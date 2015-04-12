@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{2C74567A-5CF2-4006-B6C1-FDA122578AD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Tests", "Database.Tests\Database.Tests.csproj", "{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8ACFBAB7-7318-492E-8BFD-DE0DF4329778}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C74567A-5CF2-4006-B6C1-FDA122578AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C74567A-5CF2-4006-B6C1-FDA122578AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C74567A-5CF2-4006-B6C1-FDA122578AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C74567A-5CF2-4006-B6C1-FDA122578AD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

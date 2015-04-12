@@ -1,0 +1,9 @@
+
+*/bin
+*/obj
+*/*.csproj.user
+*.suo
+*.sln.cache
+
+Lucid.VisualState.xml
+/Source/TestResult.xml

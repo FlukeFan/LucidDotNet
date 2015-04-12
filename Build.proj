@@ -1,0 +1,20 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <SolutionDir>$(MSBuildProjectDirectory)\</SolutionDir>
+    <RunTests Condition=" '$(RunTests)' == '' ">true</RunTests>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <NUnitPath>$(SolutionDir)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
+    <GlobalProperties>Configuration=$(Configuration);RunTests=$(RunTests);NUnitPath=$(NUnitPath)</GlobalProperties>
+  </PropertyGroup>
+
+  <Target Name="Build">
+    <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True"/>
+  </Target>
+
+  <ItemGroup>
+    <ProjectsToBuild Include="Database\Database.csproj"/>
+    <ProjectsToBuild Include="Database.Tests\Database.Tests.csproj"/>
+  </ItemGroup>
+
+</Project>
