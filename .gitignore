@@ -5,5 +5,7 @@
 *.suo
 *.sln.cache
 
-Lucid.VisualState.xml
+/Lucid.VisualState.xml
 /Source/TestResult.xml
+/BuildEnvironment.json
+/TestResult.xml

@@ -1,0 +1,4 @@
+{
+    "MasterConnection": "Server=(local); Integrated Security=true;",
+    "LucidConnection":  "Server=(local); Integrated Security=true; Initial Catalog=Lucid;"
+}

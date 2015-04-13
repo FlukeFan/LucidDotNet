@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Data.SqlClient;
+using NUnit.Framework;
 
 namespace Lucid.Database.Tests.Migrations
 {
@@ -8,7 +9,16 @@ namespace Lucid.Database.Tests.Migrations
         [Test]
         public void Migrations_CanUpgradeTablesContaingData()
         {
-            Assert.That(false);
+            DropAndCreateBlankDb();
+
+            Assert.Fail("got to here");
+        }
+
+        private void DropAndCreateBlankDb()
+        {
+            var environment = BuildEnvironment.Load();
+            var masterDb = new SqlConnection(environment.MasterConnection);
+            masterDb.Open();
         }
     }
 }
