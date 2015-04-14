@@ -9,12 +9,21 @@
   </PropertyGroup>
 
   <Target Name="Build">
-    <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True"/>
+    <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
+  </Target>
+
+  <Target Name="Clean">
+    <MSBuild Projects="@(ProjectsToClean)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
   </Target>
 
   <ItemGroup>
     <ProjectsToBuild Include="Database\Database.csproj"/>
     <ProjectsToBuild Include="Database.Tests\Database.Tests.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectsToClean Include="Database.Tests\Database.Tests.csproj"/>
+    <ProjectsToClean Include="Database\Database.csproj"/>
   </ItemGroup>
 
 </Project>

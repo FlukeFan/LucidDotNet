@@ -55,8 +55,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="NUnit" Condition="'$(RunTests)' == 'true'">
-    <Exec Command="$(NUnitPath) bin\$(Configuration)\Lucid.Database.Tests.dll" />
+  <ItemGroup>
+    <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
+      <InProject>False</InProject>
+    </TestAssembly>
+    <TestOutput Include="bin\$(Configuration)\$(AssemblyName).results.xml">
+      <InProject>False</InProject>
+    </TestOutput>
+  </ItemGroup>
+  <Target Name="NUnit" Condition="'$(RunTests)'=='true'">
+    <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
   </Target>
   <Target Name="AfterBuild">
     <Copy SourceFiles="DefaultEnvironment.json" DestinationFiles="..\BuildEnvironment.json" Condition="!Exists('..\BuildEnvironment.json') OR $([System.IO.File]::GetLastWriteTime('DefaultEnvironment.json').Ticks) &gt; $([System.IO.File]::GetLastWriteTime('..\BuildEnvironment.json').Ticks)" />
