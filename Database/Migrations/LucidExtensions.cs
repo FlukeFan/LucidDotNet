@@ -1,6 +1,6 @@
 ﻿using FluentMigrator.Builders.Create.Table;
 
-namespace Lucid.Database.Migrations
+namespace LucidDotNet.Database.Migrations
 {
     public static class LucidExtensions
     {

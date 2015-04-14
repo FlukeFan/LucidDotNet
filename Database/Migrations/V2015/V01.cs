@@ -1,6 +1,6 @@
-﻿using Lucid.Database.Schema;
+﻿using LucidDotNet.Database.Schema;
 
-namespace Lucid.Database.Migrations.V2015
+namespace LucidDotNet.Database.Migrations.V2015
 {
     public class V01 : LucidMigration
     {

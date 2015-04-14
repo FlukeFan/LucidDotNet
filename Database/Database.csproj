@@ -7,8 +7,8 @@
     <ProjectGuid>{2C74567A-5CF2-4006-B6C1-FDA122578AD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lucid.Database</RootNamespace>
-    <AssemblyName>Lucid.Database</AssemblyName>
+    <RootNamespace>LucidDotNet.Database</RootNamespace>
+    <AssemblyName>LucidDotNet.Database</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

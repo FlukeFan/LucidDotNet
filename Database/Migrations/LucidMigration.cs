@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentMigrator;
 
-namespace Lucid.Database.Migrations
+namespace LucidDotNet.Database.Migrations
 {
     public abstract class LucidMigration : Migration
     {

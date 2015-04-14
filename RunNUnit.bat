@@ -1,1 +1,1 @@
-start "NUnitGui" "packages\NUnit.Runners.2.6.4\tools\nunit.exe" Lucid.nunit
+start "NUnitGui" "packages\NUnit.Runners.2.6.4\tools\nunit.exe" LucidDotNet.nunit

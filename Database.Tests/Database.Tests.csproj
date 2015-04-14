@@ -7,8 +7,8 @@
     <ProjectGuid>{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lucid.Database.Tests</RootNamespace>
-    <AssemblyName>Lucid.Database.Tests</AssemblyName>
+    <RootNamespace>LucidDotNet.Database.Tests</RootNamespace>
+    <AssemblyName>LucidDotNet.Database.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
