@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orgs\UserTest.cs" />
+    <Compile Include="Utility\DomainTest.cs" />
+    <Compile Include="Utility\TestValues.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
