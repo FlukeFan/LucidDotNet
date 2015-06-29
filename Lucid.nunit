@@ -1,6 +1,6 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
   <Config name="Debug" binpathtype="Auto">
-    <assembly path="Database.Tests\bin\Debug\LucidDotNet.Database.Tests.dll" />
+    <assembly path="Database.Tests\bin\Debug\Lucid.Database.Tests.dll" />
   </Config>
 </NUnitProject>

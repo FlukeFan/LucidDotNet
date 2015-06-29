@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using NUnit.Framework;
 
-namespace LucidDotNet.Database.Tests.Migrations
+namespace Lucid.Database.Tests.Migrations
 {
     [TestFixture]
     public class TestMigrations

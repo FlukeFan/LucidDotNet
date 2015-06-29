@@ -2,7 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace LucidDotNet.Database.Tests
+namespace Lucid.Database.Tests
 {
     public class BuildEnvironment
     {

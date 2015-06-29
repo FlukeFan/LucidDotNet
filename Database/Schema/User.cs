@@ -1,5 +1,5 @@
 ﻿
-namespace LucidDotNet.Database.Schema
+namespace Lucid.Database.Schema
 {
     public static partial class Db
     {
