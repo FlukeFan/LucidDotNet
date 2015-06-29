@@ -60,6 +60,12 @@
       <InProject>False</InProject>
     </TestOutput>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{bec5e340-20aa-48f0-bb0a-288a9e071177}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
   </Target>

@@ -20,6 +20,7 @@ namespace Lucid.Database.Tests.Migrations
         private const string CreateDb = "Create Database Lucid";
 
         [Test]
+        [Ignore("WIP - not ready for DB yet")]
         public void Migrations_Run_UpgradesDatabase()
         {
             DropAndCreateBlankDb();

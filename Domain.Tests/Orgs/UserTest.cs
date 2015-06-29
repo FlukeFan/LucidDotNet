@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Lucid.Domain.Orgs;
+using NUnit.Framework;
 
 namespace Lucid.Domain.Tests.Orgs
 {
@@ -8,8 +9,9 @@ namespace Lucid.Domain.Tests.Orgs
         [Test]
         public void Login_WhenDoesNotExist_IsCreated()
         {
-            Assert.Fail("Login_WhenDoesNotExist_IsCreated not written yet");
-        }
+            var user = User.Login("does.not@exist.net");
 
+            Assert.That(user, Is.Not.Null);
+        }
     }
 }
