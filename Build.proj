@@ -17,11 +17,15 @@
   </Target>
 
   <ItemGroup>
+    <ProjectsToBuild Include="Domain\Domain.csproj"/>
+    <ProjectsToBuild Include="Domain.Tests\Domain.Tests.csproj"/>
     <ProjectsToBuild Include="Database\Database.csproj"/>
     <ProjectsToBuild Include="Database.Tests\Database.Tests.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectsToClean Include="Domain.Tests\Domain.Tests.csproj"/>
+    <ProjectsToClean Include="Domain\Domain.csproj"/>
     <ProjectsToClean Include="Database.Tests\Database.Tests.csproj"/>
     <ProjectsToClean Include="Database\Database.csproj"/>
   </ItemGroup>
