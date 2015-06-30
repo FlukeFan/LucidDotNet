@@ -13,7 +13,7 @@ namespace Lucid.Domain.Orgs
             var user = new User
             {
                 Email = email,
-                LastLoggedIn = DomainContext.NowUtc(),
+                LastLoggedIn = Registry.NowUtc(),
             };
 
             return user;

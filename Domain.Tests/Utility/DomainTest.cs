@@ -16,7 +16,7 @@ namespace Lucid.Domain.Tests.Utility
 
         protected DateTime SetDomainNow(DateTime now)
         {
-            DomainContext.NowUtc = () => now;
+            Registry.NowUtc = () => now;
             return now;
         }
     }
