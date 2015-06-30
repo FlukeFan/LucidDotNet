@@ -1,5 +1,4 @@
-﻿using System;
-using Lucid.Domain.Orgs;
+﻿using Lucid.Domain.Orgs;
 using Lucid.Domain.Tests.Utility;
 using NUnit.Framework;
 
@@ -16,6 +15,8 @@ namespace Lucid.Domain.Tests.Orgs
             var user = User.Login("does.not@exist.net");
 
             Assert.That(user, Is.Not.Null);
+            Assert.That(user.Id, Is.Not.EqualTo(0), "failed: entity not persisted");
+
             Assert.That(user.LastLoggedIn, Is.EqualTo(now));
         }
     }

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Orgs\UserTest.cs" />
     <Compile Include="Utility\DomainTest.cs" />
+    <Compile Include="Utility\MemoryRepository.cs" />
     <Compile Include="Utility\TestValues.cs" />
   </ItemGroup>
   <ItemGroup>

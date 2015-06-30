@@ -3,7 +3,7 @@ using Lucid.Domain.Utility;
 
 namespace Lucid.Domain.Orgs
 {
-    public class User
+    public class User : Entity
     {
         public string   Email           { get; protected set; }
         public DateTime LastLoggedIn    { get; protected set; }
@@ -16,7 +16,7 @@ namespace Lucid.Domain.Orgs
                 LastLoggedIn = Registry.NowUtc(),
             };
 
-            return user;
+            return Registry.Repository.Save(user);
         }
     }
 }
