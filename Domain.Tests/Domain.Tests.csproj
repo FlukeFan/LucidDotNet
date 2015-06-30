@@ -43,9 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Orgs\UserTest.cs" />
     <Compile Include="Utility\DomainTest.cs" />
     <Compile Include="Utility\TestValues.cs" />

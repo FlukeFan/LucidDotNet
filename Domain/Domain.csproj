@@ -39,9 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Orgs\User.cs" />
     <Compile Include="Utility\Registry.cs" />
   </ItemGroup>
