@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using FluentAssertions;
 using Lucid.Domain.Utility;
 
 namespace Lucid.Domain.Tests.Utility
@@ -9,12 +11,22 @@ namespace Lucid.Domain.Tests.Utility
         private static readonly Type            entityType = typeof(Entity);
         private static readonly PropertyInfo    idProperty = entityType.GetProperty("Id");
 
+        private IList<Entity> entities = new List<Entity>();
+
         private int lastId = 101;
 
         public T Save<T>(T entity) where T : Entity
         {
             idProperty.SetValue(entity, lastId++);
+            entities.Add(entity);
             return entity;
+        }
+
+        public void ShouldContain(Entity entity)
+        {
+            entity.Should().NotBeNull("entity was null");
+            entity.Id.Should().NotBe(0, "entity Id was 0");
+            entities.Should().Contain(entity);
         }
     }
 }
