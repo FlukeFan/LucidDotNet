@@ -9,7 +9,7 @@ namespace Lucid.Domain.Tests.Utility
         private static readonly Type            entityType = typeof(Entity);
         private static readonly PropertyInfo    idProperty = entityType.GetProperty("Id");
 
-        private int lastId = 99;
+        private int lastId = 101;
 
         public T Save<T>(T entity) where T : Entity
         {
