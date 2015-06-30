@@ -62,9 +62,16 @@
     <TestOutput Include="bin\$(Configuration)\$(AssemblyName).results.xml">
       <InProject>False</InProject>
     </TestOutput>
+    <TestSuccessFlag Include="bin\$(Configuration)\$(AssemblyName).success.flg">
+      <InProject>False</InProject>
+    </TestSuccessFlag>
+    <TestDependencies Include="@(TestAssembly)">
+      <InProject>False</InProject>
+    </TestDependencies>
   </ItemGroup>
-  <Target Name="NUnit" Condition="'$(RunTests)'=='true'">
+  <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
+    <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
   <Target Name="AfterBuild">
     <Copy SourceFiles="DefaultEnvironment.json" DestinationFiles="..\BuildEnvironment.json" Condition="!Exists('..\BuildEnvironment.json') OR $([System.IO.File]::GetLastWriteTime('DefaultEnvironment.json').Ticks) &gt; $([System.IO.File]::GetLastWriteTime('..\BuildEnvironment.json').Ticks)" />
