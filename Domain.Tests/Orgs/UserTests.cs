@@ -10,7 +10,7 @@ namespace Lucid.Domain.Tests.Orgs
     }
 
     [TestFixture]
-    public class UserTest : DomainTest
+    public class UserTests : DomainTest
     {
         [Test]
         public void Login_WhenDoesNotExist_IsCreated()

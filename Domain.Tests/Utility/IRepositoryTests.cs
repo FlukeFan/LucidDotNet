@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Lucid.Domain.Tests.Utility
 {
     [TestFixture]
-    public abstract class IRepositoryTest
+    public abstract class IRepositoryTests
     {
         abstract protected IRepository New();
 

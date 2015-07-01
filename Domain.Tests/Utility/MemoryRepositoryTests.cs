@@ -1,7 +1,7 @@
 ﻿
 namespace Lucid.Domain.Tests.Utility
 {
-    public class MemoryRepositoryTest : IRepositoryTest
+    public class MemoryRepositoryTests : IRepositoryTests
     {
         protected override Domain.Utility.IRepository New()
         {
