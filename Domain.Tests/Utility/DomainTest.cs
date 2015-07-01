@@ -18,6 +18,13 @@ namespace Lucid.Domain.Tests.Utility
             Registry.Repository = Repository;
         }
 
+        [TearDown]
+        public virtual void TearDown()
+        {
+            Registry.Repository = null;
+            Test = null;
+        }
+
         protected DateTime SetDomainNow(DateTime now)
         {
             Registry.NowUtc = () => now;
