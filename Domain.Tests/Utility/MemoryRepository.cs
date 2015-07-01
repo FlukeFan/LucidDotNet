@@ -33,6 +33,12 @@ namespace Lucid.Domain.Tests.Utility
         public IList<T> Satisfy<T>(Query<T> query)
         {
             var result = entities.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
+
+            var processor = MemoryRestrictionsProcessor.For<T>();
+
+            foreach (var restriction in query.Restrictions)
+                result = result.Where(e => processor.Satisfies(e, restriction));
+
             return result.ToList();
         }
 

@@ -57,6 +57,7 @@
     <Compile Include="Utility\IRepositoryTests.cs" />
     <Compile Include="Utility\MemoryRepository.cs" />
     <Compile Include="Utility\MemoryRepositoryTests.cs" />
+    <Compile Include="Utility\MemoryRestrictionsProcessor.cs" />
     <Compile Include="Utility\TestValues.cs" />
   </ItemGroup>
   <ItemGroup>

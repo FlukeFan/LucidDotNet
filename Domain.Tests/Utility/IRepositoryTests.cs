@@ -2,6 +2,7 @@
 using Lucid.Domain.Orgs;
 using Lucid.Domain.Tests.Orgs;
 using Lucid.Domain.Utility;
+using Lucid.Domain.Utility.Queries;
 using NUnit.Framework;
 
 namespace Lucid.Domain.Tests.Utility
@@ -11,15 +12,22 @@ namespace Lucid.Domain.Tests.Utility
     {
         abstract protected IRepository New();
 
+        private IRepository _repository;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _repository = New();
+        }
+
         [Test]
         public void Save_SetsId()
         {
-            var repository = New();
             var user = new UserBuilder().Value();
 
             user.Id.Should().Be(0, "newly instantiated entity should have a default Id value");
 
-            var savedUser = repository.Save(user);
+            var savedUser = _repository.Save(user);
 
             savedUser.Should().BeSameAs(user);
             savedUser.Id.Should().NotBe(0, "persisted entity should have a non-zero Id");
@@ -28,16 +36,29 @@ namespace Lucid.Domain.Tests.Utility
         [Test]
         public void Query_RetrieveAll()
         {
-            var repository = New();
-
             var user1 = new UserBuilder().Save();
             var user2 = new UserBuilder().Save();
 
-            var allUsers = repository.Query<User>().List();
+            var allUsers = _repository.Query<User>().List();
 
             allUsers.Count.Should().Be(2);
             allUsers.Should().Contain(user1);
             allUsers.Should().Contain(user2);
+        }
+
+        [Test]
+        public void Query_RestrictPropertyEqual()
+        {
+            var user1 = new UserBuilder().With(u => u.Email, "test1@user.net").Save();
+            var user2 = new UserBuilder().With(u => u.Email, "test2@user.net").Save();
+
+            var specificUser =
+                _repository.Query<User>()
+                    .Add(Where<User>.Equals(u => u.Email, "test2@user.net"))
+                    .SingleOrDefault();
+
+            specificUser.Should().NotBeNull();
+            specificUser.Should().BeSameAs(user2);
         }
     }
 }
