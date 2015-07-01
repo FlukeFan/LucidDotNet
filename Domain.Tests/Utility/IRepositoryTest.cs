@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Lucid.Domain.Orgs;
+using Lucid.Domain.Tests.Orgs;
 using Lucid.Domain.Utility;
 using NUnit.Framework;
 
@@ -14,12 +14,14 @@ namespace Lucid.Domain.Tests.Utility
         public void Save_SetsId()
         {
             var repository = New();
-            var user = (User)null;
+            var user = new UserBuilder().Value();
+
+            user.Id.Should().Be(0, "newly instantiated entity should have a default Id value");
 
             var savedUser = repository.Save(user);
 
             savedUser.Should().BeSameAs(user);
-            savedUser.Id.Should().Be(-123, "wip");
+            savedUser.Id.Should().NotBe(0, "persisted entity should have a non-zero Id");
         }
     }
 }

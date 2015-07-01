@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orgs\UserTest.cs" />
+    <Compile Include="Utility\Builder.cs" />
     <Compile Include="Utility\DomainTest.cs" />
     <Compile Include="Utility\IRepositoryTest.cs" />
     <Compile Include="Utility\MemoryRepository.cs" />

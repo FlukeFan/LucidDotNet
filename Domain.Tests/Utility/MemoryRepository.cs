@@ -8,8 +8,8 @@ namespace Lucid.Domain.Tests.Utility
 {
     public class MemoryRepository : IRepository
     {
-        private static readonly Type            entityType = typeof(Entity);
-        private static readonly PropertyInfo    idProperty = entityType.GetProperty("Id");
+        private static readonly Type            _entityType = typeof(Entity);
+        private static readonly PropertyInfo    _idProperty = _entityType.GetProperty("Id");
 
         private IList<Entity> entities = new List<Entity>();
 
@@ -18,7 +18,7 @@ namespace Lucid.Domain.Tests.Utility
         public T Save<T>(T entity) where T : Entity
         {
             entity.Should().NotBeNull("null entity supplied");
-            idProperty.SetValue(entity, lastId++);
+            _idProperty.SetValue(entity, lastId++);
             entities.Add(entity);
             return entity;
         }

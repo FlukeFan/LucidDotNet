@@ -5,6 +5,10 @@ using NUnit.Framework;
 
 namespace Lucid.Domain.Tests.Orgs
 {
+    public class UserBuilder : Builder<User>
+    {
+    }
+
     [TestFixture]
     public class UserTest : DomainTest
     {

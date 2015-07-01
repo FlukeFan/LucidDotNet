@@ -5,6 +5,8 @@ namespace Lucid.Domain.Orgs
 {
     public class User : Entity
     {
+        protected User() { }
+
         public string   Email           { get; protected set; }
         public DateTime LastLoggedIn    { get; protected set; }
 
