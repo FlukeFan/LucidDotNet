@@ -17,6 +17,7 @@ namespace Lucid.Domain.Tests.Utility
 
         public T Save<T>(T entity) where T : Entity
         {
+            entity.Should().NotBeNull("null entity supplied");
             idProperty.SetValue(entity, lastId++);
             entities.Add(entity);
             return entity;
