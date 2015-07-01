@@ -1,5 +1,6 @@
 ﻿using System;
 using Lucid.Domain.Utility;
+using Lucid.Domain.Utility.Queries;
 
 namespace Lucid.Domain.Orgs
 {
@@ -14,6 +15,7 @@ namespace Lucid.Domain.Orgs
         {
             var user =
                 Registry.Repository.Query<User>()
+                    .Filter(Where<User>.PropEq(u => u.Email, email))
                     .SingleOrDefault();
 
             if (user == null)

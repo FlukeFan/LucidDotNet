@@ -36,7 +36,6 @@ namespace Lucid.Domain.Tests.Orgs
                     .With(u => u.LastLoggedIn, Test.SummerDateTime1 - TimeSpan.FromHours(1))
                     .Save();
 
-            Assert.Ignore("working on filtering in query");
             var anotherUser = new UserBuilder().With(u => u.Email, "another@user.net").Save();
 
             var user = User.Login("existing@user.net");

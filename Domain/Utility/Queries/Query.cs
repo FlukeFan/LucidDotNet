@@ -15,7 +15,7 @@ namespace Lucid.Domain.Utility.Queries
             _repository = repository;
         }
 
-        public Query<T> Add(Where<T> restriction)
+        public Query<T> Filter(Where<T> restriction)
         {
             _restrictions.Add(restriction);
             return this;

@@ -19,7 +19,7 @@ namespace Lucid.Domain.Utility.Queries
             Property = (PropertyInfo)me.Member;
         }
 
-        public static Where<T> Equals(Expression<Func<T, string>> property, string value)
+        public static Where<T> PropEq(Expression<Func<T, string>> property, string value)
         {
             return new WhereStringEqual<T>(property.Body, value);
         }

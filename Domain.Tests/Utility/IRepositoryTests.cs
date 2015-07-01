@@ -54,7 +54,7 @@ namespace Lucid.Domain.Tests.Utility
 
             var specificUser =
                 _repository.Query<User>()
-                    .Add(Where<User>.Equals(u => u.Email, "test2@user.net"))
+                    .Filter(Where<User>.PropEq(u => u.Email, "test2@user.net"))
                     .SingleOrDefault();
 
             specificUser.Should().NotBeNull();
