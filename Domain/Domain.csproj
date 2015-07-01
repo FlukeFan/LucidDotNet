@@ -42,6 +42,7 @@
     <Compile Include="Orgs\User.cs" />
     <Compile Include="Utility\Entity.cs" />
     <Compile Include="Utility\IRepository.cs" />
+    <Compile Include="Utility\Queries\Query.cs" />
     <Compile Include="Utility\Registry.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

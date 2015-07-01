@@ -12,12 +12,19 @@ namespace Lucid.Domain.Orgs
 
         public static User Login(string email)
         {
-            var user = new User
-            {
-                Email = email,
-                LastLoggedIn = Registry.NowUtc(),
-            };
+            var user =
+                Registry.Repository.Query<User>()
+                    .SingleOrDefault();
 
+            if (user == null)
+            {
+                user = new User
+                {
+                    Email = email,
+                };
+            }
+
+            user.LastLoggedIn = Registry.NowUtc();
             return Registry.Repository.Save(user);
         }
     }
