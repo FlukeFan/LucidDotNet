@@ -34,10 +34,8 @@ namespace Lucid.Domain.Tests.Utility
         {
             var result = entities.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
 
-            var processor = MemoryRestrictionsProcessor.For<T>();
-
             foreach (var restriction in query.Restrictions)
-                result = result.Where(e => processor.Satisfies(e, restriction));
+                result = result.Where(e => restriction.Satisfies(e));
 
             return result.ToList();
         }

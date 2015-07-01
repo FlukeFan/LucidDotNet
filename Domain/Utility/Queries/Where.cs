@@ -19,19 +19,31 @@ namespace Lucid.Domain.Utility.Queries
             Property = (PropertyInfo)me.Member;
         }
 
+        public abstract bool Satisfies(T entity);
+
         public static Where<T> PropEq(Expression<Func<T, string>> property, string value)
         {
-            return new WhereStringEqual<T>(property.Body, value);
+            return new WhereStringEqual<T>(property, value);
         }
     }
 
     public class WhereStringEqual<T> : Where<T>
     {
+        private Func<T, string> _accessor;
+
         public string  Value { get; private set; }
 
-        public WhereStringEqual(Expression property, string value) : base(property)
+        public WhereStringEqual(Expression<Func<T, string>> property, string value)
+            : base(property.Body)
         {
+            _accessor = property.Compile();
             Value = value;
+        }
+
+        public override bool Satisfies(T entity)
+        {
+            var entityValue = _accessor(entity);
+            return entityValue == Value;
         }
     }
 }
