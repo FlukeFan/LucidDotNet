@@ -33,8 +33,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentMigrator, Version=1.5.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentMigrator.1.5.0.0\lib\40\FluentMigrator.dll</HintPath>
+    <Reference Include="FluentMigrator, Version=1.5.1.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentMigrator.1.5.1.0\lib\40\FluentMigrator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentMigrator.Runner, Version=1.5.1.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentMigrator.Runner.1.5.1.0\lib\40\FluentMigrator.Runner.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -46,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LucidMigrationRunner.cs" />
     <Compile Include="Migrations\LucidExtensions.cs" />
     <Compile Include="Migrations\LucidMigration.cs" />
     <Compile Include="Migrations\V2015\V01.cs" />

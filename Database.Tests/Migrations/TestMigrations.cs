@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Lucid.Database.Tests.Migrations
@@ -7,6 +8,8 @@ namespace Lucid.Database.Tests.Migrations
     [TestFixture]
     public class TestMigrations
     {
+        private static BuildEnvironment _environment = BuildEnvironment.Load();
+
         private const string DropDb = @"
             IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'Lucid')
             BEGIN
@@ -20,12 +23,22 @@ namespace Lucid.Database.Tests.Migrations
         private const string CreateDb = "Create Database Lucid";
 
         [Test]
-        [Ignore("WIP - not ready for DB yet")]
         public void Migrations_Run_UpgradesDatabase()
         {
             DropAndCreateBlankDb();
 
-            Assert.Fail("got to here");
+            LucidMigrationRunner.Run(_environment.LucidConnection);
+
+            using (var db = new SqlConnection(_environment.LucidConnection))
+            {
+                db.Open();
+
+                var cmd = db.CreateCommand();
+                cmd.CommandText = "select count(*) from [User]";
+                var rows = (int)cmd.ExecuteScalar();
+
+                rows.Should().Be(0);
+            }
         }
 
         private void ExecuteNonQuery(IDbConnection connection, string sql)
@@ -37,9 +50,7 @@ namespace Lucid.Database.Tests.Migrations
 
         private void DropAndCreateBlankDb()
         {
-            var environment = BuildEnvironment.Load();
-
-            using (var masterDb = new SqlConnection(environment.MasterConnection))
+            using (var masterDb = new SqlConnection(_environment.MasterConnection))
             {
                 masterDb.Open();
                 ExecuteNonQuery(masterDb, DropDb);
