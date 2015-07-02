@@ -16,12 +16,15 @@ namespace Lucid.Database
             var firstMigration = typeof(Lucid.Database.Migrations.V2015.V01);
             var assembly = new SingleAssembly(firstMigration.Assembly);
 
-            using (var connection = new SqlConnection(connectionString))
-            {
-                using (var processor = new SqlServerProcessor(connection, new SqlServer2008Generator(), new NullAnnouncer(), new ProcessorOptions(), new SqlServerDbFactory()))
-                    Execute(firstMigration, processor, assembly, connectionString);
-            }
+            var migrationGenerator = new SqlServer2008Generator();
+            var announcer = new NullAnnouncer();
+            var dbFactory = new SqlServerDbFactory();
 
+            var options = new ProcessorOptions();
+
+            using (var connection = new SqlConnection(connectionString))
+            using (var processor = new SqlServerProcessor(connection, migrationGenerator, announcer, options, dbFactory))
+                Execute(firstMigration, processor, assembly, connectionString);
         }
 
         private static void Execute(Type migrationType, IMigrationProcessor processor, IAssemblyCollection assembly, string connectionString)
