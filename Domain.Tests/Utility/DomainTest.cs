@@ -14,7 +14,7 @@ namespace Lucid.Domain.Tests.Utility
         {
             Test = new TestValues();
             
-            Repository = new MemoryRepository();
+            Repository = new MemoryRepository(LucidPersistenceValidator.BeforeSave);
             Registry.Repository = Repository;
         }
 

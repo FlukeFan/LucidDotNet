@@ -8,6 +8,10 @@ namespace Lucid.Domain.Tests.Orgs
 {
     public class UserBuilder : Builder<User>
     {
+        public UserBuilder()
+        {
+            With(u => u.LastLoggedIn, TestValues.EarlyDateTimeValue);
+        }
     }
 
     [TestFixture]

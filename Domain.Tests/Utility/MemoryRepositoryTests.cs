@@ -6,7 +6,7 @@ namespace Lucid.Domain.Tests.Utility
     {
         protected override Domain.Utility.IRepository New()
         {
-            var repository = new MemoryRepository();
+            var repository = new MemoryRepository(LucidPersistenceValidator.BeforeSave);
             Registry.Repository = repository;
             return repository;
         }

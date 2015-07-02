@@ -13,15 +13,22 @@ namespace Lucid.Domain.Tests.Utility
         private static readonly Type            _entityType = typeof(Entity);
         private static readonly PropertyInfo    _idProperty = _entityType.GetProperty("Id");
 
-        private IList<Entity> entities = new List<Entity>();
+        private Action<Entity>  _beforeSave;
+        private IList<Entity>   _entities = new List<Entity>();
 
         private int lastId = 101;
+
+        public MemoryRepository(Action<Entity> beforeSave)
+        {
+            _beforeSave = beforeSave;
+        }
 
         public T Save<T>(T entity) where T : Entity
         {
             entity.Should().NotBeNull("null entity supplied");
+            _beforeSave(entity);
             _idProperty.SetValue(entity, lastId++);
-            entities.Add(entity);
+            _entities.Add(entity);
             return entity;
         }
 
@@ -32,7 +39,7 @@ namespace Lucid.Domain.Tests.Utility
 
         public IList<T> Satisfy<T>(Query<T> query)
         {
-            var result = entities.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
+            var result = _entities.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
 
             foreach (var restriction in query.Restrictions)
                 result = result.Where(e => restriction.Satisfies(e));
@@ -44,7 +51,7 @@ namespace Lucid.Domain.Tests.Utility
         {
             entity.Should().NotBeNull("entity was null");
             entity.Id.Should().NotBe(0, "entity Id was 0");
-            entities.Should().Contain(entity);
+            _entities.Should().Contain(entity);
         }
     }
 }
