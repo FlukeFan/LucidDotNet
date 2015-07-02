@@ -8,8 +8,8 @@ namespace Lucid.Domain.Orgs
     {
         protected User() { }
 
-        public string   Email           { get; protected set; }
-        public DateTime LastLoggedIn    { get; protected set; }
+        public virtual string   Email           { get; protected set; }
+        public virtual DateTime LastLoggedIn    { get; protected set; }
 
         public static User Login(string email)
         {

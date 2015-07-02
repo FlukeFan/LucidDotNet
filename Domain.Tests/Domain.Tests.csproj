@@ -64,6 +64,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{bec5e340-20aa-48f0-bb0a-288a9e071177}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
       <InProject>False</InProject>
     </TestAssembly>
@@ -76,13 +82,6 @@
     <TestDependencies Include="@(TestAssembly)">
       <InProject>False</InProject>
     </TestDependencies>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{bec5e340-20aa-48f0-bb0a-288a9e071177}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />

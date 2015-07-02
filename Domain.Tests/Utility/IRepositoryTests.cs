@@ -15,9 +15,15 @@ namespace Lucid.Domain.Tests.Utility
         private IRepository _repository;
 
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             _repository = New();
+        }
+
+        [TearDown]
+        public virtual void TearDown()
+        {
+            _repository = null;
         }
 
         [Test]

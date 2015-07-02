@@ -7,7 +7,7 @@ namespace Lucid.Database.Tests
     public class BuildEnvironment
     {
         public string MasterConnection;
-        public string LucidConncection;
+        public string LucidConnection;
 
         public static BuildEnvironment Load()
         {

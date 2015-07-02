@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -38,12 +42,50 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NHibernate\NhRepositoryTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Database.Tests\Database.Tests.csproj">
+      <Project>{c976d0c2-11a6-4993-a338-bdbaa0bfc67d}</Project>
+      <Name>Database.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain.Tests\Domain.Tests.csproj">
+      <Project>{f061fd23-24d6-4b84-bb5a-0f1860f6e784}</Project>
+      <Name>Domain.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{bec5e340-20aa-48f0-bb0a-288a9e071177}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{d2bef9cd-b8b0-40e3-9f96-d7989395cc26}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <ItemGroup>
+    <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
+      <InProject>False</InProject>
+    </TestAssembly>
+    <TestOutput Include="bin\$(Configuration)\$(AssemblyName).results.xml">
+      <InProject>False</InProject>
+    </TestOutput>
+    <TestSuccessFlag Include="bin\$(Configuration)\$(AssemblyName).success.flg">
+      <InProject>False</InProject>
+    </TestSuccessFlag>
+    <TestDependencies Include="@(TestAssembly)">
+      <InProject>False</InProject>
+    </TestDependencies>
+  </ItemGroup>
+  <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
+    <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
+    <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
   <Target Name="AfterBuild">
+    <CallTarget Targets="NUnit" />
   </Target>
-  -->
 </Project>
