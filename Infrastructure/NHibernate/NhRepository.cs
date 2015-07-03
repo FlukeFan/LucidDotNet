@@ -5,6 +5,7 @@ using Lucid.Domain.Utility.Queries;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Connection;
+using NHibernate.Criterion;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Tool.hbm2ddl;
@@ -65,7 +66,25 @@ namespace Lucid.Infrastructure.NHibernate
         {
             var criteria = _session.CreateCriteria<T>();
 
+            foreach (var restriction in query.Restrictions)
+                AddRestriction(criteria, restriction);
+
             return criteria.List<T>();
+        }
+
+        private void AddRestriction<T>(ICriteria criteria, Where<T> where)
+        {
+            var whereType = where.GetType().GetGenericTypeDefinition();
+
+            if (whereType == typeof(WhereStringEqual<>))
+                AddStringRestriction(criteria, (WhereStringEqual<T>)where);
+            else
+                throw new Exception("Unhandled restriction: " + where);
+        }
+
+        private void AddStringRestriction<T>(ICriteria criteria, WhereStringEqual<T> where)
+        {
+            criteria.Add(Restrictions.Eq(where.Property.Name, where.Value));
         }
 
         public void Dispose()

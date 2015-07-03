@@ -2,11 +2,9 @@
 using Lucid.Domain.Tests.Utility;
 using Lucid.Domain.Utility;
 using Lucid.Infrastructure.NHibernate;
-using NUnit.Framework;
 
 namespace Lucid.Infrastructure.Tests.NHibernate
 {
-    [Ignore("WIP")]
     public class NhRepositoryTests : IRepositoryTests
     {
         static NhRepositoryTests()
