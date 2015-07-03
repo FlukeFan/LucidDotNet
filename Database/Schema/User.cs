@@ -9,8 +9,9 @@ namespace Lucid.Database.Schema
         {
             public readonly string Name         = "User";
 
-            public readonly string Column_Id    = "Id";
-            public readonly string Column_Email = "Email";
+            public readonly string Column_Id            = "Id";
+            public readonly string Column_Email         = "Email";
+            public readonly string Column_LastLoggedIn  = "LastLoggedIn";
         }
     }
 }

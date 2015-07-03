@@ -31,6 +31,11 @@ namespace Lucid.Domain.Tests.Utility
             me = (MemberExpression)body;
             return (PropertyInfo)me.Member;
         }
+
+        public static string GetPropertyName(Expression body)
+        {
+            return GetPropertyInfo(body).Name;
+        }
     }
 
     public class Builder<T> : Builder

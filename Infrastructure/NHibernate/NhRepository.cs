@@ -23,6 +23,7 @@ namespace Lucid.Infrastructure.NHibernate
                 db.ConnectionProvider<DriverConnectionProvider>();
                 db.Driver<SqlClientDriver>();
                 db.Dialect<MsSql2008Dialect>();
+                db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
             });
 
             var mappings = Mapping.CreateMappings();

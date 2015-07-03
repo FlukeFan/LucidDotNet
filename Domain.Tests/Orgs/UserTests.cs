@@ -8,8 +8,17 @@ namespace Lucid.Domain.Tests.Orgs
 {
     public class UserBuilder : Builder<User>
     {
+        static UserBuilder()
+        {
+            LucidPersistenceValidator.AddCustomValidation<User>((validator, user) =>
+            {
+                validator.CheckNotNull(() => user.Email);
+            });
+        }
+
         public UserBuilder()
         {
+            With(u => u.Email, "test.mail@test.site");
             With(u => u.LastLoggedIn, TestValues.EarlyDateTimeValue);
         }
     }

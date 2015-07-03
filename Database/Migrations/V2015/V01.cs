@@ -15,7 +15,8 @@ namespace Lucid.Database.Migrations.V2015
 
             Create.Table(table.Name)
                 .LucidPrimaryKey(table.Name, table.Column_Id)
-                .WithColumn(table.Column_Email).AsAnsiString().NotNullable();
+                .WithColumn(table.Column_Email).AsAnsiString().NotNullable()
+                .WithColumn(table.Column_LastLoggedIn).AsDateTime().NotNullable();
         }
     }
 }
