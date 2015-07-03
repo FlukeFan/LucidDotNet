@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Lucid.Domain.Utility;
 using Lucid.Domain.Utility.Queries;
 using NHibernate;
@@ -14,7 +15,16 @@ namespace Lucid.Infrastructure.NHibernate
 {
     public class NhRepository : IRepository, IDisposable
     {
+        private static IDictionary<Type, Type> _whereInterfaces = new Dictionary<Type, Type>();
+
+        private static IDictionary<Type, Action<ICriteria, IWhere>> _restrictionProcessors = new Dictionary<Type, Action<ICriteria, IWhere>>();
+
         public static ISessionFactory SessionFactory { get; protected set; }
+
+        static NhRepository()
+        {
+            _restrictionProcessors.Add(typeof(IWhereStringEqual), (c, w) => AddStringRestriction(c, (IWhereStringEqual)w));
+        }
 
         public static void Init(string connectionString)
         {
@@ -74,15 +84,28 @@ namespace Lucid.Infrastructure.NHibernate
 
         private void AddRestriction<T>(ICriteria criteria, Where<T> where)
         {
-            var whereType = where.GetType().GetGenericTypeDefinition();
+            var type = where.GetType();
+            var genericType = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
 
-            if (whereType == typeof(WhereStringEqual<>))
-                AddStringRestriction(criteria, (WhereStringEqual<T>)where);
-            else
-                throw new Exception("Unhandled restriction: " + where);
+            if (!_whereInterfaces.ContainsKey(type))
+            {
+                var interfaces = genericType.GetInterfaces().Where(t => t != typeof(IWhere)).ToList();
+
+                if (interfaces.Count != 1)
+                    throw new Exception("Could not determine single interface for where restriction: " + type);
+
+                _whereInterfaces.Add(type, interfaces[0]);
+            }
+
+            var whereInterface = _whereInterfaces[type];
+
+            if (!_restrictionProcessors.ContainsKey(whereInterface))
+                throw new Exception("Not handled: " + whereInterface);
+
+            _restrictionProcessors[whereInterface](criteria, where);
         }
 
-        private void AddStringRestriction<T>(ICriteria criteria, WhereStringEqual<T> where)
+        private static void AddStringRestriction(ICriteria criteria, IWhereStringEqual where)
         {
             criteria.Add(Restrictions.Eq(where.Property.Name, where.Value));
         }

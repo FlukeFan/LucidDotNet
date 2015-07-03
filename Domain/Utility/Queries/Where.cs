@@ -4,7 +4,12 @@ using System.Reflection;
 
 namespace Lucid.Domain.Utility.Queries
 {
-    public abstract class Where<T>
+    public interface IWhere
+    {
+        PropertyInfo Property { get; }
+    }
+
+    public abstract class Where<T> : IWhere
     {
         public PropertyInfo Property { get; private set; }
 

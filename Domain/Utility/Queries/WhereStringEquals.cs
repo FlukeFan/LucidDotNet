@@ -3,7 +3,12 @@ using System.Linq.Expressions;
 
 namespace Lucid.Domain.Utility.Queries
 {
-    public class WhereStringEqual<T> : Where<T>
+    public interface IWhereStringEqual : IWhere
+    {
+        string Value { get; }
+    }
+
+    public class WhereStringEqual<T> : Where<T>, IWhereStringEqual
     {
         private Func<T, string> _accessor;
 
