@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Lucid.Domain.Utility.Queries
 {
-    public class Query<T>
+    public class Query<T> where T : class
     {
         private IRepository     _repository;
         private IList<Where<T>> _restrictions = new List<Where<T>>();

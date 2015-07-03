@@ -5,9 +5,9 @@ namespace Lucid.Domain.Utility
 {
     public interface IRepository
     {
-        T           Save<T>(T entity)   where T : Entity;
+        T           Save<T>(T entity)           where T : Entity;
 
-        Query<T>    Query<T>()          where T : Entity;
-        IList<T>    Satisfy<T>(Query<T> query);
+        Query<T>    Query<T>()                  where T : Entity;
+        IList<T>    Satisfy<T>(Query<T> query)  where T : class;
     }
 }

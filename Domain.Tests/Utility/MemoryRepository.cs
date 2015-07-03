@@ -37,7 +37,7 @@ namespace Lucid.Domain.Tests.Utility
             return new Query<T>(this);
         }
 
-        public IList<T> Satisfy<T>(Query<T> query)
+        public IList<T> Satisfy<T>(Query<T> query) where T : class
         {
             var result = _entities.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lucid.Domain.Utility;
+using Lucid.Domain.Utility.Queries;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Connection;
@@ -55,14 +56,16 @@ namespace Lucid.Infrastructure.NHibernate
             return entity;
         }
 
-        public Domain.Utility.Queries.Query<T> Query<T>() where T : Entity
+        public Query<T> Query<T>() where T : Entity
         {
-            throw new NotImplementedException();
+            return new Query<T>(this);
         }
 
-        public IList<T> Satisfy<T>(Domain.Utility.Queries.Query<T> query)
+        public IList<T> Satisfy<T>(Query<T> query) where T : class
         {
-            throw new NotImplementedException();
+            var criteria = _session.CreateCriteria<T>();
+
+            return criteria.List<T>();
         }
 
         public void Dispose()
