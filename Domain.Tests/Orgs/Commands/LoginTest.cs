@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Lucid.Domain.Orgs;
 using Lucid.Domain.Orgs.Commands;
 using Lucid.Domain.Tests.Utility;
@@ -22,6 +23,21 @@ namespace Lucid.Domain.Tests.Orgs.Commands
 
             Repository.ShouldContain<User>(userDto.UserId);
             userDto.Email.Should().Be("cmd.test@email.com");
+        }
+
+        [Test]
+        public void Validation()
+        {
+            Func<Login> validCommand = () =>
+                new Login
+                {
+                    Email = "valid.mail@valid.com",
+                };
+
+            validCommand().ShouldBeValid();
+
+            validCommand().ShouldBeInvalid(c => c.Email = null);
+            validCommand().ShouldBeInvalid(c => c.Email = "");
         }
     }
 }
