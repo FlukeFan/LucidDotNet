@@ -53,5 +53,11 @@ namespace Lucid.Domain.Tests.Utility
             entity.Id.Should().NotBe(0, "entity Id was 0");
             _entities.Should().Contain(entity);
         }
+
+        public void ShouldContain<T>(int id)
+        {
+            var entity = _entities.Where(e => e.Id == id).SingleOrDefault();
+            entity.Should().NotBeNull("could not find entity with id " + id + " and type " + typeof(T));
+        }
     }
 }
