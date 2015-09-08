@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Tests", "Database.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF-B71C-4A7B-BC83-B4649FC99361}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		Build.proj = Build.proj
 		BuildEnvironment.json = BuildEnvironment.json
 		CommandPrompt.bat = CommandPrompt.bat
@@ -24,6 +25,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{D2BEF9CD-B8B0-40E3-9F96-D7989395CC26}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Tests", "Infrastructure.Tests\Infrastructure.Tests.csproj", "{DDC2CB9A-255D-4CCE-A292-C0F38AD321FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +58,10 @@ Global
 		{DDC2CB9A-255D-4CCE-A292-C0F38AD321FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDC2CB9A-255D-4CCE-A292-C0F38AD321FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDC2CB9A-255D-4CCE-A292-C0F38AD321FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
