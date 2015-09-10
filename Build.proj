@@ -24,9 +24,11 @@
     <ProjectsToBuild Include="Infrastructure\Infrastructure.csproj"/>
     <ProjectsToBuild Include="Infrastructure.Tests\Infrastructure.Tests.csproj"/>
     <ProjectsToBuild Include="Web\Web.csproj"/>
+    <ProjectsToBuild Include="Web.Tests\Web.Tests.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectsToClean Include="Web.Tests\Web.Tests.csproj"/>
     <ProjectsToClean Include="Web\Web.csproj"/>
     <ProjectsToClean Include="Infrastructure\Infrastructure.csproj"/>
     <ProjectsToClean Include="Infrastructure.Tests\Infrastructure.Tests.csproj"/>

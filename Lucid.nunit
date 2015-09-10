@@ -4,5 +4,6 @@
     <assembly path="Domain.Tests\bin\Debug\Lucid.Domain.Tests.dll" />
     <assembly path="Database.Tests\bin\Debug\Lucid.Database.Tests.dll" />
     <assembly path="Infrastructure.Tests\bin\Debug\Lucid.Infrastructure.Tests.dll" />
+    <assembly path="Web.Tests\bin\Debug\Lucid.Web.Tests.dll" />
   </Config>
 </NUnitProject>
