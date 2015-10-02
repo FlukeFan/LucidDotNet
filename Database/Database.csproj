@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs" />
     <Compile Include="LucidMigrationRunner.cs" />
     <Compile Include="Migrations\LucidExtensions.cs" />
     <Compile Include="Migrations\LucidMigration.cs" />

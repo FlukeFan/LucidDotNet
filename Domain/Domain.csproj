@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs" />
     <Compile Include="Orgs\Commands\Login.cs" />
     <Compile Include="Orgs\Responses\UserDto.cs" />
     <Compile Include="Orgs\User.cs" />

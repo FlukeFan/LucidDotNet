@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs" />
     <Compile Include="Orgs\Commands\LoginTest.cs" />
     <Compile Include="Orgs\UserTests.cs" />
     <Compile Include="Utility\Builder.cs" />
