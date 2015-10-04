@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF
 		Build.proj = Build.proj
 		BuildEnvironment.json = BuildEnvironment.json
 		CommandPrompt.bat = CommandPrompt.bat
+		Global.targets = Global.targets
 		Lucid.nunit = Lucid.nunit
 		readme.txt = readme.txt
 		RunNUnit.bat = RunNUnit.bat

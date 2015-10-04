@@ -4,10 +4,10 @@
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
   </PropertyGroup>
 
-  <Import Project="packages\MSBuildTasks.1.4.0.88\tools\MSBuild.Community.Tasks.Targets" />
+  <Import Project="Global.targets" />
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
 
   <PropertyGroup>
-    <LucidVersion>0.0.0.1</LucidVersion>
     <SolutionDir>$(MSBuildProjectDirectory)\</SolutionDir>
     <RunTests Condition=" '$(RunTests)' == '' ">true</RunTests>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -46,7 +46,7 @@
     <ProjectsToClean Include="Domain\Domain.csproj"/>
   </ItemGroup>
 
-  <Target Name="GenerateAssemblyInfo" Inputs="Build.proj" Outputs="AssemblyInfo.cs">
+  <Target Name="GenerateAssemblyInfo" Inputs="Global.targets" Outputs="AssemblyInfo.cs">
     <AssemblyInfo
       CodeLanguage="CS"
       AssemblyDescription="Lucid Library"

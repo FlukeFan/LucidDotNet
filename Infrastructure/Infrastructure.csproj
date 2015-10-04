@@ -62,11 +62,16 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <Import Project="..\Global.targets" />
+  <ItemGroup>
+    <PackageDependencies Include="bin\$(Configuration)\$(AssemblyName).dll">
+      <InProject>False</InProject>
+    </PackageDependencies>
+  </ItemGroup>
+  <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\Lucid.Infrastructure.$(LucidVersion).nupkg">
+    <Exec Command="..\$(NuGetExe) pack -OutputDirectory ..\packaged" />
   </Target>
   <Target Name="AfterBuild">
+    <CallTarget Targets="Package" />
   </Target>
-  -->
 </Project>
