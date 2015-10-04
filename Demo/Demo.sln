@@ -5,6 +5,11 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Web", "Demo.Web\Demo.Web.csproj", "{9EA489D1-14A1-4482-872B-3A1FD7F93646}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{51A70DC7-59E4-450F-B442-866366B9D63C}"
+	ProjectSection(SolutionItems) = preProject
+		Demo.proj = Demo.proj
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

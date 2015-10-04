@@ -20,3 +20,4 @@ Demo/*.sln.cache
 /packaged
 
 /Demo/.vs
+/Demo/packages

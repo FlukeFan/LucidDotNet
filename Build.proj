@@ -12,7 +12,7 @@
     <RunTests Condition=" '$(RunTests)' == '' ">true</RunTests>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <NUnitPath>$(SolutionDir)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
-    <GlobalProperties>Configuration=$(Configuration);RunTests=$(RunTests);NUnitPath=$(NUnitPath)</GlobalProperties>
+    <GlobalProperties>Configuration=$(Configuration);RunTests=$(RunTests);NUnitPath=$(NUnitPath);NuGetExe=$(NuGetExe)</GlobalProperties>
   </PropertyGroup>
 
   <Target Name="Build">
@@ -33,9 +33,11 @@
     <ProjectsToBuild Include="Infrastructure.Tests\Infrastructure.Tests.csproj"/>
     <ProjectsToBuild Include="Web\Web.csproj"/>
     <ProjectsToBuild Include="Web.Tests\Web.Tests.csproj"/>
+    <ProjectsToBuild Include="Demo\Demo.proj"/>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectsToClean Include="Demo\Demo.proj"/>
     <ProjectsToClean Include="Web.Tests\Web.Tests.csproj"/>
     <ProjectsToClean Include="Web\Web.csproj"/>
     <ProjectsToClean Include="Infrastructure\Infrastructure.csproj"/>

@@ -1,0 +1,32 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="Build">
+    <CallTarget Targets="PackageRestore" />
+    <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
+  </Target>
+
+  <Target Name="Clean">
+    <MSBuild Projects="@(ProjectsToClean)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
+  </Target>
+
+  <ItemGroup>
+    <ProjectsToBuild Include="Demo.Web\Demo.Web.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectsToClean Include="Demo.Web\Demo.Web.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageDependencies Include="..\packaged\*">
+      <InProject>False</InProject>
+    </PackageDependencies>
+  </ItemGroup>
+
+  <Target Name="PackageRestore" Inputs="@(PackageDependencies)" Outputs="packages\restored">
+    <RemoveDir Directories="packages" />
+    <Exec Command="..\$(NuGetExe) restore -Source $(MSBuildProjectDirectory)\..\packaged" />
+    <Touch Files="packages\restored" AlwaysCreate="true" />
+  </Target>
+
+</Project>
