@@ -5,6 +5,12 @@
 *.suo
 *.sln.cache
 
+Demo/*/bin
+Demo/*/obj
+Demo/*/*.csproj.user
+Demo/*.suo
+Demo/*.sln.cache
+
 /Lucid.VisualState.xml
 /Source/TestResult.xml
 /BuildEnvironment.json
@@ -12,4 +18,5 @@
 /.vs
 /AssemblyInfo.cs
 /packaged
+
 /Demo/.vs
