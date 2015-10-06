@@ -52,9 +52,9 @@
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs" />
     <Compile Include="DemoMigrationRunner.cs" />
-    <Compile Include="Migrations\LucidExtensions.cs" />
-    <Compile Include="Migrations\LucidMigration.cs" />
-    <Compile Include="Migrations\V2015\V01.cs" />
+    <Compile Include="Migrations\CreateTableExtensions.cs" />
+    <Compile Include="Migrations\DemoMigration.cs" />
+    <Compile Include="Migrations\V01.cs" />
     <Compile Include="Schema\User.cs" />
   </ItemGroup>
   <ItemGroup>

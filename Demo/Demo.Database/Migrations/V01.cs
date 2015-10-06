@@ -1,8 +1,8 @@
 ﻿using Demo.Database.Schema;
 
-namespace Demo.Database.Migrations.V2015
+namespace Demo.Database.Migrations
 {
-    public class V01 : LucidMigration
+    public class V01 : DemoMigration
     {
         public override void Up()
         {
@@ -14,7 +14,7 @@ namespace Demo.Database.Migrations.V2015
             var table = Db.Table_User;
 
             Create.Table(table.Name)
-                .LucidPrimaryKey(table.Name, table.Column_Id)
+                .DemoPrimaryKey(table.Name, table.Column_Id)
                 .WithColumn(table.Column_Email).AsAnsiString().NotNullable()
                 .WithColumn(table.Column_LastLoggedIn).AsDateTime().NotNullable();
         }

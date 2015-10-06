@@ -13,7 +13,7 @@ namespace Demo.Database
     {
         public static void Run(string connectionString)
         {
-            var firstMigration = typeof(Demo.Database.Migrations.V2015.V01);
+            var firstMigration = typeof(Demo.Database.Migrations.V01);
             var assembly = new SingleAssembly(firstMigration.Assembly);
 
             var migrationGenerator = new SqlServer2008Generator();
