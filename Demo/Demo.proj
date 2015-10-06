@@ -2,19 +2,23 @@
 
   <Target Name="Build">
     <CallTarget Targets="PackageRestore" />
-    <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
+    <MSBuild Projects="@(ProjectsToBuild)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
   </Target>
 
   <Target Name="Clean">
-    <MSBuild Projects="@(ProjectsToClean)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
+    <MSBuild Projects="@(ProjectsToClean)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
   </Target>
 
   <ItemGroup>
+    <ProjectsToBuild Include="Demo.Database\Demo.Database.csproj"/>
+    <ProjectsToBuild Include="Demo.Database.Tests\Demo.Database.Tests.csproj"/>
     <ProjectsToBuild Include="Demo.Web\Demo.Web.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectsToClean Include="Demo.Web\Demo.Web.csproj"/>
+    <ProjectsToClean Include="Demo.Database.Tests\Demo.Database.Tests.csproj"/>
+    <ProjectsToClean Include="Demo.Database\Demo.Database.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +29,7 @@
 
   <Target Name="PackageRestore" Inputs="@(PackageDependencies)" Outputs="packages\restored">
     <RemoveDir Directories="packages" />
-    <Exec Command="..\$(NuGetExe) restore -Source $(MSBuildProjectDirectory)\..\packaged" />
+    <Exec Command="..\$(NuGetExe) restore -Source $(MSBuildProjectDirectory)\..\packaged -Source $(MSBuildProjectDirectory)\..\packages" />
     <Touch Files="packages\restored" AlwaysCreate="true" />
   </Target>
 

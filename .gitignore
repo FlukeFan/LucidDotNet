@@ -21,3 +21,4 @@ Demo/*.sln.cache
 
 /Demo/.vs
 /Demo/packages
+/Demo/BuildEnvironment.json
