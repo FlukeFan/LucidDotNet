@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Lucid.Domain.Utility.Queries
+namespace Lucid.Domain.Persistence.Queries
 {
     public interface IWhereStringEqual : IWhere
     {

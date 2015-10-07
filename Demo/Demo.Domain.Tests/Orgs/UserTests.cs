@@ -1,6 +1,6 @@
 ﻿using System;
+using Demo.Domain.Orgs;
 using FluentAssertions;
-using Lucid.Domain.Orgs;
 using Lucid.Domain.Tests.Utility;
 using NUnit.Framework;
 

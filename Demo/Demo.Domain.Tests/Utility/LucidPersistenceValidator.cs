@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using Demo.Domain.Utility;
 using FluentAssertions;
-using Lucid.Domain.Utility;
 
 namespace Lucid.Domain.Tests.Utility
 {
@@ -12,9 +12,9 @@ namespace Lucid.Domain.Tests.Utility
         private static readonly DateTime                    _minSqlServerDateTime   = new DateTime(1753, 1, 1, 0, 0, 0);
         private static readonly LucidPersistenceValidator   _validator              = new LucidPersistenceValidator();
 
-        private static IDictionary<Type, Action<LucidPersistenceValidator, Entity>> _customValidators = new Dictionary<Type, Action<LucidPersistenceValidator, Entity>>();
+        private static IDictionary<Type, Action<LucidPersistenceValidator, DemoEntity>> _customValidators = new Dictionary<Type, Action<LucidPersistenceValidator, DemoEntity>>();
 
-        public static void BeforeSave(Entity entity)
+        public static void BeforeSave(DemoEntity entity)
         {
             var type = entity.GetType();
             var properties = type.GetProperties();
@@ -26,12 +26,12 @@ namespace Lucid.Domain.Tests.Utility
                 _customValidators[type](_validator, entity);
         }
 
-        public static void AddCustomValidation<T>(Action<LucidPersistenceValidator, T> validation) where T : Entity
+        public static void AddCustomValidation<T>(Action<LucidPersistenceValidator, T> validation) where T : DemoEntity
         {
             _customValidators.Add(typeof(T), (v, e) => validation(v, (T)e));
         }
 
-        private static void CheckProperty(Entity entity, PropertyInfo property)
+        private static void CheckProperty(DemoEntity entity, PropertyInfo property)
         {
             var type = property.PropertyType;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using Lucid.Domain.Utility;
+using Demo.Domain.Utility;
 
 namespace Lucid.Domain.Tests.Utility
 {
@@ -73,7 +73,7 @@ namespace Lucid.Domain.Tests.Utility
 
         public T Save()
         {
-            Registry.Repository.Save(_instance as Entity);
+            Registry.Repository.Save(_instance as DemoEntity);
             return _instance;
         }
     }

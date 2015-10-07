@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
-using Lucid.Domain.Orgs;
+﻿using Demo.Domain.Orgs;
+using FluentAssertions;
+using Lucid.Domain.Persistence;
+using Lucid.Domain.Persistence.Queries;
 using Lucid.Domain.Tests.Orgs;
-using Lucid.Domain.Utility;
-using Lucid.Domain.Utility.Queries;
 using NUnit.Framework;
 
 namespace Lucid.Domain.Tests.Utility
@@ -10,9 +10,9 @@ namespace Lucid.Domain.Tests.Utility
     [TestFixture]
     public abstract class IRepositoryTests
     {
-        abstract protected IRepository New();
+        abstract protected IRepository<int> New();
 
-        private IRepository _repository;
+        private IRepository<int> _repository;
 
         [SetUp]
         public virtual void SetUp()

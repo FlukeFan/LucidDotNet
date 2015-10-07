@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Lucid.Domain.Utility.Queries
+namespace Lucid.Domain.Persistence.Queries
 {
     public interface IWhere
     {

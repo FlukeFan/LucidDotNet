@@ -1,10 +1,10 @@
 ﻿using System;
-using Lucid.Domain.Utility;
-using Lucid.Domain.Utility.Queries;
+using Demo.Domain.Utility;
+using Lucid.Domain.Persistence.Queries;
 
-namespace Lucid.Domain.Orgs
+namespace Demo.Domain.Orgs
 {
-    public class User : Entity
+    public class User : DemoEntity
     {
         protected User() { }
 

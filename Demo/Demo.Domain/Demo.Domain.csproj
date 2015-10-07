@@ -49,13 +49,10 @@
     <Compile Include="Orgs\Commands\Login.cs" />
     <Compile Include="Orgs\Responses\UserDto.cs" />
     <Compile Include="Orgs\User.cs" />
-    <Compile Include="Utility\Entity.cs" />
-    <Compile Include="Utility\IRepository.cs" />
-    <Compile Include="Utility\Queries\Query.cs" />
-    <Compile Include="Utility\Queries\Where.cs" />
-    <Compile Include="Utility\Queries\WhereStringEquals.cs" />
+    <Compile Include="Utility\DemoEntity.cs" />
     <Compile Include="Utility\Registry.cs" />
     <Compile Include="Utility\Remoteable.cs" />
+    <Compile Include="Utility\IRepository.cs" />
     <Compile Include="Utility\Validator.cs" />
   </ItemGroup>
   <ItemGroup>

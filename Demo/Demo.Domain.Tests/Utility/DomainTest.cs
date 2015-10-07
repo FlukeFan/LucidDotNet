@@ -1,20 +1,20 @@
 ﻿using System;
-using Lucid.Domain.Utility;
+using Demo.Domain.Utility;
 using NUnit.Framework;
 
 namespace Lucid.Domain.Tests.Utility
 {
     public abstract class DomainTest
     {
-        protected TestValues        Test;
-        protected MemoryRepository  Repository;
+        protected TestValues            Test;
+        protected DemoMemoryRepository  Repository;
 
         [SetUp]
         public virtual void SetUp()
         {
             Test = new TestValues();
             
-            Repository = new MemoryRepository(LucidPersistenceValidator.BeforeSave);
+            Repository = new DemoMemoryRepository(LucidPersistenceValidator.BeforeSave);
             Registry.Repository = Repository;
         }
 

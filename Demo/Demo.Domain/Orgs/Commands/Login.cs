@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Lucid.Domain.Orgs.Responses;
+using Demo.Domain.Orgs.Responses;
 using Lucid.Domain.Utility;
 
-namespace Lucid.Domain.Orgs.Commands
+namespace Demo.Domain.Orgs.Commands
 {
     public class Login : Command<UserDto>
     {

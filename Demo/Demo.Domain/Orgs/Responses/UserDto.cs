@@ -1,10 +1,10 @@
 ﻿
-namespace Lucid.Domain.Orgs.Responses
+namespace Demo.Domain.Orgs.Responses
 {
     public class UserDto
     {
-        public int UserId;
-        public string Email;
+        public int      UserId;
+        public string   Email;
 
         public UserDto() { }
 
