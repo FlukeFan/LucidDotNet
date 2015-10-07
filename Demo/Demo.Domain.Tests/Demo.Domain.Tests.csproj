@@ -63,7 +63,7 @@
     <Compile Include="Utility\DomainTest.cs" />
     <Compile Include="Utility\LucidPersistenceValidator.cs" />
     <Compile Include="Utility\IRepositoryTests.cs" />
-    <Compile Include="Utility\MemoryRepository.cs" />
+    <Compile Include="Utility\DemoMemoryRepository.cs" />
     <Compile Include="Utility\MemoryRepositoryTests.cs" />
     <Compile Include="Utility\TestExtensions.cs" />
     <Compile Include="Utility\TestValues.cs" />
