@@ -6,12 +6,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo.Database.Tests</RootNamespace>
-    <AssemblyName>Demo.Database.Tests</AssemblyName>
+    <RootNamespace>Demo.Domain.Tests</RootNamespace>
+    <AssemblyName>Demo.Domain.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <ProjectGuid>{C4352D6D-C6DF-4A1A-A613-800B3573F8A3}</ProjectGuid>
+    <ProjectGuid>{CC13E71E-1978-4232-93F3-C7380D498C9C}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,10 +39,6 @@
       <HintPath>..\packages\FluentAssertions.4.0.0\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -57,14 +53,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs" />
-    <Compile Include="BuildEnvironment.cs" />
-    <Compile Include="Migrations\TestMigrations.cs" />
+    <Compile Include="Orgs\Commands\LoginTest.cs" />
+    <Compile Include="Orgs\UserTests.cs" />
+    <Compile Include="Utility\Builder.cs" />
+    <Compile Include="Utility\DomainTest.cs" />
+    <Compile Include="Utility\LucidPersistenceValidator.cs" />
+    <Compile Include="Utility\IRepositoryTests.cs" />
+    <Compile Include="Utility\MemoryRepository.cs" />
+    <Compile Include="Utility\MemoryRepositoryTests.cs" />
+    <Compile Include="Utility\TestExtensions.cs" />
+    <Compile Include="Utility\TestValues.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DefaultEnvironment.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">
+      <Project>{74bda17e-fc05-42f2-810c-d7b677c0d29e}</Project>
+      <Name>Demo.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
       <InProject>False</InProject>
@@ -79,18 +88,11 @@
       <InProject>False</InProject>
     </TestDependencies>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Demo.Database\Demo.Database.csproj">
-      <Project>{2c74567a-5cf2-4006-b6c1-fda122578ad1}</Project>
-      <Name>Demo.Database</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
     <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
   <Target Name="AfterBuild">
-    <Copy SourceFiles="DefaultEnvironment.json" DestinationFiles="..\BuildEnvironment.json" Condition="!Exists('..\BuildEnvironment.json') OR $([System.IO.File]::GetLastWriteTime('DefaultEnvironment.json').Ticks) &gt; $([System.IO.File]::GetLastWriteTime('..\BuildEnvironment.json').Ticks)" />
     <CallTarget Targets="NUnit" />
   </Target>
 </Project>
