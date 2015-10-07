@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs" />
-    <Compile Include="Orgs\Commands\LoginTest.cs" />
+    <Compile Include="Orgs\Commands\LoginTests.cs" />
     <Compile Include="Orgs\UserTests.cs" />
     <Compile Include="Utility\BuilderExtensions.cs" />
     <Compile Include="Utility\DomainTest.cs" />

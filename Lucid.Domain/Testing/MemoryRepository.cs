@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Demo.Domain.Utility;
-using FluentAssertions;
 using Lucid.Domain.Persistence;
 using Lucid.Domain.Persistence.Queries;
 
-namespace Lucid.Domain.Tests.Utility
+namespace Lucid.Domain.Testing
 {
-    public class DemoMemoryRepository : MemoryRepository<int>, IDemoRepository
-    {
-        public DemoMemoryRepository(Action<DemoEntity> beforeSave) : base(e => beforeSave((DemoEntity)e)) { }
-    }
-
     public class MemoryRepository<TId> : IRepository<TId>
     {
         private Action<IEntity<TId>>    _beforeSave;
@@ -27,7 +20,9 @@ namespace Lucid.Domain.Tests.Utility
 
         public T Save<T>(T entity) where T : IEntity<TId>
         {
-            entity.Should().NotBeNull("null entity supplied");
+            if (entity == null)
+                throw new Exception("Entity to be saved should not be null");
+
             _beforeSave(entity);
             var idProperty = entity.GetType().GetProperty("Id");
             idProperty.SetValue(entity, lastId++);
@@ -52,15 +47,22 @@ namespace Lucid.Domain.Tests.Utility
 
         public void ShouldContain(IEntity<TId> entity)
         {
-            entity.Should().NotBeNull("entity was null");
-            entity.Id.Should().NotBe(0, "entity Id was 0");
-            _entities.Should().Contain(entity);
+            if (entity == null)
+                throw new Exception("Entity to be verified should not be null");
+
+            if (entity.Id == null || entity.Id.Equals(default(TId)))
+                throw new Exception("Entity to be verified has an unsaved Id value: " + entity.Id);
+
+            if (!_entities.Contains(entity))
+                throw new Exception(string.Format("Could not find Entity with Id {0} in Repository", entity.Id));
         }
 
         public void ShouldContain<T>(TId id)
         {
             var entity = _entities.Where(e => e.Id.Equals(id)).SingleOrDefault();
-            entity.Should().NotBeNull("could not find entity with id " + id + " and type " + typeof(T));
+
+            if (entity == null)
+                throw new Exception("could not find entity with id " + id + " and type " + typeof(T));
         }
     }
 }

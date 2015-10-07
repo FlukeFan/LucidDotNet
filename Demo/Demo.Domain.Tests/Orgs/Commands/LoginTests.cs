@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Lucid.Domain.Tests.Orgs.Commands
 {
     [TestFixture]
-    public class LoginTest : DomainTest
+    public class LoginTests : DomainTest
     {
         [Test]
         public void Execute()

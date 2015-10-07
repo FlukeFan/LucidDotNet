@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Demo.Database.Tests.Migrations
 {
     [TestFixture]
-    public class TestMigrations
+    public class MigrationsTests
     {
         private static BuildEnvironment _environment = BuildEnvironment.Load();
 
