@@ -79,12 +79,6 @@
       <InProject>False</InProject>
     </TestDependencies>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Database\Database.csproj">
-      <Project>{2c74567a-5cf2-4006-b6c1-fda122578ad1}</Project>
-      <Name>Database</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
     <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />

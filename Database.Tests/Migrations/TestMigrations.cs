@@ -22,12 +22,27 @@ namespace Lucid.Database.Tests.Migrations
 
         private const string CreateDb = "Create Database Lucid";
 
+        private const string CreateStructure = @"
+            CREATE TABLE [dbo].[User](
+                [Id] [int] IDENTITY(1,1) NOT NULL,
+                [Email] [varchar](255) NOT NULL,
+                [LastLoggedIn] [datetime] NOT NULL,
+             CONSTRAINT [PK_User_Id] PRIMARY KEY CLUSTERED
+            (
+                [Id] ASC
+            ))
+            ";
+
         [Test]
         public void Migrations_Run_UpgradesDatabase()
         {
             DropAndCreateBlankDb();
 
-            LucidMigrationRunner.Run(_environment.LucidConnection);
+            using (var db = new SqlConnection(_environment.LucidConnection))
+            {
+                db.Open();
+                ExecuteNonQuery(db, CreateStructure);
+            }
 
             using (var db = new SqlConnection(_environment.LucidConnection))
             {
