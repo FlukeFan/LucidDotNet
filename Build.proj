@@ -25,6 +25,8 @@
   </Target>
 
   <ItemGroup>
+    <ProjectsToBuild Include="Lucid.Domain\Lucid.Domain.csproj"/>
+    <ProjectsToBuild Include="Lucid.Domain.Tests\Lucid.Domain.Tests.csproj"/>
     <ProjectsToBuild Include="Domain\Domain.csproj"/>
     <ProjectsToBuild Include="Domain.Tests\Domain.Tests.csproj"/>
     <ProjectsToBuild Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
@@ -44,6 +46,8 @@
     <ProjectsToClean Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
     <ProjectsToClean Include="Domain.Tests\Domain.Tests.csproj"/>
     <ProjectsToClean Include="Domain\Domain.csproj"/>
+    <ProjectsToClean Include="Lucid.Domain.Tests\Lucid.Domain.Tests.csproj"/>
+    <ProjectsToClean Include="Lucid.Domain\Lucid.Domain.csproj"/>
   </ItemGroup>
 
   <Target Name="GenerateAssemblyInfo" Inputs="Global.targets" Outputs="AssemblyInfo.cs">
