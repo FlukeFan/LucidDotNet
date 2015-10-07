@@ -27,7 +27,7 @@
   <ItemGroup>
     <ProjectsToBuild Include="Domain\Domain.csproj"/>
     <ProjectsToBuild Include="Domain.Tests\Domain.Tests.csproj"/>
-    <ProjectsToBuild Include="Database.Tests\Database.Tests.csproj"/>
+    <ProjectsToBuild Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
     <ProjectsToBuild Include="Infrastructure\Infrastructure.csproj"/>
     <ProjectsToBuild Include="Infrastructure.Tests\Infrastructure.Tests.csproj"/>
     <ProjectsToBuild Include="Web\Web.csproj"/>
@@ -41,7 +41,7 @@
     <ProjectsToClean Include="Web\Web.csproj"/>
     <ProjectsToClean Include="Infrastructure\Infrastructure.csproj"/>
     <ProjectsToClean Include="Infrastructure.Tests\Infrastructure.Tests.csproj"/>
-    <ProjectsToClean Include="Database.Tests\Database.Tests.csproj"/>
+    <ProjectsToClean Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
     <ProjectsToClean Include="Domain.Tests\Domain.Tests.csproj"/>
     <ProjectsToClean Include="Domain\Domain.csproj"/>
   </ItemGroup>

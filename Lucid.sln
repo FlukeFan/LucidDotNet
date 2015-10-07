@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Tests", "Database.Tests\Database.Tests.csproj", "{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Database.Tests", "Lucid.Database.Tests\Lucid.Database.Tests.csproj", "{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF-B71C-4A7B-BC83-B4649FC99361}"
 	ProjectSection(SolutionItems) = preProject

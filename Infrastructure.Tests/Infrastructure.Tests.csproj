@@ -48,9 +48,9 @@
     <Compile Include="NHibernate\NhRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Database.Tests\Database.Tests.csproj">
+    <ProjectReference Include="..\Lucid.Database.Tests\Lucid.Database.Tests.csproj">
       <Project>{c976d0c2-11a6-4993-a338-bdbaa0bfc67d}</Project>
-      <Name>Database.Tests</Name>
+      <Name>Lucid.Database.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain.Tests\Domain.Tests.csproj">
       <Project>{f061fd23-24d6-4b84-bb5a-0f1860f6e784}</Project>

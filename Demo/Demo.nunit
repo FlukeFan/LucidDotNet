@@ -1,7 +1,7 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
   <Config name="Debug" binpathtype="Auto">
-    <assembly path="Domain.Tests\bin\Debug\Demo.Domain.Tests.dll" />
-    <assembly path="Database.Tests\bin\Debug\Demo.Database.Tests.dll" />
+    <assembly path="Demo.Domain.Tests\bin\Debug\Demo.Domain.Tests.dll" />
+    <assembly path="Demo.Database.Tests\bin\Debug\Demo.Database.Tests.dll" />
   </Config>
 </NUnitProject>
