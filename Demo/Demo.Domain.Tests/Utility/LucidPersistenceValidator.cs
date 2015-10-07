@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Demo.Domain.Utility;
 using FluentAssertions;
+using Lucid.Domain.Testing;
 
 namespace Lucid.Domain.Tests.Utility
 {
@@ -48,7 +49,6 @@ namespace Lucid.Domain.Tests.Utility
         {
             CheckNotNull(property.Compile().Invoke(), Builder.GetPropertyName(property.Body));
         }
-
 
         public void CheckNotNull(string value, string propertyName)
         {

@@ -48,6 +48,7 @@
     <Compile Include="Persistence\Queries\Query.cs" />
     <Compile Include="Persistence\Queries\Where.cs" />
     <Compile Include="Persistence\Queries\WhereStringEquals.cs" />
+    <Compile Include="Testing\Builder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lucid.Domain.nuspec" />
@@ -59,6 +60,7 @@
       <InProject>False</InProject>
     </PackageDependencies>
   </ItemGroup>
+  <ItemGroup />
   <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\Lucid.Domain.$(LucidVersion).nupkg">
     <Exec Command="..\$(NuGetExe) pack -OutputDirectory ..\packaged" />
   </Target>

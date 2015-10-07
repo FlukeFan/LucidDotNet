@@ -59,7 +59,7 @@
     <Compile Include="..\..\AssemblyInfo.cs" />
     <Compile Include="Orgs\Commands\LoginTest.cs" />
     <Compile Include="Orgs\UserTests.cs" />
-    <Compile Include="Utility\Builder.cs" />
+    <Compile Include="Utility\BuilderExtensions.cs" />
     <Compile Include="Utility\DomainTest.cs" />
     <Compile Include="Utility\LucidPersistenceValidator.cs" />
     <Compile Include="Utility\IRepositoryTests.cs" />
