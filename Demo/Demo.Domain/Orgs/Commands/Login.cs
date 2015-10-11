@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Demo.Domain.Orgs.Responses;
-using Lucid.Domain.Utility;
+using Lucid.Domain.Remote;
 
 namespace Demo.Domain.Orgs.Commands
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lucid.Domain.Utility
+namespace Lucid.Domain.Remote
 {
     public interface IRemoteable
     {

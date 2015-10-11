@@ -51,9 +51,7 @@
     <Compile Include="Orgs\User.cs" />
     <Compile Include="Utility\DemoEntity.cs" />
     <Compile Include="Utility\Registry.cs" />
-    <Compile Include="Utility\Remoteable.cs" />
     <Compile Include="Utility\IRepository.cs" />
-    <Compile Include="Utility\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

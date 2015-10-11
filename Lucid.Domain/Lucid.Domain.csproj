@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,6 +49,8 @@
     <Compile Include="Persistence\Queries\Query.cs" />
     <Compile Include="Persistence\Queries\Where.cs" />
     <Compile Include="Persistence\Queries\WhereStringEquals.cs" />
+    <Compile Include="Remote\Remoteable.cs" />
+    <Compile Include="Remote\Validator.cs" />
     <Compile Include="Testing\Builder.cs" />
     <Compile Include="Testing\ConsistencyInspector.cs" />
     <Compile Include="Testing\CustomInspections.cs" />

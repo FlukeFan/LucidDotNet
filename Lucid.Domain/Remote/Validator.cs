@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Lucid.Domain.Utility
+namespace Lucid.Domain.Remote
 {
     public static class Validator
     {

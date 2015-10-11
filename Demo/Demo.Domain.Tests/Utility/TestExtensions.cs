@@ -1,5 +1,5 @@
 ﻿using System;
-using Lucid.Domain.Utility;
+using Lucid.Domain.Remote;
 using NUnit.Framework;
 
 namespace Demo.Domain.Tests.Utility
