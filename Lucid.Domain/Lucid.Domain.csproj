@@ -49,7 +49,10 @@
     <Compile Include="Persistence\Queries\Query.cs" />
     <Compile Include="Persistence\Queries\Where.cs" />
     <Compile Include="Persistence\Queries\WhereStringEquals.cs" />
-    <Compile Include="Remote\Remoteable.cs" />
+    <Compile Include="Remote\Command.cs" />
+    <Compile Include="Remote\IRemoteable.cs" />
+    <Compile Include="Remote\QueryList.cs" />
+    <Compile Include="Remote\QuerySingle.cs" />
     <Compile Include="Remote\Validator.cs" />
     <Compile Include="Testing\Builder.cs" />
     <Compile Include="Testing\ConsistencyInspector.cs" />
