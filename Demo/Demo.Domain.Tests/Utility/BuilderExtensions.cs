@@ -1,7 +1,7 @@
 ﻿using Demo.Domain.Utility;
 using Lucid.Domain.Testing;
 
-namespace Lucid.Domain.Tests.Utility
+namespace Demo.Domain.Tests.Utility
 {
     public static class BuilderExtensions
     {

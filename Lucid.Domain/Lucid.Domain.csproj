@@ -49,6 +49,8 @@
     <Compile Include="Persistence\Queries\Where.cs" />
     <Compile Include="Persistence\Queries\WhereStringEquals.cs" />
     <Compile Include="Testing\Builder.cs" />
+    <Compile Include="Testing\ConsistencyInspector.cs" />
+    <Compile Include="Testing\CustomInspections.cs" />
     <Compile Include="Testing\MemoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>

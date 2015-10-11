@@ -1,11 +1,11 @@
 ﻿using System;
 using Demo.Domain.Orgs;
 using Demo.Domain.Orgs.Commands;
+using Demo.Domain.Tests.Utility;
 using FluentAssertions;
-using Lucid.Domain.Tests.Utility;
 using NUnit.Framework;
 
-namespace Lucid.Domain.Tests.Orgs.Commands
+namespace Demo.Domain.Tests.Orgs.Commands
 {
     [TestFixture]
     public class LoginTests : DomainTest

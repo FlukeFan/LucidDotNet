@@ -2,7 +2,7 @@
 using Demo.Domain.Utility;
 using NUnit.Framework;
 
-namespace Lucid.Domain.Tests.Utility
+namespace Demo.Domain.Tests.Utility
 {
     public abstract class DomainTest
     {

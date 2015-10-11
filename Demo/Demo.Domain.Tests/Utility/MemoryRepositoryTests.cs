@@ -1,7 +1,7 @@
 ﻿using Demo.Domain.Utility;
 using Lucid.Domain.Persistence;
 
-namespace Lucid.Domain.Tests.Utility
+namespace Demo.Domain.Tests.Utility
 {
     public class MemoryRepositoryTests : IRepositoryTests
     {

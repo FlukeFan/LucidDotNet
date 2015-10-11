@@ -60,8 +60,9 @@
     <Compile Include="Orgs\Commands\LoginTests.cs" />
     <Compile Include="Orgs\UserTests.cs" />
     <Compile Include="Utility\BuilderExtensions.cs" />
+    <Compile Include="Utility\DemoConsistencyInspector.cs" />
     <Compile Include="Utility\DomainTest.cs" />
-    <Compile Include="Utility\LucidPersistenceValidator.cs" />
+    <Compile Include="Utility\DemoCustomInspections.cs" />
     <Compile Include="Utility\IRepositoryTests.cs" />
     <Compile Include="Utility\DemoMemoryRepository.cs" />
     <Compile Include="Utility\MemoryRepositoryTests.cs" />

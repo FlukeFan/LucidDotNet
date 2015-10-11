@@ -1,11 +1,11 @@
 ﻿using Demo.Domain.Orgs;
+using Demo.Domain.Tests.Orgs;
 using FluentAssertions;
 using Lucid.Domain.Persistence;
 using Lucid.Domain.Persistence.Queries;
-using Lucid.Domain.Tests.Orgs;
 using NUnit.Framework;
 
-namespace Lucid.Domain.Tests.Utility
+namespace Demo.Domain.Tests.Utility
 {
     [TestFixture]
     public abstract class IRepositoryTests

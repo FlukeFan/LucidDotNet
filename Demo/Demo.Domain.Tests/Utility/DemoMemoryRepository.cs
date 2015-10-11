@@ -2,7 +2,7 @@
 using Demo.Domain.Utility;
 using Lucid.Domain.Testing;
 
-namespace Lucid.Domain.Tests.Utility
+namespace Demo.Domain.Tests.Utility
 {
     public class DemoMemoryRepository : MemoryRepository<int>, IDemoRepository
     {
