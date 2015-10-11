@@ -54,10 +54,6 @@
     <Compile Include="Remote\QueryList.cs" />
     <Compile Include="Remote\QuerySingle.cs" />
     <Compile Include="Remote\Validator.cs" />
-    <Compile Include="Testing\Builder.cs" />
-    <Compile Include="Testing\ConsistencyInspector.cs" />
-    <Compile Include="Testing\CustomInspections.cs" />
-    <Compile Include="Testing\MemoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lucid.Domain.nuspec" />
@@ -70,7 +66,7 @@
     </PackageDependencies>
   </ItemGroup>
   <ItemGroup />
-  <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\Lucid.Domain.$(LucidVersion).nupkg">
+  <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(LucidVersion).nupkg">
     <Exec Command="..\$(NuGetExe) pack -OutputDirectory ..\packaged" />
   </Target>
   <Target Name="AfterBuild">

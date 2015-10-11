@@ -17,15 +17,18 @@
 
   <Target Name="Build">
     <CallTarget Targets="GenerateAssemblyInfo" />
+    <MakeDir Directories="packaged" />
     <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
   </Target>
 
   <Target Name="Clean">
     <MSBuild Projects="@(ProjectsToClean)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
+    <RemoveDir Directories="packaged" />
   </Target>
 
   <ItemGroup>
     <ProjectsToBuild Include="Lucid.Domain\Lucid.Domain.csproj"/>
+    <ProjectsToBuild Include="Lucid.Domain.Testing\Lucid.Domain.Testing.csproj"/>
     <ProjectsToBuild Include="Lucid.Domain.Tests\Lucid.Domain.Tests.csproj"/>
     <ProjectsToBuild Include="Domain\Domain.csproj"/>
     <ProjectsToBuild Include="Domain.Tests\Domain.Tests.csproj"/>
@@ -47,6 +50,7 @@
     <ProjectsToClean Include="Domain.Tests\Domain.Tests.csproj"/>
     <ProjectsToClean Include="Domain\Domain.csproj"/>
     <ProjectsToClean Include="Lucid.Domain.Tests\Lucid.Domain.Tests.csproj"/>
+    <ProjectsToClean Include="Lucid.Domain.Testing\Lucid.Domain.Testing.csproj"/>
     <ProjectsToClean Include="Lucid.Domain\Lucid.Domain.csproj"/>
   </ItemGroup>
 

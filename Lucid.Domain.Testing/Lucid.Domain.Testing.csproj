@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D2BEF9CD-B8B0-40E3-9F96-D7989395CC26}</ProjectGuid>
+    <ProjectGuid>{720932D2-760D-46C4-8DD9-7D492867D23E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lucid.Infrastructure</RootNamespace>
-    <AssemblyName>Lucid.Infrastructure</AssemblyName>
+    <RootNamespace>Lucid.Domain.Testing</RootNamespace>
+    <AssemblyName>Lucid.Domain.Testing</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -21,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,16 +29,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,18 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
-    <Compile Include="NHibernate\Mapping.cs" />
-    <Compile Include="NHibernate\NhRepository.cs" />
+    <Compile Include="Builder.cs" />
+    <Compile Include="ConsistencyInspector.cs" />
+    <Compile Include="CustomInspections.cs" />
+    <Compile Include="MemoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{bec5e340-20aa-48f0-bb0a-288a9e071177}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
+    <None Include="Lucid.Domain.Testing.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Global.targets" />
@@ -67,6 +56,12 @@
     <PackageDependencies Include="bin\$(Configuration)\$(AssemblyName).dll">
       <InProject>False</InProject>
     </PackageDependencies>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucid.Domain\Lucid.Domain.csproj">
+      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
+      <Name>Lucid.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(LucidVersion).nupkg">
     <Exec Command="..\$(NuGetExe) pack -OutputDirectory ..\packaged" />
