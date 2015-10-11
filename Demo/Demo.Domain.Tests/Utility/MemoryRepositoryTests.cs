@@ -7,8 +7,7 @@ namespace Demo.Domain.Tests.Utility
     {
         protected override IRepository<int> New()
         {
-            var validator = new DemoConsistencyInspector();
-            var repository = new DemoMemoryRepository(e => validator.BeforeSave(e));
+            var repository = new DemoMemoryRepository();
             Registry.Repository = repository;
             return repository;
         }

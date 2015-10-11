@@ -14,8 +14,7 @@ namespace Demo.Domain.Tests.Utility
         {
             Test = new TestValues();
 
-            var validator = new DemoConsistencyInspector();
-            Repository = new DemoMemoryRepository(e => validator.BeforeSave(e));
+            Repository = new DemoMemoryRepository();
             Registry.Repository = Repository;
         }
 

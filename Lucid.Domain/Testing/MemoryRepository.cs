@@ -8,14 +8,14 @@ namespace Lucid.Domain.Testing
 {
     public class MemoryRepository<TId> : IRepository<TId>
     {
-        private Action<IEntity<TId>>    _beforeSave;
+        private ConsistencyInspector    _consistencyInspector;
         private IList<IEntity<TId>>     _entities = new List<IEntity<TId>>();
 
         private int lastId = 101;
 
-        public MemoryRepository(Action<IEntity<TId>> beforeSave)
+        public MemoryRepository(ConsistencyInspector consistencyInspector)
         {
-            _beforeSave = beforeSave;
+            _consistencyInspector = consistencyInspector;
         }
 
         public T Save<T>(T entity) where T : IEntity<TId>
@@ -23,7 +23,7 @@ namespace Lucid.Domain.Testing
             if (entity == null)
                 throw new Exception("Entity to be saved should not be null");
 
-            _beforeSave(entity);
+            _consistencyInspector.BeforeSave(entity);
             var idProperty = entity.GetType().GetProperty("Id");
             idProperty.SetValue(entity, lastId++);
             _entities.Add(entity);
