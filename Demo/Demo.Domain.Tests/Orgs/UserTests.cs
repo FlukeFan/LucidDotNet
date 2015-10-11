@@ -11,7 +11,7 @@ namespace Lucid.Domain.Tests.Orgs
     {
         static UserBuilder()
         {
-            LucidPersistenceValidator.AddCustomValidation<User>((validator, user) =>
+            DemoCustomInspections.Add<User>((validator, user) =>
             {
                 validator.CheckNotNull(() => user.Email);
             });

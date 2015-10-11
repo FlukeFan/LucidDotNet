@@ -2,20 +2,29 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using Demo.Domain.Utility;
 using FluentAssertions;
 using Lucid.Domain.Testing;
 
 namespace Lucid.Domain.Tests.Utility
 {
-    public class LucidPersistenceValidator
+    public class DemoConsistencyInspector : ConsistencyInspector
     {
-        private static readonly DateTime                    _minSqlServerDateTime   = new DateTime(1753, 1, 1, 0, 0, 0);
-        private static readonly LucidPersistenceValidator   _validator              = new LucidPersistenceValidator();
+        protected override void CheckProperty(object entity, PropertyInfo property)
+        {
+            base.CheckProperty(entity, property);
 
-        private static IDictionary<Type, Action<LucidPersistenceValidator, DemoEntity>> _customValidators = new Dictionary<Type, Action<LucidPersistenceValidator, DemoEntity>>();
+            var type = property.PropertyType;
 
-        public static void BeforeSave(DemoEntity entity)
+            if (type == typeof(DateTime))
+                CheckMsSqlDateTime((DateTime)property.GetValue(entity), property.Name);
+        }
+    }
+
+    public class ConsistencyInspector
+    {
+        public static readonly DateTime MinSqlServerDateTime = new DateTime(1753, 1, 1, 0, 0, 0);
+
+        public virtual void BeforeSave(object entity)
         {
             var type = entity.GetType();
             var properties = type.GetProperties();
@@ -23,26 +32,16 @@ namespace Lucid.Domain.Tests.Utility
             foreach (var property in properties)
                 CheckProperty(entity, property);
 
-            if (_customValidators.ContainsKey(type))
-                _customValidators[type](_validator, entity);
+            CustomInspections.Verify(type, entity, this);
         }
 
-        public static void AddCustomValidation<T>(Action<LucidPersistenceValidator, T> validation) where T : DemoEntity
+        protected virtual void CheckProperty(object entity, PropertyInfo property)
         {
-            _customValidators.Add(typeof(T), (v, e) => validation(v, (T)e));
-        }
-
-        private static void CheckProperty(DemoEntity entity, PropertyInfo property)
-        {
-            var type = property.PropertyType;
-
-            if (type == typeof(DateTime))
-                _validator.CheckMsSqlDateTime((DateTime)property.GetValue(entity), property.Name);
         }
 
         public void CheckMsSqlDateTime(DateTime dateTime, string propertyName)
         {
-            dateTime.Should().BeOnOrAfter(_minSqlServerDateTime, propertyName + " value cannot be stored in SQL Server");
+            dateTime.Should().BeOnOrAfter(MinSqlServerDateTime, propertyName + " value cannot be stored in SQL Server");
         }
 
         public void CheckNotNull(Expression<Func<string>> property)
@@ -53,6 +52,30 @@ namespace Lucid.Domain.Tests.Utility
         public void CheckNotNull(string value, string propertyName)
         {
             value.Should().NotBeNullOrWhiteSpace(propertyName + " value cannot be null");
+        }
+    }
+
+    public static class DemoCustomInspections
+    {
+        public static void Add<T>(Action<DemoConsistencyInspector, T> inspection)
+        {
+            CustomInspections.Add<T>((ci, entity) => inspection((DemoConsistencyInspector)ci, entity));
+        }
+    }
+
+    public static class CustomInspections
+    {
+        private static IDictionary<Type, Action<ConsistencyInspector, object>> _customValidators = new Dictionary<Type, Action<ConsistencyInspector, object>>();
+
+        public static void Add<T>(Action<ConsistencyInspector, T> validation)
+        {
+            _customValidators.Add(typeof(T), (v, e) => validation(v, (T)e));
+        }
+
+        public static void Verify(Type type, object entity, ConsistencyInspector validator)
+        {
+            if (_customValidators.ContainsKey(type))
+                _customValidators[type](validator, entity);
         }
     }
 }

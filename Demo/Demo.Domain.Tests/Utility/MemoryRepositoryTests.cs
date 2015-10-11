@@ -7,7 +7,8 @@ namespace Lucid.Domain.Tests.Utility
     {
         protected override IRepository<int> New()
         {
-            var repository = new DemoMemoryRepository(LucidPersistenceValidator.BeforeSave);
+            var validator = new DemoConsistencyInspector();
+            var repository = new DemoMemoryRepository(e => validator.BeforeSave(e));
             Registry.Repository = repository;
             return repository;
         }

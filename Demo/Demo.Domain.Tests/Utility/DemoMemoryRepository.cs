@@ -6,6 +6,8 @@ namespace Lucid.Domain.Tests.Utility
 {
     public class DemoMemoryRepository : MemoryRepository<int>, IDemoRepository
     {
+        private static DemoConsistencyInspector _validator = new DemoConsistencyInspector();
+
         public DemoMemoryRepository(Action<DemoEntity> beforeSave) : base(e => beforeSave((DemoEntity)e)) { }
     }
 }

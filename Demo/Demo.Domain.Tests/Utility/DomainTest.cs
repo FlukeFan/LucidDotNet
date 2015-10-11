@@ -13,8 +13,9 @@ namespace Lucid.Domain.Tests.Utility
         public virtual void SetUp()
         {
             Test = new TestValues();
-            
-            Repository = new DemoMemoryRepository(LucidPersistenceValidator.BeforeSave);
+
+            var validator = new DemoConsistencyInspector();
+            Repository = new DemoMemoryRepository(e => validator.BeforeSave(e));
             Registry.Repository = Repository;
         }
 
