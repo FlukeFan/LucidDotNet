@@ -1,11 +1,11 @@
 ﻿using System;
-using Demo.Domain.Orgs;
+using Demo.Domain.Account;
 using Demo.Domain.Tests.Utility;
 using FluentAssertions;
 using Lucid.Domain.Testing;
 using NUnit.Framework;
 
-namespace Demo.Domain.Tests.Orgs
+namespace Demo.Domain.Tests.Account
 {
     public class UserBuilder : Builder<User>
     {

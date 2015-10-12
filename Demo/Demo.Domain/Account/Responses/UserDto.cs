@@ -1,5 +1,5 @@
 ﻿
-namespace Demo.Domain.Orgs.Responses
+namespace Demo.Domain.Account.Responses
 {
     public class UserDto
     {

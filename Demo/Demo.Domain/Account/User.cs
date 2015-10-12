@@ -2,7 +2,7 @@
 using Demo.Domain.Utility;
 using Lucid.Domain.Persistence.Queries;
 
-namespace Demo.Domain.Orgs
+namespace Demo.Domain.Account
 {
     public class User : DemoEntity
     {

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Demo.Domain.Orgs.Responses;
+using Demo.Domain.Account.Responses;
 using Lucid.Domain.Remote;
 
-namespace Demo.Domain.Orgs.Commands
+namespace Demo.Domain.Account.Commands
 {
     public class Login : Command<UserDto>
     {
