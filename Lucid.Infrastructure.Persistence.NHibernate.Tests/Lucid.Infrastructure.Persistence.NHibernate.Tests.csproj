@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DDC2CB9A-255D-4CCE-A292-C0F38AD321FC}</ProjectGuid>
+    <ProjectGuid>{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lucid.Infrastructure.Tests</RootNamespace>
-    <AssemblyName>Lucid.Infrastructure.Tests</AssemblyName>
+    <RootNamespace>Lucid.Infrastructure.Persistence.NHibernate.Tests</RootNamespace>
+    <AssemblyName>Lucid.Infrastructure.Persistence.NHibernate.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -21,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,12 +29,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,28 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
-    <Compile Include="NHibernate\NhRepositoryTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lucid.Database.Tests\Lucid.Database.Tests.csproj">
-      <Project>{c976d0c2-11a6-4993-a338-bdbaa0bfc67d}</Project>
-      <Name>Lucid.Database.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain.Tests\Domain.Tests.csproj">
-      <Project>{f061fd23-24d6-4b84-bb5a-0f1860f6e784}</Project>
-      <Name>Domain.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{bec5e340-20aa-48f0-bb0a-288a9e071177}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{d2bef9cd-b8b0-40e3-9f96-d7989395cc26}</Project>
-      <Name>Infrastructure</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="NhRepositoryTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -82,6 +58,24 @@
     <TestDependencies Include="@(TestAssembly)">
       <InProject>False</InProject>
     </TestDependencies>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucid.Database.Tests\Lucid.Database.Tests.csproj">
+      <Project>{c976d0c2-11a6-4993-a338-bdbaa0bfc67d}</Project>
+      <Name>Lucid.Database.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Domain.Tests\Lucid.Domain.Tests.csproj">
+      <Project>{24eed56f-299c-4e7d-989d-75c8ed35dc8d}</Project>
+      <Name>Lucid.Domain.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Domain\Lucid.Domain.csproj">
+      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
+      <Name>Lucid.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Infrastructure.Persistence.NHibernate\Lucid.Infrastructure.Persistence.NHibernate.csproj">
+      <Project>{d824c9d7-9a47-4221-897c-db99fe98c0d9}</Project>
+      <Name>Lucid.Infrastructure.Persistence.NHibernate</Name>
+    </ProjectReference>
   </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />

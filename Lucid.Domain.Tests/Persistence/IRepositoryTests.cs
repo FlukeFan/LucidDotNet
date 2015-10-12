@@ -27,7 +27,7 @@ namespace Lucid.Domain.Tests.Persistence
         [Test]
         public void Save_SetsId()
         {
-            var user = new LucidEntityBuilder().Value();
+            var user = new LucidPolyTypeBuilder().Value();
 
             user.Id.Should().Be(0, "newly instantiated entity should have a default Id value");
 
@@ -40,10 +40,10 @@ namespace Lucid.Domain.Tests.Persistence
         [Test]
         public void Query_RetrieveAll()
         {
-            var user1 = new LucidEntityBuilder().Save(_repository);
-            var user2 = new LucidEntityBuilder().Save(_repository);
+            var user1 = new LucidPolyTypeBuilder().Save(_repository);
+            var user2 = new LucidPolyTypeBuilder().Save(_repository);
 
-            var allUsers = _repository.Query<LucidEntity>().List();
+            var allUsers = _repository.Query<LucidPolyType>().List();
 
             allUsers.Count.Should().Be(2);
             allUsers.Should().Contain(user1);
@@ -53,12 +53,12 @@ namespace Lucid.Domain.Tests.Persistence
         [Test]
         public void Query_RestrictPropertyEqual()
         {
-            var user1 = new LucidEntityBuilder().With(u => u.Email, "test1@user.net").Save(_repository);
-            var user2 = new LucidEntityBuilder().With(u => u.Email, "test2@user.net").Save(_repository);
+            var user1 = new LucidPolyTypeBuilder().With(u => u.Email, "test1@user.net").Save(_repository);
+            var user2 = new LucidPolyTypeBuilder().With(u => u.Email, "test2@user.net").Save(_repository);
 
             var specificUser =
-                _repository.Query<LucidEntity>()
-                    .Filter(Where<LucidEntity>.PropEq(u => u.Email, "test2@user.net"))
+                _repository.Query<LucidPolyType>()
+                    .Filter(Where<LucidPolyType>.PropEq(u => u.Email, "test2@user.net"))
                     .SingleOrDefault();
 
             specificUser.Should().NotBeNull();

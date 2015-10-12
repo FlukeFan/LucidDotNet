@@ -30,12 +30,12 @@ namespace Lucid.Domain.Testing
             return entity;
         }
 
-        public Query<T, TId> Query<T>() where T : IEntity<TId>
+        public Query<T, TId> Query<T>() where T : class, IEntity<TId>
         {
             return new Query<T, TId>(this);
         }
 
-        public IList<T> Satisfy<T>(Query<T, TId> query) where T : IEntity<TId>
+        public IList<T> Satisfy<T>(Query<T, TId> query) where T : class, IEntity<TId>
         {
             var result = _entities.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
 

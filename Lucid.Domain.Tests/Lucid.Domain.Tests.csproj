@@ -57,7 +57,8 @@
     <Compile Include="Persistence\IRepositoryTests.cs" />
     <Compile Include="Persistence\LucidBuilderExtensions.cs" />
     <Compile Include="Persistence\LucidEntity.cs" />
-    <Compile Include="Persistence\LucidEntityBuilder.cs" />
+    <Compile Include="Persistence\LucidPolyTypeBuilder.cs" />
+    <Compile Include="Persistence\LucidPolyType.cs" />
     <Compile Include="Testing\MemoryRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +70,9 @@
       <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
       <Name>Lucid.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -84,9 +88,6 @@
     <TestDependencies Include="@(TestAssembly)">
       <InProject>False</InProject>
     </TestDependencies>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />

@@ -30,11 +30,9 @@
     <ProjectsToBuild Include="Lucid.Domain\Lucid.Domain.csproj"/>
     <ProjectsToBuild Include="Lucid.Domain.Testing\Lucid.Domain.Testing.csproj"/>
     <ProjectsToBuild Include="Lucid.Domain.Tests\Lucid.Domain.Tests.csproj"/>
-    <ProjectsToBuild Include="Domain\Domain.csproj"/>
-    <ProjectsToBuild Include="Domain.Tests\Domain.Tests.csproj"/>
     <ProjectsToBuild Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
-    <ProjectsToBuild Include="Infrastructure\Infrastructure.csproj"/>
-    <ProjectsToBuild Include="Infrastructure.Tests\Infrastructure.Tests.csproj"/>
+    <ProjectsToBuild Include="Lucid.Infrastructure.Persistence.NHibernate\Lucid.Infrastructure.Persistence.NHibernate.csproj"/>
+    <ProjectsToBuild Include="Lucid.Infrastructure.Persistence.NHibernate.Tests\Lucid.Infrastructure.Persistence.NHibernate.Tests.csproj"/>
     <ProjectsToBuild Include="Web\Web.csproj"/>
     <ProjectsToBuild Include="Web.Tests\Web.Tests.csproj"/>
     <ProjectsToBuild Include="Demo\Demo.proj"/>
@@ -44,11 +42,9 @@
     <ProjectsToClean Include="Demo\Demo.proj"/>
     <ProjectsToClean Include="Web.Tests\Web.Tests.csproj"/>
     <ProjectsToClean Include="Web\Web.csproj"/>
-    <ProjectsToClean Include="Infrastructure\Infrastructure.csproj"/>
-    <ProjectsToClean Include="Infrastructure.Tests\Infrastructure.Tests.csproj"/>
+    <ProjectsToClean Include="Lucid.Infrastructure.Persistence.NHibernate.Tests\Lucid.Infrastructure.Persistence.NHibernate.Tests.csproj"/>
+    <ProjectsToClean Include="Lucid.Infrastructure.Persistence.NHibernate\Lucid.Infrastructure.Persistence.NHibernate.csproj"/>
     <ProjectsToClean Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
-    <ProjectsToClean Include="Domain.Tests\Domain.Tests.csproj"/>
-    <ProjectsToClean Include="Domain\Domain.csproj"/>
     <ProjectsToClean Include="Lucid.Domain.Tests\Lucid.Domain.Tests.csproj"/>
     <ProjectsToClean Include="Lucid.Domain.Testing\Lucid.Domain.Testing.csproj"/>
     <ProjectsToClean Include="Lucid.Domain\Lucid.Domain.csproj"/>

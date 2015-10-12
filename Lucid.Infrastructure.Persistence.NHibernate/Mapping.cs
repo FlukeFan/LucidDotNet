@@ -1,24 +1,25 @@
-﻿using System.Linq;
-using Lucid.Domain.Utility;
+﻿using System;
+using System.Linq;
+using Lucid.Domain.Persistence;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Mapping.ByCode;
 
-namespace Lucid.Infrastructure.NHibernate
+namespace Lucid.Infrastructure.Persistence.NHibernate
 {
     public static class Mapping
     {
-        public static HbmMapping CreateMappings()
+        public static HbmMapping CreateMappings<TId>(Type rootEntityType)
         {
             var mapper = new ConventionModelMapper();
 
             var baseEntities =
-                typeof(Entity).Assembly.GetTypes()
-                    .Where(t => t.BaseType == typeof(Entity))
+                rootEntityType.Assembly.GetTypes()
+                    .Where(t => t.BaseType == rootEntityType)
                     .OrderBy(t => t.FullName);
 
             var allEntities =
-                typeof(Entity).Assembly.GetTypes()
-                    .Where(t => typeof(Entity).IsAssignableFrom(t) && t != typeof(Entity))
+                rootEntityType.Assembly.GetTypes()
+                    .Where(t => rootEntityType.IsAssignableFrom(t) && t != rootEntityType)
                     .OrderBy(t => t.FullName);
 
             var entitiesWithoutHierarchy =
@@ -35,7 +36,7 @@ namespace Lucid.Infrastructure.NHibernate
             mapper.IsRootEntity((t, declared) => baseEntities.Contains(t));
             mapper.IsTablePerClassHierarchy((t, declared) => entitiesWithHierarchy.Contains(t));
 
-            mapper.Class<Entity>(m =>
+            mapper.Class<IEntity<TId>>(m =>
             {
                 m.Id(e => e.Id, im => im.Generator(Generators.Native));
             });

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lucid.Domain.Utility;
-using Lucid.Domain.Utility.Queries;
+using Lucid.Domain.Persistence;
+using Lucid.Domain.Persistence.Queries;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Connection;
@@ -11,9 +11,9 @@ using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Tool.hbm2ddl;
 
-namespace Lucid.Infrastructure.NHibernate
+namespace Lucid.Infrastructure.Persistence.NHibernate
 {
-    public class NhRepository : IRepository, IDisposable
+    public class NhRepository<TId> : IRepository<TId>, IDisposable
     {
         private static IDictionary<Type, Type> _whereInterfaces = new Dictionary<Type, Type>();
 
@@ -26,7 +26,7 @@ namespace Lucid.Infrastructure.NHibernate
             _restrictionProcessors.Add(typeof(IWhereStringEqual), (c, w) => AddStringRestriction(c, (IWhereStringEqual)w));
         }
 
-        public static void Init(string connectionString)
+        public static void Init(string connectionString, Type rootEntityType)
         {
             var config = new Configuration();
 
@@ -38,15 +38,15 @@ namespace Lucid.Infrastructure.NHibernate
                 db.Dialect<MsSql2008Dialect>();
             });
 
-            var mappings = Mapping.CreateMappings();
+            var mappings = Mapping.CreateMappings<TId>(rootEntityType);
             config.AddDeserializedMapping(mappings, "DomainMapping");
 
             SchemaMetadataUpdater.QuoteTableAndColumns(config);
             SessionFactory = config.BuildSessionFactory();
         }
 
-        private ISession        _session;
-        private ITransaction    _transaction;
+        private ISession _session;
+        private ITransaction _transaction;
 
         public NhRepository()
         {
@@ -54,25 +54,25 @@ namespace Lucid.Infrastructure.NHibernate
                 throw new Exception("Call Init() once to setup the session factory");
         }
 
-        public NhRepository Open()
+        public NhRepository<TId> Open()
         {
             _session = SessionFactory.OpenSession();
             _transaction = _session.BeginTransaction();
             return this;
         }
 
-        public T Save<T>(T entity) where T : Entity
+        public T Save<T>(T entity) where T : IEntity<TId>
         {
             _session.Save(entity);
             return entity;
         }
 
-        public Query<T> Query<T>() where T : Entity
+        public Query<T, TId> Query<T>() where T : class, IEntity<TId>
         {
-            return new Query<T>(this);
+            return new Query<T, TId>(this);
         }
 
-        public IList<T> Satisfy<T>(Query<T> query) where T : class
+        public IList<T> Satisfy<T>(Query<T, TId> query) where T : class, IEntity<TId>
         {
             var criteria = _session.CreateCriteria<T>();
 

@@ -23,11 +23,11 @@ namespace Lucid.Database.Tests.Migrations
         private const string CreateDb = "Create Database Lucid";
 
         private const string CreateStructure = @"
-            CREATE TABLE [dbo].[User](
+            CREATE TABLE [dbo].[LucidPolyType](
                 [Id] [int] IDENTITY(1,1) NOT NULL,
                 [Email] [varchar](255) NOT NULL,
                 [LastLoggedIn] [datetime] NOT NULL,
-             CONSTRAINT [PK_User_Id] PRIMARY KEY CLUSTERED
+             CONSTRAINT [PK_LucidPolyType_Id] PRIMARY KEY CLUSTERED
             (
                 [Id] ASC
             ))
@@ -49,7 +49,7 @@ namespace Lucid.Database.Tests.Migrations
                 db.Open();
 
                 var cmd = db.CreateCommand();
-                cmd.CommandText = "select count(*) from [User]";
+                cmd.CommandText = "select count(*) from [LucidPolyType]";
                 var rows = (int)cmd.ExecuteScalar();
 
                 rows.Should().Be(0);

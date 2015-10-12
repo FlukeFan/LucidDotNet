@@ -1,4 +1,5 @@
-﻿using Lucid.Infrastructure.NHibernate;
+﻿using Demo.Domain.Utility;
+using Lucid.Infrastructure.Persistence.NHibernate;
 
 namespace Lucid.Demo.Web
 {
@@ -9,7 +10,7 @@ namespace Lucid.Demo.Web
     {
         public static void NotCalled()
         {
-            Mapping.CreateMappings();
+            Mapping.CreateMappings<int>(typeof(DemoEntity));
         }
     }
 }

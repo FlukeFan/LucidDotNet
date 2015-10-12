@@ -1,24 +1,22 @@
 ﻿using Lucid.Database.Tests;
-using Lucid.Domain.Tests.Utility;
-using Lucid.Domain.Utility;
-using Lucid.Infrastructure.NHibernate;
+using Lucid.Domain.Persistence;
+using Lucid.Domain.Tests.Persistence;
 
-namespace Lucid.Infrastructure.Tests.NHibernate
+namespace Lucid.Infrastructure.Persistence.NHibernate.Tests
 {
     public class NhRepositoryTests : IRepositoryTests
     {
         static NhRepositoryTests()
         {
             var environment = BuildEnvironment.Load();
-            NhRepository.Init(environment.LucidConnection);
+            NhRepository<int>.Init(environment.LucidConnection, typeof(LucidEntity));
         }
 
-        private NhRepository _repository;
+        private NhRepository<int> _repository;
 
-        protected override IRepository New()
+        protected override IRepository<int> New()
         {
-            _repository = new NhRepository().Open();
-            Registry.Repository = _repository;
+            _repository = new NhRepository<int>().Open();
             return _repository;
         }
 
