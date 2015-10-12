@@ -1,11 +1,9 @@
-﻿using Demo.Domain.Orgs;
-using Demo.Domain.Tests.Orgs;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Lucid.Domain.Persistence;
 using Lucid.Domain.Persistence.Queries;
 using NUnit.Framework;
 
-namespace Demo.Domain.Tests.Utility
+namespace Lucid.Domain.Tests.Persistence
 {
     [TestFixture]
     public abstract class IRepositoryTests
@@ -29,7 +27,7 @@ namespace Demo.Domain.Tests.Utility
         [Test]
         public void Save_SetsId()
         {
-            var user = new UserBuilder().Value();
+            var user = new LucidEntityBuilder().Value();
 
             user.Id.Should().Be(0, "newly instantiated entity should have a default Id value");
 
@@ -42,10 +40,10 @@ namespace Demo.Domain.Tests.Utility
         [Test]
         public void Query_RetrieveAll()
         {
-            var user1 = new UserBuilder().Save();
-            var user2 = new UserBuilder().Save();
+            var user1 = new LucidEntityBuilder().Save(_repository);
+            var user2 = new LucidEntityBuilder().Save(_repository);
 
-            var allUsers = _repository.Query<User>().List();
+            var allUsers = _repository.Query<LucidEntity>().List();
 
             allUsers.Count.Should().Be(2);
             allUsers.Should().Contain(user1);
@@ -55,12 +53,12 @@ namespace Demo.Domain.Tests.Utility
         [Test]
         public void Query_RestrictPropertyEqual()
         {
-            var user1 = new UserBuilder().With(u => u.Email, "test1@user.net").Save();
-            var user2 = new UserBuilder().With(u => u.Email, "test2@user.net").Save();
+            var user1 = new LucidEntityBuilder().With(u => u.Email, "test1@user.net").Save(_repository);
+            var user2 = new LucidEntityBuilder().With(u => u.Email, "test2@user.net").Save(_repository);
 
             var specificUser =
-                _repository.Query<User>()
-                    .Filter(Where<User>.PropEq(u => u.Email, "test2@user.net"))
+                _repository.Query<LucidEntity>()
+                    .Filter(Where<LucidEntity>.PropEq(u => u.Email, "test2@user.net"))
                     .SingleOrDefault();
 
             specificUser.Should().NotBeNull();

@@ -67,9 +67,7 @@
     <Compile Include="Utility\DemoConsistencyInspector.cs" />
     <Compile Include="Utility\DomainTest.cs" />
     <Compile Include="Utility\DemoCustomInspections.cs" />
-    <Compile Include="Utility\IRepositoryTests.cs" />
     <Compile Include="Utility\DemoMemoryRepository.cs" />
-    <Compile Include="Utility\MemoryRepositoryTests.cs" />
     <Compile Include="Utility\TestExtensions.cs" />
     <Compile Include="Utility\TestValues.cs" />
   </ItemGroup>
