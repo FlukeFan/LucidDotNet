@@ -67,14 +67,14 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
             return entity;
         }
 
-        public Query<T, TId> Query<T>() where T : class, IEntity<TId>
+        public Query<T, TId> Query<T>() where T : IEntity<TId>
         {
             return new Query<T, TId>(this);
         }
 
-        public IList<T> Satisfy<T>(Query<T, TId> query) where T : class, IEntity<TId>
+        public IList<T> Satisfy<T>(Query<T, TId> query) where T : IEntity<TId>
         {
-            var criteria = _session.CreateCriteria<T>();
+            var criteria = _session.CreateCriteria(typeof(T));
 
             foreach (var restriction in query.Restrictions)
                 AddRestriction(criteria, restriction);

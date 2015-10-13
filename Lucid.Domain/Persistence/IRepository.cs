@@ -7,7 +7,7 @@ namespace Lucid.Domain.Persistence
     {
         T               Save<T>(T entity)               where T : IEntity<TId>;
 
-        Query<T, TId>   Query<T>()                      where T : class, IEntity<TId>;
-        IList<T>        Satisfy<T>(Query<T, TId> query) where T : class, IEntity<TId>;
+        Query<T, TId>   Query<T>()                      where T : IEntity<TId>;
+        IList<T>        Satisfy<T>(Query<T, TId> query) where T : IEntity<TId>;
     }
 }
