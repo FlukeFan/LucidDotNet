@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
     <Compile Include="BuildEnvironment.cs" />
-    <Compile Include="Migrations\TestMigrations.cs" />
+    <Compile Include="CreateDatabaseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DefaultEnvironment.json" />

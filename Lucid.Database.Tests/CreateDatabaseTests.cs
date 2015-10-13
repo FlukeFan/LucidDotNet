@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Lucid.Database.Tests.Migrations
 {
     [TestFixture]
-    public class TestMigrations
+    public class CreateDatabaseTests
     {
         private static BuildEnvironment _environment = BuildEnvironment.Load();
 
