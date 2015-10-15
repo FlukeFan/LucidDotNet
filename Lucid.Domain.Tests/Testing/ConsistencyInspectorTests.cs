@@ -10,9 +10,10 @@ namespace Lucid.Domain.Tests.Testing
     {
         public class FakeEntity
         {
-            public object   Object      { get; set; }
-            public DateTime DateTime    { get; set; }
-            public string   String      { get; set; }
+            public object       Object              { get; set; }
+            public DateTime     DateTime            { get; set; }
+            public DateTime?    NullableDateTime    { get; set; }
+            public string       String              { get; set; }
         }
 
         [Test]
@@ -44,16 +45,18 @@ namespace Lucid.Domain.Tests.Testing
             {
                 Object = new object(),
                 DateTime = new DateTime(2008, 07, 06),
+                NullableDateTime = new DateTime(2009, 08, 07),
                 String = "not null",
             };
 
             Assert.DoesNotThrow(() => inspector.CheckNotNull(() => entity.Object));
             Assert.DoesNotThrow(() => inspector.CheckMsSqlDateTime(() => entity.DateTime));
+            Assert.DoesNotThrow(() => inspector.CheckNotNull(() => entity.NullableDateTime));
             Assert.DoesNotThrow(() => inspector.CheckNotNullOrEmpty(() => entity.String));
         }
 
         [Test]
-        public void CheckNotNull_ThrowsWhenNull()
+        public void CheckNotNullObject_ThrowsWhenNull()
         {
             var inspector = new ConsistencyInspector();
             var entity = new FakeEntity { Object = null };
@@ -61,6 +64,17 @@ namespace Lucid.Domain.Tests.Testing
             var e = Assert.Throws<Exception>(() => inspector.CheckNotNull(() => entity.Object));
 
             e.Message.Should().Contain("Object cannot be null");
+        }
+
+        [Test]
+        public void CheckNotNullValue_ThrowsWhenNull()
+        {
+            var inspector = new ConsistencyInspector();
+            var entity = new FakeEntity { NullableDateTime = null };
+
+            var e = Assert.Throws<Exception>(() => inspector.CheckNotNull(() => entity.NullableDateTime));
+
+            e.Message.Should().Contain("NullableDateTime cannot be null");
         }
 
         [Test]
