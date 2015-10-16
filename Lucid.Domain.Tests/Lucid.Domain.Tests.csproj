@@ -61,6 +61,7 @@
     <Compile Include="Persistence\LucidPolyType.cs" />
     <Compile Include="Testing\BuilderTests.cs" />
     <Compile Include="Testing\ConsistencyInspectorTests.cs" />
+    <Compile Include="Testing\CustomInspectionsTests.cs" />
     <Compile Include="Testing\MemoryRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>

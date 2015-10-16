@@ -24,7 +24,7 @@ namespace Lucid.Domain.Testing
                 throw new Exception("Entity to be saved should not be null");
 
             _consistencyInspector.BeforeSave(entity);
-            CustomInspections.Verify(typeof(T), entity, _consistencyInspector);
+            CustomInspections.Inspect(entity, _consistencyInspector);
             var idProperty = entity.GetType().GetProperty("Id");
             idProperty.SetValue(entity, lastId++);
             _entities.Add(entity);
