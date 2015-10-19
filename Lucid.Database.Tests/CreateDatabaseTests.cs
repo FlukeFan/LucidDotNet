@@ -24,9 +24,14 @@ namespace Lucid.Database.Tests.Migrations
 
         private const string CreateStructure = @"
             CREATE TABLE [dbo].[LucidPolyType](
-                [Id] [int] IDENTITY(1,1) NOT NULL,
-                [Email] [varchar](255) NOT NULL,
-                [LastLoggedIn] [datetime] NOT NULL,
+                [Id]                [int] IDENTITY(1,1) NOT NULL,
+                [String]            [varchar](255)      NOT NULL,
+                [Int]               [int]               NOT NULL,
+                [DateTime]          [datetime]          NOT NULL,
+                [Enum]              [int]               NOT NULL,
+                [NullableInt]       [int]               NULL,
+                [NullableDateTime]  [datetime]          NULL,
+                [NullableEnum]      [int]               NULL,
              CONSTRAINT [PK_LucidPolyType_Id] PRIMARY KEY CLUSTERED
             (
                 [Id] ASC

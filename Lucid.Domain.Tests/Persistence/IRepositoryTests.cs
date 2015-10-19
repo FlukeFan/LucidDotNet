@@ -52,12 +52,12 @@ namespace Lucid.Domain.Tests.Persistence
         [Test]
         public virtual void Query_RestrictPropertyEqual()
         {
-            var user1 = new LucidPolyTypeBuilder().With(u => u.Email, "test1@user.net").Save(_repository);
-            var user2 = new LucidPolyTypeBuilder().With(u => u.Email, "test2@user.net").Save(_repository);
+            var user1 = new LucidPolyTypeBuilder().With(u => u.String, "test1@user.net").Save(_repository);
+            var user2 = new LucidPolyTypeBuilder().With(u => u.String, "test2@user.net").Save(_repository);
 
             var specificUser =
                 _repository.Query<LucidPolyType>()
-                    .Filter(e => e.Email == "test2@user.net")
+                    .Filter(e => e.String == "test2@user.net")
                     .SingleOrDefault();
 
             specificUser.Should().NotBeNull();
