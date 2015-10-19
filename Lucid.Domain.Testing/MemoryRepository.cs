@@ -38,7 +38,12 @@ namespace Lucid.Domain.Testing
 
         public IList<T> Satisfy<T>(Query<T, TId> query) where T : IEntity<TId>
         {
-            return MemoryQuery.Query(_entities, query);
+            var entities = _entities.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
+
+            foreach (var restriction in query.Restrictions)
+                entities = Filter(entities, restriction);
+
+            return entities.ToList();
         }
 
         public void ShouldContain(IEntity<TId> entity)
@@ -59,6 +64,13 @@ namespace Lucid.Domain.Testing
 
             if (entity == null)
                 throw new Exception("could not find entity with id " + id + " and type " + typeof(T));
+        }
+
+        private static IEnumerable<T> Filter<T>(IEnumerable<T> entities, Where restriction)
+        {
+            var expression = Where.Lambda<T>(restriction).Compile();
+            entities = entities.Where(expression);
+            return entities;
         }
     }
 }

@@ -25,6 +25,16 @@ namespace Lucid.Domain.Persistence.Queries
             return For(restriction.Body);
         }
 
+        public static Expression<Func<T, bool>> Lambda<T>(Where where)
+        {
+            var parameter = Expression.Parameter(typeof(T));
+            var expression = where.CreateExpression(parameter);
+            var lambda = Expression.Lambda<Func<T, bool>>(expression, parameter);
+            return lambda;
+        }
+
+        public abstract Expression CreateExpression(ParameterExpression parameter);
+
         public override string ToString()
         {
             return string.Format("{0} ({1}, {2})", base.ToString(), Expression.NodeType, Expression.GetType());

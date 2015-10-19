@@ -22,6 +22,14 @@ namespace Lucid.Domain.Persistence.Queries
             Operand2 = operand2;
         }
 
+        public override Expression CreateExpression(ParameterExpression parameter)
+        {
+            var left = Expression.PropertyOrField(parameter, Operand1.Name);
+            var right = Expression.Constant(Operand2);
+            var comparison = Expression.MakeBinary(ExpressionType.Equal, left, right);
+            return comparison;
+        }
+
         private OperatorType FindOperator(ExpressionType expressionType)
         {
             switch(expressionType)
