@@ -8,7 +8,11 @@ namespace Lucid.Domain.Persistence.Queries
     {
         public enum OperatorType
         {
+            LessThan,
+            LessThanOrEqual,
             Equal,
+            GreaterThanOrEqual,
+            GreaterThan,
         }
 
         public MemberInfo   Operand1 { get; protected set; }
@@ -35,7 +39,11 @@ namespace Lucid.Domain.Persistence.Queries
         {
             switch(expressionType)
             {
-                case ExpressionType.Equal: return OperatorType.Equal;
+                case ExpressionType.LessThan:           return OperatorType.LessThan;
+                case ExpressionType.LessThanOrEqual:    return OperatorType.LessThanOrEqual;
+                case ExpressionType.Equal:              return OperatorType.Equal;
+                case ExpressionType.GreaterThanOrEqual: return OperatorType.GreaterThanOrEqual;
+                case ExpressionType.GreaterThan:        return OperatorType.GreaterThan;
 
                 default:
                     throw new Exception("Unhandled binary comparison expression type: " + expressionType);
@@ -46,7 +54,11 @@ namespace Lucid.Domain.Persistence.Queries
         {
             switch(operatorType)
             {
-                case OperatorType.Equal: return ExpressionType.Equal;
+                case OperatorType.LessThan:             return ExpressionType.LessThan;
+                case OperatorType.LessThanOrEqual:      return ExpressionType.LessThanOrEqual;
+                case OperatorType.Equal:                return ExpressionType.Equal;
+                case OperatorType.GreaterThanOrEqual:   return ExpressionType.GreaterThanOrEqual;
+                case OperatorType.GreaterThan:          return ExpressionType.GreaterThan;
 
                 default:
                     throw new Exception("Unhandled binary comparison operator type: " + operatorType);

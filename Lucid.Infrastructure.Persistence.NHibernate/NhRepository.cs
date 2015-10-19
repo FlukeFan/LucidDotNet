@@ -5,7 +5,6 @@ using Lucid.Domain.Persistence.Queries;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Connection;
-using NHibernate.Criterion;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Tool.hbm2ddl;
@@ -14,14 +13,7 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
 {
     public class NhRepository<TId> : IRepository<TId>, IDisposable
     {
-        private static IDictionary<Type, Action<ICriteria, Where>> _restrictionProcessors = new Dictionary<Type, Action<ICriteria, Where>>();
-
         public static ISessionFactory SessionFactory { get; protected set; }
-
-        static NhRepository()
-        {
-            _restrictionProcessors.Add(typeof(WhereBinaryComparison), (c, w) => AddBinaryComparison(c, (WhereBinaryComparison)w));
-        }
 
         public static void Init(string connectionString, Type rootEntityType)
         {
@@ -71,28 +63,9 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
 
         public IList<T> Satisfy<T>(Query<T, TId> query) where T : IEntity<TId>
         {
-            var criteria = _session.CreateCriteria(typeof(T));
-
-            foreach (var restriction in query.Restrictions)
-                AddRestriction(criteria, restriction);
-
+            var nhCriteria = NhCriteria.For(query);
+            var criteria = nhCriteria.CreateCriteria(_session);
             return criteria.List<T>();
-        }
-
-        private void AddRestriction(ICriteria criteria, Where where)
-        {
-            var whereType = where.GetType();
-
-            if (!_restrictionProcessors.ContainsKey(whereType))
-                throw new Exception("Unhandled Where clause: " + where);
-
-            var processor = _restrictionProcessors[whereType];
-            processor(criteria, where);
-        }
-
-        private static void AddBinaryComparison(ICriteria criteria, WhereBinaryComparison where)
-        {
-            criteria.Add(Restrictions.Eq(where.Operand1.Name, where.Operand2));
         }
 
         public void Dispose()

@@ -50,7 +50,7 @@ namespace Lucid.Domain.Tests.Persistence
         }
 
         [Test]
-        public virtual void Query_RestrictPropertyEqual()
+        public virtual void Query_RestrictStringPropertyEqual()
         {
             var user1 = new LucidPolyTypeBuilder().With(u => u.String, "test1@user.net").Save(_repository);
             var user2 = new LucidPolyTypeBuilder().With(u => u.String, "test2@user.net").Save(_repository);
@@ -62,6 +62,35 @@ namespace Lucid.Domain.Tests.Persistence
 
             specificUser.Should().NotBeNull();
             specificUser.Should().BeSameAs(user2);
+        }
+
+        [Test]
+        public virtual void Query_RestrictComparisons()
+        {
+            var user1 = new LucidPolyTypeBuilder().With(u => u.Int, 1).Save(_repository);
+            var user2 = new LucidPolyTypeBuilder().With(u => u.Int, 2).Save(_repository);
+            var user3 = new LucidPolyTypeBuilder().With(u => u.Int, 3).Save(_repository);
+
+            {
+                var result = _repository.Query<LucidPolyType>().Filter(e => e.Int < 2).List();
+                result.Count.Should().Be(1);
+            }
+            {
+                var result = _repository.Query<LucidPolyType>().Filter(e => e.Int <= 2).List();
+                result.Count.Should().Be(2);
+            }
+            {
+                var result = _repository.Query<LucidPolyType>().Filter(e => e.Int == 2).List();
+                result.Count.Should().Be(1);
+            }
+            {
+                var result = _repository.Query<LucidPolyType>().Filter(e => e.Int > 2).List();
+                result.Count.Should().Be(1);
+            }
+            {
+                var result = _repository.Query<LucidPolyType>().Filter(e => e.Int >= 2).List();
+                result.Count.Should().Be(2);
+            }
         }
     }
 }
