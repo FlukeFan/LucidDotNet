@@ -1,6 +1,5 @@
 ﻿using System;
 using Demo.Domain.Utility;
-using Lucid.Domain.Persistence.Queries;
 
 namespace Demo.Domain.Account
 {
@@ -15,7 +14,7 @@ namespace Demo.Domain.Account
         {
             var user =
                 Registry.Repository.Query<User>()
-                    .Filter(Where<User>.PropEq(u => u.Email, email))
+                    .Filter(u => u.Email == email)
                     .SingleOrDefault();
 
             if (user == null)

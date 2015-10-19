@@ -38,12 +38,7 @@ namespace Lucid.Domain.Testing
 
         public IList<T> Satisfy<T>(Query<T, TId> query) where T : IEntity<TId>
         {
-            var result = _entities.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
-
-            foreach (var restriction in query.Restrictions)
-                result = result.Where(e => restriction.Satisfies(e));
-
-            return result.ToList();
+            return MemoryQuery.Query(_entities, query);
         }
 
         public void ShouldContain(IEntity<TId> entity)

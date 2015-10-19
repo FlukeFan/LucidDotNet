@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Lucid.Domain.Persistence;
 using Lucid.Domain.Persistence.Queries;
 using NHibernate;
@@ -15,15 +14,13 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
 {
     public class NhRepository<TId> : IRepository<TId>, IDisposable
     {
-        private static IDictionary<Type, Type> _whereInterfaces = new Dictionary<Type, Type>();
-
-        private static IDictionary<Type, Action<ICriteria, IWhere>> _restrictionProcessors = new Dictionary<Type, Action<ICriteria, IWhere>>();
+        private static IDictionary<Type, Action<ICriteria, Where>> _restrictionProcessors = new Dictionary<Type, Action<ICriteria, Where>>();
 
         public static ISessionFactory SessionFactory { get; protected set; }
 
         static NhRepository()
         {
-            _restrictionProcessors.Add(typeof(IWhereStringEqual), (c, w) => AddStringRestriction(c, (IWhereStringEqual)w));
+            _restrictionProcessors.Add(typeof(WhereBinaryComparison), (c, w) => AddBinaryComparison(c, (WhereBinaryComparison)w));
         }
 
         public static void Init(string connectionString, Type rootEntityType)
@@ -82,32 +79,20 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
             return criteria.List<T>();
         }
 
-        private void AddRestriction<T>(ICriteria criteria, Where<T> where)
+        private void AddRestriction(ICriteria criteria, Where where)
         {
-            var type = where.GetType();
-            var genericType = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
+            var whereType = where.GetType();
 
-            if (!_whereInterfaces.ContainsKey(type))
-            {
-                var interfaces = genericType.GetInterfaces().Where(t => t != typeof(IWhere)).ToList();
+            if (!_restrictionProcessors.ContainsKey(whereType))
+                throw new Exception("Unhandled Where clause: " + where);
 
-                if (interfaces.Count != 1)
-                    throw new Exception("Could not determine single interface for where restriction: " + type);
-
-                _whereInterfaces.Add(type, interfaces[0]);
-            }
-
-            var whereInterface = _whereInterfaces[type];
-
-            if (!_restrictionProcessors.ContainsKey(whereInterface))
-                throw new Exception("Not handled: " + whereInterface);
-
-            _restrictionProcessors[whereInterface](criteria, where);
+            var processor = _restrictionProcessors[whereType];
+            processor(criteria, where);
         }
 
-        private static void AddStringRestriction(ICriteria criteria, IWhereStringEqual where)
+        private static void AddBinaryComparison(ICriteria criteria, WhereBinaryComparison where)
         {
-            criteria.Add(Restrictions.Eq(where.Property.Name, where.Value));
+            criteria.Add(Restrictions.Eq(where.Operand1.Name, where.Operand2));
         }
 
         public void Dispose()

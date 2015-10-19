@@ -59,6 +59,7 @@
     <Compile Include="Persistence\LucidEntity.cs" />
     <Compile Include="Persistence\LucidPolyTypeBuilder.cs" />
     <Compile Include="Persistence\LucidPolyType.cs" />
+    <Compile Include="Persistence\Queries\WhereTests.cs" />
     <Compile Include="Testing\BuilderTests.cs" />
     <Compile Include="Testing\ConsistencyInspectorTests.cs" />
     <Compile Include="Testing\CustomInspectionsTests.cs" />

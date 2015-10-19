@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Lucid.Domain.Persistence;
-using Lucid.Domain.Persistence.Queries;
 using NUnit.Framework;
 
 namespace Lucid.Domain.Tests.Persistence
@@ -25,7 +24,7 @@ namespace Lucid.Domain.Tests.Persistence
         }
 
         [Test]
-        public void Save_SetsId()
+        public virtual void Save_SetsId()
         {
             var user = new LucidPolyTypeBuilder().Value();
 
@@ -38,7 +37,7 @@ namespace Lucid.Domain.Tests.Persistence
         }
 
         [Test]
-        public void Query_RetrieveAll()
+        public virtual void Query_RetrieveAll()
         {
             var user1 = new LucidPolyTypeBuilder().Save(_repository);
             var user2 = new LucidPolyTypeBuilder().Save(_repository);
@@ -51,14 +50,14 @@ namespace Lucid.Domain.Tests.Persistence
         }
 
         [Test]
-        public void Query_RestrictPropertyEqual()
+        public virtual void Query_RestrictPropertyEqual()
         {
             var user1 = new LucidPolyTypeBuilder().With(u => u.Email, "test1@user.net").Save(_repository);
             var user2 = new LucidPolyTypeBuilder().With(u => u.Email, "test2@user.net").Save(_repository);
 
             var specificUser =
                 _repository.Query<LucidPolyType>()
-                    .Filter(Where<LucidPolyType>.PropEq(u => u.Email, "test2@user.net"))
+                    .Filter(e => e.Email == "test2@user.net")
                     .SingleOrDefault();
 
             specificUser.Should().NotBeNull();

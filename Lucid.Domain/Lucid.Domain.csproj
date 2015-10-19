@@ -48,7 +48,7 @@
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Persistence\Queries\Query.cs" />
     <Compile Include="Persistence\Queries\Where.cs" />
-    <Compile Include="Persistence\Queries\WhereStringEquals.cs" />
+    <Compile Include="Persistence\Queries\WhereBinaryComparison.cs" />
     <Compile Include="Remote\Command.cs" />
     <Compile Include="Remote\IRemoteable.cs" />
     <Compile Include="Remote\QueryList.cs" />

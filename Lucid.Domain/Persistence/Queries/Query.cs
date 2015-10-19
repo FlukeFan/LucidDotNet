@@ -1,23 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Lucid.Domain.Persistence.Queries
 {
     public class Query<T, TId> where T : IEntity<TId>
     {
         private IRepository<TId>    _repository;
-        private IList<Where<T>>     _restrictions = new List<Where<T>>();
+        private IList<Where>        _restrictions   = new List<Where>();
 
-        public IEnumerable<Where<T>> Restrictions { get { return _restrictions; } }
+        public IEnumerable<Where>   Restrictions    { get { return _restrictions; } }
 
         public Query(IRepository<TId> repository)
         {
             _repository = repository;
         }
 
-        public Query<T, TId> Filter(Where<T> restriction)
+        public Query<T, TId> Filter(Expression<Func<T, bool>> restriction)
         {
-            _restrictions.Add(restriction);
+            _restrictions.Add(Where.For(restriction));
             return this;
         }
 
