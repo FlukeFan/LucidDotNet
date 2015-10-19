@@ -26,18 +26,30 @@ namespace Lucid.Domain.Persistence.Queries
         {
             var left = Expression.PropertyOrField(parameter, Operand1.Name);
             var right = Expression.Constant(Operand2);
-            var comparison = Expression.MakeBinary(ExpressionType.Equal, left, right);
+            var expressionType = FindExpressionType(Operator);
+            var comparison = Expression.MakeBinary(expressionType, left, right);
             return comparison;
         }
 
-        private OperatorType FindOperator(ExpressionType expressionType)
+        public static OperatorType FindOperator(ExpressionType expressionType)
         {
             switch(expressionType)
             {
-                case ExpressionType.Equal:
-                    return OperatorType.Equal;
+                case ExpressionType.Equal: return OperatorType.Equal;
+
                 default:
-                    throw new Exception("Unhandled binary comparison operation: " + expressionType);
+                    throw new Exception("Unhandled binary comparison expression type: " + expressionType);
+            }
+        }
+
+        public static ExpressionType FindExpressionType(OperatorType operatorType)
+        {
+            switch(operatorType)
+            {
+                case OperatorType.Equal: return ExpressionType.Equal;
+
+                default:
+                    throw new Exception("Unhandled binary comparison operator type: " + operatorType);
             }
         }
     }
