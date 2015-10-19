@@ -13,9 +13,21 @@ namespace Lucid.Domain.Persistence.Queries
             MemberExpression,
         };
 
+        public Expression Expression { get; private set; }
+
+        public Where(Expression expression)
+        {
+            Expression = expression;
+        }
+
         public static Where For<T>(Expression<Func<T, bool>> restriction)
         {
             return For(restriction.Body);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} ({1}, {2})", base.ToString(), Expression.NodeType, Expression.GetType());
         }
 
         private static Where For(Expression restriction)
@@ -33,7 +45,7 @@ namespace Lucid.Domain.Persistence.Queries
         {
             var operand1 = FindMemberInfo(binaryExpression.Left);
             var operand2 = FindValue(binaryExpression.Right);
-            return new WhereBinaryComparison(operand1, binaryExpression.NodeType, operand2);
+            return new WhereBinaryComparison(binaryExpression, operand1, binaryExpression.NodeType, operand2);
         }
 
         private static MemberInfo FindMemberInfo(Expression expression)

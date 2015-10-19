@@ -15,7 +15,7 @@ namespace Lucid.Domain.Persistence.Queries
         public OperatorType Operator { get; protected set; }
         public object       Operand2 { get; protected set; }
 
-        public WhereBinaryComparison(MemberInfo operand1, ExpressionType expressionType, object operand2)
+        public WhereBinaryComparison(Expression expression, MemberInfo operand1, ExpressionType expressionType, object operand2) : base(expression)
         {
             Operand1 = operand1;
             Operator = FindOperator(expressionType);
