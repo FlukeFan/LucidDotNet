@@ -49,6 +49,7 @@
     <Compile Include="Account\Commands\Login.cs" />
     <Compile Include="Account\Responses\UserDto.cs" />
     <Compile Include="Account\User.cs" />
+    <Compile Include="Product\Design.cs" />
     <Compile Include="Utility\DemoEntity.cs" />
     <Compile Include="Utility\Registry.cs" />
     <Compile Include="Utility\IRepository.cs" />
