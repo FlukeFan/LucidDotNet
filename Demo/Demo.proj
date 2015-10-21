@@ -15,11 +15,15 @@
     <ProjectsToBuild Include="Demo.Domain.Tests\Demo.Domain.Tests.csproj"/>
     <ProjectsToBuild Include="Demo.Database\Demo.Database.csproj"/>
     <ProjectsToBuild Include="Demo.Database.Tests\Demo.Database.Tests.csproj"/>
+    <ProjectsToBuild Include="Demo.Infrastructure\Demo.Infrastructure.csproj"/>
+    <ProjectsToBuild Include="Demo.Infrastructure.Tests\Demo.Infrastructure.Tests.csproj"/>
     <ProjectsToBuild Include="Demo.Web\Demo.Web.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectsToClean Include="Demo.Web\Demo.Web.csproj"/>
+    <ProjectsToClean Include="Demo.Infrastructure.Tests\Demo.Infrastructure.Tests.csproj"/>
+    <ProjectsToClean Include="Demo.Infrastructure\Demo.Infrastructure.csproj"/>
     <ProjectsToClean Include="Demo.Database.Tests\Demo.Database.Tests.csproj"/>
     <ProjectsToClean Include="Demo.Database\Demo.Database.csproj"/>
     <ProjectsToClean Include="Demo.Domain.Tests\Demo.Domain.Tests.csproj"/>

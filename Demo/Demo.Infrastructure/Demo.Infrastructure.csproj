@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C18D5B86-C73A-483B-9405-39C8D85A1823}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo.Domain</RootNamespace>
-    <AssemblyName>Demo.Domain</AssemblyName>
+    <RootNamespace>Demo.Infrastructure</RootNamespace>
+    <AssemblyName>Demo.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <ProjectGuid>{74BDA17E-FC05-42F2-810C-D7B677C0D29E}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,12 +33,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lucid.Domain, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Domain.0.0.0.1\lib\net45\Lucid.Domain.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,16 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs" />
-    <Compile Include="Account\Commands\Login.cs" />
-    <Compile Include="Account\Responses\UserDto.cs" />
-    <Compile Include="Account\User.cs" />
-    <Compile Include="Product\Design.cs" />
-    <Compile Include="Utility\DemoEntity.cs" />
-    <Compile Include="Utility\Registry.cs" />
-    <Compile Include="Utility\IRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

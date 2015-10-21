@@ -3,5 +3,6 @@
   <Config name="Debug" binpathtype="Auto">
     <assembly path="Demo.Domain.Tests\bin\Debug\Demo.Domain.Tests.dll" />
     <assembly path="Demo.Database.Tests\bin\Debug\Demo.Database.Tests.dll" />
+    <assembly path="Demo.Infrastructure.Tests\bin\Debug\Demo.Infrastructure.Tests.dll" />
   </Config>
 </NUnitProject>

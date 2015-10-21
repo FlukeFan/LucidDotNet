@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3877B1C6-15A4-43D3-899E-74168842C92C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo.Domain.Tests</RootNamespace>
-    <AssemblyName>Demo.Domain.Tests</AssemblyName>
+    <RootNamespace>Demo.Infrastructure.Tests</RootNamespace>
+    <AssemblyName>Demo.Infrastructure.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <ProjectGuid>{CC13E71E-1978-4232-93F3-C7380D498C9C}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,14 +41,6 @@
       <HintPath>..\packages\FluentAssertions.4.0.0\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Domain, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Domain.0.0.0.1\lib\net45\Lucid.Domain.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lucid.Domain.Testing, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Domain.Testing.0.0.0.1\lib\net45\Lucid.Domain.Testing.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -63,25 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs" />
-    <Compile Include="Account\Commands\LoginTests.cs" />
-    <Compile Include="Account\UserTests.cs" />
-    <Compile Include="Product\DesignTests.cs" />
-    <Compile Include="Utility\BuilderExtensions.cs" />
-    <Compile Include="Utility\DemoConsistencyInspector.cs" />
-    <Compile Include="Utility\DomainTest.cs" />
-    <Compile Include="Utility\DemoCustomInspections.cs" />
-    <Compile Include="Utility\DemoMemoryRepository.cs" />
-    <Compile Include="Utility\TestExtensions.cs" />
-    <Compile Include="Utility\TestValues.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">
-      <Project>{74bda17e-fc05-42f2-810c-d7b677c0d29e}</Project>
-      <Name>Demo.Domain</Name>
-    </ProjectReference>
+    <Compile Include="Placeholder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -97,6 +71,9 @@
     <TestDependencies Include="@(TestAssembly)">
       <InProject>False</InProject>
     </TestDependencies>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
