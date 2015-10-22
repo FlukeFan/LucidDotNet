@@ -6,8 +6,8 @@ namespace Demo.Domain.Tests.Utility
 {
     public abstract class DomainTest
     {
-        protected TestValues            Test;
-        protected DemoMemoryRepository  Repository;
+        protected TestValues            Test        { get; set; }
+        protected DemoMemoryRepository  Repository  { get; set; }
 
         [SetUp]
         public virtual void SetUp()

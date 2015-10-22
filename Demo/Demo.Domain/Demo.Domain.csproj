@@ -56,7 +56,7 @@
     <Compile Include="Product\Design.cs" />
     <Compile Include="Utility\DemoEntity.cs" />
     <Compile Include="Utility\Registry.cs" />
-    <Compile Include="Utility\IRepository.cs" />
+    <Compile Include="Utility\IDemoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
