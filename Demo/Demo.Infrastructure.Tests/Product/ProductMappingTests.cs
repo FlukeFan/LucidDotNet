@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Demo.Infrastructure.Tests.Product
 {
-    public class ProductMappingTests : InfrastructureTest
+    public class ProductMappingTests : DbTest
     {
         [Test]
         public void Design()

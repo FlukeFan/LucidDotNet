@@ -78,7 +78,7 @@
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs" />
     <Compile Include="Product\ProductMappingTests.cs" />
-    <Compile Include="Utility\InfrastructureTest.cs" />
+    <Compile Include="Utility\DbTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
