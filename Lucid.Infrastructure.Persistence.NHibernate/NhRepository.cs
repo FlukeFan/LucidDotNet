@@ -56,6 +56,11 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
             return entity;
         }
 
+        public T Load<T>(TId id) where T : IEntity<TId>
+        {
+            return _session.Load<T>(id);
+        }
+
         public Query<T, TId> Query<T>() where T : IEntity<TId>
         {
             return new Query<T, TId>(this);

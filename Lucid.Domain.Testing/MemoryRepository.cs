@@ -31,6 +31,14 @@ namespace Lucid.Domain.Testing
             return entity;
         }
 
+        public T Load<T>(TId id) where T : IEntity<TId>
+        {
+            return _entities
+                .Where(e => e.Id.Equals(id))
+                .Cast<T>()
+                .SingleOrDefault();
+        }
+
         public Query<T, TId> Query<T>() where T : IEntity<TId>
         {
             return new Query<T, TId>(this);
