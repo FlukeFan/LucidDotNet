@@ -103,5 +103,19 @@ namespace Lucid.Domain.Tests.Testing
 
             mixed.StringValue.Should().Be("Value");
         }
+
+        [Test]
+        public void CanMutateExistingInstance()
+        {
+            var obj = new ProtectedBuilder()
+                .With(p => p.StringValue, "before")
+                .Value();
+
+            obj.StringValue.Should().Be("before");
+
+            Builder.Modify(obj).With(p => p.StringValue, "after");
+
+            obj.StringValue.Should().Be("after");
+        }
     }
 }

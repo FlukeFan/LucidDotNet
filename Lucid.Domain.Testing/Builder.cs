@@ -30,6 +30,11 @@ namespace Lucid.Domain.Testing
             return (T)constructors[0].Invoke(null);
         }
 
+        public static Builder<T> Modify<T>(T instance)
+        {
+            return new Builder<T>(instance);
+        }
+
         protected static PropertyInfo GetPropertyInfo(Expression body)
         {
             MemberExpression me;

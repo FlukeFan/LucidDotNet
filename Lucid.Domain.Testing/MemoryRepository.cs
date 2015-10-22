@@ -39,6 +39,11 @@ namespace Lucid.Domain.Testing
                 .SingleOrDefault();
         }
 
+        public void Flush()
+        {
+            // no externally visible behaviour to implement
+        }
+
         public Query<T, TId> Query<T>() where T : IEntity<TId>
         {
             return new Query<T, TId>(this);

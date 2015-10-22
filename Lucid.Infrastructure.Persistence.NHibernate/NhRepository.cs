@@ -34,14 +34,16 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
             SessionFactory = config.BuildSessionFactory();
         }
 
-        private ISession _session;
-        private ITransaction _transaction;
+        private ISession        _session;
+        private ITransaction    _transaction;
 
         public NhRepository()
         {
             if (SessionFactory == null)
                 throw new Exception("Call Init() once to setup the session factory");
         }
+
+        public ISession Session { get { return _session; } }
 
         public NhRepository<TId> Open()
         {
@@ -59,6 +61,11 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
         public T Load<T>(TId id) where T : IEntity<TId>
         {
             return _session.Load<T>(id);
+        }
+
+        public void Flush()
+        {
+            _session.Flush();
         }
 
         public Query<T, TId> Query<T>() where T : IEntity<TId>
