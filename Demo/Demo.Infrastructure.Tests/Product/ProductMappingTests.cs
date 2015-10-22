@@ -4,7 +4,6 @@ using NUnit.Framework;
 
 namespace Demo.Infrastructure.Tests.Product
 {
-    [TestFixture]
     public class ProductMappingTests : InfrastructureTest
     {
         [Test]

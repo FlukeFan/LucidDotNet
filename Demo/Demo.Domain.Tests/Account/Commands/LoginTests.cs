@@ -7,7 +7,6 @@ using NUnit.Framework;
 
 namespace Demo.Domain.Tests.Account.Commands
 {
-    [TestFixture]
     public class LoginTests : DomainTest
     {
         [Test]

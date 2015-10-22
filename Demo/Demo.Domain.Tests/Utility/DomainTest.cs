@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace Demo.Domain.Tests.Utility
 {
+    [TestFixture]
     public abstract class DomainTest
     {
         protected TestValues            Test        { get; set; }

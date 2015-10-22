@@ -24,7 +24,6 @@ namespace Demo.Domain.Tests.Account
         }
     }
 
-    [TestFixture]
     public class UserTests : DomainTest
     {
         [Test]

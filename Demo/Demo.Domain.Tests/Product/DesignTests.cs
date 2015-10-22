@@ -21,7 +21,6 @@ namespace Demo.Domain.Tests.Product
         }
     }
 
-    [TestFixture]
     public class DesignTests : DomainTest
     {
         [Test]

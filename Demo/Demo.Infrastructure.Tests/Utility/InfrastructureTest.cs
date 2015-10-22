@@ -5,6 +5,7 @@ using NUnit.Framework;
 
 namespace Demo.Infrastructure.Tests.Utility
 {
+    [TestFixture]
     public abstract class InfrastructureTest
     {
         private static BuildEnvironment _buildEnvironment = BuildEnvironment.Load();
