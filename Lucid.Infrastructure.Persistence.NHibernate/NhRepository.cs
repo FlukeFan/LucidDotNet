@@ -43,49 +43,50 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
                 throw new Exception("Call Init() once to setup the session factory");
         }
 
-        public ISession Session { get { return _session; } }
+        public ISession     Session     { get { return _session; } }
+        public ITransaction Transaction { get { return _transaction; } }
 
-        public NhRepository<TId> Open()
+        public virtual NhRepository<TId> Open()
         {
             _session = SessionFactory.OpenSession();
             _transaction = _session.BeginTransaction();
             return this;
         }
 
-        public T Save<T>(T entity) where T : IEntity<TId>
+        public virtual T Save<T>(T entity) where T : IEntity<TId>
         {
             _session.Save(entity);
             return entity;
         }
 
-        public T Load<T>(TId id) where T : IEntity<TId>
+        public virtual T Load<T>(TId id) where T : IEntity<TId>
         {
             return _session.Load<T>(id);
         }
 
-        public void Flush()
+        public virtual void Flush()
         {
             _session.Flush();
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             _session.Clear();
         }
 
-        public Query<T, TId> Query<T>() where T : IEntity<TId>
+        public virtual Query<T, TId> Query<T>() where T : IEntity<TId>
         {
             return new Query<T, TId>(this);
         }
 
-        public IList<T> Satisfy<T>(Query<T, TId> query) where T : IEntity<TId>
+        public virtual IList<T> Satisfy<T>(Query<T, TId> query) where T : IEntity<TId>
         {
             var nhCriteria = NhCriteria.For(query);
             var criteria = nhCriteria.CreateCriteria(_session);
             return criteria.List<T>();
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             try
             {
