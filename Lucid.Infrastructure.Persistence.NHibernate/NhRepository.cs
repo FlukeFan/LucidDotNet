@@ -11,7 +11,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Lucid.Infrastructure.Persistence.NHibernate
 {
-    public class NhRepository<TId> : IRepository<TId>, IDisposable
+    public class NhRepository<TId> : IIdentityMapRepository<TId>, IDisposable
     {
         public static ISessionFactory SessionFactory { get; protected set; }
 
@@ -66,6 +66,11 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
         public void Flush()
         {
             _session.Flush();
+        }
+
+        public void Clear()
+        {
+            _session.Clear();
         }
 
         public Query<T, TId> Query<T>() where T : IEntity<TId>

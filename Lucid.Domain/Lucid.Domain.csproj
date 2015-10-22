@@ -48,6 +48,7 @@
     <Compile Include="Persistence\Entity.cs" />
     <Compile Include="Persistence\IEntity.cs" />
     <Compile Include="Persistence\IRepository.cs" />
+    <Compile Include="Persistence\IIdentityMapRepository.cs" />
     <Compile Include="Persistence\Queries\Query.cs" />
     <Compile Include="Persistence\Queries\Where.cs" />
     <Compile Include="Persistence\Queries\WhereBinaryComparison.cs" />
