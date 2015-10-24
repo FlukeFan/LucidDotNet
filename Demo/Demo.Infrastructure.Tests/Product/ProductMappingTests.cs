@@ -27,7 +27,7 @@ namespace Demo.Infrastructure.Tests.Product
         }
 
         [Test]
-        public void Design_SaveInvalidConstraints()
+        public void Design_VerifyConstraints()
         {
             VerifyInvalidConstraint(new DesignBuilder().With(d => d.Name, null).Value());
         }
