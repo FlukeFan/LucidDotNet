@@ -9,7 +9,7 @@ namespace Demo.Infrastructure.Tests.Product
     public class ProductMappingTests : DbTest
     {
         [Test]
-        public void Design()
+        public void Design_SaveLoad()
         {
             var design = new DesignBuilder()
                 .With(d => d.Name, "test name")
@@ -24,6 +24,12 @@ namespace Demo.Infrastructure.Tests.Product
 
             loadedDesign.Id.Should().Be(design.Id);
             loadedDesign.Name.Should().Be(design.Name);
+        }
+
+        [Test]
+        public void Design_SaveInvalidConstraints()
+        {
+            VerifyCannotSave(new DesignBuilder().With(d => d.Name, null).Value());
         }
     }
 }
