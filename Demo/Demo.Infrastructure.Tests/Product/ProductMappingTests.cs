@@ -29,7 +29,7 @@ namespace Demo.Infrastructure.Tests.Product
         [Test]
         public void Design_SaveInvalidConstraints()
         {
-            VerifyCannotSave(new DesignBuilder().With(d => d.Name, null).Value());
+            VerifyInvalidConstraint(new DesignBuilder().With(d => d.Name, null).Value());
         }
     }
 }
