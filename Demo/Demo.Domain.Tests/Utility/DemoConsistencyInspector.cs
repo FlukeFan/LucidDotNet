@@ -1,19 +1,22 @@
 ﻿using System;
-using System.Reflection;
+using System.Linq.Expressions;
 using Lucid.Domain.Testing;
 
 namespace Demo.Domain.Tests.Utility
 {
     public class DemoConsistencyInspector : ConsistencyInspector
     {
-        protected override void CheckProperty(object entity, PropertyInfo property)
+        public DemoConsistencyInspector() : base(isMsSql: true) { }
+
+        public void CheckMaxLength(Expression<Func<string>> property, int maxLength)
         {
-            base.CheckProperty(entity, property);
+            CheckMaxLength(property.Compile().Invoke(), maxLength, Builder.GetPropertyName(property.Body));
+        }
 
-            var type = property.PropertyType;
-
-            if (type == typeof(DateTime))
-                CheckMsSqlDateTime((DateTime)property.GetValue(entity), property.Name);
+        public void CheckMaxLength(string value, int maxLength, string propertyName)
+        {
+            if (value != null && value.Length > maxLength)
+                throw new Exception(string.Format("property {0} has size {1} which is larger than maximum allowable of {2}", propertyName, value.Length, maxLength));
         }
     }
 }

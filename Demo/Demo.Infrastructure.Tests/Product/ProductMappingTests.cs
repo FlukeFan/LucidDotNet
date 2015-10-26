@@ -30,6 +30,7 @@ namespace Demo.Infrastructure.Tests.Product
         public void Design_VerifyConstraints()
         {
             VerifyInvalidConstraint(new DesignBuilder().With(d => d.Name, null).Value());
+            VerifyInvalidConstraint(new DesignBuilder().With(d => d.Name, new string('x', 256)).Value());
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Demo.Domain.Tests.Product
             DemoCustomInspections.Add<Design>((validator, entity) =>
             {
                 validator.CheckNotNull(() => entity.Name);
+                validator.CheckMaxLength(() => entity.Name, 255);
             });
         }
 
