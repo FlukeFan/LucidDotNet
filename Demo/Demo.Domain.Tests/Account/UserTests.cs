@@ -14,6 +14,7 @@ namespace Demo.Domain.Tests.Account
             DemoCustomInspections.Add<User>((validator, user) =>
             {
                 validator.CheckNotNull(() => user.Email);
+                validator.CheckMaxLength(() => user.Email, 255);
             });
         }
 

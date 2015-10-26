@@ -30,6 +30,7 @@ namespace Demo.Infrastructure.Tests.Account
         public void User_VerifyConstraints()
         {
             VerifyInvalidConstraint(new UserBuilder().With(d => d.Email, null).Value());
+            VerifyInvalidConstraint(new UserBuilder().With(d => d.Email, new string('x', 256)).Value());
         }
     }
 }
