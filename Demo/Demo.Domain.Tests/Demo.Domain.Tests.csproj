@@ -67,6 +67,7 @@
     <Compile Include="..\..\AssemblyInfo.cs" />
     <Compile Include="Account\Commands\LoginTests.cs" />
     <Compile Include="Account\UserTests.cs" />
+    <Compile Include="Product\Commands\StartDesignTests.cs" />
     <Compile Include="Product\DesignTests.cs" />
     <Compile Include="Utility\BuilderExtensions.cs" />
     <Compile Include="Utility\DemoConsistencyInspector.cs" />
