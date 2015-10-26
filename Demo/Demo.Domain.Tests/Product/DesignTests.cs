@@ -1,5 +1,6 @@
 ﻿using Demo.Domain.Product;
 using Demo.Domain.Tests.Utility;
+using Demo.Domain.Utility;
 using Lucid.Domain.Testing;
 using NUnit.Framework;
 
@@ -12,7 +13,7 @@ namespace Demo.Domain.Tests.Product
             DemoCustomInspections.Add<Design>((validator, entity) =>
             {
                 validator.CheckNotNull(() => entity.Name);
-                validator.CheckMaxLength(() => entity.Name, 255);
+                validator.CheckMaxLength(() => entity.Name, DemoEntity.DefaultMaxStringLength);
             });
         }
 

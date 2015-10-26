@@ -1,6 +1,7 @@
 ﻿using System;
 using Demo.Domain.Product.Commands;
 using Demo.Domain.Tests.Utility;
+using Demo.Domain.Utility;
 using NUnit.Framework;
 
 namespace Demo.Domain.Tests.Product.Commands
@@ -21,7 +22,7 @@ namespace Demo.Domain.Tests.Product.Commands
 
             validCommand().ShouldBeInvalid(c => c.Name = null);
             validCommand().ShouldBeInvalid(c => c.Name = "");
-            validCommand().ShouldBeInvalid(c => c.Name = new string('x', 256));
+            validCommand().ShouldBeInvalid(c => c.Name = new string('x', DemoEntity.DefaultMaxStringLength + 1));
         }
     }
 }
