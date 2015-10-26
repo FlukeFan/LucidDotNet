@@ -29,15 +29,15 @@ namespace Lucid.Domain.Testing
             var type = property.PropertyType;
 
             if (type == typeof(DateTime) && _isMsSql)
-                CheckMsSqlDateTime((DateTime)property.GetValue(entity), property.Name);
+                CheckMsSqlDateTime(property.Name, (DateTime)property.GetValue(entity));
         }
 
         public void CheckMsSqlDateTime(Expression<Func<DateTime>> property)
         {
-            CheckMsSqlDateTime(property.Compile().Invoke(), Builder.GetPropertyName(property.Body));
+            CheckMsSqlDateTime(Builder.GetPropertyName(property.Body), property.Compile().Invoke());
         }
 
-        public void CheckMsSqlDateTime(DateTime dateTime, string propertyName)
+        public void CheckMsSqlDateTime(string propertyName, DateTime dateTime)
         {
             if (dateTime < MinSqlServerDateTime)
                 throw new Exception(string.Format("DateTime property {0} with value {1} cannot be stored in SQL Server", propertyName, dateTime));
@@ -45,10 +45,10 @@ namespace Lucid.Domain.Testing
 
         public void CheckNotNull(Expression<Func<object>> property)
         {
-            CheckNotNull(property.Compile().Invoke(), Builder.GetPropertyName(property.Body));
+            CheckNotNull(Builder.GetPropertyName(property.Body), property.Compile().Invoke());
         }
 
-        public void CheckNotNull(object value, string propertyName)
+        public void CheckNotNull(string propertyName, object value)
         {
             if (value == null)
                 throw new Exception(string.Format("property {0} cannot be null", propertyName));
@@ -56,15 +56,26 @@ namespace Lucid.Domain.Testing
 
         public void CheckNotNullOrEmpty(Expression<Func<string>> property)
         {
-            CheckNotNullOrEmpty(property.Compile().Invoke(), Builder.GetPropertyName(property.Body));
+            CheckNotNullOrEmpty(Builder.GetPropertyName(property.Body), property.Compile().Invoke());
         }
 
-        public void CheckNotNullOrEmpty(string value, string propertyName)
+        public void CheckNotNullOrEmpty(string propertyName, string value)
         {
-            CheckNotNull(value, propertyName);
+            CheckNotNull(propertyName, value);
 
             if (value == string.Empty)
                 throw new Exception(string.Format("string property {0} cannot be empty", propertyName));
+        }
+
+        public void CheckMaxLength(Expression<Func<string>> property, int maxLength)
+        {
+            CheckMaxLength(Builder.GetPropertyName(property.Body), property.Compile().Invoke(), maxLength);
+        }
+
+        public void CheckMaxLength(string propertyName, string value, int maxLength)
+        {
+            if (value != null && value.Length > maxLength)
+                throw new Exception(string.Format("string property {0} has length {1} which is larger than the maximum length of {2}", propertyName, value.Length, maxLength));
         }
     }
 }

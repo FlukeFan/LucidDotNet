@@ -53,6 +53,7 @@ namespace Lucid.Domain.Tests.Testing
             Assert.DoesNotThrow(() => inspector.CheckMsSqlDateTime(() => entity.DateTime));
             Assert.DoesNotThrow(() => inspector.CheckNotNull(() => entity.NullableDateTime));
             Assert.DoesNotThrow(() => inspector.CheckNotNullOrEmpty(() => entity.String));
+            Assert.DoesNotThrow(() => inspector.CheckMaxLength(() => entity.String, 8));
         }
 
         [Test]
@@ -97,6 +98,17 @@ namespace Lucid.Domain.Tests.Testing
             var e = Assert.Throws<Exception>(() => inspector.CheckNotNullOrEmpty(() => entity.String));
 
             e.Message.Should().Contain("String cannot be empty");
+        }
+
+        [Test]
+        public void CheckMaxLength_ThrowsWhenTooLarge()
+        {
+            var inspector = new ConsistencyInspector();
+            var entity = new FakeEntity { String = "7 chars" };
+
+            var e = Assert.Throws<Exception>(() => inspector.CheckMaxLength(() => entity.String, 6));
+
+            e.Message.Should().Contain("string property String has length 7 which is larger than the maximum length of 6");
         }
     }
 }
