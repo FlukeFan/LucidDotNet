@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Demo.Domain.Product.Responses;
 using Demo.Domain.Utility;
 using Lucid.Domain.Remote;
@@ -14,7 +13,8 @@ namespace Demo.Domain.Product.Commands
 
         public override DesignDto Execute()
         {
-            throw new NotImplementedException();
+            var design = Design.Start(this);
+            return new DesignDto(design);
         }
     }
 }

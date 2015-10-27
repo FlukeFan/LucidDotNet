@@ -76,7 +76,7 @@ namespace Lucid.Domain.Testing
             var entity = _entities.Where(e => e.Id.Equals(id)).SingleOrDefault();
 
             if (entity == null)
-                throw new Exception("could not find entity with id " + id + " and type " + typeof(T));
+                throw new Exception(string.Format("could not find entity with id {0} and type {1} in the Repository", id, typeof(T)));
         }
 
         private static IEnumerable<T> Filter<T>(IEnumerable<T> entities, Where restriction)
