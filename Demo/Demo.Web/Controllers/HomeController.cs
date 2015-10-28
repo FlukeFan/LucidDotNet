@@ -1,6 +1,6 @@
-﻿using Lucid.Demo.Web.Utility;
+﻿using Demo.Web.Utility;
 
-namespace Lucid.Demo.Web.Controllers
+namespace Demo.Web.Controllers
 {
     public class HomeController : DemoController
     {
