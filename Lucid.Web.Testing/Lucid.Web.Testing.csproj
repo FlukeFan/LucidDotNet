@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{720932D2-760D-46C4-8DD9-7D492867D23E}</ProjectGuid>
+    <ProjectGuid>{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Lucid.Domain.Testing</RootNamespace>
-    <AssemblyName>Lucid.Domain.Testing</AssemblyName>
+    <RootNamespace>Lucid.Web.Testing</RootNamespace>
+    <AssemblyName>Lucid.Web.Testing</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -44,19 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
-    <Compile Include="Builder.cs" />
-    <Compile Include="ConsistencyInspector.cs" />
-    <Compile Include="CustomInspections.cs" />
-    <Compile Include="MemoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Lucid.Domain.Testing.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lucid.Domain\Lucid.Domain.csproj">
-      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
-      <Name>Lucid.Domain</Name>
-    </ProjectReference>
+    <None Include="Lucid.Web.Testing.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Global.targets" />

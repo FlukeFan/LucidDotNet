@@ -33,6 +33,8 @@
     <ProjectsToBuild Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
     <ProjectsToBuild Include="Lucid.Infrastructure.Persistence.NHibernate\Lucid.Infrastructure.Persistence.NHibernate.csproj"/>
     <ProjectsToBuild Include="Lucid.Infrastructure.Persistence.NHibernate.Tests\Lucid.Infrastructure.Persistence.NHibernate.Tests.csproj"/>
+    <ProjectsToBuild Include="Lucid.Web.Testing\Lucid.Web.Testing.csproj"/>
+    <ProjectsToBuild Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
     <ProjectsToBuild Include="Web\Web.csproj"/>
     <ProjectsToBuild Include="Web.Tests\Web.Tests.csproj"/>
     <ProjectsToBuild Include="Demo\Demo.proj"/>
@@ -42,6 +44,8 @@
     <ProjectsToClean Include="Demo\Demo.proj"/>
     <ProjectsToClean Include="Web.Tests\Web.Tests.csproj"/>
     <ProjectsToClean Include="Web\Web.csproj"/>
+    <ProjectsToClean Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
+    <ProjectsToClean Include="Lucid.Web.Testing\Lucid.Web.Testing.csproj"/>
     <ProjectsToClean Include="Lucid.Infrastructure.Persistence.NHibernate.Tests\Lucid.Infrastructure.Persistence.NHibernate.Tests.csproj"/>
     <ProjectsToClean Include="Lucid.Infrastructure.Persistence.NHibernate\Lucid.Infrastructure.Persistence.NHibernate.csproj"/>
     <ProjectsToClean Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>

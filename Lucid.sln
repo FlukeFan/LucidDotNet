@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Infrastructure.Persis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Infrastructure.Persistence.NHibernate.Tests", "Lucid.Infrastructure.Persistence.NHibernate.Tests\Lucid.Infrastructure.Persistence.NHibernate.Tests.csproj", "{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.Testing", "Lucid.Web.Testing\Lucid.Web.Testing.csproj", "{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.Tests", "Lucid.Web.Tests\Lucid.Web.Tests.csproj", "{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
