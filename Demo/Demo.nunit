@@ -4,5 +4,6 @@
     <assembly path="Demo.Domain.Tests\bin\Debug\Demo.Domain.Tests.dll" />
     <assembly path="Demo.Database.Tests\bin\Debug\Demo.Database.Tests.dll" />
     <assembly path="Demo.Infrastructure.Tests\bin\Debug\Demo.Infrastructure.Tests.dll" />
+    <assembly path="Demo.Web.Tests\bin\Debug\Demo.Web.Tests.dll" />
   </Config>
 </NUnitProject>

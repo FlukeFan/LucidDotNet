@@ -81,25 +81,9 @@
     <Compile Include="Product\ProductMappingTests.cs" />
     <Compile Include="Utility\DbTest.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
-      <InProject>False</InProject>
-    </TestAssembly>
-    <TestOutput Include="bin\$(Configuration)\$(AssemblyName).results.xml">
-      <InProject>False</InProject>
-    </TestOutput>
-    <TestSuccessFlag Include="bin\$(Configuration)\$(AssemblyName).success.flg">
-      <InProject>False</InProject>
-    </TestSuccessFlag>
-    <TestDependencies Include="@(TestAssembly)">
-      <InProject>False</InProject>
-    </TestDependencies>
-  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Demo.Database.Tests\Demo.Database.Tests.csproj">
       <Project>{c4352d6d-c6df-4a1a-a613-800b3573f8a3}</Project>
@@ -117,6 +101,21 @@
       <Project>{c18d5b86-c73a-483b-9405-39c8d85a1823}</Project>
       <Name>Demo.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
+      <InProject>False</InProject>
+    </TestAssembly>
+    <TestOutput Include="bin\$(Configuration)\$(AssemblyName).results.xml">
+      <InProject>False</InProject>
+    </TestOutput>
+    <TestSuccessFlag Include="bin\$(Configuration)\$(AssemblyName).success.flg">
+      <InProject>False</InProject>
+    </TestSuccessFlag>
+    <TestDependencies Include="@(TestAssembly)">
+      <InProject>False</InProject>
+    </TestDependencies>
   </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
