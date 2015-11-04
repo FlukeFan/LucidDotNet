@@ -3,7 +3,7 @@ using System.IO;
 using System.Web;
 using System.Web.Hosting;
 
-namespace Lucid.Web.Tests.Utility.Http
+namespace Lucid.Web.Testing.Http
 {
     [Serializable]
     public class SimulatedHttpClient

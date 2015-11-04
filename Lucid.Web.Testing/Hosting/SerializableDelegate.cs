@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace Lucid.Web.Tests.Utility.Hosting
+namespace Lucid.Web.Testing.Hosting
 {
     /// <summary>
     /// Makes delegates serializable where possible

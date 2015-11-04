@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="Hosting\AppDomainProxy.cs" />
+    <Compile Include="Hosting\AspNetTestHost.cs" />
+    <Compile Include="Hosting\SerializableDelegate.cs" />
+    <Compile Include="Http\SimulatedHttpClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lucid.Web.Testing.nuspec" />

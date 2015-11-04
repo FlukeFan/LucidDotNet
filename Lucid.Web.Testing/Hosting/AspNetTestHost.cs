@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Hosting;
-using Lucid.Web.Tests.Utility.Http;
+using Lucid.Web.Testing.Http;
 
-namespace Lucid.Web.Tests.Utility.Hosting
+namespace Lucid.Web.Testing.Hosting
 {
     // borrowed from an excellent post on testing asp.net:
     // http://blog.stevensanderson.com/2009/06/11/integration-testing-your-aspnet-mvc-application/
     public class AspNetTestHost : IDisposable
     {
-        private AppDomainProxy _appDomainProxy;
-        private List<Action> _deleteTestBinaries = new List<Action>();
+        private bool            _disposed;
+        private AppDomainProxy  _appDomainProxy;
+        private List<Action>    _deleteTestBinaries = new List<Action>();
 
         public static AspNetTestHost Current { get; protected set; }
 
@@ -49,7 +50,34 @@ namespace Lucid.Web.Tests.Utility.Hosting
 
         public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~AspNetTestHost()
+        {
+            Dispose(false);
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (_disposed)
+                return;
+
+            if (isDisposing)
+            {
+                // dispose aggregated managed resources
+            }
+
+            if (_appDomainProxy != null)
+            {
+                _appDomainProxy.RunCodeInAppDomain(() => HttpRuntime.UnloadAppDomain());
+                _appDomainProxy = null;
+            }
+
             DeleteTestBinaries();
+
+            _disposed = true;
         }
 
         private void CopyTestBinaries(string webDir)
@@ -69,12 +97,11 @@ namespace Lucid.Web.Tests.Utility.Hosting
                 }
             }
 
-            AppDomain.CurrentDomain.DomainUnload += (s, e) => DeleteTestBinaries();
+            AppDomain.CurrentDomain.DomainUnload += (s, e) => Dispose();
         }
 
         private void DeleteTestBinaries()
         {
-            _appDomainProxy.RunCodeInAppDomain(() => HttpRuntime.UnloadAppDomain());
             _deleteTestBinaries.ForEach(deleteFile => deleteFile());
             _deleteTestBinaries.Clear();
         }

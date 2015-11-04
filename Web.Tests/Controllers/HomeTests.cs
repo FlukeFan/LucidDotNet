@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using FluentAssertions;
-using Lucid.Web.Tests.Utility.Hosting;
+using Lucid.Web.Testing.Hosting;
 using NUnit.Framework;
 
 namespace Web.Tests.Controllers
