@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Lucid.Web.Testing.Hosting;
+﻿using Lucid.Web.Testing.Hosting;
 using NUnit.Framework;
 
 namespace Demo.Web.Tests.Utility
@@ -11,7 +10,7 @@ namespace Demo.Web.Tests.Utility
 
         public static void SetUpWebHost()
         {
-            WebApp = new AspNetTestHost(Path.GetFullPath(@"..\..\..\Demo.Web"));
+            WebApp = AspNetTestHost.For(@"..\..\..\Demo.Web");
         }
 
         public static void TearDownWebHost()

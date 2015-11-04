@@ -25,11 +25,11 @@ namespace Lucid.Web.Testing.Hosting
         {
             _enforceSingleInstance = new Semaphore(1, 1, "Global\\LucidAspNetTestHost");
             _enforceSingleInstance.WaitOne();
-            PhysicalDirectory = physicalDirectory;
+            PhysicalDirectory = Path.GetFullPath(physicalDirectory);
             CopyTestBinaries(physicalDirectory);
             try
             {
-                _appDomainProxy = (AppDomainProxy)ApplicationHost.CreateApplicationHost(typeof(AppDomainProxy), virtualDirectory, physicalDirectory);
+                _appDomainProxy = (AppDomainProxy)ApplicationHost.CreateApplicationHost(typeof(AppDomainProxy), virtualDirectory, PhysicalDirectory);
             }
             catch
             {

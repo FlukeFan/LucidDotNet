@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Lucid.Web.Testing.Hosting;
 using NUnit.Framework;
 
@@ -14,7 +12,7 @@ namespace Web.Tests.Controllers
         [SetUp]
         public void SetUp()
         {
-            _host = AspNetTestHost.For(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\Web")));
+            _host = AspNetTestHost.For(@"..\..\..\Web");
         }
 
         [Test]
