@@ -35,6 +35,14 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.0.1\lib\net45\FluentAssertions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.0.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.0.1\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Lucid.Web.Testing, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucid.Web.Testing.0.0.0.1\lib\net45\Lucid.Web.Testing.dll</HintPath>
       <Private>True</Private>
@@ -72,6 +80,9 @@
       <InProject>False</InProject>
     </TestSuccessFlag>
     <TestDependencies Include="@(TestAssembly)">
+      <InProject>False</InProject>
+    </TestDependencies>
+    <TestDependencies Include="..\Demo.Web\**">
       <InProject>False</InProject>
     </TestDependencies>
   </ItemGroup>
