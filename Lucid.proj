@@ -68,9 +68,8 @@
   </Target>
 
   <ItemGroup>
-    <DemoPackageDependencies Include="packaged\**">
-      <InProject>False</InProject>
-    </DemoPackageDependencies>
+    <DemoPackageDependencies Include="packaged\*" />
+    <DemoPackageDependencies Include="Lucid.proj" />
   </ItemGroup>
 
   <Target Name="RestoreDemoPackages" Inputs="@(DemoPackageDependencies)" Outputs="Demo\packages\restored">
