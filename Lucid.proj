@@ -68,7 +68,7 @@
   </Target>
 
   <ItemGroup>
-    <DemoPackageDependencies Include="packaged\*">
+    <DemoPackageDependencies Include="packaged\**">
       <InProject>False</InProject>
     </DemoPackageDependencies>
   </ItemGroup>
