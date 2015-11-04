@@ -10,7 +10,9 @@ namespace Lucid.Domain.Testing
 
         private bool _isMsSql;
 
-        public ConsistencyInspector(bool isMsSql = true)
+        public ConsistencyInspector() : this(true) { }
+
+        public ConsistencyInspector(bool isMsSql)
         {
             _isMsSql = isMsSql;
         }

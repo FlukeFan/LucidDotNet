@@ -21,7 +21,9 @@ namespace Lucid.Web.Testing.Hosting
 
         public string PhysicalDirectory { get; protected set; }
 
-        public AspNetTestHost(string physicalDirectory, string virtualDirectory = "/")
+        public AspNetTestHost(string physicalDirectory) : this(physicalDirectory, "/") { }
+
+        public AspNetTestHost(string physicalDirectory, string virtualDirectory)
         {
             _enforceSingleInstance = new Semaphore(1, 1, "Global\\LucidAspNetTestHost");
             _enforceSingleInstance.WaitOne();

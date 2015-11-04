@@ -10,7 +10,12 @@ namespace Lucid.Domain.Testing
         ///  Utility method to create objects with protected constructor
         ///  e.g., Apple apple = ObjectBuilder.Create&lt;Apple&gt;();
         /// </summary>
-        public static T Create<T>(bool allowPublicConstructor = false)
+        public static T Create<T>()
+        {
+            return Create<T>(false);
+        }
+        
+        public static T Create<T>(bool allowPublicConstructor)
         {
             var flags = allowPublicConstructor
                 ? BindingFlags.Instance | BindingFlags.Public
