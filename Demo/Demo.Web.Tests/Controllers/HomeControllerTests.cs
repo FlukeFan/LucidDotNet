@@ -10,7 +10,6 @@ namespace Demo.Web.Tests.Controllers
         {
             WebApp.Test(client =>
             {
-
             });
         }
     }

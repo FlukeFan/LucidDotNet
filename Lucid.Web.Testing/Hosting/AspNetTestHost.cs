@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Web;
 using System.Web.Hosting;
 using Lucid.Web.Testing.Http;
@@ -12,6 +13,7 @@ namespace Lucid.Web.Testing.Hosting
     public class AspNetTestHost : IDisposable
     {
         private bool            _disposed;
+        private Semaphore       _enforceSingleInstance;
         private AppDomainProxy  _appDomainProxy;
         private List<Action>    _deleteTestBinaries = new List<Action>();
 
@@ -21,9 +23,19 @@ namespace Lucid.Web.Testing.Hosting
 
         public AspNetTestHost(string physicalDirectory, string virtualDirectory = "/")
         {
+            _enforceSingleInstance = new Semaphore(1, 1, "Global\\LucidAspNetTestHost");
+            _enforceSingleInstance.WaitOne();
             PhysicalDirectory = physicalDirectory;
             CopyTestBinaries(physicalDirectory);
-            _appDomainProxy = (AppDomainProxy)ApplicationHost.CreateApplicationHost(typeof(AppDomainProxy), virtualDirectory, physicalDirectory);
+            try
+            {
+                _appDomainProxy = (AppDomainProxy)ApplicationHost.CreateApplicationHost(typeof(AppDomainProxy), virtualDirectory, physicalDirectory);
+            }
+            catch
+            {
+                DeleteTestBinaries();
+                throw;
+            }
         }
 
         public static AspNetTestHost For(string physicalDirectory, string virtualDirectory = "/")
@@ -76,6 +88,13 @@ namespace Lucid.Web.Testing.Hosting
             }
 
             DeleteTestBinaries();
+
+            if (_enforceSingleInstance != null)
+                using (_enforceSingleInstance)
+                {
+                    _enforceSingleInstance.Release();
+                    _enforceSingleInstance = null;
+                }
 
             _disposed = true;
         }
