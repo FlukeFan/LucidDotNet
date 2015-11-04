@@ -1,13 +1,11 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <Target Name="Build">
-    <CallTarget Targets="PackageRestore" />
     <MSBuild Projects="@(ProjectsToBuild)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
   </Target>
 
   <Target Name="Clean">
     <MSBuild Projects="@(ProjectsToClean)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
-    <RemoveDir Directories="packages" />
   </Target>
 
   <ItemGroup>
@@ -31,17 +29,5 @@
     <ProjectsToClean Include="Demo.Domain.Tests\Demo.Domain.Tests.csproj"/>
     <ProjectsToClean Include="Demo.Domain\Demo.Domain.csproj"/>
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageDependencies Include="..\packaged\*">
-      <InProject>False</InProject>
-    </PackageDependencies>
-  </ItemGroup>
-
-  <Target Name="PackageRestore" Inputs="@(PackageDependencies)" Outputs="packages\restored">
-    <RemoveDir Directories="packages" />
-    <Exec Command="..\$(NuGetExe) restore -Source $(MSBuildProjectDirectory)\..\packaged -Source $(MSBuildProjectDirectory)\..\packages" />
-    <Touch Files="packages\restored" AlwaysCreate="true" />
-  </Target>
 
 </Project>

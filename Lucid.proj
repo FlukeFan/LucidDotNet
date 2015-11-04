@@ -19,11 +19,16 @@
     <CallTarget Targets="GenerateAssemblyInfo" />
     <MakeDir Directories="packaged" />
     <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
+    <CallTarget Targets="RestoreDemoPackages" />
+    <MSBuild Projects="Demo\Demo.proj" Properties="$(GlobalProperties)" Targets="Build" />
   </Target>
 
   <Target Name="Clean">
+    <MSBuild Projects="Demo\Demo.proj" Properties="$(GlobalProperties)" Targets="Clean" />
+    <RemoveDir Directories="Demo\packages" />
     <MSBuild Projects="@(ProjectsToClean)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
     <RemoveDir Directories="packaged" />
+    <Delete Files="AssemblyInfo.cs" />
   </Target>
 
   <ItemGroup>
@@ -37,11 +42,9 @@
     <ProjectsToBuild Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
     <ProjectsToBuild Include="Web\Web.csproj"/>
     <ProjectsToBuild Include="Web.Tests\Web.Tests.csproj"/>
-    <ProjectsToBuild Include="Demo\Demo.proj"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectsToClean Include="Demo\Demo.proj"/>
     <ProjectsToClean Include="Web.Tests\Web.Tests.csproj"/>
     <ProjectsToClean Include="Web\Web.csproj"/>
     <ProjectsToClean Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
@@ -62,6 +65,18 @@
       AssemblyProduct="Lucid $(Configuration) $(LucidVersion)"
       AssemblyVersion="$(LucidVersion)"
       />
+  </Target>
+
+  <ItemGroup>
+    <DemoPackageDependencies Include="packaged\*">
+      <InProject>False</InProject>
+    </DemoPackageDependencies>
+  </ItemGroup>
+
+  <Target Name="RestoreDemoPackages" Inputs="@(DemoPackageDependencies)" Outputs="Demo\packages\restored">
+    <RemoveDir Directories="Demo\packages" />
+    <Exec Command="..\$(NuGetExe) restore -Source $(MSBuildProjectDirectory)\packaged -Source $(MSBuildProjectDirectory)\packages" WorkingDirectory="Demo" />
+    <Touch Files="Demo\packages\restored" AlwaysCreate="true" />
   </Target>
 
 </Project>

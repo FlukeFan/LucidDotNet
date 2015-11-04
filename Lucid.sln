@@ -8,11 +8,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF-B71C-4A7B-BC83-B4649FC99361}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		Build.proj = Build.proj
 		BuildEnvironment.json = BuildEnvironment.json
 		CommandPrompt.bat = CommandPrompt.bat
 		Global.targets = Global.targets
 		Lucid.nunit = Lucid.nunit
+		Lucid.proj = Lucid.proj
 		readme.txt = readme.txt
 		RunNUnit.bat = RunNUnit.bat
 	EndProjectSection
