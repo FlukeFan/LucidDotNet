@@ -34,6 +34,18 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.0.1\lib\net45\FluentAssertions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.0.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.0.1\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="Testing\Hosting\AspNetTestHostTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -59,6 +72,15 @@
     <TestDependencies Include="@(TestAssembly)">
       <InProject>False</InProject>
     </TestDependencies>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucid.Web.Testing\Lucid.Web.Testing.csproj">
+      <Project>{e0560e10-0ec3-4160-9ed3-b86e1d19ab2f}</Project>
+      <Name>Lucid.Web.Testing</Name>
+    </ProjectReference>
   </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />

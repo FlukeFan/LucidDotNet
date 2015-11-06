@@ -28,6 +28,10 @@ namespace Lucid.Web.Testing.Hosting
             _enforceSingleInstance = new Semaphore(1, 1, "Global\\LucidAspNetTestHost");
             _enforceSingleInstance.WaitOne();
             PhysicalDirectory = Path.GetFullPath(physicalDirectory);
+
+            if (!Directory.Exists(PhysicalDirectory))
+                throw new Exception("Could not find directory: " + PhysicalDirectory);
+
             CopyTestBinaries(physicalDirectory);
             try
             {
