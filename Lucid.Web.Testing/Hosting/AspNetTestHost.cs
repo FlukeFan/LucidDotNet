@@ -12,12 +12,12 @@ namespace Lucid.Web.Testing.Hosting
     // http://blog.stevensanderson.com/2009/06/11/integration-testing-your-aspnet-mvc-application/
     public class AspNetTestHost : IDisposable
     {
+        public const string     RunningFlagFile = "AspNetTestHost.running.txt";
+
         private bool            _disposed;
         private Semaphore       _enforceSingleInstance;
         private AppDomainProxy  _appDomainProxy;
-        private List<Action>    _deleteTestBinaries = new List<Action>();
-
-        public static AspNetTestHost Current { get; protected set; }
+        private List<Action>    _deleteActions = new List<Action>();
 
         public string PhysicalDirectory { get; protected set; }
 
@@ -32,27 +32,23 @@ namespace Lucid.Web.Testing.Hosting
             if (!Directory.Exists(PhysicalDirectory))
                 throw new Exception("Could not find directory: " + PhysicalDirectory);
 
-            CopyTestBinaries(physicalDirectory);
             try
             {
+                CopyTestBinaries(PhysicalDirectory);
                 _appDomainProxy = (AppDomainProxy)ApplicationHost.CreateApplicationHost(typeof(AppDomainProxy), virtualDirectory, PhysicalDirectory);
             }
             catch
             {
                 DeleteTestBinaries();
+                using (_enforceSingleInstance)
+                    _enforceSingleInstance.Release();
                 throw;
             }
         }
 
         public static AspNetTestHost For(string physicalDirectory, string virtualDirectory = "/")
         {
-            if (Current == null || Current.PhysicalDirectory != physicalDirectory)
-            {
-                using (Current) { }
-                Current = new AspNetTestHost(physicalDirectory, virtualDirectory);
-            }
-
-            return Current;
+            return new AspNetTestHost(physicalDirectory, virtualDirectory);
         }
 
         private void CurrentDomain_DomainUnload(object sender, EventArgs e)
@@ -82,11 +78,6 @@ namespace Lucid.Web.Testing.Hosting
             if (_disposed)
                 return;
 
-            if (isDisposing)
-            {
-                // dispose aggregated managed resources
-            }
-
             if (_appDomainProxy != null)
             {
                 _appDomainProxy.RunCodeInAppDomain(() => HttpRuntime.UnloadAppDomain());
@@ -95,7 +86,7 @@ namespace Lucid.Web.Testing.Hosting
 
             DeleteTestBinaries();
 
-            if (_enforceSingleInstance != null)
+            if (isDisposing && _enforceSingleInstance != null)
                 using (_enforceSingleInstance)
                 {
                     _enforceSingleInstance.Release();
@@ -109,6 +100,14 @@ namespace Lucid.Web.Testing.Hosting
         {
             var webBinDir = Path.Combine(webDir, "bin");
             var testBinDir = AppDomain.CurrentDomain.BaseDirectory;
+            var runningFlagFile = Path.Combine(webBinDir, RunningFlagFile);
+
+            if (File.Exists(runningFlagFile))
+                throw new Exception("Previous instance of AspNetTestHosts was not cleanly disposed - you might need to clean/rebuild your web folder");
+
+            AppDomain.CurrentDomain.DomainUnload += (s, e) => Dispose();
+
+            File.WriteAllText(runningFlagFile, "AspNetTestHost running");
 
             foreach (var srcFile in Directory.GetFiles(testBinDir))
             {
@@ -117,18 +116,18 @@ namespace Lucid.Web.Testing.Hosting
 
                 if (!File.Exists(destFile))
                 {
-                    _deleteTestBinaries.Add(() => File.Delete(destFile));
+                    _deleteActions.Add(() => File.Delete(destFile));
                     File.Copy(srcFile, destFile);
                 }
             }
 
-            AppDomain.CurrentDomain.DomainUnload += (s, e) => Dispose();
+            _deleteActions.Add(() => File.Delete(runningFlagFile));
         }
 
         private void DeleteTestBinaries()
         {
-            _deleteTestBinaries.ForEach(deleteFile => deleteFile());
-            _deleteTestBinaries.Clear();
+            _deleteActions.ForEach(deleteAction => deleteAction());
+            _deleteActions.Clear();
         }
     }
 }
