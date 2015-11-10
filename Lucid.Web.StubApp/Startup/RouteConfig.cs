@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Lucid.Web.Startup
+namespace Lucid.Web.StubApp.Startup
 {
     public class RouteConfig
     {

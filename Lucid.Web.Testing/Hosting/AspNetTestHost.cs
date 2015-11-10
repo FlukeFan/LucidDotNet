@@ -29,11 +29,11 @@ namespace Lucid.Web.Testing.Hosting
             _enforceSingleInstance.WaitOne();
             PhysicalDirectory = Path.GetFullPath(physicalDirectory);
 
-            if (!Directory.Exists(PhysicalDirectory))
-                throw new Exception("Could not find directory: " + PhysicalDirectory);
-
             try
             {
+                if (!Directory.Exists(PhysicalDirectory))
+                    throw new Exception("Could not find directory: " + PhysicalDirectory);
+
                 CopyTestBinaries(PhysicalDirectory);
                 _appDomainProxy = (AppDomainProxy)ApplicationHost.CreateApplicationHost(typeof(AppDomainProxy), virtualDirectory, PhysicalDirectory);
             }
@@ -101,6 +101,9 @@ namespace Lucid.Web.Testing.Hosting
             var webBinDir = Path.Combine(webDir, "bin");
             var testBinDir = AppDomain.CurrentDomain.BaseDirectory;
             var runningFlagFile = Path.Combine(webBinDir, RunningFlagFile);
+
+            if (!Directory.Exists(webBinDir))
+                throw new Exception("Could not find directory: " + webBinDir);
 
             if (File.Exists(runningFlagFile))
                 throw new Exception("Previous instance of AspNetTestHosts was not cleanly disposed - you might need to clean/rebuild your web folder");

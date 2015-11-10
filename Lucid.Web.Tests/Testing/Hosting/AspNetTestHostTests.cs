@@ -11,7 +11,7 @@ namespace Lucid.Web.Tests.Testing.Hosting
     [TestFixture]
     public class AspNetTestHostTests
     {
-        private static readonly string _web     = @"..\..\..\Web";
+        private static readonly string _web     = @"..\..\..\Lucid.Web.StubApp";
         private static readonly string _webBin  = _web + @"\bin";
 
         private Semaphore _enforceSingle;

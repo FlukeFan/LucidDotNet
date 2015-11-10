@@ -12,7 +12,7 @@ namespace Web.Tests.Controllers
         [SetUp]
         public void SetUp()
         {
-            _host = AspNetTestHost.For(@"..\..\..\Web");
+            _host = AspNetTestHost.For(@"..\..\..\Lucid.Web.StubApp");
         }
 
         [Test]

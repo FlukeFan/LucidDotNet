@@ -91,9 +91,9 @@
       <Project>{e0560e10-0ec3-4160-9ed3-b86e1d19ab2f}</Project>
       <Name>Lucid.Web.Testing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Web\Web.csproj">
+    <ProjectReference Include="..\Lucid.Web.StubApp\Lucid.Web.StubApp.csproj">
       <Project>{d0f98206-1edc-4c9f-b705-b1a8286d86dd}</Project>
-      <Name>Web</Name>
+      <Name>Lucid.Web.StubApp</Name>
     </ProjectReference>
   </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">

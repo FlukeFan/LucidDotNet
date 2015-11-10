@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web;
 using System.Web.Routing;
-using Lucid.Web.Startup;
+using Lucid.Web.StubApp.Startup;
 
-namespace Lucid.Web
+namespace Lucid.Web.StubApp
 {
     public class Global : HttpApplication
     {
