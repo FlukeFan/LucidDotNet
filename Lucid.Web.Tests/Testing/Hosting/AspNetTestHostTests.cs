@@ -14,6 +14,22 @@ namespace Lucid.Web.Tests.Testing.Hosting
         private static readonly string _web     = @"..\..\..\Web";
         private static readonly string _webBin  = _web + @"\bin";
 
+        private Semaphore _enforceSingle;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _enforceSingle = new Semaphore(1, 1, "Global\\AspNetTestHostTests");
+            _enforceSingle.WaitOne();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            using (_enforceSingle)
+                _enforceSingle.Release();
+        }
+
         [Test]
         public void HostCopiesAndDeletesTestBinaries()
         {
