@@ -66,5 +66,57 @@ namespace Lucid.Web.Tests.Testing.Hosting
 
             Task.WaitAll(startHosts);
         }
+
+        public class AssemblyUnloadTest : MarshalByRefObject
+        {
+            private AspNetTestHost _host;
+
+            public void Go()
+            {
+                _host = AspNetTestHost.For(_web);
+            }
+
+            public void SuppressFinalize()
+            {
+                GC.SuppressFinalize(_host);
+            }
+        }
+
+        [Test]
+        public void AssemblyUnload_Disposes()
+        {
+            var type = typeof(AssemblyUnloadTest);
+            var webBinPath = Path.GetFullPath(_webBin);
+            var flagFile = Path.Combine(webBinPath, AspNetTestHost.RunningFlagFile);
+
+            {
+                // test finalizer
+
+                var appDomain = AppDomain.CreateDomain("AssemblyUnloadTest", null, AppDomain.CurrentDomain.SetupInformation);
+                var proxy = (AssemblyUnloadTest)appDomain.CreateInstanceAndUnwrap(type.Assembly.FullName, type.FullName);
+                proxy.Go();
+
+                File.Exists(flagFile).Should().BeTrue();
+
+                AppDomain.Unload(appDomain);
+
+                File.Exists(flagFile).Should().BeFalse();
+            }
+
+            {
+                // test dispose gets called on DomainUnload event
+
+                var appDomain = AppDomain.CreateDomain("AssemblyUnloadTest", null, AppDomain.CurrentDomain.SetupInformation);
+                var proxy = (AssemblyUnloadTest)appDomain.CreateInstanceAndUnwrap(type.Assembly.FullName, type.FullName);
+                proxy.Go();
+
+                File.Exists(flagFile).Should().BeTrue();
+
+                proxy.SuppressFinalize();
+                AppDomain.Unload(appDomain);
+
+                File.Exists(flagFile).Should().BeFalse();
+            }
+        }
     }
 }
