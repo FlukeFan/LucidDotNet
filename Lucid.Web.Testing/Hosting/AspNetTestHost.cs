@@ -25,15 +25,15 @@ namespace Lucid.Web.Testing.Hosting
 
         public AspNetTestHost(string physicalDirectory, string virtualDirectory, TimeSpan timeout)
         {
-            var semaphoreName = "Global\\LucidAspNetTestHost";
+            PhysicalDirectory = Path.GetFullPath(physicalDirectory);
+
+            var semaphoreName = "Global\\LucidAspNetTestHost" + PhysicalDirectory.GetHashCode();
             _enforceSingleInstance = new Semaphore(1, 1, semaphoreName);
 
             try
             {
                 if (!_enforceSingleInstance.WaitOne(timeout))
                     throw new Exception("Could not obtain semaphore: " + semaphoreName);
-
-                PhysicalDirectory = Path.GetFullPath(physicalDirectory);
 
                 if (!Directory.Exists(PhysicalDirectory))
                     throw new Exception("Could not find directory: " + PhysicalDirectory);
