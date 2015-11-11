@@ -21,16 +21,20 @@ namespace Lucid.Web.Testing.Hosting
 
         public string PhysicalDirectory { get; protected set; }
 
-        public AspNetTestHost(string physicalDirectory) : this(physicalDirectory, "/") { }
+        public AspNetTestHost(string physicalDirectory) : this(physicalDirectory, "/", Timeout.InfiniteTimeSpan) { }
 
-        public AspNetTestHost(string physicalDirectory, string virtualDirectory)
+        public AspNetTestHost(string physicalDirectory, string virtualDirectory, TimeSpan timeout)
         {
-            _enforceSingleInstance = new Semaphore(1, 1, "Global\\LucidAspNetTestHost");
-            _enforceSingleInstance.WaitOne();
-            PhysicalDirectory = Path.GetFullPath(physicalDirectory);
+            var semaphoreName = "Global\\LucidAspNetTestHost";
+            _enforceSingleInstance = new Semaphore(1, 1, semaphoreName);
 
             try
             {
+                if (!_enforceSingleInstance.WaitOne(timeout))
+                    throw new Exception("Could not obtain semaphore: " + semaphoreName);
+
+                PhysicalDirectory = Path.GetFullPath(physicalDirectory);
+
                 if (!Directory.Exists(PhysicalDirectory))
                     throw new Exception("Could not find directory: " + PhysicalDirectory);
 
@@ -46,9 +50,14 @@ namespace Lucid.Web.Testing.Hosting
             }
         }
 
-        public static AspNetTestHost For(string physicalDirectory, string virtualDirectory = "/")
+        public static AspNetTestHost For(string physicalDirectory)
         {
-            return new AspNetTestHost(physicalDirectory, virtualDirectory);
+            return new AspNetTestHost(physicalDirectory);
+        }
+
+        public static AspNetTestHost For(string physicalDirectory, string virtualDirectory, TimeSpan timeout)
+        {
+            return new AspNetTestHost(physicalDirectory, virtualDirectory, timeout);
         }
 
         private void CurrentDomain_DomainUnload(object sender, EventArgs e)
@@ -103,7 +112,7 @@ namespace Lucid.Web.Testing.Hosting
             var runningFlagFile = Path.Combine(webBinDir, RunningFlagFile);
 
             if (!Directory.Exists(webBinDir))
-                throw new Exception("Could not find directory: " + webBinDir);
+                throw new Exception("Could not find bin directory: " + webBinDir);
 
             if (File.Exists(runningFlagFile))
                 throw new Exception("Previous instance of AspNetTestHosts was not cleanly disposed - you might need to clean/rebuild your web folder");

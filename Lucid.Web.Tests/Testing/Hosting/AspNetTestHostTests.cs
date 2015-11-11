@@ -58,6 +58,7 @@ namespace Lucid.Web.Tests.Testing.Hosting
         {
             var webBinPath = Path.GetFullPath(_webBin);
             var flagFile = Path.Combine(webBinPath, AspNetTestHost.RunningFlagFile);
+
             try
             {
                 File.WriteAllText(flagFile, "simulating instance already running");
@@ -81,6 +82,33 @@ namespace Lucid.Web.Tests.Testing.Hosting
             };
 
             Task.WaitAll(startHosts);
+        }
+
+        [Test]
+        public void FolderDoesNotExist_Throws()
+        {
+            var tmpFolder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+            try
+            {
+                Directory.CreateDirectory(tmpFolder);
+                Directory.CreateDirectory(Path.Combine(tmpFolder, "bin"));
+
+                {
+                    var nonExistentFolder = Path.Combine(tmpFolder, "doesNotExist");
+                    var folderError = Assert.Throws<Exception>(() => AspNetTestHost.For(nonExistentFolder, "/", TimeSpan.FromSeconds(15)));
+                    folderError.Message.Should().Be("Could not find directory: " + nonExistentFolder);
+                }
+
+                {
+                    var folderWithoutBin = Path.Combine(tmpFolder, "bin");
+                    var binError = Assert.Throws<Exception>(() => AspNetTestHost.For(folderWithoutBin, "/", TimeSpan.FromSeconds(15)));
+                    binError.Message.Should().Be("Could not find bin directory: " + Path.Combine(folderWithoutBin, "bin"));
+                }
+            }
+            finally
+            {
+                Directory.Delete(tmpFolder, true);
+            }
         }
 
         public class AssemblyUnloadTest : MarshalByRefObject
