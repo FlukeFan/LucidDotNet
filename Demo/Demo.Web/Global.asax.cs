@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using Demo.Web.Utility;
 
 namespace Demo.Web
 {
@@ -8,6 +9,7 @@ namespace Demo.Web
         protected void Application_Start()
         {
             ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new LucidRazorViewEngine("Demo.Web"));
 
             RouteTable.Routes.MapRoute(
                 "Default",                                              // Route name

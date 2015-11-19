@@ -1,12 +1,13 @@
-﻿using Demo.Web.Utility;
+﻿using System.Web.Mvc;
+using Demo.Web.Utility;
 
 namespace Demo.Web.App.Home
 {
     public class HomeController : DemoController
     {
-        public string Index()
+        public ActionResult Index()
         {
-            return "Hello world";
+            return View();
         }
     }
 }

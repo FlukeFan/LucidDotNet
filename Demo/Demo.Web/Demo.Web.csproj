@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="App\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -125,6 +126,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Utility\DemoController.cs" />
+    <Compile Include="Utility\LucidRazorViewEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">

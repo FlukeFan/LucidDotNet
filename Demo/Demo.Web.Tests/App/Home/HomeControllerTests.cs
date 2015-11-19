@@ -12,7 +12,7 @@ namespace Demo.Web.Tests.App.Home
             WebApp.Test(client =>
             {
                 var response = client.Get("/");
-                response.Should().Be("Hello world");
+                response.Should().Contain("Hello world");
             });
         }
     }
