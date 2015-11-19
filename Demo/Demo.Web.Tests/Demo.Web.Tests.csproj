@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTests.cs" />
+    <Compile Include="App\Home\HomeControllerTests.cs" />
     <Compile Include="SetUpFixture.cs" />
     <Compile Include="Utility\WebTest.cs" />
   </ItemGroup>

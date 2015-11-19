@@ -1,6 +1,6 @@
 ﻿using Demo.Web.Utility;
 
-namespace Demo.Web.Controllers
+namespace Demo.Web.App.Home
 {
     public class HomeController : DemoController
     {

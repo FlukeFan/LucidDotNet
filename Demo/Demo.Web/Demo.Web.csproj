@@ -120,7 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="App\Home\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
