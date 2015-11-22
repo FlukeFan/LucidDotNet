@@ -2,7 +2,7 @@
 using Lucid.Web.Testing.Hosting;
 using NUnit.Framework;
 
-namespace Web.Tests.App
+namespace Lucid.Web.Tests.StubApp.App
 {
     [TestFixture]
     public class HomeTests
@@ -13,6 +13,12 @@ namespace Web.Tests.App
         public void SetUp()
         {
             _host = AspNetTestHost.For(@"..\..\..\Lucid.Web.StubApp");
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            using (_host) { }
         }
 
         [Test]

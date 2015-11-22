@@ -19,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.StubApp", "Lucid.Web.StubApp\Lucid.Web.StubApp.csproj", "{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Tests", "Web.Tests\Web.Tests.csproj", "{A040ED97-C55B-4D50-ACA2-AB0FBB959090}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Domain", "Lucid.Domain\Lucid.Domain.csproj", "{743E64D3-1A87-4177-9D12-E1000CE04C4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Domain.Tests", "Lucid.Domain.Tests\Lucid.Domain.Tests.csproj", "{24EED56F-299C-4E7D-989D-75C8ED35DC8D}"
@@ -49,10 +47,6 @@ Global
 		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A040ED97-C55B-4D50-ACA2-AB0FBB959090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A040ED97-C55B-4D50-ACA2-AB0FBB959090}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A040ED97-C55B-4D50-ACA2-AB0FBB959090}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A040ED97-C55B-4D50-ACA2-AB0FBB959090}.Release|Any CPU.Build.0 = Release|Any CPU
 		{743E64D3-1A87-4177-9D12-E1000CE04C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{743E64D3-1A87-4177-9D12-E1000CE04C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{743E64D3-1A87-4177-9D12-E1000CE04C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU

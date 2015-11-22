@@ -41,11 +41,9 @@
     <ProjectsToBuild Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
     <ProjectsToBuild Include="Lucid.Web.Testing\Lucid.Web.Testing.csproj"/>
     <ProjectsToBuild Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
-    <ProjectsToBuild Include="Web.Tests\Web.Tests.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectsToClean Include="Web.Tests\Web.Tests.csproj"/>
     <ProjectsToClean Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
     <ProjectsToClean Include="Lucid.Web.Testing\Lucid.Web.Testing.csproj"/>
     <ProjectsToClean Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
