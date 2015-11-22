@@ -8,11 +8,22 @@ namespace Lucid.Web.Tests.StubApp.App
     public class HomeTests : StubAppTest
     {
         [Test]
-        public void Index_Get()
+        public void Index_GetByConvention()
         {
             StubApp.Test(http =>
             {
                 string response = http.Get("/");
+
+                response.Should().Contain("root home controller");
+            });
+        }
+
+        [Test]
+        public void Index_GetExplicit()
+        {
+            StubApp.Test(http =>
+            {
+                string response = http.Get("/Home");
 
                 response.Should().Contain("root home controller");
             });
