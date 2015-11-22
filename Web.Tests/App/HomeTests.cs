@@ -2,7 +2,7 @@
 using Lucid.Web.Testing.Hosting;
 using NUnit.Framework;
 
-namespace Web.Tests.Controllers
+namespace Web.Tests.App
 {
     [TestFixture]
     public class HomeTests
