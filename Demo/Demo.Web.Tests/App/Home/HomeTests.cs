@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Demo.Web.Tests.App.Home
 {
-    public class HomeControllerTests : WebTest
+    public class HomeTests : WebTest
     {
         [Test]
         public void Index_RendersView()

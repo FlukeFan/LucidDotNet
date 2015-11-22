@@ -1,30 +1,16 @@
 ﻿using FluentAssertions;
-using Lucid.Web.Testing.Hosting;
+using Lucid.Web.Tests.StubApp.Utility;
 using NUnit.Framework;
 
 namespace Lucid.Web.Tests.StubApp.App
 {
     [TestFixture]
-    public class HomeTests
+    public class HomeTests : StubAppTest
     {
-        private AspNetTestHost _host;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _host = AspNetTestHost.For(@"..\..\..\Lucid.Web.StubApp");
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            using (_host) { }
-        }
-
         [Test]
-        public void Home_Get()
+        public void Index_Get()
         {
-            _host.Test(http =>
+            StubApp.Test(http =>
             {
                 string response = http.Get("/");
 

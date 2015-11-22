@@ -17,10 +17,5 @@ namespace Demo.Web.Tests.Utility
         {
             using (WebApp) { }
         }
-
-        [SetUp]
-        public virtual void SetUp()
-        {
-        }
     }
 }
