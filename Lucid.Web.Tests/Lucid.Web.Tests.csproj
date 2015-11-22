@@ -80,6 +80,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lucid.Web.StubApp\Lucid.Web.StubApp.csproj">
+      <Project>{d0f98206-1edc-4c9f-b705-b1a8286d86dd}</Project>
+      <Name>Lucid.Web.StubApp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lucid.Web.Testing\Lucid.Web.Testing.csproj">
       <Project>{e0560e10-0ec3-4160-9ed3-b86e1d19ab2f}</Project>
       <Name>Lucid.Web.Testing</Name>

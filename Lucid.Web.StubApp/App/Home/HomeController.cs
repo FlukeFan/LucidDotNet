@@ -6,7 +6,7 @@ namespace Lucid.Web.StubApp.App.Home
     {
         public ActionResult Index()
         {
-            return Content("first controller");
+            return Content("root home controller");
         }
     }
 }

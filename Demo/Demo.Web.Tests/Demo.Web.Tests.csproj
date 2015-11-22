@@ -86,6 +86,12 @@
       <InProject>False</InProject>
     </TestDependencies>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Demo.Web\Demo.Web.csproj">
+      <Project>{9ea489d1-14a1-4482-872b-3a1fd7f93646}</Project>
+      <Name>Demo.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
     <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />

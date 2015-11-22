@@ -14,7 +14,7 @@ namespace Lucid.Web.Tests.StubApp.App
             {
                 string response = http.Get("/");
 
-                response.Should().Contain("first controller");
+                response.Should().Contain("root home controller");
             });
         }
     }
