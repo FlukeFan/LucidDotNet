@@ -56,9 +56,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="StubApp\App\F1\F11Tests.cs" />
     <Compile Include="StubApp\App\F3Tests.cs" />
     <Compile Include="StubApp\App\F2Tests.cs" />
-    <Compile Include="StubApp\App\F1\F1Tests.cs" />
+    <Compile Include="StubApp\App\F1\HomeTests.cs" />
     <Compile Include="StubApp\App\HomeTests.cs" />
     <Compile Include="StubApp\SetUpFixture.cs" />
     <Compile Include="StubApp\Utility\StubAppTest.cs" />

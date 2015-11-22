@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Lucid.Web.Tests.StubApp.App.F1
 {
     [TestFixture]
-    public class F1Tests : StubAppTest
+    public class HomeTests : StubAppTest
     {
         [Test]
         public void Index_GetByConvention()
