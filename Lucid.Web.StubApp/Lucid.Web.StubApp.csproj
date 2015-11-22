@@ -108,7 +108,6 @@
     <Compile Include="App\F1\F11\F11Controller.cs" />
     <Compile Include="App\F1\F12\F121\F121Controller.cs" />
     <Compile Include="App\F1\F12\F122\F122Controller.cs" />
-    <Compile Include="App\F1\F1Controller.cs" />
     <Compile Include="App\F1\Home\HomeController.cs" />
     <Compile Include="App\F2\F2Controller.cs" />
     <Compile Include="App\F3\F3Controller.cs" />

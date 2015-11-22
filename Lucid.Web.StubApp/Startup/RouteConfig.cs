@@ -9,10 +9,12 @@ namespace Lucid.Web.StubApp.Startup
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute("Default",  "{controller}", new { controller = "Home",  action = "Index" }, new string[] { "Lucid.Web.StubApp.App.Home" });
-            routes.MapRoute("F1",       "F1",           new { controller = "F1",    action = "Index" }, new string[] { "Lucid.Web.StubApp.App.F1" });
-            routes.MapRoute("F2",       "F2",           new { controller = "F2",    action = "Index" }, new string[] { "Lucid.Web.StubApp.App.F2" });
-            routes.MapRoute("F3",       "F3",           new { controller = "F3",    action = "Index" }, new string[] { "Lucid.Web.StubApp.App.F3" });
+            routes.MapRoute("F1X",      "f1/Home/{action}",         new { controller = "Home",  action = "Index" }, new string[] { "Lucid.Web.StubApp.App.F1.Home" });
+            routes.MapRoute("F1",       "f1/{action}",              new { controller = "Home",  action = "Index" }, new string[] { "Lucid.Web.StubApp.App.F1.Home" });
+            routes.MapRoute("F2",       "f2/{action}",              new { controller = "F2",    action = "Index" }, new string[] { "Lucid.Web.StubApp.App.F2" });
+            routes.MapRoute("F3",       "f3/{action}",              new { controller = "F3",    action = "Index" }, new string[] { "Lucid.Web.StubApp.App.F3" });
+            routes.MapRoute("RX",       "Home/{action}",            new { controller = "Home",  action = "Index" }, new string[] { "Lucid.Web.StubApp.App.Home" });
+            routes.MapRoute("R",        "{action}",                 new { controller = "Home",  action = "Index" }, new string[] { "Lucid.Web.StubApp.App.Home" });
         }
     }
 }
