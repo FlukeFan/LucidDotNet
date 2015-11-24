@@ -8,7 +8,7 @@ namespace Lucid.Web.Tests.StubApp.App.F1
     public class HomeTests : StubAppTest
     {
         [Test]
-        public void Index_GetByConvention()
+        public void Index_GetByControllerConvention()
         {
             StubApp.Test(http =>
             {
@@ -19,24 +19,13 @@ namespace Lucid.Web.Tests.StubApp.App.F1
         }
 
         [Test]
-        public void Index_GetExplicit()
+        public void Index_GetByActionConvention()
         {
             StubApp.Test(http =>
             {
-                string response = http.Get("/f1/Home");
+                string response = http.Get("/f1/Home/");
 
                 response.Should().Contain("F1/Home/Index");
-            });
-        }
-
-        [Test]
-        public void Other_GetByConvention()
-        {
-            StubApp.Test(http =>
-            {
-                string response = http.Get("/f1/other");
-
-                response.Should().Contain("F1/Home/Other");
             });
         }
 

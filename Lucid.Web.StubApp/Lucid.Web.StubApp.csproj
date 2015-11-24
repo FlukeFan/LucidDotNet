@@ -115,6 +115,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Startup\LucidActionData.cs" />
+    <Compile Include="Startup\LucidFeatureActions.cs" />
+    <Compile Include="Startup\LucidFeatureFolders.cs" />
+    <Compile Include="Startup\LucidRoute.cs" />
     <Compile Include="Startup\RouteConfig.cs" />
   </ItemGroup>
   <ItemGroup />
