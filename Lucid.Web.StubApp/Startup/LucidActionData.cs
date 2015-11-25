@@ -7,27 +7,21 @@ namespace Lucid.Web.StubApp.Startup
 {
     public class LucidActionData
     {
-        public LucidActionData(Type controllerType, MethodInfo action, string controllerName)
+        public Type         ControllerType  { get; protected set; }
+        public string       ControllerName  { get; protected set; }
+        public string       Namespace       { get; protected set; }
+        public MethodInfo   Method          { get; protected set; }
+        public string       ActionName      { get; protected set; }
+        public string       AreaName        { get; protected set; }
+
+        public LucidActionData(Type controllerType, MethodInfo action, string controllerName, string areaName)
         {
             ControllerType = controllerType;
             ControllerName = controllerName;
             Namespace = controllerType.Namespace;
             Method = action;
             ActionName = action.Name;
-        }
-
-        public Type         ControllerType  { get; protected set; }
-        public string       ControllerName  { get; protected set; }
-        public string       Namespace       { get; protected set; }
-        public MethodInfo   Method          { get; protected set; }
-        public string       ActionName      { get; protected set; }
-
-        public RouteValueDictionary RouteValues()
-        {
-            var values = new RouteValueDictionary();
-            values.Add("controller", ControllerName);
-            values.Add("action", ActionName);
-            return values;
+            AreaName = areaName;
         }
 
         public RouteData RouteData(LucidRoute lucidRoute)
@@ -37,10 +31,12 @@ namespace Lucid.Web.StubApp.Startup
             var dataTokens = routeData.DataTokens;
             dataTokens.Add("Namespaces", new string[] { Namespace });
 
+            if (AreaName != null)
+                dataTokens.Add("area", AreaName);
+
             var values = routeData.Values;
             values.Add("controller", ControllerName);
             values.Add("action", ActionName);
-            values.Add("Namespace", new string[] { Namespace });
 
             return routeData;
         }

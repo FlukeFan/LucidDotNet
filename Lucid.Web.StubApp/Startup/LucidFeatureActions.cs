@@ -30,20 +30,20 @@ namespace Lucid.Web.StubApp.Startup
             return ActionData;
         }
 
-        public void Add(Type controllerType, string controllerName, string[] controllerFolders)
+        public void Add(Type controllerType, string controllerName, string areaName, string[] controllerFolders)
         {
             if (controllerFolders.Length > 0)
-                AddSubfolder(controllerType, controllerName, controllerFolders);
+                AddSubfolder(controllerType, controllerName, areaName, controllerFolders);
             else
-                AddControllerActions(controllerType, controllerName, controllerFolders);
+                AddControllerActions(controllerType, controllerName, areaName);
         }
 
-        public void AddAction(Type controllerType, MethodInfo action, string controllerName)
+        public void AddAction(Type controllerType, MethodInfo action, string controllerName, string areaName)
         {
-            ActionData = new LucidActionData(controllerType, action, controllerName);
+            ActionData = new LucidActionData(controllerType, action, controllerName, areaName);
         }
 
-        private void AddSubfolder(Type controllerType, string controllerName, string[] controllerFolders)
+        private void AddSubfolder(Type controllerType, string controllerName, string areaName, string[] controllerFolders)
         {
             var folderName = controllerFolders.First().ToLower();
 
@@ -53,18 +53,18 @@ namespace Lucid.Web.StubApp.Startup
             var folder = Paths[folderName];
             var subFolders = controllerFolders.Skip(1).ToArray();
 
-            folder.Add(controllerType, controllerName, subFolders);
+            folder.Add(controllerType, controllerName, areaName, subFolders);
         }
 
-        private void AddControllerActions(Type controllerType, string controllerName, string[] controllerFolders)
+        private void AddControllerActions(Type controllerType, string controllerName, string areaName)
         {
             var actions = controllerType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 
             foreach (var action in actions)
-                AddControllerAction(controllerType, action, controllerName);
+                AddControllerAction(controllerType, action, controllerName, areaName);
         }
 
-        private void AddControllerAction(Type controllerType, MethodInfo action, string controllerName)
+        private void AddControllerAction(Type controllerType, MethodInfo action, string controllerName, string areaName)
         {
             var actionName = action.Name.ToLower();
 
@@ -72,14 +72,14 @@ namespace Lucid.Web.StubApp.Startup
                 Paths.Add(actionName, new LucidFeatureActions(this));
 
             var actionPath = Paths[actionName];
-            actionPath.AddAction(controllerType, action, controllerName);
+            actionPath.AddAction(controllerType, action, controllerName, areaName);
 
             if (actionName == "index")
             {
-                AddAction(controllerType, action, controllerName);
+                AddAction(controllerType, action, controllerName, areaName);
 
                 if (controllerName == "Home" && Parent != null)
-                    Parent.AddAction(controllerType, action, controllerName);
+                    Parent.AddAction(controllerType, action, controllerName, areaName);
             }
         }
     }

@@ -96,6 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="App\F1\F12\F121\Index.cshtml" />
+    <Content Include="App\F3\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -118,6 +120,7 @@
     <Compile Include="Startup\LucidActionData.cs" />
     <Compile Include="Startup\LucidFeatureActions.cs" />
     <Compile Include="Startup\LucidFeatureFolders.cs" />
+    <Compile Include="Startup\LucidRazorViewEngine.cs" />
     <Compile Include="Startup\LucidRoute.cs" />
     <Compile Include="Startup\RouteConfig.cs" />
   </ItemGroup>

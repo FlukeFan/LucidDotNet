@@ -8,6 +8,11 @@ namespace Lucid.Web.StubApp.Startup
 {
     public class LucidFeatureFolders
     {
+        public LucidRoute           Route               { get; protected set; }
+        public string               RootFolderNamespace { get; protected set; }
+        public string               RootFolder          { get; protected set; }
+        public LucidFeatureActions  RootActions         { get; protected set; }
+
         public LucidFeatureFolders(Assembly controllersAssembly, string rootFolderNamespace)
         {
             RootFolderNamespace = rootFolderNamespace;
@@ -18,10 +23,12 @@ namespace Lucid.Web.StubApp.Startup
             Route = new LucidRoute(this);
         }
 
-        public LucidRoute           Route               { get; protected set; }
-        public string               RootFolderNamespace { get; protected set; }
-        public string               RootFolder          { get; protected set; }
-        public LucidFeatureActions  RootActions         { get; protected set; }
+        public void RegisterViewEngine()
+        {
+            var engine = new LucidRazorViewEngine(RootFolder);
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(engine);
+        }
 
         public LucidActionData FindActionData(string[] pathParts, int partIndex)
         {
@@ -56,13 +63,18 @@ namespace Lucid.Web.StubApp.Startup
 
             var controllerName = controllerType.Name.Substring(0, controllerType.Name.Length - controllerSuffix.Length);
 
-            var controllerFolder = controllerType.Namespace.Substring(RootFolderNamespace.Length).TrimStart('.');
+            var controllerFolder = controllerType.Namespace.Substring(RootFolderNamespace.Length + 1);
             var controllerFolders = controllerFolder.Split('.');
 
             if (controllerFolders.Last() != controllerName)
                 throw new Exception(string.Format("Expected controller {0} to have convention of namespace ending in {1}", controllerType.FullName, controllerName));
 
-            RootActions.Add(controllerType, controllerName, controllerFolders);
+            string areaName = null;
+
+            if (controllerFolders.Length > 1)
+                areaName = string.Join("/", controllerFolders.Take(controllerFolders.Length - 1));
+
+            RootActions.Add(controllerType, controllerName, areaName, controllerFolders);
         }
     }
 }
