@@ -47,6 +47,7 @@
     <Compile Include="..\AssemblyInfo.cs" />
     <Compile Include="Hosting\AppDomainProxy.cs" />
     <Compile Include="Hosting\AspNetTestHost.cs" />
+    <Compile Include="Hosting\ConsoleWriter.cs" />
     <Compile Include="Hosting\SerializableDelegate.cs" />
     <Compile Include="Http\SimulatedHttpClient.cs" />
   </ItemGroup>
