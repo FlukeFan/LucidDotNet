@@ -6,12 +6,12 @@ namespace Lucid.Web.StubApp.App.F1.Home
     {
         public ActionResult Index()
         {
-            return Content("F1/Home/Index");
+            return Content("Response - F1/Home/Index");
         }
 
         public ActionResult Other()
         {
-            return Content("F1/Home/Other");
+            return Content("Response - F1/Home/Other");
         }
     }
 }

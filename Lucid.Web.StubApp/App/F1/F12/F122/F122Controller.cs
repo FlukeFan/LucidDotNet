@@ -6,7 +6,7 @@ namespace Lucid.Web.StubApp.App.F1.F12.F122
     {
         public ActionResult Index()
         {
-            return Content("F1/F12/F122/Index");
+            return Content("Response - F1/F12/F122/Index");
         }
     }
 }

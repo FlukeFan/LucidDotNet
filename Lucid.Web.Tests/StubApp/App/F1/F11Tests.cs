@@ -19,7 +19,7 @@ namespace Lucid.Web.Tests.StubApp.App.F1
             {
                 string response = http.Get("/f1/f11");
 
-                response.Should().Contain("F1/F11/Index");
+                response.Should().Contain("Response - F1/F11/Index");
             });
         }
 
@@ -30,7 +30,7 @@ namespace Lucid.Web.Tests.StubApp.App.F1
             {
                 string response = http.Get("/f1/f11/index");
 
-                response.Should().Contain("F1/F11/Index");
+                response.Should().Contain("Response - F1/F11/Index");
             });
         }
     }
