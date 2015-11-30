@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 
-namespace Lucid.Web.StubApp.Startup
+namespace Lucid.Web.Routing
 {
     public class LucidRazorViewEngine : RazorViewEngine
     {

@@ -3,9 +3,9 @@ using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Lucid.Web.StubApp.Startup
+namespace Lucid.Web.Routing
 {
-    public class LucidActionData
+    public class ActionData
     {
         public Type         ControllerType  { get; protected set; }
         public string       ControllerName  { get; protected set; }
@@ -14,7 +14,7 @@ namespace Lucid.Web.StubApp.Startup
         public string       ActionName      { get; protected set; }
         public string       AreaName        { get; protected set; }
 
-        public LucidActionData(Type controllerType, MethodInfo action, string controllerName, string areaName)
+        public ActionData(Type controllerType, MethodInfo action, string controllerName, string areaName)
         {
             ControllerType = controllerType;
             ControllerName = controllerName;

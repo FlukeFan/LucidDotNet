@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Lucid.Web.StubApp.Startup
+namespace Lucid.Web.Routing
 {
-    public class LucidFeatureActions
+    public class FeatureActions
     {
-        public LucidFeatureActions(LucidFeatureActions parent)
+        public FeatureActions                       Parent      { get; protected set; }
+        public IDictionary<string, FeatureActions>  Paths       { get; protected set; }
+        public ActionData                           ActionData  { get; protected set; }
+
+        public FeatureActions(FeatureActions parent)
         {
             Parent = parent;
-            Paths = new Dictionary<string, LucidFeatureActions>();
+            Paths = new Dictionary<string, FeatureActions>();
         }
 
-        public LucidFeatureActions                      Parent      { get; protected set; }
-        public IDictionary<string, LucidFeatureActions> Paths       { get; protected set; }
-        public LucidActionData                          ActionData  { get; protected set; }
-
-        public LucidActionData FindActionData(string[] pathParts, int partIndex)
+        public ActionData FindActionData(string[] pathParts, int partIndex)
         {
             if (partIndex >= pathParts.Length)
                 return ActionData;
@@ -40,7 +40,7 @@ namespace Lucid.Web.StubApp.Startup
 
         public void AddAction(Type controllerType, MethodInfo action, string controllerName, string areaName)
         {
-            ActionData = new LucidActionData(controllerType, action, controllerName, areaName);
+            ActionData = new ActionData(controllerType, action, controllerName, areaName);
         }
 
         private void AddSubfolder(Type controllerType, string controllerName, string areaName, string[] controllerFolders)
@@ -48,7 +48,7 @@ namespace Lucid.Web.StubApp.Startup
             var folderName = controllerFolders.First().ToLower();
 
             if (!Paths.ContainsKey(folderName))
-                Paths.Add(folderName, new LucidFeatureActions(this));
+                Paths.Add(folderName, new FeatureActions(this));
 
             var folder = Paths[folderName];
             var subFolders = controllerFolders.Skip(1).ToArray();
@@ -69,7 +69,7 @@ namespace Lucid.Web.StubApp.Startup
             var actionName = action.Name.ToLower();
 
             if (!Paths.ContainsKey(actionName))
-                Paths.Add(actionName, new LucidFeatureActions(this));
+                Paths.Add(actionName, new FeatureActions(this));
 
             var actionPath = Paths[actionName];
             actionPath.AddAction(controllerType, action, controllerName, areaName);

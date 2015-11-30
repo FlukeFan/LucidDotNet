@@ -2,13 +2,13 @@
 using System.Web;
 using System.Web.Routing;
 
-namespace Lucid.Web.StubApp.Startup
+namespace Lucid.Web.Routing
 {
     public class LucidRoute : RouteBase
     {
-        private LucidFeatureFolders _lucidFeatureFolders;
+        private FeatureFolders _lucidFeatureFolders;
 
-        public LucidRoute(LucidFeatureFolders lucidFeatureFolders)
+        public LucidRoute(FeatureFolders lucidFeatureFolders)
         {
             _lucidFeatureFolders = lucidFeatureFolders;
         }

@@ -117,14 +117,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Startup\LucidActionData.cs" />
-    <Compile Include="Startup\LucidFeatureActions.cs" />
-    <Compile Include="Startup\LucidFeatureFolders.cs" />
-    <Compile Include="Startup\LucidRazorViewEngine.cs" />
-    <Compile Include="Startup\LucidRoute.cs" />
     <Compile Include="Startup\RouteConfig.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Lucid.Web\Lucid.Web.csproj">
+      <Project>{0c0cfe50-9cc9-49f1-af0b-caf7ebf1820d}</Project>
+      <Name>Lucid.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

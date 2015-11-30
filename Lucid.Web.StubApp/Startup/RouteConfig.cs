@@ -10,7 +10,7 @@ namespace Lucid.Web.StubApp.Startup
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            var featureFolders = new LucidFeatureFolders(typeof(HomeController).Assembly, "Lucid.Web.StubApp.App");
+            var featureFolders = new FeatureFolders(typeof(HomeController).Assembly, "Lucid.Web.StubApp.App");
             routes.Add("LucidFeatureFolders", featureFolders.Route);
 
             featureFolders.RegisterViewEngine();

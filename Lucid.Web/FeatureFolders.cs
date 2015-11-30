@@ -3,21 +3,22 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Mvc.Async;
+using Lucid.Web.Routing;
 
-namespace Lucid.Web.StubApp.Startup
+namespace Lucid.Web
 {
-    public class LucidFeatureFolders
+    public class FeatureFolders
     {
-        public LucidRoute           Route               { get; protected set; }
-        public string               RootFolderNamespace { get; protected set; }
-        public string               RootFolder          { get; protected set; }
-        public LucidFeatureActions  RootActions         { get; protected set; }
+        public LucidRoute       Route               { get; protected set; }
+        public string           RootFolderNamespace { get; protected set; }
+        public string           RootFolder          { get; protected set; }
+        public FeatureActions   RootActions         { get; protected set; }
 
-        public LucidFeatureFolders(Assembly controllersAssembly, string rootFolderNamespace)
+        public FeatureFolders(Assembly controllersAssembly, string rootFolderNamespace)
         {
             RootFolderNamespace = rootFolderNamespace;
             RootFolder = rootFolderNamespace.Split('.').Last();
-            RootActions = new LucidFeatureActions(null);
+            RootActions = new FeatureActions(null);
 
             BuildActions(controllersAssembly);
             Route = new LucidRoute(this);
@@ -30,7 +31,7 @@ namespace Lucid.Web.StubApp.Startup
             ViewEngines.Engines.Add(engine);
         }
 
-        public LucidActionData FindActionData(string[] pathParts, int partIndex)
+        public ActionData FindActionData(string[] pathParts, int partIndex)
         {
             return RootActions.FindActionData(pathParts, partIndex);
         }
