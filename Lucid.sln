@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.Testing", "Lucid.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.Tests", "Lucid.Web.Tests\Lucid.Web.Tests.csproj", "{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web", "Lucid.Web\Lucid.Web.csproj", "{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
