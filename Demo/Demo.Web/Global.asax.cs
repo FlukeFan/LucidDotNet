@@ -1,6 +1,4 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-using Demo.Web.Utility;
+﻿using Demo.Web.Utility;
 using Lucid.Web;
 
 namespace Demo.Web
@@ -9,7 +7,7 @@ namespace Demo.Web
     {
         protected void Application_Start()
         {
-            FeatureFolders.Register(typeof(DemoController).Assembly, "Demo.Web.App", RouteTable.Routes, ViewEngines.Engines);
+            FeatureFolders.Register(typeof(DemoController).Assembly, "Demo.Web.App");
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web;
-using System.Web.Routing;
-using Lucid.Web.StubApp.Startup;
+using Lucid.Web.StubApp.App.Home;
 
 namespace Lucid.Web.StubApp
 {
@@ -9,7 +8,7 @@ namespace Lucid.Web.StubApp
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            FeatureFolders.Register(typeof(HomeController).Assembly, "Lucid.Web.StubApp.App");
         }
     }
 }

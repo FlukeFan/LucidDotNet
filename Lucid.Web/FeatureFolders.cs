@@ -25,6 +25,11 @@ namespace Lucid.Web
             Route = new LucidRoute(this);
         }
 
+        public static FeatureFolders Register(Assembly controllerAssembly, string rootFolderNamespace)
+        {
+            return Register(controllerAssembly, rootFolderNamespace, RouteTable.Routes, ViewEngines.Engines);
+        }
+
         public static FeatureFolders Register(Assembly controllerAssembly, string rootFolderNamespace, RouteCollection routes, ViewEngineCollection viewEngines)
         {
             var features = new FeatureFolders(controllerAssembly, rootFolderNamespace);
