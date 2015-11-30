@@ -56,6 +56,10 @@
       <HintPath>..\packages\Lucid.Infrastructure.Persistence.NHibernate.0.0.0.1\lib\net45\Lucid.Infrastructure.Persistence.NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Lucid.Web, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucid.Web.0.0.0.1\lib\net45\Lucid.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -126,7 +130,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Utility\DemoController.cs" />
-    <Compile Include="Utility\LucidRazorViewEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">

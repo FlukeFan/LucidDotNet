@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using Demo.Web.Utility;
+using Lucid.Web;
 
 namespace Demo.Web
 {
@@ -8,16 +9,7 @@ namespace Demo.Web
     {
         protected void Application_Start()
         {
-            ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new LucidRazorViewEngine("Demo.Web"));
-
-            RouteTable.Routes.MapRoute(
-                "Default",                                              // Route name
-                "{controller}/{action}/{id}",                           // URL with parameters
-                new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
-            );
-
-            AreaRegistration.RegisterAllAreas();
+            FeatureFolders.Register(typeof(DemoController).Assembly, "Demo.Web.App", RouteTable.Routes, ViewEngines.Engines);
         }
     }
 }

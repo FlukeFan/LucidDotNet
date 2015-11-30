@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Mvc.Async;
+using System.Web.Routing;
 using Lucid.Web.Routing;
 
 namespace Lucid.Web
@@ -24,11 +25,17 @@ namespace Lucid.Web
             Route = new LucidRoute(this);
         }
 
-        public void RegisterViewEngine()
+        public static FeatureFolders Register(Assembly controllerAssembly, string rootFolderNamespace, RouteCollection routes, ViewEngineCollection viewEngines)
         {
-            var engine = new LucidRazorViewEngine(RootFolder);
-            ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(engine);
+            var features = new FeatureFolders(controllerAssembly, rootFolderNamespace);
+
+            routes.Add("LucidFeatureFolders", features.Route);
+
+            var engine = new LucidRazorViewEngine(features.RootFolder);
+            viewEngines.Clear();
+            viewEngines.Add(engine);
+
+            return features;
         }
 
         public ActionData FindActionData(string[] pathParts, int partIndex)

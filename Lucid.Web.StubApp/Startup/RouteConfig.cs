@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using Lucid.Web.Routing;
 using Lucid.Web.StubApp.App.Home;
 
 namespace Lucid.Web.StubApp.Startup
@@ -10,10 +11,7 @@ namespace Lucid.Web.StubApp.Startup
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            var featureFolders = new FeatureFolders(typeof(HomeController).Assembly, "Lucid.Web.StubApp.App");
-            routes.Add("LucidFeatureFolders", featureFolders.Route);
-
-            featureFolders.RegisterViewEngine();
+            FeatureFolders.Register(typeof(HomeController).Assembly, "Lucid.Web.StubApp.App", routes, ViewEngines.Engines);
         }
     }
 }
