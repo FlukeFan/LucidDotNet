@@ -8,5 +8,10 @@ namespace Lucid.Web.StubApp.App.F3
         {
             return View();
         }
+
+        public ActionResult Param1(int param1)
+        {
+            return Content("param1=" + param1);
+        }
     }
 }

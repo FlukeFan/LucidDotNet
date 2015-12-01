@@ -78,6 +78,7 @@
     <Compile Include="Routing\FeatureActions.cs" />
     <Compile Include="Routing\LucidRazorViewEngine.cs" />
     <Compile Include="Routing\LucidRoute.cs" />
+    <Compile Include="Routing\RouteParameterFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lucid.Web.nuspec" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Routing;
 
@@ -6,6 +7,8 @@ namespace Lucid.Web.Routing
 {
     public class LucidRoute : RouteBase
     {
+        public const string RouteDataParametersKey = "_lucidRouteDataParameters";
+
         private FeatureFolders _lucidFeatureFolders;
 
         public LucidRoute(FeatureFolders lucidFeatureFolders)
@@ -17,13 +20,16 @@ namespace Lucid.Web.Routing
         {
             var request = httpContext.Request;
             var path = (request.AppRelativeCurrentExecutionFilePath + request.PathInfo).Substring(2); // remove ~/
-            var pathParts = path.Split('/');
+            var pathParts = path.Split('/').Where(s => !string.IsNullOrEmpty(s)).ToArray();
             var actionData = _lucidFeatureFolders.FindActionData(pathParts, 0);
 
             if (actionData == null)
                 return null;
 
-            return actionData.RouteData(this);
+            var routeData = actionData.CreateRouteData(this);
+            var urlParameters = pathParts.Skip(actionData.Depth).ToArray();
+            routeData.DataTokens.Add(RouteDataParametersKey, urlParameters);
+            return routeData;
         }
 
         public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)

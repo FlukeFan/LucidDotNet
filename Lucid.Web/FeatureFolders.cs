@@ -27,14 +27,16 @@ namespace Lucid.Web
 
         public static FeatureFolders Register(Assembly controllerAssembly, string rootFolderNamespace)
         {
-            return Register(controllerAssembly, rootFolderNamespace, RouteTable.Routes, ViewEngines.Engines);
+            return Register(controllerAssembly, rootFolderNamespace, RouteTable.Routes, GlobalFilters.Filters, ViewEngines.Engines);
         }
 
-        public static FeatureFolders Register(Assembly controllerAssembly, string rootFolderNamespace, RouteCollection routes, ViewEngineCollection viewEngines)
+        public static FeatureFolders Register(Assembly controllerAssembly, string rootFolderNamespace, RouteCollection routes, GlobalFilterCollection globalFilters, ViewEngineCollection viewEngines)
         {
             var features = new FeatureFolders(controllerAssembly, rootFolderNamespace);
 
             routes.Add("LucidFeatureFolders", features.Route);
+
+            globalFilters.Add(new RouteParameterFilter());
 
             var engine = new LucidRazorViewEngine(features.RootFolder);
             viewEngines.Clear();
@@ -87,7 +89,7 @@ namespace Lucid.Web
             if (controllerFolders.Length > 1)
                 areaName = string.Join("/", controllerFolders.Take(controllerFolders.Length - 1));
 
-            RootActions.Add(controllerType, controllerName, areaName, controllerFolders);
+            RootActions.Add(controllerType, controllerName, areaName, controllerFolders, 0);
         }
     }
 }

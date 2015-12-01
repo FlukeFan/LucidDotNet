@@ -17,5 +17,16 @@ namespace Lucid.Web.Tests.StubApp.App
                 response.Should().Contain("Response - F3/Index");
             });
         }
+
+        [Test]
+        public void Param1_Get()
+        {
+            StubApp.Test(http =>
+            {
+                string response = http.Get("/f3/param1/123");
+
+                response.Should().Contain("param1=123");
+            });
+        }
     }
 }
