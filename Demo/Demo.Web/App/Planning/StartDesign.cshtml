@@ -11,6 +11,13 @@
 
     @using (var form = Html.BeginForm())
     {
+        <div>
+            @{/* TODO create form helper that allows command for model names */}
+            @Html.Label("Name", "Design Name")
+            @Html.TextBox("Name")
+            @Html.ValidationMessage("Name")
+        </div>
+
         <input type="submit" value="Start Design"/>
     }
 </body>
