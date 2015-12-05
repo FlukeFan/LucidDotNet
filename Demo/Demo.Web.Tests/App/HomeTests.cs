@@ -2,7 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Demo.Web.Tests.App.Home
+namespace Demo.Web.Tests.App
 {
     public class HomeTests : WebTest
     {

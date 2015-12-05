@@ -116,6 +116,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="App\Home\Index.cshtml" />
+    <Content Include="App\Planning\StartDesign.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -126,6 +127,7 @@
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs" />
     <Compile Include="App\Home\HomeController.cs" />
+    <Compile Include="App\Planning\PlanningController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

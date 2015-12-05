@@ -12,7 +12,15 @@ namespace Lucid.Web.Testing.Hosting
 
         public void RunCodeInAppDomain(SerializableDelegate<Action<SimulatedHttpClient>> codeToRun, SimulatedHttpClient client)
         {
-            codeToRun.Delegate(client);
+            try
+            {
+                codeToRun.Delegate(client);
+            }
+            catch
+            {
+                client.ConsoleWriter.WriteLine("Last response:\n\n" + SimulatedHttpClient.LastResponseText);
+                throw;
+            }
         }
 
         public override object InitializeLifetimeService()

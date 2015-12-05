@@ -34,6 +34,7 @@ namespace Lucid.Web.Routing
 
         public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
         {
+            // TODO implement this so we can use existing routing styles
             throw new NotImplementedException();
         }
     }

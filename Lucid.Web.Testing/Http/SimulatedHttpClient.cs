@@ -9,6 +9,8 @@ namespace Lucid.Web.Testing.Http
     [Serializable]
     public class SimulatedHttpClient
     {
+        public static string LastResponseText { get; protected set; }
+
         public ConsoleWriter ConsoleWriter { get; protected set; }
 
         public SimulatedHttpClient()
@@ -26,6 +28,7 @@ namespace Lucid.Web.Testing.Http
                 HttpRuntime.ProcessRequest(workerRequest);
 
                 var responseText = output.ToString();
+                LastResponseText = responseText;
                 return responseText;
             }
         }
