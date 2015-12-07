@@ -10,12 +10,20 @@ namespace Lucid.Web.Tests.StubApp.Utility
 
         public static void SetUpWebHost()
         {
-            StubApp = AspNetTestHost.For(@"..\..\..\Lucid.Web.StubApp");
+            StubApp = AspNetTestHost.For(@"..\..\..\Lucid.Web.StubApp", typeof(TestHostStartup));
         }
 
         public static void TearDownWebHost()
         {
             using (StubApp) { }
+        }
+
+        private class TestHostStartup : AppDomainProxy
+        {
+            public TestHostStartup()
+            {
+                Lucid.Web.StubApp.App.Home.HomeController.RootHomeControllerResponseText = "root home controller";
+            }
         }
     }
 }

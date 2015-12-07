@@ -61,6 +61,12 @@
       <InProject>False</InProject>
     </PackageDependencies>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucid.Web\Lucid.Web.csproj">
+      <Project>{0c0cfe50-9cc9-49f1-af0b-caf7ebf1820d}</Project>
+      <Name>Lucid.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(LucidVersion).nupkg">
     <Exec Command="..\$(NuGetExe) pack -OutputDirectory ..\packaged" />
   </Target>

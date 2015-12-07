@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security.AccessControl;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -20,7 +21,11 @@ namespace Lucid.Web.Tests.Testing.Hosting
         [SetUp]
         public void SetUp()
         {
-            _enforceSingle = new Semaphore(1, 1, "Global\\AspNetTestHostTests");
+            var security = new SemaphoreSecurity();
+            security.AddAccessRule(new SemaphoreAccessRule("Everyone", SemaphoreRights.FullControl, AccessControlType.Allow));
+
+            bool notUsed;
+            _enforceSingle = new Semaphore(1, 1, "Global\\AspNetTestHostTests", out notUsed, security);
             _enforceSingle.WaitOne();
 
             _tmpFolder = Path.Combine(Path.GetFullPath("."), Guid.NewGuid().ToString());

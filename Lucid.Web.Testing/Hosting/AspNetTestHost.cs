@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.AccessControl;
 using System.Threading;
 using System.Web;
 using System.Web.Hosting;
@@ -21,14 +22,23 @@ namespace Lucid.Web.Testing.Hosting
 
         public string PhysicalDirectory { get; protected set; }
 
-        public AspNetTestHost(string physicalDirectory) : this(physicalDirectory, "/", Timeout.InfiniteTimeSpan) { }
+        public AspNetTestHost(string physicalDirectory) : this(physicalDirectory, typeof(AppDomainProxy)) { }
 
-        public AspNetTestHost(string physicalDirectory, string virtualDirectory, TimeSpan timeout)
+        public AspNetTestHost(string physicalDirectory, Type appDomainProxyType) : this(physicalDirectory, "/", Timeout.InfiniteTimeSpan, appDomainProxyType) { }
+
+        public AspNetTestHost(string physicalDirectory, string virtualDirectory, TimeSpan timeout, Type appDomainProxyType)
         {
+            if (!typeof(AppDomainProxy).IsAssignableFrom(appDomainProxyType))
+                throw new Exception(string.Format("Type: {0} should inherit from {1}", appDomainProxyType, typeof(AppDomainProxy)));
+
             PhysicalDirectory = Path.GetFullPath(physicalDirectory);
 
+            var security = new SemaphoreSecurity();
+            security.AddAccessRule(new SemaphoreAccessRule("Everyone", SemaphoreRights.FullControl, AccessControlType.Allow));
+
+            bool createdNew_notUsed;
             var semaphoreName = "Global\\LucidAspNetTestHost" + PhysicalDirectory.GetHashCode();
-            _enforceSingleInstance = new Semaphore(1, 1, semaphoreName);
+            _enforceSingleInstance = new Semaphore(1, 1, semaphoreName, out createdNew_notUsed, security);
 
             try
             {
@@ -39,7 +49,7 @@ namespace Lucid.Web.Testing.Hosting
                     throw new Exception("Could not find directory: " + PhysicalDirectory);
 
                 CopyTestBinaries(PhysicalDirectory);
-                _appDomainProxy = (AppDomainProxy)ApplicationHost.CreateApplicationHost(typeof(AppDomainProxy), virtualDirectory, PhysicalDirectory);
+                _appDomainProxy = (AppDomainProxy)ApplicationHost.CreateApplicationHost(appDomainProxyType, virtualDirectory, PhysicalDirectory);
             }
             catch
             {
@@ -55,9 +65,19 @@ namespace Lucid.Web.Testing.Hosting
             return new AspNetTestHost(physicalDirectory);
         }
 
+        public static AspNetTestHost For(string physicalDirectory, Type appDomainProxyType)
+        {
+            return new AspNetTestHost(physicalDirectory, appDomainProxyType);
+        }
+
         public static AspNetTestHost For(string physicalDirectory, string virtualDirectory, TimeSpan timeout)
         {
-            return new AspNetTestHost(physicalDirectory, virtualDirectory, timeout);
+            return new AspNetTestHost(physicalDirectory, virtualDirectory, timeout, typeof(AppDomainProxy));
+        }
+
+        public static AspNetTestHost For(string physicalDirectory, string virtualDirectory, TimeSpan timeout, Type appDomainProxyType)
+        {
+            return new AspNetTestHost(physicalDirectory, virtualDirectory, timeout, appDomainProxyType);
         }
 
         private void CurrentDomain_DomainUnload(object sender, EventArgs e)

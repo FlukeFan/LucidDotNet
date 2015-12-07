@@ -4,9 +4,11 @@ namespace Lucid.Web.StubApp.App.Home
 {
     public class HomeController : Controller
     {
+        public static string RootHomeControllerResponseText = "not set";
+
         public ActionResult Index()
         {
-            return Content("root home controller");
+            return Content(RootHomeControllerResponseText);
         }
     }
 }

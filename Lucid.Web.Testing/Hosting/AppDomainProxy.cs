@@ -5,6 +5,11 @@ namespace Lucid.Web.Testing.Hosting
 {
     public class AppDomainProxy : MarshalByRefObject
     {
+        public AppDomainProxy()
+        {
+            WebHost.IsRunningInTestHost = true;
+        }
+
         public void RunCodeInAppDomain(Action codeToRun)
         {
             codeToRun();
