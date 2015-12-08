@@ -53,6 +53,13 @@ namespace Lucid.Infrastructure.Persistence.NHibernate
             return this;
         }
 
+        public virtual void Commit()
+        {
+            _transaction.Commit();
+            _transaction = null;
+            _session = null;
+        }
+
         public virtual T Save<T>(T entity) where T : IEntity<TId>
         {
             _session.Save(entity);
