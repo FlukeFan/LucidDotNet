@@ -134,6 +134,7 @@
     <Compile Include="Utility\DemoController.cs" />
     <Compile Include="Utility\MvcExecutor.cs" />
     <Compile Include="Utility\PresentationRegistry.cs" />
+    <Compile Include="Utility\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">
