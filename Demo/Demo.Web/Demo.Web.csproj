@@ -132,6 +132,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Utility\DemoController.cs" />
+    <Compile Include="Utility\MvcExecutor.cs" />
+    <Compile Include="Utility\PresentationRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">

@@ -18,6 +18,7 @@ namespace Demo.Web
                 // verify NH not hitting DB for reserved words
                 DemoNhRepository.Init(connectionString, typeof(DemoEntity));
             }
+
             FeatureFolders.Register(typeof(DemoController).Assembly, "Demo.Web.App");
         }
     }
