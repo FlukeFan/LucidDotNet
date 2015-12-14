@@ -1,4 +1,5 @@
-﻿using Lucid.Web.Testing.Hosting;
+﻿using Lucid.Web.StubApp.App.Home;
+using Lucid.Web.Testing.Hosting;
 using NUnit.Framework;
 
 namespace Lucid.Web.Tests.StubApp.Utility
@@ -22,7 +23,7 @@ namespace Lucid.Web.Tests.StubApp.Utility
         {
             public TestHostStartup()
             {
-                Lucid.Web.StubApp.App.Home.HomeController.RootHomeControllerResponseText = "root home controller";
+                HomeController.RootHomeControllerResponseText = "root home controller";
             }
         }
     }
