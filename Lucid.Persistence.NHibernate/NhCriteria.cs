@@ -5,7 +5,7 @@ using Lucid.Domain.Persistence.Queries;
 using NHibernate;
 using NHibernate.Criterion;
 
-namespace Lucid.Infrastructure.Persistence.NHibernate
+namespace Lucid.Persistence.NHibernate
 {
     public static class NhCriteria
     {

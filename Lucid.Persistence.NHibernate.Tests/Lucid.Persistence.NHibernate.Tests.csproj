@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Lucid.Infrastructure.Persistence.NHibernate.Tests</RootNamespace>
-    <AssemblyName>Lucid.Infrastructure.Persistence.NHibernate.Tests</AssemblyName>
+    <RootNamespace>Lucid.Persistence.NHibernate.Tests</RootNamespace>
+    <AssemblyName>Lucid.Persistence.NHibernate.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -98,9 +98,9 @@
       <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
       <Name>Lucid.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lucid.Infrastructure.Persistence.NHibernate\Lucid.Infrastructure.Persistence.NHibernate.csproj">
+    <ProjectReference Include="..\Lucid.Persistence.NHibernate\Lucid.Persistence.NHibernate.csproj">
       <Project>{d824c9d7-9a47-4221-897c-db99fe98c0d9}</Project>
-      <Name>Lucid.Infrastructure.Persistence.NHibernate</Name>
+      <Name>Lucid.Persistence.NHibernate</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

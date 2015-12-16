@@ -1,5 +1,5 @@
 ﻿using Demo.Domain.Utility;
-using Lucid.Infrastructure.Persistence.NHibernate;
+using Lucid.Persistence.NHibernate;
 
 namespace Demo.Infrastructure.NHibernate
 {

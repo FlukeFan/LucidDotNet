@@ -5,7 +5,7 @@ using Lucid.Domain.Testing;
 using Lucid.Domain.Tests.Persistence;
 using NUnit.Framework;
 
-namespace Lucid.Infrastructure.Persistence.NHibernate.Tests
+namespace Lucid.Persistence.NHibernate.Tests
 {
     public class NhRepositoryTests : IRepositoryTests
     {

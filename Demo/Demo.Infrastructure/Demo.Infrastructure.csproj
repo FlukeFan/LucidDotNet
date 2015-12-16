@@ -43,8 +43,8 @@
       <HintPath>..\packages\Lucid.Domain.0.0.0.1\lib\net45\Lucid.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Infrastructure.Persistence.NHibernate, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Infrastructure.Persistence.NHibernate.0.0.0.1\lib\net45\Lucid.Infrastructure.Persistence.NHibernate.dll</HintPath>
+    <Reference Include="Lucid.Persistence.NHibernate, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucid.Persistence.NHibernate.0.0.0.1\lib\net45\Lucid.Persistence.NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">

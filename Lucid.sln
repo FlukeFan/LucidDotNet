@@ -25,9 +25,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Domain.Tests", "Lucid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Domain.Testing", "Lucid.Domain.Testing\Lucid.Domain.Testing.csproj", "{720932D2-760D-46C4-8DD9-7D492867D23E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Infrastructure.Persistence.NHibernate", "Lucid.Infrastructure.Persistence.NHibernate\Lucid.Infrastructure.Persistence.NHibernate.csproj", "{D824C9D7-9A47-4221-897C-DB99FE98C0D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Persistence.NHibernate", "Lucid.Persistence.NHibernate\Lucid.Persistence.NHibernate.csproj", "{D824C9D7-9A47-4221-897C-DB99FE98C0D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Infrastructure.Persistence.NHibernate.Tests", "Lucid.Infrastructure.Persistence.NHibernate.Tests\Lucid.Infrastructure.Persistence.NHibernate.Tests.csproj", "{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Persistence.NHibernate.Tests", "Lucid.Persistence.NHibernate.Tests\Lucid.Persistence.NHibernate.Tests.csproj", "{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.Testing", "Lucid.Web.Testing\Lucid.Web.Testing.csproj", "{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}"
 EndProject

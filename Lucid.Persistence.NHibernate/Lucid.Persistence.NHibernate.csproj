@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D824C9D7-9A47-4221-897C-DB99FE98C0D9}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Lucid.Infrastructure.Persistence.NHibernate</RootNamespace>
-    <AssemblyName>Lucid.Infrastructure.Persistence.NHibernate</AssemblyName>
+    <RootNamespace>Lucid.Persistence.NHibernate</RootNamespace>
+    <AssemblyName>Lucid.Persistence.NHibernate</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -57,7 +57,7 @@
     <Compile Include="NhRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Lucid.Infrastructure.Persistence.NHibernate.nuspec" />
+    <None Include="Lucid.Persistence.NHibernate.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

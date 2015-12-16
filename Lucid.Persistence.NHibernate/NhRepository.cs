@@ -9,7 +9,7 @@ using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Tool.hbm2ddl;
 
-namespace Lucid.Infrastructure.Persistence.NHibernate
+namespace Lucid.Persistence.NHibernate
 {
     public class NhRepository<TId> : IIdentityMapRepository<TId>, IDisposable
     {

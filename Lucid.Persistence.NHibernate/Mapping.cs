@@ -4,7 +4,7 @@ using Lucid.Domain.Persistence;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Mapping.ByCode;
 
-namespace Lucid.Infrastructure.Persistence.NHibernate
+namespace Lucid.Persistence.NHibernate
 {
     public static class Mapping
     {
