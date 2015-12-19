@@ -1,4 +1,5 @@
-﻿using Demo.Web.Tests.Utility;
+﻿using Demo.Web.App.Planning;
+using Demo.Web.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -11,7 +12,7 @@ namespace Demo.Web.Tests.App
         {
             WebApp.Test(client =>
             {
-                var response = client.Get("/planning/startdesign");
+                var response = client.Get(Actions.GetStartDesign());
 
                 response.Should().Contain("<form");
             });

@@ -1,5 +1,5 @@
 ﻿@inherits System.Web.Mvc.WebViewPage 
-@using System.Web.Mvc.Html
+@using Demo.Web.App.Planning
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +10,7 @@
     <div>Hello world</div>
 
     <div>
-        @{/* TODO create helpers so routes are not magic strings */}
-        <a href="@Url.Content("~/Planning/StartDesign")">Start Design</a>
+        <a href="@Url.Content(Actions.GetStartDesign())">Start Design</a>
     </div>
 </body>
 </html>

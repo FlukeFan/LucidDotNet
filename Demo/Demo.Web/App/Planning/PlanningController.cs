@@ -5,6 +5,11 @@ using Demo.Web.Utility;
 
 namespace Demo.Web.App.Planning
 {
+    public static class Actions
+    {
+        public static string GetStartDesign() { return "~/Planning/StartDesign"; }
+    }
+
     public class PlanningController : DemoController
     {
         public ActionResult StartDesign()
