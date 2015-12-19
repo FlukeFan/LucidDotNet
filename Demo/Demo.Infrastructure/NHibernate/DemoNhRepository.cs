@@ -1,15 +1,29 @@
 ﻿using System;
 using Demo.Domain.Utility;
 using Lucid.Persistence.NHibernate;
+using NHibernate.Cfg;
+using NHibernate.Connection;
+using NHibernate.Dialect;
+using NHibernate.Driver;
 
 namespace Demo.Infrastructure.NHibernate
 {
     public class DemoNhRepository : NhRepository<int>, IDemoRepository
     {
-        public static void Init(string connection, Type type)
+        public static void Init(string connection, Type rootEntityType)
         {
-            var sessionFactory = NhHelper.CreateSessionFactory<int>(connection, type);
-            Init(sessionFactory);
+            var config = NhHelper.CreateConfig<int>(rootEntityType, cfg =>
+            {
+                cfg.DataBaseIntegration(db =>
+                {
+                    db.ConnectionString = connection;
+                    db.ConnectionProvider<DriverConnectionProvider>();
+                    db.Driver<SqlClientDriver>();
+                    db.Dialect<MsSql2008Dialect>();
+                });
+            });
+
+            Init(config);
         }
     }
 }

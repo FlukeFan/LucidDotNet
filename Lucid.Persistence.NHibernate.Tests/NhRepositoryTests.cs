@@ -3,6 +3,10 @@ using Lucid.Database.Tests;
 using Lucid.Domain.Persistence;
 using Lucid.Domain.Testing;
 using Lucid.Domain.Tests.Persistence;
+using NHibernate.Cfg;
+using NHibernate.Connection;
+using NHibernate.Dialect;
+using NHibernate.Driver;
 using NUnit.Framework;
 
 namespace Lucid.Persistence.NHibernate.Tests
@@ -13,7 +17,16 @@ namespace Lucid.Persistence.NHibernate.Tests
         {
             var environment = BuildEnvironment.Load();
 
-            NhRepository<int>.Init(NhHelper.CreateSessionFactory<int>(environment.LucidConnection, typeof(LucidEntity)));
+            NhRepository<int>.Init(NhHelper.CreateConfig<int>(typeof(LucidEntity), cfg =>
+            {
+                cfg.DataBaseIntegration(db =>
+                {
+                    db.ConnectionString = environment.LucidConnection;
+                    db.ConnectionProvider<DriverConnectionProvider>();
+                    db.Driver<SqlClientDriver>();
+                    db.Dialect<MsSql2008Dialect>();
+                });
+            }));
         }
 
         private NhRepository<int> _repository;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Lucid.Domain.Persistence;
 using Lucid.Domain.Persistence.Queries;
 using NHibernate;
+using NHibernate.Cfg;
 
 namespace Lucid.Persistence.NHibernate
 {
@@ -13,6 +14,11 @@ namespace Lucid.Persistence.NHibernate
         public static void Init(ISessionFactory sessionFactory)
         {
             SessionFactory = sessionFactory;
+        }
+
+        public static void Init(Configuration configuration)
+        {
+            Init(configuration.BuildSessionFactory());
         }
 
         private ISession        _session;

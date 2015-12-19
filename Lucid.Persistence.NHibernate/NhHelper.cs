@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Lucid.Domain.Persistence;
-using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
-using NHibernate.Connection;
-using NHibernate.Dialect;
-using NHibernate.Driver;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
 
@@ -14,7 +10,7 @@ namespace Lucid.Persistence.NHibernate
 {
     public static class NhHelper
     {
-        public static HbmMapping CreateMappings<TId>(Type rootEntityType)
+        public static HbmMapping CreateConventionalMappings<TId>(Type rootEntityType)
         {
             var mapper = new ConventionModelMapper();
 
@@ -50,24 +46,22 @@ namespace Lucid.Persistence.NHibernate
             return mapper.CompileMappingFor(allEntities);
         }
 
-        public static ISessionFactory CreateSessionFactory<TId>(string connectionString, Type rootEntityType)
+        public static Configuration CreateConfig<TId>(Type rootEntityType, Action<Configuration> configure)
+        {
+            var mappings = CreateConventionalMappings<TId>(rootEntityType);
+            return CreateConfig(mappings, configure);
+        }
+
+        public static Configuration CreateConfig(HbmMapping mappings, Action<Configuration> configure)
         {
             var config = new Configuration();
+            configure(config);
 
-            config.DataBaseIntegration(db =>
-            {
-                db.ConnectionString = connectionString;
-                db.ConnectionProvider<DriverConnectionProvider>();
-                db.Driver<SqlClientDriver>();
-                db.Dialect<MsSql2008Dialect>();
-            });
-
-            var mappings = NhHelper.CreateMappings<TId>(rootEntityType);
             config.AddDeserializedMapping(mappings, "DomainMapping");
 
             SchemaMetadataUpdater.QuoteTableAndColumns(config);
 
-            return config.BuildSessionFactory();
+            return config;
         }
     }
 }
