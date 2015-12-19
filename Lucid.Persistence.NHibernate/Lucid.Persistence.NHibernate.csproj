@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
-    <Compile Include="Mapping.cs" />
+    <Compile Include="NhHelper.cs" />
     <Compile Include="NhCriteria.cs" />
     <Compile Include="NhRepository.cs" />
   </ItemGroup>

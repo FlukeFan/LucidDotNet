@@ -12,7 +12,8 @@ namespace Lucid.Persistence.NHibernate.Tests
         static NhRepositoryTests()
         {
             var environment = BuildEnvironment.Load();
-            NhRepository<int>.Init(environment.LucidConnection, typeof(LucidEntity));
+
+            NhRepository<int>.Init(NhHelper.CreateSessionFactory<int>(environment.LucidConnection, typeof(LucidEntity)));
         }
 
         private NhRepository<int> _repository;

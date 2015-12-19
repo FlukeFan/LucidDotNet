@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using Lucid.Domain.Persistence;
 using Lucid.Domain.Persistence.Queries;
 using NHibernate;
-using NHibernate.Cfg;
-using NHibernate.Connection;
-using NHibernate.Dialect;
-using NHibernate.Driver;
-using NHibernate.Tool.hbm2ddl;
 
 namespace Lucid.Persistence.NHibernate
 {
@@ -15,23 +10,9 @@ namespace Lucid.Persistence.NHibernate
     {
         public static ISessionFactory SessionFactory { get; protected set; }
 
-        public static void Init(string connectionString, Type rootEntityType)
+        public static void Init(ISessionFactory sessionFactory)
         {
-            var config = new Configuration();
-
-            config.DataBaseIntegration(db =>
-            {
-                db.ConnectionString = connectionString;
-                db.ConnectionProvider<DriverConnectionProvider>();
-                db.Driver<SqlClientDriver>();
-                db.Dialect<MsSql2008Dialect>();
-            });
-
-            var mappings = Mapping.CreateMappings<TId>(rootEntityType);
-            config.AddDeserializedMapping(mappings, "DomainMapping");
-
-            SchemaMetadataUpdater.QuoteTableAndColumns(config);
-            SessionFactory = config.BuildSessionFactory();
+            SessionFactory = sessionFactory;
         }
 
         private ISession        _session;

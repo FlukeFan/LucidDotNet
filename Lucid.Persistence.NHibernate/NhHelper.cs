@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Linq;
 using Lucid.Domain.Persistence;
+using NHibernate;
+using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
+using NHibernate.Connection;
+using NHibernate.Dialect;
+using NHibernate.Driver;
 using NHibernate.Mapping.ByCode;
+using NHibernate.Tool.hbm2ddl;
 
 namespace Lucid.Persistence.NHibernate
 {
-    public static class Mapping
+    public static class NhHelper
     {
         public static HbmMapping CreateMappings<TId>(Type rootEntityType)
         {
@@ -42,6 +48,26 @@ namespace Lucid.Persistence.NHibernate
             });
 
             return mapper.CompileMappingFor(allEntities);
+        }
+
+        public static ISessionFactory CreateSessionFactory<TId>(string connectionString, Type rootEntityType)
+        {
+            var config = new Configuration();
+
+            config.DataBaseIntegration(db =>
+            {
+                db.ConnectionString = connectionString;
+                db.ConnectionProvider<DriverConnectionProvider>();
+                db.Driver<SqlClientDriver>();
+                db.Dialect<MsSql2008Dialect>();
+            });
+
+            var mappings = NhHelper.CreateMappings<TId>(rootEntityType);
+            config.AddDeserializedMapping(mappings, "DomainMapping");
+
+            SchemaMetadataUpdater.QuoteTableAndColumns(config);
+
+            return config.BuildSessionFactory();
         }
     }
 }
