@@ -4,7 +4,6 @@ using Lucid.Domain.Persistence;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Mapping.ByCode;
-using NHibernate.Tool.hbm2ddl;
 
 namespace Lucid.Persistence.NHibernate
 {
@@ -58,8 +57,6 @@ namespace Lucid.Persistence.NHibernate
             configure(config);
 
             config.AddDeserializedMapping(mappings, "DomainMapping");
-
-            SchemaMetadataUpdater.QuoteTableAndColumns(config);
 
             return config;
         }

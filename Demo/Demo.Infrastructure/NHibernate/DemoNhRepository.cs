@@ -5,6 +5,7 @@ using NHibernate.Cfg;
 using NHibernate.Connection;
 using NHibernate.Dialect;
 using NHibernate.Driver;
+using NHibernate.Tool.hbm2ddl;
 
 namespace Demo.Infrastructure.NHibernate
 {
@@ -22,6 +23,8 @@ namespace Demo.Infrastructure.NHibernate
                     db.Dialect<MsSql2008Dialect>();
                 });
             });
+
+            SchemaMetadataUpdater.QuoteTableAndColumns(config);
 
             Init(config);
         }

@@ -14,7 +14,6 @@ namespace Demo.Web.Utility
         {
             var connectionString = DevConnectionStringOverride() ?? WebConfigConnnectionString();
 
-            // TODO verify NH not hitting DB for reserved words
             DemoNhRepository.Init(connectionString, typeof(DemoEntity));
         }
 
