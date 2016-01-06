@@ -7,7 +7,7 @@ namespace Demo.Web.App.Planning
 {
     public static class Actions
     {
-        public static string GetStartDesign() { return "~/Planning/StartDesign"; }
+        public static string StartDesign() { return "~/Planning/StartDesign"; }
     }
 
     public class PlanningController : DemoController
@@ -20,6 +20,9 @@ namespace Demo.Web.App.Planning
         [HttpPost]
         public ActionResult StartDesign(StartDesign cmd)
         {
+            if (Lucid.Web.WebHost.IsRunningInTestHost)
+                return Content("TODO - stub out command executor");
+
             return Execute(cmd,
                 success: r => View(),
                 failure: () => { throw new Exception("failure not handled!"); });

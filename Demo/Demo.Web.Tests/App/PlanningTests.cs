@@ -12,7 +12,7 @@ namespace Demo.Web.Tests.App
         {
             WebApp.Test(client =>
             {
-                var response = client.Get(Actions.GetStartDesign());
+                var response = client.Get(Actions.StartDesign());
 
                 response.Should().Contain("<form");
             });
@@ -23,7 +23,9 @@ namespace Demo.Web.Tests.App
         {
             WebApp.Test(client =>
             {
-                // TODO implement client.Post(...)
+                var response = client.Post(Actions.StartDesign());
+
+                response.Should().Contain("stub out command executor");
             });
         }
     }

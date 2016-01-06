@@ -20,11 +20,21 @@ namespace Lucid.Web.Testing.Http
 
         public string Get(string url)
         {
-            url = url.TrimStart('~', '/');
+            return Process(new Request { Verb = "GET", Url = url });
+        }
+
+        public string Post(string url)
+        {
+            return Process(new Request { Verb = "POST", Url = url });
+        }
+
+        public string Process(Request request)
+        {
+            request.Url = request.Url.TrimStart('~', '/');
 
             using (var output = new StringWriter())
             {
-                var workerRequest = new SimulatedWorkerRequest(url, "", output);
+                var workerRequest = new SimulatedWorkerRequest(request, output);
                 HttpRuntime.ProcessRequest(workerRequest);
 
                 var responseText = output.ToString();
@@ -35,9 +45,17 @@ namespace Lucid.Web.Testing.Http
 
         private class SimulatedWorkerRequest : SimpleWorkerRequest
         {
-            public SimulatedWorkerRequest(string url, string query, TextWriter output)
-                : base(url, query, output)
+            private Request _request;
+
+            public SimulatedWorkerRequest(Request request, TextWriter output)
+                : base(request.Url, request.Query, output)
             {
+                _request = request;
+            }
+
+            public override string GetHttpVerbName()
+            {
+                return _request.Verb;
             }
         }
     }

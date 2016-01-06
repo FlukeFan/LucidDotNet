@@ -12,7 +12,7 @@ namespace Lucid.Web.Tests.StubApp.App
         {
             StubApp.Test(http =>
             {
-                string response = http.Get("/f2");
+                var response = http.Get("/f2");
 
                 response.Should().Contain("Response - F2/Index");
             });

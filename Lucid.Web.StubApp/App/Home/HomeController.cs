@@ -10,5 +10,11 @@ namespace Lucid.Web.StubApp.App.Home
         {
             return Content(RootHomeControllerResponseText);
         }
+
+        [HttpPost]
+        public ActionResult Post()
+        {
+            return Content("posted");
+        }
     }
 }

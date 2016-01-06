@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Lucid.Web.Tests.StubApp.Utility;
 using NUnit.Framework;
 
@@ -17,7 +12,7 @@ namespace Lucid.Web.Tests.StubApp.App.F1
         {
             StubApp.Test(http =>
             {
-                string response = http.Get("/f1/f11");
+                var response = http.Get("/f1/f11");
 
                 response.Should().Contain("Response - F1/F11/Index");
             });
@@ -28,7 +23,7 @@ namespace Lucid.Web.Tests.StubApp.App.F1
         {
             StubApp.Test(http =>
             {
-                string response = http.Get("/f1/f11/index");
+                var response = http.Get("/f1/f11/index");
 
                 response.Should().Contain("Response - F1/F11/Index");
             });

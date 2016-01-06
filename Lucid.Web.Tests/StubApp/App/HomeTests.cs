@@ -12,7 +12,7 @@ namespace Lucid.Web.Tests.StubApp.App
         {
             StubApp.Test(http =>
             {
-                string response = http.Get("/");
+                var response = http.Get("/");
 
                 response.Should().Contain("root home controller");
             });
@@ -23,7 +23,7 @@ namespace Lucid.Web.Tests.StubApp.App
         {
             StubApp.Test(http =>
             {
-                string response = http.Get("/Home");
+                var response = http.Get("/Home");
 
                 response.Should().Contain("root home controller");
             });
@@ -34,9 +34,20 @@ namespace Lucid.Web.Tests.StubApp.App
         {
             StubApp.Test(http =>
             {
-                string response = http.Get("/Home/Index");
+                var response = http.Get("/Home/Index");
 
                 response.Should().Contain("root home controller");
+            });
+        }
+
+        [Test]
+        public void Post()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Post("/Home/Post");
+
+                response.Should().Be("posted");
             });
         }
     }
