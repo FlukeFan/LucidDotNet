@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Web;
 using System.Web.Hosting;
 using Lucid.Web.Testing.Hosting;
@@ -20,15 +21,25 @@ namespace Lucid.Web.Testing.Http
 
         public Response Get(string url)
         {
-            return Process(new Request { Verb = "GET", Url = url });
+            return Get(HttpStatusCode.OK, url);
+        }
+
+        public Response Get(HttpStatusCode expectedStatusCode, string url)
+        {
+            return Process(expectedStatusCode, new Request { Verb = "GET", Url = url });
         }
 
         public Response Post(string url)
         {
-            return Process(new Request { Verb = "POST", Url = url });
+            return Post(HttpStatusCode.OK, url);
         }
 
-        public Response Process(Request request)
+        public Response Post(HttpStatusCode expectedStatusCode, string url)
+        {
+            return Process(expectedStatusCode, new Request { Verb = "POST", Url = url });
+        }
+
+        public Response Process(HttpStatusCode expectedStatusCode, Request request)
         {
             request.Url = request.Url.TrimStart('~', '/');
 
@@ -46,6 +57,9 @@ namespace Lucid.Web.Testing.Http
                     StatusDescription   = workerRequest.StatusDescription,
                     Text                = responseText,
                 };
+
+                if (response.HttpStatusCode != expectedStatusCode)
+                    throw new UnexpectedStatusCodeException(response, expectedStatusCode);
 
                 return response;
             }

@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using FluentAssertions;
+using Lucid.Web.Testing.Http;
 using Lucid.Web.Tests.StubApp.Utility;
 using NUnit.Framework;
 
@@ -57,10 +58,29 @@ namespace Lucid.Web.Tests.StubApp.App
         {
             StubApp.Test(http =>
             {
-                var response = http.Get("/Home/Return500");
+                try
+                {
+                    http.Get("/Home/Return500");
 
-                response.HttpStatusCode.Should().Be(HttpStatusCode.InternalServerError);
-                response.StatusDescription.Should().Be("Internal Server Error");
+                    Assert.Fail("Expected UnexpectedStatusCodeException");
+                }
+                catch (UnexpectedStatusCodeException e)
+                {
+                    e.ExpectedStatusCode.Should().Be(HttpStatusCode.OK);
+                    e.Response.HttpStatusCode.Should().Be(HttpStatusCode.InternalServerError);
+                    e.Response.StatusDescription.Should().Be("Internal Server Error");
+                }
+            });
+        }
+
+        [Test]
+        public void ReturnCode_AllowsAnyStatusCode()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Get(HttpStatusCode.InternalServerError, "/Home/Return500");
+
+                response.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
             });
         }
     }
