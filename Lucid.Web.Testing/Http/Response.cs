@@ -1,7 +1,9 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace Lucid.Web.Testing.Http
 {
+    [Serializable]
     public class Response
     {
         public int      StatusCode;

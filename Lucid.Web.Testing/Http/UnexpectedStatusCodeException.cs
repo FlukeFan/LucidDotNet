@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net;
+using System.Runtime.Serialization;
 
 namespace Lucid.Web.Testing.Http
 {
+    [Serializable]
     public class UnexpectedStatusCodeException : Exception
     {
         private Response        _response;
@@ -25,6 +27,20 @@ namespace Lucid.Web.Testing.Http
                 expectedStatusCode,
                 response.StatusCode,
                 response.StatusDescription);
+        }
+
+        protected UnexpectedStatusCodeException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            _response = (Response)info.GetValue("Response", typeof(Response));
+            _expectedStatusCode = (HttpStatusCode)info.GetValue("ExpectedStatusCode", typeof(HttpStatusCode));
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Response", _response);
+            info.AddValue("ExpectedStatusCode", _expectedStatusCode);
+            base.GetObjectData(info, context);
         }
     }
 }

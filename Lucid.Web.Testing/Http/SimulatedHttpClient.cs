@@ -12,11 +12,25 @@ namespace Lucid.Web.Testing.Http
     {
         public static string LastResponseText { get; protected set; }
 
+        private bool _expectedError;
+
         public ConsoleWriter ConsoleWriter { get; protected set; }
 
         public SimulatedHttpClient()
         {
             ConsoleWriter = new ConsoleWriter();
+        }
+
+        public void ExpectError()
+        {
+            _expectedError = true;
+        }
+
+        public bool HadExpectedError()
+        {
+            var hadExpectedError = _expectedError;
+            _expectedError = false;
+            return hadExpectedError;
         }
 
         public Response Get(string url)

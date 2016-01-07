@@ -56,21 +56,22 @@ namespace Lucid.Web.Tests.StubApp.App
         [Test]
         public void ReturnCode_Throws()
         {
-            StubApp.Test(http =>
+            try
             {
-                try
+                StubApp.Test(http =>
                 {
+                    http.ExpectError();
                     http.Get("/Home/Return500");
+                });
 
-                    Assert.Fail("Expected UnexpectedStatusCodeException");
-                }
-                catch (UnexpectedStatusCodeException e)
-                {
-                    e.ExpectedStatusCode.Should().Be(HttpStatusCode.OK);
-                    e.Response.HttpStatusCode.Should().Be(HttpStatusCode.InternalServerError);
-                    e.Response.StatusDescription.Should().Be("Internal Server Error");
-                }
-            });
+                Assert.Fail("Expected UnexpectedStatusCodeException");
+            }
+            catch (UnexpectedStatusCodeException e)
+            {
+                e.ExpectedStatusCode.Should().Be(HttpStatusCode.OK);
+                e.Response.HttpStatusCode.Should().Be(HttpStatusCode.InternalServerError);
+                e.Response.StatusDescription.Should().Be("Internal Server Error");
+            }
         }
 
         [Test]

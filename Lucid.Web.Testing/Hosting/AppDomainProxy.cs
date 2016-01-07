@@ -23,9 +23,14 @@ namespace Lucid.Web.Testing.Hosting
             }
             catch
             {
-                client.ConsoleWriter.WriteLine("Last response:\n\n" + SimulatedHttpClient.LastResponseText);
+                if (!client.HadExpectedError())
+                    client.ConsoleWriter.WriteLine("Last response:\n\n" + SimulatedHttpClient.LastResponseText);
+
                 throw;
             }
+
+            if (client.HadExpectedError())
+                throw new Exception("Expected error from HTTP client, but didn't get one");
         }
 
         public override object InitializeLifetimeService()
