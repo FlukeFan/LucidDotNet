@@ -50,6 +50,7 @@
     <Compile Include="Hosting\ConsoleWriter.cs" />
     <Compile Include="Hosting\SerializableDelegate.cs" />
     <Compile Include="Http\Request.cs" />
+    <Compile Include="Http\Response.cs" />
     <Compile Include="Http\SimulatedHttpClient.cs" />
   </ItemGroup>
   <ItemGroup>

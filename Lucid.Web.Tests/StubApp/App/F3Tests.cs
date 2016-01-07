@@ -14,7 +14,7 @@ namespace Lucid.Web.Tests.StubApp.App
             {
                 var response = http.Get("/f3");
 
-                response.Should().Contain("Response - F3/Index");
+                response.Text.Should().Contain("Response - F3/Index");
             });
         }
 
@@ -25,7 +25,7 @@ namespace Lucid.Web.Tests.StubApp.App
             {
                 var response = http.Get("/f3/param1/123");
 
-                response.Should().Contain("param1=123");
+                response.Text.Should().Contain("param1=123");
             });
         }
     }

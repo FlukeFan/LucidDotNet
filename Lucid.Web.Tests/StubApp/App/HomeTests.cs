@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Net;
+using FluentAssertions;
 using Lucid.Web.Tests.StubApp.Utility;
 using NUnit.Framework;
 
@@ -14,7 +15,7 @@ namespace Lucid.Web.Tests.StubApp.App
             {
                 var response = http.Get("/");
 
-                response.Should().Contain("root home controller");
+                response.Text.Should().Contain("root home controller");
             });
         }
 
@@ -25,7 +26,7 @@ namespace Lucid.Web.Tests.StubApp.App
             {
                 var response = http.Get("/Home");
 
-                response.Should().Contain("root home controller");
+                response.Text.Should().Contain("root home controller");
             });
         }
 
@@ -36,7 +37,7 @@ namespace Lucid.Web.Tests.StubApp.App
             {
                 var response = http.Get("/Home/Index");
 
-                response.Should().Contain("root home controller");
+                response.Text.Should().Contain("root home controller");
             });
         }
 
@@ -47,7 +48,19 @@ namespace Lucid.Web.Tests.StubApp.App
             {
                 var response = http.Post("/Home/Post");
 
-                response.Should().Be("posted");
+                response.Text.Should().Be("posted");
+            });
+        }
+
+        [Test]
+        public void ReturnCode_Throws()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Get("/Home/Return500");
+
+                response.HttpStatusCode.Should().Be(HttpStatusCode.InternalServerError);
+                response.StatusDescription.Should().Be("Internal Server Error");
             });
         }
     }

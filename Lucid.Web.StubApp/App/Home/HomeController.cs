@@ -16,5 +16,10 @@ namespace Lucid.Web.StubApp.App.Home
         {
             return Content("posted");
         }
+
+        public ActionResult Return500()
+        {
+            throw new System.Exception("returns 500");
+        }
     }
 }

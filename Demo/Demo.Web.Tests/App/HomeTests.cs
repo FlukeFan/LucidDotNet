@@ -13,8 +13,8 @@ namespace Demo.Web.Tests.App
             {
                 var response = client.Get("/");
 
-                response.Should().Contain("<title>Home page</title>");
-                response.Should().Contain("Hello world");
+                response.Text.Should().Contain("<title>Home page</title>");
+                response.Text.Should().Contain("Hello world");
             });
         }
     }

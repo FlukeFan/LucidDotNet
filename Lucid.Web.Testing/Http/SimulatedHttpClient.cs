@@ -18,17 +18,17 @@ namespace Lucid.Web.Testing.Http
             ConsoleWriter = new ConsoleWriter();
         }
 
-        public string Get(string url)
+        public Response Get(string url)
         {
             return Process(new Request { Verb = "GET", Url = url });
         }
 
-        public string Post(string url)
+        public Response Post(string url)
         {
             return Process(new Request { Verb = "POST", Url = url });
         }
 
-        public string Process(Request request)
+        public Response Process(Request request)
         {
             request.Url = request.Url.TrimStart('~', '/');
 
@@ -39,13 +39,26 @@ namespace Lucid.Web.Testing.Http
 
                 var responseText = output.ToString();
                 LastResponseText = responseText;
-                return responseText;
+
+                var response = new Response
+                {
+                    StatusCode          = workerRequest.StatusCode,
+                    StatusDescription   = workerRequest.StatusDescription,
+                    Text                = responseText,
+                };
+
+                return response;
             }
         }
 
         private class SimulatedWorkerRequest : SimpleWorkerRequest
         {
             private Request _request;
+            private int     _statusCode;
+            private string  _statusDescription;
+
+            public int      StatusCode          { get { return _statusCode; } }
+            public string   StatusDescription   { get { return _statusDescription; } }
 
             public SimulatedWorkerRequest(Request request, TextWriter output)
                 : base(request.Url, request.Query, output)
@@ -56,6 +69,13 @@ namespace Lucid.Web.Testing.Http
             public override string GetHttpVerbName()
             {
                 return _request.Verb;
+            }
+
+            public override void SendStatus(int statusCode, string statusDescription)
+            {
+                base.SendStatus(statusCode, statusDescription);
+                _statusCode = statusCode;
+                _statusDescription = statusDescription;
             }
         }
     }
