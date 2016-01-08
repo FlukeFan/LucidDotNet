@@ -1,5 +1,4 @@
-﻿using Demo.Web.Utility;
-using Lucid.Web.Testing.Hosting;
+﻿using Lucid.Web.Testing.Hosting;
 using NUnit.Framework;
 
 namespace Demo.Web.Tests.Utility
@@ -24,14 +23,6 @@ namespace Demo.Web.Tests.Utility
             public TestEnvironmentProxy()
             {
                 DemoApplication.Startup = new FakeStartup();
-            }
-        }
-
-        private class FakeStartup : Startup
-        {
-            public override void InitRepository()
-            {
-                // no repository to setup during the web tests
             }
         }
     }

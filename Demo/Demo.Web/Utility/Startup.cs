@@ -4,13 +4,32 @@ using System.IO;
 using System.Web.Hosting;
 using Demo.Domain.Utility;
 using Demo.Infrastructure.NHibernate;
+using Lucid.Domain.Execution;
 using Newtonsoft.Json;
 
 namespace Demo.Web.Utility
 {
     public class Startup
     {
-        public virtual void InitRepository()
+        public virtual void Init()
+        {
+            InitExecutor();
+            InitRepository();
+        }
+
+        private void InitExecutor()
+        {
+            PresentationRegistry.Executor =
+                new MvcExecutor(
+                    new RepositoryExecutor(
+                        new ValidatingExecutor(
+                            new Executor()
+                        )
+                    )
+                );
+        }
+
+        private void InitRepository()
         {
             var connectionString = DevConnectionStringOverride() ?? WebConfigConnnectionString();
 

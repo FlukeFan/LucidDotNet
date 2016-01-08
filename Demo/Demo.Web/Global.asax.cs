@@ -9,7 +9,7 @@ namespace Demo.Web
 
         protected void Application_Start()
         {
-            Startup.InitRepository();
+            Startup.Init();
 
             FeatureFolders.Register(typeof(DemoController).Assembly, "Demo.Web.App");
         }
