@@ -47,6 +47,7 @@
     <Compile Include="Builder.cs" />
     <Compile Include="ConsistencyInspector.cs" />
     <Compile Include="CustomInspections.cs" />
+    <Compile Include="ExecutorStub.cs" />
     <Compile Include="MemoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
