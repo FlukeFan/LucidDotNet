@@ -8,7 +8,8 @@ namespace Lucid.Domain.Testing
 {
     public class ExecutorStub : IExecutor
     {
-        protected IList<object> _executed = new List<object>();
+        protected IList<object>                                     _executed       = new List<object>();
+        protected IDictionary<Type, Func<object, object, object>>   _setupResults   = new Dictionary<Type, Func<object, object, object>>();
 
         public IEnumerable<object> AllExecuted()
         {
@@ -22,10 +23,14 @@ namespace Lucid.Domain.Testing
 
         public object Execute(object executable)
         {
+            var executableType = executable.GetType();
             _executed.Add(executable);
 
             var defaultResponseType = FindResponseType(executable);
             var defaultResponse = CreateDefaultResponse(defaultResponseType);
+
+            if (_setupResults.ContainsKey(executableType))
+                return _setupResults[executableType](executable, defaultResponse);
 
             return defaultResponse;
         }
@@ -92,6 +97,17 @@ namespace Lucid.Domain.Testing
         protected object CreateDictionary(Type type)
         {
             return Activator.CreateInstance(typeof(Dictionary<,>).MakeGenericType(type.GetGenericArguments()));
+        }
+
+        public ExecutorStub SetupObjectResult<T>(object result)
+        {
+            return SetupObjectResult<T>((exe, def) => result);
+        }
+
+        public ExecutorStub SetupObjectResult<T>(Func<object, object, object> setup)
+        {
+            _setupResults.Add(typeof(T), setup);
+            return this;
         }
     }
 }

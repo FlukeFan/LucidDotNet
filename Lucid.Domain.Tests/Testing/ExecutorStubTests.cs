@@ -27,7 +27,7 @@ namespace Lucid.Domain.Tests.Testing
 
         public class FakeVoidCommand : ICommand { }
 
-        public class FakeCommand : ICommand<FakeResponse> { }
+        public class FakeCommand : ICommand<FakeResponse> { public int Input = 5; }
 
         public class FakeQuerySingle : IQuerySingle<int> { }
 
@@ -125,6 +125,37 @@ namespace Lucid.Domain.Tests.Testing
 
             result.Should().NotBeNull();
             result.Keys.Count().Should().Be(0);
+        }
+
+        [Test]
+        public void SetupObjectResult()
+        {
+            var executor = new ExecutorStub()
+                .SetupObjectResult<FakeCommand>(new FakeResponse(234));
+
+            var result = (FakeResponse)executor.Execute(new FakeCommand());
+
+            result.ShouldBeEquivalentTo(new FakeResponse(234));
+        }
+
+        [Test]
+        public void SetupObjectLambdaResult()
+        {
+            var executor = new ExecutorStub()
+                .SetupObjectResult<FakeCommand>((exe, def) =>
+                {
+                    var e = (FakeCommand)exe;
+                    if (e.Input == 10)
+                        return new FakeResponse(10);
+                    else
+                        return new FakeResponse(0);
+                });
+
+            var result1 = (FakeResponse)executor.Execute(new FakeCommand { Input = 10 });
+            var result2 = (FakeResponse)executor.Execute(new FakeCommand { Input = 20 });
+
+            result1.ShouldBeEquivalentTo(new FakeResponse(10));
+            result2.ShouldBeEquivalentTo(new FakeResponse(0));
         }
     }
 }
