@@ -136,7 +136,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Utility\DemoController.cs" />
-    <Compile Include="Utility\MvcExecutor.cs" />
     <Compile Include="Utility\PresentationRegistry.cs" />
     <Compile Include="Utility\Startup.cs" />
   </ItemGroup>

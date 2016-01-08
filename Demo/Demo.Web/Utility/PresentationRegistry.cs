@@ -1,7 +1,9 @@
-﻿namespace Demo.Web.Utility
+﻿using Lucid.Domain.Execution;
+
+namespace Demo.Web.Utility
 {
     public class PresentationRegistry
     {
-        public static MvcExecutor Executor;
+        public static ICqExecutor Executor;
     }
 }

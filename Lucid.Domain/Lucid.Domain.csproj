@@ -45,8 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="Execution\CqExecutor.cs" />
     <Compile Include="Execution\Executor.cs" />
     <Compile Include="Execution\ICommand.cs" />
+    <Compile Include="Execution\ICqExecutor.cs" />
     <Compile Include="Execution\IExecutor.cs" />
     <Compile Include="Execution\IQueryList.cs" />
     <Compile Include="Execution\IQuerySingle.cs" />

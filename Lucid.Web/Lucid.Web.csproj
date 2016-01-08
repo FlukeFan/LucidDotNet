@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
     <Compile Include="FeatureFolders.cs" />
+    <Compile Include="MvcExecutor.cs" />
     <Compile Include="Routing\ActionData.cs" />
     <Compile Include="Routing\FeatureActions.cs" />
     <Compile Include="Routing\LucidRazorViewEngine.cs" />
@@ -91,6 +92,12 @@
     <PackageDependencies Include="bin\$(Configuration)\$(AssemblyName).dll">
       <InProject>False</InProject>
     </PackageDependencies>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucid.Domain\Lucid.Domain.csproj">
+      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
+      <Name>Lucid.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(LucidVersion).nupkg">
     <Exec Command="..\$(NuGetExe) pack $(MSBuildProjectFile) -OutputDirectory ..\packaged" />

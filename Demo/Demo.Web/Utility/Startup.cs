@@ -20,7 +20,7 @@ namespace Demo.Web.Utility
         private void InitExecutor()
         {
             PresentationRegistry.Executor =
-                new MvcExecutor(
+                new CqExecutor(
                     new RepositoryExecutor(
                         new ValidatingExecutor(
                             new Executor()
