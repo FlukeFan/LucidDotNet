@@ -148,14 +148,14 @@ namespace Lucid.Domain.Tests.Testing
                     if (e.Input == 10)
                         return new FakeResponse(10);
                     else
-                        return new FakeResponse(0);
+                        return def;
                 });
 
             var result1 = (FakeResponse)executor.Execute(new FakeCommand { Input = 10 });
             var result2 = (FakeResponse)executor.Execute(new FakeCommand { Input = 20 });
 
             result1.ShouldBeEquivalentTo(new FakeResponse(10));
-            result2.ShouldBeEquivalentTo(new FakeResponse(0));
+            result2.ShouldBeEquivalentTo(new FakeResponse(123));
         }
 
         [Test]
@@ -186,6 +186,17 @@ namespace Lucid.Domain.Tests.Testing
             result.Count.Should().Be(2);
             result[0].Value.Should().Be(567);
             result[1].Value.Should().Be(678);
+        }
+
+        [Test]
+        public void SetupQuerySingleResult()
+        {
+            var executor = new ExecutorStub()
+                .SetupQuerySingle(It.IsAny<FakeQuerySingle>(), 7);
+
+            var result = (int)executor.Execute(new FakeQuerySingle());
+
+            result.Should().Be(7);
         }
     }
 }

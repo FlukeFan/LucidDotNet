@@ -133,5 +133,17 @@ namespace Lucid.Domain.Testing
         {
             return SetupObjectResult<TQuery>((exe, def) => setup((TQuery)exe, (IList<TListItem>)def));
         }
+
+        public ExecutorStub SetupQuerySingle<TQuery, TReturn>(TQuery queryType, TReturn result)
+            where TQuery : IQuerySingle<TReturn>
+        {
+            return SetupQuerySingle<TQuery, TReturn>(queryType, (exe, def) => result);
+        }
+
+        public ExecutorStub SetupQuerySingle<TQuery, TReturn>(TQuery queryType, Func<TQuery, TReturn, TReturn> setup)
+            where TQuery : IQuerySingle<TReturn>
+        {
+            return SetupObjectResult<TQuery>((exe, def) => setup((TQuery)exe, (TReturn)def));
+        }
     }
 }
