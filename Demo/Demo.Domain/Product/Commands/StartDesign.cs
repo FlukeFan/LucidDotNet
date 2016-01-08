@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Demo.Domain.Product.Responses;
 using Demo.Domain.Utility;
-using Lucid.Domain.Remote;
+using Lucid.Domain.Execution;
 
 namespace Demo.Domain.Product.Commands
 {

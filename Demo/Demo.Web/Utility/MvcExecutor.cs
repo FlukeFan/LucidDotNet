@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Demo.Infrastructure.NHibernate;
-using Lucid.Domain.Remote;
+using Lucid.Domain.Execution;
 
 namespace Demo.Web.Utility
 {

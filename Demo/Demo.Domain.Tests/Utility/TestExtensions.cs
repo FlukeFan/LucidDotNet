@@ -1,20 +1,20 @@
 ﻿using System;
-using Lucid.Domain.Remote;
+using Lucid.Domain.Execution;
 using NUnit.Framework;
 
 namespace Demo.Domain.Tests.Utility
 {
     public static class TestExtensions
     {
-        public static void ShouldBeValid(this IRemoteable remoteable)
+        public static void ShouldBeValid(this IExecutable executable)
         {
-            Validator.Validate(remoteable);
+            Validator.Validate(executable);
         }
 
-        public static void ShouldBeInvalid<T>(this T remoteable, Action<T> invalidate) where T : IRemoteable
+        public static void ShouldBeInvalid<Executable>(this Executable executable, Action<Executable> invalidate) where Executable : IExecutable
         {
-            invalidate(remoteable);
-            Assert.Throws<Exception>(() => Validator.Validate(remoteable), remoteable + " passed validation, but expected failure");
+            invalidate(executable);
+            Assert.Throws<Exception>(() => Validator.Validate(executable), executable + " passed validation, but expected failure");
         }
     }
 }

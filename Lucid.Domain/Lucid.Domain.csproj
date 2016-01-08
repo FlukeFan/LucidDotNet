@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="Execution\ICommand.cs" />
+    <Compile Include="Execution\IQueryList.cs" />
+    <Compile Include="Execution\IQuerySingle.cs" />
     <Compile Include="Persistence\Entity.cs" />
     <Compile Include="Persistence\IEntity.cs" />
     <Compile Include="Persistence\IRepository.cs" />
@@ -52,11 +55,11 @@
     <Compile Include="Persistence\Queries\Query.cs" />
     <Compile Include="Persistence\Queries\Where.cs" />
     <Compile Include="Persistence\Queries\WhereBinaryComparison.cs" />
-    <Compile Include="Remote\Command.cs" />
-    <Compile Include="Remote\IRemoteable.cs" />
-    <Compile Include="Remote\QueryList.cs" />
-    <Compile Include="Remote\QuerySingle.cs" />
-    <Compile Include="Remote\Validator.cs" />
+    <Compile Include="Execution\Command.cs" />
+    <Compile Include="Execution\IExecutable.cs" />
+    <Compile Include="Execution\QueryList.cs" />
+    <Compile Include="Execution\QuerySingle.cs" />
+    <Compile Include="Execution\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lucid.Domain.nuspec" />

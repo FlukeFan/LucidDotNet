@@ -2,19 +2,19 @@
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Lucid.Domain.Remote
+namespace Lucid.Domain.Execution
 {
     public static class Validator
     {
-        public static void Validate(object remoteable)
+        public static void Validate(object executable)
         {
-            var type = remoteable.GetType();
+            var type = executable.GetType();
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 if (!property.CanWrite)
                     continue;
 
-                var value = property.GetValue(remoteable);
+                var value = property.GetValue(executable);
 
                 foreach (ValidationAttribute annotation in property.GetCustomAttributes(typeof(ValidationAttribute), true))
                     if (!annotation.IsValid(value))
