@@ -109,5 +109,17 @@ namespace Lucid.Domain.Testing
             _setupResults.Add(typeof(T), setup);
             return this;
         }
+
+        public ExecutorStub Setup<TCmd, TReturn>(TCmd cmdType, TReturn result)
+            where TCmd : ICommand<TReturn>
+        {
+            return Setup<TCmd, TReturn>(cmdType, (exe, def) => result);
+        }
+
+        public ExecutorStub Setup<TCmd, TReturn>(TCmd cmdType, Func<TCmd, TReturn, TReturn> setup)
+            where TCmd : ICommand<TReturn>
+        {
+            return SetupObjectResult<TCmd>((exe, def) => setup((TCmd)exe, (TReturn)def));
+        }
     }
 }

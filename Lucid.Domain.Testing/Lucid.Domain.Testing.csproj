@@ -48,6 +48,7 @@
     <Compile Include="ConsistencyInspector.cs" />
     <Compile Include="CustomInspections.cs" />
     <Compile Include="ExecutorStub.cs" />
+    <Compile Include="It.cs" />
     <Compile Include="MemoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>

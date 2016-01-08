@@ -157,5 +157,16 @@ namespace Lucid.Domain.Tests.Testing
             result1.ShouldBeEquivalentTo(new FakeResponse(10));
             result2.ShouldBeEquivalentTo(new FakeResponse(0));
         }
+
+        [Test]
+        public void SetupCommandResult()
+        {
+            var executor = new ExecutorStub()
+                .Setup(It.IsAny<FakeCommand>(), new FakeResponse(456));
+
+            var result = (FakeResponse)executor.Execute(new FakeCommand());
+
+            result.ShouldBeEquivalentTo(new FakeResponse(456));
+        }
     }
 }
