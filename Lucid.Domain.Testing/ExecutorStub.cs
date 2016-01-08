@@ -110,16 +110,28 @@ namespace Lucid.Domain.Testing
             return this;
         }
 
-        public ExecutorStub Setup<TCmd, TReturn>(TCmd cmdType, TReturn result)
+        public ExecutorStub SetupCommand<TCmd, TReturn>(TCmd cmdType, TReturn result)
             where TCmd : ICommand<TReturn>
         {
-            return Setup<TCmd, TReturn>(cmdType, (exe, def) => result);
+            return SetupCommand<TCmd, TReturn>(cmdType, (exe, def) => result);
         }
 
-        public ExecutorStub Setup<TCmd, TReturn>(TCmd cmdType, Func<TCmd, TReturn, TReturn> setup)
+        public ExecutorStub SetupCommand<TCmd, TReturn>(TCmd cmdType, Func<TCmd, TReturn, TReturn> setup)
             where TCmd : ICommand<TReturn>
         {
             return SetupObjectResult<TCmd>((exe, def) => setup((TCmd)exe, (TReturn)def));
+        }
+
+        public ExecutorStub SetupQueryList<TQuery, TListItem>(TQuery queryType, IList<TListItem> result)
+            where TQuery : IQueryList<TListItem>
+        {
+            return SetupQueryList<TQuery, TListItem>(queryType, (exe, def) => result);
+        }
+
+        public ExecutorStub SetupQueryList<TQuery, TListItem>(TQuery queryType, Func<TQuery, IList<TListItem>, IList<TListItem>> setup)
+            where TQuery : IQueryList<TListItem>
+        {
+            return SetupObjectResult<TQuery>((exe, def) => setup((TQuery)exe, (IList<TListItem>)def));
         }
     }
 }

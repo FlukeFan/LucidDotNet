@@ -162,11 +162,30 @@ namespace Lucid.Domain.Tests.Testing
         public void SetupCommandResult()
         {
             var executor = new ExecutorStub()
-                .Setup(It.IsAny<FakeCommand>(), new FakeResponse(456));
+                .SetupCommand(It.IsAny<FakeCommand>(), new FakeResponse(456));
 
             var result = (FakeResponse)executor.Execute(new FakeCommand());
 
             result.ShouldBeEquivalentTo(new FakeResponse(456));
+        }
+
+        [Test]
+        public void SetupQueryListResult()
+        {
+            var executor = new ExecutorStub()
+                .SetupQueryList(It.IsAny<FakeQueryList>(),
+                new List<FakeResponse>
+                {
+                    new FakeResponse(567),
+                    new FakeResponse(678),
+                });
+
+            var result = (IList<FakeResponse>)executor.Execute(new FakeQueryList());
+
+            result.Should().NotBeNull();
+            result.Count.Should().Be(2);
+            result[0].Value.Should().Be(567);
+            result[1].Value.Should().Be(678);
         }
     }
 }
