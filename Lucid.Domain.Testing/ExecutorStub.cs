@@ -48,6 +48,9 @@ namespace Lucid.Domain.Testing
 
                 if (genericType == commandInterface || genericType == querySingleInterface)
                     return intrface.GetGenericArguments()[0];
+
+                if (genericType == queryListInterface)
+                    return typeof(IList<>).MakeGenericType(intrface.GetGenericArguments()[0]);
             }
 
             return null;
@@ -67,7 +70,28 @@ namespace Lucid.Domain.Testing
             if (type.IsValueType)
                 return Activator.CreateInstance(type);
 
+            if (type.IsInterface)
+            {
+                var typeName = type.Name;
+
+                if (typeName.StartsWith("IList") || typeName.StartsWith("IEnumerable"))
+                    return CreateList(type);
+
+                if (typeName.StartsWith("IDictionary"))
+                    return CreateDictionary(type);
+            }
+
             return null;
+        }
+
+        protected object CreateList(Type type)
+        {
+            return Activator.CreateInstance(typeof(List<>).MakeGenericType(type.GetGenericArguments()));
+        }
+
+        protected object CreateDictionary(Type type)
+        {
+            return Activator.CreateInstance(typeof(Dictionary<,>).MakeGenericType(type.GetGenericArguments()));
         }
     }
 }

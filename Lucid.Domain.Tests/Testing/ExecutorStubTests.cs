@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Lucid.Domain.Execution;
 using Lucid.Domain.Testing;
@@ -29,6 +30,12 @@ namespace Lucid.Domain.Tests.Testing
         public class FakeCommand : ICommand<FakeResponse> { }
 
         public class FakeQuerySingle : IQuerySingle<int> { }
+
+        public class FakeQueryList : IQueryList<FakeResponse> { };
+
+        public class FakeQueryEnumerable : IQuerySingle<IEnumerable<FakeResponse>> { }
+
+        public class FakeQueryDictionary : IQuerySingle<IDictionary<int, FakeResponse>> { }
 
         [Test]
         public void AllExecuted_ReturnsStoredExecutions()
@@ -85,6 +92,39 @@ namespace Lucid.Domain.Tests.Testing
             var result = (int)executor.Execute(new FakeQuerySingle());
 
             result.Should().Be(0);
+        }
+
+        [Test]
+        public void ExecuteQueryList_ReturnsEmptyList()
+        {
+            var executor = new ExecutorStub();
+
+            var result = (IList<FakeResponse>)executor.Execute(new FakeQueryList());
+
+            result.Should().NotBeNull();
+            result.Count.Should().Be(0);
+        }
+
+        [Test]
+        public void ExecuteQueryEnumerable_ReturnsEmptyList()
+        {
+            var executor = new ExecutorStub();
+
+            var result = (IEnumerable<FakeResponse>)executor.Execute(new FakeQueryEnumerable());
+
+            result.Should().NotBeNull();
+            result.Count().Should().Be(0);
+        }
+
+        [Test]
+        public void ExecuteQueryDictionary_ReturnsEmptyDictionary()
+        {
+            var executor = new ExecutorStub();
+
+            var result = (IDictionary<int, FakeResponse>)executor.Execute(new FakeQueryDictionary());
+
+            result.Should().NotBeNull();
+            result.Keys.Count().Should().Be(0);
         }
     }
 }
