@@ -2,17 +2,17 @@
 {
     public interface ICommand {}
 
-    public interface ICommand<Returns> { }
+    public interface ICommand<TReturn> { }
 
-    public interface IHandleVoidCommand<Cmd>
-        where Cmd : ICommand
+    public interface IHandleVoidCommand<TCmd>
+        where TCmd : ICommand
     {
-        void Execute(Cmd cmd);
+        void Execute(TCmd cmd);
     }
 
-    public interface IHandleCommand<Cmd, Return>
-        where Cmd : ICommand<Return>
+    public interface IHandleCommand<TCmd, TReturn>
+        where TCmd : ICommand<TReturn>
     {
-        Return Execute(Cmd cmd);
+        TReturn Execute(TCmd cmd);
     }
 }

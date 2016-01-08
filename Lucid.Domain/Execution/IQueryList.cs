@@ -2,11 +2,11 @@
 
 namespace Lucid.Domain.Execution
 {
-    public interface IQueryList<ListItem> { }
+    public interface IQueryList<TListItem> { }
 
-    public interface IHandleQueryList<Query, ListItem>
-        where Query : IQueryList<ListItem>
+    public interface IHandleQueryList<TQuery, TListItem>
+        where TQuery : IQueryList<TListItem>
     {
-        IList<ListItem> List(Query query);
+        IList<TListItem> List(TQuery query);
     }
 }

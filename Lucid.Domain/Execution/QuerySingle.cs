@@ -1,8 +1,8 @@
 ﻿namespace Lucid.Domain.Execution
 {
-    public abstract class QuerySingle<T> : IExecutable
+    public abstract class QuerySingle<TReturn> : IQuerySingle<TReturn>, IExecutable
     {
-        public abstract T Find();
+        public abstract TReturn Find();
 
         object IExecutable.Execute()
         {

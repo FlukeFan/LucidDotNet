@@ -2,9 +2,9 @@
 
 namespace Lucid.Domain.Execution
 {
-    public abstract class QueryList<T> : IExecutable
+    public abstract class QueryList<TListItem> : IQueryList<TListItem>, IExecutable
     {
-        public abstract IList<T> List();
+        public abstract IList<TListItem> List();
 
         object IExecutable.Execute()
         {

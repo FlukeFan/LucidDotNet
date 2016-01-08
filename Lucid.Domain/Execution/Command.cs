@@ -1,6 +1,6 @@
 ﻿namespace Lucid.Domain.Execution
 {
-    public abstract class Command : IExecutable
+    public abstract class Command : ICommand, IExecutable
     {
         public abstract void Execute();
 
@@ -11,9 +11,9 @@
         }
     }
 
-    public abstract class Command<T> : IExecutable
+    public abstract class Command<TReturn> : ICommand<TReturn>, IExecutable
     {
-        public abstract T Execute();
+        public abstract TReturn Execute();
 
         object IExecutable.Execute()
         {

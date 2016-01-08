@@ -1,10 +1,10 @@
 ﻿namespace Lucid.Domain.Execution
 {
-    public interface IQuerySingle<Return> { }
+    public interface IQuerySingle<TReturn> { }
 
-    public interface IHandleQuerySingle<Query, Return>
-        where Query : IQuerySingle<Return>
+    public interface IHandleQuerySingle<TQuery, TReturn>
+        where TQuery : IQuerySingle<TReturn>
     {
-        Return Find(Query query);
+        TReturn Find(TQuery query);
     }
 }
