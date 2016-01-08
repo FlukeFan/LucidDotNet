@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Lucid.Domain.Execution;
 
 namespace Lucid.Domain.Testing
 {
     public class ExecutorStub : IExecutor
     {
-        private IList<object> _executed = new List<object>();
+        protected IList<object> _executed = new List<object>();
 
         public IEnumerable<object> AllExecuted()
         {
@@ -21,6 +23,50 @@ namespace Lucid.Domain.Testing
         public object Execute(object executable)
         {
             _executed.Add(executable);
+
+            var defaultResponseType = FindResponseType(executable);
+            var defaultResponse = CreateDefaultResponse(defaultResponseType);
+
+            return defaultResponse;
+        }
+
+        protected virtual Type FindResponseType(object executable)
+        {
+            var executableType = executable.GetType();
+            var interfaces = executable.GetType().GetInterfaces();
+
+            var commandInterface = typeof(ICommand<>);
+            var queryListInterface = typeof(IQueryList<>);
+            var querySingleInterface = typeof(IQuerySingle<>);
+
+            foreach (var intrface in interfaces)
+            {
+                if (!intrface.IsGenericType)
+                    continue;
+
+                var genericType = intrface.GetGenericTypeDefinition();
+
+                if (genericType == commandInterface || genericType == querySingleInterface)
+                    return intrface.GetGenericArguments()[0];
+            }
+
+            return null;
+        }
+
+        protected virtual object CreateDefaultResponse(Type type)
+        {
+            if (type == null)
+                return null;
+
+            // if the return type has a default constructor, then create an object to return
+            var constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public, null, new Type[0], null);
+
+            if (constructor != null)
+                return constructor.Invoke(new object[0]);
+
+            if (type.IsValueType)
+                return Activator.CreateInstance(type);
+
             return null;
         }
     }

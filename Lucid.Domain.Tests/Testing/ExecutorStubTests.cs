@@ -9,7 +9,26 @@ namespace Lucid.Domain.Tests.Testing
     [TestFixture]
     public class ExecutorStubTests
     {
+        public class FakeResponse
+        {
+            public int Value;
+
+            protected FakeResponse()
+            {
+                Value = 123;
+            }
+
+            public FakeResponse(int value)
+            {
+                Value = value;
+            }
+        }
+
         public class FakeVoidCommand : ICommand { }
+
+        public class FakeCommand : ICommand<FakeResponse> { }
+
+        public class FakeQuerySingle : IQuerySingle<int> { }
 
         [Test]
         public void AllExecuted_ReturnsStoredExecutions()
@@ -35,6 +54,37 @@ namespace Lucid.Domain.Tests.Testing
             executor.Executed<FakeVoidCommand>().ElementAt(0).Should().Be(executable);
 
             executor.Executed<ExecutorStubTests>().Count().Should().Be(0);
+        }
+
+        [Test]
+        public void ExecuteVoidCommand_ReturnsNull()
+        {
+            var executor = new ExecutorStub();
+            var executable = new FakeVoidCommand();
+
+            var result = executor.Execute(executable);
+
+            result.Should().BeNull();
+        }
+
+        [Test]
+        public void ExecuteCommand_ReturnsDefaultConstructedResponse()
+        {
+            var executor = new ExecutorStub();
+
+            var result = (FakeResponse)executor.Execute(new FakeCommand());
+
+            result.ShouldBeEquivalentTo(new FakeResponse(123));
+        }
+
+        [Test]
+        public void ExecuteQuerySingle_ReturnsDefaultValueType()
+        {
+            var executor = new ExecutorStub();
+
+            var result = (int)executor.Execute(new FakeQuerySingle());
+
+            result.Should().Be(0);
         }
     }
 }
