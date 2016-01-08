@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Lucid.Domain.Execution;
 
 namespace Lucid.Domain.Testing
@@ -7,7 +8,15 @@ namespace Lucid.Domain.Testing
     {
         private IList<object> _executed = new List<object>();
 
-        public IEnumerable<object> Executed { get { return _executed; } }
+        public IEnumerable<object> AllExecuted()
+        {
+            return _executed;
+        }
+
+        public IEnumerable<T> Executed<T>()
+        {
+            return _executed.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
+        }
 
         public object Execute(object executable)
         {
