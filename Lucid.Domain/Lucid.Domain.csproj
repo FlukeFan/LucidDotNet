@@ -45,9 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="Execution\Executor.cs" />
     <Compile Include="Execution\ICommand.cs" />
+    <Compile Include="Execution\IExecutor.cs" />
     <Compile Include="Execution\IQueryList.cs" />
     <Compile Include="Execution\IQuerySingle.cs" />
+    <Compile Include="Execution\ValidatingExecutor.cs" />
     <Compile Include="Persistence\Entity.cs" />
     <Compile Include="Persistence\IEntity.cs" />
     <Compile Include="Persistence\IRepository.cs" />

@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs" />
     <Compile Include="NHibernate\DemoNhRepository.cs" />
+    <Compile Include="NHibernate\RepositoryExecutor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
