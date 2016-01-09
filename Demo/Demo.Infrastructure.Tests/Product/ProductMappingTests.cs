@@ -1,6 +1,6 @@
-﻿using Demo.Domain.Product;
+﻿using Demo.Domain.Contract;
+using Demo.Domain.Product;
 using Demo.Domain.Tests.Product;
-using Demo.Domain.Utility;
 using Demo.Infrastructure.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
@@ -31,7 +31,7 @@ namespace Demo.Infrastructure.Tests.Product
         public void Design_VerifyConstraints()
         {
             VerifyInvalidConstraint(new DesignBuilder().With(d => d.Name, null).Value());
-            VerifyInvalidConstraint(new DesignBuilder().With(d => d.Name, new string('x', DemoEntity.DefaultMaxStringLength + 1)).Value());
+            VerifyInvalidConstraint(new DesignBuilder().With(d => d.Name, new string('x', Constraints.DefaultMaxStringLength + 1)).Value());
         }
     }
 }

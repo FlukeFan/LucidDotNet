@@ -1,4 +1,4 @@
-﻿using Demo.Domain.Product.Commands;
+﻿using Demo.Domain.Contract.Product.Commands;
 using Demo.Domain.Utility;
 
 namespace Demo.Domain.Product

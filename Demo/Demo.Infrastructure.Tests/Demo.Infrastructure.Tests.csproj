@@ -89,6 +89,10 @@
       <Project>{c4352d6d-c6df-4a1a-a613-800b3573f8a3}</Project>
       <Name>Demo.Database.Tests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Demo.Domain.Contract\Demo.Domain.Contract.csproj">
+      <Project>{2d85d27e-bdff-4545-a48c-49d193143232}</Project>
+      <Name>Demo.Domain.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Demo.Domain.Tests\Demo.Domain.Tests.csproj">
       <Project>{cc13e71e-1978-4232-93f3-c7380d498c9c}</Project>
       <Name>Demo.Domain.Tests</Name>

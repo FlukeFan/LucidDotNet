@@ -52,6 +52,9 @@
     <Compile Include="..\..\AssemblyInfo.cs" />
     <Compile Include="Account\Commands\Login.cs" />
     <Compile Include="Account\Responses\UserDto.cs" />
+    <Compile Include="Constraints.cs" />
+    <Compile Include="Product\Commands\StartDesign.cs" />
+    <Compile Include="Product\Responses\DesignDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

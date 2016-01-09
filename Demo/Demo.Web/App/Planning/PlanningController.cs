@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using Demo.Domain.Product.Commands;
+using Demo.Domain.Contract.Product.Commands;
 using Demo.Web.Utility;
 
 namespace Demo.Web.App.Planning

@@ -1,8 +1,9 @@
 ﻿using System;
+using Demo.Domain.Contract;
+using Demo.Domain.Contract.Product.Commands;
 using Demo.Domain.Product;
 using Demo.Domain.Product.Commands;
 using Demo.Domain.Tests.Utility;
-using Demo.Domain.Utility;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -24,7 +25,7 @@ namespace Demo.Domain.Tests.Product.Commands
 
             validCommand().ShouldBeInvalid(c => c.Name = null);
             validCommand().ShouldBeInvalid(c => c.Name = "");
-            validCommand().ShouldBeInvalid(c => c.Name = new string('x', DemoEntity.DefaultMaxStringLength + 1));
+            validCommand().ShouldBeInvalid(c => c.Name = new string('x', Constraints.DefaultMaxStringLength + 1));
         }
 
         [Test]
@@ -36,7 +37,7 @@ namespace Demo.Domain.Tests.Product.Commands
                     Name = "created design",
                 };
 
-            var designDto = cmd.Execute();
+            var designDto = new StartDesignHandler().Execute(cmd);
 
             Repository.ShouldContain<Design>(designDto.DesignId);
             designDto.Name.Should().Be("created design");

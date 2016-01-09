@@ -2,8 +2,5 @@
 
 namespace Demo.Domain.Utility
 {
-    public class DemoEntity : Entity<int>
-    {
-        public const int DefaultMaxStringLength = 255;
-    }
+    public class DemoEntity : Entity<int> { }
 }

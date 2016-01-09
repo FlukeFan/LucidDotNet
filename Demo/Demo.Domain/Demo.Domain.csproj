@@ -52,9 +52,9 @@
     <Compile Include="Account\Commands\LoginHandler.cs" />
     <Compile Include="Account\Responses\UserDtoMapper.cs" />
     <Compile Include="Account\User.cs" />
-    <Compile Include="Product\Commands\StartDesign.cs" />
+    <Compile Include="Product\Commands\StartDesignHandler.cs" />
     <Compile Include="Product\Design.cs" />
-    <Compile Include="Product\Responses\DesignDto.cs" />
+    <Compile Include="Product\Responses\DesignDtoMapper.cs" />
     <Compile Include="Utility\DemoEntity.cs" />
     <Compile Include="Utility\Registry.cs" />
     <Compile Include="Utility\IDemoRepository.cs" />

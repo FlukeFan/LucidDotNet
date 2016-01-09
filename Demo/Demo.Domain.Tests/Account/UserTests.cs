@@ -1,7 +1,7 @@
 ﻿using System;
 using Demo.Domain.Account;
+using Demo.Domain.Contract;
 using Demo.Domain.Tests.Utility;
-using Demo.Domain.Utility;
 using FluentAssertions;
 using Lucid.Domain.Testing;
 using NUnit.Framework;
@@ -15,7 +15,7 @@ namespace Demo.Domain.Tests.Account
             DemoCustomInspections.Add<User>((validator, user) =>
             {
                 validator.CheckNotNull(() => user.Email);
-                validator.CheckMaxLength(() => user.Email, DemoEntity.DefaultMaxStringLength);
+                validator.CheckMaxLength(() => user.Email, Constraints.DefaultMaxStringLength);
             });
         }
 

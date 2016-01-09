@@ -23,7 +23,7 @@ namespace Demo.Web.Utility
                 new CqExecutor(
                     new RepositoryExecutor(
                         new ValidatingExecutor(
-                            new Executor()
+                            new Executor().UsingHandlersFromAssemblyWithType<DemoEntity>()
                         )
                     )
                 );

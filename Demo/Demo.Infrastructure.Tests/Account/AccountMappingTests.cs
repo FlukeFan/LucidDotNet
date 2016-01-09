@@ -1,6 +1,6 @@
 ﻿using Demo.Domain.Account;
+using Demo.Domain.Contract;
 using Demo.Domain.Tests.Account;
-using Demo.Domain.Utility;
 using Demo.Infrastructure.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
@@ -31,7 +31,7 @@ namespace Demo.Infrastructure.Tests.Account
         public void User_VerifyConstraints()
         {
             VerifyInvalidConstraint(new UserBuilder().With(d => d.Email, null).Value());
-            VerifyInvalidConstraint(new UserBuilder().With(d => d.Email, new string('x', DemoEntity.DefaultMaxStringLength + 1)).Value());
+            VerifyInvalidConstraint(new UserBuilder().With(d => d.Email, new string('x', Constraints.DefaultMaxStringLength + 1)).Value());
         }
     }
 }
