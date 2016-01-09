@@ -1,6 +1,7 @@
 ﻿using System;
 using Demo.Domain.Account;
 using Demo.Domain.Account.Commands;
+using Demo.Domain.Contract.Account.Commands;
 using Demo.Domain.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
@@ -18,7 +19,7 @@ namespace Demo.Domain.Tests.Account.Commands
                     Email = "cmd.test@email.com",
                 };
 
-            var userDto = cmd.Execute();
+            var userDto = new LoginHandler().Execute(cmd);
 
             Repository.ShouldContain<User>(userDto.UserId);
             userDto.Email.Should().Be("cmd.test@email.com");

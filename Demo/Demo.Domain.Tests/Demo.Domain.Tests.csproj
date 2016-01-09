@@ -74,13 +74,17 @@
     <Compile Include="Utility\DomainTest.cs" />
     <Compile Include="Utility\DemoCustomInspections.cs" />
     <Compile Include="Utility\DemoMemoryRepository.cs" />
-    <Compile Include="Utility\TestExtensions.cs" />
+    <Compile Include="Utility\ValidationExtensions.cs" />
     <Compile Include="Utility\TestValues.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Demo.Domain.Contract\Demo.Domain.Contract.csproj">
+      <Project>{2d85d27e-bdff-4545-a48c-49d193143232}</Project>
+      <Name>Demo.Domain.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">
       <Project>{74bda17e-fc05-42f2-810c-d7b677c0d29e}</Project>
       <Name>Demo.Domain</Name>
