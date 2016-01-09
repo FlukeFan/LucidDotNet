@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using Lucid.Domain.Execution;
 using NUnit.Framework;
 
@@ -38,6 +39,26 @@ namespace Lucid.Domain.Tests.Execution
             result.Should().Be(9);
         }
 
+        [Test]
+        public void ExecutesQuerySingleHandler()
+        {
+            var executor = new Executor().UsingHandlersFromAssemblyWithType<VoidCommandHandler>() as IExecutor;
+
+            var result = (int)executor.Execute(new Multiply { Value1 = 3, Value2 = 2 });
+
+            result.Should().Be(6);
+        }
+
+        [Test]
+        public void ExecutesQueryListHandler()
+        {
+            var executor = new Executor().UsingHandlersFromAssemblyWithType<VoidCommandHandler>() as IExecutor;
+
+            var result = (IList<int>)executor.Execute(new List { Start = 4 });
+
+            result.Should().ContainInOrder(4, 5, 6);
+        }
+
         public class SimpleExecutable : QuerySingle<int>
         {
             public override int Find()
@@ -69,6 +90,38 @@ namespace Lucid.Domain.Tests.Execution
             public int Execute(Square cmd)
             {
                 return cmd.Value * cmd.Value;
+            }
+        }
+
+        public class Multiply : IQuerySingle<int>
+        {
+            public int Value1;
+            public int Value2;
+        }
+
+        public class MultipleHandle : IHandleQuerySingle<Multiply, int>
+        {
+            public int Find(Multiply query)
+            {
+                return query.Value1 * query.Value2;
+            }
+        }
+
+        public class List : IQueryList<int>
+        {
+            public int Start;
+        }
+
+        public class ListHandler : IHandleQueryList<List, int>
+        {
+            public IList<int> List(List query)
+            {
+                return new List<int>
+                {
+                    query.Start,
+                    query.Start + 1,
+                    query.Start + 2,
+                };
             }
         }
     }

@@ -7,7 +7,7 @@ namespace Lucid.Domain.Execution
     {
         protected IDictionary<Type, Func<object, object>> _handlers = new Dictionary<Type, Func<object, object>>();
 
-        public Executor UsingHandlersFromAssemblyWithType<T>()
+        public virtual Executor UsingHandlersFromAssemblyWithType<T>()
         {
             var types = typeof(T).Assembly.GetTypes();
 
@@ -21,15 +21,22 @@ namespace Lucid.Domain.Execution
                     var genericType = intrface.GetGenericTypeDefinition();
 
                     if (genericType == typeof(IHandleVoidCommand<>) || genericType == typeof(IHandleCommand<,>))
-                    {
-                        var commandType = intrface.GetGenericArguments()[0];
-                        var executeMethod = intrface.GetMethod("Execute");
-                        _handlers.Add(commandType, cmd => executeMethod.Invoke(Activator.CreateInstance(type), new object[] { cmd }));
-                    }
+                        HandleMethod(type, intrface, "Execute");
+                    else if (genericType == typeof(IHandleQuerySingle<,>))
+                        HandleMethod(type, intrface, "Find");
+                    else if (genericType == typeof(IHandleQueryList<,>))
+                        HandleMethod(type, intrface, "List");
                 }
             }
 
             return this;
+        }
+
+        protected void HandleMethod(Type handlerType, Type intrface, string methodName)
+        {
+            var commandType = intrface.GetGenericArguments()[0];
+            var executeMethod = intrface.GetMethod(methodName);
+            _handlers.Add(commandType, cmd => executeMethod.Invoke(Activator.CreateInstance(handlerType), new object[] { cmd }));
         }
 
         object IExecutor.Execute(object executable)
