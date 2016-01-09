@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.IO;
 using System.Web.Hosting;
-using Demo.Domain.Utility;
+using Demo.Infrastructure;
 using Demo.Infrastructure.NHibernate;
 using Lucid.Domain.Execution;
 using Newtonsoft.Json;
@@ -23,7 +23,7 @@ namespace Demo.Web.Utility
                 new CqExecutor(
                     new RepositoryExecutor(
                         new ValidatingExecutor(
-                            new Executor().UsingHandlersFromAssemblyWithType<DemoEntity>()
+                            new DemoExecutor()
                         )
                     )
                 );
@@ -33,7 +33,7 @@ namespace Demo.Web.Utility
         {
             var connectionString = DevConnectionStringOverride() ?? WebConfigConnnectionString();
 
-            DemoNhRepository.Init(connectionString, typeof(DemoEntity));
+            DemoNhRepository.Init(connectionString);
         }
 
         private string WebConfigConnnectionString()

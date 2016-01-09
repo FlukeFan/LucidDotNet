@@ -1,5 +1,4 @@
-﻿using System;
-using Demo.Domain.Utility;
+﻿using Demo.Domain.Utility;
 using Lucid.Persistence.NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Connection;
@@ -11,8 +10,10 @@ namespace Demo.Infrastructure.NHibernate
 {
     public class DemoNhRepository : NhRepository<int>, IDemoRepository
     {
-        public static void Init(string connection, Type rootEntityType)
+        public static void Init(string connection)
         {
+            var rootEntityType = typeof(DemoEntity);
+
             var config = NhHelper.CreateConfig<int>(rootEntityType, cfg =>
             {
                 cfg.DataBaseIntegration(db =>

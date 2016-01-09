@@ -16,7 +16,7 @@ namespace Demo.Infrastructure.Tests.Utility
         [SetUp]
         public virtual void SetUp()
         {
-            DemoNhRepository.Init(_buildEnvironment.DemoConnection, typeof(DemoEntity));
+            DemoNhRepository.Init(_buildEnvironment.DemoConnection);
             Repository = new DemoNhRepository();
             Repository.Open();
             Registry.Repository = Repository;
