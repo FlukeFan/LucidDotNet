@@ -21,7 +21,7 @@ namespace Lucid.Domain.Testing
             return _executed.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
         }
 
-        public object Execute(object executable)
+        object IExecutor.Execute(object executable)
         {
             var executableType = executable.GetType();
             _executed.Add(executable);

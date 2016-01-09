@@ -43,7 +43,7 @@ namespace Lucid.Domain.Tests.Testing
             var executor = new ExecutorStub();
             var executable = new FakeVoidCommand();
 
-            executor.Execute(executable);
+            (executor as IExecutor).Execute(executable);
 
             executor.AllExecuted().Count().Should().Be(1);
             executor.AllExecuted().ElementAt(0).Should().Be(executable);
@@ -55,7 +55,7 @@ namespace Lucid.Domain.Tests.Testing
             var executor = new ExecutorStub();
             var executable = new FakeVoidCommand();
 
-            executor.Execute(executable);
+            (executor as IExecutor).Execute(executable);
 
             executor.Executed<FakeVoidCommand>().Count().Should().Be(1);
             executor.Executed<FakeVoidCommand>().ElementAt(0).Should().Be(executable);
@@ -69,7 +69,7 @@ namespace Lucid.Domain.Tests.Testing
             var executor = new ExecutorStub();
             var executable = new FakeVoidCommand();
 
-            var result = executor.Execute(executable);
+            var result = (executor as IExecutor).Execute(executable);
 
             result.Should().BeNull();
         }
@@ -79,7 +79,7 @@ namespace Lucid.Domain.Tests.Testing
         {
             var executor = new ExecutorStub();
 
-            var result = (FakeResponse)executor.Execute(new FakeCommand());
+            var result = (FakeResponse)(executor as IExecutor).Execute(new FakeCommand());
 
             result.ShouldBeEquivalentTo(new FakeResponse(123));
         }
@@ -89,7 +89,7 @@ namespace Lucid.Domain.Tests.Testing
         {
             var executor = new ExecutorStub();
 
-            var result = (int)executor.Execute(new FakeQuerySingle());
+            var result = (int)(executor as IExecutor).Execute(new FakeQuerySingle());
 
             result.Should().Be(0);
         }
@@ -99,7 +99,7 @@ namespace Lucid.Domain.Tests.Testing
         {
             var executor = new ExecutorStub();
 
-            var result = (IList<FakeResponse>)executor.Execute(new FakeQueryList());
+            var result = (IList<FakeResponse>)(executor as IExecutor).Execute(new FakeQueryList());
 
             result.Should().NotBeNull();
             result.Count.Should().Be(0);
@@ -110,7 +110,7 @@ namespace Lucid.Domain.Tests.Testing
         {
             var executor = new ExecutorStub();
 
-            var result = (IEnumerable<FakeResponse>)executor.Execute(new FakeQueryEnumerable());
+            var result = (IEnumerable<FakeResponse>)(executor as IExecutor).Execute(new FakeQueryEnumerable());
 
             result.Should().NotBeNull();
             result.Count().Should().Be(0);
@@ -121,7 +121,7 @@ namespace Lucid.Domain.Tests.Testing
         {
             var executor = new ExecutorStub();
 
-            var result = (IDictionary<int, FakeResponse>)executor.Execute(new FakeQueryDictionary());
+            var result = (IDictionary<int, FakeResponse>)(executor as IExecutor).Execute(new FakeQueryDictionary());
 
             result.Should().NotBeNull();
             result.Keys.Count().Should().Be(0);
@@ -133,7 +133,7 @@ namespace Lucid.Domain.Tests.Testing
             var executor = new ExecutorStub()
                 .SetupObjectResult<FakeCommand>(new FakeResponse(234));
 
-            var result = (FakeResponse)executor.Execute(new FakeCommand());
+            var result = (FakeResponse)(executor as IExecutor).Execute(new FakeCommand());
 
             result.ShouldBeEquivalentTo(new FakeResponse(234));
         }
@@ -151,8 +151,8 @@ namespace Lucid.Domain.Tests.Testing
                         return def;
                 });
 
-            var result1 = (FakeResponse)executor.Execute(new FakeCommand { Input = 10 });
-            var result2 = (FakeResponse)executor.Execute(new FakeCommand { Input = 20 });
+            var result1 = (FakeResponse)(executor as IExecutor).Execute(new FakeCommand { Input = 10 });
+            var result2 = (FakeResponse)(executor as IExecutor).Execute(new FakeCommand { Input = 20 });
 
             result1.ShouldBeEquivalentTo(new FakeResponse(10));
             result2.ShouldBeEquivalentTo(new FakeResponse(123));
@@ -164,7 +164,7 @@ namespace Lucid.Domain.Tests.Testing
             var executor = new ExecutorStub()
                 .SetupCommand(It.IsAny<FakeCommand>(), new FakeResponse(456));
 
-            var result = (FakeResponse)executor.Execute(new FakeCommand());
+            var result = (FakeResponse)(executor as IExecutor).Execute(new FakeCommand());
 
             result.ShouldBeEquivalentTo(new FakeResponse(456));
         }
@@ -180,7 +180,7 @@ namespace Lucid.Domain.Tests.Testing
                     new FakeResponse(678),
                 });
 
-            var result = (IList<FakeResponse>)executor.Execute(new FakeQueryList());
+            var result = (IList<FakeResponse>)(executor as IExecutor).Execute(new FakeQueryList());
 
             result.Should().NotBeNull();
             result.Count.Should().Be(2);
@@ -194,7 +194,7 @@ namespace Lucid.Domain.Tests.Testing
             var executor = new ExecutorStub()
                 .SetupQuerySingle(It.IsAny<FakeQuerySingle>(), 7);
 
-            var result = (int)executor.Execute(new FakeQuerySingle());
+            var result = (int)(executor as IExecutor).Execute(new FakeQuerySingle());
 
             result.Should().Be(7);
         }

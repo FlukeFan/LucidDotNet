@@ -9,7 +9,7 @@
             _inner = inner;
         }
 
-        public object Execute(object executable)
+        object IExecutor.Execute(object executable)
         {
             Validator.Validate(executable);
             return _inner.Execute(executable);
