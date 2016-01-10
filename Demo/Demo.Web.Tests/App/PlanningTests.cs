@@ -10,7 +10,7 @@ namespace Demo.Web.Tests.App
         [Test]
         public void StartDesign_GET_RendersForm()
         {
-            WebApp.Test(client =>
+            WebAppTest(client =>
             {
                 var response = client.Get(Actions.StartDesign());
 
@@ -21,7 +21,7 @@ namespace Demo.Web.Tests.App
         [Test]
         public void StartDesign_POST_ExecutesCommand()
         {
-            WebApp.Test(client =>
+            WebAppTest(client =>
             {
                 var response = client.Post(Actions.StartDesign());
 

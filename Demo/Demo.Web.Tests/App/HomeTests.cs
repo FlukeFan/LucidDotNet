@@ -9,7 +9,7 @@ namespace Demo.Web.Tests.App
         [Test]
         public void Index_RendersView()
         {
-            WebApp.Test(client =>
+            WebAppTest(client =>
             {
                 var response = client.Get("/");
 

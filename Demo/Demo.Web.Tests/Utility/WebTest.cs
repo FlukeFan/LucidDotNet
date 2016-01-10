@@ -1,4 +1,8 @@
-﻿using Lucid.Web.Testing.Hosting;
+﻿using System;
+using System.Diagnostics;
+using Lucid.Domain.Testing;
+using Lucid.Web.Testing.Hosting;
+using Lucid.Web.Testing.Http;
 using NUnit.Framework;
 
 namespace Demo.Web.Tests.Utility
@@ -6,16 +10,27 @@ namespace Demo.Web.Tests.Utility
     [TestFixture]
     public abstract class WebTest
     {
-        protected static AspNetTestHost WebApp { get; private set; }
+        private static AspNetTestHost _webApp;
+
+        protected ExecutorStub ExecutorStub {[DebuggerStepThrough] get { return WebTestRegistry.ExecutorStub; } }
 
         public static void SetUpWebHost()
         {
-            WebApp = AspNetTestHost.For(@"..\..\..\Demo.Web", typeof(TestEnvironmentProxy));
+            _webApp = AspNetTestHost.For(@"..\..\..\Demo.Web", typeof(TestEnvironmentProxy));
         }
 
         public static void TearDownWebHost()
         {
-            using (WebApp) { }
+            using (_webApp) { }
+        }
+
+        protected void WebAppTest(Action<SimulatedHttpClient> test)
+        {
+            _webApp.Test(http =>
+            {
+                WebTestRegistry.SetupExecutorStub();
+                test(http);
+            });
         }
 
         private class TestEnvironmentProxy : AppDomainProxy

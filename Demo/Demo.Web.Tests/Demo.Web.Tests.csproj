@@ -43,6 +43,14 @@
       <HintPath>..\packages\FluentAssertions.4.1.1\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Lucid.Domain, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucid.Domain.0.0.0.1\lib\net45\Lucid.Domain.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lucid.Domain.Testing, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucid.Domain.Testing.0.0.0.1\lib\net45\Lucid.Domain.Testing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Lucid.Web.Testing, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucid.Web.Testing.0.0.0.1\lib\net45\Lucid.Web.Testing.dll</HintPath>
       <Private>True</Private>
@@ -67,6 +75,7 @@
     <Compile Include="SetUpFixture.cs" />
     <Compile Include="Utility\FakeStartup.cs" />
     <Compile Include="Utility\WebTest.cs" />
+    <Compile Include="Utility\WebTestRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
