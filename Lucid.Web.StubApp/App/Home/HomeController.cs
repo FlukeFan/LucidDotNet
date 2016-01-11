@@ -14,7 +14,15 @@ namespace Lucid.Web.StubApp.App.Home
         [HttpPost]
         public ActionResult Post()
         {
-            return Content("posted");
+            return Redirect("/otherAddress");
+        }
+
+        [HttpPost]
+        public ActionResult PostValues()
+        {
+            var v1 = Request.Form["V1"];
+            var v2 = Request.Form["%&V2"];
+            return Content(string.Format("V1={0}\nV2={1}", v1, v2));
         }
 
         public ActionResult Return500()

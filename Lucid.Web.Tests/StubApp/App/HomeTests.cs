@@ -49,7 +49,21 @@ namespace Lucid.Web.Tests.StubApp.App
             {
                 var response = http.Post("/Home/Post");
 
-                response.Text.Should().Be("posted");
+                response.HttpStatusCode.Should().Be(HttpStatusCode.Redirect);
+            });
+        }
+
+        [Test]
+        public void Post_Values()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Post(HttpStatusCode.OK, "/Home/PostValues", r => r
+                    .SetFormValue("V1", "test")
+                    .SetFormValue("%&V2", "!\"$%^&*()")
+                );
+
+                response.Text.Should().Be("V1=test\nV2=!\"$%^&*()");
             });
         }
 

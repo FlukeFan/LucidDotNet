@@ -38,15 +38,15 @@ namespace Lucid.Domain.Tests.Testing
         public class FakeQueryDictionary : IQuerySingle<IDictionary<int, FakeResponse>> { }
 
         [Test]
-        public void AllExecuted_ReturnsStoredExecutions()
+        public void Executed_ReturnsStoredExecutions()
         {
             var executor = new ExecutorStub();
             var executable = new FakeVoidCommand();
 
             (executor as IExecutor).Execute(executable);
 
-            executor.AllExecuted().Count().Should().Be(1);
-            executor.AllExecuted().ElementAt(0).Should().Be(executable);
+            executor.Executed().Count().Should().Be(1);
+            executor.Executed().ElementAt(0).Should().Be(executable);
         }
 
         [Test]

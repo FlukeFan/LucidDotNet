@@ -52,6 +52,7 @@
     <Compile Include="Http\Request.cs" />
     <Compile Include="Http\Response.cs" />
     <Compile Include="Http\SimulatedHttpClient.cs" />
+    <Compile Include="Http\SimulatedWorkerRequest.cs" />
     <Compile Include="Http\UnexpectedStatusCodeException.cs" />
   </ItemGroup>
   <ItemGroup>

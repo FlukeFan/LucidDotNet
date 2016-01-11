@@ -20,11 +20,8 @@ namespace Demo.Web.App.Planning
         [HttpPost]
         public ActionResult StartDesign(StartDesign cmd)
         {
-            if (Lucid.Web.WebHost.IsRunningInTestHost)
-                return Content("TODO - stub out command executor");
-
             return Execute(cmd,
-                success: r => View(),
+                success: r => Redirect("~/Planning/StartDesign"),
                 failure: () => { throw new Exception("failure not handled!"); });
         }
     }

@@ -11,14 +11,19 @@ namespace Lucid.Domain.Testing
         protected IList<object>                                     _executed       = new List<object>();
         protected IDictionary<Type, Func<object, object, object>>   _setupResults   = new Dictionary<Type, Func<object, object, object>>();
 
-        public IEnumerable<object> AllExecuted()
+        public object[] Executed()
         {
-            return _executed;
+            return _executed.ToArray(); ;
         }
 
-        public IEnumerable<T> Executed<T>()
+        public T Executed<T>(int index)
         {
-            return _executed.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>();
+            return (T)_executed[index];
+        }
+
+        public T[] Executed<T>()
+        {
+            return _executed.Where(e => typeof(T).IsAssignableFrom(e.GetType())).Cast<T>().ToArray();
         }
 
         object IExecutor.Execute(object executable)

@@ -1,4 +1,5 @@
-﻿using Demo.Web.App.Planning;
+﻿using Demo.Domain.Contract.Product.Commands;
+using Demo.Web.App.Planning;
 using Demo.Web.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
@@ -23,9 +24,14 @@ namespace Demo.Web.Tests.App
         {
             WebAppTest(client =>
             {
-                var response = client.Post(Actions.StartDesign());
+                var response = client.Post(Actions.StartDesign(), r => r
+                    .SetFormValue("Name", "web test")
+                );
 
-                response.Text.Should().Contain("stub out command executor");
+                ExecutorStub.Executed<StartDesign>(0).ShouldBeEquivalentTo(new StartDesign
+                {
+                    Name = "web test",
+                });
             });
         }
     }
