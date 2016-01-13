@@ -54,8 +54,13 @@
     <Compile Include="Account\User.cs" />
     <Compile Include="Product\Commands\StartDesignHandler.cs" />
     <Compile Include="Product\Design.cs" />
+    <Compile Include="Product\Queries\FindDesignsHandler.cs" />
     <Compile Include="Product\Responses\DesignDtoMapper.cs" />
     <Compile Include="Utility\DemoEntity.cs" />
+    <Compile Include="Utility\HandleCommand.cs" />
+    <Compile Include="Utility\HandleQueryList.cs" />
+    <Compile Include="Utility\HandleQuerySingle.cs" />
+    <Compile Include="Utility\HandleVoidCommand.cs" />
     <Compile Include="Utility\Registry.cs" />
     <Compile Include="Utility\IDemoRepository.cs" />
   </ItemGroup>

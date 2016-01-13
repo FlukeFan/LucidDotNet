@@ -69,6 +69,7 @@
     <Compile Include="Account\UserTests.cs" />
     <Compile Include="Product\Commands\StartDesignTests.cs" />
     <Compile Include="Product\DesignTests.cs" />
+    <Compile Include="Product\Queries\FindDesignsTests.cs" />
     <Compile Include="Utility\BuilderExtensions.cs" />
     <Compile Include="Utility\DemoConsistencyInspector.cs" />
     <Compile Include="Utility\DomainTest.cs" />

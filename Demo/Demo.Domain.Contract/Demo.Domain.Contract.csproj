@@ -54,6 +54,7 @@
     <Compile Include="Account\Responses\UserDto.cs" />
     <Compile Include="Constraints.cs" />
     <Compile Include="Product\Commands\StartDesign.cs" />
+    <Compile Include="Product\Queries\FindDesigns.cs" />
     <Compile Include="Product\Responses\DesignDto.cs" />
   </ItemGroup>
   <ItemGroup>

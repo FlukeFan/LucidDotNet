@@ -12,7 +12,7 @@ namespace Demo.Domain.Product
         public static Design Start(StartDesign cmd)
         {
             var design = new Design { Name = cmd.Name };
-            return Registry.Repository.Save(design);
+            return Repository.Save(design);
         }
     }
 }

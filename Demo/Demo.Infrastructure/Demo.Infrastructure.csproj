@@ -63,6 +63,7 @@
     <Compile Include="..\..\AssemblyInfo.cs" />
     <Compile Include="DemoExecutor.cs" />
     <Compile Include="NHibernate\DemoNhRepository.cs" />
+    <Compile Include="NHibernate\DemoNhStartup.cs" />
     <Compile Include="NHibernate\RepositoryExecutor.cs" />
   </ItemGroup>
   <ItemGroup>

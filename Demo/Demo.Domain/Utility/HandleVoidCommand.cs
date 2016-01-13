@@ -1,10 +1,13 @@
 ﻿using System.Diagnostics;
-using Lucid.Domain.Persistence;
+using Lucid.Domain.Execution;
 
 namespace Demo.Domain.Utility
 {
-    public class DemoEntity : Entity<int>
+    public abstract class HandleVoidCommand<TCmd> : IHandleVoidCommand<TCmd>
+        where TCmd : ICommand
     {
         protected static IDemoRepository Repository {[DebuggerStepThrough] get { return Registry.Repository; } }
+
+        public abstract void Execute(TCmd cmd);
     }
 }

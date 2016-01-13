@@ -13,7 +13,7 @@ namespace Demo.Domain.Account
         public static User Login(string email)
         {
             var user =
-                Registry.Repository.Query<User>()
+                Repository.Query<User>()
                     .Filter(u => u.Email == email)
                     .SingleOrDefault();
 
@@ -26,7 +26,7 @@ namespace Demo.Domain.Account
             }
 
             user.LastLoggedIn = Registry.NowUtc();
-            return Registry.Repository.Save(user);
+            return Repository.Save(user);
         }
     }
 }
