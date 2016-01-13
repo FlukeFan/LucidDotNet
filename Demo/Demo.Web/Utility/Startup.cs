@@ -33,7 +33,7 @@ namespace Demo.Web.Utility
         {
             var connectionString = DevConnectionStringOverride() ?? WebConfigConnnectionString();
 
-            DemoNhStartup.Init(connectionString);
+            DemoStartup.Init(connectionString);
         }
 
         private string WebConfigConnnectionString()

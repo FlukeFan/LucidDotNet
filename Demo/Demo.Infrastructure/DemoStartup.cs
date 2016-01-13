@@ -1,6 +1,8 @@
-﻿namespace Demo.Infrastructure.NHibernate
+﻿using Demo.Infrastructure.NHibernate;
+
+namespace Demo.Infrastructure
 {
-    public static class DemoNhStartup
+    public static class DemoStartup
     {
         public static void Init(string connection)
         {
