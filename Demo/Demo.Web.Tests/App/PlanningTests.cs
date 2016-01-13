@@ -9,6 +9,17 @@ namespace Demo.Web.Tests.App
     public class PlanningTests : WebTest
     {
         [Test]
+        public void List_GET_RendersLinks()
+        {
+            WebAppTest(client =>
+            {
+                var response = client.Get(Actions.List());
+
+                response.Text.Should().Contain("<ul");
+            });
+        }
+
+        [Test]
         public void StartDesign_GET_RendersForm()
         {
             WebAppTest(client =>

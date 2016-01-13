@@ -121,6 +121,7 @@
     <Content Include="packages.config" />
     <Content Include="App\Home\Index.cshtml" />
     <Content Include="App\Planning\StartDesign.cshtml" />
+    <Content Include="App\Planning\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
