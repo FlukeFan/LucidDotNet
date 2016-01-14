@@ -12,10 +12,39 @@
     <RunTests Condition=" '$(RunTests)' == '' ">true</RunTests>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <NUnitPath>$(SolutionDir)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
-    <GlobalProperties>Configuration=$(Configuration);RunTests=$(RunTests);NUnitPath=$(NUnitPath);NuGetExe=$(NuGetExe)</GlobalProperties>
   </PropertyGroup>
+  
+  <Target Name="Init">
+    <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);NUnitPath=$(NUnitPath);NuGetExe=$(NuGetExe)">
+      <Output TaskParameter="Value" PropertyName="GlobalProperties" />
+    </CreateProperty>
+  </Target>
 
-  <Target Name="Build">
+  <Target Name="SetReleaseConfiguration">
+    <CreateProperty Value="Release">
+      <Output TaskParameter="Value" PropertyName="Configuration" />
+    </CreateProperty>
+  </Target>
+
+  <Target Name="SetDebugConfiguration">
+    <CreateProperty Value="Debug">
+      <Output TaskParameter="Value" PropertyName="Configuration" />
+    </CreateProperty>
+  </Target>
+
+  <Target Name="Push">
+    <RemoveDir Directories="packaged" />
+    <CallTarget Targets="SetReleaseConfiguration" />
+    <CallTarget Targets="Init" />
+    <CallTarget Targets="Build" />
+    <Exec Command="$(NuGetExe) push packaged\Lucid.Domain.$(LucidVersion).nupkg" />
+    <Exec Command="$(NuGetExe) push packaged\Lucid.Domain.Testing.$(LucidVersion).nupkg" />
+    <Exec Command="$(NuGetExe) push packaged\Lucid.Persistence.NHibernate.$(LucidVersion).nupkg" />
+    <Exec Command="$(NuGetExe) push packaged\Lucid.Web.$(LucidVersion).nupkg" />
+    <Exec Command="$(NuGetExe) push packaged\Lucid.Web.Testing.$(LucidVersion).nupkg" />
+  </Target>
+  
+  <Target Name="Build" DependsOnTargets="Init">
     <CallTarget Targets="GenerateAssemblyInfo" />
     <MakeDir Directories="packaged" />
     <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
@@ -24,6 +53,12 @@
   </Target>
 
   <Target Name="Clean">
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="CleanFiles" Properties="Configuration=Debug" />
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="CleanFiles" Properties="Configuration=Release" />
+  </Target>
+
+  <Target Name="CleanFiles">
+    <CallTarget Targets="Init" />
     <MSBuild Projects="Demo\Demo.proj" Properties="$(GlobalProperties)" Targets="Clean" />
     <RemoveDir Directories="Demo\packages" />
     <MSBuild Projects="@(ProjectsToClean)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
