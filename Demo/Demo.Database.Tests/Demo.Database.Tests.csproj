@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\AssemblyInfo.cs" />
+    <Compile Include="..\AssemblyInfo.cs" />
     <Compile Include="BuildEnvironment.cs" />
     <Compile Include="Migrations\MigrationsTests.cs" />
   </ItemGroup>

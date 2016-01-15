@@ -1,20 +1,18 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://MSBuild/Community/Tasks packages\MSBuildTasks.1.4.0.128\tools\MSBuild.Community.Tasks.xsd">
-
-  <PropertyGroup>
-    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.128\tools</MSBuildCommunityTasksPath>
-  </PropertyGroup>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <Import Project="Global.targets" />
-  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" Condition="Exists('$(MSBuildCommunityTasksPath)')" />
 
   <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SolutionDir>$(MSBuildProjectDirectory)\</SolutionDir>
     <RunTests Condition=" '$(RunTests)' == '' ">true</RunTests>
     <NUnitPath>$(SolutionDir)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
-    <GlobalProperties>RunTests=$(RunTests);NUnitPath=$(NUnitPath)</GlobalProperties>
+    <GlobalProperties>RunTests=$(RunTests);NUnitPath=$(NUnitPath);DemoVersion=$(DemoVersion)</GlobalProperties>
   </PropertyGroup>
 
   <Target Name="Build">
+    <CallTarget Targets="PackageRestore" />
+    <MSBuild Projects="Init.proj" Properties="$(GlobalProperties);Configuration=$(Configuration)" />
     <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
   </Target>
 
@@ -48,9 +46,9 @@
     <MSBuildXsd Include="lib\MSBuild\*.xsd" />
   </ItemGroup>
 
-  <Target Name="PackageRestore">
+  <Target Name="PackageRestore" Condition="'$(RestorePackages)'=='true'">
     <Exec Command="$(NuGetExe) restore" />
-    <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildCommunityTasksPath)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.128\tools" SkipUnchangedFiles="true" />
   </Target>
 
 </Project>

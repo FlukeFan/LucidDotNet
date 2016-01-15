@@ -26,3 +26,4 @@ Demo/*.sln.cache
 /Demo/TestResult.xml
 /packages/MSBuildTasks.1.4.0.128/tools/Microsoft.Build.Commontypes.xsd
 /packages/MSBuildTasks.1.4.0.128/tools/Microsoft.Build.Core.xsd
+/Demo/AssemblyInfo.cs

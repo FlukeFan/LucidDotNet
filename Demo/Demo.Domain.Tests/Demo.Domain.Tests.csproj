@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\AssemblyInfo.cs" />
+    <Compile Include="..\AssemblyInfo.cs" />
     <Compile Include="Account\Commands\LoginTests.cs" />
     <Compile Include="Account\UserTests.cs" />
     <Compile Include="Product\Commands\StartDesignTests.cs" />
