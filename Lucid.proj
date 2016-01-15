@@ -108,6 +108,7 @@
   </ItemGroup>
 
   <Target Name="RestoreDemoPackages" Inputs="@(DemoPackageDependencies)" Outputs="Demo\packages\restored">
+    <Copy SourceFiles="$(NuGetExe)" DestinationFolder="Demo\lib\NuGet" />
     <RemoveDir Directories="Demo\packages" />
     <Exec Command="..\$(NuGetExe) restore -Source $(MSBuildProjectDirectory)\packaged -Source $(MSBuildProjectDirectory)\packages" WorkingDirectory="Demo" />
     <Touch Files="Demo\packages\restored" AlwaysCreate="true" />

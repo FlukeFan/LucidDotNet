@@ -1,6 +1,13 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.128\tools</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+
+  <Import Project="Global.targets" />
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" Condition="Exists('$(MSBuildCommunityTasksPath)')" />
+
+  <PropertyGroup>
     <SolutionDir>$(MSBuildProjectDirectory)\</SolutionDir>
     <RunTests Condition=" '$(RunTests)' == '' ">true</RunTests>
     <NUnitPath>$(SolutionDir)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
