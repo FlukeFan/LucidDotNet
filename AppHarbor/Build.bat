@@ -1,1 +1,1 @@
-msbuild AppHarbor\AppHarbor.sln /p:Configuration=Release
+msbuild AppHarbor\AppHarbor.sln /p:Configuration=Release /property:OutDir=C:\temp\ah
