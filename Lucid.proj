@@ -13,11 +13,16 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <NUnitPath>$(SolutionDir)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
   </PropertyGroup>
-  
+
+  <ItemGroup>
+    <MSBuildXsd Include="lib\MSBuild\*.xsd" />
+  </ItemGroup>
+
   <Target Name="Init">
     <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);NUnitPath=$(NUnitPath);NuGetExe=$(NuGetExe)">
       <Output TaskParameter="Value" PropertyName="GlobalProperties" />
     </CreateProperty>
+    <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildCommunityTasksPath)" />
   </Target>
 
   <Target Name="SetReleaseConfiguration">
@@ -109,6 +114,7 @@
 
   <Target Name="RestoreDemoPackages" Inputs="@(DemoPackageDependencies)" Outputs="Demo\packages\restored">
     <Copy SourceFiles="$(NuGetExe)" DestinationFolder="Demo\lib\NuGet" />
+    <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="Demo\lib\MSBuild" />
     <RemoveDir Directories="Demo\packages" />
     <Exec Command="..\$(NuGetExe) restore -Source $(MSBuildProjectDirectory)\packaged -Source $(MSBuildProjectDirectory)\packages" WorkingDirectory="Demo" />
     <Touch Files="Demo\packages\restored" AlwaysCreate="true" />
