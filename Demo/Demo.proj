@@ -15,7 +15,6 @@
   </PropertyGroup>
 
   <Target Name="Build">
-    <CallTarget Targets="PackageRestore" />
     <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
   </Target>
 
@@ -45,8 +44,13 @@
     <ProjectsToClean Include="Demo.Domain\Demo.Domain.csproj"/>
   </ItemGroup>
 
-  <Target Name="PackageRestore" Condition="'$(RestorePackages)'=='True'">
+  <ItemGroup>
+    <MSBuildXsd Include="lib\MSBuild\*.xsd" />
+  </ItemGroup>
+
+  <Target Name="PackageRestore">
     <Exec Command="$(NuGetExe) restore" />
+    <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildCommunityTasksPath)" SkipUnchangedFiles="true" />
   </Target>
 
 </Project>

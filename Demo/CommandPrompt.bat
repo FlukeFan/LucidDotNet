@@ -1,6 +1,6 @@
 @CD /D "%~dp0"
 @title Demo Command Prompt
 @SET PATH=C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\;%PATH%
-@doskey b=msbuild $* Demo.proj /p:RestorePackages=True
+@doskey b=msbuild Demo.proj /t:PackageRestore ^& msbuild $* Demo.proj
 type readme.txt
 %comspec%
