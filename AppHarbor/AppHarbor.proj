@@ -3,11 +3,15 @@
   <Target Name="Build">
     <MSBuild Projects="..\Lucid.proj" Properties="RunTests=false" />
     <CallTarget Targets="RemoveTests" />
+    <CallTarget Targets="RemoveStubApp" />
   </Target>
   <Target Name="RemoveTests">
     <ItemGroup>
       <TestFiles Include="$(OutDir)\*.Tests.*" />
     </ItemGroup>
     <Delete Files="@(TestFiles)" />
+  </Target>
+  <Target Name="RemoveStubApp">
+    <RemoveDir Directories="$(OutDir)\_PublishedWebsites\Lucid.Web.StubApp" />
   </Target>
 </Project>
