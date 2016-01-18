@@ -2,5 +2,12 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Build">
     <MSBuild Projects="..\Lucid.proj" Properties="RunTests=false" />
+    <CallTarget Targets="RemoveTests" />
+  </Target>
+  <Target Name="RemoveTests">
+    <ItemGroup>
+      <TestFiles Include="$(OutDir)\*.Tests.*" />
+    </ItemGroup>
+    <Delete Files="@(TestFiles)" />
   </Target>
 </Project>
