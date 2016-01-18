@@ -38,7 +38,7 @@ namespace Demo.Web.Utility
 
         private string WebConfigConnnectionString()
         {
-            return ConfigurationManager.AppSettings["connectionString"];
+            return ConfigurationManager.AppSettings["SQLSERVER_CONNECTION_STRING"];
         }
 
         private string DevConnectionStringOverride()
