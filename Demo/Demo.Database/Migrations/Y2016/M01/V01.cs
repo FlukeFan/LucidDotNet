@@ -1,7 +1,9 @@
 ﻿using Demo.Database.Schema;
+using FluentMigrator;
 
-namespace Demo.Database.Migrations
+namespace Demo.Database.Migrations.Y2016.M01
 {
+    [Migration(1)]
     public class V01 : DemoMigration
     {
         public override void Up()

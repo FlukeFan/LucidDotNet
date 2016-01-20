@@ -29,6 +29,9 @@ namespace Demo.Database.Tests.Migrations
 
             DemoMigrationRunner.Run(_environment.DemoConnection);
 
+            // verify we can run a second time (i.e., scripts don't get run twice where they shouldn't)
+            DemoMigrationRunner.Run(_environment.DemoConnection);
+
             using (var db = new SqlConnection(_environment.DemoConnection))
             {
                 db.Open();
