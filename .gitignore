@@ -18,6 +18,7 @@ Demo/*.sln.cache
 /.vs
 /AssemblyInfo.cs
 /packaged
+/packages_deployed
 
 /Demo/.vs
 /Demo/packages

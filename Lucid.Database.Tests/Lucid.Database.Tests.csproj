@@ -63,6 +63,8 @@
     <Compile Include="..\AssemblyInfo.cs" />
     <Compile Include="BuildEnvironment.cs" />
     <Compile Include="CreateDatabaseTests.cs" />
+    <Compile Include="DeployConstraintsTests.cs" />
+    <Compile Include="Run.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DefaultEnvironment.json" />
