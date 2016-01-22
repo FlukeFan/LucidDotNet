@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace Lucid.Database.Tests
+namespace Lucid.Web.Tests.Deploy
 {
     [TestFixture]
     public class DeployConstraintsTests
@@ -26,6 +24,11 @@ namespace Lucid.Database.Tests
                 DownloadLocalCopy(nugetExe, localCopyFolder, localCopyVersionFile, deployedVersion);
 
             localCopyVersion = GetLocalCopyVersion(localCopyVersionFile);
+
+            var thisVersion = GetThisVersion();
+
+            if (thisVersion == localCopyVersion)
+                Assert.Fail(string.Format("Version {0} is currently deployed.  This version needs updated.", thisVersion));
 
             Assert.Ignore("Got current version: '" + localCopyVersion + "'");
         }
@@ -78,6 +81,13 @@ namespace Lucid.Database.Tests
             }
 
             File.WriteAllText(localCopyVersionFile, deployedVersion);
+        }
+
+        private string GetThisVersion()
+        {
+            var assembly = GetType().Assembly;
+            var version = assembly.GetName().Version;
+            return version.ToString();
         }
     }
 }
