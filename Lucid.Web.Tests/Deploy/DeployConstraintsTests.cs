@@ -28,7 +28,7 @@ namespace Lucid.Web.Tests.Deploy
             var thisVersion = GetThisVersion();
 
             if (thisVersion == localCopyVersion)
-                Assert.Fail(string.Format("Version {0} is currently deployed.  This version needs updated.", thisVersion));
+                Assert.Fail(string.Format("Version {0} is currently deployed. Update the version in Global.targets to a newer version.", thisVersion));
 
             Assert.Ignore("Got current version: '" + localCopyVersion + "'");
         }
