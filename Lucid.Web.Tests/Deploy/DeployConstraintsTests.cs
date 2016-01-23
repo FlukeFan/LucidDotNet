@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Xml;
 using NUnit.Framework;
 
 namespace Lucid.Web.Tests.Deploy
@@ -10,57 +9,6 @@ namespace Lucid.Web.Tests.Deploy
     {
         private const string NugetSourceOption  = " -Source https://api.nuget.org/v3/index.json";
         private const string NugetExeLocation   = "packages\\NuGet.CommandLine.3.3.0\\tools\\NuGet.exe";
-
-        [Test][Category("AppHarborDeploy")][Explicit("This only gets verified when trying to deploy to AppHarbor")]
-        public void Verify_DemoOnlyReferencesDeployedNugetPackages()
-        {
-            var rootDir = GetType().Assembly.CodeBase;
-            var environmentVariables = Environment.GetEnvironmentVariables();
-            var appHarborSlnDir = environmentVariables["app_harbor_sln_dir"];
-
-            if (appHarborSlnDir != null)
-                rootDir = (string)appHarborSlnDir;
-
-            if (rootDir.StartsWith("file:///"))
-                rootDir = rootDir.Replace("file:///", "");
-
-            var initialRoot = rootDir;
-
-            rootDir = Path.GetDirectoryName(rootDir);
-
-            while (Directory.GetParent(rootDir).FullName != rootDir && !File.Exists(Path.Combine(rootDir, "Lucid.proj")))
-                rootDir = Directory.GetParent(rootDir).FullName;
-
-            if (!File.Exists(Path.Combine(rootDir, "Lucid.proj")))
-                Assert.Fail("Could not find root source directory: " + initialRoot);
-
-            var nugetExe = Path.Combine(rootDir, NugetExeLocation);
-            var deployedVersion = GetDeployedVersion(nugetExe, NugetSourceOption);
-
-            var packageConfigurations = Directory.GetFiles(Path.Combine(rootDir, "Demo"), "packages.config", SearchOption.AllDirectories);
-
-            foreach (var packageConfigurationFile in packageConfigurations)
-            {
-                var packageDoc = new XmlDocument();
-                packageDoc.Load(packageConfigurationFile);
-
-                var packageNodes = packageDoc.SelectNodes("//package");
-
-                foreach (XmlNode packageNode in packageNodes)
-                {
-                    var id = packageNode.Attributes["id"].Value;
-                    var version = packageNode.Attributes["version"].Value;
-
-                    if (!id.StartsWith("Lucid"))
-                        continue;
-
-                    if (new Version(version) > new Version(deployedVersion))
-                        Assert.Fail(string.Format("Currently deployed Lucid is {0}. Cannot deploy Demo that references a newer version {1} in : {2}", deployedVersion, version, packageConfigurationFile));
-                }
-            }
-
-            Assert.Fail(rootDir);
-        }
 
         [Test]
         public void Verify_VersionIsUpdated_AfterDeployToNuGet()
