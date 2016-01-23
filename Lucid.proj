@@ -11,7 +11,8 @@
     <SolutionDir>$(MSBuildProjectDirectory)\</SolutionDir>
     <RunTests Condition=" '$(RunTests)' == '' ">true</RunTests>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <NUnitPath>$(SolutionDir)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
+    <NUnitPath Condition=" '$(AppHarbor)' != 'true' ">$(SolutionDir)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
+    <NUnitPath Condition=" '$(AppHarbor)' == 'true' ">$(SolutionDir)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -41,6 +42,7 @@
     <CallTarget Targets="GenerateAssemblyInfo" />
     <MakeDir Directories="packaged" />
     <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
+    <CallTarget Targets="VerifyAppHarborDeploy" Condition="'$(AppHarbor)' == 'true'" />
     <CallTarget Targets="RestoreDemoPackages" />
     <MSBuild Projects="Demo\Demo.proj" Properties="$(GlobalProperties)" Targets="Build" />
   </Target>
@@ -108,6 +110,10 @@
     <RemoveDir Directories="Demo\packages" Condition="'$(AppHarbor)' != 'true'" />
     <Exec Command="..\$(NuGetExe) restore -Source $(MSBuildProjectDirectory)\packaged -Source $(MSBuildProjectDirectory)\packages -Source $(MSBuildProjectDirectory)\packages_deployed" WorkingDirectory="Demo" />
     <Touch Files="Demo\packages\restored" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="VerifyAppHarborDeploy">
+    <Exec Command="(SET app_harbor_sln_dir=$(SolutionDir)) &amp; $(NUnitPath) $(OutDir)\Lucid.Web.Tests.dll /include=AppHarborDeploy" />
   </Target>
 
   <Target Name="Push">
