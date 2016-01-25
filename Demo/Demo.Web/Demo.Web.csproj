@@ -48,16 +48,16 @@
       <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Domain, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Domain.0.0.0.2\lib\net45\Lucid.Domain.dll</HintPath>
+    <Reference Include="Lucid.Domain, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucid.Domain.0.0.0.1\lib\net45\Lucid.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Persistence.NHibernate, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Persistence.NHibernate.0.0.0.2\lib\net45\Lucid.Persistence.NHibernate.dll</HintPath>
+    <Reference Include="Lucid.Persistence.NHibernate, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucid.Persistence.NHibernate.0.0.0.1\lib\net45\Lucid.Persistence.NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Web, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Web.0.0.0.2\lib\net45\Lucid.Web.dll</HintPath>
+    <Reference Include="Lucid.Web, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucid.Web.0.0.0.1\lib\net45\Lucid.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
