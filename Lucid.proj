@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <Target Name="Init">
-    <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);NUnitPath=$(NUnitPath);NuGetExe=$(NuGetExe)">
+    <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);NUnitPath=$(NUnitPath);NuGetExe=$(NuGetExe);DeployBuild=$(AppHarbor)">
       <Output TaskParameter="Value" PropertyName="GlobalProperties" />
     </CreateProperty>
     <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildCommunityTasksPath)" />

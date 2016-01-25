@@ -9,7 +9,7 @@ namespace Demo.Database.Migrations
 
         static DeployedMigrations()
         {
-            //Hashes.Add(typeof(Y2016.M01.V01), "667AEF850D5C19E2E08CAD20E5769EAB");
+            Hashes.Add(typeof(Y2016.M01.V01), "667AEF850D5C19E2E08CAD20E5769EAB");
         }
     }
 }

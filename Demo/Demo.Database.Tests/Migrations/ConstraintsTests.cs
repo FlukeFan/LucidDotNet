@@ -102,7 +102,7 @@ namespace Demo.Database.Tests.Migrations
             }
 
             if (errors.Count > 0)
-                Assert.Fail("Could not deploy database scripts:\n\n{0}", string.Join("\n\n", errors));
+                Assert.Fail("Could not deploy database scripts:\n\n{0}\n", string.Join("\n\n", errors));
         }
 
         private IEnumerable<Type> FindMigrationTypes()
@@ -116,7 +116,7 @@ namespace Demo.Database.Tests.Migrations
         {
             var searchFile = "Demo.sln";
             var envVars = Environment.GetEnvironmentVariables();
-            var searchDir = (string)envVars["ProjectDir"];
+            var searchDir = (string)envVars["project_src_dir"];
             var error = "";
 
             if (searchDir == null)

@@ -98,8 +98,12 @@
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
     <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
+  <Target Name="VerifyScriptsForDeploy">
+    <Exec Command="(SET project_src_dir=$(MSBuildProjectDirectory)) &amp; $(NUnitPath) $(OutDir)\Demo.Database.Tests.dll /include=DeployBuild /result=&quot;$(OutDir)\DeployBuild.xml&quot;" />
+  </Target>
   <Target Name="AfterBuild">
     <Copy SourceFiles="DefaultEnvironment.json" DestinationFiles="..\BuildEnvironment.json" Condition="!Exists('..\BuildEnvironment.json') OR $([System.IO.File]::GetLastWriteTime('DefaultEnvironment.json').Ticks) &gt; $([System.IO.File]::GetLastWriteTime('..\BuildEnvironment.json').Ticks)" />
     <CallTarget Targets="NUnit" />
+    <CallTarget Targets="VerifyScriptsForDeploy" Condition="'$(DeployBuild)'=='true'" />
   </Target>
 </Project>

@@ -7,7 +7,7 @@
     <SolutionDir>$(MSBuildProjectDirectory)\</SolutionDir>
     <RunTests Condition=" '$(RunTests)' == '' ">true</RunTests>
     <NUnitPath>$(SolutionDir)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
-    <GlobalProperties>RunTests=$(RunTests);NUnitPath=$(NUnitPath);DemoVersion=$(DemoVersion)</GlobalProperties>
+    <GlobalProperties>RunTests=$(RunTests);NUnitPath=$(NUnitPath);DemoVersion=$(DemoVersion);DeployBuild=$(DeployBuild)</GlobalProperties>
   </PropertyGroup>
 
   <Target Name="Build">
