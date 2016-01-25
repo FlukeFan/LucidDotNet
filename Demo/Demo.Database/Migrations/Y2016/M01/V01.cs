@@ -3,7 +3,7 @@ using FluentMigrator;
 
 namespace Demo.Database.Migrations.Y2016.M01
 {
-    [Migration(1)]
+    [Migration(20160101)]
     public class V01 : DemoMigration
     {
         public override void Up()
