@@ -56,6 +56,17 @@ namespace Demo.Database.Tests.Migrations
         [Explicit("Run explcitly during creation of a deployment build")]
         public void Verify_AllDeployedScripts_HaveHash()
         {
+            VerifyHashes(failIfNoHash: true);
+        }
+
+        [Test]
+        public void Verify_AllDeployedScripts_HaveNotChangedHash()
+        {
+            VerifyHashes(failIfNoHash: false);
+        }
+
+        private void VerifyHashes(bool failIfNoHash)
+        {
             var projectDir = FindProjectDir();
             var migrationsSourceDir = Path.Combine(projectDir, "Demo.Database/Migrations");
             var migrationTypes = FindMigrationTypes();
@@ -89,7 +100,9 @@ namespace Demo.Database.Tests.Migrations
 
                     if (!hashes.ContainsKey(migrationType))
                     {
-                        errors.Add(string.Format("Migration {0} needs an entry in DeployedMigrations with hash {1}", migrationType, hash));
+                        if (failIfNoHash)
+                            errors.Add(string.Format("Migration {0} needs an entry in DeployedMigrations with hash {1}", migrationType, hash));
+
                         continue;
                     }
 
