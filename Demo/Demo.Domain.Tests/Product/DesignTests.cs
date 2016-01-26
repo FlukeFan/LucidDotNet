@@ -1,6 +1,9 @@
-﻿using Demo.Domain.Contract;
+﻿using System;
+using Demo.Domain.Contract;
+using Demo.Domain.Contract.Product.Commands;
 using Demo.Domain.Product;
 using Demo.Domain.Tests.Utility;
+using FluentAssertions;
 using Lucid.Domain.Testing;
 using NUnit.Framework;
 
@@ -29,6 +32,19 @@ namespace Demo.Domain.Tests.Product
         public void Construct()
         {
             new DesignBuilder().Save();
+        }
+
+        [Test]
+        public void NameMustBeUnique()
+        {
+            new DesignBuilder().With(d => d.Name, "existingName").Save();
+
+            Action act = () =>
+            {
+                Design.Start(new StartDesign { Name = "existingName" });
+            };
+
+            act.ShouldThrow<Exception>("duplicate names should not be allowed");
         }
     }
 }
