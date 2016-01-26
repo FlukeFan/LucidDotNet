@@ -1,5 +1,4 @@
-﻿using System;
-using Demo.Domain.Contract.Product.Commands;
+﻿using Demo.Domain.Contract.Product.Commands;
 using Demo.Domain.Utility;
 
 namespace Demo.Domain.Product
@@ -24,7 +23,7 @@ namespace Demo.Domain.Product
                 .List();
 
             if (designsWithName.Count > 0)
-                throw new Exception("Please specify a design name that is not already in use.");
+                throw new DomainException("Please specify a design name that is not already in use.");
         }
     }
 }

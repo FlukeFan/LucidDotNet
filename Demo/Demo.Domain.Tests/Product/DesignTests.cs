@@ -3,6 +3,7 @@ using Demo.Domain.Contract;
 using Demo.Domain.Contract.Product.Commands;
 using Demo.Domain.Product;
 using Demo.Domain.Tests.Utility;
+using Demo.Domain.Utility;
 using FluentAssertions;
 using Lucid.Domain.Testing;
 using NUnit.Framework;
@@ -44,7 +45,7 @@ namespace Demo.Domain.Tests.Product
                 Design.Start(new StartDesign { Name = "existingName" });
             };
 
-            act.ShouldThrow<Exception>("duplicate names should not be allowed");
+            act.ShouldThrow<DomainException>("duplicate names should not be allowed");
         }
     }
 }

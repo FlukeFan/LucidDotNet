@@ -57,6 +57,7 @@
     <Compile Include="Product\Queries\FindDesignsHandler.cs" />
     <Compile Include="Product\Responses\DesignDtoMapper.cs" />
     <Compile Include="Utility\DemoEntity.cs" />
+    <Compile Include="Utility\DomainException.cs" />
     <Compile Include="Utility\HandleCommand.cs" />
     <Compile Include="Utility\HandleQueryList.cs" />
     <Compile Include="Utility\HandleQuerySingle.cs" />
