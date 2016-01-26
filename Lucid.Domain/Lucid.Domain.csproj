@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="Exceptions\ErrorContext.cs" />
+    <Compile Include="Exceptions\LucidException.cs" />
     <Compile Include="Execution\CqExecutor.cs" />
     <Compile Include="Execution\Executor.cs" />
     <Compile Include="Execution\ICommand.cs" />
@@ -52,7 +54,7 @@
     <Compile Include="Execution\IExecutor.cs" />
     <Compile Include="Execution\IQueryList.cs" />
     <Compile Include="Execution\IQuerySingle.cs" />
-    <Compile Include="Execution\ValidatingExecutor.cs" />
+    <Compile Include="Validation\ValidatingExecutor.cs" />
     <Compile Include="Persistence\Entity.cs" />
     <Compile Include="Persistence\IEntity.cs" />
     <Compile Include="Persistence\IRepository.cs" />
@@ -64,7 +66,7 @@
     <Compile Include="Execution\IExecutable.cs" />
     <Compile Include="Execution\QueryList.cs" />
     <Compile Include="Execution\QuerySingle.cs" />
-    <Compile Include="Execution\Validator.cs" />
+    <Compile Include="Validation\LucidValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lucid.Domain.nuspec" />

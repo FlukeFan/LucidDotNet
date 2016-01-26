@@ -1,4 +1,6 @@
-﻿namespace Lucid.Domain.Execution
+﻿using Lucid.Domain.Execution;
+
+namespace Lucid.Domain.Validation
 {
     public class ValidatingExecutor : IExecutor
     {
@@ -11,7 +13,7 @@
 
         object IExecutor.Execute(object executable)
         {
-            Validator.Validate(executable);
+            LucidValidator.Validate(executable);
             return _inner.Execute(executable);
         }
     }
