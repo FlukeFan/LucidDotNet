@@ -20,12 +20,12 @@ namespace Demo.Web.Utility
 
         protected ActionResult Exec(ICommand cmd, Func<ActionResult> success, Func<ActionResult> failure)
         {
-            return MvcExecutor.Exec(PresentationRegistry.Executor, cmd, success, failure);
+            return MvcExecutor.Exec(ModelState, PresentationRegistry.Executor, cmd, success, failure);
         }
 
         protected ActionResult Exec<TReturn>(ICommand<TReturn> cmd, Func<TReturn, ActionResult> success, Func<ActionResult> failure)
         {
-            return MvcExecutor.Exec(PresentationRegistry.Executor, cmd, success, failure);
+            return MvcExecutor.Exec(ModelState, PresentationRegistry.Executor, cmd, success, failure);
         }
     }
 }

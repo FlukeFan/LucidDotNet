@@ -31,7 +31,7 @@ namespace Demo.Web.App.Planning
         {
             return Exec(cmd,
                 success: r => Redirect(Actions.List()),
-                failure: () => { throw new Exception("failure not handled!"); });
+                failure: () => View());
         }
     }
 }

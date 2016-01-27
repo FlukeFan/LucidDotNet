@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
+using Lucid.Domain.Exceptions;
 using Lucid.Domain.Execution;
 using NUnit.Framework;
 
@@ -16,6 +17,16 @@ namespace Lucid.Domain.Tests.Execution
             var result = (int)executor.Execute(new SimpleExecutable());
 
             result.Should().Be(3);
+        }
+
+        [Test]
+        public void Execute_UnwrapsTargetInvocationException()
+        {
+            var executor = new Executor().UsingHandlersFromAssemblyWithType<VoidCommandHandler>() as IExecutor;
+
+            var customException = Assert.Throws<CustomException>(() => executor.Execute(new ExceptingCommand()));
+
+            customException.Message.Should().Be("Thrown from ExceptingCommand");
         }
 
         [Test]
@@ -67,6 +78,21 @@ namespace Lucid.Domain.Tests.Execution
             }
         }
 
+        public class ExceptingCommand : ICommand<int> { }
+
+        public class ExceptingCommandHandler : IHandleCommand<ExceptingCommand, int>
+        {
+            public int Execute(ExceptingCommand cmd)
+            {
+                throw new CustomException("Thrown from ExceptingCommand");
+            }
+        }
+
+        public class CustomException : LucidException
+        {
+            public CustomException(string message) : base(message) { }
+        }
+
         public class VoidCommand : ICommand
         {
             public static bool WasRun = false;
@@ -99,7 +125,7 @@ namespace Lucid.Domain.Tests.Execution
             public int Value2;
         }
 
-        public class MultipleHandle : IHandleQuerySingle<Multiply, int>
+        public class MultiplyHandler : IHandleQuerySingle<Multiply, int>
         {
             public int Find(Multiply query)
             {
@@ -123,6 +149,12 @@ namespace Lucid.Domain.Tests.Execution
                     query.Start + 2,
                 };
             }
+        }
+
+        public abstract class AbstractHandler<TCmd, TReturn> : IHandleCommand<TCmd, TReturn>
+            where TCmd : ICommand<TReturn>
+        {
+            public abstract TReturn Execute(TCmd cmd);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Lucid.Domain.Exceptions;
 using Lucid.Domain.Execution;
 
 namespace Lucid.Web
@@ -17,16 +18,48 @@ namespace Lucid.Web
             return executor.Execute(query);
         }
 
-        public static ActionResult Exec(ICqExecutor executor, ICommand cmd, Func<ActionResult> success, Func<ActionResult> failure)
+        public static ActionResult Exec(ModelStateDictionary modelState, ICqExecutor executor, ICommand cmd, Func<ActionResult> success, Func<ActionResult> failure)
         {
-            executor.Execute(cmd);
-            return success();
+            return Exec<object>(modelState, () => { executor.Execute(cmd); return null; }, nullValue => success(), failure);
         }
 
-        public static ActionResult Exec<TReturn>(ICqExecutor executor, ICommand<TReturn> cmd, Func<TReturn, ActionResult> success, Func<ActionResult> failure)
+        public static ActionResult Exec<TReturn>(ModelStateDictionary modelState, ICqExecutor executor, ICommand<TReturn> cmd, Func<TReturn, ActionResult> success, Func<ActionResult> failure)
         {
-            var response = executor.Execute(cmd);
-            return success(response);
+            return Exec(modelState, () => executor.Execute(cmd), success, failure);
+        }
+
+        public static ActionResult Exec<TReturn>(ModelStateDictionary modelState, Func<TReturn> run, Func<TReturn, ActionResult> success, Func<ActionResult> failure)
+        {
+            TReturn response = default(TReturn);
+
+            if (modelState.IsValid)
+            {
+                try
+                {
+                    response = run();
+                }
+                catch (LucidException exception)
+                {
+                    AddErrors(modelState, exception);
+                }
+            }
+
+            return modelState.IsValid
+                ? success(response)
+                : failure();
+        }
+
+        public static void AddErrors(ModelStateDictionary modelState, LucidException exception)
+        {
+            lock(modelState)
+            {
+                foreach (var message in exception.Messages)
+                    modelState.AddModelError("", message);
+
+                foreach (var kvp in exception.PropertyMessages)
+                    foreach (var message in kvp.Value)
+                        modelState.AddModelError(kvp.Key, message);
+            }
         }
     }
 }

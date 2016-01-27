@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.ExceptionServices;
 
 namespace Lucid.Domain.Execution
 {
@@ -9,7 +12,8 @@ namespace Lucid.Domain.Execution
 
         public virtual Executor UsingHandlersFromAssemblyWithType<T>()
         {
-            var types = typeof(T).Assembly.GetTypes();
+            var types = typeof(T).Assembly.GetTypes()
+                .Where(t => !t.IsAbstract);
 
             foreach (var type in types)
             {
@@ -36,7 +40,19 @@ namespace Lucid.Domain.Execution
         {
             var commandType = intrface.GetGenericArguments()[0];
             var executeMethod = intrface.GetMethod(methodName);
-            _handlers.Add(commandType, cmd => executeMethod.Invoke(Activator.CreateInstance(handlerType), new object[] { cmd }));
+            _handlers.Add(commandType, cmd =>
+            {
+                try
+                {
+                    var target = Activator.CreateInstance(handlerType);
+                    return executeMethod.Invoke(target, new object[] { cmd });
+                }
+                catch (TargetInvocationException tie)
+                {
+                    ExceptionDispatchInfo.Capture(tie.InnerException).Throw();
+                    return null;
+                }
+            });
         }
 
         object IExecutor.Execute(object executable)
