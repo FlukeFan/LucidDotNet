@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="Exceptions\LucidExceptionTests.cs" />
     <Compile Include="Execution\ExecutorTests.cs" />
     <Compile Include="Persistence\IRepositoryTests.cs" />
     <Compile Include="Persistence\LucidBuilderExtensions.cs" />

@@ -15,18 +15,7 @@ namespace Lucid.Domain.Validation
             if (valid)
                 return;
 
-            var errorContext = CreateErrorContext(results);
-            throw new LucidException(errorContext);
-        }
-
-        public static ErrorContext CreateErrorContext(IEnumerable<ValidationResult> results)
-        {
-            var error = new ErrorContext { IsLogicException = true };
-
-            foreach (var result in results)
-                error.Add(result);
-
-            return error;
+            throw new LucidException(results);
         }
     }
 }

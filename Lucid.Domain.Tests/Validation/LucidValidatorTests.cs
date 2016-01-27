@@ -21,15 +21,14 @@ namespace Lucid.Domain.Tests.Validation
             };
 
             var e = act.ShouldThrow<LucidException>().Which;
-            var error = e.Context;
 
-            error.Messages.Count.Should().Be(0);
-            error.PropertyMessages.Count.Should().Be(2);
+            e.Messages.Count().Should().Be(0);
+            e.PropertyMessages.Count.Should().Be(2);
 
-            error.PropertyMessages.Keys.Should().BeEquivalentTo("Name", "Description");
+            e.PropertyMessages.Keys.Should().BeEquivalentTo("Description", "Name");
 
-            error.PropertyMessages["Name"].Should().BeEquivalentTo("The Name field is required.");
-            error.PropertyMessages["Description"].Should().BeEquivalentTo("The Description field is required.");
+            e.PropertyMessages["Name"].Should().BeEquivalentTo("The Name field is required.");
+            e.PropertyMessages["Description"].Should().BeEquivalentTo("The Description field is required.");
         }
 
         public class Dto

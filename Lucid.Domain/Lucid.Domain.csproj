@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
-    <Compile Include="Exceptions\ErrorContext.cs" />
     <Compile Include="Exceptions\LucidException.cs" />
     <Compile Include="Execution\CqExecutor.cs" />
     <Compile Include="Execution\Executor.cs" />

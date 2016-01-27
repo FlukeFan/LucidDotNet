@@ -1,21 +1,58 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Lucid.Domain.Exceptions
 {
     public class LucidException : ApplicationException
     {
-        public ErrorContext Context { get; protected set; }
+        public IEnumerable<string>                  Messages            { get; protected set; }
+        public IDictionary<string, IList<string>>   PropertyMessages    { get; protected set; }
 
-        public LucidException(ErrorContext context) : base(context.FormatMessage())
+        public LucidException(IEnumerable<string> messages, IDictionary<string, IList<string>> propertyMessages)
+            : base(FormatMessage(messages, propertyMessages))
         {
-            Context = context;
+            Messages = messages;
+            PropertyMessages = propertyMessages;
         }
 
-        public LucidException(string message) : this(FromMessage(message)) { }
+        public LucidException(IEnumerable<ValidationResult> validationResults)
+            : this(new List<string>(), ConvertResults(validationResults))
+        { }
 
-        public static ErrorContext FromMessage(string message)
+        public LucidException(IEnumerable<string> messages)
+            : this(messages, new Dictionary<string, IList<string>>())
+        { }
+
+        public LucidException(string message)
+            : this(new List<string> { message })
+        { }
+
+        public static string FormatMessage(IEnumerable<string> messages, IDictionary<string, IList<string>> propertyMessages)
         {
-            return new ErrorContext { IsLogicException = true }.AddMessage(message);
+            var lines = new List<string>(messages);
+
+            foreach (var kvp in propertyMessages)
+                lines.AddRange(kvp.Value.Select(s => kvp.Key + ": " + s));
+
+            return string.Join("\n", lines);
+        }
+
+        public static IDictionary<string, IList<string>> ConvertResults(IEnumerable<ValidationResult> validationResults)
+        {
+            var results = new Dictionary<string, IList<string>>();
+
+            foreach (var result in validationResults)
+                foreach (var propertyName in result.MemberNames)
+                {
+                    if (!results.ContainsKey(propertyName))
+                        results[propertyName] = new List<string>();
+
+                    results[propertyName].Add(result.ErrorMessage);
+                }
+
+            return results;
         }
     }
 }
