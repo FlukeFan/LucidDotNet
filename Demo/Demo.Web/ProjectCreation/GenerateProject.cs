@@ -16,7 +16,11 @@ namespace Demo.Web.ProjectCreation
 
         private static byte[] StreamToBytes(Stream stream)
         {
-            return null;
+            using (var memory = new MemoryStream())
+            {
+                stream.CopyTo(memory);
+                return memory.ToArray();
+            }
         }
     }
 }

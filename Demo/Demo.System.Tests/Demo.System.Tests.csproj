@@ -43,6 +43,10 @@
       <HintPath>..\packages\FluentAssertions.4.2.1\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Lucid.Domain, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucid.Domain.0.0.0.2\lib\net45\Lucid.Domain.dll</HintPath>
       <Private>True</Private>
