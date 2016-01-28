@@ -140,6 +140,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ProjectCreation\GenerateProject.cs" />
     <Compile Include="Utility\DemoController.cs" />
     <Compile Include="Utility\PresentationRegistry.cs" />
     <Compile Include="Utility\Startup.cs" />
