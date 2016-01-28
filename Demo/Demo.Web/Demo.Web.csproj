@@ -129,7 +129,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="WebZip.proj" />
+    <Content Include="WebZip.proj">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
@@ -179,5 +181,8 @@
   </ProjectExtensions>
   <Target Name="BeforeBuild">
     <MSBuild Projects="WebZip.proj" Targets="Zip" />
+  </Target>
+  <Target Name="BeforeClean">
+    <MSBuild Projects="WebZip.proj" Targets="Clean" />
   </Target>
 </Project>

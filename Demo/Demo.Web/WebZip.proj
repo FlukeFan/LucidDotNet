@@ -21,4 +21,8 @@
     <Zip ZipFileName="Project.zip" Files="@(FilesToZip)" WorkingDirectory=".." Quiet="true" />
   </Target>
 
+  <Target Name="Clean">
+    <Delete Files="Project.zip" />
+  </Target>
+
 </Project>
