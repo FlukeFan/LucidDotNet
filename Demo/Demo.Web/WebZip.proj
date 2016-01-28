@@ -4,7 +4,7 @@
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\..\packages\MSBuildTasks.1.4.0.128\tools</MSBuildCommunityTasksPath>
   </PropertyGroup>
 
-  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" Condition="Exists('$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets')" />
 
   <ItemGroup>
     <FilesToZip Include="..\lib\**" />
