@@ -122,12 +122,14 @@
     <Content Include="App\Home\Index.cshtml" />
     <Content Include="App\Planning\StartDesign.cshtml" />
     <Content Include="App\Planning\List.cshtml" />
+    <EmbeddedResource Include="Project.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="WebZip.proj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
@@ -175,11 +177,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
+    <MSBuild Projects="WebZip.proj" Targets="Zip" />
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

@@ -1,0 +1,24 @@
+﻿<Project DefaultTargets="Zip" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://MSBuild/Community/Tasks ..\packages\MSBuildTasks.1.4.0.128\tools\MSBuild.Community.Tasks.xsd">
+
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\..\packages\MSBuildTasks.1.4.0.128\tools</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
+
+  <ItemGroup>
+    <FilesToZip Include="..\lib\**" />
+    <FilesToZip Include="..\*.bat" />
+    <FilesToZip Include="..\*.proj" />
+    <FilesToZip Include="..\*.targets" />
+    <FilesToZip Include="..\*.sln" />
+    <FilesToZip Include="..\**\*.csproj" />
+    <FilesToZip Include="..\**\packages.config" />
+    <FilesToZip Include="..\**\*.cs" Exclude="..\AssemblyInfo.cs;..\**\obj\**" />
+  </ItemGroup>
+  
+  <Target Name="Zip" Inputs="@(FilesToZip);WebZip.proj" Outputs="Project.zip">
+    <Zip ZipFileName="Project.zip" Files="@(FilesToZip)" WorkingDirectory=".." Quiet="true" />
+  </Target>
+
+</Project>

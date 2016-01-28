@@ -12,6 +12,7 @@
 
   <Target Name="Build">
     <CallTarget Targets="PackageRestore" />
+    <CallTarget Targets="FixTasksXsd" />
     <MSBuild Projects="Init.proj" Properties="$(GlobalProperties);Configuration=$(Configuration)" />
     <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
   </Target>
@@ -48,6 +49,9 @@
 
   <Target Name="PackageRestore" Condition="'$(RestorePackages)'=='true'">
     <Exec Command="$(NuGetExe) restore" />
+  </Target>
+
+  <Target Name="FixTasksXsd">
     <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.128\tools" SkipUnchangedFiles="true" />
   </Target>
 
