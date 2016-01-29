@@ -9,12 +9,19 @@
   <ItemGroup>
     <FilesToZip Include="..\lib\**" />
     <FilesToZip Include="..\*.bat" />
+    <FilesToZip Include="..\*.nunit" />
+    <FilesToZip Include="..\*.txt" />
     <FilesToZip Include="..\*.proj" />
+    <FilesToZip Include="..\Demo.Web\*.proj" />
     <FilesToZip Include="..\*.targets" />
+    <FilesToZip Include="..\Demo.Database.Tests\DefaultEnvironment.json" />
     <FilesToZip Include="..\*.sln" />
     <FilesToZip Include="..\**\*.csproj" />
     <FilesToZip Include="..\**\packages.config" />
     <FilesToZip Include="..\**\*.cs" Exclude="..\AssemblyInfo.cs;..\**\obj\**" />
+    <FilesToZip Include="..\Demo.Web\**\*.cshtml" />
+    <FilesToZip Include="..\Demo.Web\**\*.asax" />
+    <FilesToZip Include="..\Demo.Web\**\Web.config" />
   </ItemGroup>
   
   <Target Name="Zip" Inputs="@(FilesToZip);WebZip.proj" Outputs="Project.zip">
