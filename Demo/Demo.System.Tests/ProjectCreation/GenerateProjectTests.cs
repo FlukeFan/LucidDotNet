@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Demo.Web.ProjectCreation;
 using FluentAssertions;
@@ -20,14 +23,26 @@ namespace Demo.System.Tests.ProjectCreation
 
             var zipBytes = cmd.Execute();
 
+            var originalFolder = @"..\..\..";
             var buildFolder = Path.Combine(Path.GetTempPath(), "GpTmp");
+            Console.WriteLine("Building project {0} in {1}", cmd.Name, buildFolder);
             Unzip(zipBytes, buildFolder);
             CopyFolder(@"..\..\..\packages", Path.Combine(buildFolder, "packages"));
-            File.WriteAllText(Path.Combine(buildFolder, "BuildEnvironment.json"), File.ReadAllText(@"..\..\..\BuildEnvironment.json"));
+            File.WriteAllText(Path.Combine(buildFolder, "BuildEnvironment.json"), File.ReadAllText(Path.Combine(originalFolder, "BuildEnvironment.json")));
 
             var fxFolder = @"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319";
             var setupCmd = File.ReadAllText(Path.Combine(buildFolder, "CommandPrompt.bat"));
             setupCmd.Should().Contain(fxFolder);
+
+            File.ReadAllText(Path.Combine(buildFolder, "Demo.Web\\Demo.Web.csproj")).Should().Contain("349c5851-65df-11da-9384-00065b846f21", "ProjectTypeGuids should not be replaced");
+
+            var originalGuids = FindGuids(originalFolder);
+            var newGuids = FindGuids(buildFolder);
+            newGuids.Count.Should().BeGreaterThan(1);
+
+            foreach (var originalGuid in originalGuids)
+                if (newGuids.Contains(originalGuid))
+                    Assert.Fail("GUID {0} was found in both the original project and the generated project", originalGuid);
 
             var msBuild = Path.Combine(fxFolder, "msbuild.exe");
             RunVerify(msBuild, "Demo.proj", buildFolder);
@@ -36,6 +51,26 @@ namespace Demo.System.Tests.ProjectCreation
 
             RunVerify(msBuild, "Demo.proj /t:clean", buildFolder);
             DeleteFolder(buildFolder, 5);
+        }
+
+        private IList<string> FindGuids(string folder)
+        {
+            var guids = new List<string>();
+
+            var projectFiles = Directory.EnumerateFiles(folder, "*.csproj", SearchOption.AllDirectories);
+            var slnFiles = Directory.EnumerateFiles(folder, "*.sln", SearchOption.AllDirectories);
+            var files = projectFiles.Union(slnFiles);
+
+            foreach (var file in files)
+            {
+                var lines = File.ReadAllLines(file);
+                foreach (var line in lines)
+                    foreach (Match match in Generate.GuidSearch.Matches(line))
+                        if (match.Success && !guids.Contains(match.Value) && !Generate.GuidsToIgnore.Contains(match.Value.ToUpper()))
+                            guids.Add(match.Value);
+            }
+
+            return guids;
         }
 
         private void CopyFolder(string sourceFolder, string destinationFolder)
@@ -67,8 +102,6 @@ namespace Demo.System.Tests.ProjectCreation
 
         private void Unzip(byte[] zipBytes, string folder)
         {
-            Console.WriteLine("Uzipping to: {0}", folder);
-
             if (Directory.Exists(folder))
                 DeleteFolder(folder, 5);
 

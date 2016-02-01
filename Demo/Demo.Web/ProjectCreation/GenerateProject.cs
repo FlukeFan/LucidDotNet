@@ -10,8 +10,10 @@ namespace Demo.Web.ProjectCreation
         public override byte[] Execute()
         {
             var assembly = GetType().Assembly;
-            using (var zip = assembly.GetManifestResourceStream("Demo.Web.Project.zip"))
-                return StreamToBytes(zip);
+
+            using (var zipInputStream = assembly.GetManifestResourceStream("Demo.Web.Project.zip"))
+            using (var zipOutputStream = Generate.Project(zipInputStream))
+                return StreamToBytes(zipOutputStream);
         }
 
         private static byte[] StreamToBytes(Stream stream)
