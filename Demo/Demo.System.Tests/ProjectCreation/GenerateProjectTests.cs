@@ -28,13 +28,22 @@ namespace Demo.System.Tests.ProjectCreation
             Console.WriteLine("Building project {0} in {1}", cmd.Name, buildFolder);
             Unzip(zipBytes, buildFolder);
             CopyFolder(@"..\..\..\packages", Path.Combine(buildFolder, "packages"));
-            File.WriteAllText(Path.Combine(buildFolder, "BuildEnvironment.json"), File.ReadAllText(Path.Combine(originalFolder, "BuildEnvironment.json")));
+            var currentBuildEnvironment = File.ReadAllText(Path.Combine(originalFolder, "BuildEnvironment.json"));
+            File.WriteAllText(Path.Combine(buildFolder, "BuildEnvironment.json"), currentBuildEnvironment.Replace("Demo", "ShinyNewProject"));
 
             var fxFolder = @"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319";
             var setupCmd = File.ReadAllText(Path.Combine(buildFolder, "CommandPrompt.bat"));
             setupCmd.Should().Contain(fxFolder);
 
-            File.ReadAllText(Path.Combine(buildFolder, "Demo.Web\\Demo.Web.csproj")).Should().Contain("349c5851-65df-11da-9384-00065b846f21", "ProjectTypeGuids should not be replaced");
+            File.ReadAllText(Path.Combine(buildFolder, "ShinyNewProject.Web\\ShinyNewProject.Web.csproj")).Should().Contain("349c5851-65df-11da-9384-00065b846f21", "ProjectTypeGuids should not be replaced");
+
+            var processedFiles = Directory.EnumerateFiles(buildFolder, "*.*", SearchOption.AllDirectories)
+                .Where(d => Generate.ProcessedExtensions.Contains(Path.GetExtension(d).ToLower()));
+
+            foreach (var processedFile in processedFiles)
+                foreach (var line in File.ReadAllLines(processedFile))
+                    if (line.Contains("Demo"))
+                        Assert.Fail("Found Demo in {0}: {1}", processedFile, line);
 
             var originalGuids = FindGuids(originalFolder);
             var newGuids = FindGuids(buildFolder);
@@ -45,11 +54,11 @@ namespace Demo.System.Tests.ProjectCreation
                     Assert.Fail("GUID {0} was found in both the original project and the generated project", originalGuid);
 
             var msBuild = Path.Combine(fxFolder, "msbuild.exe");
-            RunVerify(msBuild, "Demo.proj", buildFolder);
+            RunVerify(msBuild, "ShinyNewProject.proj", buildFolder);
 
             // Assert DB?  NUnit logs?
 
-            RunVerify(msBuild, "Demo.proj /t:clean", buildFolder);
+            RunVerify(msBuild, "ShinyNewProject.proj /t:clean", buildFolder);
             DeleteFolder(buildFolder, 5);
         }
 

@@ -12,7 +12,7 @@ namespace Demo.Web.ProjectCreation
             var assembly = GetType().Assembly;
 
             using (var zipInputStream = assembly.GetManifestResourceStream("Demo.Web.Project.zip"))
-            using (var zipOutputStream = Generate.Project(zipInputStream))
+            using (var zipOutputStream = Generate.Project(zipInputStream, Name))
                 return StreamToBytes(zipOutputStream);
         }
 

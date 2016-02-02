@@ -10,6 +10,28 @@ namespace Demo.Web.ProjectCreation
 {
     public class Generate
     {
+        public static readonly IList<string> ProcessedExtensions = new List<string>
+        {
+            ".sln",
+            ".csproj",
+            ".proj",
+            ".bat",
+            ".nunit",
+            ".txt",
+            ".targets",
+            ".json",
+            ".config",
+            ".cs",
+            ".cshtml",
+            ".asax",
+        };
+
+        public static readonly IList<String> UnprocessedExtensions = new List<string>
+        {
+            ".xsd",
+            ".exe",
+        };
+
         public static readonly IList<string> GuidsToIgnore = new List<string>
         {
             "2150E333-8FDC-42A3-9474-1A3956D46DE8".ToUpper(), // project items
@@ -34,17 +56,11 @@ namespace Demo.Web.ProjectCreation
 
         public static readonly Regex GuidSearch = new Regex("(.{8}-.{4}-.{4}-.{4}-.{12})", RegexOptions.Compiled);
 
-        private static readonly IList<string> _processedExtensions = new List<string>
-        {
-            ".sln",
-            ".csproj",
-        };
-
         private static readonly byte[] _buffer = new byte[4096];
 
         private static IDictionary<string, string> _guidMap;
 
-        public static MemoryStream Project(Stream zipInputStream)
+        public static MemoryStream Project(Stream zipInputStream, string newName)
         {
             _guidMap = new Dictionary<string, string>();
 
@@ -56,28 +72,28 @@ namespace Demo.Web.ProjectCreation
 
                 using (var zipInput = new ZipFile(zipInputStream))
                     foreach (ZipEntry zipEntry in zipInput)
-                        CopyEntry(zipInput, zipEntry, zipOutput);
+                        CopyEntry(zipInput, zipEntry, zipOutput, newName);
             }
 
             memoryStream.Position = 0;
             return memoryStream;
         }
 
-        private static void CopyEntry(ZipFile zipInput, ZipEntry inputEntry, ZipOutputStream zipOutput)
+        private static void CopyEntry(ZipFile zipInput, ZipEntry inputEntry, ZipOutputStream zipOutput, string newName)
         {
             if (!inputEntry.IsFile)
                 return;
 
-            var fileName = inputEntry.Name;
+            var fileName = inputEntry.Name.Replace("Demo", newName);
             using (var inputStream = zipInput.GetInputStream(inputEntry))
             {
-                var extension = Path.GetExtension(fileName);
+                var extension = Path.GetExtension(fileName).ToLower();
 
                 var newEntry = new ZipEntry(fileName);
                 newEntry.DateTime = inputEntry.DateTime;
 
                 if (ShouldProcessFile(extension))
-                    ProcessTextFile(inputStream, newEntry, zipOutput);
+                    ProcessTextFile(inputStream, newEntry, zipOutput, newName);
                 else
                     ProcessBinaryFile(inputEntry, inputStream, newEntry, zipOutput);
             }
@@ -85,7 +101,13 @@ namespace Demo.Web.ProjectCreation
 
         private static bool ShouldProcessFile(string extension)
         {
-            return _processedExtensions.Contains(extension);
+            if (ProcessedExtensions.Contains(extension))
+                return true;
+
+            if (!UnprocessedExtensions.Contains(extension))
+                throw new Exception(string.Format("Extension {0} should be added to Generate.ProcessedExtensions or Generate.UnprocessedExtensions.", extension));
+
+            return false;
         }
 
         private static void ProcessBinaryFile(ZipEntry inputEntry, Stream inputFileStream, ZipEntry newEntry, ZipOutputStream zipOutput)
@@ -97,7 +119,7 @@ namespace Demo.Web.ProjectCreation
             zipOutput.CloseEntry();
         }
 
-        private static void ProcessTextFile(Stream inputFileStream, ZipEntry newEntry, ZipOutputStream zipOutput)
+        private static void ProcessTextFile(Stream inputFileStream, ZipEntry newEntry, ZipOutputStream zipOutput, string newName)
         {
             var inputLines = new List<string>();
             using (var reader = new StreamReader(inputFileStream))
@@ -113,7 +135,9 @@ namespace Demo.Web.ProjectCreation
             {
                 var outputLine = inputLine;
 
-                outputLine = ReplaceGuids(inputLine);
+                outputLine = ReplaceGuids(outputLine);
+                outputLine = ReplaceDemo(outputLine, newName);
+                outputLine = ReplaceHashes(outputLine);
 
                 outputLines.Add(outputLine);
             }
@@ -139,9 +163,12 @@ namespace Demo.Web.ProjectCreation
                 if (GuidsToIgnore.Contains(inputGuid))
                     continue;
 
+                if (inputGuid.Contains("{8}-.{4}-.{4}-.{4}-.{12}"))
+                    continue; // not a guid - it's finding the declaration of the Regex
+
                 if (!GuidsToReplace.Contains(inputGuid))
                 {
-                    var errorMessage = string.Format("Could not find guid {0}.  All project GUIDS must be defined in Generate.GuidsToIngore or GuidsToReplace.", inputGuid);
+                    var errorMessage = string.Format("Could not find guid {0}.  All project GUIDS must be defined in Generate.GuidsToIngore or GuidsToReplace.  Line: {1}", inputGuid, inputLine);
                     Console.WriteLine(errorMessage);
                     throw new Exception(errorMessage);
                 }
@@ -155,6 +182,24 @@ namespace Demo.Web.ProjectCreation
                 outputLine = outputLine.Substring(0, matchStartIndex) + replacement + outputLine.Substring(matchEndIndex, outputLine.Length - matchEndIndex);
             }
 
+            return outputLine;
+        }
+
+        private static string ReplaceDemo(string inputLine, string newName)
+        {
+            var outputLine = inputLine.Replace("Demo", newName);
+            return outputLine;
+        }
+
+        private static string ReplaceHashes(string inputLine)
+        {
+            var hashCode = "Hashes.Add(typeof(";
+
+            if (!inputLine.Contains(hashCode))
+                return inputLine;
+
+            var outputLine = inputLine.Replace(hashCode, "// " + hashCode);
+            outputLine += "// Replace with 'real' hashes once reployed.";
             return outputLine;
         }
     }
