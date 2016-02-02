@@ -66,8 +66,12 @@ namespace Demo.System.Tests.ProjectCreation
                 var lines = File.ReadAllLines(file);
                 foreach (var line in lines)
                     foreach (Match match in Generate.GuidSearch.Matches(line))
-                        if (match.Success && !guids.Contains(match.Value) && !Generate.GuidsToIgnore.Contains(match.Value.ToUpper()))
-                            guids.Add(match.Value);
+                    {
+                        var guid = match.Value.ToUpper();
+
+                        if (match.Success && !guids.Contains(guid) && !Generate.GuidsToIgnore.Contains(guid))
+                            guids.Add(guid);
+                    }
             }
 
             return guids;
