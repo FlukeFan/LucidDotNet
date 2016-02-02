@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Demo.Domain.Contract.Product.Commands;
 using Demo.Domain.Contract.Product.Queries;
 using Demo.Web.Utility;
@@ -14,6 +13,7 @@ namespace Demo.Web.App.Planning
 
     public class PlanningController : DemoController
     {
+        [HttpGet]
         public ActionResult List()
         {
             var designs = Exec(new FindDesigns());
@@ -21,6 +21,7 @@ namespace Demo.Web.App.Planning
             return View(designs);
         }
 
+        [HttpGet]
         public ActionResult StartDesign()
         {
             return View();

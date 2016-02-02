@@ -16,9 +16,15 @@ namespace Lucid.Domain.Testing
             return _executed.ToArray(); ;
         }
 
-        public T Executed<T>(int index)
+        public T Executed<T>(uint index)
         {
-            return (T)_executed[index];
+            var executedCmds = Executed<T>().ToArray();
+
+            if (index >= executedCmds.Length)
+                throw new Exception(string.Format("Could not find executed command of type {0} with index {1}.\nFound {2} executed commands of type {3}.",
+                    typeof(T), index, executedCmds.Length, typeof(T)));
+
+            return executedCmds[index];
         }
 
         public T[] Executed<T>()
