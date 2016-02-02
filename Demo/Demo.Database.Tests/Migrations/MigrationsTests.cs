@@ -11,16 +11,16 @@ namespace Demo.Database.Tests.Migrations
         private static BuildEnvironment _environment = BuildEnvironment.Load();
 
         private const string DropDb = @"
-            IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'LucidDemo')
+            IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'Demo')
             BEGIN
-                ALTER DATABASE LucidDemo
+                ALTER DATABASE Demo
                     SET SINGLE_USER
                     WITH ROLLBACK IMMEDIATE
 
-                DROP DATABASE LucidDemo
+                DROP DATABASE Demo
             END";
 
-        private const string CreateDb = "CREATE DATABASE LucidDemo";
+        private const string CreateDb = "CREATE DATABASE Demo";
 
         [Test]
         public void Migrations_Run_UpgradesDatabase()
