@@ -32,7 +32,7 @@ namespace Demo.Database.Tests.Migrations
 
                 var actualVersion = migrationAttribute.Version;
                 var expectedVersion = 0L;
-                var nameParts = migrationType.FullName.Split('.');
+                var nameParts = migrationType.FullName.Replace("Demo.Database.", "").Split('.');
 
                 foreach (var namePart in nameParts)
                 {

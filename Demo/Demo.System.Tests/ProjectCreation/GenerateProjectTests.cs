@@ -19,7 +19,7 @@ namespace Demo.System.Tests.ProjectCreation
         [Test]
         public void Execute()
         {
-            var cmd = new GenerateProject { Name = "ShinyNewProject" };
+            var cmd = new GenerateProject { Name = "ShinyNewProject1" };
 
             var zipBytes = cmd.Execute();
 
@@ -29,21 +29,21 @@ namespace Demo.System.Tests.ProjectCreation
             Unzip(zipBytes, buildFolder);
             CopyFolder(@"..\..\..\packages", Path.Combine(buildFolder, "packages"));
             var currentBuildEnvironment = File.ReadAllText(Path.Combine(originalFolder, "BuildEnvironment.json"));
-            File.WriteAllText(Path.Combine(buildFolder, "BuildEnvironment.json"), currentBuildEnvironment.Replace("Demo", "ShinyNewProject"));
+            File.WriteAllText(Path.Combine(buildFolder, "BuildEnvironment.json"), currentBuildEnvironment.Replace("Demo", "ShinyNewProject1"));
 
             var fxFolder = @"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319";
             var setupCmd = File.ReadAllText(Path.Combine(buildFolder, "CommandPrompt.bat"));
             setupCmd.Should().Contain(fxFolder);
 
-            File.ReadAllText(Path.Combine(buildFolder, "ShinyNewProject.Web\\ShinyNewProject.Web.csproj")).Should().Contain("349c5851-65df-11da-9384-00065b846f21", "ProjectTypeGuids should not be replaced");
+            File.ReadAllText(Path.Combine(buildFolder, "ShinyNewProject1.Web\\ShinyNewProject1.Web.csproj")).Should().Contain("349c5851-65df-11da-9384-00065b846f21", "ProjectTypeGuids should not be replaced");
 
             var processedFiles = Directory.EnumerateFiles(buildFolder, "*.*", SearchOption.AllDirectories)
                 .Where(d => Generate.ProcessedExtensions.Contains(Path.GetExtension(d).ToLower()));
 
             foreach (var processedFile in processedFiles)
                 foreach (var line in File.ReadAllLines(processedFile))
-                    if (line.Contains("Demo"))
-                        Assert.Fail("Found Demo in {0}: {1}", processedFile, line);
+                    if (Path.GetFileName(processedFile) != "GenerateProjectTests.cs" && line.ToLower().Contains("demo"))
+                        Assert.Fail("Found [Dd]emo in {0}: {1}", processedFile, line);
 
             var originalGuids = FindGuids(originalFolder);
             var newGuids = FindGuids(buildFolder);
@@ -54,11 +54,11 @@ namespace Demo.System.Tests.ProjectCreation
                     Assert.Fail("GUID {0} was found in both the original project and the generated project", originalGuid);
 
             var msBuild = Path.Combine(fxFolder, "msbuild.exe");
-            RunVerify(msBuild, "ShinyNewProject.proj", buildFolder);
+            RunVerify(msBuild, "ShinyNewProject1.proj", buildFolder);
 
             // Assert DB?  NUnit logs?
 
-            RunVerify(msBuild, "ShinyNewProject.proj /t:clean", buildFolder);
+            RunVerify(msBuild, "ShinyNewProject1.proj /t:clean", buildFolder);
             DeleteFolder(buildFolder, 5);
         }
 
