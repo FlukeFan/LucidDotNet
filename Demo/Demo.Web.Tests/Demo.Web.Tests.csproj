@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="App\GenerationTests.cs" />
     <Compile Include="App\HomeTests.cs" />
     <Compile Include="App\PlanningTests.cs" />
     <Compile Include="SetUpFixture.cs" />

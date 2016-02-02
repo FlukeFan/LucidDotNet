@@ -1,0 +1,25 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+@using System.Web.Mvc.Html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Project</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div>Generate Project</div>
+
+    @Html.ValidationSummary(true)
+    @using (var form = Html.BeginForm())
+    {
+        <div>
+            @{/* TODO create form helper that allows command for model names */}
+            @Html.Label("Name", "Project Name")
+            @Html.TextBox("Name")
+            @Html.ValidationMessage("Name")
+        </div>
+
+        <input type="submit" value="Generate Project" />
+    }
+</body>
+</html>

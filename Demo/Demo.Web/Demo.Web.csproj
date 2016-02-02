@@ -127,6 +127,7 @@
     <Content Include="App\Planning\StartDesign.cshtml" />
     <Content Include="App\Planning\List.cshtml" />
     <EmbeddedResource Include="Project.zip" />
+    <Content Include="App\Generation\Generate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="App\Generation\GenerationController.cs" />
     <Compile Include="App\Home\HomeController.cs" />
     <Compile Include="App\Planning\PlanningController.cs" />
     <Compile Include="Global.asax.cs">
