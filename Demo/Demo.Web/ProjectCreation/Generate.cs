@@ -121,12 +121,11 @@ namespace Demo.Web.ProjectCreation
 
         private static void ProcessTextFile(Stream inputFileStream, ZipEntry newEntry, ZipOutputStream zipOutput, string newName)
         {
-            var inputLines = new List<string>();
+            string[] inputLines;
             using (var reader = new StreamReader(inputFileStream))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                    inputLines.Add(line);
+                var content = reader.ReadToEnd();
+                inputLines = content.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.None);
             }
 
             var outputLines = new List<string>();
