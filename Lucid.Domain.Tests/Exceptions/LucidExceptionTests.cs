@@ -42,5 +42,21 @@ namespace Lucid.Domain.Tests.Exceptions
 
             e.Message.Should().Be("p1: m1\np2: m1\np2: m2\np3: m2");
         }
+
+        [Test]
+        public void PropertyErrorExtension()
+        {
+            var cmd = new PropCommand();
+
+            var exception = cmd.PropertyError(c => c.P1, p => string.Format("Error with {0}", p));
+
+            exception.PropertyMessages.Keys.Should().BeEquivalentTo("P1");
+            exception.PropertyMessages["P1"].Should().BeEquivalentTo("Error with P1");
+        }
+
+        public class PropCommand
+        {
+            public string P1 { get; set; }
+        }
     }
 }
