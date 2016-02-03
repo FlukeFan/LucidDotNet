@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace Demo.System.Tests.ProjectCreation
 {
     [TestFixture]
-    [Explicit("Until this is working")]
+    [Explicit("Very slow system test - this is run explicitly before pusing to production")]
     public class GenerateProjectTests
     {
         [Test]
