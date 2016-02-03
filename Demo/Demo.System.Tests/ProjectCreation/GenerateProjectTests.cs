@@ -35,6 +35,12 @@ namespace Demo.System.Tests.ProjectCreation
             var setupCmd = File.ReadAllText(Path.Combine(buildFolder, "CommandPrompt.bat"));
             setupCmd.Should().Contain(fxFolder);
 
+            var lastReadmeCharBefore = LastCharOfFile(Path.Combine(originalFolder, "readme.txt"));
+            var lastReadmeCharAfter = LastCharOfFile(Path.Combine(buildFolder, "readme.txt"));
+
+            lastReadmeCharBefore.Should().Be(10);
+            lastReadmeCharAfter.Should().Be(lastReadmeCharBefore, "trailing lines in readme.txt should be maintained (and last line should be empty)");
+
             File.ReadAllText(Path.Combine(buildFolder, "ShinyNewProject1.Web\\ShinyNewProject1.Web.csproj")).Should().Contain("349c5851-65df-11da-9384-00065b846f21", "ProjectTypeGuids should not be replaced");
 
             var processedFiles = Directory.EnumerateFiles(buildFolder, "*.*", SearchOption.AllDirectories)
@@ -60,6 +66,15 @@ namespace Demo.System.Tests.ProjectCreation
 
             RunVerify(msBuild, "ShinyNewProject1.proj /t:clean", buildFolder);
             DeleteFolder(buildFolder, 5);
+        }
+
+        private int LastCharOfFile(string path)
+        {
+            using (var stream = File.OpenRead(path))
+            {
+                stream.Seek(-1, SeekOrigin.End);
+                return stream.ReadByte();
+            }
         }
 
         private IList<string> FindGuids(string folder)
