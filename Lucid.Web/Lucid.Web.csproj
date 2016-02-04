@@ -94,9 +94,9 @@
     </PackageDependencies>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lucid.Domain\Lucid.Domain.csproj">
+    <ProjectReference Include="..\Lucid.Facade\Lucid.Facade.csproj">
       <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
-      <Name>Lucid.Domain</Name>
+      <Name>Lucid.Facade</Name>
     </ProjectReference>
   </ItemGroup>
   <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(LucidVersion).nupkg">

@@ -1,5 +1,5 @@
 ﻿using Demo.Domain.Utility;
-using Lucid.Domain.Execution;
+using Lucid.Facade.Execution;
 
 namespace Demo.Infrastructure.NHibernate
 {

@@ -1,4 +1,5 @@
-﻿namespace Demo.Domain.Contract.Product.Responses
+﻿
+namespace Demo.Domain.Contract.Product.Responses
 {
     public class DesignDto
     {

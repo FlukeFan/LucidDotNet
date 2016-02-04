@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using Lucid.Domain.Testing;
+using Lucid.Facade.Testing;
 using Lucid.Web.Testing.Hosting;
 using Lucid.Web.Testing.Http;
 using NUnit.Framework;

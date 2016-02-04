@@ -4,8 +4,8 @@ using System.IO;
 using System.Web.Hosting;
 using Demo.Infrastructure;
 using Demo.Infrastructure.NHibernate;
-using Lucid.Domain.Execution;
-using Lucid.Domain.Validation;
+using Lucid.Facade.Execution;
+using Lucid.Facade.Validation;
 using Newtonsoft.Json;
 
 namespace Demo.Web.Utility

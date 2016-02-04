@@ -34,8 +34,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lucid.Domain, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Domain.0.0.0.2\lib\net45\Lucid.Domain.dll</HintPath>
+    <Reference Include="Lucid.Facade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucid.Facade.0.0.0.2\lib\net45\Lucid.Facade.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lucid.Persistence, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">

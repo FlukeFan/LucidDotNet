@@ -3,8 +3,8 @@ using System.IO;
 using Demo.Web.ProjectCreation;
 using FluentAssertions;
 using ICSharpCode.SharpZipLib.Zip;
-using Lucid.Domain.Exceptions;
-using Lucid.Domain.Validation;
+using Lucid.Facade.Exceptions;
+using Lucid.Facade.Validation;
 using NUnit.Framework;
 
 namespace Demo.Web.Tests.ProjectCreation

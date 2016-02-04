@@ -1,6 +1,6 @@
 ﻿using System;
-using Lucid.Domain.Exceptions;
-using Lucid.Domain.Validation;
+using Lucid.Facade.Exceptions;
+using Lucid.Facade.Validation;
 using NUnit.Framework;
 
 namespace Demo.Domain.Tests.Utility

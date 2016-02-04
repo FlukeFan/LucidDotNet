@@ -47,12 +47,12 @@
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Domain, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Domain.0.0.0.2\lib\net45\Lucid.Domain.dll</HintPath>
+    <Reference Include="Lucid.Facade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucid.Facade.0.0.0.2\lib\net45\Lucid.Facade.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Domain.Testing, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Domain.Testing.0.0.0.2\lib\net45\Lucid.Domain.Testing.dll</HintPath>
+    <Reference Include="Lucid.Facade.Testing, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucid.Facade.Testing.0.0.0.2\lib\net45\Lucid.Facade.Testing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lucid.Web.Testing, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">

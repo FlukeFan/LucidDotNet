@@ -1,5 +1,5 @@
 ﻿using Demo.Domain.Contract.Product.Responses;
-using Lucid.Domain.Execution;
+using Lucid.Facade.Execution;
 
 namespace Demo.Domain.Contract.Product.Queries
 {
