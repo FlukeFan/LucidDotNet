@@ -1,0 +1,17 @@
+
+*/bin
+*/obj
+*/*.csproj.user
+*.suo
+*.sln.cache
+
+/BuildEnvironment.json
+/TestResult.xml
+/.vs
+/AssemblyInfo.cs
+
+*.VisualState.xml
+*.Web/Project.zip
+
+/packages/MSBuildTasks.1.4.0.128/tools/Microsoft.Build.Commontypes.xsd
+/packages/MSBuildTasks.1.4.0.128/tools/Microsoft.Build.Core.xsd
