@@ -1,1 +1,1 @@
-git push appharbor master
+msbuild AppHarbor\AppHarbor.proj /t:Push
