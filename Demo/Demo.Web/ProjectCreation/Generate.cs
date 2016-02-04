@@ -12,6 +12,7 @@ namespace Demo.Web.ProjectCreation
     {
         public static readonly IList<string> ProcessedExtensions = new List<string>
         {
+            ".gitignore",
             ".sln",
             ".csproj",
             ".proj",
