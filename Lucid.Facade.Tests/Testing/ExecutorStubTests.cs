@@ -37,6 +37,8 @@ namespace Lucid.Facade.Tests.Testing
 
         public class FakeQueryDictionary : IQuerySingle<IDictionary<int, FakeResponse>> { }
 
+        public class FakeQueryArray : IQuerySingle<int[]> { }
+
         [Test]
         public void Executed_ReturnsStoredExecutions()
         {
@@ -125,6 +127,17 @@ namespace Lucid.Facade.Tests.Testing
 
             result.Should().NotBeNull();
             result.Keys.Count().Should().Be(0);
+        }
+
+        [Test]
+        public void ExecuteQueryArray_ReturnsEmptyArray()
+        {
+            var executor = new ExecutorStub();
+
+            var result = (int[])(executor as IExecutor).Execute(new FakeQueryArray());
+
+            result.Should().NotBeNull();
+            result.Length.Should().Be(0);
         }
 
         [Test]

@@ -86,6 +86,9 @@ namespace Lucid.Facade.Testing
             if (type.IsValueType)
                 return Activator.CreateInstance(type);
 
+            if (type.IsArray)
+                return Array.CreateInstance(type.GetElementType(), 0);
+
             if (type.IsInterface)
             {
                 var typeName = type.Name;
