@@ -23,6 +23,17 @@ namespace Demo.Database.Tests.Migrations
         private const string CreateDb = "CREATE DATABASE Demo";
 
         [Test]
+        [Explicit("Run when cleaning the build")]
+        public void DropDatabase()
+        {
+            using (var masterDb = new SqlConnection(_environment.MasterConnection))
+            {
+                masterDb.Open();
+                ExecuteNonQuery(masterDb, DropDb);
+            }
+        }
+
+        [Test]
         public void Migrations_Run_UpgradesDatabase()
         {
             DropAndCreateBlankDb();

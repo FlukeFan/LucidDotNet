@@ -47,12 +47,16 @@
   </Target>
 
   <Target Name="Clean">
-    <MSBuild Projects="$(MSBuildProjectFile)" Targets="CleanFiles" Properties="Configuration=Debug" />
-    <MSBuild Projects="$(MSBuildProjectFile)" Targets="CleanFiles" Properties="Configuration=Release" />
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="CleanFilesInit" Properties="Configuration=Debug" />
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="CleanFilesInit" Properties="Configuration=Release" />
   </Target>
 
-  <Target Name="CleanFiles">
+  <Target Name="CleanFilesInit">
     <CallTarget Targets="Init" />
+    <CallTarget Targets="CleanFiles" />
+  </Target>
+  
+  <Target Name="CleanFiles">
     <MSBuild Projects="Demo\Demo.proj" Properties="$(GlobalProperties)" Targets="Clean" />
     <RemoveDir Directories="Demo\packages" />
     <MSBuild Projects="@(ProjectsToClean)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />

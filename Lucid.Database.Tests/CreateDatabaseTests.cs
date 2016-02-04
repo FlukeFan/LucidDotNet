@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Lucid.Database.Tests.Migrations
+namespace Lucid.Database.Tests
 {
     [TestFixture]
     public class CreateDatabaseTests
@@ -37,6 +37,17 @@ namespace Lucid.Database.Tests.Migrations
                 [Id] ASC
             ))
             ";
+
+        [Test]
+        [Explicit("Run when cleaning the build")]
+        public void DropDatabase()
+        {
+            using (var masterDb = new SqlConnection(_environment.MasterConnection))
+            {
+                masterDb.Open();
+                ExecuteNonQuery(masterDb, DropDb);
+            }
+        }
 
         [Test]
         public void Migrations_Run_UpgradesDatabase()
