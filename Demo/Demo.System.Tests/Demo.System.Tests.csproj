@@ -92,6 +92,9 @@
       <Name>Demo.Web</Name>
     </ProjectReference>
   </ItemGroup>
+  <Target Name="BeforeDeploy">
+    <Exec Command="$(NUnitPath) @(TestAssembly) /run:Demo.System.Tests.ProjectCreation.GenerateProjectTests.Execute /result=&quot;$(OutDir)\BeforeDeploy.xml&quot;" />
+  </Target>
   <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
     <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
     <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
