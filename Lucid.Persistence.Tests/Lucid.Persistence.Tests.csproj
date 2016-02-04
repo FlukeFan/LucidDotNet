@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D824C9D7-9A47-4221-897C-DB99FE98C0D9}</ProjectGuid>
+    <ProjectGuid>{F66200E6-6F80-4355-96E4-84439F7EA652}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Lucid.Persistence.NHibernate</RootNamespace>
-    <AssemblyName>Lucid.Persistence.NHibernate</AssemblyName>
+    <RootNamespace>Lucid.Persistence.Tests</RootNamespace>
+    <AssemblyName>Lucid.Persistence.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -34,15 +34,20 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    <Reference Include="FluentAssertions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.2.1\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+    <Reference Include="FluentAssertions.Core, Version=4.2.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.2.1\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,31 +57,47 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
-    <Compile Include="NhHelper.cs" />
-    <Compile Include="NhCriteria.cs" />
-    <Compile Include="NhRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Lucid.Persistence.NHibernate.nuspec" />
-    <None Include="packages.config" />
+    <Compile Include="IRepositoryTests.cs" />
+    <Compile Include="LucidBuilderExtensions.cs" />
+    <Compile Include="LucidEntity.cs" />
+    <Compile Include="LucidPolyType.cs" />
+    <Compile Include="LucidPolyTypeBuilder.cs" />
+    <Compile Include="Queries\WhereTests.cs" />
+    <Compile Include="Testing\BuilderTests.cs" />
+    <Compile Include="Testing\ConsistencyInspectorTests.cs" />
+    <Compile Include="Testing\CustomInspectionsTests.cs" />
+    <Compile Include="Testing\MemoryRepositoryTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\Global.targets" />
   <ItemGroup>
-    <PackageDependencies Include="bin\$(Configuration)\$(AssemblyName).dll">
+    <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
       <InProject>False</InProject>
-    </PackageDependencies>
+    </TestAssembly>
+    <TestOutput Include="bin\$(Configuration)\$(AssemblyName).results.xml">
+      <InProject>False</InProject>
+    </TestOutput>
+    <TestSuccessFlag Include="bin\$(Configuration)\$(AssemblyName).success.flg">
+      <InProject>False</InProject>
+    </TestSuccessFlag>
+    <TestDependencies Include="@(TestAssembly)">
+      <InProject>False</InProject>
+    </TestDependencies>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lucid.Persistence.Testing\Lucid.Persistence.Testing.csproj">
+      <Project>{d0d43151-7a59-4fbd-bb3a-087ae0b5df06}</Project>
+      <Name>Lucid.Persistence.Testing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lucid.Persistence\Lucid.Persistence.csproj">
       <Project>{ad59fd30-63d8-4416-9703-93d5854c2886}</Project>
       <Name>Lucid.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
-  <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(LucidVersion).nupkg">
-    <Exec Command="..\$(NuGetExe) pack $(MSBuildProjectFile) -OutputDirectory ..\packaged -Properties Configuration=$(Configuration);OutDir=$(OutDir)" />
+  <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
+    <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
+    <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
   <Target Name="AfterBuild">
-    <CallTarget Targets="Package" />
+    <CallTarget Targets="NUnit" />
   </Target>
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Lucid.Domain.Persistence.Queries;
+using Lucid.Persistence.Queries;
 
-namespace Lucid.Domain.Persistence
+namespace Lucid.Persistence
 {
     public interface IRepository<TId>
     {

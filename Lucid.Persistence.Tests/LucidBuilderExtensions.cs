@@ -1,7 +1,6 @@
-﻿using Lucid.Domain.Persistence;
-using Lucid.Domain.Testing;
+﻿using Lucid.Persistence.Testing;
 
-namespace Lucid.Domain.Tests.Persistence
+namespace Lucid.Persistence.Tests
 {
     public static class LucidBuildExtensions
     {

@@ -5,7 +5,7 @@ using Demo.Domain.Product;
 using Demo.Domain.Tests.Utility;
 using Demo.Domain.Utility;
 using FluentAssertions;
-using Lucid.Domain.Testing;
+using Lucid.Persistence.Testing;
 using NUnit.Framework;
 
 namespace Demo.Domain.Tests.Product

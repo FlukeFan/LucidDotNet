@@ -1,8 +1,6 @@
-﻿using Lucid.Domain.Persistence;
-using Lucid.Domain.Testing;
-using Lucid.Domain.Tests.Persistence;
+﻿using Lucid.Persistence.Testing;
 
-namespace Lucid.Domain.Tests.Testing
+namespace Lucid.Persistence.Tests.Testing
 {
     public class MemoryRepositoryTests : IRepositoryTests
     {

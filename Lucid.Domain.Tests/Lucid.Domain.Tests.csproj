@@ -59,17 +59,7 @@
     <Compile Include="..\AssemblyInfo.cs" />
     <Compile Include="Exceptions\LucidExceptionTests.cs" />
     <Compile Include="Execution\ExecutorTests.cs" />
-    <Compile Include="Persistence\IRepositoryTests.cs" />
-    <Compile Include="Persistence\LucidBuilderExtensions.cs" />
-    <Compile Include="Persistence\LucidEntity.cs" />
-    <Compile Include="Persistence\LucidPolyTypeBuilder.cs" />
-    <Compile Include="Persistence\LucidPolyType.cs" />
-    <Compile Include="Persistence\Queries\WhereTests.cs" />
-    <Compile Include="Testing\BuilderTests.cs" />
-    <Compile Include="Testing\ConsistencyInspectorTests.cs" />
-    <Compile Include="Testing\CustomInspectionsTests.cs" />
     <Compile Include="Testing\ExecutorStubTests.cs" />
-    <Compile Include="Testing\MemoryRepositoryTests.cs" />
     <Compile Include="Validation\LucidValidatorTests.cs" />
     <Compile Include="Validation\ValildatingExecutorTests.cs" />
   </ItemGroup>

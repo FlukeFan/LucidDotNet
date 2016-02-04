@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D824C9D7-9A47-4221-897C-DB99FE98C0D9}</ProjectGuid>
+    <ProjectGuid>{D0D43151-7A59-4FBD-BB3A-087AE0B5DF06}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Lucid.Persistence.NHibernate</RootNamespace>
-    <AssemblyName>Lucid.Persistence.NHibernate</AssemblyName>
+    <RootNamespace>Lucid.Persistence.Testing</RootNamespace>
+    <AssemblyName>Lucid.Persistence.Testing</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -34,14 +34,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,13 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs" />
-    <Compile Include="NhHelper.cs" />
-    <Compile Include="NhCriteria.cs" />
-    <Compile Include="NhRepository.cs" />
+    <Compile Include="Builder.cs" />
+    <Compile Include="ConsistencyInspector.cs" />
+    <Compile Include="CustomInspections.cs" />
+    <Compile Include="MemoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Lucid.Persistence.NHibernate.nuspec" />
-    <None Include="packages.config" />
+    <None Include="Lucid.Persistence.Testing.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Global.targets" />

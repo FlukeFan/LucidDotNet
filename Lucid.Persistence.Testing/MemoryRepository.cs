@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lucid.Domain.Persistence;
-using Lucid.Domain.Persistence.Queries;
+using Lucid.Persistence.Queries;
 
-namespace Lucid.Domain.Testing
+namespace Lucid.Persistence.Testing
 {
     public class MemoryRepository<TId> : IRepository<TId>
     {

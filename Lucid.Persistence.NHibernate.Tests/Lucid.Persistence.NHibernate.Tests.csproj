@@ -86,21 +86,21 @@
       <Project>{c976d0c2-11a6-4993-a338-bdbaa0bfc67d}</Project>
       <Name>Lucid.Database.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lucid.Domain.Testing\Lucid.Domain.Testing.csproj">
-      <Project>{720932d2-760d-46c4-8dd9-7d492867d23e}</Project>
-      <Name>Lucid.Domain.Testing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lucid.Domain.Tests\Lucid.Domain.Tests.csproj">
-      <Project>{24eed56f-299c-4e7d-989d-75c8ed35dc8d}</Project>
-      <Name>Lucid.Domain.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lucid.Domain\Lucid.Domain.csproj">
-      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
-      <Name>Lucid.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lucid.Persistence.NHibernate\Lucid.Persistence.NHibernate.csproj">
       <Project>{d824c9d7-9a47-4221-897c-db99fe98c0d9}</Project>
       <Name>Lucid.Persistence.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Persistence.Testing\Lucid.Persistence.Testing.csproj">
+      <Project>{d0d43151-7a59-4fbd-bb3a-087ae0b5df06}</Project>
+      <Name>Lucid.Persistence.Testing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Persistence.Tests\Lucid.Persistence.Tests.csproj">
+      <Project>{f66200e6-6f80-4355-96e4-84439f7ea652}</Project>
+      <Name>Lucid.Persistence.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Persistence\Lucid.Persistence.csproj">
+      <Project>{ad59fd30-63d8-4416-9703-93d5854c2886}</Project>
+      <Name>Lucid.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

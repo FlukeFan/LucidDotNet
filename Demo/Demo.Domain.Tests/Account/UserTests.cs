@@ -3,7 +3,7 @@ using Demo.Domain.Account;
 using Demo.Domain.Contract;
 using Demo.Domain.Tests.Utility;
 using FluentAssertions;
-using Lucid.Domain.Testing;
+using Lucid.Persistence.Testing;
 using NUnit.Framework;
 
 namespace Demo.Domain.Tests.Account

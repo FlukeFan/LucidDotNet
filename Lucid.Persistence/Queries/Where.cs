@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Lucid.Domain.Persistence.Queries
+namespace Lucid.Persistence.Queries
 {
     public abstract class Where
     {

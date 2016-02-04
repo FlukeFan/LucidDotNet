@@ -1,8 +1,7 @@
 ﻿using FluentAssertions;
-using Lucid.Domain.Persistence;
 using NUnit.Framework;
 
-namespace Lucid.Domain.Tests.Persistence
+namespace Lucid.Persistence.Tests
 {
     [TestFixture]
     public abstract class IRepositoryTests

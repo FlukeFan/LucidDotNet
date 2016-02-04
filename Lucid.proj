@@ -61,12 +61,15 @@
   </Target>
 
   <ItemGroup>
-    <ProjectsToBuild Include="Lucid.Domain\Lucid.Domain.csproj"/>
-    <ProjectsToBuild Include="Lucid.Domain.Testing\Lucid.Domain.Testing.csproj"/>
-    <ProjectsToBuild Include="Lucid.Domain.Tests\Lucid.Domain.Tests.csproj"/>
+    <ProjectsToBuild Include="Lucid.Persistence\Lucid.Persistence.csproj"/>
+    <ProjectsToBuild Include="Lucid.Persistence.Testing\Lucid.Persistence.Testing.csproj"/>
+    <ProjectsToBuild Include="Lucid.Persistence.Tests\Lucid.Persistence.Tests.csproj"/>
     <ProjectsToBuild Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
     <ProjectsToBuild Include="Lucid.Persistence.NHibernate\Lucid.Persistence.NHibernate.csproj"/>
     <ProjectsToBuild Include="Lucid.Persistence.NHibernate.Tests\Lucid.Persistence.NHibernate.Tests.csproj"/>
+    <ProjectsToBuild Include="Lucid.Domain\Lucid.Domain.csproj"/>
+    <ProjectsToBuild Include="Lucid.Domain.Testing\Lucid.Domain.Testing.csproj"/>
+    <ProjectsToBuild Include="Lucid.Domain.Tests\Lucid.Domain.Tests.csproj"/>
     <ProjectsToBuild Include="Lucid.Web\Lucid.Web.csproj"/>
     <ProjectsToBuild Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
     <ProjectsToBuild Include="Lucid.Web.Testing\Lucid.Web.Testing.csproj"/>
@@ -78,12 +81,15 @@
     <ProjectsToClean Include="Lucid.Web.Testing\Lucid.Web.Testing.csproj"/>
     <ProjectsToClean Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
     <ProjectsToClean Include="Lucid.Web\Lucid.Web.csproj"/>
-    <ProjectsToClean Include="Lucid.Persistence.NHibernate.Tests\Lucid.Persistence.NHibernate.Tests.csproj"/>
-    <ProjectsToClean Include="Lucid.Persistence.NHibernate\Lucid.Persistence.NHibernate.csproj"/>
-    <ProjectsToClean Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
     <ProjectsToClean Include="Lucid.Domain.Tests\Lucid.Domain.Tests.csproj"/>
     <ProjectsToClean Include="Lucid.Domain.Testing\Lucid.Domain.Testing.csproj"/>
     <ProjectsToClean Include="Lucid.Domain\Lucid.Domain.csproj"/>
+    <ProjectsToClean Include="Lucid.Persistence.NHibernate.Tests\Lucid.Persistence.NHibernate.Tests.csproj"/>
+    <ProjectsToClean Include="Lucid.Persistence.NHibernate\Lucid.Persistence.NHibernate.csproj"/>
+    <ProjectsToClean Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
+    <ProjectsToClean Include="Lucid.Persistence.Tests\Lucid.Persistence.Tests.csproj"/>
+    <ProjectsToClean Include="Lucid.Persistence.Testing\Lucid.Persistence.Testing.csproj"/>
+    <ProjectsToClean Include="Lucid.Persistence\Lucid.Persistence.csproj"/>
   </ItemGroup>
 
   <Target Name="GenerateAssemblyInfo" Inputs="Global.targets" Outputs="AssemblyInfo.cs">
@@ -117,9 +123,11 @@
     <CallTarget Targets="SetReleaseConfiguration" />
     <CallTarget Targets="Init" />
     <CallTarget Targets="Build" />
+    <Exec Command="$(NuGetExe) push packaged\Lucid.Persistence.$(LucidVersion).nupkg" />
+    <Exec Command="$(NuGetExe) push packaged\Lucid.Persistence.Testing.$(LucidVersion).nupkg" />
+    <Exec Command="$(NuGetExe) push packaged\Lucid.Persistence.NHibernate.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Domain.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Domain.Testing.$(LucidVersion).nupkg" />
-    <Exec Command="$(NuGetExe) push packaged\Lucid.Persistence.NHibernate.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Web.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Web.Testing.$(LucidVersion).nupkg" />
   </Target>

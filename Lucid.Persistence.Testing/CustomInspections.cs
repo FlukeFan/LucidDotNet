@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lucid.Domain.Testing
+namespace Lucid.Persistence.Testing
 {
     public class CustomInspections
     {

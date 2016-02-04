@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Lucid.Domain.Persistence.Queries
+namespace Lucid.Persistence.Queries
 {
     public class Query<T, TId> where T : IEntity<TId>
     {

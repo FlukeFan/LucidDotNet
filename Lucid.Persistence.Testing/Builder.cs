@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Lucid.Domain.Testing
+namespace Lucid.Persistence.Testing
 {
     public class Builder
     {

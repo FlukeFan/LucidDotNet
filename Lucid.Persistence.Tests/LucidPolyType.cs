@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucid.Domain.Tests.Persistence
+namespace Lucid.Persistence.Tests
 {
     public class LucidPolyType : LucidEntity
     {

@@ -1,4 +1,4 @@
-﻿namespace Lucid.Domain.Persistence
+﻿namespace Lucid.Persistence
 {
     public interface IEntity<TId>
     {

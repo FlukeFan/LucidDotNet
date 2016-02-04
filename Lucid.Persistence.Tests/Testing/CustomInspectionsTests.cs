@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using Lucid.Domain.Testing;
+using Lucid.Persistence.Testing;
 using NUnit.Framework;
 
-namespace Lucid.Domain.Tests.Testing
+namespace Lucid.Persistence.Tests.Testing
 {
     [TestFixture]
     public class CustomInspectionsTests

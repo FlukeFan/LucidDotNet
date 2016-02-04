@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using Lucid.Domain.Persistence.Queries;
+using Lucid.Persistence.Queries;
 using NUnit.Framework;
 
-namespace Lucid.Domain.Tests.Persistence.Queries
+namespace Lucid.Persistence.Tests.Queries
 {
     [TestFixture]
     public class WhereTests

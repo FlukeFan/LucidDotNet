@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Lucid.Domain.Persistence;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Mapping.ByCode;

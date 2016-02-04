@@ -1,8 +1,7 @@
 ﻿using FluentAssertions;
 using Lucid.Database.Tests;
-using Lucid.Domain.Persistence;
-using Lucid.Domain.Testing;
-using Lucid.Domain.Tests.Persistence;
+using Lucid.Persistence.Testing;
+using Lucid.Persistence.Tests;
 using NHibernate.Cfg;
 using NHibernate.Connection;
 using NHibernate.Dialect;

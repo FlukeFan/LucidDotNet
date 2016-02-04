@@ -1,6 +1,7 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
   <Config name="Debug" binpathtype="Auto">
+    <assembly path="Lucid.Persistence.Tests\bin\Debug\Lucid.Persistence.Tests.dll" />
     <assembly path="Lucid.Domain.Tests\bin\Debug\Lucid.Domain.Tests.dll" />
     <assembly path="Lucid.Database.Tests\bin\Debug\Lucid.Database.Tests.dll" />
     <assembly path="Lucid.Persistence.NHibernate.Tests\bin\Debug\Lucid.Persistence.NHibernate.Tests.dll" />

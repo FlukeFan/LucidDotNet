@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lucid.Domain.Persistence;
-using Lucid.Domain.Persistence.Queries;
+using Lucid.Persistence.Queries;
 using NHibernate;
 using NHibernate.Criterion;
 

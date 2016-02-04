@@ -1,5 +1,5 @@
 ﻿using Demo.Domain.Utility;
-using Lucid.Domain.Testing;
+using Lucid.Persistence.Testing;
 
 namespace Demo.Domain.Tests.Utility
 {

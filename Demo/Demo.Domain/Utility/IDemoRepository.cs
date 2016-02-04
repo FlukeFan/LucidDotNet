@@ -1,4 +1,4 @@
-﻿using Lucid.Domain.Persistence;
+﻿using Lucid.Persistence;
 
 namespace Demo.Domain.Utility
 {

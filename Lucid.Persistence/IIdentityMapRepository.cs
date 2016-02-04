@@ -1,4 +1,4 @@
-﻿namespace Lucid.Domain.Persistence
+﻿namespace Lucid.Persistence
 {
     public interface IIdentityMapRepository<TId> : IRepository<TId>
     {
