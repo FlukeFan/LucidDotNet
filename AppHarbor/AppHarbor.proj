@@ -21,6 +21,5 @@
     <Exec Command="..\packages\NuGet.CommandLine.3.3.0\tools\NuGet.exe restore Demo.sln -Source https://api.nuget.org/v3/index.json" WorkingDirectory="..\Demo" />
     <MSBuild Projects="..\Lucid.proj" Properties="RunTests=false;AppHarbor=true;NUnitPath=$(MSBuildProjectDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" />
     <MSBuild Projects="..\Demo\Demo.System.Tests\Demo.System.Tests.csproj" Targets="BeforeDeploy" Properties="RunTests=false;AppHarbor=true;NUnitPath=$(MSBuildProjectDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" />
-    <Exec Command="git push appharbor master" WorkingDirectory=".." />
   </Target>
 </Project>
