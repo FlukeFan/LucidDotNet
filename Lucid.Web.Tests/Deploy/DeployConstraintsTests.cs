@@ -7,6 +7,7 @@ namespace Lucid.Web.Tests.Deploy
     [TestFixture]
     public class DeployConstraintsTests
     {
+        private const string NugetPackageName   = "Lucid.Persistence.Testing";
         private const string NugetSourceOption  = " -Source https://api.nuget.org/v3/index.json";
         private const string NugetExeLocation   = "packages\\NuGet.CommandLine.3.3.0\\tools\\NuGet.exe";
 
@@ -36,7 +37,7 @@ namespace Lucid.Web.Tests.Deploy
 
         private string GetDeployedVersion(string nugetExe, string sourceOption)
         {
-            var result = Run.Program(nugetExe, "list Lucid.Domain.Testing" + sourceOption);
+            var result = Run.Program(nugetExe, "list " + NugetPackageName + sourceOption);
 
             if (result.ExitCode != 0)
             {
@@ -53,7 +54,7 @@ namespace Lucid.Web.Tests.Deploy
 
             var lines = result.Output[0].Split(' ');
 
-            if (lines.Length != 2 || lines[0] != "Lucid.Domain.Testing")
+            if (lines.Length != 2 || lines[0] != NugetPackageName)
                 Assert.Fail("Expected output to contain a single line, but got " + failMessage);
 
             return lines[1];

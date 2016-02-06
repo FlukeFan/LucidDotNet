@@ -134,6 +134,7 @@
     <Exec Command="$(NuGetExe) push packaged\Lucid.Facade.Testing.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Web.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Web.Testing.$(LucidVersion).nupkg" />
+    <CallTarget Targets="Clean" />
   </Target>
 
 </Project>
