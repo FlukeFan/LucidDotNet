@@ -6,7 +6,7 @@
 
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
 
-  <Target Name="Init" Inputs="Global.targets" Outputs="AssemblyInfo.cs">
+  <Target Name="Init" Inputs="Common.targets" Outputs="AssemblyInfo.cs">
     <AssemblyInfo
       CodeLanguage="CS"
       AssemblyDescription="Demo Application"

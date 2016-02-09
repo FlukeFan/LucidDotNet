@@ -32,7 +32,7 @@ namespace Lucid.Web.Tests.Deploy
             var thisVersion = GetThisVersion();
 
             if (thisVersion == localCopyVersion)
-                Assert.Fail(string.Format("Version {0} is currently deployed. Update the version in Global.targets to a newer version.", thisVersion));
+                Assert.Fail(string.Format("Version {0} is currently deployed. Update the version in Common.targets to a newer version.", thisVersion));
         }
 
         private string GetDeployedVersion(string nugetExe, string sourceOption)

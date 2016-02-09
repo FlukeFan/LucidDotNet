@@ -65,7 +65,7 @@
     <None Include="Lucid.Facade.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\Global.targets" />
+  <Import Project="..\Common.targets" />
   <ItemGroup>
     <PackageDependencies Include="bin\$(Configuration)\$(AssemblyName).dll">
       <InProject>False</InProject>
