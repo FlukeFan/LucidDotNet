@@ -86,24 +86,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
-      <InProject>False</InProject>
-    </TestAssembly>
-    <TestOutput Include="bin\$(Configuration)\$(AssemblyName).results.xml">
-      <InProject>False</InProject>
-    </TestOutput>
-    <TestSuccessFlag Include="bin\$(Configuration)\$(AssemblyName).success.flg">
-      <InProject>False</InProject>
-    </TestSuccessFlag>
-    <TestDependencies Include="@(TestAssembly)">
-      <InProject>False</InProject>
-    </TestDependencies>
-    <TestDependencies Include="..\Demo.Web\**">
-      <InProject>False</InProject>
-    </TestDependencies>
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demo.Domain.Contract\Demo.Domain.Contract.csproj">
       <Project>{2d85d27e-bdff-4545-a48c-49d193143232}</Project>
@@ -114,11 +96,14 @@
       <Name>Demo.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
-    <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
-    <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
-  </Target>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\Global.targets" />
+  <ItemGroup>
+    <TestDependencies Include="..\Demo.Web\**">
+      <InProject>False</InProject>
+    </TestDependencies>
+  </ItemGroup>
   <Target Name="AfterBuild">
-    <CallTarget Targets="NUnit" />
+    <CallTarget Targets="RunTests" />
   </Target>
 </Project>

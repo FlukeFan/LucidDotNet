@@ -77,25 +77,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
-      <InProject>False</InProject>
-    </TestAssembly>
-    <TestOutput Include="bin\$(Configuration)\$(AssemblyName).results.xml">
-      <InProject>False</InProject>
-    </TestOutput>
-    <TestSuccessFlag Include="bin\$(Configuration)\$(AssemblyName).success.flg">
-      <InProject>False</InProject>
-    </TestSuccessFlag>
-    <TestDependencies Include="@(TestAssembly)">
-      <InProject>False</InProject>
-    </TestDependencies>
-  </ItemGroup>
-  <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
-    <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
-    <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
-  </Target>
+  <Import Project="..\Global.targets" />
   <Target Name="AfterBuild">
-    <CallTarget Targets="NUnit" />
+    <CallTarget Targets="RunTests" />
   </Target>
 </Project>

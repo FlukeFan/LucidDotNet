@@ -67,20 +67,7 @@
     <Compile Include="NhRepositoryTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
-      <InProject>False</InProject>
-    </TestAssembly>
-    <TestOutput Include="bin\$(Configuration)\$(AssemblyName).results.xml">
-      <InProject>False</InProject>
-    </TestOutput>
-    <TestSuccessFlag Include="bin\$(Configuration)\$(AssemblyName).success.flg">
-      <InProject>False</InProject>
-    </TestSuccessFlag>
-    <TestDependencies Include="@(TestAssembly)">
-      <InProject>False</InProject>
-    </TestDependencies>
-  </ItemGroup>
+  <Import Project="..\Global.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Lucid.Database.Tests\Lucid.Database.Tests.csproj">
       <Project>{c976d0c2-11a6-4993-a338-bdbaa0bfc67d}</Project>
@@ -106,11 +93,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
-    <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
-    <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
-  </Target>
   <Target Name="AfterBuild">
-    <CallTarget Targets="NUnit" />
+    <CallTarget Targets="RunTests" />
   </Target>
 </Project>

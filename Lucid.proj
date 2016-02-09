@@ -11,8 +11,6 @@
     <SolutionDir>$(MSBuildProjectDirectory)\</SolutionDir>
     <RunTests Condition=" '$(RunTests)' == '' ">true</RunTests>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <NUnitPath Condition=" '$(AppHarbor)' != 'true' ">$(SolutionDir)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
-    <NUnitPath Condition=" '$(AppHarbor)' == 'true' ">$(SolutionDir)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +18,7 @@
   </ItemGroup>
 
   <Target Name="Init">
-    <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);NUnitPath=$(NUnitPath);NuGetExe=$(NuGetExe);DeployBuild=$(AppHarbor)">
+    <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);NuGetExe=$(NuGetExe);DeployBuild=$(AppHarbor)">
       <Output TaskParameter="Value" PropertyName="GlobalProperties" />
     </CreateProperty>
     <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildCommunityTasksPath)" />

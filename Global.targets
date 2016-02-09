@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
   <PropertyGroup>
     <LucidVersion>0.0.0.3</LucidVersion>
     <NuGetExe>packages\NuGet.CommandLine.3.3.0\tools\NuGet.exe</NuGetExe>
+    <NUnitExe>$(MSBuildThisFileDirectory)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <TestAssembly     Include="$(OutDir)\$(AssemblyName).dll"         />
+    <TestOutput       Include="$(OutDir)\$(AssemblyName).results.xml" />
+    <TestSuccessFlag  Include="$(OutDir)\$(AssemblyName).success.flg" />
+    <TestDependencies Include="@(TestAssembly)"                       />
+  </ItemGroup>
+
+  <Target Name="RunTests" Condition="'$(RunTests)'=='true'">
+
+    <Error Text="OutDir not set"          Condition="'$(OutDir)'==''"           />
+    <Error Text="TestAssembly not set"    Condition="'@(TestAssembly)'==''"     />
+    <Error Text="TestOutput not set"      Condition="'@(TestOutput)'==''"       />
+    <Error Text="TestSuccessFlag not set" Condition="'@(TestSuccessFlag)'==''"  />
+
+    <CallTarget Targets="ExecuteTests" />
+
+  </Target>
+
+  <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
+    <Exec Command="$(NUnitExe) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
+    <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
+  </Target>
+
 </Project>

@@ -68,21 +68,6 @@
     <Compile Include="ProjectCreation\GenerateProjectTests.cs" />
     <Compile Include="ProjectCreation\Run.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <TestAssembly Include="bin\$(Configuration)\$(AssemblyName).dll">
-      <InProject>False</InProject>
-    </TestAssembly>
-    <TestOutput Include="bin\$(Configuration)\$(AssemblyName).results.xml">
-      <InProject>False</InProject>
-    </TestOutput>
-    <TestSuccessFlag Include="bin\$(Configuration)\$(AssemblyName).success.flg">
-      <InProject>False</InProject>
-    </TestSuccessFlag>
-    <TestDependencies Include="@(TestAssembly)">
-      <InProject>False</InProject>
-    </TestDependencies>
-  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
@@ -92,14 +77,12 @@
       <Name>Demo.Web</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\Global.targets" />
   <Target Name="BeforeDeploy">
-    <Exec Command="$(NUnitPath) @(TestAssembly) /run:Demo.System.Tests.ProjectCreation.GenerateProjectTests.Execute /result=&quot;$(OutDir)\BeforeDeploy.xml&quot;" />
-  </Target>
-  <Target Name="NUnit" Condition="'$(RunTests)'=='true'" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
-    <Exec Command="$(NUnitPath) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
-    <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
+    <Exec Command="$(NUnitExe) @(TestAssembly) /run:Demo.System.Tests.ProjectCreation.GenerateProjectTests.Execute /result=&quot;$(OutDir)\BeforeDeploy.xml&quot;" />
   </Target>
   <Target Name="AfterBuild">
-    <CallTarget Targets="NUnit" />
+    <CallTarget Targets="RunTests" />
   </Target>
 </Project>
