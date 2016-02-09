@@ -59,7 +59,7 @@
     <None Include="Lucid.Web.Testing.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\Common.targets" />
+  <Import Project="..\Lucid.Common.targets" />
   <ItemGroup>
     <PackageDependencies Include="bin\$(Configuration)\$(AssemblyName).dll">
       <InProject>False</InProject>

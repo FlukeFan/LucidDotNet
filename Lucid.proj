@@ -4,7 +4,7 @@
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.128\tools</MSBuildCommunityTasksPath>
   </PropertyGroup>
 
-  <Import Project="Common.targets" />
+  <Import Project="Lucid.Common.targets" />
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
 
   <PropertyGroup>
@@ -94,7 +94,7 @@
     <ProjectsToClean Include="Lucid.Persistence\Lucid.Persistence.csproj"/>
   </ItemGroup>
 
-  <Target Name="GenerateAssemblyInfo" Inputs="Common.targets" Outputs="AssemblyInfo.cs">
+  <Target Name="GenerateAssemblyInfo" Inputs="Lucid.Common.targets" Outputs="AssemblyInfo.cs">
     <RemoveDir Directories="packaged" />
     <RemoveDir Directories="Demo\packages" Condition="'$(AppHarbor)' != 'true'" />
     <AssemblyInfo

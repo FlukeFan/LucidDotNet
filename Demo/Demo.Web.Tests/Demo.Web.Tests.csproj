@@ -97,7 +97,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\Common.targets" />
+  <Import Project="..\Demo.Common.targets" />
   <ItemGroup>
     <TestDependencies Include="..\Demo.Web\**">
       <InProject>False</InProject>
