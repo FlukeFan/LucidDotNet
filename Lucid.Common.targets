@@ -5,28 +5,28 @@
     <LucidVersion>0.0.0.3</LucidVersion>
     <NuGetExe>packages\NuGet.CommandLine.3.3.0\tools\NuGet.exe</NuGetExe>
     <NUnitExe>$(MSBuildThisFileDirectory)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
+    <OpenCoverExe>$(MSBuildThisFileDirectory)\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
   </PropertyGroup>
   
   <ItemGroup>
-    <TestAssembly     Include="$(OutDir)\$(AssemblyName).dll"         />
-    <TestOutput       Include="$(OutDir)\$(AssemblyName).results.xml" />
-    <TestSuccessFlag  Include="$(OutDir)\$(AssemblyName).success.flg" />
-    <TestDependencies Include="@(TestAssembly)"                       />
+    <TestAssembly     Include="$(AssemblyName).dll"                     />
+    <TestOutput       Include="$(OutDir)\$(AssemblyName).results.xml"   />
+    <TestSuccessFlag  Include="$(OutDir)\$(AssemblyName).success.flg"   />
+    <TestDependencies Include="@(TestAssembly)"                         />
+    <CoverageOutput   Include="$(OutDir)\$(AssemblyName).coverage.xml"  />
   </ItemGroup>
 
   <Target Name="RunTests" Condition="'$(RunTests)'=='true'">
 
     <Error Text="OutDir not set"          Condition="'$(OutDir)'==''"           />
-    <Error Text="TestAssembly not set"    Condition="'@(TestAssembly)'==''"     />
-    <Error Text="TestOutput not set"      Condition="'@(TestOutput)'==''"       />
-    <Error Text="TestSuccessFlag not set" Condition="'@(TestSuccessFlag)'==''"  />
+    <Error Text="AssemblyName not set"    Condition="'$(AssemblyName)'==''"     />
 
     <CallTarget Targets="ExecuteTests" />
 
   </Target>
 
   <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
-    <Exec Command="$(NUnitExe) @(TestAssembly) /result=&quot;@(TestOutput)&quot;" />
+    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:@(TestAssembly) -register -output:@(CoverageOutput) -log:Warn" />
     <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
 
