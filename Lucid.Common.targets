@@ -10,6 +10,7 @@
     <OpenCoverExe>$(MSBuildThisFileDirectory)\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
     <ReportGeneratorExe>$(MSBuildThisFileDirectory)\packages\ReportGenerator.2.4.2.0\tools\ReportGenerator.exe</ReportGeneratorExe>
 
+    <Asterisk>%2A</Asterisk>
     <TestAssembly>$(AssemblyName).dll</TestAssembly>
     <TestOutput>$(AssemblyName).results.xml</TestOutput>
     <TestSuccessFlag>$(OutDir)\$(AssemblyName).success.flg</TestSuccessFlag>
@@ -19,6 +20,11 @@
   
   <ItemGroup>
     <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <CoverFilter Include="-[FluentAssertions$(Asterisk)]$(Asterisk)" />
+    <CoverFilter Include="+[$(Asterisk)]$(Asterisk)" />
   </ItemGroup>
 
   <Target Name="RunTests" Condition="'$(RunTests)'=='true'">
@@ -31,7 +37,7 @@
   </Target>
 
   <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="$(TestSuccessFlag)">
-    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:&quot;$(TestAssembly) /result=$(TestOutput)&quot; -register:user -output:$(CoverageOutput) -log:Warn -returntargetcode" />
+    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:&quot;$(TestAssembly) /result=$(TestOutput)&quot; -register:user -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot;" />
     <Exec Command="$(ReportGeneratorExe) -reports:$(CoverageOutput) -targetdir:$(OutDir)\CoverageReport -verbosity:Error" />
     <Touch Files="$(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
