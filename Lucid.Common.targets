@@ -8,6 +8,7 @@
     <NuGetExe>packages\NuGet.CommandLine.3.3.0\tools\NuGet.exe</NuGetExe>
     <NUnitExe>$(MSBuildThisFileDirectory)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
     <OpenCoverExe>$(MSBuildThisFileDirectory)\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
+    <ReportGeneratorExe>$(MSBuildThisFileDirectory)\packages\ReportGenerator.2.4.2.0\tools\ReportGenerator.exe</ReportGeneratorExe>
 
     <TestAssembly>$(AssemblyName).dll</TestAssembly>
     <TestOutput>$(AssemblyName).results.xml</TestOutput>
@@ -31,6 +32,7 @@
 
   <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="$(TestSuccessFlag)">
     <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:&quot;$(TestAssembly) /result=$(TestOutput)&quot; -register:user -output:$(CoverageOutput) -log:Warn -returntargetcode" />
+    <Exec Command="$(ReportGeneratorExe) -reports:$(CoverageOutput) -targetdir:$(OutDir)\CoverageReport -verbosity:Error" />
     <Touch Files="$(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
 
