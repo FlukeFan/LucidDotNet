@@ -5,10 +5,10 @@
 
     <LucidVersion>0.0.0.3</LucidVersion>
 
-    <NuGetExe>packages\NuGet.CommandLine.3.3.0\tools\NuGet.exe</NuGetExe>
-    <NUnitExe>$(MSBuildThisFileDirectory)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
-    <OpenCoverExe>$(MSBuildThisFileDirectory)\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
-    <ReportGeneratorExe>$(MSBuildThisFileDirectory)\packages\ReportGenerator.2.4.2.0\tools\ReportGenerator.exe</ReportGeneratorExe>
+    <NuGetExe>$(MSBuildThisFileDirectory)\..\packages\NuGet.CommandLine.3.3.0\tools\NuGet.exe</NuGetExe>
+    <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
+    <OpenCoverExe>$(MSBuildThisFileDirectory)\..\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
+    <ReportGeneratorExe>$(MSBuildThisFileDirectory)\..\packages\ReportGenerator.2.4.2.0\tools\ReportGenerator.exe</ReportGeneratorExe>
     <VerifyCoverageJs>$(MSBuildThisFileDirectory)\VerifyCoverage.js</VerifyCoverageJs>
 
     <Asterisk>%2A</Asterisk>

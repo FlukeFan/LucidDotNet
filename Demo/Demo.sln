@@ -7,12 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Web", "Demo.Web\Demo.W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{51A70DC7-59E4-450F-B442-866366B9D63C}"
 	ProjectSection(SolutionItems) = preProject
-		BuildEnvironment.json = BuildEnvironment.json
+		.gitignore = .gitignore
+		_items\BuildEnvironment.json = _items\BuildEnvironment.json
 		CommandPrompt.bat = CommandPrompt.bat
-		Demo.Common.targets = Demo.Common.targets
+		_items\Demo.Common.targets = _items\Demo.Common.targets
 		Demo.nunit = Demo.nunit
 		Demo.proj = Demo.proj
-		Init.proj = Init.proj
+		_items\Init.proj = _items\Init.proj
 		readme.txt = readme.txt
 		RunNUnit.bat = RunNUnit.bat
 	EndProjectSection

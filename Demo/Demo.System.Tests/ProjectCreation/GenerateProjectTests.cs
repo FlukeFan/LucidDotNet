@@ -28,8 +28,8 @@ namespace Demo.System.Tests.ProjectCreation
             Console.WriteLine("Building project {0} in {1}", cmd.Name, buildFolder);
             Unzip(zipBytes, buildFolder);
             CopyFolder(@"..\..\..\packages", Path.Combine(buildFolder, "packages"));
-            var currentBuildEnvironment = File.ReadAllText(Path.Combine(originalFolder, "BuildEnvironment.json"));
-            File.WriteAllText(Path.Combine(buildFolder, "BuildEnvironment.json"), currentBuildEnvironment.Replace("Demo", "ShinyNewProject1"));
+            var currentBuildEnvironment = File.ReadAllText(Path.Combine(originalFolder, "_items/BuildEnvironment.json"));
+            File.WriteAllText(Path.Combine(buildFolder, "_items/BuildEnvironment.json"), currentBuildEnvironment.Replace("Demo", "ShinyNewProject1"));
 
             var fxFolder = @"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319";
             var setupCmd = File.ReadAllText(Path.Combine(buildFolder, "CommandPrompt.bat"));

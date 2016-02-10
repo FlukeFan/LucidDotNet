@@ -8,14 +8,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF-B71C-4A7B-BC83-B4649FC99361}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		BuildEnvironment.json = BuildEnvironment.json
+		_items\BuildEnvironment.json = _items\BuildEnvironment.json
 		CommandPrompt.bat = CommandPrompt.bat
-		Lucid.Common.targets = Lucid.Common.targets
-		Lucid.nunit = Lucid.nunit
+		_items\Lucid.Common.targets = _items\Lucid.Common.targets
+		_items\Lucid.nunit = _items\Lucid.nunit
 		Lucid.proj = Lucid.proj
 		readme.txt = readme.txt
 		RunNUnit.bat = RunNUnit.bat
-		VerifyCoverage.js = VerifyCoverage.js
+		_items\UpdateDemoNuget.txt = _items\UpdateDemoNuget.txt
+		_items\VerifyCoverage.js = _items\VerifyCoverage.js
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.StubApp", "Lucid.Web.StubApp\Lucid.Web.StubApp.csproj", "{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}"

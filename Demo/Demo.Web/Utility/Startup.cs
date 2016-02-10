@@ -45,7 +45,7 @@ namespace Demo.Web.Utility
         private string DevConnectionStringOverride()
         {
             var webFolder = HostingEnvironment.MapPath("~");
-            var configOverrideFile = Path.Combine(webFolder, @"..\BuildEnvironment.json");
+            var configOverrideFile = Path.Combine(webFolder, @"..\_items\BuildEnvironment.json");
 
             if (!File.Exists(configOverrideFile))
                 return null;

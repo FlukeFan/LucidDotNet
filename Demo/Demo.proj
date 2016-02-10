@@ -1,6 +1,6 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Import Project="Demo.Common.targets" />
+  <Import Project="_items/Demo.Common.targets" />
 
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,7 +12,7 @@
   <Target Name="Build">
     <CallTarget Targets="PackageRestore" />
     <CallTarget Targets="FixTasksXsd" />
-    <MSBuild Projects="Init.proj" Properties="$(GlobalProperties);Configuration=$(Configuration)" />
+    <MSBuild Projects="_items/Init.proj" Properties="$(GlobalProperties);Configuration=$(Configuration)" />
     <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
   </Target>
 

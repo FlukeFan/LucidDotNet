@@ -12,7 +12,7 @@ namespace Lucid.Database.Tests
         public static BuildEnvironment Load()
         {
             var folder = Environment.CurrentDirectory;
-            var searchFile = "BuildEnvironment.json";
+            var searchFile = "_items/BuildEnvironment.json";
 
             while (!File.Exists(Path.Combine(folder, searchFile)))
             {

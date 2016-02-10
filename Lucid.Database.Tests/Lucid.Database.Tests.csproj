@@ -72,7 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="..\_items\AssemblyInfo.cs" />
     <Compile Include="BuildEnvironment.cs" />
     <Compile Include="CreateDatabaseTests.cs" />
   </ItemGroup>
@@ -81,12 +81,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\Lucid.Common.targets" />
+  <Import Project="..\_items\Lucid.Common.targets" />
   <Target Name="BeforeClean" Condition="Exists('$(NUnitExe)') and Exists('$(OutDir)\Lucid.Database.Tests.dll')">
     <Exec Command="$(NUnitExe) $(OutDir)\Lucid.Database.Tests.dll /run:Lucid.Database.Tests.CreateDatabaseTests.DropDatabase /result=&quot;$(OutDir)\DropDatabase.xml&quot;" />
   </Target>
   <Target Name="AfterBuild">
-    <Copy SourceFiles="DefaultEnvironment.json" DestinationFiles="..\BuildEnvironment.json" Condition="!Exists('..\BuildEnvironment.json') OR $([System.IO.File]::GetLastWriteTime('DefaultEnvironment.json').Ticks) &gt; $([System.IO.File]::GetLastWriteTime('..\BuildEnvironment.json').Ticks)" />
+    <Copy SourceFiles="DefaultEnvironment.json" DestinationFiles="..\_items\BuildEnvironment.json" Condition="!Exists('..\_items\BuildEnvironment.json') OR $([System.IO.File]::GetLastWriteTime('DefaultEnvironment.json').Ticks) &gt; $([System.IO.File]::GetLastWriteTime('..\_items\BuildEnvironment.json').Ticks)" />
     <CallTarget Targets="RunTests" />
   </Target>
 </Project>

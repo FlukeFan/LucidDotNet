@@ -139,7 +139,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="..\_items\AssemblyInfo.cs" />
     <Compile Include="App\Generation\GenerationController.cs" />
     <Compile Include="App\Home\HomeController.cs" />
     <Compile Include="App\Planning\PlanningController.cs" />

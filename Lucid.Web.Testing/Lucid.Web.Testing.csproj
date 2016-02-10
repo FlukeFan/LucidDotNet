@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="..\_items\AssemblyInfo.cs" />
     <Compile Include="Hosting\AppDomainProxy.cs" />
     <Compile Include="Hosting\AspNetTestHost.cs" />
     <Compile Include="Hosting\ConsoleWriter.cs" />
@@ -59,7 +59,7 @@
     <None Include="Lucid.Web.Testing.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\Lucid.Common.targets" />
+  <Import Project="..\_items\Lucid.Common.targets" />
   <ItemGroup>
     <PackageDependencies Include="bin\$(Configuration)\$(AssemblyName).dll">
       <InProject>False</InProject>
@@ -72,7 +72,7 @@
     </ProjectReference>
   </ItemGroup>
   <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(LucidVersion).nupkg">
-    <Exec Command="..\$(NuGetExe) pack $(MSBuildProjectFile) -OutputDirectory ..\packaged -Properties Configuration=$(Configuration);OutDir=$(OutDir)" />
+    <Exec Command="$(NuGetExe) pack $(MSBuildProjectFile) -OutputDirectory ..\packaged -Properties Configuration=$(Configuration);OutDir=$(OutDir)" />
   </Target>
   <Target Name="AfterBuild">
     <CallTarget Targets="Package" />

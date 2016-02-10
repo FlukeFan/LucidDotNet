@@ -5,9 +5,9 @@
 
     <DemoVersion>0.0.0.1</DemoVersion>
 
-    <NuGetExe>lib\NuGet\NuGet.exe</NuGetExe>
-    <NUnitExe>$(MSBuildThisFileDirectory)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
-    <OpenCoverExe>$(MSBuildThisFileDirectory)\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
+    <NuGetExe>$(MSBuildThisFileDirectory)\..\lib\NuGet\NuGet.exe</NuGetExe>
+    <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
+    <OpenCoverExe>$(MSBuildThisFileDirectory)\..\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
 
     <TestAssembly>$(AssemblyName).dll</TestAssembly>
     <TestOutput>$(AssemblyName).results.xml</TestOutput>

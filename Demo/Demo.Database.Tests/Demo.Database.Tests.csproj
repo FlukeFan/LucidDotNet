@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="..\_items\AssemblyInfo.cs" />
     <Compile Include="BuildEnvironment.cs" />
     <Compile Include="Migrations\ConstraintsTests.cs" />
     <Compile Include="Migrations\MigrationsTests.cs" />
@@ -74,7 +74,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\Demo.Common.targets" />
+  <Import Project="..\_items\Demo.Common.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Demo.Database\Demo.Database.csproj">
       <Project>{2c74567a-5cf2-4006-b6c1-fda122578ad1}</Project>
@@ -88,7 +88,7 @@
     <Exec Command="$(NUnitExe) $(OutDir)\Demo.Database.Tests.dll /run:Demo.Database.Tests.Migrations.MigrationsTests.DropDatabase /result=&quot;$(OutDir)\DropDatabase.xml&quot;" />
   </Target>
   <Target Name="AfterBuild">
-    <Copy SourceFiles="DefaultEnvironment.json" DestinationFiles="..\BuildEnvironment.json" Condition="!Exists('..\BuildEnvironment.json') OR $([System.IO.File]::GetLastWriteTime('DefaultEnvironment.json').Ticks) &gt; $([System.IO.File]::GetLastWriteTime('..\BuildEnvironment.json').Ticks)" />
+    <Copy SourceFiles="DefaultEnvironment.json" DestinationFiles="..\_items\BuildEnvironment.json" Condition="!Exists('..\_items\BuildEnvironment.json') OR $([System.IO.File]::GetLastWriteTime('DefaultEnvironment.json').Ticks) &gt; $([System.IO.File]::GetLastWriteTime('..\_items\BuildEnvironment.json').Ticks)" />
     <CallTarget Targets="RunTests" />
     <CallTarget Targets="VerifyScriptsForDeploy" Condition="'$(DeployBuild)'=='true'" />
   </Target>

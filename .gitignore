@@ -11,12 +11,11 @@ Demo/*/*.csproj.user
 Demo/*.suo
 Demo/*.sln.cache
 
-/Lucid.VisualState.xml
-/Source/TestResult.xml
-/BuildEnvironment.json
-/TestResult.xml
+_items/Lucid.VisualState.xml
+_items/BuildEnvironment.json
+_items/TestResult.xml
+_items/AssemblyInfo.cs
 /.vs
-/AssemblyInfo.cs
 /packaged
 /packages_deployed
 

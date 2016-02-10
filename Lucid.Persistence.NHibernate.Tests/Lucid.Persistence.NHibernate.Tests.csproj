@@ -63,11 +63,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfo.cs" />
+    <Compile Include="..\_items\AssemblyInfo.cs" />
     <Compile Include="NhRepositoryTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\Lucid.Common.targets" />
+  <Import Project="..\_items\Lucid.Common.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Lucid.Database.Tests\Lucid.Database.Tests.csproj">
       <Project>{c976d0c2-11a6-4993-a338-bdbaa0bfc67d}</Project>
