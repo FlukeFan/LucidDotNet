@@ -10,14 +10,14 @@
     <OpenCoverExe>$(MSBuildThisFileDirectory)\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
 
     <TestAssembly>$(AssemblyName).dll</TestAssembly>
-    <TestOutput>$(OutDir)\$(AssemblyName).results.xml</TestOutput>
+    <TestOutput>$(AssemblyName).results.xml</TestOutput>
     <TestSuccessFlag>$(OutDir)\$(AssemblyName).success.flg</TestSuccessFlag>
     <CoverageOutput>$(OutDir)\$(AssemblyName).coverage.xml</CoverageOutput>
 
   </PropertyGroup>
 
   <ItemGroup>
-    <TestDependencies Include="$(OutDir)\$(TestAssembly)"               />
+    <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
   </ItemGroup>
 
   <Target Name="RunTests" Condition="'$(RunTests)'=='true'">
@@ -30,7 +30,7 @@
   </Target>
 
   <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="$(TestSuccessFlag)">
-    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:$(TestAssembly) -register:user -output:$(CoverageOutput) -log:Warn -returntargetcode" />
+    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:&quot;$(TestAssembly) /result=$(TestOutput)&quot; -register:user -output:$(CoverageOutput) -log:Warn -returntargetcode" />
     <Touch Files="$(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
 
