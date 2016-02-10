@@ -10,16 +10,15 @@
     <FilesToZip Include="..\.gitignore" />
     <FilesToZip Include="..\lib\**" />
     <FilesToZip Include="..\*.bat" />
-    <FilesToZip Include="..\*.nunit" />
+    <FilesToZip Include="..\_items\*.nunit" />
     <FilesToZip Include="..\*.txt" />
-    <FilesToZip Include="..\*.proj" />
-    <FilesToZip Include="..\Demo.Web\*.proj" />
-    <FilesToZip Include="..\*.targets" />
+    <FilesToZip Include="..\**\*.proj" />
+    <FilesToZip Include="..\_items\*.targets" />
     <FilesToZip Include="..\Demo.Database.Tests\DefaultEnvironment.json" />
     <FilesToZip Include="..\*.sln" />
     <FilesToZip Include="..\**\*.csproj" />
     <FilesToZip Include="..\**\packages.config" />
-    <FilesToZip Include="..\**\*.cs" Exclude="..\AssemblyInfo.cs;..\**\obj\**" />
+    <FilesToZip Include="..\**\*.cs" Exclude="..\_items\AssemblyInfo.cs;..\**\obj\**" />
     <FilesToZip Include="..\Demo.Web\**\*.cshtml" />
     <FilesToZip Include="..\Demo.Web\**\*.asax" />
     <FilesToZip Include="..\Demo.Web\**\Web.config" />
