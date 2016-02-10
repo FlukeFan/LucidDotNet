@@ -75,7 +75,7 @@ namespace Lucid.Persistence.Testing
             var entity = _entities.Where(e => e.Id.Equals(id)).SingleOrDefault();
 
             if (entity == null)
-                throw new Exception(string.Format("could not find entity with id {0} and type {1} in the Repository", id, typeof(T)));
+                throw new Exception(string.Format("Could not find entity with id {0} and type {1} in the Repository", id, typeof(T)));
         }
 
         private static IEnumerable<T> Filter<T>(IEnumerable<T> entities, Where restriction)

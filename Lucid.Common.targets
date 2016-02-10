@@ -15,9 +15,10 @@
     <TestOutput>$(AssemblyName).results.xml</TestOutput>
     <TestSuccessFlag>$(OutDir)\$(AssemblyName).success.flg</TestSuccessFlag>
     <CoverageOutput>$(OutDir)\$(AssemblyName).coverage.xml</CoverageOutput>
+    <CoverageTarget>75</CoverageTarget>
 
   </PropertyGroup>
-  
+
   <ItemGroup>
     <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
   </ItemGroup>
@@ -38,7 +39,18 @@
 
   <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="$(TestSuccessFlag)">
     <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:&quot;$(TestAssembly) /result=$(TestOutput)&quot; -register:user -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot;" />
-    <Exec Command="$(ReportGeneratorExe) -reports:$(CoverageOutput) -targetdir:$(OutDir)\CoverageReport -verbosity:Error" />
+    <RemoveDir Directories="$(OutDir)\CoverageReport" />
+    <Exec Command="$(ReportGeneratorExe) -reports:$(CoverageOutput) -targetdir:$(OutDir)\CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
+    <!-- grab the summary line coverage value -->
+    <XmlPeek XmlInputPath="$(OutDir)\CoverageReport\Summary.xml" Query="CoverageReport/Summary/Linecoverage/text()">
+      <Output TaskParameter="Result" ItemName="LineCoveragePercentage" />
+    </XmlPeek>
+    <!-- strip out the '%' sign from the coverage -->
+    <CreateProperty Value="$([System.String]::Copy(&quot;%(LineCoveragePercentage.Identity)&quot;).Replace(&quot;%&quot;, &quot;&quot;))">
+      <Output TaskParameter="Value" PropertyName="LineCoverage" />
+    </CreateProperty>
+    <!-- Fail the build if the coverate isn't high enough -->
+    <Warning Text="Expected at least $(CoverageTarget)% coverage, only got $(LineCoverage)% coverage" Condition=" $(LineCoverage) &lt; $(CoverageTarget)" />
     <Touch Files="$(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
 
