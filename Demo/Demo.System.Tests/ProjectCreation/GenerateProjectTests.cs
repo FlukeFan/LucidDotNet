@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace Demo.System.Tests.ProjectCreation
 {
     [TestFixture]
-    [Explicit("Very slow system test - this is run explicitly before pusing to production")]
+    [Explicit("Very slow system test - this is run explicitly before pushing to production")]
     public class GenerateProjectTests
     {
         [Test]
@@ -44,7 +44,7 @@ namespace Demo.System.Tests.ProjectCreation
             File.ReadAllText(Path.Combine(buildFolder, "ShinyNewProject1.Web\\ShinyNewProject1.Web.csproj")).Should().Contain("349c5851-65df-11da-9384-00065b846f21", "ProjectTypeGuids should not be replaced");
 
             var processedFiles = Directory.EnumerateFiles(buildFolder, "*.*", SearchOption.AllDirectories)
-                .Where(d => Generate.ProcessedExtensions.Contains(Path.GetExtension(d).ToLower()));
+                .Where(d => Generate.ShouldProcessFile(d));
 
             foreach (var processedFile in processedFiles)
                 foreach (var line in File.ReadAllLines(processedFile))
@@ -87,6 +87,9 @@ namespace Demo.System.Tests.ProjectCreation
 
             foreach (var file in files)
             {
+                if (!Generate.ShouldProcessFile(file))
+                    continue;
+
                 var lines = File.ReadAllLines(file);
                 foreach (var line in lines)
                     foreach (Match match in Generate.GuidSearch.Matches(line))

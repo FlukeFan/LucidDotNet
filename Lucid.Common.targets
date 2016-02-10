@@ -2,32 +2,36 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
+
     <LucidVersion>0.0.0.3</LucidVersion>
+
     <NuGetExe>packages\NuGet.CommandLine.3.3.0\tools\NuGet.exe</NuGetExe>
     <NUnitExe>$(MSBuildThisFileDirectory)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
     <OpenCoverExe>$(MSBuildThisFileDirectory)\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
+
+    <TestAssembly>$(AssemblyName).dll</TestAssembly>
+    <TestOutput>$(OutDir)\$(AssemblyName).results.xml</TestOutput>
+    <TestSuccessFlag>$(OutDir)\$(AssemblyName).success.flg</TestSuccessFlag>
+    <CoverageOutput>$(OutDir)\$(AssemblyName).coverage.xml</CoverageOutput>
+
   </PropertyGroup>
   
   <ItemGroup>
-    <TestAssembly     Include="$(AssemblyName).dll"                     />
-    <TestOutput       Include="$(OutDir)\$(AssemblyName).results.xml"   />
-    <TestSuccessFlag  Include="$(OutDir)\$(AssemblyName).success.flg"   />
-    <TestDependencies Include="@(TestAssembly)"                         />
-    <CoverageOutput   Include="$(OutDir)\$(AssemblyName).coverage.xml"  />
+    <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
   </ItemGroup>
 
   <Target Name="RunTests" Condition="'$(RunTests)'=='true'">
 
-    <Error Text="OutDir not set"          Condition="'$(OutDir)'==''"           />
     <Error Text="AssemblyName not set"    Condition="'$(AssemblyName)'==''"     />
+    <Error Text="OutDir not set"          Condition="'$(OutDir)'==''"           />
 
     <CallTarget Targets="ExecuteTests" />
 
   </Target>
 
-  <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="@(TestSuccessFlag)">
-    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:@(TestAssembly) -register -output:@(CoverageOutput) -log:Warn" />
-    <Touch Files="@(TestSuccessFlag)" AlwaysCreate="true" />
+  <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="$(TestSuccessFlag)">
+    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:$(TestAssembly) -register:user -output:$(CoverageOutput) -log:Warn -returntargetcode" />
+    <Touch Files="$(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
 
 </Project>

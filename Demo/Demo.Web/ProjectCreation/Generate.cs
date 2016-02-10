@@ -10,7 +10,7 @@ namespace Demo.Web.ProjectCreation
 {
     public class Generate
     {
-        public static readonly IList<string> ProcessedExtensions = new List<string>
+        private static readonly IList<string> ProcessedExtensions = new List<string>
         {
             ".gitignore",
             ".sln",
@@ -27,7 +27,7 @@ namespace Demo.Web.ProjectCreation
             ".asax",
         };
 
-        public static readonly IList<String> UnprocessedExtensions = new List<string>
+        private static readonly IList<String> UnprocessedExtensions = new List<string>
         {
             ".xsd",
             ".exe",
@@ -80,6 +80,22 @@ namespace Demo.Web.ProjectCreation
             return memoryStream;
         }
 
+        public static bool ShouldProcessFile(string fileName)
+        {
+            if (fileName.ToLower().Replace('\\', '/').Contains("packages/"))
+                return false;
+
+            var extension = Path.GetExtension(fileName).ToLower();
+
+            if (ProcessedExtensions.Contains(extension))
+                return true;
+
+            if (!UnprocessedExtensions.Contains(extension))
+                throw new Exception(string.Format("Extension {0} should be added to Generate.ProcessedExtensions or Generate.UnprocessedExtensions.", extension));
+
+            return false;
+        }
+
         private static void CopyEntry(ZipFile zipInput, ZipEntry inputEntry, ZipOutputStream zipOutput, string newName)
         {
             if (!inputEntry.IsFile)
@@ -88,27 +104,14 @@ namespace Demo.Web.ProjectCreation
             var fileName = inputEntry.Name.Replace("Demo", newName);
             using (var inputStream = zipInput.GetInputStream(inputEntry))
             {
-                var extension = Path.GetExtension(fileName).ToLower();
-
                 var newEntry = new ZipEntry(fileName);
                 newEntry.DateTime = inputEntry.DateTime;
 
-                if (ShouldProcessFile(extension))
+                if (ShouldProcessFile(fileName))
                     ProcessTextFile(inputStream, newEntry, zipOutput, newName);
                 else
                     ProcessBinaryFile(inputEntry, inputStream, newEntry, zipOutput);
             }
-        }
-
-        private static bool ShouldProcessFile(string extension)
-        {
-            if (ProcessedExtensions.Contains(extension))
-                return true;
-
-            if (!UnprocessedExtensions.Contains(extension))
-                throw new Exception(string.Format("Extension {0} should be added to Generate.ProcessedExtensions or Generate.UnprocessedExtensions.", extension));
-
-            return false;
         }
 
         private static void ProcessBinaryFile(ZipEntry inputEntry, Stream inputFileStream, ZipEntry newEntry, ZipOutputStream zipOutput)
