@@ -112,6 +112,9 @@
       <Name>Lucid.Web.Testing</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="CoverageFilter.txt" />
+  </ItemGroup>
   <Target Name="AfterBuild">
     <CallTarget Targets="RunTests" />
   </Target>

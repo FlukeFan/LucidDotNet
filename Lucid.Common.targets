@@ -9,18 +9,25 @@
     <NUnitExe>$(MSBuildThisFileDirectory)\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
     <OpenCoverExe>$(MSBuildThisFileDirectory)\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
     <ReportGeneratorExe>$(MSBuildThisFileDirectory)\packages\ReportGenerator.2.4.2.0\tools\ReportGenerator.exe</ReportGeneratorExe>
+    <VerifyCoverageJs>$(MSBuildThisFileDirectory)\VerifyCoverage.js</VerifyCoverageJs>
 
     <Asterisk>%2A</Asterisk>
     <TestAssembly>$(AssemblyName).dll</TestAssembly>
     <TestOutput>$(AssemblyName).results.xml</TestOutput>
     <TestSuccessFlag>$(OutDir)\$(AssemblyName).success.flg</TestSuccessFlag>
     <CoverageOutput>$(OutDir)\$(AssemblyName).coverage.xml</CoverageOutput>
+    <CoverFilterFileOption Condition="!Exists('CoverageFilter.txt')"></CoverFilterFileOption>
+    <CoverFilterFileOption Condition="Exists('CoverageFilter.txt')">-filterfile:CoverageFilter.txt</CoverFilterFileOption>
     <CoverageTarget>75</CoverageTarget>
 
   </PropertyGroup>
 
   <ItemGroup>
     <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition="Exists('CoverageFilter.txt')">
+    <TestDependencies Include="CoverageFilter.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,19 +45,10 @@
   </Target>
 
   <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="$(TestSuccessFlag)">
-    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:&quot;$(TestAssembly) /result=$(TestOutput)&quot; -register:user -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot;" />
+    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:&quot;$(TestAssembly) /result=$(TestOutput)&quot; -register:user -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot; $(CoverFilterFileOption)" />
     <RemoveDir Directories="$(OutDir)\CoverageReport" />
     <Exec Command="$(ReportGeneratorExe) -reports:$(CoverageOutput) -targetdir:$(OutDir)\CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
-    <!-- grab the summary line coverage value -->
-    <XmlPeek XmlInputPath="$(OutDir)\CoverageReport\Summary.xml" Query="CoverageReport/Summary/Linecoverage/text()">
-      <Output TaskParameter="Result" ItemName="LineCoveragePercentage" />
-    </XmlPeek>
-    <!-- strip out the '%' sign from the coverage -->
-    <CreateProperty Value="$([System.String]::Copy(&quot;%(LineCoveragePercentage.Identity)&quot;).Replace(&quot;%&quot;, &quot;&quot;))">
-      <Output TaskParameter="Value" PropertyName="LineCoverage" />
-    </CreateProperty>
-    <!-- Fail the build if the coverate isn't high enough -->
-    <Warning Text="Expected at least $(CoverageTarget)% coverage, only got $(LineCoverage)% coverage" Condition=" $(LineCoverage) &lt; $(CoverageTarget)" />
+    <Exec Command="CScript //NoLogo $(VerifyCoverageJs) $(CoverageTarget) $(OutDir)\CoverageReport\Summary.xml" />
     <Touch Files="$(TestSuccessFlag)" AlwaysCreate="true" />
   </Target>
 

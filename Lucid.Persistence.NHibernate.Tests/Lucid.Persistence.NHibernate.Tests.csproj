@@ -93,6 +93,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="CoverageFilter.txt" />
+  </ItemGroup>
   <Target Name="AfterBuild">
     <CallTarget Targets="RunTests" />
   </Target>
