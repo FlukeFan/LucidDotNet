@@ -96,14 +96,5 @@ namespace Lucid.Persistence.NHibernate.Tests
             query.SetInt32("id", id);
             return query.UniqueResult<string>();
         }
-
-        private void SetUnderlyingDbValue(int id, string value)
-        {
-            var sql = "UPDATE [LucidPolyType] SET [String] = :val WHERE [Id] = :id";
-            var query = _repository.Session.CreateSQLQuery(sql);
-            query.SetAnsiString("val", value);
-            query.SetInt32("id", id);
-            query.ExecuteUpdate();
-        }
     }
 }
