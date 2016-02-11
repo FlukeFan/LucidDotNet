@@ -75,11 +75,17 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\_items\Demo.Common.targets" />
+  <PropertyGroup>
+    <CoverageTarget>85</CoverageTarget>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demo.Database\Demo.Database.csproj">
       <Project>{2c74567a-5cf2-4006-b6c1-fda122578ad1}</Project>
       <Name>Demo.Database</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CoverageFilter.txt" />
   </ItemGroup>
   <Target Name="VerifyScriptsForDeploy">
     <Exec Command="(SET project_src_dir=$(MSBuildProjectDirectory)) &amp; $(NUnitExe) $(OutDir)\Demo.Database.Tests.dll /include=DeployBuild /result=&quot;$(OutDir)\DeployBuild.xml&quot;" />

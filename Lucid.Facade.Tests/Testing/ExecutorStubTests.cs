@@ -183,6 +183,21 @@ namespace Lucid.Facade.Tests.Testing
         }
 
         [Test]
+        public void SetupVoidCommand()
+        {
+            var state = 0;
+
+            var executor = new ExecutorStub()
+                .SetupVoidCommand(It.IsAny<FakeVoidCommand>(), (cmd) => { state = 5; });
+
+            state.Should().Be(0);
+
+            (executor as IExecutor).Execute(new FakeVoidCommand());
+
+            state.Should().Be(5);
+        }
+
+        [Test]
         public void SetupQueryListResult()
         {
             var executor = new ExecutorStub()

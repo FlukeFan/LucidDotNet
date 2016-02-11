@@ -10,7 +10,7 @@
     <CoverageOutput>$(OutDir)\$(AssemblyName).coverage.xml</CoverageOutput>
     <CoverFilterFileOption Condition="!Exists('CoverageFilter.txt')"></CoverFilterFileOption>
     <CoverFilterFileOption Condition="Exists('CoverageFilter.txt')">-filterfile:CoverageFilter.txt</CoverFilterFileOption>
-    <CoverageTarget Condition="'$(CoverageTarget)'==''">85</CoverageTarget>
+    <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
 
   </PropertyGroup>
 

@@ -124,13 +124,19 @@ namespace Lucid.Facade.Testing
             return this;
         }
 
+        public ExecutorStub SetupVoidCommand<TCmd>(TCmd cmdType, Action<TCmd> setup)
+            where TCmd : ICommand
+        {
+            return SetupObjectResult<TCmd>((exe, def) => { setup((TCmd)exe); return null; });
+        }
+
         public ExecutorStub SetupCommand<TCmd, TReturn>(TCmd cmdType, TReturn result)
             where TCmd : ICommand<TReturn>
         {
-            return SetupCommand<TCmd, TReturn>(cmdType, (exe, def) => result);
+            return SetupCommand<TCmd, TReturn>((exe, def) => result);
         }
 
-        public ExecutorStub SetupCommand<TCmd, TReturn>(TCmd cmdType, Func<TCmd, TReturn, TReturn> setup)
+        public ExecutorStub SetupCommand<TCmd, TReturn>(Func<TCmd, TReturn, TReturn> setup)
             where TCmd : ICommand<TReturn>
         {
             return SetupObjectResult<TCmd>((exe, def) => setup((TCmd)exe, (TReturn)def));

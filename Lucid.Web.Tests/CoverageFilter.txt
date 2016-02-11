@@ -1,3 +1,5 @@
 -[Lucid.Facade]*
 -[Lucid.Facade.Testing]*
+-[Lucid.Web.Testing]Lucid.Web.Testing.Hosting.ConsoleWriter
+-[Lucid.Web.Testing]Lucid.Web.Testing.Hosting.SerializableDelegate*
 -[App_*]*
