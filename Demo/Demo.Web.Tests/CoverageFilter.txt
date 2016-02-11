@@ -1,3 +1,5 @@
 -[App_*]*
 -[Demo.Domain.Contract]*
+-[Demo.Domain]*
+-[Demo.Infrastructure]*
 -[Demo.Web]Demo.Web.Utility.Startup

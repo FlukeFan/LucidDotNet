@@ -103,6 +103,9 @@
       <InProject>False</InProject>
     </TestDependencies>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="CoverageFilter.txt" />
+  </ItemGroup>
   <Target Name="AfterBuild">
     <CallTarget Targets="RunTestsWithCoverage" />
   </Target>
