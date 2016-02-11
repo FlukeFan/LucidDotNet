@@ -22,6 +22,7 @@ namespace Demo.Web.ProjectCreation
             ".targets",
             ".json",
             ".config",
+            ".js",
             ".cs",
             ".cshtml",
             ".asax",

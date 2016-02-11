@@ -14,9 +14,11 @@
     <FilesToZip Include="..\*.txt" />
     <FilesToZip Include="..\**\*.proj" />
     <FilesToZip Include="..\_items\*.targets" />
+    <FilesToZip Include="..\_items\*.js" />
     <FilesToZip Include="..\Demo.Database.Tests\DefaultEnvironment.json" />
     <FilesToZip Include="..\*.sln" />
     <FilesToZip Include="..\**\*.csproj" />
+    <FilesToZip Include="..\**\CoverageFilter.txt" />
     <FilesToZip Include="..\**\packages.config" />
     <FilesToZip Include="..\**\*.cs" Exclude="..\_items\AssemblyInfo.cs;..\**\obj\**" />
     <FilesToZip Include="..\Demo.Web\**\*.cshtml" />
