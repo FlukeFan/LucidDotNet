@@ -104,6 +104,6 @@
     </TestDependencies>
   </ItemGroup>
   <Target Name="AfterBuild">
-    <CallTarget Targets="RunTests" />
+    <CallTarget Targets="RunTestsWithCoverage" />
   </Target>
 </Project>

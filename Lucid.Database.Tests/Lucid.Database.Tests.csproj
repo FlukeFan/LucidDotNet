@@ -87,6 +87,6 @@
   </Target>
   <Target Name="AfterBuild">
     <Copy SourceFiles="DefaultEnvironment.json" DestinationFiles="..\_items\BuildEnvironment.json" Condition="!Exists('..\_items\BuildEnvironment.json') OR $([System.IO.File]::GetLastWriteTime('DefaultEnvironment.json').Ticks) &gt; $([System.IO.File]::GetLastWriteTime('..\_items\BuildEnvironment.json').Ticks)" />
-    <CallTarget Targets="RunTests" />
+    <CallTarget Targets="RunTestsWithCoverage" />
   </Target>
 </Project>

@@ -79,6 +79,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\_items\Lucid.Common.targets" />
   <Target Name="AfterBuild">
-    <CallTarget Targets="RunTests" />
+    <CallTarget Targets="RunTestsWithCoverage" />
   </Target>
 </Project>

@@ -16,7 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF
 		readme.txt = readme.txt
 		RunNUnit.bat = RunNUnit.bat
 		_items\UpdateDemoNuget.txt = _items\UpdateDemoNuget.txt
-		_items\VerifyCoverage.js = _items\VerifyCoverage.js
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.StubApp", "Lucid.Web.StubApp\Lucid.Web.StubApp.csproj", "{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}"

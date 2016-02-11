@@ -6,50 +6,13 @@
     <LucidVersion>0.0.0.3</LucidVersion>
 
     <NuGetExe>$(MSBuildThisFileDirectory)\..\packages\NuGet.CommandLine.3.3.0\tools\NuGet.exe</NuGetExe>
-    <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
     <OpenCoverExe>$(MSBuildThisFileDirectory)\..\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
+    <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
     <ReportGeneratorExe>$(MSBuildThisFileDirectory)\..\packages\ReportGenerator.2.4.2.0\tools\ReportGenerator.exe</ReportGeneratorExe>
-    <VerifyCoverageJs>$(MSBuildThisFileDirectory)\VerifyCoverage.js</VerifyCoverageJs>
-
-    <Asterisk>%2A</Asterisk>
-    <TestAssembly>$(AssemblyName).dll</TestAssembly>
-    <TestOutput>$(AssemblyName).results.xml</TestOutput>
-    <TestSuccessFlag>$(OutDir)\$(AssemblyName).success.flg</TestSuccessFlag>
-    <CoverageOutput>$(OutDir)\$(AssemblyName).coverage.xml</CoverageOutput>
-    <CoverFilterFileOption Condition="!Exists('CoverageFilter.txt')"></CoverFilterFileOption>
-    <CoverFilterFileOption Condition="Exists('CoverageFilter.txt')">-filterfile:CoverageFilter.txt</CoverFilterFileOption>
-    <CoverageTarget>75</CoverageTarget>
+    <VerifyCoverageJs>$(MSBuildThisFileDirectory)\..\Demo\_items\VerifyCoverage.js</VerifyCoverageJs>
 
   </PropertyGroup>
 
-  <ItemGroup>
-    <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
-  </ItemGroup>
-
-  <ItemGroup Condition="Exists('CoverageFilter.txt')">
-    <TestDependencies Include="CoverageFilter.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <CoverFilter Include="-[FluentAssertions$(Asterisk)]$(Asterisk)" />
-    <CoverFilter Include="+[$(Asterisk)]$(Asterisk)" />
-  </ItemGroup>
-
-  <Target Name="RunTests" Condition="'$(RunTests)'=='true'">
-
-    <Error Text="AssemblyName not set"    Condition="'$(AssemblyName)'==''"     />
-    <Error Text="OutDir not set"          Condition="'$(OutDir)'==''"           />
-
-    <CallTarget Targets="ExecuteTests" />
-
-  </Target>
-
-  <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="$(TestSuccessFlag)">
-    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:&quot;$(TestAssembly) /result=$(TestOutput)&quot; -register:user -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot; $(CoverFilterFileOption)" />
-    <RemoveDir Directories="$(OutDir)\CoverageReport" />
-    <Exec Command="$(ReportGeneratorExe) -reports:$(CoverageOutput) -targetdir:$(OutDir)\CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
-    <Exec Command="CScript //NoLogo $(VerifyCoverageJs) $(CoverageTarget) $(OutDir)\CoverageReport\Summary.xml" />
-    <Touch Files="$(TestSuccessFlag)" AlwaysCreate="true" />
-  </Target>
+  <Import Project="..\Demo\_items\Demo.Testing.targets" />
 
 </Project>

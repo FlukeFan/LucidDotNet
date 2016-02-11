@@ -1,0 +1,3 @@
+-[App_*]*
+-[Demo.Domain.Contract]*
+-[Demo.Web]Demo.Web.Utility.Startup

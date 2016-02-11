@@ -83,6 +83,6 @@
     <Exec Command="$(NUnitExe) @(TestAssembly) /run:Demo.System.Tests.ProjectCreation.GenerateProjectTests.Execute /result=&quot;$(OutDir)\BeforeDeploy.xml&quot;" />
   </Target>
   <Target Name="AfterBuild">
-    <CallTarget Targets="RunTests" />
+    <CallTarget Targets="RunTestsWithoutCoverage" />
   </Target>
 </Project>

@@ -13,9 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{51A70DC7
 		_items\Demo.Common.targets = _items\Demo.Common.targets
 		_items\Demo.nunit = _items\Demo.nunit
 		Demo.proj = Demo.proj
+		_items\Demo.Testing.targets = _items\Demo.Testing.targets
 		_items\Init.proj = _items\Init.proj
 		readme.txt = readme.txt
 		RunNUnit.bat = RunNUnit.bat
+		_items\VerifyCoverage.js = _items\VerifyCoverage.js
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Database", "Demo.Database\Demo.Database.csproj", "{2C74567A-5CF2-4006-B6C1-FDA122578AD1}"

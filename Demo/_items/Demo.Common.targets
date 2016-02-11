@@ -6,32 +6,13 @@
     <DemoVersion>0.0.0.1</DemoVersion>
 
     <NuGetExe>$(MSBuildThisFileDirectory)\..\lib\NuGet\NuGet.exe</NuGetExe>
-    <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
     <OpenCoverExe>$(MSBuildThisFileDirectory)\..\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
-
-    <TestAssembly>$(AssemblyName).dll</TestAssembly>
-    <TestOutput>$(AssemblyName).results.xml</TestOutput>
-    <TestSuccessFlag>$(OutDir)\$(AssemblyName).success.flg</TestSuccessFlag>
-    <CoverageOutput>$(OutDir)\$(AssemblyName).coverage.xml</CoverageOutput>
+    <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
+    <ReportGeneratorExe>$(MSBuildThisFileDirectory)\..\packages\ReportGenerator.2.4.2.0\tools\ReportGenerator.exe</ReportGeneratorExe>
+    <VerifyCoverageJs>$(MSBuildThisFileDirectory)\VerifyCoverage.js</VerifyCoverageJs>
 
   </PropertyGroup>
 
-  <ItemGroup>
-    <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
-  </ItemGroup>
-
-  <Target Name="RunTests" Condition="'$(RunTests)'=='true'">
-
-    <Error Text="AssemblyName not set"    Condition="'$(AssemblyName)'==''"     />
-    <Error Text="OutDir not set"          Condition="'$(OutDir)'==''"           />
-
-    <CallTarget Targets="ExecuteTests" />
-
-  </Target>
-
-  <Target Name="ExecuteTests" Inputs="@(TestDependencies)" Outputs="$(TestSuccessFlag)">
-    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:&quot;$(TestAssembly) /result=$(TestOutput)&quot; -register:user -output:$(CoverageOutput) -log:Warn -returntargetcode" />
-    <Touch Files="$(TestSuccessFlag)" AlwaysCreate="true" />
-  </Target>
+  <Import Project="Demo.Testing.targets" />
 
 </Project>

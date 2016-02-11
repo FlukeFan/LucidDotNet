@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+
+    <Asterisk>%2A</Asterisk>
+    <TestAssembly>$(AssemblyName).dll</TestAssembly>
+    <TestOutput>$(AssemblyName).results.xml</TestOutput>
+    <TestSuccessFlag>$(OutDir)\$(AssemblyName).success.flg</TestSuccessFlag>
+    <CoverageOutput>$(OutDir)\$(AssemblyName).coverage.xml</CoverageOutput>
+    <CoverFilterFileOption Condition="!Exists('CoverageFilter.txt')"></CoverFilterFileOption>
+    <CoverFilterFileOption Condition="Exists('CoverageFilter.txt')">-filterfile:CoverageFilter.txt</CoverFilterFileOption>
+    <CoverageTarget Condition="'$(CoverageTarget)'==''">75</CoverageTarget>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition="Exists('CoverageFilter.txt')">
+    <TestDependencies Include="CoverageFilter.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <CoverFilter Include="-[FluentAssertions$(Asterisk)]$(Asterisk)" />
+    <CoverFilter Include="-[FluentMigrator$(Asterisk)]$(Asterisk)" />
+    <CoverFilter Include="+[$(Asterisk)]$(Asterisk)" />
+  </ItemGroup>
+
+  <Target Name="RunTestsWithCoverage" Condition="'$(RunTests)'=='true'">
+
+    <Error Text="AssemblyName not set"        Condition="'$(AssemblyName)'==''"       />
+    <Error Text="OutDir not set"              Condition="'$(OutDir)'==''"             />
+    <Error Text="OpenCoverExe not set"        Condition="'$(OpenCoverExe)'==''"       />
+    <Error Text="NUnitExe not set"            Condition="'$(NUnitExe)'==''"           />
+    <Error Text="ReportGeneratorExe not set"  Condition="'$(ReportGeneratorExe)'==''" />
+    <Error Text="VerifyCoverageJs not set"    Condition="'$(VerifyCoverageJs)'==''"   />
+
+    <CallTarget Targets="ExecuteTestsWithCoverage" />
+
+  </Target>
+
+  <Target Name="ExecuteTestsWithCoverage" Inputs="@(TestDependencies)" Outputs="$(TestSuccessFlag)">
+    <Exec Command="$(OpenCoverExe) -targetdir:$(OutDir) -target:$(NUnitExe) -targetargs:&quot;$(TestAssembly) /result=$(TestOutput)&quot; -register:user -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot; $(CoverFilterFileOption)" />
+    <RemoveDir Directories="$(OutDir)\CoverageReport" />
+    <Exec Command="$(ReportGeneratorExe) -reports:$(CoverageOutput) -targetdir:$(OutDir)\CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
+    <Exec Command="CScript //NoLogo $(VerifyCoverageJs) $(CoverageTarget) $(OutDir)\CoverageReport\Summary.xml" />
+    <Touch Files="$(TestSuccessFlag)" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="RunTestsWithoutCoverage" Condition="'$(RunTests)'=='true'">
+
+    <Error Text="AssemblyName not set"        Condition="'$(AssemblyName)'==''"       />
+    <Error Text="OutDir not set"              Condition="'$(OutDir)'==''"             />
+    <Error Text="NUnitExe not set"            Condition="'$(NUnitExe)'==''"           />
+
+    <CallTarget Targets="ExecuteTestsWithoutCoverage" />
+
+  </Target>
+
+  <Target Name="ExecuteTestsWithoutCoverage" Inputs="@(TestDependencies)" Outputs="$(TestSuccessFlag)">
+    <Exec Command="$(NUnitExe) $(OutDir)\$(TestAssembly) /result=$(OutDir)\$(TestOutput)" />
+    <Touch Files="$(TestSuccessFlag)" AlwaysCreate="true" />
+  </Target>
+
+</Project>

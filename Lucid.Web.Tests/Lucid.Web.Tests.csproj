@@ -116,6 +116,6 @@
     <Content Include="CoverageFilter.txt" />
   </ItemGroup>
   <Target Name="AfterBuild">
-    <CallTarget Targets="RunTests" />
+    <CallTarget Targets="RunTestsWithCoverage" />
   </Target>
 </Project>
