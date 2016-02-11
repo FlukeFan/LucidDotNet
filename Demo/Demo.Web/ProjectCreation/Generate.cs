@@ -56,7 +56,8 @@ namespace Demo.Web.ProjectCreation
             "B21A7182-EF27-48FA-93D8-C8E24E44FDB6".ToUpper(), // Demo.System.Tests
         };
 
-        public static readonly Regex GuidSearch = new Regex("(.{8}-.{4}-.{4}-.{4}-.{12})", RegexOptions.Compiled);
+        public static readonly Regex GuidSearch     = new Regex("(.{8}-.{4}-.{4}-.{4}-.{12})", RegexOptions.Compiled);
+        public static readonly Regex TempDirSearch  = new Regex("tempDirectory=\"[^\"]*\"", RegexOptions.Compiled);
 
         private static readonly byte[] _buffer = new byte[4096];
 
@@ -137,12 +138,7 @@ namespace Demo.Web.ProjectCreation
 
             foreach (var inputLine in inputLines)
             {
-                var outputLine = inputLine;
-
-                outputLine = ReplaceGuids(outputLine);
-                outputLine = ReplaceDemo(outputLine, newName);
-                outputLine = ReplaceHashes(outputLine);
-
+                var outputLine = ProcessLine(inputLine, newName);
                 outputLines.Add(outputLine);
             }
 
@@ -154,6 +150,18 @@ namespace Demo.Web.ProjectCreation
             zipOutput.PutNextEntry(newEntry);
             zipOutput.Write(bytes, 0, bytes.Length);
             zipOutput.CloseEntry();
+        }
+
+        public static string ProcessLine(string inputLine, string newName)
+        {
+            var outputLine = inputLine;
+
+            outputLine = ReplaceGuids(outputLine);
+            outputLine = ReplaceDemo(outputLine, newName);
+            outputLine = ReplaceHashes(outputLine);
+            outputLine = ReplaceAppHarborTmpDir(outputLine);
+
+            return outputLine;
         }
 
         private static string ReplaceGuids(string inputLine)
@@ -204,6 +212,17 @@ namespace Demo.Web.ProjectCreation
 
             var outputLine = inputLine.Replace(hashCode, "// " + hashCode);
             outputLine += "// Replace with 'real' hashes once reployed.";
+            return outputLine;
+        }
+
+        private static string ReplaceAppHarborTmpDir(string inputLine)
+        {
+            var match = TempDirSearch.Match(inputLine);
+
+            if (!match.Success)
+                return inputLine;
+
+            var outputLine = inputLine.Substring(0, match.Index) + inputLine.Substring(match.Index + match.Length);
             return outputLine;
         }
     }

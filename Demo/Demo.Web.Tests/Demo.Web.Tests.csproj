@@ -78,6 +78,7 @@
     <Compile Include="App\HomeTests.cs" />
     <Compile Include="App\PlanningTests.cs" />
     <Compile Include="ProjectCreation\GenerateProjectTests.cs" />
+    <Compile Include="ProjectCreation\GenerateTests.cs" />
     <Compile Include="SetUpFixture.cs" />
     <Compile Include="Utility\FakeStartup.cs" />
     <Compile Include="Utility\WebTest.cs" />
