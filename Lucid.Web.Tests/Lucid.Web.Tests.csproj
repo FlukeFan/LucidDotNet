@@ -86,6 +86,7 @@
     <Compile Include="..\_items\AssemblyInfo.cs" />
     <Compile Include="Deploy\DeployConstraintsTests.cs" />
     <Compile Include="Deploy\Run.cs" />
+    <Compile Include="MvcExecutorTests.cs" />
     <Compile Include="StubApp\App\F1\F11Tests.cs" />
     <Compile Include="StubApp\App\F1\F12\F121Tests.cs" />
     <Compile Include="StubApp\App\F1\F12\F122Tests.cs" />
@@ -103,6 +104,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lucid.Facade.Testing\Lucid.Facade.Testing.csproj">
+      <Project>{720932d2-760d-46c4-8dd9-7d492867d23e}</Project>
+      <Name>Lucid.Facade.Testing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Facade\Lucid.Facade.csproj">
+      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
+      <Name>Lucid.Facade</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lucid.Web.StubApp\Lucid.Web.StubApp.csproj">
       <Project>{d0f98206-1edc-4c9f-b705-b1a8286d86dd}</Project>
       <Name>Lucid.Web.StubApp</Name>
@@ -110,6 +119,10 @@
     <ProjectReference Include="..\Lucid.Web.Testing\Lucid.Web.Testing.csproj">
       <Project>{e0560e10-0ec3-4160-9ed3-b86e1d19ab2f}</Project>
       <Name>Lucid.Web.Testing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Web\Lucid.Web.csproj">
+      <Project>{0c0cfe50-9cc9-49f1-af0b-caf7ebf1820d}</Project>
+      <Name>Lucid.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

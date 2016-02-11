@@ -1,4 +1,5 @@
 -[App_*]*
+-[Demo.Database]*
 -[Demo.Domain.Contract]*
 -[Demo.Domain]*
 -[Demo.Infrastructure]*
