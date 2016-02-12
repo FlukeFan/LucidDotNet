@@ -11,23 +11,25 @@ namespace Lucid.Persistence.Queries
         Descending,
     }
 
-    public class Order
+    public class Ordering
     {
-        public Expression               KeyExpression           { get; private set; }
-        public Type                     KeyType                 { get; private set; }
-        public Direction                Direction               { get; private set; }
+        public Expression   KeyExpression   { get; private set; }
+        public Expression   KeyBody         { get; private set; }
+        public Type         KeyType         { get; private set; }
+        public Direction    Direction       { get; private set; }
 
-        public static Order For<T, TKey>(Expression<Func<T, TKey>> property, Direction direction)
+        public static Ordering For<T, TKey>(Expression<Func<T, TKey>> property, Direction direction)
         {
-            return new Order
+            return new Ordering
             {
                 KeyExpression = property,
+                KeyBody = property.Body,
                 KeyType = typeof(TKey),
                 Direction = direction,
             };
         }
 
-        public static Expression<Func<IEnumerable<T>, IOrderedEnumerable<T>>> Lambda<T>(Order order)
+        public static Expression<Func<IEnumerable<T>, IOrderedEnumerable<T>>> Lambda<T>(Ordering order)
         {
             var parameter = Expression.Parameter(typeof(IEnumerable<T>));
             var extensionType = typeof(Enumerable);

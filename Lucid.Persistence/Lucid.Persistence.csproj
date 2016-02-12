@@ -49,7 +49,8 @@
     <Compile Include="IEntity.cs" />
     <Compile Include="IIdentityMapRepository.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="Queries\Order.cs" />
+    <Compile Include="Queries\ExpressionUtil.cs" />
+    <Compile Include="Queries\Ordering.cs" />
     <Compile Include="Queries\Query.cs" />
     <Compile Include="Queries\Where.cs" />
     <Compile Include="Queries\WhereBinaryComparison.cs" />

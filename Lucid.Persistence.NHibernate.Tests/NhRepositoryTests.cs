@@ -12,13 +12,6 @@ namespace Lucid.Persistence.NHibernate.Tests
 {
     public class NhRepositoryTests : IRepositoryTests
     {
-        [Test]
-        [Ignore("Not implemented yet")]
-        public override void Query_Ordering()
-        {
-            base.Query_Ordering();
-        }
-
         static NhRepositoryTests()
         {
             var environment = BuildEnvironment.Load();

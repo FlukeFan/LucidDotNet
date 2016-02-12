@@ -30,6 +30,12 @@ namespace Lucid.Persistence.NHibernate
             { WhereBinaryComparison.OperatorType.GreaterThan,           (prop, val) => Restrictions.Gt(prop, val) },
         };
 
+        private static IDictionary<Direction, Func<string, Order>> _orders = new Dictionary<Direction, Func<string, Order>>
+        {
+            { Direction.Ascending,  (prop) => Order.Asc(prop)   },
+            { Direction.Descending, (prop) => Order.Desc(prop)  },
+        };
+
         public Query<T, TId> Query { get; protected set; }
 
         public NhCriteria(Query<T, TId> query)
@@ -43,6 +49,9 @@ namespace Lucid.Persistence.NHibernate
 
             foreach (var restriction in Query.Restrictions)
                 AddRestriction(criteria, restriction);
+
+            foreach (var order in Query.Orders)
+                AddOrder(criteria, order);
 
             return criteria;
         }
@@ -66,6 +75,14 @@ namespace Lucid.Persistence.NHibernate
             var criterionFunc = _binaryComparisons[where.Operator];
             var criterion = criterionFunc(where.Operand1.Name, where.Operand2);
             criteria.Add(criterion);
+        }
+
+        private void AddOrder(ICriteria criteria, Ordering ordering)
+        {
+            var orderFunc = _orders[ordering.Direction];
+            var member = ExpressionUtil.FindMemberInfo(ordering.KeyBody);
+            var order = orderFunc(member.Name);
+            criteria.AddOrder(order);
         }
     }
 }

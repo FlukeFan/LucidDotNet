@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Lucid.Persistence.Queries
 {
     public abstract class Where
     {
-        private enum ExpressionTypes
-        {
-            Unrecognised,
-            BinaryExpression,
-            MemberExpression,
-        };
-
         public Expression Expression { get; private set; }
 
         public Where(Expression expression)
@@ -42,58 +34,20 @@ namespace Lucid.Persistence.Queries
 
         private static Where For(Expression restriction)
         {
-            switch(FindType(restriction))
+            switch(ExpressionUtil.FindType(restriction))
             {
-                case ExpressionTypes.BinaryExpression:
+                case ExpressionUtil.ExpressionTypes.BinaryExpression:
                     return ForBinaryExpression((BinaryExpression)restriction);
                 default:
-                    throw NewException("Unable to form query for: ", restriction);
+                    throw ExpressionUtil.NewException("Unable to form query for: ", restriction);
             }
         }
 
         private static Where ForBinaryExpression(BinaryExpression binaryExpression)
         {
-            var operand1 = FindMemberInfo(binaryExpression.Left);
-            var operand2 = FindValue(binaryExpression.Right);
+            var operand1 = ExpressionUtil.FindMemberInfo(binaryExpression.Left);
+            var operand2 = ExpressionUtil.FindValue(binaryExpression.Right);
             return new WhereBinaryComparison(binaryExpression, operand1, binaryExpression.NodeType, operand2);
-        }
-
-        private static MemberInfo FindMemberInfo(Expression expression)
-        {
-            switch(FindType(expression))
-            {
-                case ExpressionTypes.MemberExpression:
-                    return FindMemberInfo((MemberExpression)expression);
-                default:
-                    throw NewException("Expected property access (like e.Name).  Unabled to find MemberInfo for: ", expression);
-            }
-        }
-
-        private static MemberInfo FindMemberInfo(MemberExpression memberExpression)
-        {
-            return memberExpression.Member;
-        }
-
-        private static object FindValue(Expression expression)
-        {
-            var valueExpression = Expression.Lambda(expression).Compile();
-            object value = valueExpression.DynamicInvoke();
-            return value;
-        }
-
-        private static ExpressionTypes FindType(Expression expression)
-        {
-            if (expression is BinaryExpression)
-                return ExpressionTypes.BinaryExpression;
-            else if (expression is MemberExpression)
-                return ExpressionTypes.MemberExpression;
-            else
-                return ExpressionTypes.Unrecognised;
-        }
-
-        private static Exception NewException(string message, Expression expression)
-        {
-            return new Exception(string.Format("{0} {1} of type ({2}, {3})", message, expression, expression.NodeType, expression.GetType()));
         }
     }
 }

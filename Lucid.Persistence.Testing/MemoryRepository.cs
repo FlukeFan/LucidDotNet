@@ -88,9 +88,9 @@ namespace Lucid.Persistence.Testing
             return entities;
         }
 
-        private static IEnumerable<T> OrderBy<T>(IEnumerable<T> entities, Order order)
+        private static IEnumerable<T> OrderBy<T>(IEnumerable<T> entities, Ordering order)
         {
-            var processor = Order.Lambda<T>(order).Compile();
+            var processor = Ordering.Lambda<T>(order).Compile();
             entities = processor(entities);
             return entities;
         }
