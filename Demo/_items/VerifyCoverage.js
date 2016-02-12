@@ -19,3 +19,5 @@ actual = actual.replace('%', '');
 
 if (Number(actual) < Number(target))
     throw new Error("Expected at least " + target + "% coverage, only got " + actual + "% coverage");
+
+WScript.Echo("Coverage of " + actual + "% is greater than target of " + target + "%");

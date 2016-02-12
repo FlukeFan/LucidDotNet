@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
+using Lucid.Persistence.Queries;
 using NUnit.Framework;
 
 namespace Lucid.Persistence.Tests
@@ -115,6 +117,23 @@ namespace Lucid.Persistence.Tests
             {
                 var result = _repository.Query<LucidPolyType>().Filter(e => e.Int >= 2).List();
                 result.Count.Should().Be(2);
+            }
+        }
+
+        [Test]
+        public virtual void Query_Ordering()
+        {
+            var poly2 = new LucidPolyTypeBuilder().With(u => u.Int, 2).Save(_repository);
+            var poly1 = new LucidPolyTypeBuilder().With(u => u.Int, 1).Save(_repository);
+            var poly3 = new LucidPolyTypeBuilder().With(u => u.Int, 3).Save(_repository);
+
+            {
+                var result = _repository.Query<LucidPolyType>().OrderBy(e => e.Int, Direction.Ascending).List();
+                result.Select(e => e.Int).Should().BeInAscendingOrder(e => e);
+            }
+            {
+                var result = _repository.Query<LucidPolyType>().OrderBy(e => e.Int, Direction.Descending).List();
+                result.Select(e => e.Int).Should().BeInDescendingOrder(e => e);
             }
         }
     }

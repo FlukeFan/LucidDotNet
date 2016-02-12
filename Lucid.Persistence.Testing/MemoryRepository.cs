@@ -55,6 +55,9 @@ namespace Lucid.Persistence.Testing
             foreach (var restriction in query.Restrictions)
                 entities = Filter(entities, restriction);
 
+            foreach (var order in query.Orders)
+                entities = OrderBy(entities, order);
+
             return entities.ToList();
         }
 
@@ -82,6 +85,13 @@ namespace Lucid.Persistence.Testing
         {
             var expression = Where.Lambda<T>(restriction).Compile();
             entities = entities.Where(expression);
+            return entities;
+        }
+
+        private static IEnumerable<T> OrderBy<T>(IEnumerable<T> entities, Order order)
+        {
+            var processor = Order.Lambda<T>(order).Compile();
+            entities = processor(entities);
             return entities;
         }
     }

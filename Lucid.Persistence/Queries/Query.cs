@@ -9,8 +9,10 @@ namespace Lucid.Persistence.Queries
     {
         private IRepository<TId>    _repository;
         private IList<Where>        _restrictions   = new List<Where>();
+        private IList<Order>        _orders         = new List<Order>();
 
         public IEnumerable<Where>   Restrictions    { get { return _restrictions; } }
+        public IEnumerable<Order>   Orders          { get { return _orders; } }
 
         public Query(IRepository<TId> repository)
         {
@@ -20,6 +22,12 @@ namespace Lucid.Persistence.Queries
         public Query<T, TId> Filter(Expression<Func<T, bool>> restriction)
         {
             _restrictions.Add(Where.For(restriction));
+            return this;
+        }
+
+        public Query<T, TId> OrderBy<TKey>(Expression<Func<T, TKey>> property, Direction direction)
+        {
+            _orders.Add(Order.For(property, direction));
             return this;
         }
 
