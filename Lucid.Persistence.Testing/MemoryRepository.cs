@@ -58,6 +58,12 @@ namespace Lucid.Persistence.Testing
             foreach (var order in query.Orders)
                 entities = OrderBy(entities, order);
 
+            if (query.SkipCount.HasValue)
+                entities = entities.Skip(query.SkipCount.Value);
+
+            if (query.TakeCount.HasValue)
+                entities = entities.Take(query.TakeCount.Value);
+
             return entities.ToList();
         }
 

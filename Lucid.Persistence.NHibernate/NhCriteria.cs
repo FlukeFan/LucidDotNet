@@ -53,6 +53,12 @@ namespace Lucid.Persistence.NHibernate
             foreach (var order in Query.Orders)
                 AddOrder(criteria, order);
 
+            if (Query.SkipCount.HasValue)
+                criteria.SetFirstResult(Query.SkipCount.Value);
+
+            if (Query.TakeCount.HasValue)
+                criteria.SetMaxResults(Query.TakeCount.Value);
+
             return criteria;
         }
 

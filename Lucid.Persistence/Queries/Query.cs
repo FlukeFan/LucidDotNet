@@ -14,6 +14,9 @@ namespace Lucid.Persistence.Queries
         public IEnumerable<Where>       Restrictions    { get { return _restrictions; } }
         public IEnumerable<Ordering>    Orders          { get { return _orders; } }
 
+        public int?                     SkipCount       { get; protected set; }
+        public int?                     TakeCount       { get; protected set; }
+
         public Query(IRepository<TId> repository)
         {
             _repository = repository;
@@ -30,6 +33,19 @@ namespace Lucid.Persistence.Queries
             _orders.Add(Ordering.For(property, direction));
             return this;
         }
+
+        public Query<T, TId> Skip(int skipCount)
+        {
+            SkipCount = skipCount;
+            return this;
+        }
+
+        public Query<T, TId> Take(int takeCount)
+        {
+            TakeCount = takeCount;
+            return this;
+        }
+
 
         public IList<T> List()
         {

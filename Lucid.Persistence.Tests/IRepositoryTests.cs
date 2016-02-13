@@ -136,5 +136,22 @@ namespace Lucid.Persistence.Tests
                 result.Select(e => e.Int).Should().BeInDescendingOrder(e => e);
             }
         }
+
+        [Test]
+        public virtual void Query_Paging()
+        {
+            var poly1 = new LucidPolyTypeBuilder().With(u => u.Int, 1).Save(_repository);
+            var poly2 = new LucidPolyTypeBuilder().With(u => u.Int, 2).Save(_repository);
+            var poly3 = new LucidPolyTypeBuilder().With(u => u.Int, 3).Save(_repository);
+            var poly4 = new LucidPolyTypeBuilder().With(u => u.Int, 4).Save(_repository);
+
+            var result = _repository.Query<LucidPolyType>()
+                .OrderBy(e => e.Int, Direction.Ascending)
+                .Skip(1)
+                .Take(2)
+                .List();
+
+            result.Select(e => e.Int).Should().BeEquivalentTo(2, 3);
+        }
     }
 }
