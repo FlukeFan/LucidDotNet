@@ -3,6 +3,7 @@ using Demo.Domain.Contract.Product.Queries;
 using Demo.Domain.Contract.Product.Responses;
 using Demo.Domain.Product.Responses;
 using Demo.Domain.Utility;
+using Lucid.Persistence.Queries;
 
 namespace Demo.Domain.Product.Queries
 {
@@ -12,6 +13,7 @@ namespace Demo.Domain.Product.Queries
         {
             var designs =
                 Repository.Query<Design>()
+                    .OrderBy(d => d.Name, Direction.Ascending)
                     .List();
 
             return DesignDtoMapper.Map(designs);
