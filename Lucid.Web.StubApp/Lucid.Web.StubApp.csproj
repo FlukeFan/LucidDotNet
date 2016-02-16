@@ -99,6 +99,7 @@
     <Content Include="App\F1\F12\F121\Index.cshtml" />
     <Content Include="App\F3\Index.cshtml" />
     <Content Include="App\Html\Component_Render.cshtml" />
+    <Content Include="App\Html\Form_Render.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

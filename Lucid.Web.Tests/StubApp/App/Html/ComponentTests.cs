@@ -8,7 +8,7 @@ namespace Lucid.Web.Tests.StubApp.App.Html
     public class ComponentTests : StubAppTest
     {
         [Test]
-        public void RenderComponent()
+        public void Component_Render()
         {
             StubApp.Test(http =>
             {
