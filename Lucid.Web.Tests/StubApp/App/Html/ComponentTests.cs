@@ -12,7 +12,7 @@ namespace Lucid.Web.Tests.StubApp.App.Html
         {
             StubApp.Test(http =>
             {
-                var response = http.Get("/html/component/RenderComponent");
+                var response = http.Get("/html/component_render");
 
                 response.Text.Should().Contain("<li>item 1 - &lt;div&gt; encoded &lt;/div&gt;");
                 response.Text.Should().Contain("<li>item 2 - not encoded</li>");

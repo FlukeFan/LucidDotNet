@@ -128,6 +128,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <TestDependencies Include="..\Lucid.Web.StubApp\**">
+      <InProject>False</InProject>
+    </TestDependencies>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="CoverageFilter.txt" />
   </ItemGroup>
   <Target Name="AfterBuild">
