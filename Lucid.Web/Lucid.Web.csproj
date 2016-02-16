@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="..\_items\AssemblyInfo.cs" />
     <Compile Include="FeatureFolders.cs" />
+    <Compile Include="Html\Component.cs" />
     <Compile Include="MvcExecutor.cs" />
     <Compile Include="Routing\ActionData.cs" />
     <Compile Include="Routing\FeatureActions.cs" />
@@ -99,6 +100,7 @@
       <Name>Lucid.Facade</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(LucidVersion).nupkg">
     <Exec Command="$(NuGetExe) pack $(MSBuildProjectFile) -OutputDirectory ..\packaged -Properties Configuration=$(Configuration);OutDir=$(OutDir)" />
   </Target>

@@ -95,6 +95,7 @@
     <Compile Include="StubApp\App\F2Tests.cs" />
     <Compile Include="StubApp\App\F1\HomeTests.cs" />
     <Compile Include="StubApp\App\HomeTests.cs" />
+    <Compile Include="StubApp\App\Html\ComponentTests.cs" />
     <Compile Include="StubApp\SetUpFixture.cs" />
     <Compile Include="StubApp\Utility\StubAppTest.cs" />
     <Compile Include="Testing\Hosting\AspNetTestHostTests.cs" />

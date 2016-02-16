@@ -1,0 +1,14 @@
+﻿@using Lucid.Web.Html
+@inherits System.Web.Mvc.WebViewPage
+<div>
+    @{ 
+        var html1 = "item 1 - <div> encoded </div>";
+        var html2 = "<li>item 2 - not encoded</li>".ToComponent();
+    }
+
+    <ul>
+        <li>@html1</li>
+        @html2
+    </ul>
+
+</div>
