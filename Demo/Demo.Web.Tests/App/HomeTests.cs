@@ -13,7 +13,7 @@ namespace Demo.Web.Tests.App
             {
                 var response = client.Get("/");
 
-                response.Text.Should().Contain("Hello world");
+                response.Doc.FindSingleElement("#homeTest").TextContent.Should().Be("Hello world");
             });
         }
     }

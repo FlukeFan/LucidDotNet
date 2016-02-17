@@ -33,5 +33,25 @@ namespace Lucid.Web.Tests.Testing.Http
 
             e.Message.Should().Be("Could not find attribute 'idx' on element <div id=\"div1\">");
         }
+
+        [Test]
+        public void And()
+        {
+            var elem = NewElem("<div id='div1'></div>", "div");
+
+            elem.And(e =>
+            {
+                e.FindAttribute("id").Should().Be("div1");
+                Assert.Throws<Exception>(() => e.FindAttribute("idx"));
+            });
+        }
+
+        [Test]
+        public void InnerText()
+        {
+            var elem = NewElem("<div>some text</div>", "div");
+
+            elem.TextContent.Should().Be("some text");
+        }
     }
 }

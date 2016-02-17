@@ -85,6 +85,7 @@
     <Compile Include="ProjectCreation\GenerateTests.cs" />
     <Compile Include="SetUpFixture.cs" />
     <Compile Include="Utility\FakeStartup.cs" />
+    <Compile Include="Utility\ShouldExtensions.cs" />
     <Compile Include="Utility\WebTest.cs" />
     <Compile Include="Utility\WebTestRegistry.cs" />
   </ItemGroup>

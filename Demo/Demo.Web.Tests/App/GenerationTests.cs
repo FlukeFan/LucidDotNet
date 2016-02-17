@@ -16,7 +16,11 @@ namespace Demo.Web.Tests.App
             {
                 var response = client.Get(Actions.Generate());
 
-                response.Text.Should().Contain("<form");
+                response.Doc.FindSingleElement("form").And(f =>
+                {
+                    f.FindAttribute("method").Should().Be("post");
+                    f.FindAttribute("action").Should().BeAction(Actions.Generate());
+                });
             });
         }
 

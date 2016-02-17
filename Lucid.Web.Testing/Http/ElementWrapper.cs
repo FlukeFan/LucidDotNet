@@ -12,6 +12,8 @@ namespace Lucid.Web.Testing.Http
 
         public IElement Element { get; protected set; }
 
+        public string TextContent { get { return Element.TextContent; } }
+
         public string FindAttribute(string attributeName)
         {
             var attribute = Element.Attributes[attributeName];
@@ -20,6 +22,12 @@ namespace Lucid.Web.Testing.Http
                 throw new Exception(string.Format("Could not find attribute '{0}' on element {1}", attributeName, FormatTag()));
 
             return attribute.Value;
+        }
+
+        public ElementWrapper And(Action<ElementWrapper> verification)
+        {
+            verification(this);
+            return this;
         }
 
         private string FormatTag()
