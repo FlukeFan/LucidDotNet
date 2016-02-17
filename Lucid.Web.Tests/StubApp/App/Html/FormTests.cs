@@ -1,5 +1,4 @@
-﻿using AngleSharp.Parser.Html;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Lucid.Web.Tests.StubApp.Utility;
 using NUnit.Framework;
 
@@ -15,14 +14,7 @@ namespace Lucid.Web.Tests.StubApp.App.Html
             {
                 var response = http.Get("/html/form_render");
 
-                var parser = new HtmlParser();
-                var dom = parser.Parse(response.Text);
-
-                var element = dom.QuerySelector("form");
-
-                element.Should().NotBeNull();
-                var method = element.Attributes.GetNamedItem("method");
-                method.Value.Should().Be("post");
+                response.Doc.FindSingleElement("form").FindAttribute("method").Should().Be("post");
             });
         }
     }
