@@ -38,5 +38,29 @@ namespace Lucid.Web.Tests.Testing.Http
             var e = Assert.Throws<Exception>(() => doc.Find("span"));
             e.Message.Should().Be("Expected 1 element, but found 2 elements matching selector 'span'");
         }
+
+        [Test]
+        public void FindAll()
+        {
+            var doc = NewDoc("<div><span id='s1'/><span id='s2'/><div>");
+
+            var elems = doc.FindAll("span");
+
+            elems.Count.Should().Be(2);
+            elems[0].Id.Should().Be("s1");
+            elems[1].Id.Should().Be("s2");
+        }
+
+        [Test]
+        public void FindAll_CanUseForEach()
+        {
+            var doc = NewDoc("<div><span id='s1'/><span id='s2'/><div>");
+
+            var elems = doc.FindAll("span");
+
+            var ids = "";
+            elems.ForEach(e => ids += e.Id);
+            ids.Should().Be("s1s2");
+        }
     }
 }

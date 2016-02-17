@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AngleSharp.Dom;
 
 namespace Lucid.Web.Testing.Http
@@ -23,6 +25,13 @@ namespace Lucid.Web.Testing.Http
                 throw new Exception(string.Format("Expected 1 element, but found {0} elements matching selector '{1}'", elements.Length, cssSelector));
 
             return new ElementWrapper(elements[0]);
+        }
+
+        public List<ElementWrapper> FindAll(string cssSelector)
+        {
+            var elementList = _parentNode.QuerySelectorAll(cssSelector);
+            var elementWrapperList = elementList.Select(e => new ElementWrapper(e)).ToList();
+            return elementWrapperList;
         }
     }
 }

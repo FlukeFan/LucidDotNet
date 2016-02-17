@@ -35,6 +35,15 @@ namespace Lucid.Web.Tests.Testing.Http
         }
 
         [Test]
+        public void HasAttribute()
+        {
+            var elem = NewElem("<div id='div1'></div>", "div");
+
+            elem.HasAttribute("id").Should().BeTrue();
+            elem.HasAttribute("idx").Should().BeFalse();
+        }
+
+        [Test]
         public void Where()
         {
             var elem = NewElem("<div id='div1'></div>", "div");
@@ -47,10 +56,15 @@ namespace Lucid.Web.Tests.Testing.Http
         }
 
         [Test]
-        public void InnerText()
+        public void WrapperProperties()
         {
-            var elem = NewElem("<div>some text</div>", "div");
+            var elem = NewElem("<div id='d1' class='c1 c2'>some <span>text</span></div>", "#d1");
 
+            elem.ClassName.Should().Be("c1 c2");
+            elem.Id.Should().Be("d1");
+            elem.InnerHtml.Should().Be("some <span>text</span>");
+            elem.OuterHtml.Should().StartWith("<div").And.EndWith("</div>");
+            elem.TagName.Should().Be("DIV");
             elem.TextContent.Should().Be("some text");
         }
     }

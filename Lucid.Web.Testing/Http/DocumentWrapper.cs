@@ -4,11 +4,13 @@ namespace Lucid.Web.Testing.Http
 {
     public class DocumentWrapper : ParentNodeWrapper
     {
+        private IHtmlDocument _document;
+
         public DocumentWrapper(IHtmlDocument document) : base(document)
         {
-            Document = document;
+            _document = document;
         }
 
-        public IHtmlDocument Document { get; protected set; }
+        public IHtmlDocument Document { get { return _document; } }
     }
 }
