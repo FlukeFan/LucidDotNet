@@ -12,7 +12,7 @@ namespace Lucid.Web.Testing.Http
 
         public IHtmlDocument Document { get; protected set; }
 
-        public ElementWrapper FindSingleElement(string cssSelector)
+        public ElementWrapper FindSingle(string cssSelector)
         {
             var elements = Document.QuerySelectorAll(cssSelector);
 

@@ -10,39 +10,39 @@ namespace Lucid.Web.Tests.Testing.Http
     {
         private static ElementWrapper NewElem(string html, string cssSelector)
         {
-            return new Response { Text = html }.Doc.FindSingleElement(cssSelector);
+            return new Response { Text = html }.Doc.FindSingle(cssSelector);
         }
 
         [Test]
-        public void FindAttribute()
+        public void Attribute()
         {
             var elem = NewElem("<div id='div1'></div>", "div");
 
-            var value = elem.FindAttribute("id");
+            var value = elem.Attribute("id");
 
             value.Should().NotBeNull();
             value.Should().Be("div1");
         }
 
         [Test]
-        public void FindAttribute_ThrowsWhenNotFound()
+        public void Attribute_ThrowsWhenNotFound()
         {
             var elem = NewElem("<div id='div1'></div>", "div");
 
-            var e = Assert.Throws<Exception>(() => elem.FindAttribute("idx"));
+            var e = Assert.Throws<Exception>(() => elem.Attribute("idx"));
 
             e.Message.Should().Be("Could not find attribute 'idx' on element <div id=\"div1\">");
         }
 
         [Test]
-        public void And()
+        public void Where()
         {
             var elem = NewElem("<div id='div1'></div>", "div");
 
-            elem.And(e =>
+            elem.Where(e =>
             {
-                e.FindAttribute("id").Should().Be("div1");
-                Assert.Throws<Exception>(() => e.FindAttribute("idx"));
+                e.Attribute("id").Should().Be("div1");
+                Assert.Throws<Exception>(() => e.Attribute("idx"));
             });
         }
 

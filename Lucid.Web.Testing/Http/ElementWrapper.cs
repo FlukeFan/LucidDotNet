@@ -14,7 +14,7 @@ namespace Lucid.Web.Testing.Http
 
         public string TextContent { get { return Element.TextContent; } }
 
-        public string FindAttribute(string attributeName)
+        public string Attribute(string attributeName)
         {
             var attribute = Element.Attributes[attributeName];
 
@@ -24,7 +24,7 @@ namespace Lucid.Web.Testing.Http
             return attribute.Value;
         }
 
-        public ElementWrapper And(Action<ElementWrapper> verification)
+        public ElementWrapper Where(Action<ElementWrapper> verification)
         {
             verification(this);
             return this;

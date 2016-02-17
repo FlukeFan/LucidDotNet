@@ -14,7 +14,7 @@ namespace Lucid.Web.Tests.StubApp.App.Html
             {
                 var response = http.Get("/html/form_render");
 
-                response.Doc.FindSingleElement("form").FindAttribute("method").Should().Be("post");
+                response.Doc.FindSingle("form").Attribute("method").Should().Be("post");
             });
         }
     }

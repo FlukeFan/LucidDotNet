@@ -16,10 +16,10 @@ namespace Demo.Web.Tests.App
             {
                 var response = client.Get(Actions.Generate());
 
-                response.Doc.FindSingleElement("form").And(f =>
+                response.Doc.FindSingle("form").Where(f =>
                 {
-                    f.FindAttribute("method").Should().Be("post");
-                    f.FindAttribute("action").Should().BeAction(Actions.Generate());
+                    f.Attribute("method").Should().Be("post");
+                    f.Attribute("action").Should().BeAction(Actions.Generate());
                 });
             });
         }
