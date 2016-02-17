@@ -10,7 +10,7 @@ namespace Lucid.Web.Tests.Testing.Http
     {
         private static ElementWrapper NewElem(string html, string cssSelector)
         {
-            return new Response { Text = html }.Doc.FindSingle(cssSelector);
+            return new Response { Text = html }.Doc.Find(cssSelector);
         }
 
         [Test]

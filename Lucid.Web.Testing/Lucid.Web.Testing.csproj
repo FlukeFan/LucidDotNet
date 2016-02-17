@@ -55,6 +55,7 @@
     <Compile Include="Hosting\SerializableDelegate.cs" />
     <Compile Include="Http\DocumentWrapper.cs" />
     <Compile Include="Http\ElementWrapper.cs" />
+    <Compile Include="Http\ParentNodeWrapper.cs" />
     <Compile Include="Http\Request.cs" />
     <Compile Include="Http\Response.cs" />
     <Compile Include="Http\SimulatedHttpClient.cs" />

@@ -15,7 +15,7 @@ namespace Demo.Web.Tests.App
             {
                 var response = client.Get(Actions.List());
 
-                response.Text.Should().Contain("<ul");
+                response.Doc.Find("ul").Should().NotBeNull();
             });
         }
 
@@ -26,7 +26,7 @@ namespace Demo.Web.Tests.App
             {
                 var response = client.Get(Actions.StartDesign());
 
-                response.Text.Should().Contain("<form");
+                response.Doc.Find("form").Should().NotBeNull();
             });
         }
 

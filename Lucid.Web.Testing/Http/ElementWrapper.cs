@@ -3,9 +3,9 @@ using AngleSharp.Dom;
 
 namespace Lucid.Web.Testing.Http
 {
-    public class ElementWrapper
+    public class ElementWrapper : ParentNodeWrapper
     {
-        public ElementWrapper(IElement element)
+        public ElementWrapper(IElement element) : base(element)
         {
             Element = element;
         }

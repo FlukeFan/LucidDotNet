@@ -14,28 +14,28 @@ namespace Lucid.Web.Tests.Testing.Http
         }
 
         [Test]
-        public void FindSingle()
+        public void Find()
         {
             var doc = NewDoc("<div><span/><div>");
 
-            doc.FindSingle("span").Should().NotBeNull();
+            doc.Find("span").Should().NotBeNull();
         }
 
         [Test]
-        public void FindSingle_ThrowsWhenNotFound()
+        public void Find_ThrowsWhenNotFound()
         {
             var doc = NewDoc("<div><span/><div>");
 
-            var e = Assert.Throws<Exception>(() => doc.FindSingle("h1"));
+            var e = Assert.Throws<Exception>(() => doc.Find("h1"));
             e.Message.Should().Be("Could not find any element matching selector 'h1'");
         }
 
         [Test]
-        public void FindSingle_ThrowsWhenMultiple()
+        public void Find_ThrowsWhenMultiple()
         {
             var doc = NewDoc("<div><span/><span/><div>");
 
-            var e = Assert.Throws<Exception>(() => doc.FindSingle("span"));
+            var e = Assert.Throws<Exception>(() => doc.Find("span"));
             e.Message.Should().Be("Expected 1 element, but found 2 elements matching selector 'span'");
         }
     }

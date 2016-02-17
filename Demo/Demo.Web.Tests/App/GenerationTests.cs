@@ -16,7 +16,7 @@ namespace Demo.Web.Tests.App
             {
                 var response = client.Get(Actions.Generate());
 
-                response.Doc.FindSingle("form").Where(f =>
+                response.Doc.Find("form").Where(f =>
                 {
                     f.Attribute("method").Should().Be("post");
                     f.Attribute("action").Should().BeAction(Actions.Generate());
