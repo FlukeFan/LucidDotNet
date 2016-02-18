@@ -53,9 +53,9 @@
     <Compile Include="Hosting\AspNetTestHost.cs" />
     <Compile Include="Hosting\ConsoleWriter.cs" />
     <Compile Include="Hosting\SerializableDelegate.cs" />
-    <Compile Include="Http\DocumentWrapper.cs" />
-    <Compile Include="Http\ElementWrapper.cs" />
-    <Compile Include="Http\ParentNodeWrapper.cs" />
+    <Compile Include="Html\DocumentWrapper.cs" />
+    <Compile Include="Html\ElementWrapper.cs" />
+    <Compile Include="Html\ParentNodeWrapper.cs" />
     <Compile Include="Http\Request.cs" />
     <Compile Include="Http\Response.cs" />
     <Compile Include="Http\SimulatedHttpClient.cs" />

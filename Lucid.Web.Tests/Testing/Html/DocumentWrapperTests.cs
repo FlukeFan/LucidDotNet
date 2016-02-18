@@ -1,9 +1,10 @@
 ﻿using System;
 using FluentAssertions;
+using Lucid.Web.Testing.Html;
 using Lucid.Web.Testing.Http;
 using NUnit.Framework;
 
-namespace Lucid.Web.Tests.Testing.Http
+namespace Lucid.Web.Tests.Testing.Html
 {
     [TestFixture]
     public class DocumentWrapperTests

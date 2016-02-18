@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using AngleSharp.Parser.Html;
+using Lucid.Web.Testing.Html;
 
 namespace Lucid.Web.Testing.Http
 {

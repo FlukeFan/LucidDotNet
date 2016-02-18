@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AngleSharp.Dom;
 
-namespace Lucid.Web.Testing.Http
+namespace Lucid.Web.Testing.Html
 {
     public abstract class ParentNodeWrapper
     {
