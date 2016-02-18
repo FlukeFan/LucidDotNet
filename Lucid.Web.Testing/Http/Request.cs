@@ -27,5 +27,13 @@ namespace Lucid.Web.Testing.Http
             Headers[name] = value;
             return this;
         }
+
+        public Request AddQuery(string name, string value)
+        {
+            var prefix = string.IsNullOrEmpty(Query) ? "" : "&";
+            Query += string.Format("{0}{1}={2}", prefix, name, value);
+
+            return this;
+        }
     }
 }

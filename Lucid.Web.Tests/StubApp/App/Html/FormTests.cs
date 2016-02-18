@@ -12,9 +12,13 @@ namespace Lucid.Web.Tests.StubApp.App.Html
         {
             StubApp.Test(http =>
             {
-                var response = http.Get("/html/form_render");
+                var response = http.Get("/html/form_render", r => r.AddQuery("p1", "123"));
 
-                response.Doc.Find("form").Attribute("method").Should().Be("post");
+                response.Doc.Find("form").Where(f =>
+                {
+                    f.Attribute("method").Should().Be("post");
+                    f.Attribute("action").Should().Be("/html/form_render?p1=123");
+                });
             });
         }
     }
