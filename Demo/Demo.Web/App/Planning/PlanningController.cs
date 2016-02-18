@@ -24,7 +24,8 @@ namespace Demo.Web.App.Planning
         [HttpGet]
         public ActionResult StartDesign()
         {
-            return View();
+            var initialCmd = new StartDesign();
+            return StartDesign_Render(initialCmd);
         }
 
         [HttpPost]
@@ -32,7 +33,13 @@ namespace Demo.Web.App.Planning
         {
             return Exec(cmd,
                 success: r => Redirect(Actions.List()),
-                failure: () => View());
+                failure: () => StartDesign_Render(cmd));
+        }
+
+        private ActionResult StartDesign_Render(StartDesign cmd)
+        {
+            var model = new StartDesignModel { Cmd = cmd };
+            return View(model);
         }
     }
 }

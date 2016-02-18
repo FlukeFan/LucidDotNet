@@ -1,5 +1,7 @@
-﻿@inherits System.Web.Mvc.WebViewPage
+﻿@inherits System.Web.Mvc.WebViewPage<GenerateModel>
 @using System.Web.Mvc.Html
+@using Lucid.Web.Html
+@using Demo.Web.App.Generation
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,13 +12,12 @@
     <div>Generate Project</div>
 
     @Html.ValidationSummary(true)
-    @using (var form = Html.BeginForm())
+    @using (var form = Html.Form(Model.Cmd))
     {
         <div>
-            @{/* TODO create form helper that allows command for model names */}
-            @Html.Label("Name", "Project Name")
-            @Html.TextBox("Name")
-            @Html.ValidationMessage("Name")
+            @form.Html.LabelFor(c => c.Name, "Project Name")
+            @form.Html.TextBoxFor(c => c.Name)
+            @form.Html.ValidationMessageFor(c => c.Name)
         </div>
 
         <input type="submit" value="Generate Project" />

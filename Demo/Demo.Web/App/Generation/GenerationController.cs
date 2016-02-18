@@ -14,7 +14,8 @@ namespace Demo.Web.App.Generation
         [HttpGet]
         public ActionResult Generate()
         {
-            return View();
+            var initialCmd = new GenerateProject();
+            return GenerateRender(initialCmd);
         }
 
         [HttpPost]
@@ -22,7 +23,13 @@ namespace Demo.Web.App.Generation
         {
             return Exec(cmd,
                 success: r => File(r, "application/octet-stream", cmd.Name + ".zip"),
-                failure: () => View());
+                failure: () => GenerateRender(cmd));
+        }
+
+        private ActionResult GenerateRender(GenerateProject cmd)
+        {
+            var model = new GenerateModel { Cmd = cmd };
+            return View(model);
         }
     }
 }
