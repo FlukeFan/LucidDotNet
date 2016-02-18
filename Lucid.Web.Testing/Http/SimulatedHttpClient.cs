@@ -52,7 +52,7 @@ namespace Lucid.Web.Testing.Http
 
         public Response Get(HttpStatusCode expectedStatusCode, string url, Action<Request> modifier)
         {
-            var request = new Request { Verb = "GET", Url = url };
+            var request = new Request(url, "GET");
             modifier(request);
             return Process(expectedStatusCode, request);
         }
@@ -74,15 +74,13 @@ namespace Lucid.Web.Testing.Http
 
         public Response Post(HttpStatusCode expectedStatusCode, string url, Action<Request> modifier)
         {
-            var request = new Request { Verb = "POST", Url = url }.SetFormUrlEncoded();
+            var request = new Request(url, "POST").SetFormUrlEncoded();
             modifier(request);
             return Process(expectedStatusCode, request);
         }
 
         public Response Process(HttpStatusCode expectedStatusCode, Request request)
         {
-            request.Url = request.Url.TrimStart('~', '/');
-
             using (var output = new StringWriter())
             {
                 var workerRequest = new SimulatedWorkerRequest(request, output);

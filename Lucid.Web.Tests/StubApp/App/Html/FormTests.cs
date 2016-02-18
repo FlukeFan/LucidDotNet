@@ -12,7 +12,7 @@ namespace Lucid.Web.Tests.StubApp.App.Html
         {
             StubApp.Test(http =>
             {
-                var response = http.Get("/html/form_render", r => r.AddQuery("p1", "123"));
+                var response = http.Get("/html/form_render?p1=123");
 
                 response.Doc.Find("form").Where(f =>
                 {

@@ -13,11 +13,10 @@ namespace Lucid.Web.Html
         {
             _helper = helper;
 
-            var request = helper.ViewContext.RequestContext.HttpContext.Request;
-            var path = request.Url.PathAndQuery;
+            var url = helper.ViewContext.RequestContext.HttpContext.Request.RawUrl;
 
             _formTag = new FormTag();
-            _formTag.Action(path);
+            _formTag.Action(url);
 
             _helper.ViewContext.Writer.Write(_formTag.NoClosingTag().ToString());
         }

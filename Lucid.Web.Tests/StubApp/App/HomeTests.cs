@@ -32,6 +32,28 @@ namespace Lucid.Web.Tests.StubApp.App
         }
 
         [Test]
+        public void Index_NoRootPath()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Get("Home");
+
+                response.Text.Should().Contain("root home controller");
+            });
+        }
+
+        [Test]
+        public void Index_VirtualPath()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Get("~/Home");
+
+                response.Text.Should().Contain("root home controller");
+            });
+        }
+
+        [Test]
         public void Index_GetExplicit()
         {
             StubApp.Test(http =>
