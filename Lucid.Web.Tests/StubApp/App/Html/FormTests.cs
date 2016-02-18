@@ -21,5 +21,20 @@ namespace Lucid.Web.Tests.StubApp.App.Html
                 });
             });
         }
+
+        [Test]
+        public void Form_RenderInput()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Get("/html/form_renderinput");
+
+                response.Doc.Find("form input").Where(f =>
+                {
+                    f.Attribute("name").Should().Be("Name");
+                    f.Attribute("value").Should().Be("NameValue");
+                });
+            });
+        }
     }
 }

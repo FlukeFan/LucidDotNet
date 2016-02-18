@@ -100,6 +100,7 @@
     <Content Include="App\F3\Index.cshtml" />
     <Content Include="App\Html\Component_Render.cshtml" />
     <Content Include="App\Html\Form_Render.cshtml" />
+    <Content Include="App\Html\Form_RenderInput.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -116,6 +117,8 @@
     <Compile Include="App\F2\F2Controller.cs" />
     <Compile Include="App\F3\F3Controller.cs" />
     <Compile Include="App\Home\HomeController.cs" />
+    <Compile Include="App\Html\Cmd.cs" />
+    <Compile Include="App\Html\FormModel.cs" />
     <Compile Include="App\Html\HtmlController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

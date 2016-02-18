@@ -9,5 +9,8 @@ namespace Lucid.Web.StubApp.App.Html
 
         [HttpGet]
         public ActionResult Form_Render() { return View(); }
+
+        [HttpGet]
+        public ActionResult Form_RenderInput() { return View(new FormModel()); }
     }
 }

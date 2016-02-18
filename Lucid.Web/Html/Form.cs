@@ -4,12 +4,12 @@ using HtmlTags;
 
 namespace Lucid.Web.Html
 {
-    public class Form : IDisposable
+    public class Form<T> : IDisposable
     {
-        private HtmlHelper  _helper;
-        private FormTag     _formTag;
+        private HtmlHelper<T>   _helper;
+        private FormTag         _formTag;
 
-        public Form(HtmlHelper helper)
+        public Form(HtmlHelper<T> helper)
         {
             _helper = helper;
 
@@ -18,8 +18,15 @@ namespace Lucid.Web.Html
             _formTag = new FormTag();
             _formTag.Action(url);
 
+            RenderFormStart();
+        }
+
+        protected virtual void RenderFormStart()
+        {
             _helper.ViewContext.Writer.Write(_formTag.NoClosingTag().ToString());
         }
+
+        public HtmlHelper<T> Html { get { return _helper; } }
 
         void IDisposable.Dispose()
         {

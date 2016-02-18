@@ -80,6 +80,7 @@
     <Compile Include="FeatureFolders.cs" />
     <Compile Include="Html\Component.cs" />
     <Compile Include="Html\Form.cs" />
+    <Compile Include="Html\InputHelpers.cs" />
     <Compile Include="MvcExecutor.cs" />
     <Compile Include="Routing\ActionData.cs" />
     <Compile Include="Routing\FeatureActions.cs" />
