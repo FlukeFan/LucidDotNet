@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Lucid.Web.Testing.Http;
 
 namespace Lucid.Web.Testing.Html
 {
@@ -21,9 +22,35 @@ namespace Lucid.Web.Testing.Html
 
         public string GetText(Expression<Func<T, string>> property)
         {
-            MemberExpression me = (MemberExpression)property.Body;
-            var propertyName = me.Member.Name;
-            return _formValues.Where(fv => fv.Name == propertyName).Single().Value;
+            var formName = FormName(property);
+            return _formValues.Where(fv => fv.Name == formName).Single().Value;
+        }
+
+        public ScrapedForm<T> SetText(Expression<Func<T, string>> property, string value)
+        {
+            var formName = FormName(property);
+            _formValues.Where(fv => fv.Name == formName).Single().Value = value;
+            return this;
+        }
+
+        public ScrapedForm<T> SetFormValues(Request post)
+        {
+            foreach (var formValue in _formValues)
+                post.SetFormValue(formValue.Name, formValue.Value);
+
+            return this;
+        }
+
+        public object Post(SimulatedHttpClient client, string url)
+        {
+            return client.Post(url, r => SetFormValues(r));
+        }
+
+        private string FormName(LambdaExpression expression)
+        {
+            MemberExpression me = (MemberExpression)expression.Body;
+            var formName = me.Member.Name;
+            return formName;
         }
 
         private void AddInputs()
@@ -31,11 +58,17 @@ namespace Lucid.Web.Testing.Html
             var inputs = _element.FindAll("input");
 
             foreach (var input in inputs)
-                _formValues.Add(new FormValue
-                {
-                    Name = input.Attribute("name"), // TODO - what if 'name' doesn't exist?
-                    Value = input.Attribute("value") // TODO = what if 'value' doesn't exist?
-                });
+            {
+                if (!input.HasAttribute("name"))
+                    continue;
+
+                var formValue = new FormValue { Name = input.Attribute("name") };
+
+                if (input.HasAttribute("value"))
+                    formValue.Value = input.Attribute("value");
+
+                _formValues.Add(formValue);
+            }
         }
     }
 }

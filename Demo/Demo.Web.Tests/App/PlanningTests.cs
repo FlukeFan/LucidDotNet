@@ -24,9 +24,10 @@ namespace Demo.Web.Tests.App
         {
             WebAppTest(client =>
             {
-                var response = client.Get(Actions.StartDesign());
+                var get = client.Get(Actions.StartDesign());
+                var form = get.Form<StartDesign>();
 
-                response.Doc.Find("form").Should().NotBeNull();
+                form.GetText(m => m.Name).Should().Be("");
             });
         }
 
@@ -35,14 +36,19 @@ namespace Demo.Web.Tests.App
         {
             WebAppTest(client =>
             {
-                var response = client.Post(Actions.StartDesign(), r => r
-                    .SetFormValue("Name", "web test")
-                );
+                var get = client.Get(Actions.StartDesign());
+                var form = get.Form<StartDesign>();
+
+                var post = form
+                    .SetText(m => m.Name, "web test")
+                    .Post(client, Actions.StartDesign());
 
                 ExecutorStub.Executed<StartDesign>(0).ShouldBeEquivalentTo(new StartDesign
                 {
                     Name = "web test",
                 });
+
+                // TODO: verify post is redirect to Actions.List()
             });
         }
     }
