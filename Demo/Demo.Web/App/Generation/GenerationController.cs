@@ -14,7 +14,7 @@ namespace Demo.Web.App.Generation
         [HttpGet]
         public ActionResult Generate()
         {
-            var initialCmd = new GenerateProject();
+            var initialCmd = new GenerateProject { Name = "Demo" };
             return GenerateRender(initialCmd);
         }
 

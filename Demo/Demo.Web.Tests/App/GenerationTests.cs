@@ -15,12 +15,12 @@ namespace Demo.Web.Tests.App
             WebAppTest(client =>
             {
                 var response = client.Get(Actions.Generate());
+                var form = response.Form<GenerateProject>();
 
-                response.Doc.Find("form").Where(f =>
-                {
-                    f.Attribute("method").Should().Be("post");
-                    f.Attribute("action").Should().BeAction(Actions.Generate());
-                });
+                form.Element.Attribute("method").Should().Be("post");
+                form.Element.Attribute("action").Should().BeAction(Actions.Generate());
+
+                form.GetText(m => m.Name).Should().Be("Demo");
             });
         }
 
@@ -31,9 +31,10 @@ namespace Demo.Web.Tests.App
             {
                 ExecutorStub.SetupCommand(new GenerateProject(), new byte[0]);
 
-                var response = client.Post(HttpStatusCode.OK, Actions.Generate(), r => r
-                    .SetFormValue("Name", "NewProject")
-                );
+                var form = client.Get(Actions.Generate()).Form<GenerateProject>()
+                    .SetText(m => m.Name, "NewProject");
+
+                var response = client.Post(HttpStatusCode.OK, Actions.Generate(), r => form.SetFormValues(r));
 
                 ExecutorStub.Executed<GenerateProject>(0).ShouldBeEquivalentTo(new GenerateProject
                 {
