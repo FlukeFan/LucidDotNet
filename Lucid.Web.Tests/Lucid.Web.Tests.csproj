@@ -102,6 +102,8 @@
     <Compile Include="Testing\Hosting\AspNetTestHostTests.cs" />
     <Compile Include="Testing\Html\DocumentWrapperTests.cs" />
     <Compile Include="Testing\Html\ElementWrapperTests.cs" />
+    <Compile Include="Testing\Html\FormHelperTests.cs" />
+    <Compile Include="Testing\Html\FormModel.cs" />
     <Compile Include="Testing\Html\ScrapedFormTests.cs" />
     <Compile Include="Testing\Http\RequestTests.cs" />
   </ItemGroup>
