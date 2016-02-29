@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AngleSharp.Dom;
 
 namespace Lucid.Web.Testing.Html
@@ -41,11 +43,16 @@ namespace Lucid.Web.Testing.Html
             return this;
         }
 
-        private string FormatTag()
+        public string FormatTag()
         {
             var html = _element.OuterHtml;
             var firstTagClose = html.IndexOf('>');
             return html.Substring(0, firstTagClose + 1);
+        }
+
+        public static string FormatTags(IEnumerable<ElementWrapper> elements)
+        {
+            return string.Join("\n", elements.Select(e => e.FormatTag()));
         }
     }
 }

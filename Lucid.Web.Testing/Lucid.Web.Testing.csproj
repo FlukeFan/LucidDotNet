@@ -55,6 +55,9 @@
     <Compile Include="Hosting\SerializableDelegate.cs" />
     <Compile Include="Html\DocumentWrapper.cs" />
     <Compile Include="Html\ElementWrapper.cs" />
+    <Compile Include="Html\Form.cs" />
+    <Compile Include="Html\FormHelper.cs" />
+    <Compile Include="Html\FormValue.cs" />
     <Compile Include="Html\ParentNodeWrapper.cs" />
     <Compile Include="Http\Request.cs" />
     <Compile Include="Http\Response.cs" />
