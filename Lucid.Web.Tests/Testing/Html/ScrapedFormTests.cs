@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Lucid.Web.Tests.Testing.Html
 {
     [TestFixture]
-    public class FormTests
+    public class ScrapedFormTests
     {
         [Test]
         public void Scrape_ScrapeFormByIndex()

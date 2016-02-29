@@ -5,12 +5,12 @@ using System.Linq.Expressions;
 
 namespace Lucid.Web.Testing.Html
 {
-    public class Form<T>
+    public class ScrapedForm<T>
     {
         private ElementWrapper      _element;
         private IList<FormValue>    _formValues = new List<FormValue>();
 
-        public Form(ElementWrapper element)
+        public ScrapedForm(ElementWrapper element)
         {
             _element = element;
             AddInputs();
