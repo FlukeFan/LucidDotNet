@@ -1,18 +1,20 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using HtmlTags;
 
 namespace Lucid.Web.Html
 {
     public static class InputHelpers
     {
-        public static Form<T> Form<T>(this HtmlHelper<T> helper)
+        public static Form<T> Form<T>(this HtmlHelper<T> helper, Action<FormTag> mutator = null)
         {
-            return new Form<T>(helper);
+            return new Form<T>(helper, mutator);
         }
 
-        public static Form<U> Form<T, U>(this HtmlHelper<T> helper, U newModel)
+        public static Form<U> Form<T, U>(this HtmlHelper<T> helper, U newModel, Action<FormTag> mutator = null)
         {
             var newHelper = helper.NewHelper(newModel);
-            return new Form<U>(newHelper);
+            return new Form<U>(newHelper, mutator);
         }
 
         public static HtmlHelper<U> NewHelper<T, U>(this HtmlHelper<T> helper, U newModel)

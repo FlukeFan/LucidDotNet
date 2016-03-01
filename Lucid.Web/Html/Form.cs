@@ -9,7 +9,7 @@ namespace Lucid.Web.Html
         private HtmlHelper<T>   _helper;
         private FormTag         _formTag;
 
-        public Form(HtmlHelper<T> helper)
+        public Form(HtmlHelper<T> helper, Action<FormTag> mutator)
         {
             _helper = helper;
 
@@ -17,6 +17,9 @@ namespace Lucid.Web.Html
 
             _formTag = new FormTag();
             _formTag.Action(url);
+
+            if (mutator != null)
+                mutator(_formTag);
 
             RenderFormStart();
         }

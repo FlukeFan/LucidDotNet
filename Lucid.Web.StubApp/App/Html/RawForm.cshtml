@@ -14,8 +14,8 @@
 
 <hr />
 
-<form id="rawForm">
-
+@using (Html.Form(f => f.Id("rawForm")))
+{
     <table>
         <tbody>
 
@@ -37,8 +37,7 @@
 
         </tbody>
     </table>
-
-</form>
+}
 
 <script>
 
