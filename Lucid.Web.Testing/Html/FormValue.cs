@@ -26,7 +26,7 @@ namespace Lucid.Web.Testing.Html
         {
             _name = name;
             _value = value;
-            _readonly = false;
+            _readonly = read_only;
             _disabled = disabled;
         }
 
@@ -43,6 +43,9 @@ namespace Lucid.Web.Testing.Html
 
         public FormValue SetValue(string value)
         {
+            if (_readonly && value != _value)
+                throw new Exception(string.Format("Cannot change readonly input '{0}'", _name));
+
             _value = value;
             return this;
         }
