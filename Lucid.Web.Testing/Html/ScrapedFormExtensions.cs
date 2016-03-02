@@ -14,7 +14,7 @@ namespace Lucid.Web.Testing.Html
         public static ScrapedForm<T> SetText<T>(this ScrapedForm<T> form, Expression<Func<T, string>> property, string value)
         {
             var formName = FormName(property);
-            var formValue = form.GetSingle(formName).Value = value;
+            var formValue = form.GetSingle(formName).SetValue(value);
             return form;
         }
 

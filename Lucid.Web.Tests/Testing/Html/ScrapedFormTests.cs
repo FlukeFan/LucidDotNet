@@ -41,7 +41,7 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
-        public void TwoInputsSameName()
+        public void TwoInputsWithSameName()
         {
             var html = @"
                 <form>
@@ -65,6 +65,8 @@ namespace Lucid.Web.Tests.Testing.Html
             var html = @"
                 <form>
                     <input type='text' name='Name' value='form0' />
+                    <input type='text' name='Name_readonly' readonly />
+                    <input type='text' name='Name_disabled' disabled />
                 </form>
             ";
 
@@ -75,6 +77,9 @@ namespace Lucid.Web.Tests.Testing.Html
 
             formValue.Name.Should().Be("Name");
             formValue.Value.Should().Be("form0");
+
+            form.GetSingle("Name_readonly").Readonly.Should().BeTrue("should be readonly");
+            form.GetSingle("Name_disabled").Disabled.Should().BeTrue("should be disabled");
         }
 
         [Test]
@@ -122,6 +127,7 @@ namespace Lucid.Web.Tests.Testing.Html
                 <form>
                     <input type='text' name='Name' value='form0' />
                     <input type='text' name='Name2' value='form1' />
+                    <input type='text' name='Name3' disabled />
                 </form>
             ";
 

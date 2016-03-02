@@ -42,7 +42,7 @@ namespace Lucid.Web.Testing.Html
         public ScrapedForm<T> SetFormValues(Request post)
         {
             foreach (var formValue in _formValues)
-                post.SetFormValue(formValue.Name, formValue.Value);
+                formValue.SetFormValue(post);
 
             return this;
         }
@@ -61,11 +61,7 @@ namespace Lucid.Web.Testing.Html
                 if (!input.HasAttribute("name"))
                     continue;
 
-                var formValue = new FormValue { Name = input.Attribute("name") };
-
-                if (input.HasAttribute("value"))
-                    formValue.Value = input.Attribute("value");
-
+                var formValue = FormValue.FromElement(input);
                 _formValues.Add(formValue);
             }
         }
