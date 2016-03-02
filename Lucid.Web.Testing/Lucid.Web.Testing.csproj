@@ -59,6 +59,7 @@
     <Compile Include="Html\FormHelper.cs" />
     <Compile Include="Html\FormValue.cs" />
     <Compile Include="Html\ParentNodeWrapper.cs" />
+    <Compile Include="Html\ScrapedFormExtensions.cs" />
     <Compile Include="Http\Request.cs" />
     <Compile Include="Http\Response.cs" />
     <Compile Include="Http\SimulatedHttpClient.cs" />

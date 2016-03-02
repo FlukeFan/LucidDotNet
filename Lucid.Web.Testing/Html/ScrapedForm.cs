@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Lucid.Web.Testing.Http;
 
 namespace Lucid.Web.Testing.Html
@@ -20,17 +18,9 @@ namespace Lucid.Web.Testing.Html
         public ElementWrapper           Element     { get { return _element; } }
         public IEnumerable<FormValue>   FormValues  { get { return _formValues; } }
 
-        public string GetText(Expression<Func<T, string>> property)
+        public FormValue Get(string name)
         {
-            var formName = FormName(property);
-            return _formValues.Where(fv => fv.Name == formName).Single().Value;
-        }
-
-        public ScrapedForm<T> SetText(Expression<Func<T, string>> property, string value)
-        {
-            var formName = FormName(property);
-            _formValues.Where(fv => fv.Name == formName).Single().Value = value;
-            return this;
+            return _formValues.Where(fv => fv.Name == name).Single();
         }
 
         public ScrapedForm<T> SetFormValues(Request post)
@@ -44,13 +34,6 @@ namespace Lucid.Web.Testing.Html
         public object Post(SimulatedHttpClient client, string url)
         {
             return client.Post(url, r => SetFormValues(r));
-        }
-
-        private string FormName(LambdaExpression expression)
-        {
-            MemberExpression me = (MemberExpression)expression.Body;
-            var formName = me.Member.Name;
-            return formName;
         }
 
         private void AddInputs()

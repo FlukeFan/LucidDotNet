@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using Lucid.Web.Testing.Html;
 using Lucid.Web.Testing.Http;
 using NUnit.Framework;
 

@@ -3,6 +3,7 @@ using Demo.Web.App.Generation;
 using Demo.Web.ProjectCreation;
 using Demo.Web.Tests.Utility;
 using FluentAssertions;
+using Lucid.Web.Testing.Html;
 using NUnit.Framework;
 
 namespace Demo.Web.Tests.App

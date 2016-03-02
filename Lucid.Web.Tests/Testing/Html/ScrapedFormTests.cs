@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
+using Lucid.Web.Testing.Html;
 using Lucid.Web.Testing.Http;
 using NUnit.Framework;
 
@@ -39,7 +40,7 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
-        public void GetText()
+        public void Get()
         {
             var html = @"
                 <form>
@@ -50,7 +51,10 @@ namespace Lucid.Web.Tests.Testing.Html
             var response = new Response { Text = html };
             var form = response.Form<FormModel>();
 
-            form.GetText(m => m.Name).Should().Be("form0");
+            var formValue = form.Get("Name");
+
+            formValue.Name.Should().Be("Name");
+            formValue.Value.Should().Be("form0");
         }
 
         [Test]
