@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Lucid.Web.Testing.Html;
 using Lucid.Web.Testing.Http;
@@ -10,7 +11,7 @@ namespace Lucid.Web.Tests.Testing.Html
     public class ScrapedFormTests
     {
         [Test]
-        public void Scrape_IgnoresMissingNames()
+        public void IgnoresMissingNames()
         {
             var html = @"
                 <form>
@@ -25,7 +26,7 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
-        public void Scrape_AllowsMissingValues()
+        public void AllowsMissingValues()
         {
             var html = @"
                 <form>
@@ -40,6 +41,25 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
+        public void TwoInputsSameName()
+        {
+            var html = @"
+                <form>
+                    <input type='text' name='Name' value='value1' />
+                    <input type='text' name='Name' value='value2' />
+                </form>
+            ";
+
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            var formValues = form.Get("Name");
+            formValues.Length.Should().Be(2);
+            formValues[0].Value.Should().Be("value1");
+            formValues[1].Value.Should().Be("value2");
+        }
+
+        [Test]
         public void Get()
         {
             var html = @"
@@ -51,10 +71,48 @@ namespace Lucid.Web.Tests.Testing.Html
             var response = new Response { Text = html };
             var form = response.Form<FormModel>();
 
-            var formValue = form.Get("Name");
+            var formValue = form.GetSingle("Name");
 
             formValue.Name.Should().Be("Name");
             formValue.Value.Should().Be("form0");
+        }
+
+        [Test]
+        public void Get_NoMatchReturnsEmptyList()
+        {
+            var form = new ScrapedForm<FormModel>();
+
+            var formValues = form.Get("DoesNotExist");
+
+            formValues.Length.Should().Be(0);
+        }
+
+        [Test]
+        public void GetSingle_NoMatch_ThrowsError()
+        {
+            var form = new ScrapedForm<FormModel>();
+
+            var e = Assert.Throws<Exception>(() => form.GetSingle("DoesNotExist"));
+
+            e.Message.Should().Be("Could not find entry 'DoesNotExist' in form values");
+        }
+
+        [Test]
+        public void GetSingle_MultipleMatch_ThrowsError()
+        {
+            var html = @"
+                <form>
+                    <input type='text' name='Name' value='value1' />
+                    <input type='text' name='Name' value='value2' />
+                </form>
+            ";
+
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            var e = Assert.Throws<Exception>(() => form.GetSingle("Name"));
+
+            e.Message.Should().Be("Found multiple form values for 'Name'");
         }
 
         [Test]
