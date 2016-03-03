@@ -9,6 +9,7 @@ namespace Lucid.Web.Testing.Html
         private string  _value;
         private bool    _readonly;
         private bool    _disabled;
+        private bool    _sendEmpty;
 
         public static FormValue FromElement(ElementWrapper input)
         {
@@ -17,23 +18,26 @@ namespace Lucid.Web.Testing.Html
             formValue
                 .SetValue(input.HasAttribute("value") ? input.Attribute("value") : null)
                 .SetReadonly(input.HasAttribute("readonly"))
-                .SetDisabled(input.HasAttribute("disabled"));
+                .SetDisabled(input.HasAttribute("disabled"))
+                .SetSendEmpty(input.Attribute("type") != "checkbox");
 
             return formValue;
         }
 
-        public FormValue(string name, string value = "", bool read_only = false, bool disabled = false)
+        public FormValue(string name, string value = "", bool read_only = false, bool disabled = false, bool sendEmpty = true)
         {
             _name = name;
             _value = value;
             _readonly = read_only;
             _disabled = disabled;
+            _sendEmpty = sendEmpty;
         }
 
         public string   Name        { get { return _name; } }
         public string   Value       { get { return _value; } }
         public bool     Readonly    { get { return _readonly; } }
         public bool     Disabled    { get { return _disabled; } }
+        public bool     SendEmpty   { get { return _sendEmpty; } }
 
         public FormValue SetName(string name)
         {
@@ -62,10 +66,21 @@ namespace Lucid.Web.Testing.Html
             return this;
         }
 
-        public void SetFormValue(Request post)
+        public FormValue SetSendEmpty(bool sendEmpty)
         {
-            if (!_disabled)
-                post.SetFormValue(_name, _value);
+            _sendEmpty = sendEmpty;
+            return this;
+        }
+
+        public void SetFormValue(Request request)
+        {
+            if (_disabled)
+                return;
+
+            if (string.IsNullOrEmpty(_value) && !_sendEmpty)
+                return;
+
+            request.SetFormValue(_name, _value);
         }
     }
 }

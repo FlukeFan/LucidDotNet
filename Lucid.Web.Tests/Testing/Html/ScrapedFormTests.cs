@@ -77,9 +77,25 @@ namespace Lucid.Web.Tests.Testing.Html
 
             formValue.Name.Should().Be("Name");
             formValue.Value.Should().Be("form0");
+            formValue.SendEmpty.Should().BeTrue();
 
             form.GetSingle("Name_readonly").Readonly.Should().BeTrue("should be readonly");
             form.GetSingle("Name_disabled").Disabled.Should().BeTrue("should be disabled");
+        }
+
+        [Test]
+        public void Checkbox_DoesNotSendEmpty()
+        {
+            var html = @"
+                <form>
+                    <input type='checkbox' name='Name' />
+                </form>
+            ";
+
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            form.GetSingle("Name").SendEmpty.Should().BeFalse();
         }
 
         [Test]
