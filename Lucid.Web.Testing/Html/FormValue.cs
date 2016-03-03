@@ -9,35 +9,44 @@ namespace Lucid.Web.Testing.Html
         private string  _value;
         private bool    _readonly;
         private bool    _disabled;
-        private bool    _sendEmpty;
+        private bool    _send;
 
         public static FormValue FromElement(ElementWrapper input)
         {
+            var type = input.HasAttribute("type") ? input.Attribute("type").ToLower() : "text";
             var formValue = new FormValue(input.Attribute("name"));
 
             formValue
                 .SetValue(input.HasAttribute("value") ? input.Attribute("value") : null)
                 .SetReadonly(input.HasAttribute("readonly"))
-                .SetDisabled(input.HasAttribute("disabled"))
-                .SetSendEmpty(input.Attribute("type") != "checkbox");
+                .SetDisabled(input.HasAttribute("disabled"));
+
+            if (type == "checkbox" || type == "radio")
+            {
+                if (string.IsNullOrEmpty(formValue.Value))
+                    formValue.SetValue("on");
+
+                if (!input.HasAttribute("checked"))
+                    formValue.SetSend(false);
+            }
 
             return formValue;
         }
 
-        public FormValue(string name, string value = "", bool read_only = false, bool disabled = false, bool sendEmpty = true)
+        public FormValue(string name, string value = "", bool read_only = false, bool disabled = false, bool send = true)
         {
             _name = name;
             _value = value;
             _readonly = read_only;
             _disabled = disabled;
-            _sendEmpty = sendEmpty;
+            _send = send;
         }
 
         public string   Name        { get { return _name; } }
         public string   Value       { get { return _value; } }
         public bool     Readonly    { get { return _readonly; } }
         public bool     Disabled    { get { return _disabled; } }
-        public bool     SendEmpty   { get { return _sendEmpty; } }
+        public bool     Send        { get { return _send; } }
 
         public FormValue SetName(string name)
         {
@@ -66,18 +75,15 @@ namespace Lucid.Web.Testing.Html
             return this;
         }
 
-        public FormValue SetSendEmpty(bool sendEmpty)
+        public FormValue SetSend(bool send)
         {
-            _sendEmpty = sendEmpty;
+            _send = send;
             return this;
         }
 
         public void SetFormValue(Request request)
         {
-            if (_disabled)
-                return;
-
-            if (string.IsNullOrEmpty(_value) && !_sendEmpty)
+            if (_disabled || !_send)
                 return;
 
             request.SetFormValue(_name, _value);

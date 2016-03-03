@@ -77,25 +77,58 @@ namespace Lucid.Web.Tests.Testing.Html
 
             formValue.Name.Should().Be("Name");
             formValue.Value.Should().Be("form0");
-            formValue.SendEmpty.Should().BeTrue();
+            formValue.Send.Should().BeTrue();
 
             form.GetSingle("Name_readonly").Readonly.Should().BeTrue("should be readonly");
             form.GetSingle("Name_disabled").Disabled.Should().BeTrue("should be disabled");
         }
 
         [Test]
-        public void Checkbox_DoesNotSendEmpty()
+        public void Checkbox()
         {
             var html = @"
                 <form>
-                    <input type='checkbox' name='Name' />
+                    <input type='checkbox' name='cb_noValue_notChecked' />
+                    <input type='checkbox' name='cb_noValue_checked' checked />
+                    <input type='checkbox' name='cb_value_notChecked' value='123' />
+                    <input type='checkbox' name='cb_value_checked' value='234' checked />
                 </form>
             ";
 
             var response = new Response { Text = html };
             var form = response.Form<FormModel>();
 
-            form.GetSingle("Name").SendEmpty.Should().BeFalse();
+            form.GetSingle("cb_noValue_notChecked").Value.Should().Be("on");
+            form.GetSingle("cb_noValue_notChecked").Send.Should().BeFalse();
+
+            form.GetSingle("cb_noValue_checked").Value.Should().Be("on");
+            form.GetSingle("cb_noValue_checked").Send.Should().BeTrue();
+
+            form.GetSingle("cb_value_notChecked").Value.Should().Be("123");
+            form.GetSingle("cb_value_notChecked").Send.Should().BeFalse();
+
+            form.GetSingle("cb_value_checked").Value.Should().Be("234");
+            form.GetSingle("cb_value_checked").Send.Should().BeTrue();
+        }
+
+        [Test]
+        public void Radio()
+        {
+            var html = @"
+                <form>
+                    <input type='radio' name='r_noValue_checked' checked />
+                    <input type='radio' name='r_value_notChecked' value='123' />
+                </form>
+            ";
+
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            form.GetSingle("r_noValue_checked").Value.Should().Be("on");
+            form.GetSingle("r_noValue_checked").Send.Should().BeTrue();
+
+            form.GetSingle("r_value_notChecked").Value.Should().Be("123");
+            form.GetSingle("r_value_notChecked").Send.Should().BeFalse();
         }
 
         [Test]

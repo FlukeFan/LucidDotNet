@@ -22,26 +22,30 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
-        public void SetFormValue_WhenSendEmpty_SendsEmptyValue()
+        public void SetFormValue_WhenSend_SendsValues()
         {
-            var send = new FormValue("Name", null, sendEmpty: true);
+            var send_value = new FormValue("send_value", "value", send: true);
+            var send_null = new FormValue("send_null", null, send: true);
+            var send_empty = new FormValue("send_empty", "", send: true);
 
             var request = new Request("");
-            send.SetFormValue(request);
+            send_value.SetFormValue(request);
+            send_null.SetFormValue(request);
+            send_empty.SetFormValue(request);
 
-            request.FormValues.Count.Should().Be(1);
-            request.FormValues.Get("Name").Should().BeNullOrEmpty();
+            request.FormValues.Count.Should().Be(3);
+            request.FormValues.Get("send_value").Should().Be("value");
+            request.FormValues.Get("send_null").Should().BeNull();
+            request.FormValues.Get("send_empty").Should().BeEmpty();
         }
 
         [Test]
-        public void SetFormValue_WhenNotSendEmpty_DoesNotSendEmptyValue()
+        public void SetFormValue_WhenNotSend_DoesNotSend()
         {
-            var nosend1 = new FormValue("Name", null, sendEmpty: false);
-            var nosend2 = new FormValue("Name", "", sendEmpty: false);
+            var nosend = new FormValue("Name", "value", send: false);
 
             var request = new Request("");
-            nosend1.SetFormValue(request);
-            nosend2.SetFormValue(request);
+            nosend.SetFormValue(request);
 
             request.FormValues.Count.Should().Be(0);
         }
