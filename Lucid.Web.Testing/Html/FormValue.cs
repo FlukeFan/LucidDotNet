@@ -24,6 +24,9 @@ namespace Lucid.Web.Testing.Html
                 case "input":
                     return FromInput(element, formValue);
 
+                case "textarea":
+                    return FromTextArea(element, formValue);
+
                 case "select":
                     return FromSelect(element, formValue);
 
@@ -48,6 +51,15 @@ namespace Lucid.Web.Testing.Html
                 if (!input.HasAttribute("checked"))
                     formValue.SetSend(false);
             }
+
+            return formValue;
+        }
+
+        public static FormValue FromTextArea(ElementWrapper textArea, FormValue formValue)
+        {
+            formValue
+                .SetValue(textArea.TextContent)
+                .SetReadonly(textArea.HasAttribute("readonly"));
 
             return formValue;
         }

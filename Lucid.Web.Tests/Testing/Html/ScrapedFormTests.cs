@@ -155,6 +155,25 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
+        public void TextArea()
+        {
+            var html = @"
+                <form>
+                    <textarea name='ta_disabled' disabled></textarea>
+                    <textarea name='ta_readonly' readonly></textarea>
+                    <textarea name='ta'>text area</textarea>
+                </form>
+            ";
+
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            form.GetSingle("ta_disabled").Disabled.Should().BeTrue();
+            form.GetSingle("ta_readonly").Readonly.Should().BeTrue();
+            form.GetSingle("ta").Value.Should().Be("text area");
+        }
+
+        [Test]
         public void Get_NoMatchReturnsEmptyList()
         {
             var form = new ScrapedForm<FormModel>();
