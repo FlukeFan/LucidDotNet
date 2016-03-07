@@ -132,6 +132,29 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
+        public void Select()
+        {
+            var html = @"
+                <form>
+                    <select name='Selector'>
+                        <option>notset</option>
+                        <option value=''>empty</option>
+                        <option value='v1' selected>value 1</option>
+                        <option value='v2'>value 2</option>
+                    </select>
+                </form>
+            ";
+
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+            var select = form.GetSingle("Selector");
+
+            select.Value.Should().Be("v1");
+            select.ConfinedValues.Should().BeEquivalentTo("notset", "", "v1", "v2");
+            select.Texts.Should().BeEquivalentTo("notset", "empty", "value 1", "value 2");
+        }
+
+        [Test]
         public void Get_NoMatchReturnsEmptyList()
         {
             var form = new ScrapedForm<FormModel>();

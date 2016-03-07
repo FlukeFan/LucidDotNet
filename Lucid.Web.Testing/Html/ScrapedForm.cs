@@ -54,7 +54,7 @@ namespace Lucid.Web.Testing.Html
 
         private void AddInputs()
         {
-            var inputs = _element.FindAll("input");
+            var inputs = _element.FindAll("input, select");
 
             foreach (var input in inputs)
             {
