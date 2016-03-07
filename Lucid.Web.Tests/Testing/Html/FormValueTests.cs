@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Lucid.Web.Testing.Html;
 using Lucid.Web.Testing.Http;
@@ -48,6 +49,56 @@ namespace Lucid.Web.Tests.Testing.Html
             nosend.SetFormValue(request);
 
             request.FormValues.Count.Should().Be(0);
+        }
+
+        [Test]
+        public void Construct_WhenTextsIsNotSameLengthAsConfinedValues_Throws()
+        {
+            Assert.Throws<Exception>(() => new FormValue("name", confinedValues: new List<string> { "a" }, texts: new List<string> { "b", "c" }));
+        }
+
+        [Test]
+        public void SetValue_WhenNotInConfinedValues_Throws()
+        {
+            var formValue = new FormValue("Name", "a", confinedValues: new List<string> { "a", "b" });
+
+            Assert.DoesNotThrow(() => formValue.SetValue("b"));
+
+            formValue.Value.Should().Be("b");
+
+            var e = Assert.Throws<Exception>(() => formValue.SetValue("c"));
+
+            e.Message.Should().Be("Value 'c' cannot be set.  Must be one of 'a, b'");
+        }
+
+        [Test]
+        public void ForceValue()
+        {
+            var formValue = new FormValue("Name", "a", confinedValues: new List<string> { "a", "b" });
+
+            formValue.ForceValue("c");
+
+            formValue.Value.Should().Be("c");
+        }
+
+        [Test]
+        public void SelectText()
+        {
+            var formValue = new FormValue("Name", "a", confinedValues: new List<string> { "a", "b" }, texts: new List<string> { "a value", "b value" });
+
+            formValue.SelectText("b value");
+
+            formValue.Value.Should().Be("b");
+        }
+
+        [Test]
+        public void SelectText_WhenTextNotFound_Throws()
+        {
+            var formValue = new FormValue("Name", "a", confinedValues: new List<string> { "a", "b" }, texts: new List<string> { "a value", "b value" });
+
+            var e = Assert.Throws<Exception>(() => formValue.SelectText("c value"));
+
+            e.Message.Should().Be("Could not find 'c value' in 'a value, b value'");
         }
     }
 }

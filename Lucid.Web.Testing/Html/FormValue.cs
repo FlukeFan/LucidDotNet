@@ -11,8 +11,8 @@ namespace Lucid.Web.Testing.Html
         private bool            _readonly;
         private bool            _disabled;
         private bool            _send;
-        private IList<string>   _confinedValues = new List<string>();
-        private IList<string>   _texts          = new List<string>();
+        private IList<string>   _confinedValues;
+        private IList<string>   _texts;
 
         public static FormValue FromElement(ElementWrapper element)
         {
@@ -73,20 +73,19 @@ namespace Lucid.Web.Testing.Html
                     formValue.SetValue(value);
             }
 
-            formValue
-                .SetTexts(texts)
-                .SetConfinedValues(values);
+            formValue.SetConfinedValues(values, texts);
 
             return formValue;
         }
 
-        public FormValue(string name, string value = "", bool read_only = false, bool disabled = false, bool send = true)
+        public FormValue(string name, string value = "", bool read_only = false, bool disabled = false, bool send = true, IList<string> confinedValues = null, IList<string> texts = null)
         {
             _name = name;
             _value = value;
             _readonly = read_only;
             _disabled = disabled;
             _send = send;
+            SetConfinedValues(confinedValues, texts);
         }
 
         public string           Name            { get { return _name; } }
@@ -108,8 +107,26 @@ namespace Lucid.Web.Testing.Html
             if (_readonly && value != _value)
                 throw new Exception(string.Format("Cannot change readonly input '{0}'", _name));
 
+            if (_confinedValues.Count > 0 && !_confinedValues.Contains(value))
+                throw new Exception(string.Format("Value '{0}' cannot be set.  Must be one of '{1}'", value, string.Join(", ", _confinedValues)));
+
+            return ForceValue(value);
+        }
+
+        public FormValue ForceValue(string value)
+        {
             _value = value;
             return this;
+        }
+
+        public FormValue SelectText(string text)
+        {
+            var textIndex = _texts.IndexOf(text);
+
+            if (textIndex < 0)
+                throw new Exception(string.Format("Could not find '{0}' in '{1}'", text, string.Join(", ", _texts)));
+
+            return SetValue(_confinedValues[textIndex]);
         }
 
         public FormValue SetReadonly(bool read_only)
@@ -130,15 +147,14 @@ namespace Lucid.Web.Testing.Html
             return this;
         }
 
-        public FormValue SetConfinedValues(IList<string> confinedValues)
+        public FormValue SetConfinedValues(IList<string> confinedValues, IList<string> texts = null)
         {
-            _confinedValues = confinedValues;
-            return this;
-        }
+            _confinedValues = confinedValues ?? new List<string>();
+            _texts = texts ?? new List<string>();
 
-        public FormValue SetTexts(IList<string> texts)
-        {
-            _texts = texts;
+            if (_texts.Count > 0 && _texts.Count != _confinedValues.Count)
+                throw new Exception(string.Format("Supplied texts '{0}' does not match length of supplied values '{1}'", string.Join(", ", _confinedValues), string.Join(", ", _texts)));
+
             return this;
         }
 
