@@ -55,6 +55,8 @@
     <Compile Include="Hosting\SerializableDelegate.cs" />
     <Compile Include="Html\DocumentWrapper.cs" />
     <Compile Include="Html\ElementWrapper.cs" />
+    <Compile Include="Html\FormScraper.cs" />
+    <Compile Include="Html\FormValueScraper.cs" />
     <Compile Include="Html\TypedForm.cs" />
     <Compile Include="Html\FormHelper.cs" />
     <Compile Include="Html\FormValue.cs" />

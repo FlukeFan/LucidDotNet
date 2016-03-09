@@ -104,6 +104,7 @@
     <Compile Include="Testing\Html\ElementWrapperTests.cs" />
     <Compile Include="Testing\Html\FormHelperTests.cs" />
     <Compile Include="Testing\Html\FormModel.cs" />
+    <Compile Include="Testing\Html\FormScraperTests.cs" />
     <Compile Include="Testing\Html\FormValueTests.cs" />
     <Compile Include="Testing\Html\TypedFormExtensionsTests.cs" />
     <Compile Include="Testing\Html\TypedFormTests.cs" />

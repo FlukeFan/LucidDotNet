@@ -18,8 +18,8 @@ namespace Demo.Web.Tests.App
                 var response = client.Get(Actions.Generate());
                 var form = response.Form<GenerateProject>();
 
-                form.Element.Attribute("method").Should().Be("post");
-                form.Element.Attribute("action").Should().BeAction(Actions.Generate());
+                form.Method.Should().Be("post");
+                form.Action.Should().BeAction(Actions.Generate());
 
                 form.GetText(m => m.Name).Should().Be("Demo");
             });

@@ -5,6 +5,8 @@ namespace Lucid.Web.Testing.Html
 {
     public static class FormHelper
     {
+        public static Func<ElementWrapper, FormScraper> NewScraper = ew => new FormScraper(ew);
+
         public static TypedForm<T> Scrape<T>(DocumentWrapper doc)
         {
             return Scrape<T>(doc, "form");
@@ -17,7 +19,7 @@ namespace Lucid.Web.Testing.Html
             if (index > formElements.Count - 1)
                 throw new Exception(string.Format("Index '{0}' is too large for collection with '{1}' forms: {2}", index, formElements.Count, ElementWrapper.FormatTags(formElements)));
 
-            return new TypedForm<T>(formElements[index]);
+            return NewScraper(formElements[index]).Scrape<T>();
         }
 
         public static TypedForm<T> Scrape<T>(DocumentWrapper doc, string cssSelector)
@@ -27,7 +29,7 @@ namespace Lucid.Web.Testing.Html
             if (formElements.Count > 1)
                 throw new Exception("Multiple form elements found in document: " + ElementWrapper.FormatTags(formElements));
 
-            return new TypedForm<T>(formElements[0]);
+            return NewScraper(formElements[0]).Scrape<T>();
         }
 
         private static List<ElementWrapper> FindForms(DocumentWrapper doc, string cssSelector)

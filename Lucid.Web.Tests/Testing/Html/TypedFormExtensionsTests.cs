@@ -17,8 +17,7 @@ namespace Lucid.Web.Tests.Testing.Html
                 </form>
             ";
 
-            var response = new Response { Text = html };
-            var form = response.Form<FormModel>();
+            var form = new Response { Text = html }.Form<FormModel>();
 
             form.GetText(m => m.Name).Should().Be("form0");
         }
