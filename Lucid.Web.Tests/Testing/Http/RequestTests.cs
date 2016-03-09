@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Net;
+using FluentAssertions;
 using Lucid.Web.Testing.Http;
 using NUnit.Framework;
 
@@ -15,17 +16,35 @@ namespace Lucid.Web.Tests.Testing.Http
             request.Url.Should().Be("/test/path");
             request.Query.Should().Be("p1=123&p2=234");
             request.Verb.Should().Be("GET");
+            request.ExptectedResponse.Should().Be(HttpStatusCode.OK);
             request.Headers.Count.Should().Be(0);
             request.FormValues.Count.Should().Be(0);
         }
 
         [Test]
+        public void Construct_PostSetFormUrlEncoded()
+        {
+            var request = new Request("/test", "post");
+
+            request.Verb.Should().Be("POST");
+            request.ExptectedResponse.Should().Be(HttpStatusCode.Redirect);
+
+            request.Headers.Count.Should().Be(1, "the content-type header should be set");
+            request.Headers.Get("Content-Type").Should().Be("application/x-www-form-urlencoded");
+        }
+
+        [Test]
+        public void Construct_EmptyExpectedResponse()
+        {
+            var request = new Request("/test", "PUSH");
+
+            request.ExptectedResponse.Should().BeNull();
+        }
+
+        [Test]
         public void SetFormValue()
         {
-            var request = new Request("/test", "POST").SetFormUrlEncoded();
-
-            request.Headers.Count.Should().Be(1);
-            request.Headers.Get("Content-Type").Should().Be("application/x-www-form-urlencoded");
+            var request = new Request("/test", "POST");
 
             request.SetFormValue("p1", "123");
             request.SetFormValue("p2", "234");

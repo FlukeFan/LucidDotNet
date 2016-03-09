@@ -116,5 +116,29 @@ namespace Lucid.Web.Tests.Testing.Html
             post.FormValues.Get("Name").Should().Be("tst1");
             post.FormValues.Get("Name2").Should().Be("tst2");
         }
+
+        [Test]
+        public void Submit_SingleSubmit()
+        {
+            var html = @"
+                <form action='/test' method='get'>
+                    <input type='hidden' name='Name1' value='Value1' />
+                    <input type='submit' value='Submit Value' />
+                </form>
+            ";
+
+            var form = new Response { Text = html }.Form<FormModel>();
+
+            var client = new FakeClient();
+            form.Submit(client);
+
+            var request = client.Request;
+
+            request.Url.Should().Be("/test");
+            request.Verb.Should().Be("GET");
+
+            request.FormValues.Count.Should().Be(1);
+            request.FormValues["Name1"].Should().Be("Value1");
+        }
     }
 }

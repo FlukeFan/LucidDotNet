@@ -40,9 +40,9 @@ namespace Demo.Web.Tests.App
                 var get = client.Get(Actions.StartDesign());
                 var form = get.Form<StartDesign>();
 
-                var post = form
+                var response = form
                     .SetText(m => m.Name, "web test")
-                    .Post(client, Actions.StartDesign());
+                    .Submit(client);
 
                 ExecutorStub.Executed<StartDesign>(0).ShouldBeEquivalentTo(new StartDesign
                 {

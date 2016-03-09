@@ -65,17 +65,19 @@ namespace Lucid.Web.Testing.Html
             return formValues.Single();
         }
 
-        public TypedForm<T> SetFormValues(Request post)
+        public TypedForm<T> SetFormValues(Request request)
         {
             foreach (var formValue in _formValues)
-                formValue.SetFormValue(post);
+                formValue.SetFormValue(request);
 
             return this;
         }
 
-        public object Post(SimulatedHttpClient client, string url)
+        public Response Submit(ISimulatedHttpClient client, Action<Request> modifier = null)
         {
-            return client.Post(url, r => SetFormValues(r));
+            var request = new Request(Action, Method);
+            SetFormValues(request);
+            return client.Process(request, modifier);
         }
     }
 }

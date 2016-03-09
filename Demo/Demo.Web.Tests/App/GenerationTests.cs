@@ -33,9 +33,8 @@ namespace Demo.Web.Tests.App
                 ExecutorStub.SetupCommand(new GenerateProject(), new byte[0]);
 
                 var form = client.Get(Actions.Generate()).Form<GenerateProject>()
-                    .SetText(m => m.Name, "NewProject");
-
-                var response = client.Post(HttpStatusCode.OK, Actions.Generate(), r => form.SetFormValues(r));
+                    .SetText(m => m.Name, "NewProject")
+                    .Submit(client, r => r.SetExpectedResponse(HttpStatusCode.OK));
 
                 ExecutorStub.Executed<GenerateProject>(0).ShouldBeEquivalentTo(new GenerateProject
                 {

@@ -80,7 +80,8 @@ namespace Lucid.Web.Tests.StubApp.App
         {
             StubApp.Test(http =>
             {
-                var response = http.Post(HttpStatusCode.OK, "/Home/PostValues", r => r
+                var response = http.Post("/Home/PostValues", r => r
+                    .SetExpectedResponse(HttpStatusCode.OK)
                     .SetFormValue("V1", "test")
                     .SetFormValue("%&V2", "!\"$%^&*()")
                 );
@@ -115,7 +116,18 @@ namespace Lucid.Web.Tests.StubApp.App
         {
             StubApp.Test(http =>
             {
-                var response = http.Get(HttpStatusCode.InternalServerError, "/Home/Return500");
+                var response = http.Get("/Home/Return500", r => r.SetExpectedResponse(HttpStatusCode.InternalServerError));
+
+                response.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
+            });
+        }
+
+        [Test]
+        public void ReturnCode_AllowsNullStatusCode()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Get("/Home/Return500", r => r.SetExpectedResponse(null));
 
                 response.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
             });

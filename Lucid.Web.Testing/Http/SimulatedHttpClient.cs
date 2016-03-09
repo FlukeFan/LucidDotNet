@@ -1,16 +1,18 @@
 ﻿using System;
 using System.IO;
-using System.Net;
 using System.Web;
 using Lucid.Web.Testing.Hosting;
 
 namespace Lucid.Web.Testing.Http
 {
-    [Serializable]
-    public class SimulatedHttpClient
+    public interface ISimulatedHttpClient
     {
-        public static HttpStatusCode DefaultGetCode = HttpStatusCode.OK;
-        public static HttpStatusCode DefaultPostCode = HttpStatusCode.Redirect;
+        Response Process(Request request, Action<Request> modifier = null);
+    }
+
+    [Serializable]
+    public class SimulatedHttpClient : ISimulatedHttpClient
+    {
 
         public static string LastResponseText { get; protected set; }
 
@@ -35,52 +37,23 @@ namespace Lucid.Web.Testing.Http
             return hadExpectedError;
         }
 
-        public Response Get(string url)
-        {
-            return Get(DefaultGetCode, url);
-        }
-
-        public Response Get(string url, Action<Request> modifier)
-        {
-            return Get(DefaultGetCode, url, modifier);
-        }
-
-        public Response Get(HttpStatusCode expectedStatusCode, string url)
-        {
-            return Get(expectedStatusCode, url, r => { });
-        }
-
-        public Response Get(HttpStatusCode expectedStatusCode, string url, Action<Request> modifier)
+        public Response Get(string url, Action<Request> modifier = null)
         {
             var request = new Request(url, "GET");
-            modifier(request);
-            return Process(expectedStatusCode, request);
+            return Process(request, modifier);
         }
 
-        public Response Post(string url)
+        public Response Post(string url, Action<Request> modifier = null)
         {
-            return Post(DefaultPostCode, url);
+            var request = new Request(url, "POST");
+            return Process(request, modifier);
         }
 
-        public Response Post(string url, Action<Request> modifier)
+        public Response Process(Request request, Action<Request> modifier = null)
         {
-            return Post(DefaultPostCode, url, modifier);
-        }
+            if (modifier != null)
+                modifier(request);
 
-        public Response Post(HttpStatusCode expectedStatusCode, string url)
-        {
-            return Post(expectedStatusCode, url, r => { });
-        }
-
-        public Response Post(HttpStatusCode expectedStatusCode, string url, Action<Request> modifier)
-        {
-            var request = new Request(url, "POST").SetFormUrlEncoded();
-            modifier(request);
-            return Process(expectedStatusCode, request);
-        }
-
-        public Response Process(HttpStatusCode expectedStatusCode, Request request)
-        {
             using (var output = new StringWriter())
             {
                 var workerRequest = new SimulatedWorkerRequest(request, output);
@@ -96,8 +69,8 @@ namespace Lucid.Web.Testing.Http
                     Text                = responseText,
                 };
 
-                if (response.HttpStatusCode != expectedStatusCode)
-                    throw new UnexpectedStatusCodeException(response, expectedStatusCode);
+                if (request.ExptectedResponse.HasValue && request.ExptectedResponse.Value != response.HttpStatusCode)
+                    throw new UnexpectedStatusCodeException(response, request.ExptectedResponse.Value);
 
                 return response;
             }
