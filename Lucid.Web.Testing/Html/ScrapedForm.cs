@@ -7,19 +7,41 @@ namespace Lucid.Web.Testing.Html
 {
     public class ScrapedForm<T>
     {
+        private string              _method;
+        private string              _action;
         private ElementWrapper      _element;
         private IList<FormValue>    _formValues = new List<FormValue>();
 
-        public ScrapedForm() { }
+        public ScrapedForm(string method = "", string action = "")
+        {
+            SetMethod(method);
+            SetAction(action);
+        }
 
         public ScrapedForm(ElementWrapper element)
         {
             _element = element;
+            SetMethod(_element.AttributeOrEmpty("method"));
+            SetAction(_element.AttributeOrEmpty("action"));
             AddInputs();
         }
 
+        public string                   Method      { get { return _method; } }
+        public string                   Action      { get { return _action; } }
         public ElementWrapper           Element     { get { return _element; } }
         public IEnumerable<FormValue>   FormValues  { get { return _formValues; } }
+
+        public ScrapedForm<T> SetMethod(string method)
+        {
+            _method = (method ?? "").ToLower() == "post" ? "post" : "get";
+            return this;
+        }
+
+        public ScrapedForm<T> SetAction(string action)
+        {
+            _action = action ?? "";
+            return this;
+        }
 
         public FormValue[] Get(string name)
         {

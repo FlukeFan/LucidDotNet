@@ -37,6 +37,11 @@ namespace Lucid.Web.Testing.Html
             return _element.HasAttribute(name);
         }
 
+        public string AttributeOrEmpty(string name)
+        {
+            return HasAttribute(name) ? Attribute(name) : "";
+        }
+
         public ElementWrapper Where(Action<ElementWrapper> verification)
         {
             verification(this);

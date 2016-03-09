@@ -212,6 +212,56 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
+        public void Method_DefaultsToGet()
+        {
+            var html = @"<form />";
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            form.Method.Should().Be("get");
+        }
+
+        [Test]
+        public void Method_Post()
+        {
+            var html = @"<form method='post' />";
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            form.Method.Should().Be("post");
+        }
+
+        [Test]
+        public void Method_WhenNotGetOrPost_DefaultsToGet()
+        {
+            var html = @"<form method='put' />";
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            form.Method.Should().Be("get");
+        }
+
+        [Test]
+        public void Action()
+        {
+            var html = @"<form action='/test' />";
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            form.Action.Should().Be("/test");
+        }
+
+        [Test]
+        public void Action_DefaultsToEmpty()
+        {
+            var html = @"<form />";
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            form.Action.Should().Be("");
+        }
+
+        [Test]
         public void Post()
         {
             var html = @"
