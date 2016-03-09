@@ -13,8 +13,8 @@ namespace Lucid.Web.Testing.Html
 
         public IHtmlDocument Document { get { return _document; } }
 
-        public ScrapedForm<T>   Form<T>()                   { return FormHelper.Scrape<T>(this); }
-        public ScrapedForm<T>   Form<T>(int index)          { return FormHelper.Scrape<T>(this, index); }
-        public ScrapedForm<T>   Form<T>(string cssSelector) { return FormHelper.Scrape<T>(this, cssSelector); }
+        public TypedForm<T> Form<T>()                   { return FormHelper.Scrape<T>(this); }
+        public TypedForm<T> Form<T>(int index)          { return FormHelper.Scrape<T>(this, index); }
+        public TypedForm<T> Form<T>(string cssSelector) { return FormHelper.Scrape<T>(this, cssSelector); }
     }
 }

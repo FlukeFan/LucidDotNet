@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Lucid.Web.Tests.Testing.Html
 {
     [TestFixture]
-    public class ScrapedFormTests
+    public class TypedFormTests
     {
         [Test]
         public void IgnoresMissingNames()
@@ -176,7 +176,7 @@ namespace Lucid.Web.Tests.Testing.Html
         [Test]
         public void Get_NoMatchReturnsEmptyList()
         {
-            var form = new ScrapedForm<FormModel>();
+            var form = new TypedForm<FormModel>();
 
             var formValues = form.Get("DoesNotExist");
 
@@ -186,7 +186,7 @@ namespace Lucid.Web.Tests.Testing.Html
         [Test]
         public void GetSingle_NoMatch_ThrowsError()
         {
-            var form = new ScrapedForm<FormModel>();
+            var form = new TypedForm<FormModel>();
 
             var e = Assert.Throws<Exception>(() => form.GetSingle("DoesNotExist"));
 

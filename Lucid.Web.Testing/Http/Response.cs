@@ -31,8 +31,8 @@ namespace Lucid.Web.Testing.Http
         public HttpStatusCode   HttpStatusCode  { get { return (HttpStatusCode)StatusCode; } }
         public DocumentWrapper  Doc             { get { return _documentWrapper.Value; } }
 
-        public ScrapedForm<T>   Form<T>()                   { return Doc.Form<T>(); }
-        public ScrapedForm<T>   Form<T>(int index)          { return Doc.Form<T>(index); }
-        public ScrapedForm<T>   Form<T>(string cssSelector) { return Doc.Form<T>(cssSelector); }
+        public TypedForm<T> Form<T>()                   { return Doc.Form<T>(); }
+        public TypedForm<T> Form<T>(int index)          { return Doc.Form<T>(index); }
+        public TypedForm<T> Form<T>(string cssSelector) { return Doc.Form<T>(cssSelector); }
     }
 }

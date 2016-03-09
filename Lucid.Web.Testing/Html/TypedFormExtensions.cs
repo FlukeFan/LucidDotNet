@@ -3,15 +3,15 @@ using System.Linq.Expressions;
 
 namespace Lucid.Web.Testing.Html
 {
-    public static class ScrapedFormExtensions
+    public static class TypedFormExtensions
     {
-        public static string GetText<T>(this ScrapedForm<T> form, Expression<Func<T, string>> property)
+        public static string GetText<T>(this TypedForm<T> form, Expression<Func<T, string>> property)
         {
             var formName = FormName(property);
             return form.GetSingle(formName).Value;
         }
 
-        public static ScrapedForm<T> SetText<T>(this ScrapedForm<T> form, Expression<Func<T, string>> property, string value)
+        public static TypedForm<T> SetText<T>(this TypedForm<T> form, Expression<Func<T, string>> property, string value)
         {
             var formName = FormName(property);
             var formValue = form.GetSingle(formName).SetValue(value);

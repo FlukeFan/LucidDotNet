@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Lucid.Web.Tests.Testing.Html
 {
     [TestFixture]
-    public class ScrapedFormExtensionsTests
+    public class TypedFormExtensionsTests
     {
         [Test]
         public void GetText()

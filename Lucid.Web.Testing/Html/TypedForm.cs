@@ -5,7 +5,7 @@ using Lucid.Web.Testing.Http;
 
 namespace Lucid.Web.Testing.Html
 {
-    public class ScrapedForm<T>
+    public class TypedForm<T>
     {
         private string              _method;
         private string              _action;
@@ -13,13 +13,13 @@ namespace Lucid.Web.Testing.Html
         private IList<FormValue>    _formValues     = new List<FormValue>();
         private IList<SubmitValue>  _submitValues   = new List<SubmitValue>();
 
-        public ScrapedForm(string method = "", string action = "")
+        public TypedForm(string method = "", string action = "")
         {
             SetMethod(method);
             SetAction(action);
         }
 
-        public ScrapedForm(ElementWrapper element)
+        public TypedForm(ElementWrapper element)
         {
             _element = element;
             SetMethod(_element.AttributeOrEmpty("method"));
@@ -33,13 +33,13 @@ namespace Lucid.Web.Testing.Html
         public IEnumerable<FormValue>   FormValues      { get { return _formValues; } }
         public IEnumerable<SubmitValue> SubmitValues    { get { return _submitValues; } }
 
-        public ScrapedForm<T> SetMethod(string method)
+        public TypedForm<T> SetMethod(string method)
         {
             _method = (method ?? "").ToLower() == "post" ? "post" : "get";
             return this;
         }
 
-        public ScrapedForm<T> SetAction(string action)
+        public TypedForm<T> SetAction(string action)
         {
             _action = action ?? "";
             return this;
@@ -63,7 +63,7 @@ namespace Lucid.Web.Testing.Html
             return formValues.Single();
         }
 
-        public ScrapedForm<T> SetFormValues(Request post)
+        public TypedForm<T> SetFormValues(Request post)
         {
             foreach (var formValue in _formValues)
                 formValue.SetFormValue(post);
