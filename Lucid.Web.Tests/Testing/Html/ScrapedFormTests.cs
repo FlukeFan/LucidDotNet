@@ -262,6 +262,37 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
+        public void ScrapeSubmit()
+        {
+            var html = @"
+                <form>
+                    <input type='submit' />
+                    <input type='submit' name='NoValue' />
+                    <input type='submit' name='SubmitName' value='Submit Value' />
+                </form>
+            ";
+
+            var response = new Response { Text = html };
+            var form = response.Form<FormModel>();
+
+            form.SubmitValues.Count().Should().Be(3);
+            {
+                var sb = form.SubmitValues.ElementAt(0);
+                sb.Name.Should().Be("");
+            }
+            {
+                var sb = form.SubmitValues.ElementAt(1);
+                sb.Name.Should().Be("NoValue");
+                sb.Value.Should().Be("Submit");
+            }
+            {
+                var sb = form.SubmitValues.ElementAt(2);
+                sb.Name.Should().Be("SubmitName");
+                sb.Value.Should().Be("Submit Value");
+            }
+        }
+
+        [Test]
         public void Post()
         {
             var html = @"

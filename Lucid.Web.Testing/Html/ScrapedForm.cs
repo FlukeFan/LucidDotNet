@@ -10,7 +10,8 @@ namespace Lucid.Web.Testing.Html
         private string              _method;
         private string              _action;
         private ElementWrapper      _element;
-        private IList<FormValue>    _formValues = new List<FormValue>();
+        private IList<FormValue>    _formValues     = new List<FormValue>();
+        private IList<SubmitValue>  _submitValues   = new List<SubmitValue>();
 
         public ScrapedForm(string method = "", string action = "")
         {
@@ -26,10 +27,11 @@ namespace Lucid.Web.Testing.Html
             AddInputs();
         }
 
-        public string                   Method      { get { return _method; } }
-        public string                   Action      { get { return _action; } }
-        public ElementWrapper           Element     { get { return _element; } }
-        public IEnumerable<FormValue>   FormValues  { get { return _formValues; } }
+        public string                   Method          { get { return _method; } }
+        public string                   Action          { get { return _action; } }
+        public ElementWrapper           Element         { get { return _element; } }
+        public IEnumerable<FormValue>   FormValues      { get { return _formValues; } }
+        public IEnumerable<SubmitValue> SubmitValues    { get { return _submitValues; } }
 
         public ScrapedForm<T> SetMethod(string method)
         {
@@ -76,16 +78,34 @@ namespace Lucid.Web.Testing.Html
 
         private void AddInputs()
         {
-            var inputs = _element.FindAll("input, select, textarea");
+            var formInputs = _element.FindAll("input, select, textarea");
 
-            foreach (var input in inputs)
-            {
-                if (!input.HasAttribute("name"))
-                    continue;
+            foreach (var formInput in formInputs)
+                if (IsSubmit(formInput))
+                    AddSubmit(formInput);
+                else
+                    AddInput(formInput);
+        }
 
-                var formValue = FormValue.FromElement(input);
-                _formValues.Add(formValue);
-            }
+        private bool IsSubmit(ElementWrapper formInput)
+        {
+            return formInput.TagName.ToLower() == "input"
+                && formInput.AttributeOrEmpty("type").ToLower() == "submit";
+        }
+
+        private void AddSubmit(ElementWrapper inputSubmit)
+        {
+            var submitValue = SubmitValue.FromElement(inputSubmit);
+            _submitValues.Add(submitValue);
+        }
+
+        private void AddInput(ElementWrapper formInput)
+        {
+            if (!formInput.HasAttribute("name"))
+                return;
+
+            var formValue = FormValue.FromElement(formInput);
+            _formValues.Add(formValue);
         }
     }
 }
