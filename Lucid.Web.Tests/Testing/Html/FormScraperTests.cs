@@ -172,12 +172,14 @@ namespace Lucid.Web.Tests.Testing.Html
                     <input type='submit' />
                     <input type='submit' name='NoValue' />
                     <input type='submit' name='SubmitName' value='Submit Value' />
+                    <input type='image'  name='ImageName'  value='Image Value'  />
                 </form>
             ";
 
             var form = new Response { Text = html }.Form<FormModel>();
 
-            form.SubmitValues.Count().Should().Be(3);
+            form.SubmitValues.Count().Should().Be(4);
+
             {
                 var sb = form.SubmitValues.ElementAt(0);
                 sb.Name.Should().Be("");
@@ -191,6 +193,11 @@ namespace Lucid.Web.Tests.Testing.Html
                 var sb = form.SubmitValues.ElementAt(2);
                 sb.Name.Should().Be("SubmitName");
                 sb.Value.Should().Be("Submit Value");
+            }
+            {
+                var sb = form.SubmitValues.ElementAt(3);
+                sb.Name.Should().Be("ImageName");
+                sb.Value.Should().Be("Image Value");
             }
         }
     }

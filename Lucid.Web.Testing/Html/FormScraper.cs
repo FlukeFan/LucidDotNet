@@ -31,8 +31,11 @@
 
         protected virtual bool IsSubmit(ElementWrapper formInput)
         {
-            return formInput.TagName.ToLower() == "input"
-                && formInput.AttributeOrEmpty("type").ToLower() == "submit";
+            var tagName = formInput.TagName.ToLower();
+            var type = formInput.AttributeOrEmpty("type").ToLower();
+
+            return tagName == "input"
+                && (type == "submit" || type == "image");
         }
 
         protected virtual void AddSubmit<T>(TypedForm<T> form, ElementWrapper inputSubmit)
