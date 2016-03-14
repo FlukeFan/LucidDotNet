@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Lucid.Web.Testing.Http;
 
 namespace Lucid.Web.Testing.Html
 {
@@ -29,6 +29,12 @@ namespace Lucid.Web.Testing.Html
             var value = inputSubmit.Attribute("value");
 
             return new SubmitValue(name, value);
+        }
+
+        public virtual void SetFormValue(Request request)
+        {
+            if (!string.IsNullOrEmpty(_name))
+                request.SetFormValue(_name, _value);
         }
     }
 }

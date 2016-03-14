@@ -75,8 +75,18 @@ namespace Lucid.Web.Testing.Html
 
         public Response Submit(ISimulatedHttpClient client, Action<Request> modifier = null)
         {
+            var submit = _submitValues[0];
+            return SubmitForm(client, submit, modifier);
+        }
+
+        private Response SubmitForm(ISimulatedHttpClient client, SubmitValue submit, Action<Request> modifier)
+        {
             var request = new Request(Action, Method);
             SetFormValues(request);
+
+            if (submit != null)
+                submit.SetFormValue(request);
+
             return client.Process(request, modifier);
         }
     }

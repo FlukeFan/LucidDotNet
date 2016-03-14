@@ -123,7 +123,7 @@ namespace Lucid.Web.Tests.Testing.Html
             var html = @"
                 <form action='/test' method='get'>
                     <input type='hidden' name='Name1' value='Value1' />
-                    <input type='submit' value='Submit Value' />
+                    <input type='submit' name='Submit1' value='Submit Value' />
                 </form>
             ";
 
@@ -136,6 +136,28 @@ namespace Lucid.Web.Tests.Testing.Html
 
             request.Url.Should().Be("/test");
             request.Verb.Should().Be("GET");
+
+            request.FormValues.Count.Should().Be(2);
+            request.FormValues["Name1"].Should().Be("Value1");
+            request.FormValues["Submit1"].Should().Be("Submit Value");
+        }
+
+        [Test]
+        public void Submit_SingleSubmitWithoutName()
+        {
+            var html = @"
+                <form action='/test' method='get'>
+                    <input type='hidden' name='Name1' value='Value1' />
+                    <input type='submit' value='Submit Value' />
+                </form>
+            ";
+
+            var form = new Response { Text = html }.Form<FormModel>();
+
+            var client = new FakeClient();
+            form.Submit(client);
+
+            var request = client.Request;
 
             request.FormValues.Count.Should().Be(1);
             request.FormValues["Name1"].Should().Be("Value1");
