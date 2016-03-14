@@ -128,12 +128,8 @@ namespace Lucid.Web.Tests.Testing.Html
                 </form>
             ";
 
-            var form = new Response { Text = html }.Form<FormModel>();
-
-            var client = new FakeClient();
-            form.Submit(client);
-
-            var request = client.Request;
+            var request = FakeClient.Do(html, (form, client) =>
+                form.Submit(client));
 
             request.Url.Should().Be("/test");
             request.Verb.Should().Be("GET");
@@ -153,15 +149,56 @@ namespace Lucid.Web.Tests.Testing.Html
                 </form>
             ";
 
-            var form = new Response { Text = html }.Form<FormModel>();
-
-            var client = new FakeClient();
-            form.Submit(client);
-
-            var request = client.Request;
+            var request = FakeClient.Do(html, (form, client) =>
+                form.Submit(client));
 
             request.FormValues.Count.Should().Be(1);
             request.FormValues["Name1"].Should().Be("Value1");
+        }
+
+        [Test]
+        public void Submit_NoButton()
+        {
+            var html = @"
+                <form action='/test' method='get'>
+                    <input type='hidden' name='Name1' value='Value1' />
+                </form>
+            ";
+
+            var request = FakeClient.Do(html, (form, client) =>
+                form.Submit(null, client));
+
+            request.FormValues.Count.Should().Be(1);
+            request.FormValues["Name1"].Should().Be("Value1");
+        }
+
+        [Test]
+        public void Submit_WhenNoSingleSubmit_Throws()
+        {
+            var html = "<form/>";
+
+            var e = Assert.Throws<Exception>(() =>
+                FakeClient.Do(html, (form, client) =>
+                    form.Submit(client)));
+
+            e.Message.Should().Be("No submit inputs found");
+        }
+
+        [Test]
+        public void Submit_WhenMoreThanOneSubmit_Throws()
+        {
+            var html = @"
+                <form action='/test' method='get'>
+                    <input type='submit' name='Submit1' value='Value1' />
+                    <input type='submit' name='Submit2' value='Value2' />
+                </form>
+            ";
+
+            var e = Assert.Throws<Exception>(() =>
+                FakeClient.Do(html, (form, client) =>
+                    form.Submit(client)));
+
+            e.Message.Should().Be("Found multiple submit inputs: (Submit1=Value1), (Submit2=Value2)");
         }
     }
 }

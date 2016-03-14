@@ -75,11 +75,17 @@ namespace Lucid.Web.Testing.Html
 
         public Response Submit(ISimulatedHttpClient client, Action<Request> modifier = null)
         {
+            if (_submitValues.Count == 0)
+                throw new Exception("No submit inputs found");
+
+            if (_submitValues.Count > 1)
+                throw new Exception("Found multiple submit inputs: " + string.Join(", ", _submitValues.Select(sv => string.Format("({0}={1})", sv.Name, sv.Value))));
+
             var submit = _submitValues[0];
-            return SubmitForm(client, submit, modifier);
+            return Submit(submit, client, modifier);
         }
 
-        private Response SubmitForm(ISimulatedHttpClient client, SubmitValue submit, Action<Request> modifier)
+        public Response Submit(SubmitValue submit, ISimulatedHttpClient client, Action<Request> modifier = null)
         {
             var request = new Request(Action, Method);
             SetFormValues(request);
