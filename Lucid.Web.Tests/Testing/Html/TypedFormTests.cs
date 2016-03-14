@@ -166,7 +166,7 @@ namespace Lucid.Web.Tests.Testing.Html
             ";
 
             var request = FakeClient.Do(html, (form, client) =>
-                form.Submit(null, client));
+                form.Submit(new SubmitValue(), client));
 
             request.FormValues.Count.Should().Be(1);
             request.FormValues["Name1"].Should().Be("Value1");
@@ -181,7 +181,7 @@ namespace Lucid.Web.Tests.Testing.Html
                 FakeClient.Do(html, (form, client) =>
                     form.Submit(client)));
 
-            e.Message.Should().Be("No submit inputs found");
+            e.Message.Should().Be("Could not find single submit: count=0 ");
         }
 
         [Test]
@@ -198,7 +198,71 @@ namespace Lucid.Web.Tests.Testing.Html
                 FakeClient.Do(html, (form, client) =>
                     form.Submit(client)));
 
-            e.Message.Should().Be("Found multiple submit inputs: (Submit1=Value1), (Submit2=Value2)");
+            e.Message.Should().Be("Could not find single submit: count=2 (Submit1=Value1), (Submit2=Value2)");
+        }
+
+        [Test]
+        public void SubmitValue()
+        {
+            var html = @"
+                <form action='/test' method='get'>
+                    <input type='submit' name='Submit' value='Value1' />
+                    <input type='submit' name='Submit' value='Value2' />
+                </form>
+            ";
+
+            var request = FakeClient.Do(html, (form, client) =>
+                form.SubmitValue("Value2", client));
+
+            request.FormValues.Count.Should().Be(1);
+            request.FormValues["Submit"].Should().Be("Value2");
+        }
+
+        [Test]
+        public void SubmitValue_NotFound_Throws()
+        {
+            var html = @"
+                <form action='/test' method='get'>
+                    <input type='submit' name='Submit' value='Value1' />
+                    <input type='submit' name='Submit' value='Value2' />
+                </form>
+            ";
+
+            Assert.Throws<Exception>(() =>
+                FakeClient.Do(html, (form, client) =>
+                    form.SubmitValue("Value3", client)));
+        }
+
+        [Test]
+        public void SubmitValue_FoundMultiple_Throws()
+        {
+            var html = @"
+                <form action='/test' method='get'>
+                    <input type='submit' name='Submit1' value='Value1' />
+                    <input type='submit' name='Submit2' value='Value1' />
+                </form>
+            ";
+
+            Assert.Throws<Exception>(() =>
+                FakeClient.Do(html, (form, client) =>
+                    form.SubmitValue("Value1", client)));
+        }
+
+        [Test]
+        public void SubmitName()
+        {
+            var html = @"
+                <form action='/test' method='get'>
+                    <input type='submit' name='Submit1' value='Value1' />
+                    <input type='submit' name='Submit2' value='Value2' />
+                </form>
+            ";
+
+            var request = FakeClient.Do(html, (form, client) =>
+                form.SubmitName("Submit2", client));
+
+            request.FormValues.Count.Should().Be(1);
+            request.FormValues["Submit2"].Should().Be("Value2");
         }
     }
 }

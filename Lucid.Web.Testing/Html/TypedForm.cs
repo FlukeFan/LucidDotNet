@@ -75,13 +75,21 @@ namespace Lucid.Web.Testing.Html
 
         public Response Submit(ISimulatedHttpClient client, Action<Request> modifier = null)
         {
-            if (_submitValues.Count == 0)
-                throw new Exception("No submit inputs found");
+            var submit = SingleSubmit("Could not find single submit", _submitValues);
+            return Submit(submit, client, modifier);
+        }
 
-            if (_submitValues.Count > 1)
-                throw new Exception("Found multiple submit inputs: " + string.Join(", ", _submitValues.Select(sv => string.Format("({0}={1})", sv.Name, sv.Value))));
+        public Response SubmitValue(string value, ISimulatedHttpClient client, Action<Request> modifier = null)
+        {
+            var submitsWithValue = _submitValues.Where(sv => sv.Value == value).ToList();
+            var submit = SingleSubmit("Could not find submit with value " + value, submitsWithValue);
+            return Submit(submit, client, modifier);
+        }
 
-            var submit = _submitValues[0];
+        public Response SubmitName(string name, ISimulatedHttpClient client, Action<Request> modifier = null)
+        {
+            var submitsWithName = _submitValues.Where(sv => sv.Name == name).ToList();
+            var submit = SingleSubmit("Could not find submit with name " + name, submitsWithName);
             return Submit(submit, client, modifier);
         }
 
@@ -94,6 +102,14 @@ namespace Lucid.Web.Testing.Html
                 submit.SetFormValue(request);
 
             return client.Process(request, modifier);
+        }
+
+        private SubmitValue SingleSubmit(string expected, IList<SubmitValue> submits)
+        {
+            if (submits.Count != 1)
+                throw new Exception(string.Format("{0}: count={1} {2}", expected, _submitValues.Count, string.Join(", ", _submitValues.Select(sv => string.Format("({0}={1})", sv.Name, sv.Value)))));
+
+            return submits[0];
         }
     }
 }
