@@ -46,9 +46,6 @@
 
         protected virtual void AddInput<T>(TypedForm<T> form, ElementWrapper formInput)
         {
-            if (!formInput.HasAttribute("name"))
-                return;
-
             var formValue = FormValueScraper.FromElement(formInput);
             form.AddFormValue(formValue);
         }

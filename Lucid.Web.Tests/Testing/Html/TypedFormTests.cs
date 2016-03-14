@@ -93,13 +93,14 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
-        public void Post()
+        public void SetFormValues()
         {
             var html = @"
                 <form>
                     <input type='text' name='Name' value='form0' />
                     <input type='text' name='Name2' value='form1' />
-                    <input type='text' name='Name3' disabled />
+                    <input type='text' name='Name3' value='disabled inputs should not be set' disabled />
+                    <input type='text' value='un-named values should not be set' />
                 </form>
             ";
 

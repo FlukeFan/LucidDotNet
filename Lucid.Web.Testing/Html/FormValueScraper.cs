@@ -7,7 +7,7 @@ namespace Lucid.Web.Testing.Html
     {
         public static FormValue FromElement(ElementWrapper element)
         {
-            var formValue = new FormValue(element.Attribute("name"));
+            var formValue = new FormValue(element.AttributeOrEmpty("name"));
             formValue.SetDisabled(element.HasAttribute("disabled"));
 
             switch (element.TagName.ToLower())

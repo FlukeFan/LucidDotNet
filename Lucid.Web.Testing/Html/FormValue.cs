@@ -96,7 +96,7 @@ namespace Lucid.Web.Testing.Html
 
         public virtual void SetFormValue(Request request)
         {
-            if (_disabled || !_send)
+            if (string.IsNullOrEmpty(_name) || _disabled || !_send)
                 return;
 
             request.SetFormValue(_name, _value);

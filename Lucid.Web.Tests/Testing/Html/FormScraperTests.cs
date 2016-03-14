@@ -10,20 +10,6 @@ namespace Lucid.Web.Tests.Testing.Html
     public class FormScraperTests
     {
         [Test]
-        public void IgnoresMissingNames()
-        {
-            var html = @"
-                <form>
-                    <input type='text' value='form0' />
-                </form>
-            ";
-
-            var form = new Response { Text = html }.Form<FormModel>();
-
-            form.FormValues.Count().Should().Be(0);
-        }
-
-        [Test]
         public void AllowsMissingValues()
         {
             var html = @"
