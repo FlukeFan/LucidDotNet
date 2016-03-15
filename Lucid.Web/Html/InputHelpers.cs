@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using HtmlTags;
 
@@ -30,6 +31,11 @@ namespace Lucid.Web.Html
         private class ViewDataContainer : IViewDataContainer
         {
             public ViewDataDictionary ViewData { get; set; }
+        }
+
+        public static string FormName(LambdaExpression property)
+        {
+            return ExpressionHelper.GetExpressionText(property);
         }
     }
 }
