@@ -13,5 +13,10 @@
 
         public string   Name    { get { return _name; } }
         public string   Value   { get { return _value; } }
+
+        public string QueryValue()
+        {
+            return string.Format("{0}={1}", Name, Value);
+        }
     }
 }

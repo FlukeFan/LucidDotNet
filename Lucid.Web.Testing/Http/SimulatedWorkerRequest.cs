@@ -16,7 +16,7 @@ namespace Lucid.Web.Testing.Http
         public string   StatusDescription   { get { return _statusDescription; } }
 
         public SimulatedWorkerRequest(Request request, TextWriter output)
-            : base(request.Url.TrimStart('~','/'), request.Query, output)
+            : base(request.Url.TrimStart('~','/'), request.Query(), output)
         {
             _request = request;
         }

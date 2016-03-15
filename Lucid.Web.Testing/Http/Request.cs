@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Net;
 
 namespace Lucid.Web.Testing.Http
@@ -13,17 +14,25 @@ namespace Lucid.Web.Testing.Http
         };
 
         private string              _url;
-        private string              _query;
         private string              _verb;
         private HttpStatusCode?     _expectedResponse;
         private NameValueCollection _headers            = new NameValueCollection();
+        private IList<NameValue>    _queryValues        = new List<NameValue>();
         private IList<NameValue>    _formValues         = new List<NameValue>();
 
         public Request(string url, string verb = "GET")
         {
-            var urlParts = url.Split('?');
-            _url = urlParts[0];
-            _query = urlParts.Length > 1 ? urlParts[1] : null;
+            var indexOfQuery = url.IndexOf('?');
+
+            if (indexOfQuery < 0)
+            {
+                _url = url;
+            }
+            else
+            {
+                _url = url.Substring(0, indexOfQuery);
+                _queryValues = SplitQuery(url.Substring(indexOfQuery + 1));
+            }
 
             _verb = verb.ToUpper();
 
@@ -35,11 +44,17 @@ namespace Lucid.Web.Testing.Http
         }
 
         public string                   Url                 { get { return _url; } }
-        public string                   Query               { get { return _query; } }
         public string                   Verb                { get { return _verb; } }
         public HttpStatusCode?          ExptectedResponse   { get { return _expectedResponse; } }
         public NameValueCollection      Headers             { get { return _headers; } }
+        public IEnumerable<NameValue>   QueryValues         { get { return _queryValues; } }
         public IEnumerable<NameValue>   FormValues          { get { return _formValues; } }
+
+        public string Query()
+        {
+            var queryValues = _queryValues.Select(nv => nv.QueryValue());
+            return string.Join("&", queryValues);
+        }
 
         public Request SetExpectedResponse(HttpStatusCode? expectedResponseStatusCode)
         {
@@ -70,12 +85,35 @@ namespace Lucid.Web.Testing.Http
             return this;
         }
 
-        public Request AddQuery(string name, string value)
+        public Request AddQueryValue(string name, string value)
         {
-            var prefix = string.IsNullOrEmpty(_query) ? "" : "&";
-            _query += string.Format("{0}{1}={2}", prefix, name, value);
+            return AddQueryValue(new NameValue(name, value));
+        }
 
+        public Request AddQueryValue(NameValue nameValue)
+        {
+            _queryValues.Add(nameValue);
             return this;
+        }
+
+        private static IList<NameValue> SplitQuery(string query)
+        {
+            var queryValues = new List<NameValue>();
+
+            var values = query.Split('&');
+            foreach (var value in values)
+            {
+                if (string.IsNullOrEmpty(value))
+                    continue;
+
+                var parts = value.Split('=');
+                var namePart = parts[0];
+                var valuePart = parts.Length > 1 ? parts[1] : "";
+                var nameValue = new NameValue(namePart, valuePart);
+                queryValues.Add(nameValue);
+            }
+
+            return queryValues;
         }
     }
 }

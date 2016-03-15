@@ -12,14 +12,39 @@ namespace Lucid.Web.Tests.Testing.Http
         [Test]
         public void Construct()
         {
-            var request = new Request("/test/path?p1=123&p2=234");
+            var request = new Request("/test/path");
 
             request.Url.Should().Be("/test/path");
-            request.Query.Should().Be("p1=123&p2=234");
+            request.Query().Should().Be("");
             request.Verb.Should().Be("GET");
             request.ExptectedResponse.Should().Be(HttpStatusCode.OK);
             request.Headers.Count.Should().Be(0);
             request.FormValues.Count().Should().Be(0);
+        }
+
+        [Test]
+        public void Construct_WithQuery()
+        {
+            var request = new Request("/test/path?p1=123&p2=234");
+
+            request.Url.Should().Be("/test/path");
+            request.Query().Should().Be("p1=123&p2=234");
+
+            request.QueryValues.ShouldBeEquivalentTo(new NameValue[]
+            {
+                new NameValue("p1", "123"),
+                new NameValue("p2", "234"),
+            });
+        }
+
+        [Test]
+        public void Construct_WithEmptyQuery()
+        {
+            var request = new Request("/test/path?");
+
+            request.Url.Should().Be("/test/path");
+            request.Query().Should().Be("");
+            request.QueryValues.ShouldBeEquivalentTo(new NameValue[] { });
         }
 
         [Test]
@@ -62,13 +87,13 @@ namespace Lucid.Web.Tests.Testing.Http
         {
             var request = new Request("/test/path");
 
-            request.AddQuery("p1", "123");
+            request.AddQueryValue("p1", "123");
 
-            request.Query.Should().Be("p1=123");
+            request.Query().Should().Be("p1=123");
 
-            request.AddQuery("p2", "234");
+            request.AddQueryValue("p2", "234");
 
-            request.Query.Should().Be("p1=123&p2=234");
+            request.Query().Should().Be("p1=123&p2=234");
         }
     }
 }
