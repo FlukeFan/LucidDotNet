@@ -1,4 +1,6 @@
-﻿namespace Lucid.Web.Testing.Http
+﻿using System.Web;
+
+namespace Lucid.Web.Testing.Http
 {
     public class NameValue
     {
@@ -14,9 +16,11 @@
         public string   Name    { get { return _name; } }
         public string   Value   { get { return _value; } }
 
-        public string QueryValue()
+        public string UrlQueryValue()
         {
-            return string.Format("{0}={1}", Name, Value);
+            var name = HttpUtility.UrlEncode(Name);
+            var value = HttpUtility.UrlEncode(Value);
+            return string.Format("{0}={1}", name, value);
         }
     }
 }

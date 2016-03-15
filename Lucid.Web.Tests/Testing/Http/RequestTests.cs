@@ -25,15 +25,15 @@ namespace Lucid.Web.Tests.Testing.Http
         [Test]
         public void Construct_WithQuery()
         {
-            var request = new Request("/test/path?p1=123&p2=234");
+            var request = new Request("/test/path?p1=123&p2%26=234%2b");
 
             request.Url.Should().Be("/test/path");
-            request.Query().Should().Be("p1=123&p2=234");
+            request.Query().Should().Be("p1=123&p2%26=234%2b");
 
             request.QueryValues.ShouldBeEquivalentTo(new NameValue[]
             {
                 new NameValue("p1", "123"),
-                new NameValue("p2", "234"),
+                new NameValue("p2&", "234+"),
             });
         }
 

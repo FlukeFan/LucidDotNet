@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
+using System.Web;
 
 namespace Lucid.Web.Testing.Http
 {
@@ -52,7 +53,7 @@ namespace Lucid.Web.Testing.Http
 
         public string Query()
         {
-            var queryValues = _queryValues.Select(nv => nv.QueryValue());
+            var queryValues = _queryValues.Select(nv => nv.UrlQueryValue());
             return string.Join("&", queryValues);
         }
 
@@ -107,8 +108,8 @@ namespace Lucid.Web.Testing.Http
                     continue;
 
                 var parts = value.Split('=');
-                var namePart = parts[0];
-                var valuePart = parts.Length > 1 ? parts[1] : "";
+                var namePart = HttpUtility.UrlDecode(parts[0]);
+                var valuePart = parts.Length > 1 ? HttpUtility.UrlDecode(parts[1]) : "";
                 var nameValue = new NameValue(namePart, valuePart);
                 queryValues.Add(nameValue);
             }
