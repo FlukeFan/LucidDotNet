@@ -34,7 +34,7 @@ namespace Lucid.Web.Testing.Html
         public virtual void SetFormValue(Request request)
         {
             if (!string.IsNullOrEmpty(_name))
-                request.SetFormValue(_name, _value);
+                request.AddFormValue(_name, _value);
         }
     }
 }

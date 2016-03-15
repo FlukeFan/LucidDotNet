@@ -82,8 +82,8 @@ namespace Lucid.Web.Tests.StubApp.App
             {
                 var response = http.Post("/Home/PostValues", r => r
                     .SetExpectedResponse(HttpStatusCode.OK)
-                    .SetFormValue("V1", "test")
-                    .SetFormValue("%&V2", "!\"$%^&*()")
+                    .AddFormValue("V1", "test")
+                    .AddFormValue("%&V2", "!\"$%^&*()")
                 );
 
                 response.Text.Should().Be("V1=test\nV2=!\"$%^&*()");

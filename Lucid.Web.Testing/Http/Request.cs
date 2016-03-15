@@ -17,7 +17,7 @@ namespace Lucid.Web.Testing.Http
         private string              _verb;
         private HttpStatusCode?     _expectedResponse;
         private NameValueCollection _headers            = new NameValueCollection();
-        private NameValueCollection _formValues         = new NameValueCollection();
+        private IList<NameValue>    _formValues         = new List<NameValue>();
 
         public Request(string url, string verb = "GET")
         {
@@ -34,12 +34,12 @@ namespace Lucid.Web.Testing.Http
                 _expectedResponse = DefaultStatusCodes[_verb];
         }
 
-        public string               Url                 { get { return _url; } }
-        public string               Query               { get { return _query; } }
-        public string               Verb                { get { return _verb; } }
-        public HttpStatusCode?      ExptectedResponse   { get { return _expectedResponse; } }
-        public NameValueCollection  Headers             { get { return _headers; } }
-        public NameValueCollection  FormValues          { get { return _formValues; } }
+        public string                   Url                 { get { return _url; } }
+        public string                   Query               { get { return _query; } }
+        public string                   Verb                { get { return _verb; } }
+        public HttpStatusCode?          ExptectedResponse   { get { return _expectedResponse; } }
+        public NameValueCollection      Headers             { get { return _headers; } }
+        public IEnumerable<NameValue>   FormValues          { get { return _formValues; } }
 
         public Request SetExpectedResponse(HttpStatusCode? expectedResponseStatusCode)
         {
@@ -53,9 +53,14 @@ namespace Lucid.Web.Testing.Http
             return this;
         }
 
-        public Request SetFormValue(string name, string value)
+        public Request AddFormValue(string name, string value)
         {
-            _formValues[name] = value;
+            return AddFormValue(new NameValue(name, value));
+        }
+
+        public Request AddFormValue(NameValue nameValue)
+        {
+            _formValues.Add(nameValue);
             return this;
         }
 

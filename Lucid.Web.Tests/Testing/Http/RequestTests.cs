@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using FluentAssertions;
 using Lucid.Web.Testing.Http;
 using NUnit.Framework;
@@ -18,7 +19,7 @@ namespace Lucid.Web.Tests.Testing.Http
             request.Verb.Should().Be("GET");
             request.ExptectedResponse.Should().Be(HttpStatusCode.OK);
             request.Headers.Count.Should().Be(0);
-            request.FormValues.Count.Should().Be(0);
+            request.FormValues.Count().Should().Be(0);
         }
 
         [Test]
@@ -42,16 +43,18 @@ namespace Lucid.Web.Tests.Testing.Http
         }
 
         [Test]
-        public void SetFormValue()
+        public void AddFormValue()
         {
             var request = new Request("/test", "POST");
 
-            request.SetFormValue("p1", "123");
-            request.SetFormValue("p2", "234");
+            request.AddFormValue("p1", "123");
+            request.AddFormValue("p2", "234");
 
-            request.FormValues.Count.Should().Be(2);
-            request.FormValues.Get("p1").Should().Be("123");
-            request.FormValues.Get("p2").Should().Be("234");
+            request.FormValues.ShouldBeEquivalentTo(new NameValue[]
+            {
+                new NameValue("p1", "123"),
+                new NameValue("p2", "234"),
+            });
         }
 
         [Test]

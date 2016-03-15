@@ -93,7 +93,7 @@ namespace Lucid.Web.Tests.Testing.Html
         }
 
         [Test]
-        public void SetFormValues()
+        public void AddFormValues()
         {
             var html = @"
                 <form>
@@ -111,11 +111,13 @@ namespace Lucid.Web.Tests.Testing.Html
             response.Form<FormModel>()
                 .SetText(m => m.Name, "tst1")
                 .SetText(m => m.Name2, "tst2")
-                .SetFormValues(post);
+                .AddFormValues(post);
 
-            post.FormValues.Count.Should().Be(2);
-            post.FormValues.Get("Name").Should().Be("tst1");
-            post.FormValues.Get("Name2").Should().Be("tst2");
+            post.FormValues.ShouldBeEquivalentTo(new NameValue[]
+            {
+                new NameValue("Name", "tst1"),
+                new NameValue("Name2", "tst2"),
+            });
         }
 
         [Test]
@@ -134,9 +136,11 @@ namespace Lucid.Web.Tests.Testing.Html
             request.Url.Should().Be("/test");
             request.Verb.Should().Be("GET");
 
-            request.FormValues.Count.Should().Be(2);
-            request.FormValues["Name1"].Should().Be("Value1");
-            request.FormValues["Submit1"].Should().Be("Submit Value");
+            request.FormValues.ShouldBeEquivalentTo(new NameValue[]
+            {
+                new NameValue("Name1", "Value1"),
+                new NameValue("Submit1", "Submit Value"),
+            });
         }
 
         [Test]
@@ -152,8 +156,10 @@ namespace Lucid.Web.Tests.Testing.Html
             var request = FakeClient.Do(html, (form, client) =>
                 form.Submit(client));
 
-            request.FormValues.Count.Should().Be(1);
-            request.FormValues["Name1"].Should().Be("Value1");
+            request.FormValues.ShouldBeEquivalentTo(new NameValue[]
+            {
+                new NameValue("Name1", "Value1"),
+            });
         }
 
         [Test]
@@ -168,8 +174,10 @@ namespace Lucid.Web.Tests.Testing.Html
             var request = FakeClient.Do(html, (form, client) =>
                 form.Submit(new SubmitValue(), client));
 
-            request.FormValues.Count.Should().Be(1);
-            request.FormValues["Name1"].Should().Be("Value1");
+            request.FormValues.ShouldBeEquivalentTo(new NameValue[]
+            {
+                new NameValue("Name1", "Value1"),
+            });
         }
 
         [Test]
@@ -214,8 +222,10 @@ namespace Lucid.Web.Tests.Testing.Html
             var request = FakeClient.Do(html, (form, client) =>
                 form.SubmitValue("Value2", client));
 
-            request.FormValues.Count.Should().Be(1);
-            request.FormValues["Submit"].Should().Be("Value2");
+            request.FormValues.ShouldBeEquivalentTo(new NameValue[]
+            {
+                new NameValue("Submit", "Value2"),
+            });
         }
 
         [Test]
@@ -261,8 +271,10 @@ namespace Lucid.Web.Tests.Testing.Html
             var request = FakeClient.Do(html, (form, client) =>
                 form.SubmitName("Submit2", client));
 
-            request.FormValues.Count.Should().Be(1);
-            request.FormValues["Submit2"].Should().Be("Value2");
+            request.FormValues.ShouldBeEquivalentTo(new NameValue[]
+            {
+                new NameValue("Submit2", "Value2"),
+            });
         }
     }
 }

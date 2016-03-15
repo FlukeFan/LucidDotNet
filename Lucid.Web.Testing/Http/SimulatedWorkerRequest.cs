@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Hosting;
@@ -34,13 +35,13 @@ namespace Lucid.Web.Testing.Http
 
         public override byte[] GetPreloadedEntityBody()
         {
-            if (_request.FormValues.Count == 0)
+            if (_request.FormValues.Count() == 0)
                 return base.GetPreloadedEntityBody();
 
             var sb = new StringBuilder();
 
-            foreach (string key in _request.FormValues)
-                sb.AppendFormat("{0}={1}&", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(_request.FormValues[key]));
+            foreach (var formValue in _request.FormValues)
+                sb.AppendFormat("{0}={1}&", HttpUtility.UrlEncode(formValue.Name), HttpUtility.UrlEncode(formValue.Value));
 
             return Encoding.UTF8.GetBytes(sb.ToString());
         }

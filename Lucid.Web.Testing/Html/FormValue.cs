@@ -94,12 +94,12 @@ namespace Lucid.Web.Testing.Html
             return this;
         }
 
-        public virtual void SetFormValue(Request request)
+        public virtual void AddFormValue(Request request)
         {
             if (string.IsNullOrEmpty(_name) || _disabled || !_send)
                 return;
 
-            request.SetFormValue(_name, _value);
+            request.AddFormValue(_name, _value);
         }
     }
 }
