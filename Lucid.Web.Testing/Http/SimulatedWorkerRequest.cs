@@ -35,7 +35,7 @@ namespace Lucid.Web.Testing.Http
 
         public override byte[] GetPreloadedEntityBody()
         {
-            if (_request.FormValues.Count() == 0)
+            if (_request.FormValues == null)
                 return base.GetPreloadedEntityBody();
 
             var sb = new StringBuilder();

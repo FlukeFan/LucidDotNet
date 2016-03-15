@@ -67,6 +67,8 @@ namespace Lucid.Web.Testing.Html
 
         public TypedForm<T> AddFormValues(Request request)
         {
+            request.StartForm();
+
             foreach (var formValue in _formValues)
                 formValue.AddFormValue(request);
 

@@ -15,11 +15,11 @@ namespace Lucid.Web.Tests.Testing.Http
             var request = new Request("/test/path");
 
             request.Url.Should().Be("/test/path");
-            request.Query().Should().Be("");
+            request.Query().Should().BeNull();
             request.Verb.Should().Be("GET");
             request.ExptectedResponse.Should().Be(HttpStatusCode.OK);
             request.Headers.Count.Should().Be(0);
-            request.FormValues.Count().Should().Be(0);
+            request.FormValues.Should().BeNull();
         }
 
         [Test]
@@ -29,12 +29,6 @@ namespace Lucid.Web.Tests.Testing.Http
 
             request.Url.Should().Be("/test/path");
             request.Query().Should().Be("p1=123&p2%26=234%2b");
-
-            request.QueryValues.ShouldBeEquivalentTo(new NameValue[]
-            {
-                new NameValue("p1", "123"),
-                new NameValue("p2&", "234+"),
-            });
         }
 
         [Test]
@@ -44,7 +38,6 @@ namespace Lucid.Web.Tests.Testing.Http
 
             request.Url.Should().Be("/test/path");
             request.Query().Should().Be("");
-            request.QueryValues.ShouldBeEquivalentTo(new NameValue[] { });
         }
 
         [Test]
@@ -83,17 +76,28 @@ namespace Lucid.Web.Tests.Testing.Http
         }
 
         [Test]
-        public void AddQuery()
+        public void AddFormValue_Get()
         {
-            var request = new Request("/test/path");
+            var request = new Request("/test/path?a=b");
 
-            request.AddQueryValue("p1", "123");
+            request.AddFormValue("p1", "123");
 
             request.Query().Should().Be("p1=123");
 
-            request.AddQueryValue("p2", "234");
+            request.AddFormValue("p2&", "234+");
 
-            request.Query().Should().Be("p1=123&p2=234");
+            request.Query().Should().Be("p1=123&p2%26=234%2b");
+        }
+
+        [Test]
+        public void EmptyFormValues()
+        {
+            var request = new Request("/test/path?a=b");
+
+            request.StartForm();
+
+            request.FormValues.Count().Should().Be(0);
+            request.Query().Should().Be("");
         }
     }
 }

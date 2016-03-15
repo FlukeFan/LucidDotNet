@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Lucid.Web.Testing.Html;
 using Lucid.Web.Testing.Http;
@@ -118,6 +119,18 @@ namespace Lucid.Web.Tests.Testing.Html
                 new NameValue("Name", "tst1"),
                 new NameValue("Name2", "tst2"),
             });
+        }
+
+        [Test]
+        public void AddFormValues_NoValues()
+        {
+            var get = new Request("/test?a=b");
+
+            new TypedForm<object>()
+                .AddFormValues(get);
+
+            get.FormValues.Count().Should().Be(0);
+            get.Query().Should().Be("");
         }
 
         [Test]

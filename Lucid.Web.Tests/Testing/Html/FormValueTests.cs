@@ -51,7 +51,7 @@ namespace Lucid.Web.Tests.Testing.Html
             var request = new Request("");
             nosend.AddFormValue(request);
 
-            request.FormValues.Count().Should().Be(0);
+            request.FormValues.Should().BeNull();
         }
 
         [Test]
