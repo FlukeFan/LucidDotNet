@@ -30,7 +30,7 @@ namespace Lucid.Web.Testing.Http
         public string           Text;
 
         [NonSerialized]
-        public ActionResult     ActionResult;
+        public ResultExecutedContext LastResult;
 
         public HttpStatusCode   HttpStatusCode  { get { return (HttpStatusCode)StatusCode; } }
         public DocumentWrapper  Doc             { get { return _documentWrapper.Value; } }
@@ -39,9 +39,27 @@ namespace Lucid.Web.Testing.Http
         public TypedForm<T> Form<T>(int index)          { return Doc.Form<T>(index); }
         public TypedForm<T> Form<T>(string cssSelector) { return Doc.Form<T>(cssSelector); }
 
+        public ActionResult ActionResult()
+        {
+            if (LastResult == null)
+                throw new Exception("Expected ActionResult, but got no result from global filter CaptureResultFilter");
+
+            return LastResult.Result;
+        }
+
         public T ActionResultOf<T>() where T : ActionResult
         {
-            return (T)ActionResult;
+            var actionResult = ActionResult();
+
+            if (actionResult == null)
+                throw new Exception("Expected ActionResult, but got <null>");
+
+            var result = (actionResult as T);
+
+            if (result == null)
+                throw new Exception(string.Format("Expected {0}, but got {1}", typeof(T).Name, actionResult.GetType().Name));
+
+            return result;
         }
     }
 }

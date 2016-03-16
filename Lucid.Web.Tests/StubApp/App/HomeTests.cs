@@ -141,9 +141,6 @@ namespace Lucid.Web.Tests.StubApp.App
             StubApp.Test(http =>
             {
                 var response = http.Post("/Home/ReturnBinary", r => r.SetExpectedResponse(HttpStatusCode.OK));
-
-                response.ActionResult.Should().NotBeNull();
-
                 var fileResult = response.ActionResultOf<FileContentResult>();
 
                 fileResult.ContentType.Should().Be("application/octet-stream");

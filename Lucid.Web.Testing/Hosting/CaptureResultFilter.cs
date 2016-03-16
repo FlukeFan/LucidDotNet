@@ -14,7 +14,19 @@ namespace Lucid.Web.Testing.Hosting
         public override void OnResultExecuted(ResultExecutedContext filterContext)
         {
             base.OnResultExecuted(filterContext);
-            LastResult = filterContext;
+
+            if (filterContext != null)
+                LastResult = new ResultExecutedContext()
+                {
+                    Canceled            = filterContext.Canceled,
+                    Controller          = filterContext.Controller,
+                    Exception           = filterContext.Exception,
+                    ExceptionHandled    = filterContext.ExceptionHandled,
+                    HttpContext         = filterContext.HttpContext,
+                    RequestContext      = filterContext.RequestContext,
+                    Result              = filterContext.Result,
+                    RouteData           = filterContext.RouteData,
+                };
         }
     }
 }

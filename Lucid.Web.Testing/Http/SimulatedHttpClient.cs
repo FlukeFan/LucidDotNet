@@ -56,6 +56,8 @@ namespace Lucid.Web.Testing.Http
 
             using (var output = new StringWriter())
             {
+                CaptureResultFilter.LastResult = null;
+
                 var workerRequest = new SimulatedWorkerRequest(request, output);
                 HttpRuntime.ProcessRequest(workerRequest);
 
@@ -67,7 +69,7 @@ namespace Lucid.Web.Testing.Http
                     StatusCode          = workerRequest.StatusCode,
                     StatusDescription   = workerRequest.StatusDescription,
                     Text                = responseText,
-                    ActionResult        = CaptureResultFilter.LastResult.Result,
+                    LastResult          = CaptureResultFilter.LastResult,
                 };
 
                 if (request.ExptectedResponse.HasValue && request.ExptectedResponse.Value != response.HttpStatusCode)
