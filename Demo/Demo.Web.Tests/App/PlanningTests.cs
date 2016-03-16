@@ -1,4 +1,5 @@
-﻿using Demo.Domain.Contract.Product.Commands;
+﻿using System.Web.Mvc;
+using Demo.Domain.Contract.Product.Commands;
 using Demo.Web.App.Planning;
 using Demo.Web.Tests.Utility;
 using FluentAssertions;
@@ -49,7 +50,7 @@ namespace Demo.Web.Tests.App
                     Name = "web test",
                 });
 
-                // TODO: verify post is redirect to Actions.List()
+                response.ActionResultOf<RedirectResult>().Url.Should().Be(Actions.List());
             });
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Web.Mvc;
 using Demo.Web.App.Generation;
 using Demo.Web.ProjectCreation;
 using Demo.Web.Tests.Utility;
@@ -30,9 +31,10 @@ namespace Demo.Web.Tests.App
         {
             WebAppTest(client =>
             {
-                ExecutorStub.SetupCommand(new GenerateProject(), new byte[0]);
+                var expectedBytes = new byte[0];
+                ExecutorStub.SetupCommand(new GenerateProject(), expectedBytes);
 
-                var form = client.Get(Actions.Generate()).Form<GenerateProject>()
+                var response = client.Get(Actions.Generate()).Form<GenerateProject>()
                     .SetText(m => m.Name, "NewProject")
                     .Submit(client, r => r.SetExpectedResponse(HttpStatusCode.OK));
 
@@ -40,6 +42,8 @@ namespace Demo.Web.Tests.App
                 {
                     Name = "NewProject",
                 });
+
+                response.ActionResultOf<FileContentResult>().FileContents.Should().BeSameAs(expectedBytes);
             });
         }
     }
