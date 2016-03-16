@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Text;
+using System.Web.Mvc;
 
 namespace Lucid.Web.StubApp.App.Home
 {
@@ -28,6 +29,13 @@ namespace Lucid.Web.StubApp.App.Home
         public ActionResult Return500()
         {
             throw new System.Exception("returns 500");
+        }
+
+        [HttpPost]
+        public ActionResult ReturnBinary()
+        {
+            var bytes = Encoding.UTF8.GetBytes("Return Binary");
+            return File(bytes, "application/octet-stream", "test.txt");
         }
     }
 }

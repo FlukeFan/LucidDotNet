@@ -50,6 +50,8 @@ namespace Lucid.Web.Testing.Hosting
 
                 CopyTestBinaries(PhysicalDirectory);
                 _appDomainProxy = (AppDomainProxy)ApplicationHost.CreateApplicationHost(appDomainProxyType, virtualDirectory, PhysicalDirectory);
+                _appDomainProxy.RunCodeInAppDomain(() => InitHost());
+
             }
             catch
             {
@@ -58,6 +60,11 @@ namespace Lucid.Web.Testing.Hosting
                     _enforceSingleInstance.Release();
                 throw;
             }
+        }
+
+        private static void InitHost()
+        {
+            CaptureResultFilter.Register();
         }
 
         public static AspNetTestHost For(string physicalDirectory)

@@ -67,6 +67,7 @@ namespace Lucid.Web.Testing.Http
                     StatusCode          = workerRequest.StatusCode,
                     StatusDescription   = workerRequest.StatusDescription,
                     Text                = responseText,
+                    ActionResult        = CaptureResultFilter.LastResult.Result,
                 };
 
                 if (request.ExptectedResponse.HasValue && request.ExptectedResponse.Value != response.HttpStatusCode)

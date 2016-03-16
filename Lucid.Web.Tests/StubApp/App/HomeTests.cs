@@ -1,4 +1,6 @@
 ﻿using System.Net;
+using System.Text;
+using System.Web.Mvc;
 using FluentAssertions;
 using Lucid.Web.Testing.Http;
 using Lucid.Web.Tests.StubApp.Utility;
@@ -130,6 +132,25 @@ namespace Lucid.Web.Tests.StubApp.App
                 var response = http.Get("/Home/Return500", r => r.SetExpectedResponse(null));
 
                 response.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
+            });
+        }
+
+        [Test]
+        public void ReturnBinary()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Post("/Home/ReturnBinary", r => r.SetExpectedResponse(HttpStatusCode.OK));
+
+                response.ActionResult.Should().NotBeNull();
+
+                var fileResult = response.ActionResultOf<FileContentResult>();
+
+                fileResult.ContentType.Should().Be("application/octet-stream");
+                fileResult.FileDownloadName.Should().Be("test.txt");
+
+                var text = Encoding.UTF8.GetString(fileResult.FileContents);
+                text.Should().Be("Return Binary");
             });
         }
     }

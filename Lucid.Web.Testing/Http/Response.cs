@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Web.Mvc;
 using AngleSharp.Parser.Html;
 using Lucid.Web.Testing.Html;
 
@@ -24,9 +25,12 @@ namespace Lucid.Web.Testing.Http
 
         }
 
-        public int      StatusCode;
-        public string   StatusDescription;
-        public string   Text;
+        public int              StatusCode;
+        public string           StatusDescription;
+        public string           Text;
+
+        [NonSerialized]
+        public ActionResult     ActionResult;
 
         public HttpStatusCode   HttpStatusCode  { get { return (HttpStatusCode)StatusCode; } }
         public DocumentWrapper  Doc             { get { return _documentWrapper.Value; } }
@@ -34,5 +38,10 @@ namespace Lucid.Web.Testing.Http
         public TypedForm<T> Form<T>()                   { return Doc.Form<T>(); }
         public TypedForm<T> Form<T>(int index)          { return Doc.Form<T>(index); }
         public TypedForm<T> Form<T>(string cssSelector) { return Doc.Form<T>(cssSelector); }
+
+        public T ActionResultOf<T>() where T : ActionResult
+        {
+            return (T)ActionResult;
+        }
     }
 }
