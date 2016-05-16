@@ -24,7 +24,7 @@ _items/AssemblyInfo.cs
 /Demo/BuildEnvironment.json
 /Demo/Demo.VisualState.xml
 /Demo/TestResult.xml
-/packages/MSBuildTasks.1.4.0.128/tools/Microsoft.Build.Commontypes.xsd
-/packages/MSBuildTasks.1.4.0.128/tools/Microsoft.Build.Core.xsd
+/packages/MSBuildTasks.1.5.0.183/tools/Microsoft.Build.Commontypes.xsd
+/packages/MSBuildTasks.1.5.0.183/tools/Microsoft.Build.Core.xsd
 /Demo/AssemblyInfo.cs
 /Demo/Demo.Web/Project.zip

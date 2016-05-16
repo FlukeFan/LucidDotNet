@@ -13,5 +13,5 @@ _items/*.VisualState.xml
 
 *.Web/Project.zip
 
-/packages/MSBuildTasks.1.4.0.128/tools/Microsoft.Build.Commontypes.xsd
-/packages/MSBuildTasks.1.4.0.128/tools/Microsoft.Build.Core.xsd
+/packages/MSBuildTasks.1.5.0.183/tools/Microsoft.Build.Commontypes.xsd
+/packages/MSBuildTasks.1.5.0.183/tools/Microsoft.Build.Core.xsd
