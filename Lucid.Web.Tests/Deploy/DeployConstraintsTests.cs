@@ -9,7 +9,7 @@ namespace Lucid.Web.Tests.Deploy
     {
         private const string NugetPackageName   = "Lucid.Persistence.Testing";
         private const string NugetSourceOption  = " -Source https://api.nuget.org/v3/index.json";
-        private const string NugetExeLocation   = "packages\\NuGet.CommandLine.3.3.0\\tools\\NuGet.exe";
+        private const string NugetExeLocation   = "packages\\NuGet.CommandLine.3.4.3\\tools\\NuGet.exe";
 
         [Test]
         public void Verify_VersionIsUpdated_AfterDeployToNuGet()
