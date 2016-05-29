@@ -133,7 +133,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\_items\Demo.Common.targets" />
   <ItemGroup>
-    <TestDependencies Include="..\Demo.Web\**">
+    <TestDependencies Include="..\Demo.Web\**" Exclude="..\Demo.Web\obj\**">
       <InProject>False</InProject>
     </TestDependencies>
   </ItemGroup>

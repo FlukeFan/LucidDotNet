@@ -140,7 +140,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <TestDependencies Include="..\Lucid.Web.StubApp\**">
+    <TestDependencies Include="..\Lucid.Web.StubApp\**" Exclude="..\Lucid.Web.StubApp\obj\**">
       <InProject>False</InProject>
     </TestDependencies>
   </ItemGroup>
