@@ -1,6 +1,6 @@
 @CD /D "%~dp0"
 @title Lucid Command Prompt
-@SET PATH=C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\;%PATH%
+@SET PATH=C:\Program Files (x86)\MSBuild\14.0\Bin\;%PATH%
 @doskey b=msbuild $* Lucid.proj
 type readme.txt
 %comspec%

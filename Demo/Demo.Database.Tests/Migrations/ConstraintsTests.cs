@@ -7,7 +7,6 @@ using System.Text;
 using Demo.Database.Migrations;
 using Demo.Database.Migrations.Y2016.M01;
 using FluentAssertions;
-using FluentMigrator;
 using NUnit.Framework;
 
 namespace Demo.Database.Tests.Migrations
@@ -25,12 +24,7 @@ namespace Demo.Database.Tests.Migrations
 
             foreach (var migrationType in migrationTypes)
             {
-                var migrationAttribute = migrationType.GetCustomAttributes(typeof(MigrationAttribute), false).Cast<MigrationAttribute>().SingleOrDefault();
-
-                if (migrationAttribute == null)
-                    Assert.Fail("Could not find MigrationAttribute on {0}", migrationType);
-
-                var actualVersion = migrationAttribute.Version;
+                var actualVersion = VersionUtil.GetVersion(migrationType);
                 var expectedVersion = 0L;
                 var nameParts = migrationType.FullName.Replace("Demo.Database.", "").Split('.');
 
