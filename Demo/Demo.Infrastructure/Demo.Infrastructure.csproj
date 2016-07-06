@@ -43,16 +43,16 @@
       <HintPath>..\packages\Lucid.Facade.0.0.0.3\lib\net45\Lucid.Facade.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Persistence, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Persistence.0.0.0.3\lib\net45\Lucid.Persistence.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lucid.Persistence.NHibernate, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Persistence.NHibernate.0.0.0.3\lib\net45\Lucid.Persistence.NHibernate.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Reposify, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.0.0.0.1\lib\net45\Reposify.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Reposify.NHibernate, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.NHibernate.0.0.0.1\lib\net45\Reposify.NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

@@ -3,7 +3,7 @@ using Demo.Domain.Contract.Product.Queries;
 using Demo.Domain.Contract.Product.Responses;
 using Demo.Domain.Product.Responses;
 using Demo.Domain.Utility;
-using Lucid.Persistence.Queries;
+using Reposify.Queries;
 
 namespace Demo.Domain.Product.Queries
 {

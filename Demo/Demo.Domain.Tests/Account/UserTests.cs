@@ -3,8 +3,8 @@ using Demo.Domain.Account;
 using Demo.Domain.Contract;
 using Demo.Domain.Tests.Utility;
 using FluentAssertions;
-using Lucid.Persistence.Testing;
 using NUnit.Framework;
+using Reposify.Testing;
 
 namespace Demo.Domain.Tests.Account
 {

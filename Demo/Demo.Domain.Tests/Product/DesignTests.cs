@@ -5,8 +5,8 @@ using Demo.Domain.Product;
 using Demo.Domain.Tests.Utility;
 using Demo.Domain.Utility;
 using FluentAssertions;
-using Lucid.Persistence.Testing;
 using NUnit.Framework;
+using Reposify.Testing;
 
 namespace Demo.Domain.Tests.Product
 {

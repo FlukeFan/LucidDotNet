@@ -1,10 +1,10 @@
 ﻿using Demo.Domain.Utility;
-using Lucid.Persistence.NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Connection;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Tool.hbm2ddl;
+using Reposify.NHibernate;
 
 namespace Demo.Infrastructure.NHibernate
 {

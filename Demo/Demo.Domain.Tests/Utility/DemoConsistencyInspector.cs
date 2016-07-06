@@ -1,4 +1,4 @@
-﻿using Lucid.Persistence.Testing;
+﻿using Reposify.Testing;
 
 namespace Demo.Domain.Tests.Utility
 {

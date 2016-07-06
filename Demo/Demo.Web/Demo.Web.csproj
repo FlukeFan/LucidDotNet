@@ -60,10 +60,6 @@
       <HintPath>..\packages\Lucid.Facade.0.0.0.3\lib\net45\Lucid.Facade.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Persistence.NHibernate, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Persistence.NHibernate.0.0.0.3\lib\net45\Lucid.Persistence.NHibernate.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Lucid.Web, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucid.Web.0.0.0.3\lib\net45\Lucid.Web.dll</HintPath>
       <Private>True</Private>
