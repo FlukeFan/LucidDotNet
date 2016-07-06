@@ -63,12 +63,6 @@
   </Target>
 
   <ItemGroup>
-    <ProjectsToBuild Include="Lucid.Persistence\Lucid.Persistence.csproj"/>
-    <ProjectsToBuild Include="Lucid.Persistence.Testing\Lucid.Persistence.Testing.csproj"/>
-    <ProjectsToBuild Include="Lucid.Persistence.Tests\Lucid.Persistence.Tests.csproj"/>
-    <ProjectsToBuild Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
-    <ProjectsToBuild Include="Lucid.Persistence.NHibernate\Lucid.Persistence.NHibernate.csproj"/>
-    <ProjectsToBuild Include="Lucid.Persistence.NHibernate.Tests\Lucid.Persistence.NHibernate.Tests.csproj"/>
     <ProjectsToBuild Include="Lucid.Facade\Lucid.Facade.csproj"/>
     <ProjectsToBuild Include="Lucid.Facade.Testing\Lucid.Facade.Testing.csproj"/>
     <ProjectsToBuild Include="Lucid.Facade.Tests\Lucid.Facade.Tests.csproj"/>
@@ -86,12 +80,6 @@
     <ProjectsToClean Include="Lucid.Facade.Tests\Lucid.Facade.Tests.csproj"/>
     <ProjectsToClean Include="Lucid.Facade.Testing\Lucid.Facade.Testing.csproj"/>
     <ProjectsToClean Include="Lucid.Facade\Lucid.Facade.csproj"/>
-    <ProjectsToClean Include="Lucid.Persistence.NHibernate.Tests\Lucid.Persistence.NHibernate.Tests.csproj"/>
-    <ProjectsToClean Include="Lucid.Persistence.NHibernate\Lucid.Persistence.NHibernate.csproj"/>
-    <ProjectsToClean Include="Lucid.Database.Tests\Lucid.Database.Tests.csproj"/>
-    <ProjectsToClean Include="Lucid.Persistence.Tests\Lucid.Persistence.Tests.csproj"/>
-    <ProjectsToClean Include="Lucid.Persistence.Testing\Lucid.Persistence.Testing.csproj"/>
-    <ProjectsToClean Include="Lucid.Persistence\Lucid.Persistence.csproj"/>
   </ItemGroup>
 
   <Target Name="GenerateAssemblyInfo" Inputs="_items\Lucid.Common.targets" Outputs="_items\AssemblyInfo.cs">
@@ -126,9 +114,6 @@
     <CallTarget Targets="SetReleaseConfiguration" />
     <CallTarget Targets="Init" />
     <CallTarget Targets="Build" />
-    <Exec Command="$(NuGetExe) push packaged\Lucid.Persistence.$(LucidVersion).nupkg" />
-    <Exec Command="$(NuGetExe) push packaged\Lucid.Persistence.Testing.$(LucidVersion).nupkg" />
-    <Exec Command="$(NuGetExe) push packaged\Lucid.Persistence.NHibernate.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Facade.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Facade.Testing.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Web.$(LucidVersion).nupkg" />

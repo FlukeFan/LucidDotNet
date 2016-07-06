@@ -1,14 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Database.Tests", "Lucid.Database.Tests\Lucid.Database.Tests.csproj", "{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF-B71C-4A7B-BC83-B4649FC99361}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		_items\BuildEnvironment.json = _items\BuildEnvironment.json
 		CommandPrompt.bat = CommandPrompt.bat
 		_items\Lucid.Common.targets = _items\Lucid.Common.targets
 		_items\Lucid.nunit = _items\Lucid.nunit
@@ -26,21 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Facade.Tests", "Lucid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Facade.Testing", "Lucid.Facade.Testing\Lucid.Facade.Testing.csproj", "{720932D2-760D-46C4-8DD9-7D492867D23E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Persistence.NHibernate", "Lucid.Persistence.NHibernate\Lucid.Persistence.NHibernate.csproj", "{D824C9D7-9A47-4221-897C-DB99FE98C0D9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Persistence.NHibernate.Tests", "Lucid.Persistence.NHibernate.Tests\Lucid.Persistence.NHibernate.Tests.csproj", "{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.Testing", "Lucid.Web.Testing\Lucid.Web.Testing.csproj", "{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.Tests", "Lucid.Web.Tests\Lucid.Web.Tests.csproj", "{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web", "Lucid.Web\Lucid.Web.csproj", "{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Persistence", "Lucid.Persistence\Lucid.Persistence.csproj", "{AD59FD30-63D8-4416-9703-93D5854C2886}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Persistence.Testing", "Lucid.Persistence.Testing\Lucid.Persistence.Testing.csproj", "{D0D43151-7A59-4FBD-BB3A-087AE0B5DF06}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Persistence.Tests", "Lucid.Persistence.Tests\Lucid.Persistence.Tests.csproj", "{F66200E6-6F80-4355-96E4-84439F7EA652}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +35,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C976D0C2-11A6-4993-A338-BDBAA0BFC67D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,14 +51,6 @@ Global
 		{720932D2-760D-46C4-8DD9-7D492867D23E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{720932D2-760D-46C4-8DD9-7D492867D23E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{720932D2-760D-46C4-8DD9-7D492867D23E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D824C9D7-9A47-4221-897C-DB99FE98C0D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D824C9D7-9A47-4221-897C-DB99FE98C0D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D824C9D7-9A47-4221-897C-DB99FE98C0D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D824C9D7-9A47-4221-897C-DB99FE98C0D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{695ACEBF-E566-45C0-99ED-BDA9B85BDBBC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0560E10-0EC3-4160-9ED3-B86E1D19AB2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -88,18 +63,6 @@ Global
 		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD59FD30-63D8-4416-9703-93D5854C2886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD59FD30-63D8-4416-9703-93D5854C2886}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD59FD30-63D8-4416-9703-93D5854C2886}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD59FD30-63D8-4416-9703-93D5854C2886}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0D43151-7A59-4FBD-BB3A-087AE0B5DF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0D43151-7A59-4FBD-BB3A-087AE0B5DF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0D43151-7A59-4FBD-BB3A-087AE0B5DF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0D43151-7A59-4FBD-BB3A-087AE0B5DF06}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F66200E6-6F80-4355-96E4-84439F7EA652}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F66200E6-6F80-4355-96E4-84439F7EA652}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F66200E6-6F80-4355-96E4-84439F7EA652}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F66200E6-6F80-4355-96E4-84439F7EA652}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,0 @@
--[Lucid.Persistence]*
--[Lucid.Persistence.Testing]*
--[Lucid.Persistence.Tests]*
--[Lucid.Database.Tests]*
