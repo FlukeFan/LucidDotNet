@@ -7,7 +7,7 @@ namespace Lucid.Web.Tests.Deploy
     [TestFixture]
     public class DeployConstraintsTests
     {
-        private const string NugetPackageName   = "Lucid.Web.Testing";
+        private const string NugetPackageName   = "Lucid.Web";
         private const string NugetSourceOption  = " -Source https://api.nuget.org/v3/index.json";
         private const string NugetExeLocation   = "packages\\NuGet.CommandLine.3.4.3\\tools\\NuGet.exe";
 
