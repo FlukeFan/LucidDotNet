@@ -3,7 +3,7 @@ using Demo.Domain.Contract.Product.Commands;
 using Demo.Web.App.Planning;
 using Demo.Web.Tests.Utility;
 using FluentAssertions;
-using Lucid.Web.Testing.Html;
+using MvcTesting.Html;
 using NUnit.Framework;
 
 namespace Demo.Web.Tests.App

@@ -2,8 +2,8 @@
 using System.Text;
 using System.Web.Mvc;
 using FluentAssertions;
-using Lucid.Web.Testing.Http;
 using Lucid.Web.Tests.StubApp.Utility;
+using MvcTesting.Http;
 using NUnit.Framework;
 
 namespace Lucid.Web.Tests.StubApp.App

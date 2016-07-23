@@ -68,13 +68,11 @@
     <ProjectsToBuild Include="Lucid.Facade.Tests\Lucid.Facade.Tests.csproj"/>
     <ProjectsToBuild Include="Lucid.Web\Lucid.Web.csproj"/>
     <ProjectsToBuild Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
-    <ProjectsToBuild Include="Lucid.Web.Testing\Lucid.Web.Testing.csproj"/>
     <ProjectsToBuild Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectsToClean Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
-    <ProjectsToClean Include="Lucid.Web.Testing\Lucid.Web.Testing.csproj"/>
     <ProjectsToClean Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
     <ProjectsToClean Include="Lucid.Web\Lucid.Web.csproj"/>
     <ProjectsToClean Include="Lucid.Facade.Tests\Lucid.Facade.Tests.csproj"/>
@@ -117,7 +115,6 @@
     <Exec Command="$(NuGetExe) push packaged\Lucid.Facade.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Facade.Testing.$(LucidVersion).nupkg" />
     <Exec Command="$(NuGetExe) push packaged\Lucid.Web.$(LucidVersion).nupkg" />
-    <Exec Command="$(NuGetExe) push packaged\Lucid.Web.Testing.$(LucidVersion).nupkg" />
     <CallTarget Targets="Clean" />
   </Target>
 

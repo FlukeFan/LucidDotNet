@@ -1,5 +1,5 @@
 ﻿using Lucid.Web.StubApp.App.Home;
-using Lucid.Web.Testing.Hosting;
+using MvcTesting.Hosting;
 using NUnit.Framework;
 
 namespace Lucid.Web.Tests.StubApp.Utility

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using Lucid.Facade.Testing;
-using Lucid.Web.Testing.Hosting;
-using Lucid.Web.Testing.Http;
+using MvcTesting.Hosting;
+using MvcTesting.Http;
 using NUnit.Framework;
 
 namespace Demo.Web.Tests.Utility
