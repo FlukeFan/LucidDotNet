@@ -76,15 +76,13 @@
     <ProjectsToClean Include="Lucid.Facade\Lucid.Facade.csproj"/>
   </ItemGroup>
 
-  <Target Name="GenerateAssemblyInfo" Inputs="_items\Lucid.Common.targets" Outputs="_items\AssemblyInfo.cs">
-    <RemoveDir Directories="packaged" />
-    <RemoveDir Directories="Demo\packages" Condition="'$(AppHarbor)' != 'true'" />
+  <Target Name="GenerateAssemblyInfo" Inputs="_items\Demo.Common.targets" Outputs="_items\AssemblyInfo.cs">
     <AssemblyInfo
       CodeLanguage="CS"
       AssemblyDescription="Lucid Library"
       AssemblyTitle="Lucid Library"
-      AssemblyProduct="Lucid $(Configuration) $(LucidVersion)"
-      AssemblyVersion="$(LucidVersion)"
+      AssemblyProduct="Lucid $(Configuration) $(DemoVersion)"
+      AssemblyVersion="$(DemoVersion)"
       OutputFile="_items\AssemblyInfo.cs"
       />
   </Target>
