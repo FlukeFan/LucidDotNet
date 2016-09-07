@@ -3,14 +3,13 @@
 
   <PropertyGroup>
 
-    <Asterisk>%2A</Asterisk>
-    <TestAssembly>$(AssemblyName).dll</TestAssembly>
-    <TestOutput>$(AssemblyName).results.xml</TestOutput>
-    <TestSuccessFlag>$(OutDir)\$(AssemblyName).success.flg</TestSuccessFlag>
-    <CoverageOutput>$(OutDir)\$(AssemblyName).coverage.xml</CoverageOutput>
-    <CoverFilterFileOption Condition="!Exists('CoverageFilter.txt')"></CoverFilterFileOption>
-    <CoverFilterFileOption Condition="Exists('CoverageFilter.txt')">-filterfile:CoverageFilter.txt</CoverFilterFileOption>
-    <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
+    <DemoVersion>0.0.0.1</DemoVersion>
+
+    <NuGetExe>$(MSBuildThisFileDirectory)\..\packages\NuGet.CommandLine.3.4.3\tools\NuGet.exe</NuGetExe>
+    <OpenCoverExe>$(MSBuildThisFileDirectory)\..\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
+    <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
+    <ReportGeneratorExe>$(MSBuildThisFileDirectory)\..\packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe</ReportGeneratorExe>
+    <VerifyCoverageJs>$(MSBuildThisFileDirectory)\..\Demo\_items\VerifyCoverage.js</VerifyCoverageJs>
 
   </PropertyGroup>
 

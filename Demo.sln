@@ -1,18 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF-B71C-4A7B-BC83-B4649FC99361}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		CommandPrompt.bat = CommandPrompt.bat
-		_items\Lucid.Common.targets = _items\Lucid.Common.targets
-		_items\Lucid.nunit = _items\Lucid.nunit
-		Lucid.proj = Lucid.proj
+		_items\Demo.Common.targets = _items\Demo.Common.targets
+		_items\Demo.nunit = _items\Demo.nunit
+		Demo.proj = Demo.proj
 		readme.txt = readme.txt
 		RunNUnit.bat = RunNUnit.bat
-		_items\UpdateDemoNuget.txt = _items\UpdateDemoNuget.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.StubApp", "Lucid.Web.StubApp\Lucid.Web.StubApp.csproj", "{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}"

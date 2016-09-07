@@ -4,7 +4,7 @@
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.5.0.196\tools</MSBuildCommunityTasksPath>
   </PropertyGroup>
 
-  <Import Project="_items\Lucid.Common.targets" />
+  <Import Project="_items\Demo.Common.targets" />
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
 
   <PropertyGroup>
@@ -40,8 +40,6 @@
     <CallTarget Targets="GenerateAssemblyInfo" />
     <MakeDir Directories="packaged" />
     <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
-    <CallTarget Targets="RestoreDemoPackages" />
-    <MSBuild Projects="Demo\Demo.proj" Properties="$(GlobalProperties)" Targets="Build" />
   </Target>
 
   <Target Name="Clean">
@@ -55,8 +53,6 @@
   </Target>
   
   <Target Name="CleanFiles">
-    <MSBuild Projects="Demo\Demo.proj" Properties="$(GlobalProperties)" Targets="Clean" />
-    <RemoveDir Directories="Demo\packages" />
     <MSBuild Projects="@(ProjectsToClean)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
     <RemoveDir Directories="packaged" />
     <Delete Files="AssemblyInfo.cs" />
@@ -91,31 +87,6 @@
       AssemblyVersion="$(LucidVersion)"
       OutputFile="_items\AssemblyInfo.cs"
       />
-  </Target>
-
-  <ItemGroup>
-    <DemoPackageDependencies Include="packaged\*" />
-    <DemoPackageDependencies Include="packages\**" />
-    <DemoPackageDependencies Include="Lucid.proj" />
-  </ItemGroup>
-
-  <Target Name="RestoreDemoPackages" Inputs="@(DemoPackageDependencies)" Outputs="Demo\packages\restored">
-    <Copy SourceFiles="$(NuGetExe)" DestinationFolder="Demo\lib\NuGet" />
-    <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="Demo\lib\MSBuild" />
-    <RemoveDir Directories="Demo\packages" Condition="'$(AppHarbor)' != 'true'" />
-    <Exec Command="$(NuGetExe) restore -Source $(MSBuildProjectDirectory)\packaged -Source $(MSBuildProjectDirectory)\packages -Source $(MSBuildProjectDirectory)\packages_deployed" WorkingDirectory="Demo" />
-    <Touch Files="Demo\packages\restored" AlwaysCreate="true" />
-  </Target>
-
-  <Target Name="Push">
-    <RemoveDir Directories="packaged" />
-    <CallTarget Targets="SetReleaseConfiguration" />
-    <CallTarget Targets="Init" />
-    <CallTarget Targets="Build" />
-    <Exec Command="$(NuGetExe) push packaged\Lucid.Facade.$(LucidVersion).nupkg" />
-    <Exec Command="$(NuGetExe) push packaged\Lucid.Facade.Testing.$(LucidVersion).nupkg" />
-    <Exec Command="$(NuGetExe) push packaged\Lucid.Web.$(LucidVersion).nupkg" />
-    <CallTarget Targets="Clean" />
   </Target>
 
 </Project>
