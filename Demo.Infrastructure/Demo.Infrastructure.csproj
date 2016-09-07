@@ -39,10 +39,6 @@
       <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Facade, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Facade.0.0.0.3\lib\net45\Lucid.Facade.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
@@ -81,6 +77,10 @@
     <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">
       <Project>{74bda17e-fc05-42f2-810c-d7b677c0d29e}</Project>
       <Name>Demo.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Facade\Lucid.Facade.csproj">
+      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
+      <Name>Lucid.Facade</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -51,14 +51,6 @@
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lucid.Facade, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Facade.0.0.0.3\lib\net45\Lucid.Facade.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lucid.Facade.Testing, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lucid.Facade.Testing.0.0.0.3\lib\net45\Lucid.Facade.Testing.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -128,6 +120,14 @@
     <ProjectReference Include="..\Demo.Web\Demo.Web.csproj">
       <Project>{9ea489d1-14a1-4482-872b-3a1fd7f93646}</Project>
       <Name>Demo.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Facade.Testing\Lucid.Facade.Testing.csproj">
+      <Project>{720932d2-760d-46c4-8dd9-7d492867d23e}</Project>
+      <Name>Lucid.Facade.Testing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Facade\Lucid.Facade.csproj">
+      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
+      <Name>Lucid.Facade</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
