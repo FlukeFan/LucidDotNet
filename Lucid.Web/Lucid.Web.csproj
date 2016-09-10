@@ -107,7 +107,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(LucidVersion).nupkg">
+  <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(DemoVersion).nupkg">
     <Exec Command="$(NuGetExe) pack $(MSBuildProjectFile) -OutputDirectory ..\packaged -Properties Configuration=$(Configuration);OutDir=$(OutDir)" />
   </Target>
   <Target Name="AfterBuild">
