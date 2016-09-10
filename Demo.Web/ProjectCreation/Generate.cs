@@ -44,7 +44,6 @@ namespace Demo.Web.ProjectCreation
         public static readonly IList<string> GuidsToReplace = new List<string>
         {
             "E47CBDCF-B71C-4A7B-BC83-B4649FC99361".ToUpper(), // Items folder
-            "51A70DC7-59E4-450F-B442-866366B9D63C".ToUpper(), // Items folder
             "2C74567A-5CF2-4006-B6C1-FDA122578AD1".ToUpper(), // Demo.Database
             "C4352D6D-C6DF-4A1A-A613-800B3573F8A3".ToUpper(), // Demo.Database.Tests
             "2D85D27E-BDFF-4545-A48C-49D193143232".ToUpper(), // Demo.Domain.Contract
@@ -134,13 +133,7 @@ namespace Demo.Web.ProjectCreation
 
         private static void ProcessTextFile(Stream inputFileStream, ZipEntry newEntry, ZipOutputStream zipOutput, string newName)
         {
-            string[] inputLines;
-            using (var reader = new StreamReader(inputFileStream))
-            {
-                var content = reader.ReadToEnd();
-                inputLines = content.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.None);
-            }
-
+            var inputLines = ReadLines(inputFileStream);
             var outputLines = new List<string>();
 
             foreach (var inputLine in inputLines)
@@ -157,6 +150,16 @@ namespace Demo.Web.ProjectCreation
             zipOutput.PutNextEntry(newEntry);
             zipOutput.Write(bytes, 0, bytes.Length);
             zipOutput.CloseEntry();
+        }
+
+        public static string[] ReadLines(Stream inputFileStream)
+        {
+            using (var reader = new StreamReader(inputFileStream))
+            {
+                var content = reader.ReadToEnd();
+                var inputLines = content.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.None);
+                return inputLines;
+            }
         }
 
         public static string ProcessLine(string inputLine, string newName)

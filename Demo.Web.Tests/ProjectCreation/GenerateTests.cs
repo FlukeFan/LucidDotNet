@@ -1,6 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Demo.Web.ProjectCreation;
 using FluentAssertions;
+using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 
 namespace Demo.Web.Tests.ProjectCreation
@@ -8,6 +12,45 @@ namespace Demo.Web.Tests.ProjectCreation
     [TestFixture]
     public class GenerateTests
     {
+        [Test]
+        public void GuidsAreUsedInProject()
+        {
+            var assembly = typeof(Generate).Assembly;
+            var allGuidsInZip = new List<string>();
+            var ignoredGenerateCs = false;
+
+            using (var zipInputStream = assembly.GetManifestResourceStream("Demo.Web.Project.zip"))
+            using (var zipFile = new ZipFile(zipInputStream))
+                foreach (ZipEntry zipEntry in zipFile)
+                {
+                    var fileName = zipEntry.Name;
+
+                    if (fileName.EndsWith("ProjectCreation/Generate.cs"))
+                    {
+                        ignoredGenerateCs = true;
+                        continue;
+                    }
+
+                    if (!Generate.ShouldProcessFile(fileName))
+                        continue;
+
+                    var lines = Generate.ReadLines(zipFile.GetInputStream(zipEntry));
+
+                    foreach (var line in lines)
+                        foreach (Match match in Generate.GuidSearch.Matches(line))
+                            allGuidsInZip.Add(match.Value.ToUpper());
+               }
+
+            ignoredGenerateCs.Should().BeTrue("should have found Generate.cs");
+
+            var extraGuids = Generate.GuidsToIgnore
+                .Union(Generate.GuidsToReplace)
+                .Where(g => !allGuidsInZip.Contains(g))
+                .ToList();
+
+            extraGuids.Count.Should().Be(0, "GUIDs not found in project: {0}", string.Join(", ", extraGuids));
+        }
+
         [Test]
         public void GuidsDontAppearTwice()
         {
