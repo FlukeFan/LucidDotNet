@@ -65,9 +65,29 @@
     <ProjectsToBuild Include="Lucid.Web\Lucid.Web.csproj"/>
     <ProjectsToBuild Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
     <ProjectsToBuild Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
+    <ProjectsToBuild Include="Demo.Domain.Contract\Demo.Domain.Contract.csproj"/>
+    <ProjectsToBuild Include="Demo.Domain\Demo.Domain.csproj"/>
+    <ProjectsToBuild Include="Demo.Domain.Tests\Demo.Domain.Tests.csproj"/>
+    <ProjectsToBuild Include="Demo.Database\Demo.Database.csproj"/>
+    <ProjectsToBuild Include="Demo.Database.Tests\Demo.Database.Tests.csproj"/>
+    <ProjectsToBuild Include="Demo.Infrastructure\Demo.Infrastructure.csproj"/>
+    <ProjectsToBuild Include="Demo.Infrastructure.Tests\Demo.Infrastructure.Tests.csproj"/>
+    <ProjectsToBuild Include="Demo.Web\Demo.Web.csproj"/>
+    <ProjectsToBuild Include="Demo.Web.Tests\Demo.Web.Tests.csproj"/>
+    <ProjectsToBuild Include="Demo.System.Tests\Demo.System.Tests.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectsToClean Include="Demo.System.Tests\Demo.System.Tests.csproj"/>
+    <ProjectsToClean Include="Demo.Web.Tests\Demo.Web.Tests.csproj"/>
+    <ProjectsToClean Include="Demo.Web\Demo.Web.csproj"/>
+    <ProjectsToClean Include="Demo.Infrastructure.Tests\Demo.Infrastructure.Tests.csproj"/>
+    <ProjectsToClean Include="Demo.Infrastructure\Demo.Infrastructure.csproj"/>
+    <ProjectsToClean Include="Demo.Database.Tests\Demo.Database.Tests.csproj"/>
+    <ProjectsToClean Include="Demo.Database\Demo.Database.csproj"/>
+    <ProjectsToClean Include="Demo.Domain.Tests\Demo.Domain.Tests.csproj"/>
+    <ProjectsToClean Include="Demo.Domain\Demo.Domain.csproj"/>
+    <ProjectsToClean Include="Demo.Domain.Contract\Demo.Domain.Contract.csproj"/>
     <ProjectsToClean Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
     <ProjectsToClean Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
     <ProjectsToClean Include="Lucid.Web\Lucid.Web.csproj"/>
