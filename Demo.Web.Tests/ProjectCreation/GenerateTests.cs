@@ -1,4 +1,5 @@
-﻿using Demo.Web.ProjectCreation;
+﻿using System.Linq;
+using Demo.Web.ProjectCreation;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -7,6 +8,16 @@ namespace Demo.Web.Tests.ProjectCreation
     [TestFixture]
     public class GenerateTests
     {
+        [Test]
+        public void GuidsDontAppearTwice()
+        {
+            var duplicateGuids = Generate.GuidsToIgnore
+                .Where(g => Generate.GuidsToReplace.Contains(g))
+                .ToList();
+
+            duplicateGuids.Count.Should().Be(0, "The following GUIDs should not appear twice: {0}", string.Join(", ", duplicateGuids));
+        }
+
         [Test]
         public void ProcessLine_Unaffected()
         {

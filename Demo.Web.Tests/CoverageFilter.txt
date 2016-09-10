@@ -8,5 +8,3 @@
 -[Lucid.Facade]*
 -[Lucid.Facade.Testing]*
 -[Lucid.Web]*
--[Demo.Web]Demo.Web.ProjectCreation.GenerateProject
--[Demo.Web]Demo.Web.ProjectCreation.Generate

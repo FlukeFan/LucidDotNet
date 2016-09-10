@@ -36,13 +36,14 @@ namespace Demo.Web.ProjectCreation
 
         public static readonly IList<string> GuidsToIgnore = new List<string>
         {
-            "2150E333-8FDC-42A3-9474-1A3956D46DE8".ToUpper(), // project items
+            "2150E333-8FDC-42A3-9474-1A3956D46DE8".ToUpper(), // solution folder
             "349c5851-65df-11da-9384-00065b846f21".ToUpper(), // web application
-            "fae04ec0-301f-11d3-bf4b-00c04f79efbc".ToUpper(), // c#
+            "fae04ec0-301f-11d3-bf4b-00c04f79efbc".ToUpper(), // c# project
         };
 
         public static readonly IList<string> GuidsToReplace = new List<string>
         {
+            "E47CBDCF-B71C-4A7B-BC83-B4649FC99361".ToUpper(), // Items folder
             "51A70DC7-59E4-450F-B442-866366B9D63C".ToUpper(), // Items folder
             "2C74567A-5CF2-4006-B6C1-FDA122578AD1".ToUpper(), // Demo.Database
             "C4352D6D-C6DF-4A1A-A613-800B3573F8A3".ToUpper(), // Demo.Database.Tests
@@ -54,6 +55,12 @@ namespace Demo.Web.ProjectCreation
             "9EA489D1-14A1-4482-872B-3A1FD7F93646".ToUpper(), // Demo.Web
             "098ADBA2-8686-4E64-9937-EC63DFA11432".ToUpper(), // Demo.Web.Tests
             "B21A7182-EF27-48FA-93D8-C8E24E44FDB6".ToUpper(), // Demo.System.Tests
+            "D0F98206-1EDC-4C9F-B705-B1A8286D86DD".ToUpper(), // Lucid.Web.StubApp
+            "743E64D3-1A87-4177-9D12-E1000CE04C4F".ToUpper(), // Lucid.Facade
+            "720932D2-760D-46C4-8DD9-7D492867D23E".ToUpper(), // Lucid.Facade.Testing
+            "24EED56F-299C-4E7D-989D-75C8ED35DC8D".ToUpper(), // Lucid.Facade.Tests
+            "0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D".ToUpper(), // Lucid.Web
+            "D4B3691F-C8C3-40F0-8EC0-A156CC4B8093".ToUpper(), // Lucid.Web.Tests
         };
 
         public static readonly Regex GuidSearch     = new Regex("(.{8}-.{4}-.{4}-.{4}-.{12})", RegexOptions.Compiled);
