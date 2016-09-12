@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <Import Project="_items\Demo.Common.targets" />
-  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" Condition="Exists('$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets')" />
 
   <PropertyGroup>
     <SolutionDir>$(MSBuildProjectDirectory)\</SolutionDir>
@@ -18,10 +18,15 @@
   </ItemGroup>
 
   <Target Name="Init">
+    <CallTarget Targets="PackageRestore" Condition="!Exists('$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets')" />
     <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);NuGetExe=$(NuGetExe);DeployBuild=$(AppHarbor)">
       <Output TaskParameter="Value" PropertyName="GlobalProperties" />
     </CreateProperty>
     <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildCommunityTasksPath)" />
+  </Target>
+
+  <Target Name="PackageRestore">
+    <Exec Command="lib\NuGet\NuGet.exe restore" />
   </Target>
 
   <Target Name="SetReleaseConfiguration">
