@@ -17,16 +17,16 @@
     <MSBuildXsd Include="lib\MSBuild\*.xsd" />
   </ItemGroup>
 
+  <Target Name="RestorePackages">
+    <Exec Command="lib\NuGet\NuGet.exe restore" />
+  </Target>
+
   <Target Name="Init">
-    <CallTarget Targets="PackageRestore" Condition="!Exists('$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets')" />
+    <Error Text="Missing NuGet packages - try running 'b /t:RestorePackages'" Condition="!Exists('$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets')" />
     <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);NuGetExe=$(NuGetExe);DeployBuild=$(AppHarbor)">
       <Output TaskParameter="Value" PropertyName="GlobalProperties" />
     </CreateProperty>
     <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildCommunityTasksPath)" />
-  </Target>
-
-  <Target Name="PackageRestore">
-    <Exec Command="lib\NuGet\NuGet.exe restore" />
   </Target>
 
   <Target Name="SetReleaseConfiguration">
