@@ -113,8 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_items\AssemblyInfo.cs" />
-    <Compile Include="Deploy\DeployConstraintsTests.cs" />
-    <Compile Include="Deploy\Run.cs" />
     <Compile Include="MvcExecutorTests.cs" />
     <Compile Include="StubApp\App\F1\F11Tests.cs" />
     <Compile Include="StubApp\App\F1\F12\F121Tests.cs" />

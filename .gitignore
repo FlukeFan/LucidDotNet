@@ -10,8 +10,6 @@ _items/BuildEnvironment.json
 _items/TestResult.xml
 _items/AssemblyInfo.cs
 /.vs
-/packaged
-/packages_deployed
 /packages/MSBuildTasks.1.5.0.196/tools/Microsoft.Build.Commontypes.xsd
 /packages/MSBuildTasks.1.5.0.196/tools/Microsoft.Build.Core.xsd
 /Demo.Web/Project.zip

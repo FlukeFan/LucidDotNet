@@ -94,23 +94,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\_items\Demo.Common.targets" />
-  <ItemGroup>
-    <PackageDependencies Include="bin\$(Configuration)\$(AssemblyName).dll">
-      <InProject>False</InProject>
-    </PackageDependencies>
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lucid.Facade\Lucid.Facade.csproj">
       <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
       <Name>Lucid.Facade</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
-  <Target Name="Package" Inputs="@(PackageDependencies)" Outputs="..\packaged\$(AssemblyName).$(DemoVersion).nupkg">
-    <Exec Command="$(NuGetExe) pack $(MSBuildProjectFile) -OutputDirectory ..\packaged -Properties Configuration=$(Configuration);OutDir=$(OutDir)" />
-  </Target>
   <Target Name="AfterBuild">
-    <CallTarget Targets="Package" />
   </Target>
 </Project>

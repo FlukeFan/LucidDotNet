@@ -23,7 +23,7 @@
 
   <Target Name="Init">
     <Error Text="Missing NuGet packages - try running 'b /t:RestorePackages'" Condition="!Exists('$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets')" />
-    <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);NuGetExe=$(NuGetExe);DeployBuild=$(AppHarbor)">
+    <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);DeployBuild=$(AppHarbor)">
       <Output TaskParameter="Value" PropertyName="GlobalProperties" />
     </CreateProperty>
     <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildCommunityTasksPath)" />
@@ -43,7 +43,6 @@
 
   <Target Name="Build" DependsOnTargets="Init">
     <CallTarget Targets="GenerateAssemblyInfo" />
-    <MakeDir Directories="packaged" />
     <MSBuild Projects="@(ProjectsToBuild)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" />
   </Target>
 
@@ -59,7 +58,6 @@
   
   <Target Name="CleanFiles">
     <MSBuild Projects="@(ProjectsToClean)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
-    <RemoveDir Directories="packaged" />
     <Delete Files="AssemblyInfo.cs" />
   </Target>
 
