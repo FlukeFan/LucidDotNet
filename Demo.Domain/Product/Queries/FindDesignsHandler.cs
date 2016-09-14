@@ -7,9 +7,9 @@ using Reposify.Queries;
 
 namespace Demo.Domain.Product.Queries
 {
-    public class FindDesignsHandler : HandleQueryList<FindDesigns, DesignDto>
+    public class FindDesignsHandler : HandleQuery<FindDesigns, IList<DesignDto>>
     {
-        public override IList<DesignDto> List(FindDesigns query)
+        public override IList<DesignDto> Find(FindDesigns query)
         {
             var designs =
                 Repository.Query<Design>()

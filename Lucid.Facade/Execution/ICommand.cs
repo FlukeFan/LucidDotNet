@@ -3,7 +3,7 @@ namespace Lucid.Facade.Execution
 {
     public interface ICommand {}
 
-    public interface ICommand<TReturn> { }
+    public interface ICommand<in TReturn> { }
 
     public interface IHandleVoidCommand<TCmd>
         where TCmd : ICommand

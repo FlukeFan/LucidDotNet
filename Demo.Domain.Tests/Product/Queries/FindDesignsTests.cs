@@ -17,7 +17,7 @@ namespace Demo.Domain.Tests.Product.Queries
             new DesignBuilder().With(d => d.Name, "d1").Save();
             new DesignBuilder().With(d => d.Name, "d3").Save();
 
-            var designs = new FindDesignsHandler().List(new FindDesigns());
+            var designs = new FindDesignsHandler().Find(new FindDesigns());
 
             designs.Count.Should().Be(3);
             designs.Select(d => d.Name).Should().BeInAscendingOrder();

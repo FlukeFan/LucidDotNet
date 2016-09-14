@@ -3,8 +3,8 @@ using Lucid.Facade.Execution;
 
 namespace Demo.Domain.Utility
 {
-    public abstract class HandleQuerySingle<TQuery, TReturn> : IHandleQuerySingle<TQuery, TReturn>
-        where TQuery : IQuerySingle<TReturn>
+    public abstract class HandleQuery<TQuery, TReturn> : IHandleQuery<TQuery, TReturn>
+        where TQuery : IQuery<TReturn>
     {
         protected static IDemoRepository Repository {[DebuggerStepThrough] get { return Registry.Repository; } }
 

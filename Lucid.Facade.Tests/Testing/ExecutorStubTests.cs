@@ -29,15 +29,15 @@ namespace Lucid.Facade.Tests.Testing
 
         public class FakeCommand : ICommand<FakeResponse> { public int Input = 5; }
 
-        public class FakeQuerySingle : IQuerySingle<int> { }
+        public class FakeQueryValue : IQuery<int> { }
 
-        public class FakeQueryList : IQueryList<FakeResponse> { };
+        public class FakeQueryList : IQuery<IList<FakeResponse>> { };
 
-        public class FakeQueryEnumerable : IQuerySingle<IEnumerable<FakeResponse>> { }
+        public class FakeQueryEnumerable : IQuery<IEnumerable<FakeResponse>> { }
 
-        public class FakeQueryDictionary : IQuerySingle<IDictionary<int, FakeResponse>> { }
+        public class FakeQueryDictionary : IQuery<IDictionary<int, FakeResponse>> { }
 
-        public class FakeQueryArray : IQuerySingle<int[]> { }
+        public class FakeQueryArray : IQuery<int[]> { }
 
         [Test]
         public void Executed_ReturnsStoredExecutions()
@@ -91,7 +91,7 @@ namespace Lucid.Facade.Tests.Testing
         {
             var executor = new ExecutorStub();
 
-            var result = (int)(executor as IExecutor).Execute(new FakeQuerySingle());
+            var result = (int)(executor as IExecutor).Execute(new FakeQueryValue());
 
             result.Should().Be(0);
         }
@@ -201,7 +201,7 @@ namespace Lucid.Facade.Tests.Testing
         public void SetupQueryListResult()
         {
             var executor = new ExecutorStub()
-                .SetupQueryList(It.IsAny<FakeQueryList>(),
+                .SetupQuery(It.IsAny<FakeQueryList>(),
                 new List<FakeResponse>
                 {
                     new FakeResponse(567),
@@ -220,9 +220,9 @@ namespace Lucid.Facade.Tests.Testing
         public void SetupQuerySingleResult()
         {
             var executor = new ExecutorStub()
-                .SetupQuerySingle(It.IsAny<FakeQuerySingle>(), 7);
+                .SetupQuery(It.IsAny<FakeQueryValue>(), 7);
 
-            var result = (int)(executor as IExecutor).Execute(new FakeQuerySingle());
+            var result = (int)(executor as IExecutor).Execute(new FakeQueryValue());
 
             result.Should().Be(7);
         }

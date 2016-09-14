@@ -14,28 +14,16 @@ namespace Lucid.Web.Tests
     public class MvcExecutorTests
     {
         [Test]
-        public void Exec_QueryList()
+        public void Exec_Query()
         {
             var stub = new ExecutorStub();
             var executor = new CqExecutor(stub);
             var expectedList = new List<int> { 1, 2, 3 };
-            stub.SetupQueryList(It.IsAny<QueryList>(), expectedList);
+            stub.SetupQuery(It.IsAny<Query>(), expectedList);
 
-            var result = MvcExecutor.Exec(executor, new QueryList());
+            var result = MvcExecutor.Exec(executor, new Query());
 
             result.Should().BeEquivalentTo(expectedList);
-        }
-
-        [Test]
-        public void Exec_QuerySingle()
-        {
-            var stub = new ExecutorStub();
-            var executor = new CqExecutor(stub);
-            stub.SetupQuerySingle(It.IsAny<QuerySingle>(), 5);
-
-            var result = MvcExecutor.Exec(executor, new QuerySingle());
-
-            result.Should().Be(5);
         }
 
         [Test]
@@ -99,8 +87,7 @@ namespace Lucid.Web.Tests
             state[""].Errors[0].ErrorMessage.Should().Be("an error");
         }
 
-        public class QueryList : IQueryList<int> { }
-        public class QuerySingle : IQuerySingle<int> { }
+        public class Query : IQuery<IList<int>> { }
         public class Cmd : ICommand { }
         public class CmdOfT : ICommand<int> { }
     }

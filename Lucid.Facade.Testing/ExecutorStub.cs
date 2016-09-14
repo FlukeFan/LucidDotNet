@@ -52,8 +52,7 @@ namespace Lucid.Facade.Testing
             var interfaces = executable.GetType().GetInterfaces();
 
             var commandInterface = typeof(ICommand<>);
-            var queryListInterface = typeof(IQueryList<>);
-            var querySingleInterface = typeof(IQuerySingle<>);
+            var queryInterface = typeof(IQuery<>);
 
             foreach (var intrface in interfaces)
             {
@@ -62,11 +61,8 @@ namespace Lucid.Facade.Testing
 
                 var genericType = intrface.GetGenericTypeDefinition();
 
-                if (genericType == commandInterface || genericType == querySingleInterface)
+                if (genericType == commandInterface || genericType == queryInterface)
                     return intrface.GetGenericArguments()[0];
-
-                if (genericType == queryListInterface)
-                    return typeof(IList<>).MakeGenericType(intrface.GetGenericArguments()[0]);
             }
 
             return null;
@@ -142,26 +138,14 @@ namespace Lucid.Facade.Testing
             return SetupObjectResult<TCmd>((exe, def) => setup((TCmd)exe, (TReturn)def));
         }
 
-        public ExecutorStub SetupQueryList<TQuery, TListItem>(TQuery queryType, IList<TListItem> result)
-            where TQuery : IQueryList<TListItem>
+        public ExecutorStub SetupQuery<TQuery, TReturn>(TQuery queryType, TReturn result)
+            where TQuery : IQuery<TReturn>
         {
-            return SetupQueryList<TQuery, TListItem>(queryType, (exe, def) => result);
+            return SetupQuery<TQuery, TReturn>(queryType, (exe, def) => result);
         }
 
-        public ExecutorStub SetupQueryList<TQuery, TListItem>(TQuery queryType, Func<TQuery, IList<TListItem>, IList<TListItem>> setup)
-            where TQuery : IQueryList<TListItem>
-        {
-            return SetupObjectResult<TQuery>((exe, def) => setup((TQuery)exe, (IList<TListItem>)def));
-        }
-
-        public ExecutorStub SetupQuerySingle<TQuery, TReturn>(TQuery queryType, TReturn result)
-            where TQuery : IQuerySingle<TReturn>
-        {
-            return SetupQuerySingle<TQuery, TReturn>(queryType, (exe, def) => result);
-        }
-
-        public ExecutorStub SetupQuerySingle<TQuery, TReturn>(TQuery queryType, Func<TQuery, TReturn, TReturn> setup)
-            where TQuery : IQuerySingle<TReturn>
+        public ExecutorStub SetupQuery<TQuery, TReturn>(TQuery queryType, Func<TQuery, TReturn, TReturn> setup)
+            where TQuery : IQuery<TReturn>
         {
             return SetupObjectResult<TQuery>((exe, def) => setup((TQuery)exe, (TReturn)def));
         }

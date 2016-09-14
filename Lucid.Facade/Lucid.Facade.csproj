@@ -52,13 +52,11 @@
     <Compile Include="Execution\ICommand.cs" />
     <Compile Include="Execution\ICqExecutor.cs" />
     <Compile Include="Execution\IExecutor.cs" />
-    <Compile Include="Execution\IQueryList.cs" />
-    <Compile Include="Execution\IQuerySingle.cs" />
+    <Compile Include="Execution\IQuery.cs" />
     <Compile Include="Validation\ValidatingExecutor.cs" />
     <Compile Include="Execution\Command.cs" />
     <Compile Include="Execution\IExecutable.cs" />
-    <Compile Include="Execution\QueryList.cs" />
-    <Compile Include="Execution\QuerySingle.cs" />
+    <Compile Include="Execution\Query.cs" />
     <Compile Include="Validation\LucidValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

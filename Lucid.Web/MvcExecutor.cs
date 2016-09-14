@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using Lucid.Facade.Exceptions;
 using Lucid.Facade.Execution;
@@ -8,12 +7,7 @@ namespace Lucid.Web
 {
     public static class MvcExecutor
     {
-        public static IList<TListItem> Exec<TListItem>(ICqExecutor executor, IQueryList<TListItem> query)
-        {
-            return executor.Execute(query);
-        }
-
-        public static TReturn Exec<TReturn>(ICqExecutor executor, IQuerySingle<TReturn> query)
+        public static TReturn Exec<TReturn>(ICqExecutor executor, IQuery<TReturn> query)
         {
             return executor.Execute(query);
         }

@@ -26,10 +26,8 @@ namespace Lucid.Facade.Execution
 
                     if (genericType == typeof(IHandleVoidCommand<>) || genericType == typeof(IHandleCommand<,>))
                         HandleMethod(type, intrface, "Execute");
-                    else if (genericType == typeof(IHandleQuerySingle<,>))
+                    else if (genericType == typeof(IHandleQuery<,>))
                         HandleMethod(type, intrface, "Find");
-                    else if (genericType == typeof(IHandleQueryList<,>))
-                        HandleMethod(type, intrface, "List");
                 }
             }
 

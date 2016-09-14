@@ -70,7 +70,7 @@ namespace Lucid.Facade.Tests.Execution
             result.Should().ContainInOrder(4, 5, 6);
         }
 
-        public class SimpleExecutable : QuerySingle<int>
+        public class SimpleExecutable : Query<int>
         {
             public override int Find()
             {
@@ -119,13 +119,13 @@ namespace Lucid.Facade.Tests.Execution
             }
         }
 
-        public class Multiply : IQuerySingle<int>
+        public class Multiply : IQuery<int>
         {
             public int Value1;
             public int Value2;
         }
 
-        public class MultiplyHandler : IHandleQuerySingle<Multiply, int>
+        public class MultiplyHandler : IHandleQuery<Multiply, int>
         {
             public int Find(Multiply query)
             {
@@ -133,14 +133,14 @@ namespace Lucid.Facade.Tests.Execution
             }
         }
 
-        public class List : IQueryList<int>
+        public class List : IQuery<IList<int>>
         {
             public int Start;
         }
 
-        public class ListHandler : IHandleQueryList<List, int>
+        public class ListHandler : IHandleQuery<List, IList<int>>
         {
-            public IList<int> List(List query)
+            public IList<int> Find(List query)
             {
                 return new List<int>
                 {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using Lucid.Facade.Execution;
 using Lucid.Web;
@@ -8,12 +7,7 @@ namespace Demo.Web.Utility
 {
     public abstract class DemoController : Controller
     {
-        protected IList<TListItem> Exec<TListItem>(IQueryList<TListItem> query)
-        {
-            return MvcExecutor.Exec(PresentationRegistry.Executor, query);
-        }
-
-        protected TReturn Exec<TReturn>(IQuerySingle<TReturn> query)
+        protected TReturn Exec<TReturn>(IQuery<TReturn> query)
         {
             return MvcExecutor.Exec(PresentationRegistry.Executor, query);
         }

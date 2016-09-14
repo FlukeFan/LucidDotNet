@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Lucid.Facade.Execution
+﻿namespace Lucid.Facade.Execution
 {
     public class CqExecutor : ICqExecutor
     {
@@ -21,12 +19,7 @@ namespace Lucid.Facade.Execution
             return (TReturn)_executor.Execute(cmd);
         }
 
-        public IList<TListItem> Execute<TListItem>(IQueryList<TListItem> query)
-        {
-            return (IList<TListItem>)_executor.Execute(query);
-        }
-
-        public TReturn Execute<TReturn>(IQuerySingle<TReturn> query)
+        public TReturn Execute<TReturn>(IQuery<TReturn> query)
         {
             return (TReturn)_executor.Execute(query);
         }
