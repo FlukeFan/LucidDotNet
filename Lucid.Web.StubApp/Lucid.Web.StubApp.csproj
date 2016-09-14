@@ -103,11 +103,11 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\jquery-1.12.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.12.3.js" />
-    <Content Include="Scripts\jquery-1.12.3.min.js" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -120,7 +120,7 @@
     <Content Include="App\Html\Form_Render.cshtml" />
     <Content Include="App\Html\Form_RenderInput.cshtml" />
     <Content Include="App\Html\RawForm.cshtml" />
-    <Content Include="Scripts\jquery-1.12.3.min.map" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
