@@ -61,9 +61,6 @@
     <Compile Include="Execution\QuerySingle.cs" />
     <Compile Include="Validation\LucidValidator.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Lucid.Facade.nuspec" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
   </Target>

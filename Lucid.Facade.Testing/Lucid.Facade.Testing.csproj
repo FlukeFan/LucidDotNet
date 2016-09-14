@@ -48,9 +48,6 @@
     <Compile Include="It.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Lucid.Facade.Testing.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Lucid.Facade\Lucid.Facade.csproj">
       <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
       <Name>Lucid.Facade</Name>

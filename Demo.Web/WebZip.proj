@@ -17,13 +17,12 @@
     <FilesToZip Include="..\_items\*.js" />
     <FilesToZip Include="..\Demo.Database.Tests\DefaultEnvironment.json" />
     <FilesToZip Include="..\*.sln" />
-    <FilesToZip Include="..\**\*.csproj" />
+    <FilesToZip Include="..\**\*.csproj" Exclude="..\packages\**" />
     <FilesToZip Include="..\**\CoverageFilter.txt" />
-    <FilesToZip Include="..\**\packages.config" />
-    <FilesToZip Include="..\**\*.cs" Exclude="..\_items\AssemblyInfo.cs;..\**\obj\**" />
-    <FilesToZip Include="..\Demo.Web\**\*.cshtml" />
-    <FilesToZip Include="..\Demo.Web\**\*.asax" />
-    <FilesToZip Include="..\Demo.Web\**\Web.config" />
+    <FilesToZip Include="..\**\*.cs" Exclude="..\_items\AssemblyInfo.cs;..\**\obj\**;..\packages\**" />
+    <FilesToZip Include="..\**\*.cshtml" />
+    <FilesToZip Include="..\**\*.asax" />
+    <FilesToZip Include="..\**\*.config" Exclude="..\packages\**;..\.vs\**" />
   </ItemGroup>
   
   <Target Name="Zip" Inputs="@(FilesToZip);WebZip.proj" Outputs="Project.zip">

@@ -95,7 +95,6 @@
     <Compile Include="WebHost.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Lucid.Web.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
