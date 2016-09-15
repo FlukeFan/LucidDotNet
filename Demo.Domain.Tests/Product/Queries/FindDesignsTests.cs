@@ -11,7 +11,7 @@ namespace Demo.Domain.Tests.Product.Queries
     public class FindDesignsTests : DomainTest
     {
         [Test]
-        public void List_OrdersByName()
+        public void OrdersByName()
         {
             new DesignBuilder().With(d => d.Name, "d2").Save();
             new DesignBuilder().With(d => d.Name, "d1").Save();

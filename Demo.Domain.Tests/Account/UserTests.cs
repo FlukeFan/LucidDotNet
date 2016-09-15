@@ -29,7 +29,7 @@ namespace Demo.Domain.Tests.Account
     public class UserTests : DomainTest
     {
         [Test]
-        public void Login_WhenDoesNotExist_IsCreated()
+        public void LoginCreatesNewUser_WhenUserDoesNotExist()
         {
             var now = SetDomainNow(Test.SummerDateTime1);
 
@@ -41,7 +41,7 @@ namespace Demo.Domain.Tests.Account
         }
 
         [Test]
-        public void Login_WhenAlreadyExists_SavedInstanceIsReturned()
+        public void LoginReturnsExistingUser_WhenUserAlreadyExists()
         {
             var now = SetDomainNow(Test.SummerDateTime1);
 

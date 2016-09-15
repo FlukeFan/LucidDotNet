@@ -29,7 +29,7 @@ namespace Demo.Domain.Tests.Product.Commands
         }
 
         [Test]
-        public void Execute()
+        public void NewDesignIsReturned()
         {
             var cmd =
                 new StartDesign

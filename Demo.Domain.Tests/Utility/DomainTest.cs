@@ -14,6 +14,7 @@ namespace Demo.Domain.Tests.Utility
         public virtual void SetUp()
         {
             Test = new TestValues();
+            SetDomainNow(DateTime.UtcNow);
 
             Repository = new DemoMemoryRepository();
             Registry.Repository = Repository;

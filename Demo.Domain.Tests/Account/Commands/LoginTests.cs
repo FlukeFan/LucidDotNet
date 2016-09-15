@@ -11,7 +11,7 @@ namespace Demo.Domain.Tests.Account.Commands
     public class LoginTests : DomainTest
     {
         [Test]
-        public void Execute()
+        public void UserIsReturned()
         {
             var cmd =
                 new Login
