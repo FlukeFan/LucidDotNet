@@ -4,7 +4,7 @@ using Lucid.Facade.Exceptions;
 
 namespace Lucid.Facade.Validation
 {
-    public static class LucidValidator
+    public static class ExecutableValidator
     {
         public static void Validate(object dto)
         {
@@ -15,7 +15,7 @@ namespace Lucid.Facade.Validation
             if (valid)
                 return;
 
-            throw new LucidException(results);
+            throw new FacadeException(results);
         }
     }
 }

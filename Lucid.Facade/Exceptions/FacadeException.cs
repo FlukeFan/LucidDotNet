@@ -5,27 +5,27 @@ using System.Linq;
 
 namespace Lucid.Facade.Exceptions
 {
-    public class LucidException : ApplicationException
+    public class FacadeException : ApplicationException
     {
         public IEnumerable<string>                  Messages            { get; protected set; }
         public IDictionary<string, IList<string>>   PropertyMessages    { get; protected set; }
 
-        public LucidException(IEnumerable<string> messages, IDictionary<string, IList<string>> propertyMessages)
+        public FacadeException(IEnumerable<string> messages, IDictionary<string, IList<string>> propertyMessages)
             : base(FormatMessage(messages, propertyMessages))
         {
             Messages = messages;
             PropertyMessages = propertyMessages;
         }
 
-        public LucidException(IEnumerable<ValidationResult> validationResults)
+        public FacadeException(IEnumerable<ValidationResult> validationResults)
             : this(new List<string>(), ConvertResults(validationResults))
         { }
 
-        public LucidException(IEnumerable<string> messages)
+        public FacadeException(IEnumerable<string> messages)
             : this(messages, new Dictionary<string, IList<string>>())
         { }
 
-        public LucidException(string message)
+        public FacadeException(string message)
             : this(new List<string> { message })
         { }
 

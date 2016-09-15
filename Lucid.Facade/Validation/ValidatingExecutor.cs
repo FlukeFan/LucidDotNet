@@ -13,7 +13,7 @@ namespace Lucid.Facade.Validation
 
         object IExecutor.Execute(object executable)
         {
-            LucidValidator.Validate(executable);
+            ExecutableValidator.Validate(executable);
             return _inner.Execute(executable);
         }
     }

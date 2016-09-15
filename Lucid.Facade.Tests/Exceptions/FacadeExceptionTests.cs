@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Lucid.Facade.Tests.Exceptions
 {
     [TestFixture]
-    public class LucidExceptionTests
+    public class FacadeExceptionTests
     {
         [Test]
         public void FormatMessage()
@@ -24,7 +24,7 @@ namespace Lucid.Facade.Tests.Exceptions
                 { "p2", new List<string> { "m1" } },
             };
 
-            var e = new LucidException(messages, propertyMessages);
+            var e = new FacadeException(messages, propertyMessages);
 
             e.Message.Should().Be("m1\nm2\np1: m1\np1: m2\np2: m1");
         }
@@ -38,7 +38,7 @@ namespace Lucid.Facade.Tests.Exceptions
                 new ValidationResult("m2", new List<string> { "p2", "p3" }),
             };
 
-            var e = new LucidException(validationResults);
+            var e = new FacadeException(validationResults);
 
             e.Message.Should().Be("p1: m1\np2: m1\np2: m2\np3: m2");
         }

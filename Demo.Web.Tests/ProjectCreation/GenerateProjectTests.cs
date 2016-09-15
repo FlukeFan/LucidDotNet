@@ -52,7 +52,7 @@ namespace Demo.Web.Tests.ProjectCreation
         public static void ShouldBeInvalid(this GenerateProject command, Action<GenerateProject> invalidate, string reason)
         {
             invalidate(command);
-            Assert.Throws<LucidException>(() => { LucidValidator.Validate(command); command.Execute(); }, reason);
+            Assert.Throws<FacadeException>(() => { ExecutableValidator.Validate(command); command.Execute(); }, reason);
         }
     }
 }

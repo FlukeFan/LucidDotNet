@@ -57,10 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_items\AssemblyInfo.cs" />
-    <Compile Include="Exceptions\LucidExceptionTests.cs" />
+    <Compile Include="Exceptions\FacadeExceptionTests.cs" />
     <Compile Include="Execution\ExecutorTests.cs" />
     <Compile Include="Testing\ExecutorStubTests.cs" />
-    <Compile Include="Validation\LucidValidatorTests.cs" />
+    <Compile Include="Validation\ExecutableValidatorTests.cs" />
     <Compile Include="Validation\ValildatingExecutorTests.cs" />
   </ItemGroup>
   <ItemGroup>

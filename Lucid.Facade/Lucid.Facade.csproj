@@ -45,8 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_items\AssemblyInfo.cs" />
-    <Compile Include="Exceptions\LucidException.cs" />
-    <Compile Include="Exceptions\LucidExceptionExtensions.cs" />
+    <Compile Include="Exceptions\FacadeException.cs" />
+    <Compile Include="Exceptions\FacadeExceptionExtensions.cs" />
     <Compile Include="Execution\CqExecutor.cs" />
     <Compile Include="Execution\Executor.cs" />
     <Compile Include="Execution\ICommand.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="Execution\Command.cs" />
     <Compile Include="Execution\IExecutable.cs" />
     <Compile Include="Execution\Query.cs" />
-    <Compile Include="Validation\LucidValidator.cs" />
+    <Compile Include="Validation\ExecutableValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">

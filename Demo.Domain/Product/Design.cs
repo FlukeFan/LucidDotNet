@@ -23,7 +23,7 @@ namespace Demo.Domain.Product
                 .List();
 
             if (designsWithName.Count > 0)
-                throw new DomainException("Please specify a design name that is not already in use.");
+                throw new DemoException("Please specify a design name that is not already in use.");
         }
     }
 }

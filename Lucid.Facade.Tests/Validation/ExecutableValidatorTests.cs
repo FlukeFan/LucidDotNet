@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Lucid.Facade.Tests.Validation
 {
     [TestFixture]
-    public class LucidValidatorTests
+    public class ExecutableValidatorTests
     {
         [Test]
         public void Validate_ThrowsWhenInvalidField()
@@ -17,10 +17,10 @@ namespace Lucid.Facade.Tests.Validation
             Action act = () =>
             {
                 var dto = new Dto { Name = null, Description = null };
-                LucidValidator.Validate(dto);
+                ExecutableValidator.Validate(dto);
             };
 
-            var e = act.ShouldThrow<LucidException>().Which;
+            var e = act.ShouldThrow<FacadeException>().Which;
 
             e.Messages.Count().Should().Be(0);
             e.PropertyMessages.Count.Should().Be(2);

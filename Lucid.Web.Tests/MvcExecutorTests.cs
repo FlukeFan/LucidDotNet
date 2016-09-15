@@ -56,7 +56,7 @@ namespace Lucid.Web.Tests
                 new ValidationResult("e1", new List<string> { "p1" }),
             };
 
-            stub.SetupCommand<CmdOfT, int>((exe, def) => { throw new LucidException(errors); });
+            stub.SetupCommand<CmdOfT, int>((exe, def) => { throw new FacadeException(errors); });
 
             MvcExecutor.Exec(state, executor, new CmdOfT(),
                 success: r => { throw new Exception("should not pass"); },
@@ -76,7 +76,7 @@ namespace Lucid.Web.Tests
             var stub = new ExecutorStub();
             var executor = new CqExecutor(stub);
 
-            stub.SetupCommand<CmdOfT, int>((exe, def) => { throw new LucidException("an error"); });
+            stub.SetupCommand<CmdOfT, int>((exe, def) => { throw new FacadeException("an error"); });
 
             MvcExecutor.Exec(state, executor, new CmdOfT(),
                 success: r => { throw new Exception("should not pass"); },

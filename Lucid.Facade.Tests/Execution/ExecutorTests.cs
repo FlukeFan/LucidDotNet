@@ -88,7 +88,7 @@ namespace Lucid.Facade.Tests.Execution
             }
         }
 
-        public class CustomException : LucidException
+        public class CustomException : FacadeException
         {
             public CustomException(string message) : base(message) { }
         }

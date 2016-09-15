@@ -9,13 +9,13 @@ namespace Demo.Domain.Tests.Utility
     {
         public static void ShouldBeValid(this object executable)
         {
-            LucidValidator.Validate(executable);
+            Assert.DoesNotThrow(() => ExecutableValidator.Validate(executable));
         }
 
         public static void ShouldBeInvalid<TExecutable>(this TExecutable executable, Action<TExecutable> invalidate)
         {
             invalidate(executable);
-            Assert.Throws<LucidException>(() => LucidValidator.Validate(executable), executable + " passed validation, but expected failure");
+            Assert.Throws<FacadeException>(() => ExecutableValidator.Validate(executable), executable + " passed validation, but expected failure");
         }
     }
 }

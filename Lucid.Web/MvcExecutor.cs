@@ -32,7 +32,7 @@ namespace Lucid.Web
                 {
                     response = run();
                 }
-                catch (LucidException exception)
+                catch (FacadeException exception)
                 {
                     AddErrors(modelState, exception);
                 }
@@ -43,7 +43,7 @@ namespace Lucid.Web
                 : failure();
         }
 
-        public static void AddErrors(ModelStateDictionary modelState, LucidException exception)
+        public static void AddErrors(ModelStateDictionary modelState, FacadeException exception)
         {
             lock(modelState)
             {

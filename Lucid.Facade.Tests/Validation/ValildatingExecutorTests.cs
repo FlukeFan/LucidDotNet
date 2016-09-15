@@ -20,7 +20,7 @@ namespace Lucid.Facade.Tests.Validation
                 executor.Execute(new Dto { Name = null });
             };
 
-            act.ShouldThrow<LucidException>();
+            act.ShouldThrow<FacadeException>();
         }
 
         public class Dto

@@ -45,7 +45,7 @@ namespace Demo.Domain.Tests.Product
                 Design.Start(new StartDesign { Name = "existingName" });
             };
 
-            act.ShouldThrow<DomainException>("duplicate names should not be allowed");
+            act.ShouldThrow<DemoException>("duplicate names should not be allowed");
         }
     }
 }
