@@ -96,7 +96,6 @@
     <Compile Include="Routing\LucidRazorViewEngine.cs" />
     <Compile Include="Routing\LucidRoute.cs" />
     <Compile Include="Routing\RouteParameterFilter.cs" />
-    <Compile Include="WebHost.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
