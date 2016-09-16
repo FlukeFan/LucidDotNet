@@ -69,6 +69,10 @@
       <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SimpleFacade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleFacade.0.0.0.2\lib\net45\SimpleFacade.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -173,10 +177,6 @@
     <ProjectReference Include="..\Demo.Infrastructure\Demo.Infrastructure.csproj">
       <Project>{c18d5b86-c73a-483b-9405-39c8d85a1823}</Project>
       <Name>Demo.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lucid.Facade\Lucid.Facade.csproj">
-      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
-      <Name>Lucid.Facade</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lucid.Web\Lucid.Web.csproj">
       <Project>{0c0cfe50-9cc9-49f1-af0b-caf7ebf1820d}</Project>

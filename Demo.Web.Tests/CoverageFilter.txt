@@ -5,6 +5,4 @@
 -[Demo.Infrastructure]*
 -[Demo.Web]Demo.Web.Utility.Startup
 -[Demo.Web]Demo.Web.Utility.DemoController
--[Lucid.Facade]*
--[Lucid.Facade.Testing]*
 -[Lucid.Web]*

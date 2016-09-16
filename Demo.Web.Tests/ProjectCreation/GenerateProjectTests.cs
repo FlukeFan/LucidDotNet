@@ -3,9 +3,9 @@ using System.IO;
 using Demo.Web.ProjectCreation;
 using FluentAssertions;
 using ICSharpCode.SharpZipLib.Zip;
-using Lucid.Facade.Exceptions;
-using Lucid.Facade.Validation;
 using NUnit.Framework;
+using SimpleFacade.Exceptions;
+using SimpleFacade.Validation;
 
 namespace Demo.Web.Tests.ProjectCreation
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Demo.Domain.Contract.Product.Responses;
-using Lucid.Facade.Execution;
+using SimpleFacade;
 
 namespace Demo.Domain.Contract.Product.Queries
 {

@@ -78,6 +78,14 @@
       <HintPath>..\packages\Reposify.Testing.0.0.0.2\lib\net45\Reposify.Testing.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SimpleFacade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleFacade.0.0.0.2\lib\net45\SimpleFacade.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleFacade.Testing, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleFacade.Testing.0.0.0.2\lib\net45\SimpleFacade.Testing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -132,14 +140,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lucid.Facade.Testing\Lucid.Facade.Testing.csproj">
-      <Project>{720932d2-760d-46c4-8dd9-7d492867d23e}</Project>
-      <Name>Lucid.Facade.Testing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lucid.Facade\Lucid.Facade.csproj">
-      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
-      <Name>Lucid.Facade</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lucid.Web.StubApp\Lucid.Web.StubApp.csproj">
       <Project>{d0f98206-1edc-4c9f-b705-b1a8286d86dd}</Project>
       <Name>Lucid.Web.StubApp</Name>

@@ -1,7 +1,7 @@
 ﻿using System;
-using Lucid.Facade.Exceptions;
-using Lucid.Facade.Validation;
 using NUnit.Framework;
+using SimpleFacade.Exceptions;
+using SimpleFacade.Validation;
 
 namespace Demo.Domain.Tests.Utility
 {

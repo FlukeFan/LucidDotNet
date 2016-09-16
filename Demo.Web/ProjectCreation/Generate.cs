@@ -55,9 +55,6 @@ namespace Demo.Web.ProjectCreation
             "098ADBA2-8686-4E64-9937-EC63DFA11432".ToUpper(), // Demo.Web.Tests
             "B21A7182-EF27-48FA-93D8-C8E24E44FDB6".ToUpper(), // Demo.System.Tests
             "D0F98206-1EDC-4C9F-B705-B1A8286D86DD".ToUpper(), // Lucid.Web.StubApp
-            "743E64D3-1A87-4177-9D12-E1000CE04C4F".ToUpper(), // Lucid.Facade
-            "720932D2-760D-46C4-8DD9-7D492867D23E".ToUpper(), // Lucid.Facade.Testing
-            "24EED56F-299C-4E7D-989D-75C8ED35DC8D".ToUpper(), // Lucid.Facade.Tests
             "0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D".ToUpper(), // Lucid.Web
             "D4B3691F-C8C3-40F0-8EC0-A156CC4B8093".ToUpper(), // Lucid.Web.Tests
         };

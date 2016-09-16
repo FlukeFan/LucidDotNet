@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
-using Lucid.Facade.Exceptions;
-using Lucid.Facade.Execution;
+using SimpleFacade;
+using SimpleFacade.Exceptions;
+using SimpleFacade.Execution;
 
 namespace Lucid.Web
 {

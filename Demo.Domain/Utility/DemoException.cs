@@ -1,4 +1,4 @@
-﻿using Lucid.Facade.Exceptions;
+﻿using SimpleFacade.Exceptions;
 
 namespace Demo.Domain.Utility
 {

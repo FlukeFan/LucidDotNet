@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using FluentAssertions;
-using Lucid.Facade.Exceptions;
-using Lucid.Facade.Execution;
-using Lucid.Facade.Testing;
 using NUnit.Framework;
+using SimpleFacade;
+using SimpleFacade.Exceptions;
+using SimpleFacade.Execution;
+using SimpleFacade.Testing;
 
 namespace Lucid.Web.Tests
 {

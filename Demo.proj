@@ -62,9 +62,6 @@
   </Target>
 
   <ItemGroup>
-    <ProjectsToBuild Include="Lucid.Facade\Lucid.Facade.csproj"/>
-    <ProjectsToBuild Include="Lucid.Facade.Testing\Lucid.Facade.Testing.csproj"/>
-    <ProjectsToBuild Include="Lucid.Facade.Tests\Lucid.Facade.Tests.csproj"/>
     <ProjectsToBuild Include="Lucid.Web\Lucid.Web.csproj"/>
     <ProjectsToBuild Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
     <ProjectsToBuild Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
@@ -94,9 +91,6 @@
     <ProjectsToClean Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
     <ProjectsToClean Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
     <ProjectsToClean Include="Lucid.Web\Lucid.Web.csproj"/>
-    <ProjectsToClean Include="Lucid.Facade.Tests\Lucid.Facade.Tests.csproj"/>
-    <ProjectsToClean Include="Lucid.Facade.Testing\Lucid.Facade.Testing.csproj"/>
-    <ProjectsToClean Include="Lucid.Facade\Lucid.Facade.csproj"/>
   </ItemGroup>
 
   <Target Name="GenerateAssemblyInfo" Inputs="_items\Demo.Common.targets" Outputs="_items\AssemblyInfo.cs">

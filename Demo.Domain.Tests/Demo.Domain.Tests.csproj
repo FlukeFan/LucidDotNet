@@ -55,6 +55,10 @@
       <HintPath>..\packages\Reposify.Testing.0.0.0.2\lib\net45\Reposify.Testing.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SimpleFacade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleFacade.0.0.0.2\lib\net45\SimpleFacade.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -89,10 +93,6 @@
     <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">
       <Project>{74bda17e-fc05-42f2-810c-d7b677c0d29e}</Project>
       <Name>Demo.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lucid.Facade\Lucid.Facade.csproj">
-      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
-      <Name>Lucid.Facade</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

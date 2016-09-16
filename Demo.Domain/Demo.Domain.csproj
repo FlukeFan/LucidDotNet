@@ -38,6 +38,10 @@
       <HintPath>..\packages\Reposify.0.0.0.2\lib\net45\Reposify.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SimpleFacade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleFacade.0.0.0.2\lib\net45\SimpleFacade.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -68,10 +72,6 @@
     <ProjectReference Include="..\Demo.Domain.Contract\Demo.Domain.Contract.csproj">
       <Project>{2d85d27e-bdff-4545-a48c-49d193143232}</Project>
       <Name>Demo.Domain.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lucid.Facade\Lucid.Facade.csproj">
-      <Project>{743e64d3-1a87-4177-9d12-e1000ce04c4f}</Project>
-      <Name>Lucid.Facade</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

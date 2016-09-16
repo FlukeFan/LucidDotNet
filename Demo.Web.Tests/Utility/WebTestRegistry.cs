@@ -1,6 +1,6 @@
 ﻿using Demo.Web.Utility;
-using Lucid.Facade.Execution;
-using Lucid.Facade.Testing;
+using SimpleFacade.Execution;
+using SimpleFacade.Testing;
 
 namespace Demo.Web.Tests.Utility
 {

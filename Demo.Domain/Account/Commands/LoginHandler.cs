@@ -1,7 +1,7 @@
 ﻿using Demo.Domain.Account.Responses;
 using Demo.Domain.Contract.Account.Commands;
 using Demo.Domain.Contract.Account.Responses;
-using Lucid.Facade.Execution;
+using SimpleFacade;
 
 namespace Demo.Domain.Account.Commands
 {
