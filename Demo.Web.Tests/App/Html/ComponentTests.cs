@@ -1,16 +1,16 @@
-﻿using FluentAssertions;
-using Lucid.Web.Tests.StubApp.Utility;
+﻿using Demo.Web.Tests.Utility;
+using FluentAssertions;
 using NUnit.Framework;
 
-namespace Lucid.Web.Tests.StubApp.App.Html
+namespace Demo.Web.Tests.App.Html
 {
     [TestFixture]
-    public class ComponentTests : StubAppTest
+    public class ComponentTests : WebTest
     {
         [Test]
         public void Component_Render()
         {
-            StubApp.Test(http =>
+            WebAppTest(http =>
             {
                 var response = http.Get("/html/component_render");
 

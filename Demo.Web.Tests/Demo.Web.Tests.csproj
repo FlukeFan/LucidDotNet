@@ -108,6 +108,8 @@
     <Compile Include="..\_items\AssemblyInfo.cs" />
     <Compile Include="App\GenerationTests.cs" />
     <Compile Include="App\HomeTests.cs" />
+    <Compile Include="App\Html\ComponentTests.cs" />
+    <Compile Include="App\Html\FormTests.cs" />
     <Compile Include="App\PlanningTests.cs" />
     <Compile Include="ProjectCreation\GenerateProjectTests.cs" />
     <Compile Include="ProjectCreation\GenerateTests.cs" />

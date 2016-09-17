@@ -1,4 +1,4 @@
-﻿namespace Lucid.Web.StubApp.App.Html
+﻿namespace Demo.Web.App.Html
 {
     public class FormModel
     {

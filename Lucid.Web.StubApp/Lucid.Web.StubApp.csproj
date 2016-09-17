@@ -116,10 +116,6 @@
     <Content Include="packages.config" />
     <Content Include="App\F1\F12\F121\Index.cshtml" />
     <Content Include="App\F3\Index.cshtml" />
-    <Content Include="App\Html\Component_Render.cshtml" />
-    <Content Include="App\Html\Form_Render.cshtml" />
-    <Content Include="App\Html\Form_RenderInput.cshtml" />
-    <Content Include="App\Html\RawForm.cshtml" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -137,10 +133,6 @@
     <Compile Include="App\F2\F2Controller.cs" />
     <Compile Include="App\F3\F3Controller.cs" />
     <Compile Include="App\Home\HomeController.cs" />
-    <Compile Include="App\Html\Cmd.cs" />
-    <Compile Include="App\Html\FormModel.cs" />
-    <Compile Include="App\Html\HtmlController.cs" />
-    <Compile Include="App\Html\RawFormModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using HtmlTags;
 
-namespace Lucid.Web.Html
+namespace Demo.Web.Utility.Html
 {
     public static class InputHelpers
     {

@@ -130,6 +130,10 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App\Html\Component_Render.cshtml" />
+    <Content Include="App\Html\Form_Render.cshtml" />
+    <Content Include="App\Html\Form_RenderInput.cshtml" />
+    <Content Include="App\Html\RawForm.cshtml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -158,11 +162,18 @@
     <Compile Include="App\Generation\GenerateModel.cs" />
     <Compile Include="App\Generation\GenerationController.cs" />
     <Compile Include="App\Home\HomeController.cs" />
+    <Compile Include="App\Html\Cmd.cs" />
+    <Compile Include="App\Html\FormModel.cs" />
+    <Compile Include="App\Html\HtmlController.cs" />
+    <Compile Include="App\Html\RawFormModel.cs" />
     <Compile Include="App\Planning\PlanningController.cs" />
     <Compile Include="App\Planning\StartDesignModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Html\Component.cs" />
+    <Compile Include="Utility\Html\Form.cs" />
+    <Compile Include="Utility\Html\InputHelpers.cs" />
     <Compile Include="ProjectCreation\Generate.cs" />
     <Compile Include="ProjectCreation\GenerateProject.cs" />
     <Compile Include="Utility\DemoController.cs" />

@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using HtmlTags;
 
-namespace Lucid.Web.Html
+namespace Demo.Web.Utility.Html
 {
     public class Form<T> : IDisposable
     {

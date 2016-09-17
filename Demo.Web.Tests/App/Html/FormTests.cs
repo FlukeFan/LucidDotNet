@@ -1,16 +1,16 @@
-﻿using FluentAssertions;
-using Lucid.Web.Tests.StubApp.Utility;
+﻿using Demo.Web.Tests.Utility;
+using FluentAssertions;
 using NUnit.Framework;
 
-namespace Lucid.Web.Tests.StubApp.App.Html
+namespace Demo.Web.Tests.App.Html
 {
     [TestFixture]
-    public class FormTests : StubAppTest
+    public class FormTests : WebTest
     {
         [Test]
         public void Form_Render()
         {
-            StubApp.Test(http =>
+            WebAppTest(http =>
             {
                 var response = http.Get("/html/form_render?p1=123");
 
@@ -25,7 +25,7 @@ namespace Lucid.Web.Tests.StubApp.App.Html
         [Test]
         public void Form_RenderInput()
         {
-            StubApp.Test(http =>
+            WebAppTest(http =>
             {
                 var response = http.Get("/html/form_renderinput");
 

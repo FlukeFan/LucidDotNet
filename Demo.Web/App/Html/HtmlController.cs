@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Web.Mvc;
 
-namespace Lucid.Web.StubApp.App.Html
+namespace Demo.Web.App.Html
 {
     public class HtmlController : Controller
     {
