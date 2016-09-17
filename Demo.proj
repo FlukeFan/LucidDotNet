@@ -62,9 +62,6 @@
   </Target>
 
   <ItemGroup>
-    <ProjectsToBuild Include="Lucid.Web\Lucid.Web.csproj"/>
-    <ProjectsToBuild Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
-    <ProjectsToBuild Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
     <ProjectsToBuild Include="Demo.Domain.Contract\Demo.Domain.Contract.csproj"/>
     <ProjectsToBuild Include="Demo.Domain\Demo.Domain.csproj"/>
     <ProjectsToBuild Include="Demo.Domain.Tests\Demo.Domain.Tests.csproj"/>
@@ -88,9 +85,6 @@
     <ProjectsToClean Include="Demo.Domain.Tests\Demo.Domain.Tests.csproj"/>
     <ProjectsToClean Include="Demo.Domain\Demo.Domain.csproj"/>
     <ProjectsToClean Include="Demo.Domain.Contract\Demo.Domain.Contract.csproj"/>
-    <ProjectsToClean Include="Lucid.Web.Tests\Lucid.Web.Tests.csproj"/>
-    <ProjectsToClean Include="Lucid.Web.StubApp\Lucid.Web.StubApp.csproj"/>
-    <ProjectsToClean Include="Lucid.Web\Lucid.Web.csproj"/>
   </ItemGroup>
 
   <Target Name="GenerateAssemblyInfo" Inputs="_items\Demo.Common.targets" Outputs="_items\AssemblyInfo.cs">

@@ -14,12 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF
 		RunNUnit.bat = RunNUnit.bat
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.StubApp", "Lucid.Web.StubApp\Lucid.Web.StubApp.csproj", "{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.Tests", "Lucid.Web.Tests\Lucid.Web.Tests.csproj", "{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web", "Lucid.Web\Lucid.Web.csproj", "{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Database", "Demo.Database\Demo.Database.csproj", "{2C74567A-5CF2-4006-B6C1-FDA122578AD1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Database.Tests", "Demo.Database.Tests\Demo.Database.Tests.csproj", "{C4352D6D-C6DF-4A1A-A613-800B3573F8A3}"
@@ -46,18 +40,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0F98206-1EDC-4C9F-B705-B1A8286D86DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D4B3691F-C8C3-40F0-8EC0-A156CC4B8093}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C74567A-5CF2-4006-B6C1-FDA122578AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C74567A-5CF2-4006-B6C1-FDA122578AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C74567A-5CF2-4006-B6C1-FDA122578AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -54,9 +54,6 @@ namespace Demo.Web.ProjectCreation
             "9EA489D1-14A1-4482-872B-3A1FD7F93646".ToUpper(), // Demo.Web
             "098ADBA2-8686-4E64-9937-EC63DFA11432".ToUpper(), // Demo.Web.Tests
             "B21A7182-EF27-48FA-93D8-C8E24E44FDB6".ToUpper(), // Demo.System.Tests
-            "D0F98206-1EDC-4C9F-B705-B1A8286D86DD".ToUpper(), // Lucid.Web.StubApp
-            "0C0CFE50-9CC9-49F1-AF0B-CAF7EBF1820D".ToUpper(), // Lucid.Web
-            "D4B3691F-C8C3-40F0-8EC0-A156CC4B8093".ToUpper(), // Lucid.Web.Tests
         };
 
         public static readonly Regex GuidSearch     = new Regex("(.{8}-.{4}-.{4}-.{4}-.{12})", RegexOptions.Compiled);

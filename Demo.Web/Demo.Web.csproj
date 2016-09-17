@@ -61,6 +61,10 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MvcFolders, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcFolders.0.0.0.1\lib\net45\MvcFolders.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -188,10 +192,6 @@
     <ProjectReference Include="..\Demo.Infrastructure\Demo.Infrastructure.csproj">
       <Project>{c18d5b86-c73a-483b-9405-39c8d85a1823}</Project>
       <Name>Demo.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lucid.Web\Lucid.Web.csproj">
-      <Project>{0c0cfe50-9cc9-49f1-af0b-caf7ebf1820d}</Project>
-      <Name>Lucid.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
