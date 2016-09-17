@@ -4,5 +4,4 @@
 -[Demo.Domain]*
 -[Demo.Infrastructure]*
 -[Demo.Web]Demo.Web.Utility.Startup
--[Demo.Web]Demo.Web.Utility.DemoController
 -[Lucid.Web]*

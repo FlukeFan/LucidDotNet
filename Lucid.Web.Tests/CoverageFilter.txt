@@ -1,3 +1,1 @@
--[Lucid.Web.Testing]Lucid.Web.Testing.Hosting.ConsoleWriter
--[Lucid.Web.Testing]Lucid.Web.Testing.Hosting.SerializableDelegate*
 -[App_*]*
