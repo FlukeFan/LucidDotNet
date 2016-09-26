@@ -3,9 +3,9 @@ using SimpleFacade.Execution;
 
 namespace Lucid.Infrastructure
 {
-    public class DemoExecutor : Executor
+    public class LucidExecutor : Executor
     {
-        public DemoExecutor()
+        public LucidExecutor()
         {
             UsingHandlersFromAssemblyWithType<LucidEntity>();
         }

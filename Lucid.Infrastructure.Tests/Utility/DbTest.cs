@@ -11,13 +11,13 @@ namespace Lucid.Infrastructure.Tests.Utility
     {
         private static BuildEnvironment _buildEnvironment = BuildEnvironment.Load();
 
-        protected DemoNhRepository Repository { get; set; }
+        protected LucidNhRepository Repository { get; set; }
 
         [SetUp]
         public virtual void SetUp()
         {
-            DemoNhRepository.Init(_buildEnvironment.LucidConnection);
-            Repository = new DemoNhRepository();
+            LucidNhRepository.Init(_buildEnvironment.LucidConnection);
+            Repository = new LucidNhRepository();
             Repository.Open();
             Registry.Repository = Repository;
         }

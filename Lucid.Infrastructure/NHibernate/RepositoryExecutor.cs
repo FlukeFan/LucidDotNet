@@ -14,7 +14,7 @@ namespace Lucid.Infrastructure.NHibernate
 
         public object Execute(object executable)
         {
-            using (var repository = new DemoNhRepository())
+            using (var repository = new LucidNhRepository())
             {
                 repository.Open();
                 Registry.Repository = repository;

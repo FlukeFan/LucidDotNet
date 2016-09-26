@@ -65,9 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_items\AssemblyInfo.cs" />
-    <Compile Include="DemoExecutor.cs" />
-    <Compile Include="NHibernate\DemoNhRepository.cs" />
-    <Compile Include="DemoStartup.cs" />
+    <Compile Include="LucidExecutor.cs" />
+    <Compile Include="NHibernate\LucidNhRepository.cs" />
+    <Compile Include="LucidStartup.cs" />
     <Compile Include="NHibernate\RepositoryExecutor.cs" />
   </ItemGroup>
   <ItemGroup>

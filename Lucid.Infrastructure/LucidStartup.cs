@@ -3,12 +3,12 @@ using Lucid.Infrastructure.NHibernate;
 
 namespace Lucid.Infrastructure
 {
-    public static class DemoStartup
+    public static class LucidStartup
     {
         public static void Init(string connection)
         {
             LucidMigrationRunner.Run(connection);
-            DemoNhRepository.Init(connection);
+            LucidNhRepository.Init(connection);
         }
     }
 }

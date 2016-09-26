@@ -24,7 +24,7 @@ namespace Lucid.Web.Utility
                 new CqExecutor(
                     new RepositoryExecutor(
                         new ValidatingExecutor(
-                            new DemoExecutor()
+                            new LucidExecutor()
                         )
                     )
                 );
@@ -34,7 +34,7 @@ namespace Lucid.Web.Utility
         {
             var connectionString = DevConnectionStringOverride() ?? WebConfigConnnectionString();
 
-            DemoStartup.Init(connectionString);
+            LucidStartup.Init(connectionString);
         }
 
         private string WebConfigConnnectionString()

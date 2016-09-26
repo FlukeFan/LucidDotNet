@@ -8,7 +8,7 @@ using Reposify.NHibernate;
 
 namespace Lucid.Infrastructure.NHibernate
 {
-    public class DemoNhRepository : NhRepository<int>, ILucidRepository
+    public class LucidNhRepository : NhRepository<int>, ILucidRepository
     {
         public static void Init(string connection)
         {
