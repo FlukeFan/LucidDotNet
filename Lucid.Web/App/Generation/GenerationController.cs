@@ -9,7 +9,7 @@ namespace Lucid.Web.App.Generation
         public static string Generate() { return "~/Generation/Generate"; }
     }
 
-    public class GenerationController : DemoController
+    public class GenerationController : LucidController
     {
         [HttpGet]
         public ActionResult Generate()

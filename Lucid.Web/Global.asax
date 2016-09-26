@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Lucid.Web.DemoApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Lucid.Web.LucidApplication" Language="C#" %>

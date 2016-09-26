@@ -103,7 +103,7 @@ namespace Lucid.Web.ProjectCreation
             if (!inputEntry.IsFile)
                 return;
 
-            var fileName = inputEntry.Name.Replace("Demo", newName);
+            var fileName = inputEntry.Name.Replace("Lucid", newName);
             using (var inputStream = zipInput.GetInputStream(inputEntry))
             {
                 var newEntry = new ZipEntry(fileName);
@@ -161,7 +161,7 @@ namespace Lucid.Web.ProjectCreation
             var outputLine = inputLine;
 
             outputLine = ReplaceGuids(outputLine);
-            outputLine = ReplaceDemo(outputLine, newName);
+            outputLine = ReplaceLucid(outputLine, newName);
             outputLine = ReplaceHashes(outputLine);
             outputLine = ReplaceAppHarborTmpDir(outputLine);
 
@@ -201,9 +201,9 @@ namespace Lucid.Web.ProjectCreation
             return outputLine;
         }
 
-        private static string ReplaceDemo(string inputLine, string newName)
+        private static string ReplaceLucid(string inputLine, string newName)
         {
-            var outputLine = inputLine.Replace("Demo", newName);
+            var outputLine = inputLine.Replace("Lucid", newName);
             return outputLine;
         }
 

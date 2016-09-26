@@ -6,7 +6,7 @@ using SimpleFacade.Execution;
 
 namespace Lucid.Web.Utility
 {
-    public abstract class DemoController : Controller
+    public abstract class LucidController : Controller
     {
         protected TReturn Exec<TReturn>(IQuery<TReturn> query)
         {

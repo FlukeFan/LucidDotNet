@@ -16,7 +16,7 @@ namespace Lucid.Web.Tests.Utility
 
         public static void SetUpWebHost()
         {
-            _webApp = AspNetTestHost.For(@"..\..\..\Demo.Web", typeof(TestEnvironmentProxy));
+            _webApp = AspNetTestHost.For(@"..\..\..\Lucid.Web", typeof(TestEnvironmentProxy));
         }
 
         public static void TearDownWebHost()
@@ -37,7 +37,7 @@ namespace Lucid.Web.Tests.Utility
         {
             public TestEnvironmentProxy()
             {
-                DemoApplication.Startup = new FakeStartup();
+                LucidApplication.Startup = new FakeStartup();
             }
         }
     }

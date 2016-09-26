@@ -3,7 +3,7 @@ using MvcFolders;
 
 namespace Lucid.Web
 {
-    public class DemoApplication : System.Web.HttpApplication
+    public class LucidApplication : System.Web.HttpApplication
     {
         public static Startup Startup = new Startup();
 
@@ -11,7 +11,7 @@ namespace Lucid.Web
         {
             Startup.Init();
 
-            FeatureFolders.Register(typeof(DemoController).Assembly, "Demo.Web.App");
+            FeatureFolders.Register(typeof(LucidController).Assembly, "Lucid.Web.App");
         }
     }
 }

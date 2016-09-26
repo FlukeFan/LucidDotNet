@@ -11,7 +11,7 @@ namespace Lucid.Web.App.Planning
         public static string StartDesign()  { return "~/Planning/StartDesign"; }
     }
 
-    public class PlanningController : DemoController
+    public class PlanningController : LucidController
     {
         [HttpGet]
         public ActionResult List()

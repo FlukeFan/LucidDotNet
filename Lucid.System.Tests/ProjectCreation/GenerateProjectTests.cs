@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Lucid.Web.ProjectCreation;
 using FluentAssertions;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
+using Lucid.Web.ProjectCreation;
 using NUnit.Framework;
 
 namespace Lucid.System.Tests.ProjectCreation
@@ -29,7 +29,7 @@ namespace Lucid.System.Tests.ProjectCreation
             Unzip(zipBytes, buildFolder);
             CopyFolder(@"..\..\..\packages", Path.Combine(buildFolder, "packages"));
             var currentBuildEnvironment = File.ReadAllText(Path.Combine(originalFolder, "_items/BuildEnvironment.json"));
-            File.WriteAllText(Path.Combine(buildFolder, "_items/BuildEnvironment.json"), currentBuildEnvironment.Replace("Demo", "ShinyNewProject1"));
+            File.WriteAllText(Path.Combine(buildFolder, "_items/BuildEnvironment.json"), currentBuildEnvironment.Replace("Lucid", "ShinyNewProject1"));
 
             var fxFolder = @"C:\Program Files (x86)\MSBuild\14.0\Bin\";
             var setupCmd = File.ReadAllText(Path.Combine(buildFolder, "CommandPrompt.bat"));
@@ -48,7 +48,7 @@ namespace Lucid.System.Tests.ProjectCreation
 
             foreach (var processedFile in processedFiles)
                 foreach (var line in File.ReadAllLines(processedFile))
-                    if (Path.GetFileName(processedFile) != "GenerateProjectTests.cs" && line.ToLower().Contains("demo"))
+                    if (Path.GetFileName(processedFile) != "GenerateProjectTests.cs" && line.ToLower().Contains("Lucid"))
                         Assert.Fail("Found [Dd]emo in {0}: {1}", processedFile, line);
 
             var originalGuids = FindGuids(originalFolder);

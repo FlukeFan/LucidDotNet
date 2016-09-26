@@ -1,7 +1,7 @@
 -[App_*]*
--[Demo.Database]*
--[Demo.Domain.Contract]*
--[Demo.Domain]*
--[Demo.Infrastructure]*
--[Demo.Web]Demo.Web.Utility.Startup
+-[Lucid.Database]*
+-[Lucid.Domain.Contract]*
+-[Lucid.Domain]*
+-[Lucid.Infrastructure]*
+-[Lucid.Web]Lucid.Web.Utility.Startup
 -[Lucid.Web]*

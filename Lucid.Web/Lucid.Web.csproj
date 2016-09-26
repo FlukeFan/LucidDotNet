@@ -180,7 +180,7 @@
     <Compile Include="Utility\Html\InputHelpers.cs" />
     <Compile Include="ProjectCreation\Generate.cs" />
     <Compile Include="ProjectCreation\GenerateProject.cs" />
-    <Compile Include="Utility\DemoController.cs" />
+    <Compile Include="Utility\LucidController.cs" />
     <Compile Include="Utility\PresentationRegistry.cs" />
     <Compile Include="Utility\Startup.cs" />
   </ItemGroup>

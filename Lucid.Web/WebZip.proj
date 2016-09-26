@@ -15,7 +15,7 @@
     <FilesToZip Include="..\**\*.proj" />
     <FilesToZip Include="..\_items\*.targets" />
     <FilesToZip Include="..\_items\*.js" />
-    <FilesToZip Include="..\Demo.Database.Tests\DefaultEnvironment.json" />
+    <FilesToZip Include="..\Lucid.Database.Tests\DefaultEnvironment.json" />
     <FilesToZip Include="..\*.sln" />
     <FilesToZip Include="..\**\*.csproj" Exclude="..\packages\**" />
     <FilesToZip Include="..\**\CoverageFilter.txt" />

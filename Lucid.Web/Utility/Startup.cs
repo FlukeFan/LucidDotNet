@@ -53,7 +53,7 @@ namespace Lucid.Web.Utility
             var json = File.ReadAllText(configOverrideFile);
             var values = JsonConvert.DeserializeObject<IDictionary<string, string>>(json);
 
-            var key = "DemoConnection";
+            var key = "LucidConnection";
 
             if (!values.ContainsKey(key))
                 return null;

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Lucid.Web.ProjectCreation;
 using FluentAssertions;
 using ICSharpCode.SharpZipLib.Zip;
+using Lucid.Web.ProjectCreation;
 using NUnit.Framework;
 
 namespace Lucid.Web.Tests.ProjectCreation
@@ -19,7 +18,7 @@ namespace Lucid.Web.Tests.ProjectCreation
             var allGuidsInZip = new List<string>();
             var ignoredGenerateCs = false;
 
-            using (var zipInputStream = assembly.GetManifestResourceStream("Demo.Web.Project.zip"))
+            using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.Web.Project.zip"))
             using (var zipFile = new ZipFile(zipInputStream))
                 foreach (ZipEntry zipEntry in zipFile)
                 {
