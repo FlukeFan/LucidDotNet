@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo.Web</RootNamespace>
-    <AssemblyName>Demo.Web</AssemblyName>
+    <RootNamespace>Lucid.Web</RootNamespace>
+    <AssemblyName>Lucid.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -185,13 +185,13 @@
     <Compile Include="Utility\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Demo.Domain.Contract\Demo.Domain.Contract.csproj">
+    <ProjectReference Include="..\Lucid.Domain.Contract\Lucid.Domain.Contract.csproj">
       <Project>{2d85d27e-bdff-4545-a48c-49d193143232}</Project>
-      <Name>Demo.Domain.Contract</Name>
+      <Name>Lucid.Domain.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Demo.Infrastructure\Demo.Infrastructure.csproj">
+    <ProjectReference Include="..\Lucid.Infrastructure\Lucid.Infrastructure.csproj">
       <Project>{c18d5b86-c73a-483b-9405-39c8d85a1823}</Project>
-      <Name>Demo.Infrastructure</Name>
+      <Name>Lucid.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -3,7 +3,7 @@
 
   <PropertyGroup>
 
-    <DemoVersion>0.0.0.1</DemoVersion>
+    <LucidVersion>0.0.0.1</LucidVersion>
 
     <OpenCoverExe>$(MSBuildThisFileDirectory)\..\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
     <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>

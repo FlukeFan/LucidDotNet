@@ -7,32 +7,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		CommandPrompt.bat = CommandPrompt.bat
-		_items\Demo.Common.targets = _items\Demo.Common.targets
-		_items\Demo.nunit = _items\Demo.nunit
-		Demo.proj = Demo.proj
+		_items\Lucid.Common.targets = _items\Lucid.Common.targets
+		_items\Lucid.nunit = _items\Lucid.nunit
+		Lucid.proj = Lucid.proj
 		readme.txt = readme.txt
 		RunNUnit.bat = RunNUnit.bat
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Database", "Demo.Database\Demo.Database.csproj", "{2C74567A-5CF2-4006-B6C1-FDA122578AD1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Database", "Lucid.Database\Lucid.Database.csproj", "{2C74567A-5CF2-4006-B6C1-FDA122578AD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Database.Tests", "Demo.Database.Tests\Demo.Database.Tests.csproj", "{C4352D6D-C6DF-4A1A-A613-800B3573F8A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Database.Tests", "Lucid.Database.Tests\Lucid.Database.Tests.csproj", "{C4352D6D-C6DF-4A1A-A613-800B3573F8A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Domain", "Demo.Domain\Demo.Domain.csproj", "{74BDA17E-FC05-42F2-810C-D7B677C0D29E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Domain", "Lucid.Domain\Lucid.Domain.csproj", "{74BDA17E-FC05-42F2-810C-D7B677C0D29E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Domain.Contract", "Demo.Domain.Contract\Demo.Domain.Contract.csproj", "{2D85D27E-BDFF-4545-A48C-49D193143232}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Domain.Contract", "Lucid.Domain.Contract\Lucid.Domain.Contract.csproj", "{2D85D27E-BDFF-4545-A48C-49D193143232}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Domain.Tests", "Demo.Domain.Tests\Demo.Domain.Tests.csproj", "{CC13E71E-1978-4232-93F3-C7380D498C9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Domain.Tests", "Lucid.Domain.Tests\Lucid.Domain.Tests.csproj", "{CC13E71E-1978-4232-93F3-C7380D498C9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Infrastructure", "Demo.Infrastructure\Demo.Infrastructure.csproj", "{C18D5B86-C73A-483B-9405-39C8D85A1823}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Infrastructure", "Lucid.Infrastructure\Lucid.Infrastructure.csproj", "{C18D5B86-C73A-483B-9405-39C8D85A1823}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Infrastructure.Tests", "Demo.Infrastructure.Tests\Demo.Infrastructure.Tests.csproj", "{3877B1C6-15A4-43D3-899E-74168842C92C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Infrastructure.Tests", "Lucid.Infrastructure.Tests\Lucid.Infrastructure.Tests.csproj", "{3877B1C6-15A4-43D3-899E-74168842C92C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.System.Tests", "Demo.System.Tests\Demo.System.Tests.csproj", "{B21A7182-EF27-48FA-93D8-C8E24E44FDB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.System.Tests", "Lucid.System.Tests\Lucid.System.Tests.csproj", "{B21A7182-EF27-48FA-93D8-C8E24E44FDB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Web", "Demo.Web\Demo.Web.csproj", "{9EA489D1-14A1-4482-872B-3A1FD7F93646}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web", "Lucid.Web\Lucid.Web.csproj", "{9EA489D1-14A1-4482-872B-3A1FD7F93646}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Web.Tests", "Demo.Web.Tests\Demo.Web.Tests.csproj", "{098ADBA2-8686-4E64-9937-EC63DFA11432}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.Tests", "Lucid.Web.Tests\Lucid.Web.Tests.csproj", "{098ADBA2-8686-4E64-9937-EC63DFA11432}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

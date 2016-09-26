@@ -5,11 +5,11 @@
 *.suo
 *.sln.cache
 
-_items/Demo.VisualState.xml
+_items/Lucid.VisualState.xml
 _items/BuildEnvironment.json
 _items/TestResult.xml
 _items/AssemblyInfo.cs
 /.vs
 /packages/MSBuildTasks.1.5.0.196/tools/Microsoft.Build.Commontypes.xsd
 /packages/MSBuildTasks.1.5.0.196/tools/Microsoft.Build.Core.xsd
-/Demo.Web/Project.zip
+/Lucid.Web/Project.zip

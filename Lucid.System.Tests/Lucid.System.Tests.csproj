@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B21A7182-EF27-48FA-93D8-C8E24E44FDB6}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Demo.Domain</RootNamespace>
-    <AssemblyName>Demo.Domain</AssemblyName>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lucid.System.Tests</RootNamespace>
+    <AssemblyName>Lucid.System.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <ProjectGuid>{74BDA17E-FC05-42F2-810C-D7B677C0D29E}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,8 +35,20 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Reposify, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reposify.0.0.0.2\lib\net45\Reposify.dll</HintPath>
+    <Reference Include="FluentAssertions, Version=4.14.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.14.0\lib\net45\FluentAssertions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.14.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.14.0\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleFacade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
@@ -43,7 +56,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,36 +65,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_items\AssemblyInfo.cs" />
-    <Compile Include="Account\Commands\LoginHandler.cs" />
-    <Compile Include="Account\Responses\UserDtoMapper.cs" />
-    <Compile Include="Account\User.cs" />
-    <Compile Include="Product\Commands\StartDesignHandler.cs" />
-    <Compile Include="Product\Design.cs" />
-    <Compile Include="Product\Queries\FindDesignsHandler.cs" />
-    <Compile Include="Product\Responses\DesignDtoMapper.cs" />
-    <Compile Include="Utility\DemoEntity.cs" />
-    <Compile Include="Utility\DemoException.cs" />
-    <Compile Include="Utility\HandleCommand.cs" />
-    <Compile Include="Utility\HandleQuery.cs" />
-    <Compile Include="Utility\HandleVoidCommand.cs" />
-    <Compile Include="Utility\Registry.cs" />
-    <Compile Include="Utility\IDemoRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Demo.Domain.Contract\Demo.Domain.Contract.csproj">
-      <Project>{2d85d27e-bdff-4545-a48c-49d193143232}</Project>
-      <Name>Demo.Domain.Contract</Name>
-    </ProjectReference>
+    <Compile Include="ProjectCreation\GenerateProjectTests.cs" />
+    <Compile Include="ProjectCreation\Run.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucid.Web\Lucid.Web.csproj">
+      <Project>{9ea489d1-14a1-4482-872b-3a1fd7f93646}</Project>
+      <Name>Lucid.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <Import Project="..\_items\Lucid.Common.targets" />
+  <Target Name="BeforeDeploy">
+    <Exec Command="$(NUnitExe) $(OutDir)\$(TestAssembly) /run:Lucid.System.Tests.ProjectCreation.GenerateProjectTests.Execute /result=&quot;$(OutDir)\BeforeDeploy.xml&quot;" />
   </Target>
   <Target Name="AfterBuild">
+    <CallTarget Targets="RunTestsWithoutCoverage" />
   </Target>
-  -->
 </Project>

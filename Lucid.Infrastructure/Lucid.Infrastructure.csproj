@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C18D5B86-C73A-483B-9405-39C8D85A1823}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Demo.Domain.Contract</RootNamespace>
-    <AssemblyName>Demo.Domain.Contract</AssemblyName>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lucid.Infrastructure</RootNamespace>
+    <AssemblyName>Lucid.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <ProjectGuid>{2D85D27E-BDFF-4545-A48C-49D193143232}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,31 +35,53 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Reposify, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.0.0.0.2\lib\net45\Reposify.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Reposify.NHibernate, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.NHibernate.0.0.0.2\lib\net45\Reposify.NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SimpleFacade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleFacade.0.0.0.2\lib\net45\SimpleFacade.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_items\AssemblyInfo.cs" />
-    <Compile Include="Account\Commands\Login.cs" />
-    <Compile Include="Account\Responses\UserDto.cs" />
-    <Compile Include="Constraints.cs" />
-    <Compile Include="Product\Commands\StartDesign.cs" />
-    <Compile Include="Product\Queries\FindDesigns.cs" />
-    <Compile Include="Product\Responses\DesignDto.cs" />
+    <Compile Include="DemoExecutor.cs" />
+    <Compile Include="NHibernate\DemoNhRepository.cs" />
+    <Compile Include="DemoStartup.cs" />
+    <Compile Include="NHibernate\RepositoryExecutor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucid.Database\Lucid.Database.csproj">
+      <Project>{2c74567a-5cf2-4006-b6c1-fda122578ad1}</Project>
+      <Name>Lucid.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucid.Domain\Lucid.Domain.csproj">
+      <Project>{74bda17e-fc05-42f2-810c-d7b677c0d29e}</Project>
+      <Name>Lucid.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
