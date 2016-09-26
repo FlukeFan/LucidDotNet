@@ -1,14 +1,14 @@
 ﻿using System;
-using Demo.Domain.Utility;
+using Lucid.Domain.Utility;
 using NUnit.Framework;
 
-namespace Demo.Domain.Tests.Utility
+namespace Lucid.Domain.Tests.Utility
 {
     [TestFixture]
     public abstract class DomainTest
     {
         protected TestValues            Test        { get; set; }
-        protected DemoMemoryRepository  Repository  { get; set; }
+        protected LucidMemoryRepository  Repository  { get; set; }
 
         [SetUp]
         public virtual void SetUp()
@@ -16,7 +16,7 @@ namespace Demo.Domain.Tests.Utility
             Test = new TestValues();
             SetDomainNow(DateTime.UtcNow);
 
-            Repository = new DemoMemoryRepository();
+            Repository = new LucidMemoryRepository();
             Registry.Repository = Repository;
         }
 

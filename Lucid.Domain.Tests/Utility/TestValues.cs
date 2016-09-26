@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Demo.Domain.Tests.Utility
+namespace Lucid.Domain.Tests.Utility
 {
     public class TestValues
     {

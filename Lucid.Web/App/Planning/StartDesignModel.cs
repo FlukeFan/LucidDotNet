@@ -1,6 +1,6 @@
-﻿using Demo.Domain.Contract.Product.Commands;
+﻿using Lucid.Domain.Contract.Product.Commands;
 
-namespace Demo.Web.App.Planning
+namespace Lucid.Web.App.Planning
 {
     public class StartDesignModel
     {

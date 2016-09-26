@@ -1,12 +1,12 @@
 ﻿using System.Web.Mvc;
-using Demo.Domain.Contract.Product.Commands;
-using Demo.Web.App.Planning;
-using Demo.Web.Tests.Utility;
+using Lucid.Domain.Contract.Product.Commands;
+using Lucid.Web.App.Planning;
+using Lucid.Web.Tests.Utility;
 using FluentAssertions;
 using MvcTesting.Html;
 using NUnit.Framework;
 
-namespace Demo.Web.Tests.App
+namespace Lucid.Web.Tests.App
 {
     public class PlanningTests : WebTest
     {

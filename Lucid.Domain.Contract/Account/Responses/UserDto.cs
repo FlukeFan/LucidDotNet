@@ -1,5 +1,5 @@
 ﻿
-namespace Demo.Domain.Contract.Account.Responses
+namespace Lucid.Domain.Contract.Account.Responses
 {
     public class UserDto
     {

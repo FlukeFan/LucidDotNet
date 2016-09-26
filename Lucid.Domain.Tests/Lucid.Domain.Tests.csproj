@@ -75,10 +75,10 @@
     <Compile Include="Product\DesignTests.cs" />
     <Compile Include="Product\Queries\FindDesignsTests.cs" />
     <Compile Include="Utility\BuilderExtensions.cs" />
-    <Compile Include="Utility\DemoConsistencyInspector.cs" />
+    <Compile Include="Utility\LucidConsistencyInspector.cs" />
     <Compile Include="Utility\DomainTest.cs" />
-    <Compile Include="Utility\DemoCustomInspections.cs" />
-    <Compile Include="Utility\DemoMemoryRepository.cs" />
+    <Compile Include="Utility\LucidCustomInspections.cs" />
+    <Compile Include="Utility\LucidMemoryRepository.cs" />
     <Compile Include="Utility\ValidationExtensions.cs" />
     <Compile Include="Utility\TestValues.cs" />
   </ItemGroup>

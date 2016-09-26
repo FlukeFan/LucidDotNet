@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Demo.Domain.Contract.Product.Responses;
+using Lucid.Domain.Contract.Product.Responses;
 using SimpleFacade;
 
-namespace Demo.Domain.Contract.Product.Commands
+namespace Lucid.Domain.Contract.Product.Commands
 {
     public class StartDesign : ICommand<DesignDto>
     {

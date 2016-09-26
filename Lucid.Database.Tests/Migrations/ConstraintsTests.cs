@@ -4,12 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Demo.Database.Migrations;
-using Demo.Database.Migrations.Y2016.M01;
 using FluentAssertions;
+using Lucid.Database.Migrations;
+using Lucid.Database.Migrations.Y2016.M01;
 using NUnit.Framework;
 
-namespace Demo.Database.Tests.Migrations
+namespace Lucid.Database.Tests.Migrations
 {
     [TestFixture]
     public class ConstraintsTests
@@ -26,7 +26,7 @@ namespace Demo.Database.Tests.Migrations
             {
                 var actualVersion = VersionUtil.GetVersion(migrationType);
                 var expectedVersion = 0L;
-                var nameParts = migrationType.FullName.Replace("Demo.Database.", "").Split('.');
+                var nameParts = migrationType.FullName.Replace("Lucid.Database.", "").Split('.');
 
                 foreach (var namePart in nameParts)
                 {
@@ -62,14 +62,14 @@ namespace Demo.Database.Tests.Migrations
         private void VerifyHashes(bool failIfNoHash)
         {
             var projectDir = FindProjectDir();
-            var migrationsSourceDir = Path.Combine(projectDir, "Demo.Database/Migrations");
+            var migrationsSourceDir = Path.Combine(projectDir, "Lucid.Database/Migrations");
             var migrationTypes = FindMigrationTypes();
             var errors = new List<string>();
 
             foreach (var migrationType in migrationTypes)
             {
                 var nspace = migrationType.Namespace;
-                var folders = nspace.Replace("Demo.Database.Migrations.", "").Replace(".", "\\");
+                var folders = nspace.Replace("Lucid.Database.Migrations.", "").Replace(".", "\\");
                 var filename = migrationType.Name + ".cs";
                 var migrationFile = Path.Combine(Path.Combine(migrationsSourceDir, folders), filename);
 
@@ -116,12 +116,12 @@ namespace Demo.Database.Tests.Migrations
         {
             return typeof(V01).Assembly.GetTypes()
                 .Where(t => !t.IsAbstract)
-                .Where(t => typeof(DemoMigration).IsAssignableFrom(t));
+                .Where(t => typeof(LucidMigration).IsAssignableFrom(t));
         }
 
         private string FindProjectDir()
         {
-            var searchFile = "Demo.sln";
+            var searchFile = "Lucid.sln";
             var envVars = Environment.GetEnvironmentVariables();
             var searchDir = (string)envVars["project_src_dir"];
             var error = "";

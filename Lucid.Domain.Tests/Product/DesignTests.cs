@@ -1,20 +1,20 @@
 ﻿using System;
-using Demo.Domain.Contract;
-using Demo.Domain.Contract.Product.Commands;
-using Demo.Domain.Product;
-using Demo.Domain.Tests.Utility;
-using Demo.Domain.Utility;
+using Lucid.Domain.Contract;
+using Lucid.Domain.Contract.Product.Commands;
+using Lucid.Domain.Product;
+using Lucid.Domain.Tests.Utility;
+using Lucid.Domain.Utility;
 using FluentAssertions;
 using NUnit.Framework;
 using Reposify.Testing;
 
-namespace Demo.Domain.Tests.Product
+namespace Lucid.Domain.Tests.Product
 {
     public class DesignBuilder : Builder<Design>
     {
         static DesignBuilder()
         {
-            DemoCustomInspections.Add<Design>((validator, entity) =>
+            LucidCustomInspections.Add<Design>((validator, entity) =>
             {
                 validator.CheckNotNull(() => entity.Name);
                 validator.CheckMaxLength(() => entity.Name, Constraints.DefaultMaxStringLength);
@@ -45,7 +45,7 @@ namespace Demo.Domain.Tests.Product
                 Design.Start(new StartDesign { Name = "existingName" });
             };
 
-            act.ShouldThrow<DemoException>("duplicate names should not be allowed");
+            act.ShouldThrow<LucidException>("duplicate names should not be allowed");
         }
     }
 }

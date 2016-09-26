@@ -2,7 +2,7 @@
 using System.Linq;
 using FluentMigrator;
 
-namespace Demo.Database.Migrations
+namespace Lucid.Database.Migrations
 {
     public static class VersionUtil
     {

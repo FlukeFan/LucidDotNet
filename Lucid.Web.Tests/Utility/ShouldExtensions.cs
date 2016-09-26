@@ -1,6 +1,6 @@
 ﻿using FluentAssertions.Primitives;
 
-namespace Demo.Web.Tests.Utility
+namespace Lucid.Web.Tests.Utility
 {
     public static class ShouldExtensions
     {

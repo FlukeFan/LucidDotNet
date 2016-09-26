@@ -1,5 +1,5 @@
 ﻿
-namespace Demo.Domain.Contract.Product.Responses
+namespace Lucid.Domain.Contract.Product.Responses
 {
     public class DesignDto
     {

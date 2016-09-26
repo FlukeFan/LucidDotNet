@@ -1,4 +1,4 @@
-﻿namespace Demo.Web.App.Html
+﻿namespace Lucid.Web.App.Html
 {
     public class Cmd
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
-namespace Demo.System.Tests.ProjectCreation
+namespace Lucid.System.Tests.ProjectCreation
 {
     public static class Run
     {

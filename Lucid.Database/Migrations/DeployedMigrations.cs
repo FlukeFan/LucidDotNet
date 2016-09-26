@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Demo.Database.Migrations
+namespace Lucid.Database.Migrations
 {
     public static class DeployedMigrations
     {
@@ -9,7 +9,7 @@ namespace Demo.Database.Migrations
 
         static DeployedMigrations()
         {
-            Hashes.Add(typeof(Y2016.M01.V01), "667AEF850D5C19E2E08CAD20E5769EAB");
+            Hashes.Add(typeof(Y2016.M01.V01), "5BDDDD7C84CF58D2285118EB2AA85D2A");
         }
     }
 }

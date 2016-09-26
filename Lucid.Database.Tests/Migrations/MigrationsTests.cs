@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Demo.Database.Tests.Migrations
+namespace Lucid.Database.Tests.Migrations
 {
     [TestFixture]
     public class MigrationsTests
@@ -11,16 +11,16 @@ namespace Demo.Database.Tests.Migrations
         private static BuildEnvironment _environment = BuildEnvironment.Load();
 
         private const string DropDb = @"
-            IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'Demo')
+            IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'Lucid')
             BEGIN
-                ALTER DATABASE Demo
+                ALTER DATABASE Lucid
                     SET SINGLE_USER
                     WITH ROLLBACK IMMEDIATE
 
-                DROP DATABASE Demo
+                DROP DATABASE Lucid
             END";
 
-        private const string CreateDb = "CREATE DATABASE Demo";
+        private const string CreateDb = "CREATE DATABASE Lucid";
 
         [Test]
         [Explicit("Run when cleaning the build")]
@@ -38,12 +38,12 @@ namespace Demo.Database.Tests.Migrations
         {
             DropAndCreateBlankDb();
 
-            DemoMigrationRunner.Run(_environment.DemoConnection);
+            LucidMigrationRunner.Run(_environment.LucidConnection);
 
             // verify we can run a second time (i.e., scripts don't get run twice where they shouldn't)
-            DemoMigrationRunner.Run(_environment.DemoConnection);
+            LucidMigrationRunner.Run(_environment.LucidConnection);
 
-            using (var db = new SqlConnection(_environment.DemoConnection))
+            using (var db = new SqlConnection(_environment.LucidConnection))
             {
                 db.Open();
 

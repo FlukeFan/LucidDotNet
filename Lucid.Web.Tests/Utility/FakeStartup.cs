@@ -1,6 +1,6 @@
-﻿using Demo.Web.Utility;
+﻿using Lucid.Web.Utility;
 
-namespace Demo.Web.Tests.Utility
+namespace Lucid.Web.Tests.Utility
 {
     public class FakeStartup : Startup
     {

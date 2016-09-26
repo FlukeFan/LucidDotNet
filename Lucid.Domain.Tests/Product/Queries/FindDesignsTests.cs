@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using Demo.Domain.Contract.Product.Queries;
-using Demo.Domain.Product.Queries;
-using Demo.Domain.Tests.Utility;
+using Lucid.Domain.Contract.Product.Queries;
+using Lucid.Domain.Product.Queries;
+using Lucid.Domain.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Demo.Domain.Tests.Product.Queries
+namespace Lucid.Domain.Tests.Product.Queries
 {
     [TestFixture]
     public class FindDesignsTests : DomainTest

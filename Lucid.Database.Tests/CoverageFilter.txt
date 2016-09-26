@@ -1,1 +1,1 @@
--[Demo.Database]Demo.Database.Migrations.DemoMigration
+-[Lucid.Database]Lucid.Database.Migrations.LucidMigration

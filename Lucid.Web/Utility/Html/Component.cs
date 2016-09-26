@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Demo.Web.Utility.Html
+namespace Lucid.Web.Utility.Html
 {
     public class Component<T> : IHtmlString
     {

@@ -7,13 +7,13 @@ using FluentMigrator.Runner.Initialization;
 using FluentMigrator.Runner.Processors;
 using FluentMigrator.Runner.Processors.SqlServer;
 
-namespace Demo.Database
+namespace Lucid.Database
 {
-    public static class DemoMigrationRunner
+    public static class LucidMigrationRunner
     {
         public static void Run(string connectionString)
         {
-            var firstMigration = typeof(Demo.Database.Migrations.Y2016.M01.V01);
+            var firstMigration = typeof(Lucid.Database.Migrations.Y2016.M01.V01);
             var assembly = new SingleAssembly(firstMigration.Assembly);
 
             var migrationGenerator = new SqlServer2008Generator();
@@ -27,7 +27,7 @@ namespace Demo.Database
                 Connection = connectionString,
                 Targets = new string[] { firstMigration.Assembly.FullName },
                 NestedNamespaces = true,
-                Namespace = "Demo.Database.Migrations",
+                Namespace = "Lucid.Database.Migrations",
             };
 
             using (var connection = new SqlConnection(connectionString))

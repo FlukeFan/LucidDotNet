@@ -1,7 +1,7 @@
-﻿using Demo.Web.Tests.Utility;
+﻿using Lucid.Web.Tests.Utility;
 using NUnit.Framework;
 
-namespace Demo.Web.Tests
+namespace Lucid.Web.Tests
 {
     [SetUpFixture]
     public class SetUpFixture

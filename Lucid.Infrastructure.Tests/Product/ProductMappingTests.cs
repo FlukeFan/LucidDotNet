@@ -1,11 +1,11 @@
-﻿using Demo.Domain.Contract;
-using Demo.Domain.Product;
-using Demo.Domain.Tests.Product;
-using Demo.Infrastructure.Tests.Utility;
+﻿using Lucid.Domain.Contract;
+using Lucid.Domain.Product;
+using Lucid.Domain.Tests.Product;
+using Lucid.Infrastructure.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Demo.Infrastructure.Tests.Product
+namespace Lucid.Infrastructure.Tests.Product
 {
     public class ProductMappingTests : DbTest
     {

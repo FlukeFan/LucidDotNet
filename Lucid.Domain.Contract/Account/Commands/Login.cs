@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Demo.Domain.Contract.Account.Responses;
+using Lucid.Domain.Contract.Account.Responses;
 using SimpleFacade;
 
-namespace Demo.Domain.Contract.Account.Commands
+namespace Lucid.Domain.Contract.Account.Commands
 {
     public class Login : ICommand<UserDto>
     {

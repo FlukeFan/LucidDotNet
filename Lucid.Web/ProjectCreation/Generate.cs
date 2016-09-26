@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace Demo.Web.ProjectCreation
+namespace Lucid.Web.ProjectCreation
 {
     public class Generate
     {
@@ -44,16 +44,16 @@ namespace Demo.Web.ProjectCreation
         public static readonly IList<string> GuidsToReplace = new List<string>
         {
             "E47CBDCF-B71C-4A7B-BC83-B4649FC99361".ToUpper(), // Items folder
-            "2C74567A-5CF2-4006-B6C1-FDA122578AD1".ToUpper(), // Demo.Database
-            "C4352D6D-C6DF-4A1A-A613-800B3573F8A3".ToUpper(), // Demo.Database.Tests
-            "2D85D27E-BDFF-4545-A48C-49D193143232".ToUpper(), // Demo.Domain.Contract
-            "74BDA17E-FC05-42F2-810C-D7B677C0D29E".ToUpper(), // Demo.Domain
-            "CC13E71E-1978-4232-93F3-C7380D498C9C".ToUpper(), // Demo.Domain.Tests
-            "C18D5B86-C73A-483B-9405-39C8D85A1823".ToUpper(), // Demo.Infrastructure
-            "3877B1C6-15A4-43D3-899E-74168842C92C".ToUpper(), // Demo.Infrastructure.Tests
-            "9EA489D1-14A1-4482-872B-3A1FD7F93646".ToUpper(), // Demo.Web
-            "098ADBA2-8686-4E64-9937-EC63DFA11432".ToUpper(), // Demo.Web.Tests
-            "B21A7182-EF27-48FA-93D8-C8E24E44FDB6".ToUpper(), // Demo.System.Tests
+            "2C74567A-5CF2-4006-B6C1-FDA122578AD1".ToUpper(), // Lucid.Database
+            "C4352D6D-C6DF-4A1A-A613-800B3573F8A3".ToUpper(), // Lucid.Database.Tests
+            "2D85D27E-BDFF-4545-A48C-49D193143232".ToUpper(), // Lucid.Domain.Contract
+            "74BDA17E-FC05-42F2-810C-D7B677C0D29E".ToUpper(), // Lucid.Domain
+            "CC13E71E-1978-4232-93F3-C7380D498C9C".ToUpper(), // Lucid.Domain.Tests
+            "C18D5B86-C73A-483B-9405-39C8D85A1823".ToUpper(), // Lucid.Infrastructure
+            "3877B1C6-15A4-43D3-899E-74168842C92C".ToUpper(), // Lucid.Infrastructure.Tests
+            "9EA489D1-14A1-4482-872B-3A1FD7F93646".ToUpper(), // Lucid.Web
+            "098ADBA2-8686-4E64-9937-EC63DFA11432".ToUpper(), // Lucid.Web.Tests
+            "B21A7182-EF27-48FA-93D8-C8E24E44FDB6".ToUpper(), // Lucid.System.Tests
         };
 
         public static readonly Regex GuidSearch     = new Regex("(.{8}-.{4}-.{4}-.{4}-.{12})", RegexOptions.Compiled);

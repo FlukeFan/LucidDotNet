@@ -1,11 +1,11 @@
-﻿using Demo.Domain.Account;
-using Demo.Domain.Contract;
-using Demo.Domain.Tests.Account;
-using Demo.Infrastructure.Tests.Utility;
+﻿using Lucid.Domain.Account;
+using Lucid.Domain.Contract;
+using Lucid.Domain.Tests.Account;
+using Lucid.Infrastructure.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Demo.Infrastructure.Tests.Account
+namespace Lucid.Infrastructure.Tests.Account
 {
     [TestFixture]
     public class AccountMappingTests : DbTest

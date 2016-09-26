@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using Demo.Web.ProjectCreation;
-using Demo.Web.Utility;
+using Lucid.Web.ProjectCreation;
+using Lucid.Web.Utility;
 
-namespace Demo.Web.App.Generation
+namespace Lucid.Web.App.Generation
 {
     public static class Actions
     {

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
-using Demo.Web.Utility;
+using Lucid.Web.Utility;
 
-namespace Demo.Web.App.Home
+namespace Lucid.Web.App.Home
 {
     public class HomeController : DemoController
     {

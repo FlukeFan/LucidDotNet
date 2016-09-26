@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Demo.Domain.Contract.Product.Responses;
+using Lucid.Domain.Contract.Product.Responses;
 
-namespace Demo.Domain.Product.Responses
+namespace Lucid.Domain.Product.Responses
 {
     public static class DesignDtoMapper
     {

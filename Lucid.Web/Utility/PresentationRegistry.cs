@@ -1,6 +1,6 @@
 ﻿using SimpleFacade.Execution;
 
-namespace Demo.Web.Utility
+namespace Lucid.Web.Utility
 {
     public class PresentationRegistry
     {

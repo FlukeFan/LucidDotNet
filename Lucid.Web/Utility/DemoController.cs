@@ -4,7 +4,7 @@ using SimpleFacade;
 using SimpleFacade.Exceptions;
 using SimpleFacade.Execution;
 
-namespace Demo.Web.Utility
+namespace Lucid.Web.Utility
 {
     public abstract class DemoController : Controller
     {

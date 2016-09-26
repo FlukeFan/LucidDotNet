@@ -4,13 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Demo.Web.ProjectCreation;
+using Lucid.Web.ProjectCreation;
 using FluentAssertions;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 
-namespace Demo.System.Tests.ProjectCreation
+namespace Lucid.System.Tests.ProjectCreation
 {
     [TestFixture]
     [Explicit("Very slow system test - this is run explicitly before pushing to production")]

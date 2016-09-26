@@ -1,7 +1,7 @@
-﻿using Demo.Web.Utility;
+﻿using Lucid.Web.Utility;
 using MvcFolders;
 
-namespace Demo.Web
+namespace Lucid.Web
 {
     public class DemoApplication : System.Web.HttpApplication
     {

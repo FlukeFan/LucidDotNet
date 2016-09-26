@@ -60,13 +60,13 @@
     <Compile Include="Product\Design.cs" />
     <Compile Include="Product\Queries\FindDesignsHandler.cs" />
     <Compile Include="Product\Responses\DesignDtoMapper.cs" />
-    <Compile Include="Utility\DemoEntity.cs" />
-    <Compile Include="Utility\DemoException.cs" />
+    <Compile Include="Utility\LucidEntity.cs" />
+    <Compile Include="Utility\LucidException.cs" />
     <Compile Include="Utility\HandleCommand.cs" />
     <Compile Include="Utility\HandleQuery.cs" />
     <Compile Include="Utility\HandleVoidCommand.cs" />
     <Compile Include="Utility\Registry.cs" />
-    <Compile Include="Utility\IDemoRepository.cs" />
+    <Compile Include="Utility\ILucidRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lucid.Domain.Contract\Lucid.Domain.Contract.csproj">

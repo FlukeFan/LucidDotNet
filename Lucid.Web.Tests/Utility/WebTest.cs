@@ -5,7 +5,7 @@ using MvcTesting.Http;
 using NUnit.Framework;
 using SimpleFacade.Testing;
 
-namespace Demo.Web.Tests.Utility
+namespace Lucid.Web.Tests.Utility
 {
     [TestFixture]
     public abstract class WebTest

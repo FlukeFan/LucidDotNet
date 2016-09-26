@@ -1,8 +1,8 @@
-﻿using Demo.Web.Utility;
+﻿using Lucid.Web.Utility;
 using SimpleFacade.Execution;
 using SimpleFacade.Testing;
 
-namespace Demo.Web.Tests.Utility
+namespace Lucid.Web.Tests.Utility
 {
     public static class WebTestRegistry
     {

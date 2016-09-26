@@ -3,7 +3,7 @@ using System.IO;
 using SimpleFacade.Exceptions;
 using SimpleFacade.Execution;
 
-namespace Demo.Web.ProjectCreation
+namespace Lucid.Web.ProjectCreation
 {
     public class GenerateProject : Command<byte[]>
     {

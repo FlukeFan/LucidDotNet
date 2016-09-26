@@ -1,13 +1,10 @@
 ﻿using System.Diagnostics;
-using SimpleFacade;
+using Reposify;
 
 namespace Lucid.Domain.Utility
 {
-    public abstract class HandleVoidCommand<TCmd> : IHandleVoidCommand<TCmd>
-        where TCmd : ICommand
+    public class LucidEntity : Entity<int>
     {
         protected static ILucidRepository Repository {[DebuggerStepThrough] get { return Registry.Repository; } }
-
-        public abstract void Execute(TCmd cmd);
     }
 }

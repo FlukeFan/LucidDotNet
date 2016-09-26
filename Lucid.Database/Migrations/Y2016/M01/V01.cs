@@ -1,10 +1,10 @@
-﻿using Demo.Database.Schema;
+﻿using Lucid.Database.Schema;
 using FluentMigrator;
 
-namespace Demo.Database.Migrations.Y2016.M01
+namespace Lucid.Database.Migrations.Y2016.M01
 {
     [Migration(20160101)]
-    public class V01 : DemoMigration
+    public class V01 : LucidMigration
     {
         public override void Up()
         {
@@ -17,7 +17,7 @@ namespace Demo.Database.Migrations.Y2016.M01
             var table = Db.Table_User;
 
             Create.Table(table.Name)
-                .DemoPrimaryKey(table.Name, table.Column_Id)
+                .LucidPrimaryKey(table.Name, table.Column_Id)
                 .WithColumn(table.Column_Email).AsAnsiString().NotNullable()
                 .WithColumn(table.Column_LastLoggedIn).AsDateTime().NotNullable();
         }
@@ -27,7 +27,7 @@ namespace Demo.Database.Migrations.Y2016.M01
             var table = Db.Table_Design;
 
             Create.Table(table.Name)
-                .DemoPrimaryKey(table.Name, table.Column_Id)
+                .LucidPrimaryKey(table.Name, table.Column_Id)
                 .WithColumn(table.Column_Name).AsAnsiString().NotNullable();
         }
     }

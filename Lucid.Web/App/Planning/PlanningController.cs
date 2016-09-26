@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
-using Demo.Domain.Contract.Product.Commands;
-using Demo.Domain.Contract.Product.Queries;
-using Demo.Web.Utility;
+using Lucid.Domain.Contract.Product.Commands;
+using Lucid.Domain.Contract.Product.Queries;
+using Lucid.Web.Utility;
 
-namespace Demo.Web.App.Planning
+namespace Lucid.Web.App.Planning
 {
     public static class Actions
     {

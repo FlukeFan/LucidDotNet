@@ -1,9 +1,9 @@
-﻿using Demo.Domain.Contract.Product.Commands;
-using Demo.Domain.Contract.Product.Responses;
-using Demo.Domain.Product.Responses;
-using Demo.Domain.Utility;
+﻿using Lucid.Domain.Contract.Product.Commands;
+using Lucid.Domain.Contract.Product.Responses;
+using Lucid.Domain.Product.Responses;
+using Lucid.Domain.Utility;
 
-namespace Demo.Domain.Product.Commands
+namespace Lucid.Domain.Product.Commands
 {
     public class StartDesignHandler : HandleCommand<StartDesign, DesignDto>
     {

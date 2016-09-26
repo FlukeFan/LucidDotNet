@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Demo.Domain.Contract.Product.Queries;
-using Demo.Domain.Contract.Product.Responses;
-using Demo.Domain.Product.Responses;
-using Demo.Domain.Utility;
+using Lucid.Domain.Contract.Product.Queries;
+using Lucid.Domain.Contract.Product.Responses;
+using Lucid.Domain.Product.Responses;
+using Lucid.Domain.Utility;
 using Reposify.Queries;
 
-namespace Demo.Domain.Product.Queries
+namespace Lucid.Domain.Product.Queries
 {
     public class FindDesignsHandler : HandleQuery<FindDesigns, IList<DesignDto>>
     {

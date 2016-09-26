@@ -2,13 +2,13 @@
 using System.Configuration;
 using System.IO;
 using System.Web.Hosting;
-using Demo.Infrastructure;
-using Demo.Infrastructure.NHibernate;
+using Lucid.Infrastructure;
+using Lucid.Infrastructure.NHibernate;
 using Newtonsoft.Json;
 using SimpleFacade.Execution;
 using SimpleFacade.Validation;
 
-namespace Demo.Web.Utility
+namespace Lucid.Web.Utility
 {
     public class Startup
     {

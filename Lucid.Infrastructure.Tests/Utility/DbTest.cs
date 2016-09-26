@@ -1,10 +1,10 @@
-﻿using Demo.Database.Tests;
-using Demo.Domain.Tests.Utility;
-using Demo.Domain.Utility;
-using Demo.Infrastructure.NHibernate;
+﻿using Lucid.Database.Tests;
+using Lucid.Domain.Tests.Utility;
+using Lucid.Domain.Utility;
+using Lucid.Infrastructure.NHibernate;
 using NUnit.Framework;
 
-namespace Demo.Infrastructure.Tests.Utility
+namespace Lucid.Infrastructure.Tests.Utility
 {
     [TestFixture]
     public abstract class DbTest
@@ -16,7 +16,7 @@ namespace Demo.Infrastructure.Tests.Utility
         [SetUp]
         public virtual void SetUp()
         {
-            DemoNhRepository.Init(_buildEnvironment.DemoConnection);
+            DemoNhRepository.Init(_buildEnvironment.LucidConnection);
             Repository = new DemoNhRepository();
             Repository.Open();
             Registry.Repository = Repository;
@@ -29,10 +29,10 @@ namespace Demo.Infrastructure.Tests.Utility
             Registry.Repository = null;
         }
 
-        protected void VerifyInvalidConstraint<T>(T entity) where T : DemoEntity
+        protected void VerifyInvalidConstraint<T>(T entity) where T : LucidEntity
         {
             Assert.That(() => Repository.Save(entity), Throws.Exception, string.Format("Entity {0} did not fail to save in the database", entity));
-            Assert.That(() => new DemoMemoryRepository().Save(entity), Throws.Exception, string.Format("Entity {0} correctly failed to save in the database, but did not fail to save in the memory repository", entity));
+            Assert.That(() => new LucidMemoryRepository().Save(entity), Throws.Exception, string.Format("Entity {0} correctly failed to save in the database, but did not fail to save in the memory repository", entity));
         }
     }
 }

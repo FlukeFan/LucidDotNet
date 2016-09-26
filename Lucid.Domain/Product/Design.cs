@@ -1,9 +1,9 @@
-﻿using Demo.Domain.Contract.Product.Commands;
-using Demo.Domain.Utility;
+﻿using Lucid.Domain.Contract.Product.Commands;
+using Lucid.Domain.Utility;
 
-namespace Demo.Domain.Product
+namespace Lucid.Domain.Product
 {
-    public class Design : DemoEntity
+    public class Design : LucidEntity
     {
         protected Design() { }
 
@@ -23,7 +23,7 @@ namespace Demo.Domain.Product
                 .List();
 
             if (designsWithName.Count > 0)
-                throw new DemoException("Please specify a design name that is not already in use.");
+                throw new LucidException("Please specify a design name that is not already in use.");
         }
     }
 }

@@ -1,18 +1,18 @@
 ﻿using System;
-using Demo.Domain.Account;
-using Demo.Domain.Contract;
-using Demo.Domain.Tests.Utility;
+using Lucid.Domain.Account;
+using Lucid.Domain.Contract;
+using Lucid.Domain.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
 using Reposify.Testing;
 
-namespace Demo.Domain.Tests.Account
+namespace Lucid.Domain.Tests.Account
 {
     public class UserBuilder : Builder<User>
     {
         static UserBuilder()
         {
-            DemoCustomInspections.Add<User>((validator, user) =>
+            LucidCustomInspections.Add<User>((validator, user) =>
             {
                 validator.CheckNotNull(() => user.Email);
                 validator.CheckMaxLength(() => user.Email, Constraints.DefaultMaxStringLength);

@@ -3,7 +3,7 @@ using NUnit.Framework;
 using SimpleFacade.Exceptions;
 using SimpleFacade.Validation;
 
-namespace Demo.Domain.Tests.Utility
+namespace Lucid.Domain.Tests.Utility
 {
     public static class ValidationExtensions
     {

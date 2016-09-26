@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
-using Demo.Web.ProjectCreation;
+using Lucid.Web.ProjectCreation;
 using FluentAssertions;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using SimpleFacade.Exceptions;
 using SimpleFacade.Validation;
 
-namespace Demo.Web.Tests.ProjectCreation
+namespace Lucid.Web.Tests.ProjectCreation
 {
     [TestFixture]
     public class GenerateProjectTests

@@ -2,12 +2,12 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace Demo.Database.Tests
+namespace Lucid.Database.Tests
 {
     public class BuildEnvironment
     {
         public string MasterConnection;
-        public string DemoConnection;
+        public string LucidConnection;
 
         public static BuildEnvironment Load()
         {

@@ -1,9 +1,9 @@
 ﻿using System;
-using Demo.Domain.Utility;
+using Lucid.Domain.Utility;
 
-namespace Demo.Domain.Account
+namespace Lucid.Domain.Account
 {
-    public class User : DemoEntity
+    public class User : LucidEntity
     {
         protected User() { }
 

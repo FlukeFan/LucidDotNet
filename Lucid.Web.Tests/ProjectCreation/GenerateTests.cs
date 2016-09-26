@@ -2,12 +2,12 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Demo.Web.ProjectCreation;
+using Lucid.Web.ProjectCreation;
 using FluentAssertions;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 
-namespace Demo.Web.Tests.ProjectCreation
+namespace Lucid.Web.Tests.ProjectCreation
 {
     [TestFixture]
     public class GenerateTests

@@ -1,13 +1,13 @@
 ﻿using System;
-using Demo.Domain.Contract;
-using Demo.Domain.Contract.Product.Commands;
-using Demo.Domain.Product;
-using Demo.Domain.Product.Commands;
-using Demo.Domain.Tests.Utility;
+using Lucid.Domain.Contract;
+using Lucid.Domain.Contract.Product.Commands;
+using Lucid.Domain.Product;
+using Lucid.Domain.Product.Commands;
+using Lucid.Domain.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Demo.Domain.Tests.Product.Commands
+namespace Lucid.Domain.Tests.Product.Commands
 {
     [TestFixture]
     public class StartDesignTests : DomainTest

@@ -1,7 +1,7 @@
-﻿using Demo.Domain.Utility;
+﻿using Lucid.Domain.Utility;
 using SimpleFacade;
 
-namespace Demo.Infrastructure.NHibernate
+namespace Lucid.Infrastructure.NHibernate
 {
     public class RepositoryExecutor : IExecutor
     {

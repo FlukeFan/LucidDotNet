@@ -1,6 +1,6 @@
-﻿using Demo.Domain.Contract.Account.Responses;
+﻿using Lucid.Domain.Contract.Account.Responses;
 
-namespace Demo.Domain.Account.Responses
+namespace Lucid.Domain.Account.Responses
 {
     public static class UserDtoMapper
     {

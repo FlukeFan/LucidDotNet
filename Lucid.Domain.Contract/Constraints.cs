@@ -1,4 +1,4 @@
-﻿namespace Demo.Domain.Contract
+﻿namespace Lucid.Domain.Contract
 {
     public static class Constraints
     {

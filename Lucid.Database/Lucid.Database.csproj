@@ -53,9 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_items\AssemblyInfo.cs" />
-    <Compile Include="DemoMigrationRunner.cs" />
+    <Compile Include="LucidMigrationRunner.cs" />
     <Compile Include="Migrations\CreateTableExtensions.cs" />
-    <Compile Include="Migrations\DemoMigration.cs" />
+    <Compile Include="Migrations\LucidMigration.cs" />
     <Compile Include="Migrations\DeployedMigrations.cs" />
     <Compile Include="Migrations\VersionUtil.cs" />
     <Compile Include="Migrations\Y2016\M01\V01.cs" />

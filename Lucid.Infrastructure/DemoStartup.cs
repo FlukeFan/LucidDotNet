@@ -1,13 +1,13 @@
-﻿using Demo.Database;
-using Demo.Infrastructure.NHibernate;
+﻿using Lucid.Database;
+using Lucid.Infrastructure.NHibernate;
 
-namespace Demo.Infrastructure
+namespace Lucid.Infrastructure
 {
     public static class DemoStartup
     {
         public static void Init(string connection)
         {
-            DemoMigrationRunner.Run(connection);
+            LucidMigrationRunner.Run(connection);
             DemoNhRepository.Init(connection);
         }
     }

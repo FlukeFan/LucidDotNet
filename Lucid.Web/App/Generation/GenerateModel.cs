@@ -1,6 +1,6 @@
-﻿using Demo.Web.ProjectCreation;
+﻿using Lucid.Web.ProjectCreation;
 
-namespace Demo.Web.App.Generation
+namespace Lucid.Web.App.Generation
 {
     public class GenerateModel
     {

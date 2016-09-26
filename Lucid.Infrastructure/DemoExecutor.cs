@@ -1,13 +1,13 @@
-﻿using Demo.Domain.Utility;
+﻿using Lucid.Domain.Utility;
 using SimpleFacade.Execution;
 
-namespace Demo.Infrastructure
+namespace Lucid.Infrastructure
 {
     public class DemoExecutor : Executor
     {
         public DemoExecutor()
         {
-            UsingHandlersFromAssemblyWithType<DemoEntity>();
+            UsingHandlersFromAssemblyWithType<LucidEntity>();
         }
     }
 }

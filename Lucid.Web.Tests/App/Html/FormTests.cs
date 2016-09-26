@@ -1,8 +1,8 @@
-﻿using Demo.Web.Tests.Utility;
+﻿using Lucid.Web.Tests.Utility;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Demo.Web.Tests.App.Html
+namespace Lucid.Web.Tests.App.Html
 {
     [TestFixture]
     public class FormTests : WebTest
