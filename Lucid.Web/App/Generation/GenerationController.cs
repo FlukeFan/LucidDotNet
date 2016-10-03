@@ -22,7 +22,7 @@ namespace Lucid.Web.App.Generation
         public ActionResult Generate(GenerateProject cmd)
         {
             return Exec(cmd,
-                success: r => File(r, "application/octet-stream", cmd.Name + ".zip"),
+                success: r => File(r, "application/zip", cmd.Name + ".zip"),
                 failure: () => GenerateRender(cmd));
         }
 
