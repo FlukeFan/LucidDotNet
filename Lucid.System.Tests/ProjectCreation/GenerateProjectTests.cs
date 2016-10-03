@@ -28,8 +28,8 @@ namespace Lucid.System.Tests.ProjectCreation
             Console.WriteLine("Building project {0} in {1}", cmd.Name, buildFolder);
             Unzip(zipBytes, buildFolder);
             CopyFolder(@"..\..\..\packages", Path.Combine(buildFolder, "packages"));
-            var currentBuildEnvironment = File.ReadAllText(Path.Combine(originalFolder, "_items/BuildEnvironment.json"));
-            File.WriteAllText(Path.Combine(buildFolder, "_items/BuildEnvironment.json"), currentBuildEnvironment.Replace("Lucid", "ShinyNewProject1"));
+            var currentSettings = File.ReadAllText(Path.Combine(originalFolder, "Lucid.Web/settings.config"));
+            File.WriteAllText(Path.Combine(buildFolder, "ShinyNewProject1.Web/settings.config"), currentSettings.Replace("Lucid", "ShinyNewProject1"));
 
             var fxFolder = @"C:\Program Files (x86)\MSBuild\14.0\Bin\";
             var setupCmd = File.ReadAllText(Path.Combine(buildFolder, "CommandPrompt.bat"));
