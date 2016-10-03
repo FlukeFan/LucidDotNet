@@ -185,6 +185,10 @@
     <Compile Include="Utility\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lucid.Database\Lucid.Database.csproj">
+      <Project>{2C74567A-5CF2-4006-B6C1-FDA122578AD1}</Project>
+      <Name>Lucid.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lucid.Domain.Contract\Lucid.Domain.Contract.csproj">
       <Project>{2d85d27e-bdff-4545-a48c-49d193143232}</Project>
       <Name>Lucid.Domain.Contract</Name>

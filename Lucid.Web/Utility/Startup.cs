@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
+﻿using System.IO;
 using System.Web.Hosting;
+using Lucid.Database;
 using Lucid.Infrastructure;
 using Lucid.Infrastructure.NHibernate;
-using Newtonsoft.Json;
 using SimpleFacade.Execution;
 using SimpleFacade.Validation;
 
@@ -32,33 +30,11 @@ namespace Lucid.Web.Utility
 
         private void InitRepository()
         {
-            var connectionString = DevConnectionStringOverride() ?? WebConfigConnnectionString();
+            var databaseSettings = new DatabaseSettings();
+            var settingsFile = Path.Combine(HostingEnvironment.MapPath("~/"), "settings.config");
+            Settings.Init(settingsFile, databaseSettings);
 
-            LucidStartup.Init(connectionString);
-        }
-
-        private string WebConfigConnnectionString()
-        {
-            return ConfigurationManager.AppSettings["SQLSERVER_CONNECTION_STRING"];
-        }
-
-        private string DevConnectionStringOverride()
-        {
-            var webFolder = HostingEnvironment.MapPath("~");
-            var configOverrideFile = Path.Combine(webFolder, @"..\_items\BuildEnvironment.json");
-
-            if (!File.Exists(configOverrideFile))
-                return null;
-
-            var json = File.ReadAllText(configOverrideFile);
-            var values = JsonConvert.DeserializeObject<IDictionary<string, string>>(json);
-
-            var key = "LucidConnection";
-
-            if (!values.ContainsKey(key))
-                return null;
-
-            return values[key];
+            LucidStartup.Init(databaseSettings.LucidConnection);
         }
     }
 }
