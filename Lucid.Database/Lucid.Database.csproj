@@ -61,6 +61,7 @@
     <Compile Include="Migrations\Y2016\M01\V01.cs" />
     <Compile Include="Schema\Design.cs" />
     <Compile Include="Schema\User.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -64,6 +64,7 @@
     <Compile Include="BuildEnvironment.cs" />
     <Compile Include="Migrations\ConstraintsTests.cs" />
     <Compile Include="Migrations\MigrationsTests.cs" />
+    <Compile Include="SettingsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DefaultEnvironment.json" />
