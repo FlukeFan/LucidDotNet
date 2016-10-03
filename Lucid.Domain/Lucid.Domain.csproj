@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\_items\AssemblyInfo.cs" />
+    <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Account\Commands\LoginHandler.cs" />
     <Compile Include="Account\Responses\UserDtoMapper.cs" />
     <Compile Include="Account\User.cs" />

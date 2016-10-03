@@ -68,7 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\_items\AssemblyInfo.cs" />
+    <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Account\Commands\LoginTests.cs" />
     <Compile Include="Account\UserTests.cs" />
     <Compile Include="Product\Commands\StartDesignTests.cs" />
@@ -96,7 +96,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\_items\Lucid.Common.targets" />
+  <Import Project="..\Build\Common.targets" />
   <Target Name="AfterBuild">
     <CallTarget Targets="RunTestsWithCoverage" />
   </Target>

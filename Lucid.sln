@@ -7,9 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{E47CBDCF
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		CommandPrompt.bat = CommandPrompt.bat
-		_items\Lucid.Common.targets = _items\Lucid.Common.targets
-		_items\Lucid.nunit = _items\Lucid.nunit
-		Lucid.proj = Lucid.proj
 		readme.txt = readme.txt
 		RunNUnit.bat = RunNUnit.bat
 	EndProjectSection
@@ -33,6 +30,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web", "Lucid.Web\Lucid.Web.csproj", "{9EA489D1-14A1-4482-872B-3A1FD7F93646}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Web.Tests", "Lucid.Web.Tests\Lucid.Web.Tests.csproj", "{098ADBA2-8686-4E64-9937-EC63DFA11432}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{EE62401E-B98D-47D7-A63E-B70A60117F30}"
+	ProjectSection(SolutionItems) = preProject
+		Build\Common.targets = Build\Common.targets
+		Build\Lucid.nunit = Build\Lucid.nunit
+		Lucid.proj = Lucid.proj
+		Build\VerifyCoverage.js = Build\VerifyCoverage.js
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

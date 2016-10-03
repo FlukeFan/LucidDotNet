@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\_items\AssemblyInfo.cs" />
+    <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="DatabaseSettings.cs" />
     <Compile Include="LucidMigrationRunner.cs" />
     <Compile Include="Migrations\CreateTableExtensions.cs" />

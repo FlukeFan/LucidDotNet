@@ -5,9 +5,9 @@
 *.suo
 *.sln.cache
 
-_items/Lucid.VisualState.xml
-_items/TestResult.xml
-_items/AssemblyInfo.cs
+/_output
+/Build/Lucid.VisualState.xml
+/Build/TestResult.xml
 /.vs
 /packages/MSBuildTasks.1.5.0.196/tools/Microsoft.Build.Commontypes.xsd
 /packages/MSBuildTasks.1.5.0.196/tools/Microsoft.Build.Core.xsd

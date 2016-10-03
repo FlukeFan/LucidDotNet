@@ -37,6 +37,7 @@ namespace Lucid.Web.ProjectCreation
         public static readonly IList<string> GuidsToIgnore = new List<string>
         {
             "2150E333-8FDC-42A3-9474-1A3956D46DE8".ToUpper(), // solution folder
+            "EE62401E-B98D-47D7-A63E-B70A60117F30".ToUpper(), // solution folder
             "349c5851-65df-11da-9384-00065b846f21".ToUpper(), // web application
             "fae04ec0-301f-11d3-bf4b-00c04f79efbc".ToUpper(), // c# project
         };

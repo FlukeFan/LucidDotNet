@@ -10,15 +10,15 @@
     <FilesToZip Include="..\.gitignore" />
     <FilesToZip Include="..\lib\**" />
     <FilesToZip Include="..\*.bat" />
-    <FilesToZip Include="..\_items\*.nunit" />
+    <FilesToZip Include="..\Build\*.nunit" />
     <FilesToZip Include="..\*.txt" />
     <FilesToZip Include="..\**\*.proj" />
-    <FilesToZip Include="..\_items\*.targets" />
-    <FilesToZip Include="..\_items\*.js" />
+    <FilesToZip Include="..\Build\*.targets" />
+    <FilesToZip Include="..\Build\*.js" />
     <FilesToZip Include="..\*.sln" />
     <FilesToZip Include="..\**\*.csproj" Exclude="..\packages\**" />
     <FilesToZip Include="..\**\CoverageFilter.txt" />
-    <FilesToZip Include="..\**\*.cs" Exclude="..\_items\AssemblyInfo.cs;..\**\obj\**;..\packages\**" />
+    <FilesToZip Include="..\**\*.cs" Exclude="..\_output\AssemblyInfo.cs;..\**\obj\**;..\packages\**" />
     <FilesToZip Include="..\**\*.cshtml" />
     <FilesToZip Include="..\**\*.asax" />
     <FilesToZip Include="..\**\*.config" Exclude="..\packages\**;..\.vs\**;..\Lucid.Web\settings.config" />

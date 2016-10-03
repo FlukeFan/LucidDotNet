@@ -162,7 +162,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\_items\AssemblyInfo.cs" />
+    <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="App\Generation\GenerateModel.cs" />
     <Compile Include="App\Generation\GenerationController.cs" />
     <Compile Include="App\Home\HomeController.cs" />

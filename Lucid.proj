@@ -4,7 +4,7 @@
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.5.0.196\tools</MSBuildCommunityTasksPath>
   </PropertyGroup>
 
-  <Import Project="_items\Lucid.Common.targets" />
+  <Import Project="Build\Common.targets" />
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" Condition="Exists('$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets')" />
 
   <PropertyGroup>
@@ -58,7 +58,7 @@
   
   <Target Name="CleanFiles">
     <MSBuild Projects="@(ProjectsToClean)" Properties="$(GlobalProperties)" RunEachTargetSeparately="True" StopOnFirstFailure="True" Targets="Clean" />
-    <Delete Files="AssemblyInfo.cs" />
+    <RemoveDir Directories="_output" />
   </Target>
 
   <ItemGroup>
@@ -87,14 +87,15 @@
     <ProjectsToClean Include="Lucid.Domain.Contract\Lucid.Domain.Contract.csproj"/>
   </ItemGroup>
 
-  <Target Name="GenerateAssemblyInfo" Inputs="_items\Lucid.Common.targets" Outputs="_items\AssemblyInfo.cs">
+  <Target Name="GenerateAssemblyInfo" Inputs="Build\Common.targets" Outputs="_output\AssemblyInfo.cs">
+    <MakeDir Directories="_output" />
     <AssemblyInfo
       CodeLanguage="CS"
       AssemblyDescription="Lucid Library"
       AssemblyTitle="Lucid Library"
       AssemblyProduct="Lucid $(Configuration) $(LucidVersion)"
       AssemblyVersion="$(LucidVersion)"
-      OutputFile="_items\AssemblyInfo.cs"
+      OutputFile="_output\AssemblyInfo.cs"
       />
   </Target>
 

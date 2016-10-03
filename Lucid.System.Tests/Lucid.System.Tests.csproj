@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\_items\AssemblyInfo.cs" />
+    <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="ProjectCreation\GenerateProjectTests.cs" />
     <Compile Include="ProjectCreation\Run.cs" />
   </ItemGroup>
@@ -78,7 +78,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\_items\Lucid.Common.targets" />
+  <Import Project="..\Build\Common.targets" />
   <Target Name="BeforeDeploy">
     <Exec Command="$(NUnitExe) $(OutDir)\$(TestAssembly) /run:Lucid.System.Tests.ProjectCreation.GenerateProjectTests.Execute /result=&quot;$(OutDir)\BeforeDeploy.xml&quot;" />
   </Target>
