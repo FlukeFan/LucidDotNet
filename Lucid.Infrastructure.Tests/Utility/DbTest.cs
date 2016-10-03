@@ -1,4 +1,4 @@
-﻿using Lucid.Database.Tests;
+﻿using Lucid.Database;
 using Lucid.Domain.Tests.Utility;
 using Lucid.Domain.Utility;
 using Lucid.Infrastructure.NHibernate;
@@ -9,14 +9,20 @@ namespace Lucid.Infrastructure.Tests.Utility
     [TestFixture]
     public abstract class DbTest
     {
-        private static BuildEnvironment _buildEnvironment = BuildEnvironment.Load();
+        private static DatabaseSettings _databaseSettings = new DatabaseSettings();
 
         protected LucidNhRepository Repository { get; set; }
+
+        [TestFixtureSetUp]
+        public void FixtureSetup()
+        {
+            Settings.Init("..\\..\\..\\Lucid.Web\\settings.config", _databaseSettings);
+        }
 
         [SetUp]
         public virtual void SetUp()
         {
-            LucidNhRepository.Init(_buildEnvironment.LucidConnection);
+            LucidNhRepository.Init(_databaseSettings.LucidConnection);
             Repository = new LucidNhRepository();
             Repository.Open();
             Registry.Repository = Repository;

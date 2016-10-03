@@ -15,14 +15,13 @@
     <FilesToZip Include="..\**\*.proj" />
     <FilesToZip Include="..\_items\*.targets" />
     <FilesToZip Include="..\_items\*.js" />
-    <FilesToZip Include="..\Lucid.Database.Tests\DefaultEnvironment.json" />
     <FilesToZip Include="..\*.sln" />
     <FilesToZip Include="..\**\*.csproj" Exclude="..\packages\**" />
     <FilesToZip Include="..\**\CoverageFilter.txt" />
     <FilesToZip Include="..\**\*.cs" Exclude="..\_items\AssemblyInfo.cs;..\**\obj\**;..\packages\**" />
     <FilesToZip Include="..\**\*.cshtml" />
     <FilesToZip Include="..\**\*.asax" />
-    <FilesToZip Include="..\**\*.config" Exclude="..\packages\**;..\.vs\**" />
+    <FilesToZip Include="..\**\*.config" Exclude="..\packages\**;..\.vs\**;..\Lucid.Web\settings.config" />
   </ItemGroup>
   
   <Target Name="Zip" Inputs="@(FilesToZip);WebZip.proj" Outputs="Project.zip">

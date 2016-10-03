@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_items\AssemblyInfo.cs" />
+    <Compile Include="DatabaseSettings.cs" />
     <Compile Include="LucidMigrationRunner.cs" />
     <Compile Include="Migrations\CreateTableExtensions.cs" />
     <Compile Include="Migrations\LucidMigration.cs" />

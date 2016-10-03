@@ -8,7 +8,8 @@ namespace Lucid.Database.Tests.Migrations
     [TestFixture]
     public class MigrationsTests
     {
-        private static BuildEnvironment _environment = BuildEnvironment.Load();
+        private DatabaseSettings        _databaseSettings       = new DatabaseSettings();
+        private DatabaseTestsSettings   _databaseTestSettings   = new DatabaseTestsSettings();
 
         private const string DropDb = @"
             IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'Lucid')
@@ -22,11 +23,19 @@ namespace Lucid.Database.Tests.Migrations
 
         private const string CreateDb = "CREATE DATABASE Lucid";
 
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            Settings.Init("..\\..\\..\\Lucid.Web\\settings.config",
+                _databaseSettings,
+                _databaseTestSettings);
+        }
+
         [Test]
         [Explicit("Run when cleaning the build")]
         public void DropDatabase()
         {
-            using (var masterDb = new SqlConnection(_environment.MasterConnection))
+            using (var masterDb = new SqlConnection(_databaseTestSettings.MasterConnection))
             {
                 masterDb.Open();
                 ExecuteNonQuery(masterDb, DropDb);
@@ -38,12 +47,12 @@ namespace Lucid.Database.Tests.Migrations
         {
             DropAndCreateBlankDb();
 
-            LucidMigrationRunner.Run(_environment.LucidConnection);
+            LucidMigrationRunner.Run(_databaseSettings.LucidConnection);
 
             // verify we can run a second time (i.e., scripts don't get run twice where they shouldn't)
-            LucidMigrationRunner.Run(_environment.LucidConnection);
+            LucidMigrationRunner.Run(_databaseSettings.LucidConnection);
 
-            using (var db = new SqlConnection(_environment.LucidConnection))
+            using (var db = new SqlConnection(_databaseSettings.LucidConnection))
             {
                 db.Open();
 
@@ -64,7 +73,7 @@ namespace Lucid.Database.Tests.Migrations
 
         private void DropAndCreateBlankDb()
         {
-            using (var masterDb = new SqlConnection(_environment.MasterConnection))
+            using (var masterDb = new SqlConnection(_databaseTestSettings.MasterConnection))
             {
                 masterDb.Open();
                 ExecuteNonQuery(masterDb, DropDb);

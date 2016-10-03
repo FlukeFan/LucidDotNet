@@ -61,13 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_items\AssemblyInfo.cs" />
-    <Compile Include="BuildEnvironment.cs" />
+    <Compile Include="DatabaseTestsSettings.cs" />
     <Compile Include="Migrations\ConstraintsTests.cs" />
     <Compile Include="Migrations\MigrationsTests.cs" />
     <Compile Include="SettingsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DefaultEnvironment.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -91,7 +90,6 @@
     <Exec Command="$(NUnitExe) $(OutDir)\Lucid.Database.Tests.dll /run:Lucid.Database.Tests.Migrations.MigrationsTests.DropDatabase /result=&quot;$(OutDir)\DropDatabase.xml&quot;" />
   </Target>
   <Target Name="AfterBuild">
-    <Copy SourceFiles="DefaultEnvironment.json" DestinationFiles="..\_items\BuildEnvironment.json" Condition="!Exists('..\_items\BuildEnvironment.json') OR $([System.IO.File]::GetLastWriteTime('DefaultEnvironment.json').Ticks) &gt; $([System.IO.File]::GetLastWriteTime('..\_items\BuildEnvironment.json').Ticks)" />
     <CallTarget Targets="RunTestsWithCoverage" />
     <CallTarget Targets="VerifyScriptsForDeploy" Condition="'$(DeployBuild)'=='true'" />
   </Target>
