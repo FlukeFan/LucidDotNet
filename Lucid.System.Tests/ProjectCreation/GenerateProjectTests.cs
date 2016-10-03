@@ -27,6 +27,10 @@ namespace Lucid.System.Tests.ProjectCreation
             var buildFolder = Path.Combine(Path.GetTempPath(), "GpTmp");
             Console.WriteLine("Building project {0} in {1}", cmd.Name, buildFolder);
             Unzip(zipBytes, buildFolder);
+
+            Directory.GetFiles(Path.Combine(buildFolder, "ShinyNewProject1.Web/fonts")).Length.Should().BeGreaterThan(1, "should copy fonts");
+            Directory.GetFiles(Path.Combine(buildFolder, "ShinyNewProject1.Web/Content")).Length.Should().BeGreaterThan(1, "should copy css");
+
             CopyFolder(@"..\..\..\packages", Path.Combine(buildFolder, "packages"));
             var currentSettings = File.ReadAllText(Path.Combine(originalFolder, "Lucid.Web/settings.config"));
             File.WriteAllText(Path.Combine(buildFolder, "ShinyNewProject1.Web/settings.config"), currentSettings.Replace("Lucid", "ShinyNewProject1"));

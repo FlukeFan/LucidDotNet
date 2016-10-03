@@ -99,4 +99,22 @@
       />
   </Target>
 
+  <Target Name="Package">
+    <CallTarget Targets="Clean" />
+    <CallTarget Targets="SetReleaseConfiguration" />
+    <CallTarget Targets="Build" />
+    <MSBuild Projects="Lucid.System.Tests\Lucid.System.Tests.csproj" Targets="BeforePackage" Properties="Configuration=Release" />
+    <Zip ZipFileName="_output\Lucid.zip" Files="@(FilesToZip)" WorkingDirectory="Lucid.Web" Quiet="true" />
+  </Target>
+
+  <ItemGroup>
+    <FilesToZip Include="**\*.asax" />
+    <FilesToZip Include="**\*.config" Exclude="settings.config" />
+    <FilesToZip Include="**\*.zip" />
+    <FilesToZip Include="**\*.cshtml" />
+    <FilesToZip Include="bin\*.*" />
+    <FilesToZip Include="**\*.css;**\*.map" />
+    <FilesToZip Include="**\*.eot;**\*.svg;**\*.ttf;**\*.woff;**\*.woff2" />
+  </ItemGroup>
+
 </Project>

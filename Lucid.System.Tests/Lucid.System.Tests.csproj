@@ -79,7 +79,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Build\Common.targets" />
-  <Target Name="BeforeDeploy">
+  <Target Name="BeforePackage">
     <Exec Command="$(NUnitExe) $(OutDir)\$(TestAssembly) /run:Lucid.System.Tests.ProjectCreation.GenerateProjectTests.Execute /result=&quot;$(OutDir)\BeforeDeploy.xml&quot;" />
   </Target>
   <Target Name="AfterBuild">

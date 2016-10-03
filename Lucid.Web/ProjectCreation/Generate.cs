@@ -26,12 +26,19 @@ namespace Lucid.Web.ProjectCreation
             ".cs",
             ".cshtml",
             ".asax",
+            ".css",
         };
 
         private static readonly IList<String> UnprocessedExtensions = new List<string>
         {
             ".xsd",
             ".exe",
+            ".eot",
+            ".svg",
+            ".ttf",
+            ".woff",
+            ".woff2",
+            ".map",
         };
 
         public static readonly IList<string> GuidsToIgnore = new List<string>
