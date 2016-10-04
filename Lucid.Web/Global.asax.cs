@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Web;
 using System.Web.Hosting;
 using ICSharpCode.SharpZipLib.Core;
@@ -10,6 +11,8 @@ namespace Lucid.Web
 {
     public class LucidApplication : System.Web.HttpApplication
     {
+        private static bool _updating;
+
         public static Startup Startup = new Startup();
 
         protected void Application_Start()
@@ -29,6 +32,8 @@ namespace Lucid.Web
             if (!File.Exists(packagedZip))
                 return false;
 
+            _updating = true;
+
             var webFolder = HostingEnvironment.MapPath("~");
             var buffer = new byte[4096];
 
@@ -43,13 +48,24 @@ namespace Lucid.Web
                 }
 
             var deployedZip = HostingEnvironment.MapPath("~/Deployed.zip");
+
+            if (File.Exists(deployedZip))
+                File.Delete(deployedZip);
+
             File.Move(packagedZip, deployedZip);
 
-            // get the client to re-load
-            if (HttpContext.Current != null && HttpContext.Current.Request != null && HttpContext.Current.Response != null)
-                HttpContext.Current.Response.Redirect(HttpContext.Current.Request.Url.ToString(), false);
-
             return true;
+        }
+
+        protected void Application_BeginRequest(Object source, EventArgs e)
+        {
+            if (_updating)
+            {
+                var app = (HttpApplication)source;
+                var context = app.Context;
+
+                context.Response.Redirect(context.Request.Url.ToString(), false);
+            }
         }
     }
 }
