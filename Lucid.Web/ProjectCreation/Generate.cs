@@ -27,6 +27,7 @@ namespace Lucid.Web.ProjectCreation
             ".cshtml",
             ".asax",
             ".css",
+            ".html",
         };
 
         private static readonly IList<String> UnprocessedExtensions = new List<string>
@@ -39,6 +40,7 @@ namespace Lucid.Web.ProjectCreation
             ".woff",
             ".woff2",
             ".map",
+            ".rtf",
         };
 
         public static readonly IList<string> GuidsToIgnore = new List<string>
@@ -64,7 +66,7 @@ namespace Lucid.Web.ProjectCreation
             "B21A7182-EF27-48FA-93D8-C8E24E44FDB6".ToUpper(), // Lucid.System.Tests
         };
 
-        public static readonly Regex GuidSearch     = new Regex("(.{8}-.{4}-.{4}-.{4}-.{12})", RegexOptions.Compiled);
+        public static readonly Regex GuidSearch     = new Regex("([^-]{8}-[^-]{4}-[^-]{4}-[^-]{4}-[^-]{12})", RegexOptions.Compiled);
         public static readonly Regex TempDirSearch  = new Regex("tempDirectory=\"[^\"]*\"", RegexOptions.Compiled);
 
         private static readonly byte[] _buffer = new byte[4096];
