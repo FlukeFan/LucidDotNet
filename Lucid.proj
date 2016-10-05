@@ -23,7 +23,7 @@
 
   <Target Name="Init">
     <Error Text="Missing NuGet packages - try running 'b /t:RestorePackages'" Condition="!Exists('$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets')" />
-    <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);DeployBuild=$(AppHarbor)">
+    <CreateProperty Value="Configuration=$(Configuration);RunTests=$(RunTests);DeployBuild=$(DeployBuild)">
       <Output TaskParameter="Value" PropertyName="GlobalProperties" />
     </CreateProperty>
     <Copy SourceFiles="@(MSBuildXsd)" DestinationFolder="$(MSBuildCommunityTasksPath)" />
@@ -32,6 +32,9 @@
   <Target Name="SetReleaseConfiguration">
     <CreateProperty Value="Release">
       <Output TaskParameter="Value" PropertyName="Configuration" />
+    </CreateProperty>
+    <CreateProperty Value="true">
+      <Output TaskParameter="Value" PropertyName="DeployBuild" />
     </CreateProperty>
   </Target>
 
