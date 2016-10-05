@@ -41,6 +41,7 @@ namespace Lucid.Web.ProjectCreation
             ".woff2",
             ".map",
             ".rtf",
+            ".ico",
         };
 
         public static readonly IList<string> GuidsToIgnore = new List<string>
