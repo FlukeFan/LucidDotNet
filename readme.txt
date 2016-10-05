@@ -1,6 +1,8 @@
 
 Lucid
 
+To build, run CommandPrompt.bat (as administrator), then type 'b'
+
 
 Build commands:
 
