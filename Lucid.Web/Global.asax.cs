@@ -54,6 +54,9 @@ namespace Lucid.Web
 
             File.Move(packagedZip, deployedZip);
 
+            // in case the app hasn't recycled
+            HttpRuntime.UnloadAppDomain();
+
             return true;
         }
 
