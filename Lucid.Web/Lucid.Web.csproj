@@ -177,6 +177,7 @@
     <Compile Include="Utility\LucidController.cs" />
     <Compile Include="Utility\PresentationRegistry.cs" />
     <Compile Include="Utility\Startup.cs" />
+    <Compile Include="Utility\Upgrader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lucid.Database\Lucid.Database.csproj">
