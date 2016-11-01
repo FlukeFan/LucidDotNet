@@ -1,0 +1,26 @@
+﻿@inherits System.Web.Mvc.WebViewPage<LoginModel>
+@using System.Web.Mvc.Html
+@using Lucid.Web.Utility.Html
+@using Lucid.Web.App.Home
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div>Login</div>
+
+    @Html.ValidationSummary(true)
+    @using (var form = Html.Form(Model.Cmd))
+    {
+        <div>
+            @form.Html.LabelFor(c => c.Email, "Login")
+            @form.Html.TextBoxFor(c => c.Email)
+            @form.Html.ValidationMessageFor(c => c.Email)
+        </div>
+
+        <input type="submit" value="Login" />
+    }
+</body>
+</html>

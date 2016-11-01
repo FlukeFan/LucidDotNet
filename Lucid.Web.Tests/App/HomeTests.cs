@@ -1,5 +1,10 @@
-﻿using Lucid.Web.Tests.Utility;
+﻿using System.Web.Mvc;
 using FluentAssertions;
+using Lucid.Domain.Contract.Account.Commands;
+using Lucid.Domain.Contract.Account.Responses;
+using Lucid.Web.App.Home;
+using Lucid.Web.Tests.Utility;
+using MvcTesting.Html;
 using NUnit.Framework;
 
 namespace Lucid.Web.Tests.App
@@ -14,6 +19,38 @@ namespace Lucid.Web.Tests.App
                 var response = client.Get("/");
 
                 response.Doc.Find("#homeTest").TextContent.Should().Be("Hello world");
+            });
+        }
+
+        [Test]
+        public void Login_GET_RendersForm()
+        {
+            WebAppTest(client =>
+            {
+                var get = client.Get(Actions.Login());
+                var form = get.Form<Login>();
+
+                form.GetText(m => m.Email).Should().Be("");
+            });
+        }
+
+        [Test]
+        public void Login_POST_ExecutesCommand()
+        {
+            WebAppTest(client =>
+            {
+                ExecutorStub.SetupCommand(new Login(), new UserDto { });
+
+                var response = client.Get(Actions.Login()).Form<Login>()
+                    .SetText(m => m.Email, "user1")
+                    .Submit(client);
+
+                ExecutorStub.Executed<Login>(0).ShouldBeEquivalentTo(new Login
+                {
+                    Email = "user1",
+                });
+
+                response.ActionResultOf<RedirectResult>().Url.Should().Be(Actions.Index());
             });
         }
     }
