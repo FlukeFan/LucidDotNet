@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Net;
+using System.Web.Mvc;
 using FluentAssertions;
 using Lucid.Domain.Contract.Account.Commands;
 using Lucid.Domain.Contract.Account.Responses;
@@ -68,6 +69,26 @@ namespace Lucid.Web.Tests.App
                 authenticationSet.Should().BeTrue("authentication should have been set");
 
                 response.ActionResultOf<RedirectResult>().Url.Should().Be(Actions.Index());
+            });
+        }
+
+        [Test]
+        public void LogOut_GET_ClearsAuthentication()
+        {
+            WebAppTest(client =>
+            {
+                var authenticationCleared = false;
+
+                CookieAuthentication.LogOut = r =>
+                {
+                    authenticationCleared = true;
+                };
+
+                var get = client.Get(Actions.LogOut(), r => r.SetExpectedResponse(HttpStatusCode.Redirect));
+
+                authenticationCleared.Should().BeTrue("authentication should have been cleared");
+
+                get.ActionResultOf<RedirectResult>().Url.Should().Be(Actions.Index());
             });
         }
     }

@@ -19,9 +19,7 @@ namespace Lucid.Web.Utility
         private const string _cookieName        = "LucidAuth";
         private const string _encryptionPurpose = "LucidCookieAuthentication";
 
-        public delegate void AuthenticateDelegate(HttpResponseBase response, IUser user);
-
-        public static AuthenticateDelegate Authenticate = (response, user) =>
+        public static Action<HttpResponseBase, IUser> Authenticate = (HttpResponseBase response, IUser user) =>
         {
             if (!FormsAuthentication.CookiesSupported)
                 throw new Exception("FormsAuthentication.CookiesSupported returned false; Cookies are not supported");
@@ -30,6 +28,14 @@ namespace Lucid.Web.Utility
             var encryptedCookieValue = MachineKey.Protect(Encoding.UTF8.GetBytes(cookieValue), _encryptionPurpose);
             var cookie = new HttpCookie(_cookieName, Convert.ToBase64String(encryptedCookieValue));
             response.Cookies.Add(cookie);
+        };
+
+        public static Action<HttpResponseBase> LogOut = (HttpResponseBase response) =>
+        {
+            var authCookie = response.Cookies[_cookieName];
+
+            if (authCookie != null)
+                authCookie.Expires = DateTime.UtcNow.AddDays(-1);
         };
 
         private string                              _loginAction;
