@@ -4,6 +4,7 @@ using Lucid.Domain.Contract.Account.Commands;
 using Lucid.Domain.Contract.Account.Responses;
 using Lucid.Web.App.Home;
 using Lucid.Web.Tests.Utility;
+using Lucid.Web.Utility;
 using MvcTesting.Html;
 using NUnit.Framework;
 
@@ -39,7 +40,21 @@ namespace Lucid.Web.Tests.App
         {
             WebAppTest(client =>
             {
-                ExecutorStub.SetupCommand(new Login(), new UserDto { });
+                ExecutorStub.SetupCommand(new Login(), new UserDto
+                {
+                    UserId = 123,
+                    Email = "test name",
+                });
+
+                var authenticationSet = false;
+
+                CookieAuthentication.Authenticate = (r, user) =>
+                {
+                    var lucidUser = user as LucidUser;
+                    lucidUser.Id.Should().Be(123);
+                    lucidUser.Name.Should().Be("test name");
+                    authenticationSet = true;
+                };
 
                 var response = client.Get(Actions.Login()).Form<Login>()
                     .SetText(m => m.Email, "user1")
@@ -49,6 +64,8 @@ namespace Lucid.Web.Tests.App
                 {
                     Email = "user1",
                 });
+
+                authenticationSet.Should().BeTrue("authentication should have been set");
 
                 response.ActionResultOf<RedirectResult>().Url.Should().Be(Actions.Index());
             });

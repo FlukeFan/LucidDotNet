@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Web.Hosting;
+using System.Web.Mvc;
 using Lucid.Database;
 using Lucid.Infrastructure;
 using Lucid.Infrastructure.NHibernate;
@@ -12,6 +13,11 @@ namespace Lucid.Web.Utility
     {
         public virtual void Init()
         {
+            GlobalFilters.Filters.Add(new CookieAuthentication(
+                App.Home.Actions.Login(),
+                SkipAuthentication,
+                LucidUser.CreateFromCookieValue));
+
             InitExecutor();
             InitRepository();
         }
@@ -35,6 +41,13 @@ namespace Lucid.Web.Utility
             Settings.Init(settingsFile, databaseSettings);
 
             LucidStartup.Init(databaseSettings.LucidConnection);
+        }
+
+        private bool SkipAuthentication(ControllerContext context)
+        {
+            var isHome = context.Controller.GetType() == typeof(App.Home.HomeController);
+
+            return isHome;
         }
     }
 }

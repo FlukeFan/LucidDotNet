@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Lucid.Domain.Contract.Account.Commands;
+using Lucid.Domain.Contract.Account.Responses;
 using Lucid.Web.Utility;
 
 namespace Lucid.Web.App.Home
@@ -28,8 +29,15 @@ namespace Lucid.Web.App.Home
         public ActionResult Login(Login cmd)
         {
             return Exec(cmd,
-                success: r => Redirect(Actions.Index()),
+                success: r => Login(r),
                 failure: () => View(new LoginModel { Cmd = cmd }));
+        }
+
+        private ActionResult Login(UserDto domainUser)
+        {
+            var lucidUser = new LucidUser(domainUser);
+            CookieAuthentication.Authenticate(Response, lucidUser);
+            return Redirect(Actions.Index());
         }
     }
 }
