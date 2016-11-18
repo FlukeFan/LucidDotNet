@@ -28,7 +28,7 @@
   </ItemGroup>
   
   <Target Name="Zip" Inputs="@(FilesToZip);WebZip.proj" Outputs="Project.zip">
-   <Zip ZipFileName="Project.zip" Files="@(FilesToZip)" WorkingDirectory="$(MSBuildProjectDirectory).." Quiet="true" />
+   <Zip ZipFileName="Project.zip" Files="@(FilesToZip)" WorkingDirectory="$(MSBuildProjectDirectory)\.." Quiet="true" />
   </Target>
 
   <Target Name="Clean">
