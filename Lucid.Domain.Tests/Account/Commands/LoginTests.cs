@@ -37,7 +37,7 @@ namespace Lucid.Domain.Tests.Account.Commands
             validCommand().ShouldBeValid();
 
             validCommand().ShouldBeInvalid(c => c.Name = null);
-            validCommand().ShouldBeInvalid(c => c.Name = "");
+            validCommand().ShouldBeInvalid(c => c.Name = "Inv");
         }
     }
 }
