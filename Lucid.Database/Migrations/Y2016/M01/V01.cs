@@ -1,5 +1,4 @@
-﻿using Lucid.Database.Schema;
-using FluentMigrator;
+﻿using FluentMigrator;
 
 namespace Lucid.Database.Migrations.Y2016.M01
 {
@@ -14,21 +13,18 @@ namespace Lucid.Database.Migrations.Y2016.M01
 
         private void CreateUserTable()
         {
-            var table = Db.Table_User;
-
-            Create.Table(table.Name)
-                .LucidPrimaryKey(table.Name, table.Column_Id)
-                .WithColumn(table.Column_Email).AsAnsiString().NotNullable()
-                .WithColumn(table.Column_LastLoggedIn).AsDateTime().NotNullable();
+            Create.Table("User")
+                .LucidPrimaryKey("User", "Id")
+                .WithColumn("Email").AsAnsiString().NotNullable()
+                .WithColumn("LastLoggedIn").AsDateTime().NotNullable();
         }
 
         private void CreateDesignTable()
         {
-            var table = Db.Table_Design;
 
-            Create.Table(table.Name)
-                .LucidPrimaryKey(table.Name, table.Column_Id)
-                .WithColumn(table.Column_Name).AsAnsiString().NotNullable();
+            Create.Table("Design")
+                .LucidPrimaryKey("Design", "Id")
+                .WithColumn("Name").AsAnsiString().NotNullable();
         }
     }
 }
