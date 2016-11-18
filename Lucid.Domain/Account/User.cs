@@ -7,26 +7,28 @@ namespace Lucid.Domain.Account
     {
         protected User() { }
 
-        public virtual string   Email           { get; protected set; }
+        public virtual string   Name            { get; protected set; }
         public virtual DateTime LastLoggedIn    { get; protected set; }
 
-        public static User Login(string email)
+        public static User Login(string name)
         {
-            var user =
+            var existingUser =
                 Repository.Query<User>()
-                    .Filter(u => u.Email == email)
+                    .Filter(u => u.Name == name)
                     .SingleOrDefault();
 
-            if (user == null)
-            {
-                user = new User
+            var user = existingUser ??
+                new User
                 {
-                    Email = email,
+                    Name = name,
                 };
-            }
 
             user.LastLoggedIn = Registry.NowUtc();
-            return Repository.Save(user);
+
+            if (existingUser == null)
+                Repository.Save(user);
+
+            return user;
         }
     }
 }

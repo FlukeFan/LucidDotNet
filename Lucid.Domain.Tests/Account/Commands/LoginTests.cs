@@ -1,9 +1,9 @@
 ﻿using System;
+using FluentAssertions;
 using Lucid.Domain.Account;
 using Lucid.Domain.Account.Commands;
 using Lucid.Domain.Contract.Account.Commands;
 using Lucid.Domain.Tests.Utility;
-using FluentAssertions;
 using NUnit.Framework;
 
 namespace Lucid.Domain.Tests.Account.Commands
@@ -16,13 +16,13 @@ namespace Lucid.Domain.Tests.Account.Commands
             var cmd =
                 new Login
                 {
-                    Email = "cmd.test@email.com",
+                    Name = "CmdTest",
                 };
 
             var userDto = new LoginHandler().Execute(cmd);
 
             Repository.ShouldContain<User>(userDto.UserId);
-            userDto.Email.Should().Be("cmd.test@email.com");
+            userDto.Name.Should().Be("CmdTest");
         }
 
         [Test]
@@ -31,13 +31,13 @@ namespace Lucid.Domain.Tests.Account.Commands
             Func<Login> validCommand = () =>
                 new Login
                 {
-                    Email = "valid.mail@valid.com",
+                    Name = "ValidName",
                 };
 
             validCommand().ShouldBeValid();
 
-            validCommand().ShouldBeInvalid(c => c.Email = null);
-            validCommand().ShouldBeInvalid(c => c.Email = "");
+            validCommand().ShouldBeInvalid(c => c.Name = null);
+            validCommand().ShouldBeInvalid(c => c.Name = "");
         }
     }
 }

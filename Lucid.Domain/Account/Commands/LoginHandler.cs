@@ -9,7 +9,7 @@ namespace Lucid.Domain.Account.Commands
     {
         public UserDto Execute(Login cmd)
         {
-            var user = User.Login(cmd.Email);
+            var user = User.Login(cmd.Name);
             return UserDtoMapper.Map(user);
         }
     }

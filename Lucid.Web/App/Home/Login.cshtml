@@ -15,9 +15,9 @@
     @using (var form = Html.Form(Model.Cmd))
     {
         <div>
-            @form.Html.LabelFor(c => c.Email, "Login")
-            @form.Html.TextBoxFor(c => c.Email)
-            @form.Html.ValidationMessageFor(c => c.Email)
+            @form.Html.LabelFor(c => c.Name, "Name")
+            @form.Html.TextBoxFor(c => c.Name)
+            @form.Html.ValidationMessageFor(c => c.Name)
         </div>
 
         <input type="submit" value="Login" />

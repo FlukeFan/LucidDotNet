@@ -62,6 +62,7 @@
     <Compile Include="Migrations\DeployedMigrations.cs" />
     <Compile Include="Migrations\VersionUtil.cs" />
     <Compile Include="Migrations\Y2016\M01\V01.cs" />
+    <Compile Include="Migrations\Y2016\M11\V01.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>

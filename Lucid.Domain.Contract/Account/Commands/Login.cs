@@ -6,7 +6,7 @@ namespace Lucid.Domain.Contract.Account.Commands
 {
     public class Login : ICommand<UserDto>
     {
-        [Required(ErrorMessage = "Please supply an Email")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Please supply a Name")]
+        public string Name { get; set; }
     }
 }

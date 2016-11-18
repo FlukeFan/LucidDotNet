@@ -9,7 +9,7 @@ namespace Lucid.Web.Utility
         public string       Name        { get; protected set; }
         public IIdentity    Identity    { get; protected set; }
 
-        public LucidUser(UserDto userDto) : this(userDto.UserId, userDto.Email)
+        public LucidUser(UserDto userDto) : this(userDto.UserId, userDto.Name)
         {
         }
 

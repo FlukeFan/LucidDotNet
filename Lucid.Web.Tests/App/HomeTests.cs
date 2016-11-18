@@ -32,7 +32,7 @@ namespace Lucid.Web.Tests.App
                 var get = client.Get(Actions.Login());
                 var form = get.Form<Login>();
 
-                form.GetText(m => m.Email).Should().Be("");
+                form.GetText(m => m.Name).Should().Be("");
             });
         }
 
@@ -44,7 +44,7 @@ namespace Lucid.Web.Tests.App
                 ExecutorStub.SetupCommand(new Login(), new UserDto
                 {
                     UserId = 123,
-                    Email = "test name",
+                    Name = "test name",
                 });
 
                 var authenticationSet = false;
@@ -58,12 +58,12 @@ namespace Lucid.Web.Tests.App
                 };
 
                 var response = client.Get(Actions.Login()).Form<Login>()
-                    .SetText(m => m.Email, "user1")
+                    .SetText(m => m.Name, "user1")
                     .Submit(client);
 
                 ExecutorStub.Executed<Login>(0).ShouldBeEquivalentTo(new Login
                 {
-                    Email = "user1",
+                    Name = "user1",
                 });
 
                 authenticationSet.Should().BeTrue("authentication should have been set");

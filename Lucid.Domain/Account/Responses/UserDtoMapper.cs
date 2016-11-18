@@ -9,7 +9,7 @@ namespace Lucid.Domain.Account.Responses
             return new UserDto
             {
                 UserId  = user.Id,
-                Email   = user.Email,
+                Name   = user.Name,
             };
         }
     }
