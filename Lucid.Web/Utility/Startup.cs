@@ -45,9 +45,11 @@ namespace Lucid.Web.Utility
 
         private bool SkipAuthentication(ControllerContext context)
         {
-            var isHome = context.Controller.GetType() == typeof(App.Home.HomeController);
+            var controllerType = context.Controller.GetType();
+            var isHome = controllerType == typeof(App.Home.HomeController);
+            var isHtml = controllerType == typeof(App.Html.HtmlController);
 
-            return isHome;
+            return isHome || isHtml;
         }
     }
 }
