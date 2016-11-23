@@ -1,6 +1,6 @@
 ﻿@inherits System.Web.Mvc.WebViewPage<LoginModel>
 @using System.Web.Mvc.Html
-@using Lucid.Web.Utility.Html
+@using MvcForms
 @using Lucid.Web.App.Home
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
     <div>Login</div>
 
     @Html.ValidationSummary(true)
-    @using (var form = Html.Form(Model.Cmd))
+    @using (var form = Html.FormFor(Model.Cmd))
     {
         <div>
             @form.Html.LabelFor(c => c.Name, "Name")

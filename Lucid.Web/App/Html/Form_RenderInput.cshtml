@@ -1,9 +1,0 @@
-﻿@using System.Web.Mvc.Html
-@using Lucid.Web.Utility.Html
-@using Lucid.Web.App.Html
-@inherits System.Web.Mvc.WebViewPage<FormModel>
-
-@using (var f = Html.Form(Model.Cmd))
-{
-    @f.Html.TextBoxFor(m => m.Name)
-}
