@@ -13,7 +13,8 @@
 
 <hr />
 
-<form id="rawForm">
+@using (Html.Form().Tag(t => t.Id("rawForm")).Begin())
+{
     <table>
         <tbody>
 
@@ -158,11 +159,15 @@
 
         </tbody>
     </table>
-</form>
+}
 
 <script>
 
     var form = document.getElementById("rawForm");
+
+    if (form === null)
+        alert("form id=rawForm not found");
+
     var httpMethodSelect = document.getElementById("httpMethod");
     httpMethodSelect.addEventListener('change', httpMethodSelectChange);
     httpMethodSelect.value = '@Model.HttpMethod.ToLower()';

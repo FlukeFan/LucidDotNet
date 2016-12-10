@@ -12,7 +12,7 @@
     <div>Login</div>
 
     @Html.ValidationSummary(true)
-    @using (var form = Html.FormFor(Model.Cmd))
+    @using (var form = Html.FormFor(Model.Cmd).Begin())
     {
         <div>
             @form.Html.LabelFor(c => c.Name, "Name")
