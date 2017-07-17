@@ -51,17 +51,14 @@
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Reposify, Version=0.0.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reposify.0.0.0.4\lib\net45\Reposify.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Reposify, Version=0.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.0.0.0.5\lib\net45\Reposify.dll</HintPath>
     </Reference>
-    <Reference Include="Reposify.NHibernate, Version=0.0.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reposify.NHibernate.0.0.0.4\lib\net45\Reposify.NHibernate.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Reposify.NHibernate, Version=0.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.NHibernate.0.0.0.5\lib\net45\Reposify.NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Reposify.Testing, Version=0.0.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reposify.Testing.0.0.0.4\lib\net45\Reposify.Testing.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Reposify.Testing, Version=0.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.Testing.0.0.0.5\lib\net45\Reposify.Testing.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
