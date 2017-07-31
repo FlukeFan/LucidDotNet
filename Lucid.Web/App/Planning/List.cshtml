@@ -1,27 +1,17 @@
-﻿@inherits System.Web.Mvc.WebViewPage<IList<DesignDto>>
-@using System.Web.Mvc.Html
-@using Lucid.Domain.Contract.Product.Responses
+﻿@inherits LucidPage<IList<DesignDto>>
 @using Lucid.Web.App.Planning
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Designs</title>
-    <meta charset="utf-8" />
-</head>
-<body>
+@{
+    SetLayout(title: "Designs");
+}
+<div>Design</div>
 
-    <div>Design</div>
+<ul>
+    @foreach (var design in Model)
+    {
+        <li>Design: @design.Name</li>
+    }
+</ul>
 
-    <ul>
-        @foreach (var design in Model)
-        {
-            <li>Design: @design.Name</li>
-        }
-    </ul>
-
-    <div>
-        <a href="@Url.Content(Actions.StartDesign())">Start Design</a>
-    </div>
-
-</body>
-</html>
+<div>
+    <a href="@Url.Content(Actions.StartDesign())">Start Design</a>
+</div>

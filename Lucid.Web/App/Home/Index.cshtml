@@ -1,20 +1,14 @@
-﻿@inherits System.Web.Mvc.WebViewPage
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home page</title>
-    <meta charset="utf-8" />
-</head>
-<body>
-    <div id="homeTest">Hello world</div>
+﻿@inherits LucidPage<object>
+@{
+    SetLayout(title: "Home page");
+}
+<div id="homeTest">Hello world</div>
 
-    <div>
-        <ul>
-            <li><a href="@Url.Content(Lucid.Web.App.Home.Actions.Login())">Login</a></li>
-            <li><a href="@Url.Content(Lucid.Web.App.Home.Actions.LogOut())">Log Out</a></li>
-            <li><a href="@Url.Content(Lucid.Web.App.Generation.Actions.Generate())">Generate Project</a></li>
-            <li><a href="@Url.Content(Lucid.Web.App.Planning.Actions.List())">Designs</a></li>
-        </ul>
-    </div>
-</body>
-</html>
+<div>
+    <ul>
+        <li><a href="@Url.Content(Lucid.Web.App.Home.Actions.Login())">Login</a></li>
+        <li><a href="@Url.Content(Lucid.Web.App.Home.Actions.LogOut())">Log Out</a></li>
+        <li><a href="@Url.Content(Lucid.Web.App.Generation.Actions.Generate())">Generate Project</a></li>
+        <li><a href="@Url.Content(Lucid.Web.App.Planning.Actions.List())">Designs</a></li>
+    </ul>
+</div>

@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        Header @DateTime.Now.Ticks
+    </div>
+    <div data-pjax="true">
+        @RenderBody()
+    </div>
+
+    <script src="~/Scripts/jquery-1.12.4.js"></script>
+    <script src="~/Scripts/pjax.js"></script>
+    <script src="~/Scripts/lucid.js"></script>
+</body>
+</html>

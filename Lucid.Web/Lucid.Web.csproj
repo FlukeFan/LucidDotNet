@@ -136,9 +136,13 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App\Html\RawForm.cshtml" />
     <Content Include="App\Home\Login.cshtml" />
+    <Content Include="App\web.config" />
+    <Content Include="App\Shared\_master.cshtml" />
+    <Content Include="App\Shared\_masterPjax.cshtml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\lucid.js" />
     <Content Include="Scripts\pjax.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -164,6 +168,8 @@
     <Compile Include="App\Html\RawFormModel.cs" />
     <Compile Include="App\Planning\PlanningController.cs" />
     <Compile Include="App\Planning\StartDesignModel.cs" />
+    <Compile Include="App\Shared\LucidPage.cs" />
+    <Compile Include="App\Shared\SharedViews.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,6 +196,7 @@
       <Name>Lucid.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

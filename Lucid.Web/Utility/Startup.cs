@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Lucid.Database;
 using Lucid.Infrastructure;
 using Lucid.Infrastructure.NHibernate;
+using MvcForms;
 using SimpleFacade.Execution;
 using SimpleFacade.Validation;
 
@@ -17,6 +18,8 @@ namespace Lucid.Web.Utility
                 App.Home.Actions.Login(),
                 SkipAuthentication,
                 LucidUser.CreateFromCookieValue));
+
+            GlobalFilters.Filters.Add(new PjaxFilter());
 
             InitExecutor();
             InitRepository();

@@ -1,26 +1,18 @@
-﻿@inherits System.Web.Mvc.WebViewPage<StartDesignModel>
-@using System.Web.Mvc.Html
-@using MvcForms
+﻿@inherits LucidPage<StartDesignModel>
 @using Lucid.Web.App.Planning
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Start Design</title>
-    <meta charset="utf-8" />
-</head>
-<body>
-    <div>Start design</div>
+@{
+    SetLayout(title: "Start Design");
+}
+<div>Start design</div>
 
-    @Html.ValidationSummary(true)
-    @using (var form = Html.FormFor(Model.Cmd).Begin())
-    {
-        <div>
-            @form.Html.LabelFor(c => c.Name, "Design Name")
-            @form.Html.TextBoxFor(c => c.Name)
-            @form.Html.ValidationMessageFor(c => c.Name)
-        </div>
+@Html.ValidationSummary(true)
+@using (var form = Html.FormFor(Model.Cmd).Begin())
+{
+    <div>
+        @form.Html.LabelFor(c => c.Name, "Design Name")
+        @form.Html.TextBoxFor(c => c.Name)
+        @form.Html.ValidationMessageFor(c => c.Name)
+    </div>
 
-        <input type="submit" value="Start Design"/>
-    }
-</body>
-</html>
+    <input type="submit" value="Start Design"/>
+}
