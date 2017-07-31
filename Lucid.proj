@@ -127,7 +127,10 @@
     <Error Text="Need to set LucidFtpRemoteDir variable" Condition="'$(LucidFtpRemoteDir)'==''" />
     <Exec Command="lib\ncftp\ncftpput.exe -f $(LucidFtpHostFile) -S .tmp $(LucidFtpRemoteDir) _output\Packaged.zip" />
     <!-- FTP web.config to force restart of site -->
-    <Exec Command="lib\ncftp\ncftpput.exe -f $(LucidFtpHostFile) -S .tmp $(LucidFtpRemoteDir) Lucid.Web\Web.config" />
+    <MakeDir Directories="_output\_tmp" />
+    <Exec Command="lib\ncftp\ncftpget.exe -f $(LucidFtpHostFile) _output\_tmp $(LucidFtpRemoteDir)/Web.config" />
+    <Exec Command="lib\ncftp\ncftpput.exe -f $(LucidFtpHostFile) $(LucidFtpRemoteDir) _output\_tmp\Web.config" />
+    <RemoveDir Directories="_output\_tmp" />
   </Target>
 
 </Project>
