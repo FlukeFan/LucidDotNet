@@ -1,26 +1,18 @@
-﻿@inherits System.Web.Mvc.WebViewPage<GenerateModel>
-@using System.Web.Mvc.Html
-@using MvcForms
+﻿@inherits LucidPage<GenerateModel>
 @using Lucid.Web.App.Generation
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Generate Project</title>
-    <meta charset="utf-8" />
-</head>
-<body>
-    <div>Generate Project</div>
+@{
+    SetLayout(title: "Generate Project");
+}
+<div>Generate Project</div>
 
-    @Html.ValidationSummary(true)
-    @using (var form = Html.FormFor(Model.Cmd).Begin())
-    {
-        <div>
-            @form.Html.LabelFor(c => c.Name, "Project Name")
-            @form.Html.TextBoxFor(c => c.Name)
-            @form.Html.ValidationMessageFor(c => c.Name)
-        </div>
+@Html.ValidationSummary(true)
+@using (var form = Html.FormFor(Model.Cmd).Begin())
+{
+    <div>
+        @form.Html.LabelFor(c => c.Name, "Project Name")
+        @form.Html.TextBoxFor(c => c.Name)
+        @form.Html.ValidationMessageFor(c => c.Name)
+    </div>
 
-        <input type="submit" value="Generate Project" />
-    }
-</body>
-</html>
+    <input type="submit" value="Generate Project" data-nopjax="true" />
+}

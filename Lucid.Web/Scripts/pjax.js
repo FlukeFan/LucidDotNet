@@ -29,6 +29,10 @@ var pjax = {};
     function navigate(e) {
 
         var anchor = $(e.target);
+
+        if (anchor.attr('data-nopjax'))
+            return;
+
         var container = anchor.closest('[data-pjax]');
         var url = anchor.attr('href');
 
@@ -69,11 +73,14 @@ var pjax = {};
     function submit(e) {
 
         var form = $(e.currentTarget);
-        var container = form.closest('[data-pjax]');
-
-        var data = form.serialize();
 
         var clickedButton = form.find('*[clicked=true]');
+
+        if (clickedButton.attr('data-nopjax'))
+            return;
+
+        var container = form.closest('[data-pjax]');
+        var data = form.serialize();
 
         if (clickedButton.length > 0)
             data += "&" + clickedButton.attr('name') + "=" + clickedButton.attr('value');
