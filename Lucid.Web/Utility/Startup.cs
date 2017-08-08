@@ -51,8 +51,9 @@ namespace Lucid.Web.Utility
             var controllerType = context.Controller.GetType();
             var isHome = controllerType == typeof(App.Home.HomeController);
             var isHtml = controllerType == typeof(App.Html.HtmlController);
+            var isGeneration = controllerType == typeof(App.Generation.GenerationController);
 
-            return isHome || isHtml;
+            return isHome || isHtml || isGeneration;
         }
     }
 }
