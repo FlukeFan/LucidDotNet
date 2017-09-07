@@ -75,6 +75,8 @@ namespace Lucid.Web.Tests.ProjectCreation
                         if (knownGeneratedFiles.Contains(expectedFile))
                             continue;
 
+                        expectedFile.ToLower().Should().NotContain("lucid", "file should have been renamed");
+
                         zippedFiles.Should().Contain(expectedFile,
                             "file {0} was referenced by project {1}", file, csproj.Name);
                     }

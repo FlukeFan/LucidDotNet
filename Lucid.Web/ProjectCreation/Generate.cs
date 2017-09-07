@@ -115,7 +115,7 @@ namespace Lucid.Web.ProjectCreation
             if (!inputEntry.IsFile)
                 return;
 
-            var fileName = inputEntry.Name.Replace("Lucid", newName);
+            var fileName = inputEntry.Name.Replace("Lucid", newName).Replace("lucid", ToCamelCase(newName));
             using (var inputStream = zipInput.GetInputStream(inputEntry))
             {
                 var newEntry = new ZipEntry(fileName);
@@ -126,6 +126,11 @@ namespace Lucid.Web.ProjectCreation
                 else
                     ProcessBinaryFile(inputEntry, inputStream, newEntry, zipOutput);
             }
+        }
+
+        private static string ToCamelCase(string pascalCase)
+        {
+            return char.ToLower(pascalCase[0]) + pascalCase.Substring(1);
         }
 
         private static void ProcessBinaryFile(ZipEntry inputEntry, Stream inputFileStream, ZipEntry newEntry, ZipOutputStream zipOutput)
@@ -216,6 +221,7 @@ namespace Lucid.Web.ProjectCreation
         private static string ReplaceLucid(string inputLine, string newName)
         {
             var outputLine = inputLine.Replace("Lucid", newName);
+            outputLine = outputLine.Replace("lucid", ToCamelCase(newName));
             return outputLine;
         }
 
