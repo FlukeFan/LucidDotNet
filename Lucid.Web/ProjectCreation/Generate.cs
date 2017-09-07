@@ -50,6 +50,7 @@ namespace Lucid.Web.ProjectCreation
             "EE62401E-B98D-47D7-A63E-B70A60117F30".ToUpper(), // solution folder
             "349c5851-65df-11da-9384-00065b846f21".ToUpper(), // web application
             "fae04ec0-301f-11d3-bf4b-00c04f79efbc".ToUpper(), // c# project
+            "D27CDB6E-AE6D-11cf-96B8-444553540000".ToUpper(), // jQuery reference to legacy flash object
         };
 
         public static readonly IList<string> GuidsToReplace = new List<string>

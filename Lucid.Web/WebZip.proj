@@ -23,7 +23,7 @@
     <FilesToZip Include="..\**\*.asax" />
     <FilesToZip Include="..\**\*.config" Exclude="..\packages\**;..\.vs\**;..\Lucid.Web\bin\**;..\Lucid.Web\settings.config" />
     <FilesToZip Include="..\**\*.eot;**\*.svg;**\*.ttf;**\*.woff;**\*.woff2" Exclude="..\packages\**" />
-    <FilesToZip Include="**\*.css;**\*.map" />
+    <FilesToZip Include="**\*.css;**\*.map;**\*.js" />
     <FilesToZip Include="..\**\favicon.ico" />
   </ItemGroup>
   

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Xml;
 using FluentAssertions;
 using ICSharpCode.SharpZipLib.Zip;
 using Lucid.Web.ProjectCreation;
@@ -12,7 +14,76 @@ namespace Lucid.Web.Tests.ProjectCreation
     public class GenerateTests
     {
         [Test]
-        public void GuidsAreUsedInProject()
+        public void GeneratedProjectContainsFilesReferencedByEachCsproj()
+        {
+            var cmd = new GenerateProject { Name = "DemoProj" };
+            var bytes = cmd.Execute();
+
+            var zippedFiles = new List<string>();
+            var csProjEntries = new List<CsprojEntry>();
+
+            using (var ms = new MemoryStream(bytes))
+            using (var zipFile = new ZipFile(ms))
+            {
+                foreach (ZipEntry zipEntry in zipFile)
+                {
+                    var name = zipEntry.Name;
+
+                    if (zipEntry.IsFile)
+                        zippedFiles.Add(name.Replace("/", "\\"));
+
+                    if (name.ToLower().EndsWith(".csproj"))
+                        using (var sr = new StreamReader(zipFile.GetInputStream(zipEntry)))
+                            csProjEntries.Add(new CsprojEntry
+                            {
+                                Name = zipEntry.Name,
+                                Folder = Path.GetDirectoryName(zipEntry.Name),
+                                Content = sr.ReadToEnd(),
+                            });
+                }
+            }
+
+            var knownGeneratedFiles = new string[]
+            {
+                "DemoProj.Web\\Project.zip", // this is generated in the 'BeforeBuild'
+            };
+
+            var fileElements = new string[]
+            {
+                "Compile",
+                "None",
+                "Content",
+                "EmbeddedResource",
+            };
+
+            foreach (var csproj in csProjEntries)
+            {
+                var proj = new XmlDocument();
+                proj.LoadXml(csproj.Content);
+
+                foreach (XmlElement el in proj.SelectNodes("//*"))
+                {
+                    if (fileElements.Contains(el.Name) && el.HasAttribute("Include"))
+                    {
+                        var file = el.Attributes["Include"].Value;
+
+                        if (file.Contains(".."))
+                            continue; // ignore relative files
+
+                        var expectedFile = Path.Combine(csproj.Folder, file);
+
+                        if (knownGeneratedFiles.Contains(expectedFile))
+                            continue;
+
+                        zippedFiles.Should().Contain(expectedFile,
+                            "file {0} was referenced by project {1}", file, csproj.Name);
+                    }
+                }
+            }
+        }
+
+        [Test]
+        public void GuidsUsedInProjectAreKnown()
         {
             var assembly = typeof(Generate).Assembly;
             var allGuidsInZip = new List<string>();
@@ -78,6 +149,13 @@ namespace Lucid.Web.Tests.ProjectCreation
             var outputLine = Generate.ProcessLine(inputLine, "NewProj1");
 
             outputLine.Should().Be("    <compilation debug=\"true\" targetFramework=\"4.5\" optimizeCompilations=\"true\"  />");
+        }
+
+        public class CsprojEntry
+        {
+            public string Name;
+            public string Folder;
+            public string Content;
         }
     }
 }

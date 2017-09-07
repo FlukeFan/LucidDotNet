@@ -21,7 +21,6 @@ namespace Lucid.Web.Tests.ProjectCreation
 
             var bytes = cmd.Execute();
 
-            var buffer = new byte[4096];
             var fileCount = 0;
 
             using (var ms = new MemoryStream(bytes))
