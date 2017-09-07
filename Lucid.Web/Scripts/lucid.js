@@ -1,4 +1,4 @@
 ﻿
 (function () {
-    pjax.init();
+    mvcForms.init();
 }());
