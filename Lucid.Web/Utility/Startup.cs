@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using Lucid.Database;
 using Lucid.Infrastructure;
 using Lucid.Infrastructure.NHibernate;
@@ -21,8 +22,18 @@ namespace Lucid.Web.Utility
 
             GlobalFilters.Filters.Add(new PjaxFilter());
 
+            RegisterBundles(BundleTable.Bundles);
+
             InitExecutor();
             InitRepository();
+        }
+
+        private void RegisterBundles(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/mvcForms.min.js",
+                        "~/Scripts/lucid.js"));
         }
 
         private void InitExecutor()
