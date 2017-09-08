@@ -1,4 +1,4 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://MSBuild/Community/Tasks packages\MSBuildTasks.1.5.0.214\tools\MSBuild.Community.Tasks.xsd">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://MSBuild/Community/Tasks packages\MSBuildTasks.1.5.0.235\tools\MSBuild.Community.Tasks.xsd">
 
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.5.0.235\tools</MSBuildCommunityTasksPath>
@@ -107,17 +107,20 @@
     <CallTarget Targets="SetReleaseConfiguration" />
     <CallTarget Targets="Build" />
     <MSBuild Projects="Lucid.System.Tests\Lucid.System.Tests.csproj" Targets="BeforePackage" Properties="Configuration=Release" />
-    <Zip ZipFileName="_output\Packaged.zip" Files="@(FilesToZip)" WorkingDirectory="$(MSBuildProjectDirectory)\Lucid.Web" Quiet="true" />
+    <Copy SourceFiles="@(FilesToZip)" DestinationFolder="_output\Packaged\%(RecursiveDir)" />
+    <FileUpdate Files="_output\Packaged\Web.config" Regex="debug=&quot;true&quot;" ReplacementText="debug=&quot;false&quot;" />
+    <Zip ZipFileName="_output\Packaged.zip" Files="_output\Packaged" WorkingDirectory="_output\Packaged" Quiet="true" />
+    <RemoveDir Directories="_output\Packaged" />
   </Target>
 
   <ItemGroup>
-    <FilesToZip Include="Lucid.Web\favicon.ico" />
+    <FilesToZip Include="Lucid.Web\**\favicon.ico" />
     <FilesToZip Include="Lucid.Web\**\*.asax" />
     <FilesToZip Include="Lucid.Web\**\*.config" Exclude="Lucid.Web\settings.config;Lucid.Web\bin\**\*.config;Lucid.Web\packages.config" />
-    <FilesToZip Include="Lucid.Web\Project.zip" />
+    <FilesToZip Include="Lucid.Web\**\Project.zip" />
     <FilesToZip Include="Lucid.Web\**\*.cshtml" />
     <FilesToZip Include="Lucid.Web\**\*.js" />
-    <FilesToZip Include="Lucid.Web\bin\*.*" />
+    <FilesToZip Include="Lucid.Web\**\bin\*.*" />
     <FilesToZip Include="Lucid.Web\**\*.css;Lucid.Web\**\*.map" />
     <FilesToZip Include="Lucid.Web\**\*.eot;Lucid.Web\**\*.svg;Lucid.Web\**\*.ttf;Lucid.Web\**\*.woff;Lucid.Web\**\*.woff2" />
   </ItemGroup>
