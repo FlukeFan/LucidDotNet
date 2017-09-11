@@ -117,7 +117,6 @@
     <FilesToZip Include="Lucid.Web\**\favicon.ico" />
     <FilesToZip Include="Lucid.Web\**\*.asax" />
     <FilesToZip Include="Lucid.Web\**\*.config" Exclude="Lucid.Web\settings.config;Lucid.Web\bin\**\*.config;Lucid.Web\packages.config" />
-    <FilesToZip Include="Lucid.Web\**\Project.zip" />
     <FilesToZip Include="Lucid.Web\**\*.cshtml" />
     <FilesToZip Include="Lucid.Web\**\*.js" />
     <FilesToZip Include="Lucid.Web\**\bin\*.*" />
