@@ -28,8 +28,9 @@ namespace Lucid.Web.Utility
                     var outFile = Path.Combine(webFolder, zipEntry.Name);
                     Directory.CreateDirectory(Path.GetDirectoryName(outFile));
 
-                    using (var streamWriter = File.Create(outFile))
-                        StreamUtils.Copy(zipFile.GetInputStream(zipEntry), streamWriter, buffer);
+                    if (zipEntry.IsFile)
+                        using (var streamWriter = File.Create(outFile))
+                            StreamUtils.Copy(zipFile.GetInputStream(zipEntry), streamWriter, buffer);
                 }
 
             var deployedZip = HostingEnvironment.MapPath("~/Deployed.zip");
