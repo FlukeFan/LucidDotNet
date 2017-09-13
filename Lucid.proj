@@ -124,7 +124,7 @@
   </Target>
 
   <ItemGroup>
-    <AllFiles Include="**\*.*" Exclude=".vs\**\*.*" />
+    <AllFiles Include="**\*.*" Exclude=".vs\**\*.*;.git\**\*.*" />
   </ItemGroup>
 
   <Target Name="Deploy" DependsOnTargets="Package">
