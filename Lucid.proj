@@ -102,11 +102,21 @@
       />
   </Target>
 
-  <Target Name="Package" Inputs="@(FilesToZip)" Outputs="_output\Packaged.zip">
+  <Target Name="Package" Inputs="@(AllFiles)" Outputs="_output\Packaged.zip">
     <CallTarget Targets="Clean" />
     <CallTarget Targets="SetReleaseConfiguration" />
     <CallTarget Targets="Build" />
     <MSBuild Projects="Lucid.System.Tests\Lucid.System.Tests.csproj" Targets="BeforePackage" Properties="Configuration=Release" />
+    <ItemGroup>
+      <FilesToZip Include="Lucid.Web\**\favicon.ico" />
+      <FilesToZip Include="Lucid.Web\**\*.asax" />
+      <FilesToZip Include="Lucid.Web\**\*.config" Exclude="Lucid.Web\settings.config;Lucid.Web\bin\**\*.config;Lucid.Web\packages.config" />
+      <FilesToZip Include="Lucid.Web\**\*.cshtml" />
+      <FilesToZip Include="Lucid.Web\**\*.js" />
+      <FilesToZip Include="Lucid.Web\**\bin\*.*" />
+      <FilesToZip Include="Lucid.Web\**\*.css;Lucid.Web\**\*.map" />
+      <FilesToZip Include="Lucid.Web\**\*.eot;Lucid.Web\**\*.svg;Lucid.Web\**\*.ttf;Lucid.Web\**\*.woff;Lucid.Web\**\*.woff2" />
+    </ItemGroup>
     <Copy SourceFiles="@(FilesToZip)" DestinationFolder="_output\Packaged\%(RecursiveDir)" />
     <FileUpdate Files="_output\Packaged\Web.config" Regex="debug=&quot;true&quot;" ReplacementText="debug=&quot;false&quot;" />
     <Zip ZipFileName="_output\Packaged.zip" Files="_output\Packaged" WorkingDirectory="_output\Packaged" Quiet="true" />
@@ -114,14 +124,7 @@
   </Target>
 
   <ItemGroup>
-    <FilesToZip Include="Lucid.Web\**\favicon.ico" />
-    <FilesToZip Include="Lucid.Web\**\*.asax" />
-    <FilesToZip Include="Lucid.Web\**\*.config" Exclude="Lucid.Web\settings.config;Lucid.Web\bin\**\*.config;Lucid.Web\packages.config" />
-    <FilesToZip Include="Lucid.Web\**\*.cshtml" />
-    <FilesToZip Include="Lucid.Web\**\*.js" />
-    <FilesToZip Include="Lucid.Web\**\bin\*.*" />
-    <FilesToZip Include="Lucid.Web\**\*.css;Lucid.Web\**\*.map" />
-    <FilesToZip Include="Lucid.Web\**\*.eot;Lucid.Web\**\*.svg;Lucid.Web\**\*.ttf;Lucid.Web\**\*.woff;Lucid.Web\**\*.woff2" />
+    <AllFiles Include="**\*.*" Exclude=".vs\**\*.*" />
   </ItemGroup>
 
   <Target Name="Deploy" DependsOnTargets="Package">
