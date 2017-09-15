@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using MvcForms;
 
 namespace Lucid.Web.App.Shared
 {
@@ -13,6 +14,10 @@ namespace Lucid.Web.App.Shared
             Layout = user.Identity.IsAuthenticated
                 ? SharedViews.LoggedIn
                 : SharedViews.LoggedOut;
+
+            ViewBag.MasterLayout = Request.IsPjax()
+                ? SharedViews.MasterPjax
+                : SharedViews.Master;
         }
     }
 }
