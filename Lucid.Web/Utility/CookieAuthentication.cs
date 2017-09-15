@@ -51,10 +51,9 @@ namespace Lucid.Web.Utility
 
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            if (SkipAuthentication(filterContext))
-                return;
+            var authenticated = AuthenticateSuccess(filterContext);
 
-            if (!AuthenticateSuccess(filterContext))
+            if (!authenticated && !SkipAuthentication(filterContext))
                 HandleUnauthenticated(filterContext);
         }
 

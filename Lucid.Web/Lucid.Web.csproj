@@ -147,6 +147,8 @@
     <Content Include="App\web.config" />
     <Content Include="App\Shared\_master.cshtml" />
     <Content Include="App\Shared\_masterPjax.cshtml" />
+    <Content Include="App\Shared\_loggedOut.cshtml" />
+    <Content Include="App\Shared\_loggedIn.cshtml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
