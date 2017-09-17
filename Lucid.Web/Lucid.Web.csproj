@@ -130,6 +130,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\lucid.css">
+      <DependentUpon>lucid.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\lucid.min.css">
+      <DependentUpon>lucid.css</DependentUpon>
+    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -150,6 +156,10 @@
     <Content Include="App\Shared\_loggedOut.cshtml" />
     <Content Include="App\Shared\_loggedIn.cshtml" />
     <Content Include="Content\lucid.scss" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
