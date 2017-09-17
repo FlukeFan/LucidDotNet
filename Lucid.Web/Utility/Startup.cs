@@ -30,9 +30,15 @@ namespace Lucid.Web.Utility
 
         private void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-theme.css",
+                      "~/Content/lucid.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/mvcForms.min.js",
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/mvcForms.js",
                         "~/Scripts/lucid.js"));
         }
 
