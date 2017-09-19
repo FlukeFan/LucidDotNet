@@ -5,6 +5,7 @@ using System.Web.Optimization;
 using Lucid.Database;
 using Lucid.Infrastructure;
 using Lucid.Infrastructure.NHibernate;
+using Lucid.Web.App.Shared;
 using MvcForms;
 using SimpleFacade.Execution;
 using SimpleFacade.Validation;
@@ -15,14 +16,15 @@ namespace Lucid.Web.Utility
     {
         public virtual void Init()
         {
+            RegisterBundles(BundleTable.Bundles);
+
             GlobalFilters.Filters.Add(new CookieAuthentication(
                 App.Home.Actions.Login(),
                 SkipAuthentication,
                 LucidUser.CreateFromCookieValue));
 
             GlobalFilters.Filters.Add(new PjaxFilter());
-
-            RegisterBundles(BundleTable.Bundles);
+            GlobalFilters.Filters.Add(new LayoutFilter());
 
             InitExecutor();
             InitRepository();

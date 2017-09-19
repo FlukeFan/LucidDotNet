@@ -190,6 +190,7 @@
     <Compile Include="App\Html\RawFormModel.cs" />
     <Compile Include="App\Planning\PlanningController.cs" />
     <Compile Include="App\Planning\StartDesignModel.cs" />
+    <Compile Include="App\Shared\LayoutFilter.cs" />
     <Compile Include="App\Shared\LucidPage.cs" />
     <Compile Include="App\Shared\MenuModel.cs" />
     <Compile Include="App\Shared\Views.cs" />

@@ -23,11 +23,11 @@
         </div>
         @if (m.IsLoggedIn)
         {
-            <a id="logInOut" class="btn btn-success" href="@Url.Content(Lucid.Web.App.Home.Actions.LogOut())">Log Out @m.IdentityText</a>
+            <a id="logInOut" class="btn btn-primary" href="@Url.Content(Lucid.Web.App.Home.Actions.LogOut())">Log Out @m.IdentityText</a>
         }
         else
         {
-            <a id="logInOut" class="btn btn-primary" href="@Url.Content(Lucid.Web.App.Home.Actions.Login())">Log In</a>
+            <a id="logInOut" class="btn btn-success" href="@Url.Content(Lucid.Web.App.Home.Actions.Login())">Log In</a>
         }
     </nav>
 </div>
