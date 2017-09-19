@@ -11,13 +11,24 @@ namespace Lucid.Web.App.Shared
 
             var user = Context.User;
 
-            Layout = user.Identity.IsAuthenticated
-                ? SharedViews.LoggedIn
-                : SharedViews.LoggedOut;
+            if (user.Identity.IsAuthenticated)
+            {
+                // logged in
+                ViewBag.LoggedInBackground = "#cfc";
+                ViewBag.IdentityText = user.Identity.Name;
+            }
+            else
+            {
+                // logged out
+                ViewBag.LoggedInBackground = "#ccc";
+                ViewBag.IdentityText = "Logged Out";
+            }
+
+            Layout = Views.Menu;
 
             ViewBag.MasterLayout = Request.IsPjax()
-                ? SharedViews.MasterPjax
-                : SharedViews.Master;
+                ? Views.MasterPjax
+                : Views.Master;
         }
     }
 }

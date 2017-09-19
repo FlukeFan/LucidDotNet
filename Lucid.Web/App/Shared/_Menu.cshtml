@@ -1,0 +1,31 @@
+﻿@using Lucid.Web.App
+@{
+    Layout = ViewBag.MasterLayout;
+}
+<div class="header">
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="@Url.Content(Lucid.Web.App.Home.Actions.Login())">Login</a></li>
+                    <li><a href="@Url.Content(@Lucid.Web.App.Home.Actions.LogOut())">Log Out</a></li>
+                    <li><a href="@Url.Content(@Lucid.Web.App.Generation.Actions.Generate())">Generate Project</a></li>
+                    <li><a href="@Url.Content(@Lucid.Web.App.Planning.Actions.List())">Designs</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div style="background:@ViewBag.LoggedInBackground">
+    @ViewBag.IdentityText
+</div>
+<div>
+    @RenderBody()
+</div>

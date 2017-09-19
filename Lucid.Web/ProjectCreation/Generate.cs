@@ -27,6 +27,8 @@ namespace Lucid.Web.ProjectCreation
             ".cshtml",
             ".asax",
             ".css",
+            ".scss",
+            ".defaults",
             ".html",
         };
 

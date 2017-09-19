@@ -17,7 +17,7 @@ namespace Lucid.Web.Tests.App
             {
                 var response = client.Get(Actions.List());
 
-                response.Doc.Find("ul").Should().NotBeNull();
+                response.Doc.Find("#designList").Should().NotBeNull();
             });
         }
 
