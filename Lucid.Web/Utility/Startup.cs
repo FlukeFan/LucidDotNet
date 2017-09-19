@@ -40,7 +40,7 @@ namespace Lucid.Web.Utility
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/bootstrap.js",
-                        "~/Scripts/mvcForms.js",
+                        "~/Scripts/mvcForms.min.js",
                         "~/Scripts/lucid.js"));
         }
 
