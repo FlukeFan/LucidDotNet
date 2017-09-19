@@ -1,5 +1,4 @@
-﻿@using Lucid.Web.App
-@{
+﻿@{
     Layout = ViewBag.MasterLayout;
 }
 <div class="header">
@@ -8,6 +7,8 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
             </div>
@@ -23,9 +24,11 @@
     </nav>
 </div>
 
-<div style="background:@ViewBag.LoggedInBackground">
-    @ViewBag.IdentityText
-</div>
-<div>
-    @RenderBody()
+<div class="main">
+    <div style="background:@ViewBag.LoggedInBackground">
+        @ViewBag.IdentityText
+    </div>
+    <div>
+        @RenderBody()
+    </div>
 </div>

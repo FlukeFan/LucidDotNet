@@ -13,6 +13,27 @@ body {
 
 .lucid {
 
+    .header {
+        position: absolute;
+        overflow: visible;
+        top: 0px;
+        left: 0px;
+        height: 51px;
+        right: 0px;
+    }
 
+    .navbar {
+        margin-bottom: 0px;
+    }
+
+    .main {
+        position: absolute;
+        overflow: auto;
+        top: 51px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        background: #eee;
+    }
 
 }
