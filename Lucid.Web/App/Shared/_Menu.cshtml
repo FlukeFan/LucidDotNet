@@ -1,9 +1,11 @@
 ﻿@{
-    Layout = ViewBag.MasterLayout;
+    MenuModel m = ViewBag.MenuModel;
+    Layout = m.Layout;
 }
 <div class="header">
     <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Content(Lucid.Web.App.Home.Actions.Index())">Lucid</a>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -14,21 +16,24 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="@Url.Content(Lucid.Web.App.Home.Actions.Login())">Login</a></li>
-                    <li><a href="@Url.Content(@Lucid.Web.App.Home.Actions.LogOut())">Log Out</a></li>
-                    <li><a href="@Url.Content(@Lucid.Web.App.Generation.Actions.Generate())">Generate Project</a></li>
-                    <li><a href="@Url.Content(@Lucid.Web.App.Planning.Actions.List())">Designs</a></li>
+                    <li><a href="@Url.Content(Lucid.Web.App.Generation.Actions.Generate())">Generate Project</a></li>
+                    <li><a href="@Url.Content(Lucid.Web.App.Planning.Actions.List())">Designs</a></li>
                 </ul>
             </div>
         </div>
+        @if (m.IsLoggedIn)
+        {
+            <a id="logInOut" class="btn btn-success" href="@Url.Content(Lucid.Web.App.Home.Actions.LogOut())">Log Out @m.IdentityText</a>
+        }
+        else
+        {
+            <a id="logInOut" class="btn btn-primary" href="@Url.Content(Lucid.Web.App.Home.Actions.Login())">Log In</a>
+        }
     </nav>
 </div>
 
 <div class="main">
-    <div style="background:@ViewBag.LoggedInBackground">
-        @ViewBag.IdentityText
-    </div>
-    <div>
+    <div class="container-fluid">
         @RenderBody()
     </div>
 </div>

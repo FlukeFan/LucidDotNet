@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
+using FluentAssertions;
 using Lucid.Domain.Contract.Product.Commands;
 using Lucid.Web.App.Planning;
 using Lucid.Web.Tests.Utility;
-using FluentAssertions;
 using MvcTesting.Html;
 using NUnit.Framework;
 

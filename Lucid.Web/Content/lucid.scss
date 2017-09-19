@@ -20,6 +20,17 @@ body {
         left: 0px;
         height: 51px;
         right: 0px;
+
+        #logInOut {
+            position: absolute;
+            top: 8px;
+            left: 90px;
+
+            @media (min-width: 768px) {
+                left: auto;
+                right: 10px;
+            }
+        }
     }
 
     .navbar {

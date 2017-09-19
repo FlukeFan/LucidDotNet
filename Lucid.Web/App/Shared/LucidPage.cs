@@ -10,25 +10,11 @@ namespace Lucid.Web.App.Shared
             ViewBag.Title = title;
 
             var user = Context.User;
+            var isPjax = Request.IsPjax();
 
-            if (user.Identity.IsAuthenticated)
-            {
-                // logged in
-                ViewBag.LoggedInBackground = "#cfc";
-                ViewBag.IdentityText = user.Identity.Name;
-            }
-            else
-            {
-                // logged out
-                ViewBag.LoggedInBackground = "#ccc";
-                ViewBag.IdentityText = "Logged Out";
-            }
-
+            var menuModel = new MenuModel(isPjax, user.Identity);
+            ViewBag.MenuModel = menuModel;
             Layout = Views.Menu;
-
-            ViewBag.MasterLayout = Request.IsPjax()
-                ? Views.MasterPjax
-                : Views.Master;
         }
     }
 }
