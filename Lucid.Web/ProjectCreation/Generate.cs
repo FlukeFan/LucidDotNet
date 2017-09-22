@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Text;
 using System.Text.RegularExpressions;
-using ICSharpCode.SharpZipLib.Core;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace Lucid.Web.ProjectCreation
 {
@@ -83,12 +82,10 @@ namespace Lucid.Web.ProjectCreation
 
             var memoryStream = new MemoryStream();
 
-            using (var zipOutput = new ZipOutputStream(memoryStream))
+            using (var zipOutput = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
             {
-                zipOutput.IsStreamOwner = false;
-
-                using (var zipInput = new ZipFile(zipInputStream))
-                    foreach (ZipEntry zipEntry in zipInput)
+                using (var zipInput = new ZipArchive(zipInputStream, ZipArchiveMode.Read))
+                    foreach (var zipEntry in zipInput.Entries)
                         CopyEntry(zipInput, zipEntry, zipOutput, newName);
             }
 
@@ -112,21 +109,18 @@ namespace Lucid.Web.ProjectCreation
             return false;
         }
 
-        private static void CopyEntry(ZipFile zipInput, ZipEntry inputEntry, ZipOutputStream zipOutput, string newName)
+        private static void CopyEntry(ZipArchive zipInput, ZipArchiveEntry inputEntry, ZipArchive zipOutput, string newName)
         {
-            if (!inputEntry.IsFile)
-                return;
-
-            var fileName = inputEntry.Name.Replace("Lucid", newName).Replace("lucid", ToCamelCase(newName));
-            using (var inputStream = zipInput.GetInputStream(inputEntry))
+            var fileName = inputEntry.FullName.Replace("Lucid", newName).Replace("lucid", ToCamelCase(newName));
+            using (var inputStream = inputEntry.Open())
             {
-                var newEntry = new ZipEntry(fileName);
-                newEntry.DateTime = inputEntry.DateTime;
+                var newEntry = zipOutput.CreateEntry(fileName);
+                newEntry.LastWriteTime = inputEntry.LastWriteTime;
 
                 if (ShouldProcessFile(fileName))
-                    ProcessTextFile(inputStream, newEntry, zipOutput, newName);
+                    ProcessTextFile(inputStream, newEntry, newName);
                 else
-                    ProcessBinaryFile(inputEntry, inputStream, newEntry, zipOutput);
+                    ProcessBinaryFile(inputStream, newEntry);
             }
         }
 
@@ -135,16 +129,13 @@ namespace Lucid.Web.ProjectCreation
             return char.ToLower(pascalCase[0]) + pascalCase.Substring(1);
         }
 
-        private static void ProcessBinaryFile(ZipEntry inputEntry, Stream inputFileStream, ZipEntry newEntry, ZipOutputStream zipOutput)
+        private static void ProcessBinaryFile(Stream inputFileStream, ZipArchiveEntry newEntry)
         {
-            newEntry.Size = inputEntry.Size;
-
-            zipOutput.PutNextEntry(newEntry);
-            StreamUtils.Copy(inputFileStream, zipOutput, _buffer);
-            zipOutput.CloseEntry();
+            using (var newStream = newEntry.Open())
+                inputFileStream.CopyTo(newStream);
         }
 
-        private static void ProcessTextFile(Stream inputFileStream, ZipEntry newEntry, ZipOutputStream zipOutput, string newName)
+        private static void ProcessTextFile(Stream inputFileStream, ZipArchiveEntry newEntry, string newName)
         {
             var inputLines = ReadLines(inputFileStream);
             var outputLines = new List<string>();
@@ -158,11 +149,9 @@ namespace Lucid.Web.ProjectCreation
             var output = string.Join("\r\n", outputLines);
             var encoding = Encoding.UTF8;
             var bytes = encoding.GetBytes(output);
-            newEntry.Size = bytes.Length;
 
-            zipOutput.PutNextEntry(newEntry);
-            zipOutput.Write(bytes, 0, bytes.Length);
-            zipOutput.CloseEntry();
+            using (var outputStream = newEntry.Open())
+                outputStream.Write(bytes, 0, bytes.Length);
         }
 
         public static string[] ReadLines(Stream inputFileStream)
