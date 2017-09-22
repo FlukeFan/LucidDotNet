@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using Lucid.Web.ProjectCreation;
+using System.IO.Compression;
 using FluentAssertions;
-using ICSharpCode.SharpZipLib.Zip;
+using Lucid.Web.ProjectCreation;
 using NUnit.Framework;
 using SimpleFacade.Exceptions;
 using SimpleFacade.Validation;
@@ -24,8 +24,8 @@ namespace Lucid.Web.Tests.ProjectCreation
             var fileCount = 0;
 
             using (var ms = new MemoryStream(bytes))
-            using (var zipFile = new ZipFile(ms))
-                foreach (ZipEntry zipEntry in zipFile)
+            using (var zipFile = new ZipArchive(ms))
+                foreach (var zipEntry in zipFile.Entries)
                     fileCount++;
 
             fileCount.Should().BeGreaterThan(5);

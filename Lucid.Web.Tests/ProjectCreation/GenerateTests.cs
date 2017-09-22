@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
 using FluentAssertions;
-using ICSharpCode.SharpZipLib.Zip;
 using Lucid.Web.ProjectCreation;
 using NUnit.Framework;
 
@@ -23,21 +23,20 @@ namespace Lucid.Web.Tests.ProjectCreation
             var csProjEntries = new List<CsprojEntry>();
 
             using (var ms = new MemoryStream(bytes))
-            using (var zipFile = new ZipFile(ms))
+            using (var zipFile = new ZipArchive(ms))
             {
-                foreach (ZipEntry zipEntry in zipFile)
+                foreach (var zipEntry in zipFile.Entries)
                 {
-                    var name = zipEntry.Name;
+                    var name = zipEntry.FullName;
 
-                    if (zipEntry.IsFile)
-                        zippedFiles.Add(name.Replace("/", "\\"));
+                    zippedFiles.Add(name.Replace("/", "\\"));
 
                     if (name.ToLower().EndsWith(".csproj"))
-                        using (var sr = new StreamReader(zipFile.GetInputStream(zipEntry)))
+                        using (var sr = new StreamReader(zipEntry.Open()))
                             csProjEntries.Add(new CsprojEntry
                             {
-                                Name = zipEntry.Name,
-                                Folder = Path.GetDirectoryName(zipEntry.Name),
+                                Name = Path.GetFileName(name),
+                                Folder = Path.GetDirectoryName(name),
                                 Content = sr.ReadToEnd(),
                             });
                 }
@@ -92,10 +91,10 @@ namespace Lucid.Web.Tests.ProjectCreation
             var ignoredGenerateCs = false;
 
             using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.Web.Project.zip"))
-            using (var zipFile = new ZipFile(zipInputStream))
-                foreach (ZipEntry zipEntry in zipFile)
+            using (var zipFile = new ZipArchive(zipInputStream))
+                foreach (var zipEntry in zipFile.Entries)
                 {
-                    var fileName = zipEntry.Name;
+                    var fileName = zipEntry.FullName;
 
                     if (fileName.EndsWith("ProjectCreation/Generate.cs"))
                     {
@@ -106,12 +105,15 @@ namespace Lucid.Web.Tests.ProjectCreation
                     if (!Generate.ShouldProcessFile(fileName))
                         continue;
 
-                    var lines = Generate.ReadLines(zipFile.GetInputStream(zipEntry));
+                    using (var stream = zipEntry.Open())
+                    {
+                        var lines = Generate.ReadLines(stream);
 
-                    foreach (var line in lines)
-                        foreach (Match match in Generate.GuidSearch.Matches(line))
-                            allGuidsInZip.Add(match.Value.ToUpper());
-               }
+                        foreach (var line in lines)
+                            foreach (Match match in Generate.GuidSearch.Matches(line))
+                                allGuidsInZip.Add(match.Value.ToUpper());
+                    }
+                }
 
             ignoredGenerateCs.Should().BeTrue("should have found Generate.cs");
 

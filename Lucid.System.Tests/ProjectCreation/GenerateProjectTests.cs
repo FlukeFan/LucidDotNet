@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using FluentAssertions;
-using ICSharpCode.SharpZipLib.Core;
-using ICSharpCode.SharpZipLib.Zip;
 using Lucid.Web.ProjectCreation;
 using NUnit.Framework;
 
@@ -140,16 +139,16 @@ namespace Lucid.System.Tests.ProjectCreation
             if (Directory.Exists(folder))
                 DeleteFolder(folder, 5);
 
-            var buffer = new byte[4096];
             using (var ms = new MemoryStream(zipBytes))
-            using (var zipFile = new ZipFile(ms))
-                foreach (ZipEntry zipEntry in zipFile)
+            using (var zipFile = new ZipArchive(ms))
+                foreach (var zipEntry in zipFile.Entries)
                 {
-                    var outFile = Path.Combine(folder, zipEntry.Name);
+                    var outFile = Path.Combine(folder, zipEntry.FullName);
                     Directory.CreateDirectory(Path.GetDirectoryName(outFile));
 
                     using (var streamWriter = File.Create(outFile))
-                        StreamUtils.Copy(zipFile.GetInputStream(zipEntry), streamWriter, buffer);
+                    using (var inputStream = zipEntry.Open())
+                        inputStream.CopyTo(streamWriter);
                 }
         }
 
