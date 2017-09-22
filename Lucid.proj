@@ -119,7 +119,7 @@
     </ItemGroup>
     <Copy SourceFiles="@(FilesToZip)" DestinationFolder="_output\Packaged\%(RecursiveDir)" />
     <FileUpdate Files="_output\Packaged\Web.config" Regex="debug=&quot;true&quot;" ReplacementText="debug=&quot;false&quot;" />
-    <Zip ZipFileName="_output\Packaged.zip" Files="_output\Packaged" WorkingDirectory="_output\Packaged" Quiet="true" />
+    <Zip ZipFileName="_output\Packaged.zip" Files="_output\Packaged" WorkingDirectory="_output\Packaged" Quiet="true" ZipLevel="9" />
     <RemoveDir Directories="_output\Packaged" />
   </Target>
 
