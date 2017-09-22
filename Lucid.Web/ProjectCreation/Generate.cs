@@ -72,8 +72,6 @@ namespace Lucid.Web.ProjectCreation
         public static readonly Regex GuidSearch     = new Regex("([^-]{8}-[^-]{4}-[^-]{4}-[^-]{4}-[^-]{12})", RegexOptions.Compiled);
         public static readonly Regex TempDirSearch  = new Regex("tempDirectory=\"[^\"]*\"", RegexOptions.Compiled);
 
-        private static readonly byte[] _buffer = new byte[4096];
-
         private static IDictionary<string, string> _guidMap;
 
         public static MemoryStream Project(Stream zipInputStream, string newName)

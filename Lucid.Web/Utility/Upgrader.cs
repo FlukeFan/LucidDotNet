@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Hosting;
-using ICSharpCode.SharpZipLib.Core;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace Lucid.Web.Utility
 {
@@ -24,15 +23,17 @@ namespace Lucid.Web.Utility
             _updating = true;
 
             var webFolder = HostingEnvironment.MapPath("~");
-            var buffer = new byte[4096];
 
             var unzippedFolders = new List<string>();
             var unzippedFiles = new List<string>();
 
-            using (var zipFile = new ZipFile(packagedZip))
-                foreach (ZipEntry zipEntry in zipFile)
+            using (var zipFile = ZipFile.OpenRead(packagedZip))
+                foreach (var zipEntry in zipFile.Entries)
                 {
-                    var outFile = Path.Combine(webFolder, zipEntry.Name);
+                    if (zipEntry.Length == 0)
+                        continue;
+
+                    var outFile = Path.Combine(webFolder, zipEntry.FullName);
                     var folder = Path.GetDirectoryName(outFile);
 
                     if (!unzippedFolders.Contains(Normalise(folder)))
@@ -40,14 +41,12 @@ namespace Lucid.Web.Utility
 
                     Directory.CreateDirectory(folder);
 
-                    if (zipEntry.IsFile)
-                    {
-                        if (!unzippedFiles.Contains(Normalise(outFile)))
-                            unzippedFiles.Add(Normalise(outFile));
+                    if (!unzippedFiles.Contains(Normalise(outFile)))
+                        unzippedFiles.Add(Normalise(outFile));
 
-                        using (var streamWriter = File.Create(outFile))
-                            StreamUtils.Copy(zipFile.GetInputStream(zipEntry), streamWriter, buffer);
-                    }
+                    using (var streamWriter = File.Create(outFile))
+                    using (var zipInput = zipEntry.Open())
+                        zipInput.CopyTo(streamWriter);
                 }
 
             // delete any 'extra' files/folders if we're not in debug
