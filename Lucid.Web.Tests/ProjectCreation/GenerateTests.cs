@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -23,7 +22,6 @@ namespace Lucid.Web.Tests.ProjectCreation
             var zippedFiles = new List<string>();
             var csProjEntries = new List<CsprojEntry>();
 
-            Console.WriteLine("Collecting zipped files");
             using (var ms = new MemoryStream(bytes))
             using (var zipFile = new ZipArchive(ms))
             {
@@ -32,7 +30,6 @@ namespace Lucid.Web.Tests.ProjectCreation
                     var name = zipEntry.FullName;
 
                     var zippedFileName = name.Replace("/", "\\");
-                    Console.WriteLine(zippedFileName);
                     zippedFiles.Add(zippedFileName);
 
                     if (name.ToLower().EndsWith(".csproj"))
