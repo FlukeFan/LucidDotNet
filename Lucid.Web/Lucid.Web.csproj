@@ -148,7 +148,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="App\Html\RawForm.cshtml" />
     <Content Include="App\Home\Login.cshtml" />
     <Content Include="App\web.config" />
     <Content Include="App\Shared\_Master.cshtml" />
@@ -187,8 +186,6 @@
     <Compile Include="App\Generation\GenerationController.cs" />
     <Compile Include="App\Home\HomeController.cs" />
     <Compile Include="App\Home\LoginModel.cs" />
-    <Compile Include="App\Html\HtmlController.cs" />
-    <Compile Include="App\Html\RawFormModel.cs" />
     <Compile Include="App\Planning\PlanningController.cs" />
     <Compile Include="App\Planning\StartDesignModel.cs" />
     <Compile Include="App\Shared\LayoutFilter.cs" />

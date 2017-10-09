@@ -6,4 +6,3 @@
 -[Lucid.Web]Lucid.Web.LucidApplication
 -[Lucid.Web]Lucid.Web.App.Shared.*
 -[Lucid.Web]Lucid.Web.Utility.*
--[Lucid.Web]Lucid.Web.App.Html.HtmlController
