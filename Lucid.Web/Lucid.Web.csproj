@@ -62,8 +62,8 @@
     <Reference Include="MvcFolders, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvcFolders.0.0.0.3\lib\net45\MvcFolders.dll</HintPath>
     </Reference>
-    <Reference Include="MvcForms, Version=0.0.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvcForms.0.0.1.1\lib\net45\MvcForms.dll</HintPath>
+    <Reference Include="MvcForms, Version=0.0.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcForms.0.0.1.2\lib\net45\MvcForms.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -134,6 +134,8 @@
     <Content Include="Content\lucid.min.css">
       <DependentUpon>lucid.css</DependentUpon>
     </Content>
+    <Content Include="Content\mvcForms.css" />
+    <Content Include="Content\mvcForms.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

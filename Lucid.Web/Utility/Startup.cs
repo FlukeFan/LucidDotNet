@@ -35,6 +35,7 @@ namespace Lucid.Web.Utility
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-theme.css",
+                      "~/Content/mvcForms.css",
                       "~/Content/lucid.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
