@@ -2,6 +2,7 @@
 using Lucid.Domain.Contract.Product.Commands;
 using Lucid.Domain.Contract.Product.Queries;
 using Lucid.Web.Utility;
+using MvcForms;
 
 namespace Lucid.Web.App.Planning
 {
@@ -32,7 +33,7 @@ namespace Lucid.Web.App.Planning
         public ActionResult StartDesign(StartDesign cmd)
         {
             return Exec(cmd,
-                success: r => Redirect(Actions.List()),
+                success: r => this.ReturnModal(),
                 failure: () => StartDesign_Render(cmd));
         }
 

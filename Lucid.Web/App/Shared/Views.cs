@@ -4,6 +4,7 @@
     {
         public const string Master      = "~/App/Shared/_Master.cshtml";
         public const string MasterPjax  = "~/App/Shared/_MasterPjax.cshtml";
+        public const string Modal       = "~/App/Shared/_Modal.cshtml";
         public const string Menu        = "~/App/Shared/_Menu.cshtml";
     }
 }

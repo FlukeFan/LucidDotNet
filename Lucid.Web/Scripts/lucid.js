@@ -1,8 +1,8 @@
 ﻿
 (function () {
-    var pjaxOnError = pjax.onError;
+    var pjaxOnError = mfoPjax.onError;
 
-    pjax.onError = function (jqXHR, textStatus, errorThrown, context, callback) {
+    mfoPjax.onError = function (jqXHR, textStatus, errorThrown, context, callback) {
         if (!pjaxOnError(jqXHR, textStatus, errorThrown, context, callback))
         alert("Error: " + textStatus);
     };

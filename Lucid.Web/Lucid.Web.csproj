@@ -155,6 +155,7 @@
     <Content Include="App\Shared\_MasterPjax.cshtml" />
     <Content Include="App\Shared\_Menu.cshtml" />
     <Content Include="Content\lucid.scss" />
+    <Content Include="App\Shared\_Modal.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

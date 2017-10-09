@@ -14,5 +14,6 @@
         @form.Html.ValidationMessageFor(c => c.Name)
     </div>
 
-    <input type="submit" value="Start Design"/>
+    @Html.ButtonSubmit("Start Design")
+    @Html.LinkButtonCancelModal()
 }

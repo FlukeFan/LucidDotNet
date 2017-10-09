@@ -13,9 +13,17 @@ namespace Lucid.Web.App.Shared
                 return;
 
             var context = filterContext.HttpContext;
+            var request = context.Request;
+            var isModal = context.Request.IsPjaxModal();
+
+            if (isModal)
+            {
+                viewResult.MasterName = Views.Modal;
+                return;
+            }
+
             var user = context.User;
             var isPjax = context.Request.IsPjax();
-
             var menuModel = new MenuModel(isPjax, user.Identity);
             viewResult.ViewBag.MenuModel = menuModel;
             viewResult.MasterName = Views.Menu;

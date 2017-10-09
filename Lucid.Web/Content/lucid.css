@@ -37,3 +37,9 @@ body {
   background: #eee;
   padding: 15px; }
 
+.lucid .mfo-dialog {
+  background: #eee; }
+
+.lucid .lucid-modal {
+  padding: 10px; }
+
