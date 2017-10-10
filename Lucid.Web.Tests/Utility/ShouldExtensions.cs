@@ -6,7 +6,8 @@ namespace Lucid.Web.Tests.Utility
     {
         public static void BeAction(this StringAssertions stringAssertion, string action)
         {
-            stringAssertion.StartWith(action.Replace("~", ""));
+            var relativeAction = action.Replace("~", "");
+            stringAssertion.EndWith(relativeAction);
         }
     }
 }

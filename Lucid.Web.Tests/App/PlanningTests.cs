@@ -34,7 +34,6 @@ namespace Lucid.Web.Tests.App
         }
 
         [Test]
-        [Explicit("Until we get submit working with <button>s")]
         public void StartDesign_POST_ExecutesCommand()
         {
             WebAppTest(client =>
@@ -51,7 +50,7 @@ namespace Lucid.Web.Tests.App
                     Name = "web test",
                 });
 
-                response.ActionResultOf<RedirectResult>().Url.Should().Be(Actions.List());
+                response.ActionResultOf<RedirectResult>().Should().NotBeNull();
             });
         }
     }
