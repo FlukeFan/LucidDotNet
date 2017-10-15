@@ -4,6 +4,9 @@
 *, *:before, *:after {
   box-sizing: inherit; }
 
+.btn {
+  margin: 4px; }
+
 body {
   width: 100%;
   height: 100%; }

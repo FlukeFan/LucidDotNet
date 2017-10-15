@@ -7,6 +7,7 @@ using Lucid.Infrastructure;
 using Lucid.Infrastructure.NHibernate;
 using Lucid.Web.App.Shared;
 using MvcForms;
+using MvcForms.Styles.Bootstrap;
 using SimpleFacade.Execution;
 using SimpleFacade.Validation;
 
@@ -25,6 +26,8 @@ namespace Lucid.Web.Utility
 
             GlobalFilters.Filters.Add(new PjaxFilter());
             GlobalFilters.Filters.Add(new LayoutFilter());
+
+            Styler.Set(new BootstrapStyle());
 
             InitExecutor();
             InitRepository();

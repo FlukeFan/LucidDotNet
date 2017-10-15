@@ -181,7 +181,10 @@ var mfoPjax = {};
         var data = form.serialize();
 
         if (clickedButton.length > 0) {
-            data += '&' + clickedButton.attr('name') + '=' + clickedButton.attr('value');
+            var name = clickedButton.attr('name');
+            if (name) {
+                data += '&' + name + '=' + (clickedButton.attr('value') || "");
+            }
         }
 
         var context = {
@@ -255,6 +258,7 @@ var mfoPjax = {};
         if (url !== location.href) {
             history.pushState({ url: url, containerId: context.container.attr('id') }, null, url);
         }
+
     }
 
     function stripInternalParams(url) {
@@ -262,6 +266,44 @@ var mfoPjax = {};
     }
 
     function render(context, data) {
+
+        var first100 = data.substr(0, 100);
+
+        if (first100.indexOf('<html') >= 0 || first100.indexOf('<HTML') >= 0) {
+
+            // loading a full HTML page into the PJAX body is an error, so
+            // attempt to scrape out the <body> part of the page and
+            // disable the scripts
+            var bodyStart = Math.max(data.indexOf('<body'), data.indexOf('<BODY'));
+
+            if (bodyStart >= 0) {
+                data = data.substr(bodyStart + 5);
+                var bodyStartClose = data.indexOf('>');
+
+                if (bodyStartClose >= 0) {
+                    data = data.substr(bodyStartClose + 1);
+                }
+            }
+
+            var bodyEnd = Math.max(data.indexOf('body>'), data.indexOf('BODY>'));
+
+            if (bodyEnd >= 0) {
+                data = data.substr(0, bodyEnd);
+                var bodyEndOpen = data.lastIndexOf('</');
+
+                if (bodyEndOpen >= 0) {
+                    data = data.substr(0, bodyEndOpen);
+                }
+            }
+
+            data = data.replace(/<script/g, 'script_tag_disabled_pjax_error: ');
+            data = data.replace(/<SCRIPT/g, 'SCRIPT_TAG_DISABLED_PJAX_ERROR: ');
+
+            data = '<div data-title="Error - Attempt to load non-PJAX page into container">'
+                + '<h1 style="background:white; color: red">Error - Attempt to load non-PJAX page into container</h1>'
+                + '<div>' + data + '</div></div>';
+
+        }
 
         var container = context.container;
         container.html(data);
