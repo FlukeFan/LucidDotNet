@@ -18,9 +18,11 @@ body {
   left: 0px;
   height: 51px;
   right: 0px; }
+  .lucid .header .container {
+    position: relative; }
   .lucid .header #logInOut {
     position: absolute;
-    top: 8px;
+    top: 4px;
     left: 90px; }
     @media (min-width: 768px) {
       .lucid .header #logInOut {

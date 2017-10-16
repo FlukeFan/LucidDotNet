@@ -4,7 +4,7 @@
 }
 <div class="header">
     <nav class="navbar navbar-inverse navbar-static-top">
-        <div class="container-fluid">
+        <div class="container">
             <a class="navbar-brand" href="@Url.Content(Lucid.Web.App.Home.Actions.Index())">Lucid</a>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -20,20 +20,20 @@
                     <li><a href="@Url.Content(Lucid.Web.App.Planning.Actions.List())">Designs</a></li>
                 </ul>
             </div>
+            @if (m.IsLoggedIn)
+            {
+                @Html.LinkButton("Log Out " + m.IdentityText, Lucid.Web.App.Home.Actions.LogOut()).Style(BootstrapButton.Primary).Tag(t => t.Id("logInOut"))
+            }
+            else
+            {
+                @Html.LinkButton("Log In", Lucid.Web.App.Home.Actions.Login()).Style(BootstrapButton.Success).Tag(t => t.Id("logInOut"))
+            }
         </div>
-        @if (m.IsLoggedIn)
-        {
-            <a id="logInOut" class="btn btn-primary" href="@Url.Content(Lucid.Web.App.Home.Actions.LogOut())">Log Out @m.IdentityText</a>
-        }
-        else
-        {
-            <a id="logInOut" class="btn btn-success" href="@Url.Content(Lucid.Web.App.Home.Actions.Login())">Log In</a>
-        }
     </nav>
 </div>
 
 <div class="main">
-    <div class="container-fluid">
+    <div class="container">
         @RenderBody()
     </div>
 </div>

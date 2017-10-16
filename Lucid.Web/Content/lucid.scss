@@ -27,9 +27,13 @@ body {
         height: 51px;
         right: 0px;
 
+        .container {
+            position: relative;
+        }
+
         #logInOut {
             position: absolute;
-            top: 8px;
+            top: 4px;
             left: 90px;
 
             @media (min-width: 768px) {
