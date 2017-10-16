@@ -73,6 +73,26 @@ namespace Lucid.Web.Tests.App
         }
 
         [Test]
+        public void Login_POST_RedirectsToOriginalPage()
+        {
+            WebAppTest(client =>
+            {
+                CookieAuthentication.Authenticate = (r, user) => { };
+
+                ExecutorStub.SetupCommand(new Login(), new UserDto
+                {
+                    Name = "test name",
+                });
+
+                var response = client.Get(Actions.Login("http://someUrl")).Form<Login>()
+                    .SetText(m => m.Name, "user1")
+                    .Submit(client);
+
+                response.ActionResultOf<RedirectResult>().Url.Should().Be("http://someUrl");
+            });
+        }
+
+        [Test]
         public void LogOut_GET_ClearsAuthentication()
         {
             WebAppTest(client =>

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using Lucid.Domain.Contract.Account.Commands;
 using Lucid.Domain.Contract.Account.Responses;
 using Lucid.Web.Utility;
@@ -7,9 +8,9 @@ namespace Lucid.Web.App.Home
 {
     public static class Actions
     {
-        public static string Index()    { return "~/"; }
-        public static string Login()    { return "~/home/login/"; }
-        public static string LogOut()   { return "~/home/logout/"; }
+        public static string Index()                        { return "~/"; }
+        public static string Login(string returnUrl = null) { return "~/home/login/" + ((returnUrl == null) ? "" : $"?returnUrl={HttpUtility.UrlEncode(returnUrl)}"); }
+        public static string LogOut()                       { return "~/home/logout/"; }
     }
 
     public class HomeController : LucidController
@@ -38,7 +39,7 @@ namespace Lucid.Web.App.Home
         {
             var lucidUser = new LucidUser(domainUser);
             CookieAuthentication.Authenticate(Response, lucidUser);
-            return Redirect(Actions.Index());
+            return Redirect(Request["returnUrl"] ?? Actions.Index());
         }
 
         [HttpGet]
