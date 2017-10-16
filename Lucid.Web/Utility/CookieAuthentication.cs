@@ -38,13 +38,13 @@ namespace Lucid.Web.Utility
                 authCookie.Expires = DateTime.UtcNow.AddDays(-1);
         };
 
-        private string                              _loginAction;
+        private Func<string, string>                _loginAction;
         private Func<AuthenticationContext, bool>   _skipAuthentication;
         private Func<string, IPrincipal>            _createUser;
 
-        public CookieAuthentication(string loginAction, Func<AuthenticationContext, bool> skipAuthentication, Func<string, IPrincipal> createUser)
+        public CookieAuthentication(Func<string, string> loginAction, Func<AuthenticationContext, bool> skipAuthentication, Func<string, IPrincipal> createUser)
         {
-            _loginAction = (loginAction ?? "").ToLower();
+            _loginAction = loginAction;
             _skipAuthentication = skipAuthentication;
             _createUser = createUser;
         }
@@ -65,8 +65,9 @@ namespace Lucid.Web.Utility
         private bool SkipAuthentication(AuthenticationContext context)
         {
             var request = context.HttpContext.Request;
+            var loginAction = _loginAction(request.Url.OriginalString).ToLower();
 
-            if (request.AppRelativeCurrentExecutionFilePath.ToLower() == _loginAction || request.CurrentExecutionFilePath.ToLower() == _loginAction)
+            if (request.AppRelativeCurrentExecutionFilePath.ToLower() == loginAction || request.CurrentExecutionFilePath.ToLower() == loginAction)
                 return true;
 
             return _skipAuthentication(context);
@@ -93,7 +94,7 @@ namespace Lucid.Web.Utility
 
         private void HandleUnauthenticated(AuthenticationContext context)
         {
-            var url = string.Format("{0}?{1}={2}", _loginAction, "returnUrl", HttpUtility.UrlEncode(context.HttpContext.Request.Url.OriginalString));
+            var url = _loginAction(context.HttpContext.Request.Url.OriginalString);
             var redirect = new RedirectResult(url);
             context.Result = redirect;
         }

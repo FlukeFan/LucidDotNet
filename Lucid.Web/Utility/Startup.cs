@@ -20,7 +20,7 @@ namespace Lucid.Web.Utility
             RegisterBundles(BundleTable.Bundles);
 
             GlobalFilters.Filters.Add(new CookieAuthentication(
-                App.Home.Actions.Login(),
+                url => App.Home.Actions.Login(url),
                 SkipAuthentication,
                 LucidUser.CreateFromCookieValue));
 
