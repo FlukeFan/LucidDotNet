@@ -96,6 +96,7 @@ var mfoPjax = {};
     mfoPjax.onError = onError;
     mfoPjax.load = load;
     mfoPjax.reload = reload;
+    mfoPjax.onBeforeNonPjaxPushState = onBeforeNonPjaxPushState;
 
     var lastButton = null;
 
@@ -155,10 +156,11 @@ var mfoPjax = {};
             return;
         }
 
-        if (history.state === null || history.state.containerId !== container.attr('id')) {
+        if (history.state === null || history.state.containerId !== container.attr('id') || !history.state.navigatedFromPjax) {
             var state = history.state || {};
             state.url = location.pathname + location.search + location.hash;
             state.containerId = container.attr('id');
+            state.navigatedFromPjax = true;
             history.replaceState(state, null, '');
         }
 
@@ -205,11 +207,24 @@ var mfoPjax = {};
         e.preventDefault();
     }
 
+    function onBeforeNonPjaxPushState() {
+
+        var state = history.state;
+
+        if (state && state.navigatedFromPjax) {
+
+            delete state.navigatedFromPjax;
+            history.replaceState(state, '', null);
+
+        }
+
+    }
+
     function onPopState(e) {
 
         var popState = e.originalEvent.state;
 
-        if (popState === null || !popState.containerId) {
+        if (popState === null || !popState.containerId || !popState.navigatedFromPjax) {
             return;
         }
 
@@ -256,7 +271,7 @@ var mfoPjax = {};
         var url = stripInternalParams(jqXHR.getResponseHeader('X-PJAX-URL') || context.url);
 
         if (url !== location.href) {
-            history.pushState({ url: url, containerId: context.container.attr('id') }, null, url);
+            history.pushState({ url: url, containerId: context.container.attr('id'), navigatedFromPjax: true }, null, url);
         }
 
     }
@@ -535,6 +550,7 @@ var mfoDialog = {};
             history.replaceState(state, null, '');
         }
 
+        mfoPjax.onBeforeNonPjaxPushState();
         var url = location.pathname + location.search + location.hash;
         history.pushState({ dialogCount: count + 1 }, null, url);
 

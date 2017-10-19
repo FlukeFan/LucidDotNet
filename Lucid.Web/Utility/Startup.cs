@@ -27,7 +27,7 @@ namespace Lucid.Web.Utility
             GlobalFilters.Filters.Add(new PjaxFilter());
             GlobalFilters.Filters.Add(new LayoutFilter());
 
-            Styler.Set(new BootstrapStyle());
+            Styler.Set(new Bootstrap3Style());
 
             InitExecutor();
             InitRepository();

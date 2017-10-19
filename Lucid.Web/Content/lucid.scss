@@ -19,6 +19,10 @@ body {
 
 .lucid {
 
+    .container {
+        max-width: 800px;
+    }
+
     .header {
         position: absolute;
         overflow: visible;
@@ -60,9 +64,5 @@ body {
 
     .mfo-dialog {
         background: #eee;
-    }
-
-    .lucid-modal {
-        padding: 10px;
     }
 }
