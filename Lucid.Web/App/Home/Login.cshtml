@@ -3,16 +3,14 @@
 @{
     SetMenuPage(title: "Login");
 }
-<div>Login</div>
 
-@Html.ValidationSummary(true)
 @using (var form = Html.FormFor(Model.Cmd).Begin())
 {
-    <div>
-        @form.Html.LabelFor(c => c.Name, "Name")
-        @form.Html.TextBoxFor(c => c.Name)
-        @form.Html.ValidationMessageFor(c => c.Name)
-    </div>
+    @form.Html.ValidationSummary(true)
 
-    @Html.ButtonSubmit("Login")
+    @form.Html.LabelledInputText("Name", c => c.Name)
+
+    <div class="form-actions">
+        @Html.ButtonSubmit("Login")
+    </div>
 }

@@ -42,7 +42,7 @@ body {
 
             @media (min-width: 768px) {
                 left: auto;
-                right: 10px;
+                right: 15px;
             }
         }
     }
@@ -51,10 +51,20 @@ body {
         margin-bottom: 0px;
     }
 
+    .main-title {
+        position: absolute;
+        top: 51px;
+        left: 0;
+        right: 0;
+        height: 30px;
+        background: #ddd;
+        line-height: 30px;
+    }
+
     .main {
         position: absolute;
         overflow: auto;
-        top: 51px;
+        top: 81px;
         bottom: 0px;
         left: 0px;
         right: 0px;
@@ -64,5 +74,9 @@ body {
 
     .mfo-dialog {
         background: #eee;
+    }
+
+    .form-actions {
+        text-align: right;
     }
 }

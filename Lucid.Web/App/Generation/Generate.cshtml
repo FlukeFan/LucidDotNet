@@ -3,16 +3,12 @@
 @{
     SetMenuPage(title: "Generate Project");
 }
-<div>Generate Project</div>
 
-@Html.ValidationSummary(true)
 @using (var form = Html.FormFor(Model.Cmd).Begin())
 {
-    <div>
-        @form.Html.LabelFor(c => c.Name, "Project Name")
-        @form.Html.TextBoxFor(c => c.Name)
-        @form.Html.ValidationMessageFor(c => c.Name)
-    </div>
+    @form.Html.LabelledInputText("Project Name", c => c.Name)
 
-    <input type="submit" value="Generate Project" data-nopjax="true" />
+    <div class="form-actions">
+        @form.Html.ButtonSubmit("Generate Project").NoPjax()
+    </div>
 }

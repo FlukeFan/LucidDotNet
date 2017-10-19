@@ -3,17 +3,15 @@
 @{
     SetMenuPage(title: "Start Design");
 }
-<div>Start design</div>
 
-@Html.ValidationSummary(true)
 @using (var form = Html.FormFor(Model.Cmd).Begin())
 {
-    <div>
-        @form.Html.LabelFor(c => c.Name, "Design Name")
-        @form.Html.TextBoxFor(c => c.Name)
-        @form.Html.ValidationMessageFor(c => c.Name)
-    </div>
+    @form.Html.ValidationSummary(true)
 
-    @Html.ButtonSubmit("Start Design")
-    @Html.LinkButtonCancelModal()
+    @form.Html.LabelledInputText("Design Name", c => c.Name)
+
+    <div class="form-actions">
+        @Html.ButtonSubmit("Start Design")
+        @Html.LinkButtonCancelModal()
+    </div>
 }
