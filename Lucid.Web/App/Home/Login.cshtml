@@ -4,13 +4,15 @@
     SetMenuPage(title: "Login");
 }
 
-@using (var form = Html.FormFor(Model.Cmd).Begin())
-{
-    @form.Html.ValidationSummary(true)
+<div class="base-form">
+    @using (var form = Html.FormFor(Model.Cmd).Begin())
+    {
+        @form.Html.ValidationSummary(true)
 
-    @form.Html.LabelledInputText("Name", c => c.Name)
+        @form.Html.LabelledInputText("Name", c => c.Name)
 
-    <div class="form-actions">
-        @Html.ButtonSubmit("Login")
-    </div>
-}
+        <div class="form-actions">
+            @Html.ButtonSubmit("Login").Style(BootstrapButton.Primary)
+        </div>
+    }
+</div>

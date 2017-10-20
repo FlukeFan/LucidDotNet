@@ -53,6 +53,18 @@ body {
   right: 0px;
   background: #eee;
   padding: 15px; }
+  .lucid .main .base-form {
+    max-width: 600px;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: #bbb;
+    border-style: solid;
+    background-color: #ddd;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 15px; }
 
 .lucid .mfo-dialog {
   background: #eee; }

@@ -4,11 +4,13 @@
     SetMenuPage(title: "Generate Project");
 }
 
-@using (var form = Html.FormFor(Model.Cmd).Begin())
-{
-    @form.Html.LabelledInputText("Project Name", c => c.Name)
+<div class="base-form">
+    @using (var form = Html.FormFor(Model.Cmd).Begin())
+    {
+        @form.Html.LabelledInputText("Project Name", c => c.Name)
 
-    <div class="form-actions">
-        @form.Html.ButtonSubmit("Generate Project").NoPjax()
-    </div>
-}
+        <div class="form-actions">
+            @form.Html.ButtonSubmit("Generate Project").NoPjax().Style(BootstrapButton.Primary)
+        </div>
+    }
+</div>

@@ -11,7 +11,7 @@
     @form.Html.LabelledInputText("Design Name", c => c.Name)
 
     <div class="form-actions">
-        @Html.ButtonSubmit("Start Design")
+        @Html.ButtonSubmit("Start Design").Style(BootstrapButton.Primary)
         @Html.LinkButtonCancelModal()
     </div>
 }
