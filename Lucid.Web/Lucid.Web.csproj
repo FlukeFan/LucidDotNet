@@ -187,6 +187,7 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="App\Generation\GenerateModel.cs" />
     <Compile Include="App\Generation\GenerationController.cs" />
+    <Compile Include="App\Helpers\LucidHelpers.cs" />
     <Compile Include="App\Home\HomeController.cs" />
     <Compile Include="App\Home\LoginModel.cs" />
     <Compile Include="App\Planning\PlanningController.cs" />

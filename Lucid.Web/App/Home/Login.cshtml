@@ -11,8 +11,9 @@
 
         @form.Html.LabelledInputText("Name", c => c.Name)
 
-        <div class="form-actions">
+        using (form.Html.BeginFormButtons())
+        {
             @Html.ButtonSubmit("Login").Style(BootstrapButton.Primary)
-        </div>
+        }
     }
 </div>
