@@ -7,7 +7,7 @@ namespace Lucid.Web.App.Helpers
     {
         public static ScopedHtmlHelper<T> BeginFormButtons<T>(this HtmlHelper<T> helper)
         {
-            helper.ViewContext.Writer.Write("<div class=\"row\"><div class=\"col-xs-offset-4 col-xs-8\">");
+            helper.ViewContext.Writer.Write("<div class=\"row\"><div class=\"col-sm-offset-4 col-sm-8\">");
             return new ScopedHtmlHelper<T>(helper, () =>
             {
                 helper.ViewContext.Writer.Write("</div></div>");

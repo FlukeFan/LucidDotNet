@@ -4,12 +4,14 @@
     SetMenuPage(title: "Designs");
 }
 
-<ul id="designList">
-    @foreach (var design in Model)
-    {
-        <li>Design: @design.Name</li>
-    }
-</ul>
+<div class="main-content">
+    <ul id="designList">
+        @foreach (var design in Model)
+        {
+            <li>Design: @design.Name</li>
+        }
+    </ul>
+</div>
 
 <div>
     @Html.LinkButtonModal("Start Design", Actions.StartDesign())

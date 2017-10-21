@@ -12,7 +12,7 @@
 
     using (form.Html.BeginFormButtons())
     {
-        @Html.ButtonSubmit("Start Design").Style(BootstrapButton.Primary)
-        @Html.LinkButtonCancelModal()
+        @form.Html.ButtonSubmit("Start Design").Style(BootstrapButton.Primary)
+        @form.Html.LinkButtonCancelModal()
     }
 }

@@ -5,7 +5,8 @@
   box-sizing: inherit; }
 
 .btn {
-  margin-right: 6px; }
+  margin-right: 6px;
+  margin-bottom: 6px; }
 
 body {
   width: 100%;
@@ -52,17 +53,20 @@ body {
   bottom: 0px;
   left: 0px;
   right: 0px;
-  background: #eee;
-  padding: 15px; }
+  background: #eee; }
+  .lucid .main .main-content {
+    padding-top: 15px; }
   .lucid .main .base-form {
     max-width: 600px;
     border-width: 2px;
-    border-radius: 5px;
+    border-radius: 4px;
     border-color: #bbb;
     border-style: solid;
     background-color: #ddd;
     left: 0;
     right: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
     margin-right: auto;
     margin-left: auto;
     padding: 15px; }

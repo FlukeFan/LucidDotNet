@@ -10,6 +10,7 @@
     // Add margin to Bootstrap buttons, as Razor will render them
     // right next to each other with no white-space
     margin-right: 6px;
+    margin-bottom: 6px;
 }
 
 body {
@@ -70,17 +71,22 @@ body {
         left: 0px;
         right: 0px;
         background: #eee;
-        padding: 15px;
+
+        .main-content {
+            padding-top: 15px;
+        }
 
         .base-form {
             max-width: 600px;
             border-width: 2px;
-            border-radius: 5px;
+            border-radius: 4px;
             border-color: #bbb;
             border-style: solid;
             background-color: #ddd;
             left: 0;
             right: 0;
+            margin-top: 15px;
+            margin-bottom: 15px;
             margin-right: auto;
             margin-left: auto;
             padding: 15px;
