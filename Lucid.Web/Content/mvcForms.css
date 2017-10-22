@@ -9,3 +9,9 @@
   .mfo-dialog .container, .mfo-dialog .container-fluid {
     padding: 15px; }
 
+html.js .hide-js {
+  display: none; }
+
+html.no-js .show-js {
+  display: none; }
+

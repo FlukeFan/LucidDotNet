@@ -7,9 +7,11 @@
 <div class="base-form">
     @using (var form = Html.FormFor(Model.Cmd).Begin())
     {
+        @form.Html.ErrorSummary()
+
         @form.Html.LabelledInputText("Project Name", c => c.Name)
 
-        using (form.Html.BeginFormButtons())
+        using (form.Html.FormButtons())
         {
             @form.Html.ButtonSubmit("Generate Project").NoPjax().Style(BootstrapButton.Primary)
         }
