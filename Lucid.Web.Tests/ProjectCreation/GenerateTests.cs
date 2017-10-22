@@ -29,6 +29,8 @@ namespace Lucid.Web.Tests.ProjectCreation
                 {
                     var name = zipEntry.FullName;
 
+                    name.ToLower().Should().NotBe("license.txt", "LICENSE.txt should not be included in output (should be part of skipped files)");
+
                     var zippedFileName = name.Replace("/", "\\");
                     zippedFiles.Add(zippedFileName);
 

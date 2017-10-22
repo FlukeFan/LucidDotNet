@@ -9,6 +9,11 @@ namespace Lucid.Web.ProjectCreation
 {
     public class Generate
     {
+        private static readonly IList<string> SkippedFiles = new List<string>
+        {
+            "LICENSE.txt",
+        };
+
         private static readonly IList<string> ProcessedExtensions = new List<string>
         {
             ".gitignore",
@@ -110,6 +115,10 @@ namespace Lucid.Web.ProjectCreation
         private static void CopyEntry(ZipArchive zipInput, ZipArchiveEntry inputEntry, ZipArchive zipOutput, string newName)
         {
             var fileName = inputEntry.FullName.Replace("Lucid", newName).Replace("lucid", ToCamelCase(newName));
+
+            if (SkippedFiles.Contains(fileName))
+                return;
+
             using (var inputStream = inputEntry.Open())
             {
                 var newEntry = zipOutput.CreateEntry(fileName);
