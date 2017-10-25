@@ -75,7 +75,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CoverageFilter.txt" />
+    <None Include="CoverageFilter.txt" />
   </ItemGroup>
   <Target Name="VerifyScriptsForDeploy">
     <Exec Command="(SET project_src_dir=$(MSBuildProjectDirectory)) &amp; $(NUnitExe) $(OutDir)\Lucid.Database.Tests.dll /include=DeployBuild /result=&quot;$(OutDir)\DeployBuild.xml&quot;" />
