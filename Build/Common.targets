@@ -5,9 +5,9 @@
 
     <LucidVersion>0.0.0.1</LucidVersion>
 
-    <OpenCoverExe>$(MSBuildThisFileDirectory)\..\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
-    <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
-    <ReportGeneratorExe>$(MSBuildThisFileDirectory)\..\packages\ReportGenerator.3.0.2\tools\ReportGenerator.exe</ReportGeneratorExe>
+    <OpenCoverExe>$(MSBuildThisFileDirectory)\..\packages\opencover\4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
+    <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\nunit.runners\2.6.4\tools\nunit-console.exe</NUnitExe>
+    <ReportGeneratorExe>$(MSBuildThisFileDirectory)\..\packages\reportgenerator\3.0.2\tools\ReportGenerator.exe</ReportGeneratorExe>
     <VerifyCoverageJs>$(MSBuildThisFileDirectory)\VerifyCoverage.js</VerifyCoverageJs>
 
     <Asterisk>%2A</Asterisk>
