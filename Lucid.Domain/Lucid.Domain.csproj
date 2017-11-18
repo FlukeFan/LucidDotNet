@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Lucid.Domain</RootNamespace>
     <AssemblyName>Lucid.Domain</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <ProjectGuid>{74BDA17E-FC05-42F2-810C-D7B677C0D29E}</ProjectGuid>
