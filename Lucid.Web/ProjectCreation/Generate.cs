@@ -62,6 +62,7 @@ namespace Lucid.Web.ProjectCreation
         public static readonly IList<string> GuidsToReplace = new List<string>
         {
             "E47CBDCF-B71C-4A7B-BC83-B4649FC99361".ToUpper(), // Items folder
+            "11058344-C3E7-418D-A1E5-2D86AB3DE700".ToUpper(), // SolutionGuid
             "2C74567A-5CF2-4006-B6C1-FDA122578AD1".ToUpper(), // Lucid.Database
             "C4352D6D-C6DF-4A1A-A613-800B3573F8A3".ToUpper(), // Lucid.Database.Tests
             "2D85D27E-BDFF-4545-A48C-49D193143232".ToUpper(), // Lucid.Domain.Contract
