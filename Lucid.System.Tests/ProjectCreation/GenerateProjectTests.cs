@@ -34,9 +34,37 @@ namespace Lucid.System.Tests.ProjectCreation
             var currentSettings = File.ReadAllText(Path.Combine(originalFolder, "Lucid.Web/settings.config"));
             File.WriteAllText(Path.Combine(buildFolder, "ShinyNewProject1.Web/settings.config"), currentSettings.Replace("Lucid", "ShinyNewProject1"));
 
-            var fxFolder = @"C:\Program Files (x86)\MSBuild\14.0\Bin\";
-            var setupCmd = File.ReadAllText(Path.Combine(buildFolder, "CommandPrompt.bat"));
-            setupCmd.Should().Contain(fxFolder);
+            var setupCmds = File.ReadAllLines(Path.Combine(buildFolder, "CommandPrompt.bat"));
+            var pathCmds = setupCmds.Where(l => l.StartsWith("@SET PATH")).ToList();
+            var fxFolders = new List<string>();
+
+            foreach (var pathCmd in pathCmds)
+            {
+                var pathValues = pathCmd.Split('=')[1];
+                foreach (var pathValue in pathValues.Split(';'))
+                {
+                    if (pathValue?.ToLower()?.Contains("msbuild") == true)
+                        fxFolders.Add(pathValue.Replace("%ProgramFiles(x86)%", Environment.GetEnvironmentVariable("ProgramFiles(x86)")));
+                }
+            }
+
+            var fxFolder = "";
+            var msBuild = "";
+
+            var i = 0;
+            while (i < fxFolders.Count)
+            {
+                fxFolder = fxFolders[i];
+                msBuild = Path.Combine(fxFolder, "msbuild.exe");
+
+                if (File.Exists(msBuild))
+                    break;
+
+                i++;
+            }
+
+            File.Exists(msBuild).Should().BeTrue("Could not find msbuild.exe in the folders {0}", string.Join(", ", fxFolders));
+            Console.WriteLine("Using msbuild.exe: {0}", msBuild);
 
             var lastReadmeCharBefore = LastCharOfFile(Path.Combine(originalFolder, "readme.txt"));
             var lastReadmeCharAfter = LastCharOfFile(Path.Combine(buildFolder, "readme.txt"));
@@ -62,7 +90,6 @@ namespace Lucid.System.Tests.ProjectCreation
                 if (newGuids.Contains(originalGuid))
                     Assert.Fail("GUID {0} was found in both the original project and the generated project", originalGuid);
 
-            var msBuild = Path.Combine(fxFolder, "msbuild.exe");
             RunVerify(msBuild, "ShinyNewProject1.proj", buildFolder);
 
             // Assert DB?  NUnit logs?
