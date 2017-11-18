@@ -30,7 +30,6 @@ namespace Lucid.System.Tests.ProjectCreation
             Directory.GetFiles(Path.Combine(buildFolder, "ShinyNewProject1.Web/fonts")).Length.Should().BeGreaterThan(1, "should copy fonts");
             Directory.GetFiles(Path.Combine(buildFolder, "ShinyNewProject1.Web/Content")).Length.Should().BeGreaterThan(1, "should copy css");
 
-            CopyFolder(@"..\..\..\packages", Path.Combine(buildFolder, "packages"));
             var currentSettings = File.ReadAllText(Path.Combine(originalFolder, "Lucid.Web/settings.config"));
             File.WriteAllText(Path.Combine(buildFolder, "ShinyNewProject1.Web/settings.config"), currentSettings.Replace("Lucid", "ShinyNewProject1"));
 
@@ -90,11 +89,12 @@ namespace Lucid.System.Tests.ProjectCreation
                 if (newGuids.Contains(originalGuid))
                     Assert.Fail("GUID {0} was found in both the original project and the generated project", originalGuid);
 
+            RunVerify(msBuild, "ShinyNewProject1.proj /t:RestorePackages", buildFolder);
             RunVerify(msBuild, "ShinyNewProject1.proj", buildFolder);
 
             // Assert DB?  NUnit logs?
 
-            RunVerify(msBuild, "ShinyNewProject1.proj /t:clean", buildFolder);
+            RunVerify(msBuild, "ShinyNewProject1.proj /t:Clean", buildFolder);
             DeleteFolder(buildFolder, 5);
         }
 
