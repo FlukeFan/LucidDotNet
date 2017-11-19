@@ -71,9 +71,11 @@
     <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.4.1.1.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleFacade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleFacade.0.0.0.2\lib\net45\SimpleFacade.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SimpleFacade, Version=0.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleFacade.0.0.0.4\lib\netstandard2.0\SimpleFacade.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.IO.Compression" />

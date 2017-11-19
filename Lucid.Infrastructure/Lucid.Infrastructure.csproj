@@ -47,11 +47,14 @@
     <Reference Include="Reposify.NHibernate, Version=0.0.0.7, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Reposify.NHibernate.0.0.0.7\lib\net45\Reposify.NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleFacade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleFacade.0.0.0.2\lib\net45\SimpleFacade.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SimpleFacade, Version=0.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleFacade.0.0.0.4\lib\netstandard2.0\SimpleFacade.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
