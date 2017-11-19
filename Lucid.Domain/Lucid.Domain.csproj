@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>Library</OutputType>
@@ -9,7 +10,6 @@
     <AssemblyName>Lucid.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
     <ProjectGuid>{74BDA17E-FC05-42F2-810C-D7B677C0D29E}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -34,12 +34,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Reposify, Version=0.0.0.7, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reposify.0.0.0.7\lib\net45\Reposify.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleFacade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleFacade.0.0.0.2\lib\net45\SimpleFacade.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -58,13 +52,13 @@
     <Compile Include="Product\Design.cs" />
     <Compile Include="Product\Queries\FindDesignsHandler.cs" />
     <Compile Include="Product\Responses\DesignDtoMapper.cs" />
-    <Compile Include="Utility\LucidEntity.cs" />
-    <Compile Include="Utility\LucidException.cs" />
     <Compile Include="Utility\HandleCommand.cs" />
     <Compile Include="Utility\HandleQuery.cs" />
     <Compile Include="Utility\HandleVoidCommand.cs" />
-    <Compile Include="Utility\Registry.cs" />
     <Compile Include="Utility\ILucidRepository.cs" />
+    <Compile Include="Utility\LucidEntity.cs" />
+    <Compile Include="Utility\LucidException.cs" />
+    <Compile Include="Utility\Registry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lucid.Domain.Contract\Lucid.Domain.Contract.csproj">
@@ -73,14 +67,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <PackageReference Include="Reposify">
+      <Version>0.0.0.7</Version>
+    </PackageReference>
+    <PackageReference Include="SimpleFacade">
+      <Version>0.0.0.2</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
