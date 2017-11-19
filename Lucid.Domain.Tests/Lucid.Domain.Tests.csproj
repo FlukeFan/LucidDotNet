@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lucid.Domain.Tests</RootNamespace>
     <AssemblyName>Lucid.Domain.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
     <ProjectGuid>{CC13E71E-1978-4232-93F3-C7380D498C9C}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -34,6 +35,24 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions, Version=4.19.4.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.19.4\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.19.4.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.19.4\lib\net45\FluentAssertions.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Reposify, Version=0.0.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.0.0.0.7\lib\net45\Reposify.dll</HintPath>
+    </Reference>
+    <Reference Include="Reposify.Testing, Version=0.0.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.Testing.0.0.0.7\lib\net45\Reposify.Testing.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleFacade, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleFacade.0.0.0.2\lib\net45\SimpleFacade.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,23 +69,12 @@
     <Compile Include="Product\DesignTests.cs" />
     <Compile Include="Product\Queries\FindDesignsTests.cs" />
     <Compile Include="Utility\BuilderExtensions.cs" />
-    <Compile Include="Utility\DomainTest.cs" />
     <Compile Include="Utility\LucidConsistencyInspector.cs" />
+    <Compile Include="Utility\DomainTest.cs" />
     <Compile Include="Utility\LucidCustomInspections.cs" />
     <Compile Include="Utility\LucidMemoryRepository.cs" />
-    <Compile Include="Utility\TestValues.cs" />
     <Compile Include="Utility\ValidationExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="FluentAssertions">
-      <Version>4.19.4</Version>
-    </PackageReference>
-    <PackageReference Include="NUnit">
-      <Version>2.6.4</Version>
-    </PackageReference>
-    <PackageReference Include="Reposify.Testing">
-      <Version>0.0.0.7</Version>
-    </PackageReference>
+    <Compile Include="Utility\TestValues.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lucid.Domain.Contract\Lucid.Domain.Contract.csproj">
@@ -77,6 +85,9 @@
       <Project>{74bda17e-fc05-42f2-810c-d7b677c0d29e}</Project>
       <Name>Lucid.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Build\Common.targets" />
