@@ -128,15 +128,11 @@ var mfoPjax = {};
             return;
         }
 
-        var container = anchor.closest('[data-pjax]');
+        var container = findContainer(anchor);
         var url = anchor.attr('href');
 
         if (!url || url.substr(0, 1) === '#') {
             return;
-        }
-
-        if (!container.attr('id')) {
-            container.attr('id', 'pjax_' + new Date().valueOf());
         }
 
         if (url.toLowerCase().substr(0, 7) === 'http://' || url.toLowerCase().substr(0, 8) === 'https://') {
@@ -156,13 +152,7 @@ var mfoPjax = {};
             return;
         }
 
-        if (history.state === null || history.state.containerId !== container.attr('id') || !history.state.navigatedFromPjax) {
-            var state = history.state || {};
-            state.url = location.pathname + location.search + location.hash;
-            state.containerId = container.attr('id');
-            state.navigatedFromPjax = true;
-            history.replaceState(state, null, '');
-        }
+        markFromPjax(container);
 
         mfoPjax.load(context, navigateSuccess);
         e.preventDefault();
@@ -179,7 +169,7 @@ var mfoPjax = {};
             return;
         }
 
-        var container = form.closest('[data-pjax]');
+        var container = findContainer(form);
         var data = form.serialize();
 
         if (clickedButton.length > 0) {
@@ -203,8 +193,33 @@ var mfoPjax = {};
             return;
         }
 
+        markFromPjax(container);
+
         mfoPjax.load(context, navigateSuccess);
         e.preventDefault();
+    }
+
+    function findContainer(child) {
+
+        var container = child.closest('[data-pjax]');
+
+        if (!container.attr('id')) {
+            container.attr('id', 'pjax_' + new Date().valueOf());
+        }
+
+        return container;
+    }
+
+    function markFromPjax(container) {
+
+        if (history.state === null || history.state.containerId !== container.attr('id') || !history.state.navigatedFromPjax) {
+            var state = history.state || {};
+            state.url = location.pathname + location.search + location.hash;
+            state.containerId = container.attr('id');
+            state.navigatedFromPjax = true;
+            history.replaceState(state, null, '');
+        }
+
     }
 
     function onBeforeNonPjaxPushState() {
@@ -356,6 +371,11 @@ var mfoPjax = {};
             success: function (data, textStatus, jqXHR) {
                 mfoOverlay.remove(overlay);
                 callback(context, data, textStatus, jqXHR);
+                if (context.container) {
+                    context.container.trigger('pjax:loaded', context);
+                } else {
+                    console.warn('context.container not set in pjax:load (cannot raise pjax:loaded event)');
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 mfoOverlay.remove(overlay);
@@ -682,6 +702,7 @@ var mfoPjaxDialog = {};
 
         var dialog = dialogInfo.dialog;
         dialog.attr('data-pjax', context.url);
+        context.container = dialog;
 
     }
 

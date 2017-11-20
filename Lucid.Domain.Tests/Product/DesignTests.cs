@@ -1,10 +1,10 @@
 ﻿using System;
+using FluentAssertions;
 using Lucid.Domain.Contract;
 using Lucid.Domain.Contract.Product.Commands;
 using Lucid.Domain.Product;
 using Lucid.Domain.Tests.Utility;
 using Lucid.Domain.Utility;
-using FluentAssertions;
 using NUnit.Framework;
 using Reposify.Testing;
 
@@ -14,7 +14,7 @@ namespace Lucid.Domain.Tests.Product
     {
         static DesignBuilder()
         {
-            LucidCustomInspections.Add<Design>((validator, entity) =>
+            LucidCustomChecks.Add<Design>((validator, entity) =>
             {
                 validator.CheckNotNull(() => entity.Name);
                 validator.CheckMaxLength(() => entity.Name, Constraints.DefaultMaxStringLength);

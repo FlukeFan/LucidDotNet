@@ -3,7 +3,6 @@ using NHibernate.Cfg;
 using NHibernate.Connection;
 using NHibernate.Dialect;
 using NHibernate.Driver;
-using NHibernate.Tool.hbm2ddl;
 using Reposify.NHibernate;
 
 namespace Lucid.Infrastructure.NHibernate
@@ -22,10 +21,9 @@ namespace Lucid.Infrastructure.NHibernate
                     db.ConnectionProvider<DriverConnectionProvider>();
                     db.Driver<SqlClientDriver>();
                     db.Dialect<MsSql2008Dialect>();
+                    db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
                 });
             });
-
-            SchemaMetadataUpdater.QuoteTableAndColumns(config);
 
             Init(config);
         }

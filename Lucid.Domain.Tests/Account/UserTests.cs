@@ -12,7 +12,7 @@ namespace Lucid.Domain.Tests.Account
     {
         static UserBuilder()
         {
-            LucidCustomInspections.Add<User>((validator, user) =>
+            LucidCustomChecks.Add<User>((validator, user) =>
             {
                 validator.CheckNotNull(() => user.Name);
                 validator.CheckMaxLength(() => user.Name, Constraints.DefaultMaxStringLength);
