@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using System.Text;
 using FluentAssertions;
 using Lucid.Database.Migrations;
-using Lucid.Database.Migrations.Y2016.M01;
 using NUnit.Framework;
 
 namespace Lucid.Database.Tests.Migrations
@@ -18,14 +17,30 @@ namespace Lucid.Database.Tests.Migrations
         public void Verify_MigrationNumber_Matches_ScriptName()
         {
             // verify that all migration are numbered according to the namespace and name they use
-            // e.g., a script V35 in namespace Y2016.M09 should be script number 20160935
+            // e.g., a script Build035 in namespace V001.V000 should be script number 001,000,035,000
 
             var migrationTypes = FindMigrationTypes();
+            var existingVersions = new List<long>();
+            var existingTypes = new List<Type>();
 
             foreach (var migrationType in migrationTypes)
             {
                 var actualVersion = VersionUtil.GetVersion(migrationType);
-                var expectedVersion = 0L;
+
+                if (existingVersions.Contains(actualVersion))
+                {
+                    var because = $"type {migrationType.FullName} with migration order {actualVersion} "
+                        + $"should not clash with type {existingTypes[existingVersions.IndexOf(actualVersion)].FullName} "
+                        + $"with the same migration order";
+
+                    existingVersions.Should().NotContain(actualVersion, because);
+                }
+
+                existingVersions.Add(actualVersion);
+                existingTypes.Add(migrationType);
+
+                var versions = new List<int>();
+
                 var nameParts = migrationType.FullName.Replace("Lucid.Database.", "").Split('.');
 
                 foreach (var namePart in nameParts)
@@ -35,12 +50,16 @@ namespace Lucid.Database.Tests.Migrations
                     if (string.IsNullOrEmpty(numeralsAfterLetters))
                         continue;
 
-                    for (var i = 0; i < numeralsAfterLetters.Length; i++)
-                        expectedVersion *= 10;
-
-                    expectedVersion += long.Parse(numeralsAfterLetters);
+                    var partVersion = int.Parse(numeralsAfterLetters);
+                    versions.Add(partVersion);
                 }
 
+                var major = versions.Count > 0 ? versions[0] : 0;
+                var minor = versions.Count > 1 ? versions[1] : 0;
+                var build = versions.Count > 2 ? versions[2] : 0;
+                var revision = versions.Count > 3 ? versions[3] : 0;
+
+                var expectedVersion = VersionUtil.VersionFor(major, minor, build, revision);
                 actualVersion.Should().Be(expectedVersion, "version on {0} should match namespace and name", migrationType);
             }
         }
@@ -114,7 +133,7 @@ namespace Lucid.Database.Tests.Migrations
 
         private IEnumerable<Type> FindMigrationTypes()
         {
-            return typeof(V01).Assembly.GetTypes()
+            return typeof(VersionUtil).Assembly.GetTypes()
                 .Where(t => !t.IsAbstract)
                 .Where(t => typeof(LucidMigration).IsAssignableFrom(t));
         }

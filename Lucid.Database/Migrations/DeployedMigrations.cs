@@ -9,8 +9,8 @@ namespace Lucid.Database.Migrations
 
         static DeployedMigrations()
         {
-            Hashes.Add(typeof(Y2016.M01.V01), "B0C8A4259C22EB970217DEE2E9A82BA5");
-            Hashes.Add(typeof(Y2016.M11.V01), "6FC894EA5FFEF8B3B10AEB3CD99493F4");
+            Hashes.Add(typeof(V001.V000.Build000), "EDCA3C7FD6D8A06C8B1261193706954A");
+            Hashes.Add(typeof(V001.V000.Build001), "1131984F8B4A37EBCFB9C5583642D73B");
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿using FluentMigrator;
-
-namespace Lucid.Database.Migrations.Y2016.M01
+﻿namespace Lucid.Database.Migrations.V001.V000
 {
-    [Migration(20160101)]
-    public class V01 : LucidMigration
+    [MigrationOrder(major: 1, minor: 0, build: 0)]
+    public class Build000 : LucidMigration
     {
         public override void Up()
         {

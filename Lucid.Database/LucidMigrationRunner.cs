@@ -13,7 +13,7 @@ namespace Lucid.Database
     {
         public static void Run(string connectionString)
         {
-            var firstMigration = typeof(Lucid.Database.Migrations.Y2016.M01.V01);
+            var firstMigration = typeof(Migrations.V001.V000.Build000);
             var assembly = new SingleAssembly(firstMigration.Assembly);
 
             var migrationGenerator = new SqlServer2008Generator();
