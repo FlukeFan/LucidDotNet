@@ -48,7 +48,7 @@
       <HintPath>..\packages\Iesi.Collections.4.0.2\lib\net461\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=5.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.5.0.1\lib\net461\NHibernate.dll</HintPath>
+      <HintPath>..\packages\NHibernate.5.0.3\lib\net461\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
@@ -60,14 +60,14 @@
     <Reference Include="Remotion.Linq.EagerFetching, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.EagerFetching.2.1.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
     </Reference>
-    <Reference Include="Reposify, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reposify.0.0.1\lib\net45\Reposify.dll</HintPath>
+    <Reference Include="Reposify, Version=0.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.0.0.3\lib\net45\Reposify.dll</HintPath>
     </Reference>
-    <Reference Include="Reposify.NHibernate, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reposify.NHibernate.0.0.1\lib\net45\Reposify.NHibernate.dll</HintPath>
+    <Reference Include="Reposify.NHibernate, Version=0.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.NHibernate.0.0.3\lib\net45\Reposify.NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Reposify.Testing, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reposify.Testing.0.0.1\lib\net45\Reposify.Testing.dll</HintPath>
+    <Reference Include="Reposify.Testing, Version=0.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reposify.Testing.0.0.3\lib\net45\Reposify.Testing.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
