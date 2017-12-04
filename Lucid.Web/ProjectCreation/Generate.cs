@@ -164,7 +164,7 @@ namespace Lucid.Web.ProjectCreation
                 outputLines.Add(outputLine);
             }
 
-            var output = string.Join("\r\n", outputLines);
+            var output = string.Join("\n", outputLines);
 
             using (var outputStream = newEntry.Open())
             using (var streamWriter = new StreamWriter(outputStream, bomEncoding))
@@ -175,9 +175,8 @@ namespace Lucid.Web.ProjectCreation
         {
             using (var reader = new StreamReader(inputFileStream))
             {
-                reader.Peek();
                 var content = reader.ReadToEnd();
-                var inputLines = content.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.None);
+                var inputLines = content.Split('\n');
                 return inputLines;
             }
         }

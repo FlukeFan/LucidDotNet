@@ -14,7 +14,7 @@ namespace Lucid.Web.Tests.ProjectCreation
     public class GenerateTests
     {
         [Test]
-        public void BomIsMaintained()
+        public void FormatIsMaintained()
         {
             var rootPath = @"..\..\..";
             var cmd = new GenerateProject { Name = "Lucid" };
@@ -39,6 +39,23 @@ namespace Lucid.Web.Tests.ProjectCreation
                             var copiedBom = Generate.ReadBomEncoding(copy);
 
                             copiedBom.Should().Be(originalBom, $"BOM of file {name} is not the same in the generated project");
+                        }
+
+                        using (var copy = zipEntry.Open())
+                        using (var streamReader = new StreamReader(copy))
+                        {
+                            var copyContent = streamReader.ReadToEnd();
+                            var original = File.ReadAllText(originalFile);
+
+                            var copyLfCount = copyContent.Count(c => c == '\n');
+                            var originalLfCount = original.Count(c => c == '\n');
+
+                            copyLfCount.Should().Be(originalLfCount, $"{originalFile} has {originalLfCount} line-feeds, so copy should have same amount");
+
+                            var copyCrCount = copyContent.Count(c => c == '\r');
+                            var originalCrCount = original.Count(c => c == '\r');
+
+                            copyCrCount.Should().Be(originalCrCount, $"{originalFile} has {originalCrCount} carriage returns, so copy should have same amount");
                         }
                     }
                 }
