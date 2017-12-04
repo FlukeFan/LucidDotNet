@@ -14,6 +14,38 @@ namespace Lucid.Web.Tests.ProjectCreation
     public class GenerateTests
     {
         [Test]
+        public void BomIsMaintained()
+        {
+            var rootPath = @"..\..\..";
+            var cmd = new GenerateProject { Name = "Lucid" };
+            var bytes = cmd.Execute();
+
+            var zippedFiles = new List<string>();
+
+            using (var ms = new MemoryStream(bytes))
+            using (var zipFile = new ZipArchive(ms))
+            {
+                foreach (var zipEntry in zipFile.Entries)
+                {
+                    var name = zipEntry.FullName;
+
+                    if (Generate.ShouldProcessFile(name))
+                    {
+                        var originalFile = Path.Combine(rootPath, name);
+                        using (var stream = File.OpenRead(originalFile))
+                        using (var copy = zipEntry.Open())
+                        {
+                            var originalBom = Generate.ReadBomEncoding(stream);
+                            var copiedBom = Generate.ReadBomEncoding(copy);
+
+                            copiedBom.Should().Be(originalBom, $"BOM of file {name} is not the same in the generated project");
+                        }
+                    }
+                }
+            }
+        }
+
+        [Test]
         public void GeneratedProjectContainsFilesReferencedByEachCsproj()
         {
             var cmd = new GenerateProject { Name = "DemoProj" };

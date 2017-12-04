@@ -119,15 +119,26 @@ namespace Lucid.Web.ProjectCreation
             if (SkippedFiles.Contains(fileName))
                 return;
 
+            var bomEncoding = Encoding.ASCII;
+            var shouldProcessFile = ShouldProcessFile(fileName);
+
+            if (shouldProcessFile)
+                using (var tmpStream = inputEntry.Open())
+                    bomEncoding = ReadBomEncoding(tmpStream) ?? bomEncoding;
+
             using (var inputStream = inputEntry.Open())
             {
                 var newEntry = zipOutput.CreateEntry(fileName);
                 newEntry.LastWriteTime = inputEntry.LastWriteTime;
 
-                if (ShouldProcessFile(fileName))
-                    ProcessTextFile(inputStream, newEntry, newName);
+                if (shouldProcessFile)
+                {
+                    ProcessTextFile(inputStream, bomEncoding, newEntry, newName);
+                }
                 else
+                {
                     ProcessBinaryFile(inputStream, newEntry);
+                }
             }
         }
 
@@ -142,7 +153,7 @@ namespace Lucid.Web.ProjectCreation
                 inputFileStream.CopyTo(newStream);
         }
 
-        private static void ProcessTextFile(Stream inputFileStream, ZipArchiveEntry newEntry, string newName)
+        private static void ProcessTextFile(Stream inputFileStream, Encoding bomEncoding, ZipArchiveEntry newEntry, string newName)
         {
             var inputLines = ReadLines(inputFileStream);
             var outputLines = new List<string>();
@@ -154,21 +165,35 @@ namespace Lucid.Web.ProjectCreation
             }
 
             var output = string.Join("\r\n", outputLines);
-            var encoding = Encoding.UTF8;
-            var bytes = encoding.GetBytes(output);
 
             using (var outputStream = newEntry.Open())
-                outputStream.Write(bytes, 0, bytes.Length);
+            using (var streamWriter = new StreamWriter(outputStream, bomEncoding))
+                streamWriter.Write(output);
         }
 
         public static string[] ReadLines(Stream inputFileStream)
         {
             using (var reader = new StreamReader(inputFileStream))
             {
+                reader.Peek();
                 var content = reader.ReadToEnd();
                 var inputLines = content.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.None);
                 return inputLines;
             }
+        }
+
+        public static Encoding ReadBomEncoding(Stream stream)
+        {
+            var bom = new byte[4];
+            stream.Read(bom, 0, 4);
+
+            if (bom[0] == 0x2b && bom[1] == 0x2f && bom[2] == 0x76) return Encoding.UTF7;
+            if (bom[0] == 0xef && bom[1] == 0xbb && bom[2] == 0xbf) return new UTF8Encoding(true);
+            if (bom[0] == 0xff && bom[1] == 0xfe) return Encoding.Unicode; //UTF-16LE
+            if (bom[0] == 0xfe && bom[1] == 0xff) return Encoding.BigEndianUnicode; //UTF-16BE
+            if (bom[0] == 0 && bom[1] == 0 && bom[2] == 0xfe && bom[3] == 0xff) return Encoding.UTF32;
+
+            return null;
         }
 
         public static string ProcessLine(string inputLine, string newName)
