@@ -25,14 +25,14 @@ namespace Lucid.Infrastructure.Tests.Utility
             LucidNhRepository.Init(_databaseSettings.LucidConnection);
             Repository = new LucidNhRepository();
             Repository.Open();
-            Registry.Repository = Repository;
+            DomainRegistry.Repository = Repository;
         }
 
         [TearDown]
         public virtual void TearDown()
         {
             using (Repository) { }
-            Registry.Repository = null;
+            DomainRegistry.Repository = null;
         }
 
         protected void VerifyInvalidConstraint<T>(T entity) where T : LucidEntity

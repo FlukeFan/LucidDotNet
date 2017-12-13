@@ -17,10 +17,10 @@ namespace Lucid.Infrastructure.NHibernate
             using (var repository = new LucidNhRepository())
             {
                 repository.Open();
-                Registry.Repository = repository;
+                DomainRegistry.Repository = repository;
                 var response = _inner.Execute(executable);
                 repository.Commit();
-                Registry.Repository = null;
+                DomainRegistry.Repository = null;
                 return response;
             }
         }

@@ -7,7 +7,7 @@ namespace Lucid.Domain.Tests.Utility
     {
         public static T Save<T>(this Builder<T> builder) where T : LucidEntity
         {
-            return Registry.Repository.Save(builder.Value());
+            return DomainRegistry.Repository.Save(builder.Value());
         }
     }
 }

@@ -17,19 +17,19 @@ namespace Lucid.Domain.Tests.Utility
             SetDomainNow(DateTime.UtcNow);
 
             Repository = new LucidMemoryRepository();
-            Registry.Repository = Repository;
+            DomainRegistry.Repository = Repository;
         }
 
         [TearDown]
         public virtual void TearDown()
         {
-            Registry.Repository = null;
+            DomainRegistry.Repository = null;
             Test = null;
         }
 
         protected DateTime SetDomainNow(DateTime now)
         {
-            Registry.NowUtc = () => now;
+            DomainRegistry.NowUtc = () => now;
             return now;
         }
     }

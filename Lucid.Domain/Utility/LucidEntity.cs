@@ -5,6 +5,6 @@ namespace Lucid.Domain.Utility
 {
     public class LucidEntity : Entity<int>
     {
-        protected static ILucidRepository Repository {[DebuggerStepThrough] get { return Registry.Repository; } }
+        protected static ILucidRepository Repository {[DebuggerStepThrough] get { return DomainRegistry.Repository; } }
     }
 }

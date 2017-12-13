@@ -2,7 +2,7 @@
 
 namespace Lucid.Domain.Utility
 {
-    public class Registry
+    public class DomainRegistry
     {
         public static Func<DateTime> NowUtc = () => DateTime.UtcNow;
 

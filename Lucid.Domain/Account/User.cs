@@ -23,7 +23,7 @@ namespace Lucid.Domain.Account
                     Name = name,
                 };
 
-            user.LastLoggedIn = Registry.NowUtc();
+            user.LastLoggedIn = DomainRegistry.NowUtc();
 
             if (existingUser == null)
                 Repository.Save(user);
