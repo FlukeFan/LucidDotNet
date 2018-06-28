@@ -36,10 +36,7 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="..\Module1\Module1.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectsToClean Include="..\Module1\Module1.csproj" />
+    <ProjectsToBuild Include="..\Module2\Module2.csproj" />
   </ItemGroup>
 
   <Target Name="Init">
@@ -58,11 +55,11 @@
   </Target>
 
   <Target Name="After_Clean" AfterTargets="Clean" DependsOnTargets="Init">
-    <MSBuild Projects="@(ProjectsToClean)" Targets="Clean" Properties="$(GlobalProperties)" RunEachTargetSeparately="true" StopOnFirstFailure="true" />
+    <MSBuild Projects="@(ProjectsToBuild->Reverse())" Targets="Clean" Properties="$(GlobalProperties)" RunEachTargetSeparately="true" StopOnFirstFailure="true" />
     <ItemGroup>
       <OutputFolders Include="bin;obj" />
-      <OutputFolders Include="%(ProjectsToClean.RelativeDir)bin" />
-      <OutputFolders Include="%(ProjectsToClean.RelativeDir)obj" />
+      <OutputFolders Include="%(ProjectsToBuild.RelativeDir)bin" />
+      <OutputFolders Include="%(ProjectsToBuild.RelativeDir)obj" />
     </ItemGroup>
     <RemoveDir Directories="@(OutputFolders)" />
   </Target>
