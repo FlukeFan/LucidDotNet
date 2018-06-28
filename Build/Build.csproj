@@ -35,8 +35,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectsToBuild Include="..\Module1\Module1.csproj" />
-    <ProjectsToBuild Include="..\Module2\Module2.csproj" />
+    <ProjectsToBuild Include="..\Infrastructure\WebApp\WebApp.csproj" />
+    <ProjectsToBuild Include="..\ProjectCreation\Module\Module.csproj" />
   </ItemGroup>
 
   <Target Name="Init">
