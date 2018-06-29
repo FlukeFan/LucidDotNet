@@ -36,7 +36,7 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="..\Infrastructure\Host\Mvc\Mvc.csproj" />
-    <ProjectsToBuild Include="..\ProjectCreation\Module\Module.csproj" />
+    <ProjectsToBuild Include="..\ProjectCreation\Tests\Tests.csproj" />
   </ItemGroup>
 
   <Target Name="Init">
