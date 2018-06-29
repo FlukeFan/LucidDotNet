@@ -1,13 +1,10 @@
-﻿using System;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using System;
 using System.IO;
 using System.IO.Compression;
-using FluentAssertions;
-using Lucid.Web.ProjectCreation;
-using NUnit.Framework;
-using SimpleFacade.Exceptions;
-using SimpleFacade.Validation;
 
-namespace Lucid.Web.Tests.ProjectCreation
+namespace Lucid.ProjectCreation.__Tests
 {
     [TestFixture]
     public class GenerateProjectTests

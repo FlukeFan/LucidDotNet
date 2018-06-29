@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
-using FluentAssertions;
-using Lucid.Web.ProjectCreation;
-using NUnit.Framework;
 
-namespace Lucid.Web.Tests.ProjectCreation
+namespace Lucid.ProjectCreation.__Tests
 {
     [TestFixture]
     public class GenerateTests

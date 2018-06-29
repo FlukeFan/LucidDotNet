@@ -5,7 +5,7 @@ using System.IO.Compression;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Lucid.Web.ProjectCreation
+namespace Lucid.ProjectCreation
 {
     public class Generate
     {
