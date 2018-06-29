@@ -35,7 +35,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectsToBuild Include="..\Infrastructure\WebApp\WebApp.csproj" />
+    <ProjectsToBuild Include="..\Infrastructure\Host\Mvc\Mvc.csproj" />
     <ProjectsToBuild Include="..\ProjectCreation\Module\Module.csproj" />
   </ItemGroup>
 
