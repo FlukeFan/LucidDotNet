@@ -1,0 +1,17 @@
+<Project>
+
+  <ItemGroup>
+    <ProjectsToBuild Include="Zip\Zip.csproj" />
+    <ProjectsToBuild Include="Module\Module.csproj" />
+    <ProjectsToBuild Include="Tests\Tests.csproj" />
+  </ItemGroup>
+
+  <Target Name="Build">
+    <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" BuildInParallel="true" />
+  </Target>
+
+  <Target Name="Clean">
+    <MSBuild Projects="@(ProjectsToBuild->Reverse())" Targets="Clean" BuildInParallel="true" />
+  </Target>
+
+</Project>

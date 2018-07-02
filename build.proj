@@ -1,0 +1,16 @@
+<Project>
+
+  <ItemGroup>
+    <ProjectsToBuild Include="Infrastructure\Host\Mvc\Mvc.csproj" />
+    <ProjectsToBuild Include="ProjectCreation\build.proj" />
+  </ItemGroup>
+
+  <Target Name="Build">
+    <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" BuildInParallel="true" />
+  </Target>
+
+  <Target Name="Clean">
+    <MSBuild Projects="@(ProjectsToBuild->Reverse())" Targets="Clean" BuildInParallel="true" />
+  </Target>
+
+</Project>
