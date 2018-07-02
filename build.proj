@@ -1,4 +1,4 @@
-<Project>
+<Project DefaultTargets="Build">
 
   <ItemGroup>
     <ProjectsToBuild Include="Infrastructure\Host\Mvc\Mvc.csproj" />
