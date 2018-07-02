@@ -5,6 +5,13 @@
     <ProjectsToBuild Include="ProjectCreation\build.proj" />
   </ItemGroup>
 
+  <Target Name="Restore">
+    <ItemGroup>
+      <AllProjects Include="**\*.csproj" Exclude="pre_core\**" />
+    </ItemGroup>
+    <MSBuild Projects="@(AllProjects)" Targets="Restore" BuildInParallel="true" />
+  </Target>
+
   <Target Name="Build">
     <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" BuildInParallel="true" />
   </Target>
