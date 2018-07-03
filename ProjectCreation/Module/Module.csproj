@@ -5,11 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Project.zip" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
+
+  <Target Name="ZipProject" BeforeTargets="Build">
+    <MSBuild Projects="..\Zip\Zip.proj" />
+    <CreateItem Include="Project.zip">
+      <Output ItemName="EmbeddedResource" TaskParameter="Include" />
+    </CreateItem>
+  </Target>
 
 </Project>
