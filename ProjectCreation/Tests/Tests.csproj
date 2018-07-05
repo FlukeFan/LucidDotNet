@@ -1,7 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\..\Build\common.targets" />
+
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
+    <CoverageTarget>70</CoverageTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,15 +12,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
-    <PackageReference Include="FluentAssertions" Version="4.19.4" />
-    <PackageReference Include="Mono.Cecil" Version="0.10.0-beta7" />
-    <PackageReference Include="NUnit" Version="3.9.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
+    <PackageReference Include="FluentAssertions" Version="5.4.1" />
+    <PackageReference Include="Mono.Cecil" Version="0.10.0" />
+    <PackageReference Include="NUnit" Version="3.10.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
+
+  <Target Name="After_Build" AfterTargets="Build">
+    <CallTarget Targets="RunTests" />
+  </Target>
 
 </Project>

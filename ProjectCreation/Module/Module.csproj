@@ -1,18 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk" InitialTargets="ZipProject">
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
+    <AssemblyName>Lucid.ProjectCreation</AssemblyName>
+    <RootNamespace>Lucid.ProjectCreation</RootNamespace>
+    <DebugType>full</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Project.zip" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Annotations">
+      <HintPath>..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.1.0\ref\netcoreapp2.1\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
 
   <Target Name="ZipProject" BeforeTargets="Build">
     <MSBuild Projects="..\Zip\Zip.proj" />
-    <CreateItem Include="Project.zip">
-      <Output ItemName="EmbeddedResource" TaskParameter="Include" />
-    </CreateItem>
   </Target>
 
 </Project>

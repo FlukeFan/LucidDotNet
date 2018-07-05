@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="PreBuild">
 
-  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)bin\Build.exe" TaskName="Build.ColorExec" />
+  <Target Name="PreBuild">
+    <MSBuild Projects="$(MSBuildThisFileDirectory)Build.csproj" Targets="Restore;Build" Condition="!Exists('$(MSBuildThisFileDirectory)bin\Build.exe')" />
+  </Target>
 
   <PropertyGroup>
 
     <Version>0.0.1</Version>
 
+    <RunTests Condition="'$(BuildingInsideVisualStudio)' == ''">true</RunTests>
     <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
 
     <OpenCoverExe>$(NuGetPackageRoot)OpenCover\4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
@@ -38,8 +41,8 @@
   </Target>
 
   <Target Name="RunTestsWithFilter">
-    <ColorExec FileName="&quot;$(NUnitConsole)&quot;" Arguments="$(TestAssembly) --where &quot;test =~ $(FilterTestFqn)&quot;" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==False" />
-    <ColorExec FileName="dotnet" Arguments="&quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx --testcasefilter:FullyQualifiedName~$(FilterTestFqn)" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==True" />
+    <Exec Command="&quot;$(NUnitConsole)&quot; $(TestAssembly) --where &quot;test =~ $(FilterTestFqn)&quot;" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==False" />
+    <Exec Command="dotnet &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx --testcasefilter:FullyQualifiedName~$(FilterTestFqn)" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==True" />
   </Target>
 
   <Target Name="RunTestsWithCoverage">
@@ -48,11 +51,11 @@
     </PropertyGroup>
     <Message Text="TestStartTime=$(TestStartTime)" />
     <Error Text="Coverage will only work from a Windows client.  Current OS: $(OS)" Condition="'$(OS)'!='Windows_NT'" />
-    <ColorExec FileName="$(OpenCoverExe)" Arguments="-target:&quot;$(NUnitConsole)&quot; -targetargs:&quot;$(TestAssembly) --result=$(TestAssembly).results.xml&quot; -register:user -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot; $(CoverFilterFileOption)" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==False" />
-    <ColorExec FileName="$(OpenCoverExe)" Arguments="-target:dotnet.exe -targetargs:&quot;&quot;&quot;$(VsTestConsole)&quot;&quot; $(TestAssembly) --logger:trx&quot; -register:user -oldstyle -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot; $(CoverFilterFileOption)" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==True" />
+    <Exec Command="$(OpenCoverExe) -target:&quot;$(NUnitConsole)&quot; -targetargs:&quot;$(TestAssembly) --result=$(TestAssembly).results.xml&quot; -register:user -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot; $(CoverFilterFileOption)" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==False" />
+    <Exec Command="$(OpenCoverExe) -target:dotnet.exe -targetargs:&quot;&quot;&quot;$(VsTestConsole)&quot;&quot; $(TestAssembly) --logger:trx&quot; -register:user -oldstyle -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot; $(CoverFilterFileOption)" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==True" />
     <RemoveDir Directories="$(OutDir)CoverageReport" />
-    <ColorExec FileName="$(ReportGeneratorExe)" Arguments="-reports:$(OutDir)$(CoverageOutput) -targetdir:$(OutDir)CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
-    <ColorExec FileName="&quot;$(MSBuildThisFileDirectory)bin\Build.exe&quot;" Arguments="VerifyCoverage $(CoverageTarget) $(OutDir)CoverageReport/Summary.xml" />
+    <Exec Command="$(ReportGeneratorExe) -reports:$(OutDir)$(CoverageOutput) -targetdir:$(OutDir)CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
+    <Exec Command="&quot;$(MSBuildThisFileDirectory)bin\Build.exe&quot; VerifyCoverage $(CoverageTarget) $(OutDir)CoverageReport/Summary.xml" />
     <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(TestStartTime)" AlwaysCreate="true" />
   </Target>
 

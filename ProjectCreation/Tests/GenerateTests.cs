@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
 
-namespace Lucid.ProjectCreation.__Tests
+namespace Lucid.ProjectCreation.Tests
 {
     [TestFixture]
     public class GenerateTests
@@ -15,7 +15,7 @@ namespace Lucid.ProjectCreation.__Tests
         [Test]
         public void FormatIsMaintained()
         {
-            var rootPath = @"..\..\..";
+            var rootPath = @"..\..\..\..\..";
             var cmd = new GenerateProject { Name = "Lucid" };
             var bytes = cmd.Execute();
 
@@ -95,7 +95,7 @@ namespace Lucid.ProjectCreation.__Tests
 
             var knownGeneratedFiles = new string[]
             {
-                "DemoProj.Web\\Project.zip", // this is generated in the 'BeforeBuild'
+                "ProjectCreation\\Module\\Project.zip", // this is generated in the 'BeforeBuild'
             };
 
             var fileElements = new string[]
@@ -141,13 +141,13 @@ namespace Lucid.ProjectCreation.__Tests
             var allGuidsInZip = new List<string>();
             var ignoredGenerateCs = false;
 
-            using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.Web.Project.zip"))
+            using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.ProjectCreation.Project.zip"))
             using (var zipFile = new ZipArchive(zipInputStream))
                 foreach (var zipEntry in zipFile.Entries)
                 {
                     var fileName = zipEntry.FullName;
 
-                    if (fileName.EndsWith("ProjectCreation/Generate.cs"))
+                    if (fileName.EndsWith("ProjectCreation\\Module\\Generate.cs"))
                     {
                         ignoredGenerateCs = true;
                         continue;

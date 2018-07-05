@@ -53,25 +53,20 @@ namespace Lucid.ProjectCreation
         public static readonly IList<string> GuidsToIgnore = new List<string>
         {
             "2150E333-8FDC-42A3-9474-1A3956D46DE8".ToUpper(), // solution folder
-            "EE62401E-B98D-47D7-A63E-B70A60117F30".ToUpper(), // solution folder
-            "349c5851-65df-11da-9384-00065b846f21".ToUpper(), // web application
             "fae04ec0-301f-11d3-bf4b-00c04f79efbc".ToUpper(), // c# project
-            "D27CDB6E-AE6D-11cf-96B8-444553540000".ToUpper(), // jQuery reference to legacy flash object
         };
 
         public static readonly IList<string> GuidsToReplace = new List<string>
         {
-            "E47CBDCF-B71C-4A7B-BC83-B4649FC99361".ToUpper(), // Items folder
-            "2C74567A-5CF2-4006-B6C1-FDA122578AD1".ToUpper(), // Lucid.Database
-            "C4352D6D-C6DF-4A1A-A613-800B3573F8A3".ToUpper(), // Lucid.Database.Tests
-            "2D85D27E-BDFF-4545-A48C-49D193143232".ToUpper(), // Lucid.Domain.Contract
-            "74BDA17E-FC05-42F2-810C-D7B677C0D29E".ToUpper(), // Lucid.Domain
-            "CC13E71E-1978-4232-93F3-C7380D498C9C".ToUpper(), // Lucid.Domain.Tests
-            "C18D5B86-C73A-483B-9405-39C8D85A1823".ToUpper(), // Lucid.Infrastructure
-            "3877B1C6-15A4-43D3-899E-74168842C92C".ToUpper(), // Lucid.Infrastructure.Tests
-            "9EA489D1-14A1-4482-872B-3A1FD7F93646".ToUpper(), // Lucid.Web
-            "098ADBA2-8686-4E64-9937-EC63DFA11432".ToUpper(), // Lucid.Web.Tests
-            "B21A7182-EF27-48FA-93D8-C8E24E44FDB6".ToUpper(), // Lucid.System.Tests
+            // solution GUIDs
+            "CA605302-3418-48E1-8E1A-31AA13F3479F".ToUpper(), // Build\Build.csproj
+            "7157C75A-FD10-460B-B747-46EA2AC93CA3".ToUpper(), // Infrastructure folder
+            "673964CD-F184-4238-9DCA-A6EA7C9E2C7F".ToUpper(), // Host folder
+            "96E18C08-0EF5-4451-A614-1AC45F2B4A40".ToUpper(), // Mvc.csproj
+            "4134FAD9-2C7F-4959-921B-3F8EA4D50E09".ToUpper(), // ProjectCreation
+            "50F21CB1-AF5E-46CD-AB63-3ABF17EF210F".ToUpper(), // Module.csproj
+            "4E172D4F-022F-408D-8F43-BA25495B2DC4".ToUpper(), // Tests.csproj
+            "44F2D0BB-FEF1-4371-AB27-8B3555B69DCA".ToUpper(), // Zip.csproj
         };
 
         public static readonly Regex GuidSearch     = new Regex("([^-]{8}-[^-]{4}-[^-]{4}-[^-]{4}-[^-]{12})", RegexOptions.Compiled);

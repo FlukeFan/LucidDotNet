@@ -1,5 +1,7 @@
 <Project DefaultTargets="Build">
 
+  <Import Project="Build\common.build.proj" />
+
   <ItemGroup>
     <ProjectsToBuild Include="Infrastructure\Host\Mvc\Mvc.csproj" />
     <ProjectsToBuild Include="ProjectCreation\build.proj" />

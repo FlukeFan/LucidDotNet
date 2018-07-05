@@ -19,9 +19,10 @@ namespace Lucid.ProjectCreation.Zip
                 {
                     var entryName = Path.GetRelativePath(rootFolder, fileToZip);
                     var entry = archive.CreateEntryFromFile(fileToZip, entryName);
-                    Console.WriteLine($"Zipped {entryName}");
                 }
             }
+
+            Console.WriteLine($"Zipped {filesToZip.Length} files into {zipFile}");
         }
     }
 }

@@ -1,7 +1,6 @@
 <Project>
 
   <ItemGroup>
-    <ProjectsToBuild Include="Zip\Zip.csproj" />
     <ProjectsToBuild Include="Module\Module.csproj" />
     <ProjectsToBuild Include="Tests\Tests.csproj" />
   </ItemGroup>
