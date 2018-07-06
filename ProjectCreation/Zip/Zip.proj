@@ -12,10 +12,10 @@
     <FilesToZip Include="..\..\*.sln" />
     <FilesToZip Include="..\..\**\*.csproj" Exclude="..\packages\**" />
     <FilesToZip Include="..\..\**\CoverageFilter.txt" />
-    <FilesToZip Include="..\..\**\*.cs" Exclude="..\_output\AssemblyInfo.cs;..\**\obj\**;..\packages\**" />
+    <FilesToZip Include="..\..\**\*.cs" Exclude="..\..\_output\AssemblyInfo.cs;..\..\**\obj\**;..\packages\**" />
     <FilesToZip Include="..\..\**\*.cshtml" />
     <FilesToZip Include="..\..\**\*.asax" />
-    <FilesToZip Include="..\..\**\*.config" Exclude="..\packages\**;..\.vs\**;..\**\bin\**;..\Lucid.Web\settings.config" />
+    <FilesToZip Include="..\..\**\*.config" Exclude="..\packages\**;..\..\.vs\**;..\..\**\bin\**;..\..\**\obj\**;..\Lucid.Web\settings.config" />
     <FilesToZip Include="..\..\**\*.eot;**\*.svg;**\*.ttf;**\*.woff;**\*.woff2" />
     <FilesToZip Include="..\**\*.scss;**\*.css;*.json;*.json.defaults;**\*.map;**\*.js" />
     <FilesToZip Include="..\..\**\favicon.ico" />
