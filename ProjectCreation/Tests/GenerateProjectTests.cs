@@ -14,7 +14,6 @@ namespace Lucid.ProjectCreation.Tests
         [Test]
         public void Execute()
         {
-            Assert.Fail("Testing CI server");
             var cmd = _validCommand();
 
             var bytes = cmd.Execute();
