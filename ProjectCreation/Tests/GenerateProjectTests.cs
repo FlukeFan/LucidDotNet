@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Compression;
+using FluentAssertions;
+using NUnit.Framework;
 
 namespace Lucid.ProjectCreation.Tests
 {
@@ -14,6 +14,7 @@ namespace Lucid.ProjectCreation.Tests
         [Test]
         public void Execute()
         {
+            Assert.Fail("Testing CI server");
             var cmd = _validCommand();
 
             var bytes = cmd.Execute();
