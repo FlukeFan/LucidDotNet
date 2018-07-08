@@ -20,4 +20,8 @@
     <Message Text="Exported Build binaries to $(MSBuildThisFileDirectory)bin" />
   </Target>
 
+  <Target Name="Unlock" BeforeTargets="CoreCompile">
+    <Exec Command="dotnet build-server shutdown" />
+  </Target>
+
 </Project>

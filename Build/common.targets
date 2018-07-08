@@ -5,6 +5,8 @@
     <MSBuild Projects="$(MSBuildThisFileDirectory)Build.csproj" Targets="Restore;Build" Condition="!Exists('$(MSBuildThisFileDirectory)bin\Build.exe')" />
   </Target>
 
+  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)bin\Build.exe" TaskName="Build.ColorExec" />
+
   <PropertyGroup>
 
     <Version>0.0.1</Version>
