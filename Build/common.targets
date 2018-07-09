@@ -37,6 +37,10 @@
     <CoverFilter Include="+[$(Asterisk)]$(Asterisk)" />
   </ItemGroup>
 
+  <Target Name="BeforeBuildComplete" AfterTargets="AfterBuild">
+    <CallTarget Targets="RunTests" Condition="$(AssemblyName.EndsWith(&quot;Tests&quot;))==True" />
+  </Target>
+
   <Target Name="RunTests" Condition="'$(RunTests)'=='true' or '$(FilterTestFqn)'!=''" Inputs="@(TestDependencies)" Outputs="$(OutDir)$(TestSuccessFlag)">
     <CallTarget Targets="RunTestsWithFilter" Condition="'$(FilterTestFqn)'!=''" />
     <CallTarget Targets="RunTestsWithCoverage" Condition="'$(FilterTestFqn)'==''" />

@@ -23,8 +23,4 @@
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
 
-  <Target Name="After_Build" AfterTargets="Build">
-    <CallTarget Targets="RunTests" />
-  </Target>
-
 </Project>

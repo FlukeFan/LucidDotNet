@@ -1,5 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk" InitialTargets="ZipProject">
 
+  <Import Project="..\..\Build\common.targets" />
+
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <AssemblyName>Lucid.ProjectCreation</AssemblyName>
