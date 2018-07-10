@@ -168,7 +168,7 @@ namespace Lucid.ProjectCreation.Tests
 
             ignoredGenerateCs.Should().BeTrue("should have found Generate.cs");
 
-            foreach (var knownGuid in Generate.GuidsToIgnore)
+            foreach (var knownGuid in Guids.ToIgnore)
                 allGuidsInZip.Should().Contain(knownGuid, $"GUID {knownGuid} should remain in project");
         }
 

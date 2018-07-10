@@ -50,12 +50,6 @@ namespace Lucid.ProjectCreation
             ".ico",
         };
 
-        public static readonly IList<string> GuidsToIgnore = new List<string>
-        {
-            "2150E333-8FDC-42A3-9474-1A3956D46DE8".ToUpper(), // solution folder
-            "fae04ec0-301f-11d3-bf4b-00c04f79efbc".ToUpper(), // c# project
-        };
-
         public static readonly Regex GuidSearch     = new Regex("([^-]{8}-[^-]{4}-[^-]{4}-[^-]{4}-[^-]{12})", RegexOptions.Compiled);
         public static readonly Regex TempDirSearch  = new Regex("tempDirectory=\"[^\"]*\"", RegexOptions.Compiled);
 
@@ -197,7 +191,7 @@ namespace Lucid.ProjectCreation
             {
                 var inputGuid = match.Value.ToUpper();
 
-                if (GuidsToIgnore.Contains(inputGuid))
+                if (Guids.ToIgnore.Contains(inputGuid))
                     continue;
 
                 if (inputGuid.Contains("{8}-.{4}-.{4}-.{4}-.{12}"))
