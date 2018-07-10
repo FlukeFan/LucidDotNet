@@ -56,19 +56,6 @@ namespace Lucid.ProjectCreation
             "fae04ec0-301f-11d3-bf4b-00c04f79efbc".ToUpper(), // c# project
         };
 
-        public static readonly IList<string> GuidsToReplace = new List<string>
-        {
-            // solution GUIDs
-            "CA605302-3418-48E1-8E1A-31AA13F3479F".ToUpper(), // Build\Build.csproj
-            "7157C75A-FD10-460B-B747-46EA2AC93CA3".ToUpper(), // Infrastructure folder
-            "673964CD-F184-4238-9DCA-A6EA7C9E2C7F".ToUpper(), // Host folder
-            "96E18C08-0EF5-4451-A614-1AC45F2B4A40".ToUpper(), // Mvc.csproj
-            "4134FAD9-2C7F-4959-921B-3F8EA4D50E09".ToUpper(), // ProjectCreation
-            "50F21CB1-AF5E-46CD-AB63-3ABF17EF210F".ToUpper(), // Module.csproj
-            "4E172D4F-022F-408D-8F43-BA25495B2DC4".ToUpper(), // Tests.csproj
-            "44F2D0BB-FEF1-4371-AB27-8B3555B69DCA".ToUpper(), // Zip.csproj
-        };
-
         public static readonly Regex GuidSearch     = new Regex("([^-]{8}-[^-]{4}-[^-]{4}-[^-]{4}-[^-]{12})", RegexOptions.Compiled);
         public static readonly Regex TempDirSearch  = new Regex("tempDirectory=\"[^\"]*\"", RegexOptions.Compiled);
 
@@ -215,13 +202,6 @@ namespace Lucid.ProjectCreation
 
                 if (inputGuid.Contains("{8}-.{4}-.{4}-.{4}-.{12}"))
                     continue; // not a guid - it's finding the declaration of the Regex
-
-                if (!GuidsToReplace.Contains(inputGuid))
-                {
-                    var errorMessage = string.Format("Could not find guid {0}.  All project GUIDS must be defined in Generate.GuidsToIngore or GuidsToReplace.  Line: {1}", inputGuid, inputLine);
-                    Console.WriteLine(errorMessage);
-                    throw new Exception(errorMessage);
-                }
 
                 if (!_guidMap.ContainsKey(inputGuid))
                     _guidMap[inputGuid] = Guid.NewGuid().ToString().ToUpper();

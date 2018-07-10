@@ -1,11 +1,11 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
+using FluentAssertions;
+using NUnit.Framework;
 
 namespace Lucid.ProjectCreation.Tests
 {
@@ -168,22 +168,8 @@ namespace Lucid.ProjectCreation.Tests
 
             ignoredGenerateCs.Should().BeTrue("should have found Generate.cs");
 
-            var extraGuids = Generate.GuidsToIgnore
-                .Union(Generate.GuidsToReplace)
-                .Where(g => !allGuidsInZip.Contains(g))
-                .ToList();
-
-            extraGuids.Count.Should().Be(0, "GUIDs not found in project: {0}", string.Join(", ", extraGuids));
-        }
-
-        [Test]
-        public void GuidsDontAppearTwice()
-        {
-            var duplicateGuids = Generate.GuidsToIgnore
-                .Where(g => Generate.GuidsToReplace.Contains(g))
-                .ToList();
-
-            duplicateGuids.Count.Should().Be(0, "The following GUIDs should not appear twice: {0}", string.Join(", ", duplicateGuids));
+            foreach (var knownGuid in Generate.GuidsToIgnore)
+                allGuidsInZip.Should().Contain(knownGuid, $"GUID {knownGuid} should remain in project");
         }
 
         [Test]

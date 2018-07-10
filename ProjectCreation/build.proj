@@ -9,6 +9,15 @@
     <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" BuildInParallel="true" />
   </Target>
 
+  <Target Name="ForceTests">
+    <!-- to save on build time, the Project.zip (and tests) are only updated every 20 mins -->
+    <!-- this forces the run of the tests -->
+    <Delete Files="Module\Project.zip.nextUpdate" />
+    <MSBuild Projects="Module\Module.csproj" />
+    <Delete Files="Tests\bin\Debug\net461\Tests.success.flg" />
+    <MSBuild Projects="Tests\Tests.csproj" />
+  </Target>
+
   <Target Name="Clean">
     <MSBuild Projects="@(ProjectsToBuild->Reverse())" Targets="Clean" BuildInParallel="true" />
   </Target>
