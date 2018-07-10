@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\Build\common.targets" />
 
@@ -22,5 +22,9 @@
   <ItemGroup>
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
+
+  <Target Name="OnTestSuccess">
+    <Copy SourceFiles="..\Module\Project.zip.nextUpdate" DestinationFiles="$(OutDir)$(TestSuccessFlag)" />
+  </Target>
 
 </Project>
