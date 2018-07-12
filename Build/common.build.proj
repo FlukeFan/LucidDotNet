@@ -1,6 +1,17 @@
 <Project>
 
-  <PropertyGroup>
-  </PropertyGroup>
+  <ItemGroup>
+    <Watch Include="**\*.cs" />
+    <Watch Include="**\*.csproj" />
+    <Watch Include="**\*.proj" />
+    <Watch Include="**\*.targets" />
+  </ItemGroup>
+
+  <Target Name="GenerateWatchList">
+    <WriteLinesToFile
+      Overwrite="true"
+      File="$(_DotNetWatchListFile)"
+      Lines="@(Watch -> '%(FullPath)')" />
+  </Target>
 
 </Project>

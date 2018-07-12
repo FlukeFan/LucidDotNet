@@ -1,5 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+  <Import Project="..\Build\common.build.proj" />
+
   <ItemGroup>
     <ProjectsToBuild Include="Module\Module.csproj" />
     <ProjectsToBuild Include="Tests\Tests.csproj" />

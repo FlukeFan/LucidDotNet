@@ -18,8 +18,13 @@
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
 
-  <Target Name="ZipProject" BeforeTargets="Build">
+  <Target Name="ZipProject" BeforeTargets="CoreCompile">
     <MSBuild Projects="..\Zip\Zip.proj" />
+  </Target>
+
+  <Target Name="CustomClean" BeforeTargets="Clean">
+    <Delete Files="Project.zip" />
+    <Delete Files="Project.zip.nextUpdate" />
   </Target>
 
 </Project>

@@ -20,6 +20,12 @@
 
   <Target Name="Clean">
     <MSBuild Projects="@(ProjectsToBuild->Reverse())" Targets="Clean" BuildInParallel="true" />
+    <ItemGroup>
+      <BinFolders Include="**\*.csproj" />
+      <BinFolders Remove="pre_core\**" />
+    </ItemGroup>
+    <RemoveDir Directories="@(BinFolders->'%(RelativeDir)bin')" />
+    <RemoveDir Directories="@(BinFolders->'%(RelativeDir)obj')" />
   </Target>
 
 </Project>
