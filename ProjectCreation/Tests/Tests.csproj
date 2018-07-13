@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <Target Name="OnTestSuccess">
-    <Copy SourceFiles="..\Module\Project.zip.nextUpdate" DestinationFiles="$(OutDir)$(TestSuccessFlag)" />
+    <Copy SourceFiles="..\Module\Project.zip.nextUpdate" DestinationFiles="$(OutDir)$(TestSuccessFlag)" Condition="$([System.IO.File]::GetLastWriteTime(..\Module\Project.zip.nextUpdate).Ticks) &gt; $([System.IO.File]::GetLastWriteTime($(OutDir)$(TestSuccessFlag)).Ticks)" />
   </Target>
 
 </Project>
