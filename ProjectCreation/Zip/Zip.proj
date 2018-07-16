@@ -22,9 +22,8 @@
     <FilesToZip Remove="..\..\pre_core\**" />
   </ItemGroup>
 
-  <Target Name="Zip" Inputs="@(FilesToZip);Zip.proj" Outputs="..\Module\Project.zip.nextUpdate">
+  <Target Name="Zip" Inputs="@(FilesToZip);Zip.proj" Outputs="..\Module\Project.zip">
     <Exec Command="dotnet run -p Zip.csproj -- ..\.. ..\Module\Project.zip @(FilesToZip)" />
-    <Touch Files="..\Module\Project.zip.nextUpdate" Time="$([System.DateTime]::Now.AddMinutes(20).ToString(yyyy-MM-dd HH:mm:ss))" AlwaysCreate="true" />
   </Target>
 
   <Target Name="Clean">

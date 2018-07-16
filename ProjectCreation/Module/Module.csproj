@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk" InitialTargets="ZipProject">
+﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="ZipProject">
 
   <Import Project="..\..\Build\common.targets" />
 
@@ -24,7 +24,6 @@
 
   <Target Name="CustomClean" BeforeTargets="Clean">
     <Delete Files="Project.zip" />
-    <Delete Files="Project.zip.nextUpdate" />
   </Target>
 
 </Project>
