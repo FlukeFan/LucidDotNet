@@ -3,7 +3,7 @@
   <Import Project="..\..\..\Build\common.targets" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ProjectCreation\Module\Module.csproj" />
   </ItemGroup>
 
   <Target Name="DisableIisExpress" BeforeTargets="CoreCompile" Condition="$(BuildingInsideVisualStudio)!='true'">
