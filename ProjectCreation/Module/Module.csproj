@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Project.zip" />
+    <EmbeddedResource Include="Project.zip" Visible="false" />
   </ItemGroup>
 
   <ItemGroup>
