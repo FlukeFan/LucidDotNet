@@ -18,6 +18,10 @@
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
+  </ItemGroup>
+
   <Target Name="ZipProject" BeforeTargets="CoreCompile">
     <MSBuild Projects="..\Zip\Zip.proj" />
   </Target>
