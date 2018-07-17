@@ -2,6 +2,7 @@
 
 namespace Lucid.ProjectCreation
 {
+    [Route("/")]
     [Route("/projectCreation")]
     public class ProjectCreationController : Controller
     {
