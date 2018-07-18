@@ -3,7 +3,7 @@
   <Import Project="..\..\Build\common.targets" />
 
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Lucid.ProjectCreation</AssemblyName>
     <RootNamespace>Lucid.ProjectCreation</RootNamespace>
     <DebugType>full</DebugType>
@@ -11,11 +11,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Project.zip" Visible="false" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.IO.Compression" />
   </ItemGroup>
 
   <ItemGroup>
