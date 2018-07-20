@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Lucid.ProjectCreation.Tests
         [Test]
         public void FormatIsMaintained()
         {
-            var rootPath = @"..\..\..\..\..";
+            var rootPath = FindRootPath();
             var cmd = new GenerateProject { Name = "Lucid" };
             var bytes = cmd.Execute();
 
@@ -59,6 +60,23 @@ namespace Lucid.ProjectCreation.Tests
                     }
                 }
             }
+        }
+
+        private string FindRootPath()
+        {
+            var path = Environment.CurrentDirectory;
+            var fileToFind = ".gitignore";
+
+            while (!File.Exists(Path.Combine(path, fileToFind)) && path != Path.GetPathRoot(path))
+            {
+                path = Path.Combine(path, "..");
+                path = Path.GetFullPath(path);
+            }
+
+            if (path == Path.GetPathRoot(path))
+                Assert.Fail($"Could not find {fileToFind} in parent of {Environment.CurrentDirectory}");
+
+            return path;
         }
 
         [Test]

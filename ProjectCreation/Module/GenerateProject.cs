@@ -11,7 +11,6 @@ namespace Lucid.ProjectCreation
     {
         public static void Validate(object command)
         {
-
         }
     }
 

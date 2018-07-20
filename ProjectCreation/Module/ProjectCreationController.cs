@@ -2,9 +2,13 @@
 
 namespace Lucid.ProjectCreation
 {
+    public abstract class LucidController : Microsoft.AspNetCore.Mvc.Controller
+    {
+    }
+
     [Route("/")]
     [Route("/projectCreation")]
-    public class ProjectCreationController : Controller
+    public class Controller : LucidController
     {
         [HttpGet]
         public IActionResult Index()
