@@ -11,7 +11,6 @@
 
     <Version>0.0.1</Version>
 
-    <RunTests Condition="'$(BuildingInsideVisualStudio)' == ''">true</RunTests>
     <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
 
     <OpenCoverExe>$(NuGetPackageRoot)OpenCover\4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
