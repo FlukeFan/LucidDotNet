@@ -15,7 +15,6 @@
 
     <AltCover>$(NuGetPackageRoot)altcover\3.5.580\tools\netcoreapp2.0\AltCover.dll</AltCover>
     <VsTestConsole>$(MSBuildExtensionsPath)vstest.console.dll</VsTestConsole>
-    <NUnitConsole>$(NuGetPackageRoot)nunit.consolerunner\3.8.0\tools\nunit3-console.exe</NUnitConsole>
     <ReportGenerator>$(NuGetPackageRoot)reportgenerator\4.0.0-rc2\tools\netcoreapp2.0\ReportGenerator.dll</ReportGenerator>
 
     <TestAssembly>$(AssemblyName).dll</TestAssembly>
@@ -42,13 +41,13 @@
   </Target>
 
   <Target Name="RunTestsWithFilter">
-    <Exec Command="&quot;$(NUnitConsole)&quot; $(TestAssembly) --where &quot;test =~ $(FilterTestFqn)&quot;" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==False" />
-    <Exec Command="dotnet &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx --testcasefilter:FullyQualifiedName~$(FilterTestFqn)" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==True" />
+    <Message Importance="high" Text="Running VsTestConsole with --testcasefilter:FullyQualifiedName~$(FilterTestFqn)" />
+    <Exec Command="dotnet &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx --testcasefilter:FullyQualifiedName~$(FilterTestFqn)" WorkingDirectory="$(OutDir)" />
   </Target>
 
   <Target Name="RunTestsWithCoverage">
     <PropertyGroup>
-      <TestStartTime>$([System.DateTime]::Now.AddSeconds(1).ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
+      <TestStartTime>$([System.DateTime]::Now.ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
     </PropertyGroup>
     <Message Text="TestStartTime=$(TestStartTime)" />
     <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) --opencover --save --outputDirectory __Instrumented --xmlReport $(CoverageOutput) --assemblyFilter &quot;@(CoverageAssemblyFilter)&quot; --typeFilter &quot;@(CoverageTypeFilter)&quot; --methodFilter &quot;@(CoverageMethodFilter)&quot; --attributeFilter &quot;@(CoverageAttributeFilter)&quot;" />
