@@ -3,6 +3,7 @@
   <Import Project="Build\common.build.proj" />
 
   <ItemGroup>
+    <ProjectsToBuild Include="Build\Build.csproj" />
     <ProjectsToBuild Include="Infrastructure\Host\Mvc\Mvc.csproj" />
     <ProjectsToBuild Include="ProjectCreation\build.proj" />
   </ItemGroup>
