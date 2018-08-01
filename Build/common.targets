@@ -2,10 +2,10 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="PreBuild">
 
   <Target Name="PreBuild">
-    <MSBuild Projects="$(MSBuildThisFileDirectory)Build.csproj" Targets="Restore;Build" Condition="!Exists('$(MSBuildThisFileDirectory)bin\Debug\netcoreapp20\Build.dll')" />
+    <MSBuild Projects="$(MSBuildThisFileDirectory)Build.csproj" Targets="Restore;Build" Condition="!Exists('$(MSBuildThisFileDirectory)bin\Debug\netcoreapp2.1\Build.dll')" />
   </Target>
 
-  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)bin\Debug\netcoreapp20\Build.dll" TaskName="Build.ColorExec" />
+  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)bin\Debug\netcoreapp2.1\Build.dll" TaskName="Build.ColorExec" />
 
   <PropertyGroup>
 
@@ -13,7 +13,7 @@
 
     <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
 
-    <BuildUtil>$(MSBuildThisFileDirectory)bin\Debug\netcoreapp20\Build.dll</BuildUtil>
+    <BuildUtil>$(MSBuildThisFileDirectory)bin\Debug\netcoreapp2.1\Build.dll</BuildUtil>
     <AltCover>$(NuGetPackageRoot)altcover\3.5.580\tools\netcoreapp2.0\AltCover.dll</AltCover>
     <VsTestConsole>$(MSBuildExtensionsPath)vstest.console.dll</VsTestConsole>
     <ReportGenerator>$(NuGetPackageRoot)reportgenerator\4.0.0-rc2\tools\netcoreapp2.0\ReportGenerator.dll</ReportGenerator>
