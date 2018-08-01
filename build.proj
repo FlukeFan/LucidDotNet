@@ -16,6 +16,7 @@
 
   <Target Name="Build">
     <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" BuildInParallel="true" />
+    <Message Text="Build Success" Importance="high" />
   </Target>
 
   <Target Name="Clean">

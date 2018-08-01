@@ -13,17 +13,14 @@
 
     <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
 
-    <OpenCoverExe>$(NuGetPackageRoot)OpenCover\4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
+    <AltCover>$(NuGetPackageRoot)altcover\3.5.580\tools\netcoreapp2.0\AltCover.dll</AltCover>
     <VsTestConsole>$(MSBuildExtensionsPath)vstest.console.dll</VsTestConsole>
     <NUnitConsole>$(NuGetPackageRoot)nunit.consolerunner\3.8.0\tools\nunit3-console.exe</NUnitConsole>
-    <ReportGeneratorExe>$(NuGetPackageRoot)reportgenerator\3.1.2\tools\ReportGenerator.exe</ReportGeneratorExe>
+    <ReportGenerator>$(NuGetPackageRoot)reportgenerator\4.0.0-rc2\tools\netcoreapp2.0\ReportGenerator.dll</ReportGenerator>
 
-    <Asterisk>%2A</Asterisk>
     <TestAssembly>$(AssemblyName).dll</TestAssembly>
     <TestSuccessFlag>$(AssemblyName).success.flg</TestSuccessFlag>
     <CoverageOutput>$(AssemblyName).coverage.xml</CoverageOutput>
-    <CoverFilterFileOption Condition="!Exists('CoverageFilter.txt')"></CoverFilterFileOption>
-    <CoverFilterFileOption Condition="Exists('CoverageFilter.txt')">-filterfile:&quot;$(MSBuildProjectDirectory)\CoverageFilter.txt&quot;</CoverFilterFileOption>
 
   </PropertyGroup>
 
@@ -32,12 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <CoverFilter Include="-[FluentAssertions$(Asterisk)]$(Asterisk)" />
-    <CoverFilter Include="+[$(Asterisk)]$(Asterisk)" />
+    <CoverageAssemblyFilter Include="NUnit3.TestAdapter" />
   </ItemGroup>
 
   <Target Name="BeforeBuildComplete" AfterTargets="AfterBuild">
-    <CallTarget Targets="RunTests" Condition="$(AssemblyName.EndsWith(&quot;Tests&quot;))==True" />
+    <CallTarget Targets="RunTests" Condition="$(IsTestProject)=='true'" />
   </Target>
 
   <Target Name="RunTests" Condition="'$(RunTests)'=='true' or '$(FilterTestFqn)'!=''" Inputs="@(TestDependencies)" Outputs="$(OutDir)$(TestSuccessFlag)">
@@ -55,11 +51,11 @@
       <TestStartTime>$([System.DateTime]::Now.AddSeconds(1).ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
     </PropertyGroup>
     <Message Text="TestStartTime=$(TestStartTime)" />
-    <Error Text="Coverage will only work from a Windows client.  Current OS: $(OS)" Condition="'$(OS)'!='Windows_NT'" />
-    <Exec Command="$(OpenCoverExe) -target:&quot;$(NUnitConsole)&quot; -targetargs:&quot;$(TestAssembly) --result=$(TestAssembly).results.xml&quot; -register:path64 -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot; $(CoverFilterFileOption)" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==False" />
-    <Exec Command="$(OpenCoverExe) -target:dotnet.exe -targetargs:&quot;&quot;&quot;$(VsTestConsole)&quot;&quot; $(TestAssembly) --logger:trx&quot; -register:path64 -oldstyle -output:$(CoverageOutput) -returntargetcode -filter:&quot;@(CoverFilter, ' ')&quot; $(CoverFilterFileOption)" WorkingDirectory="$(OutDir)" Condition="$(TargetFramework.Contains(&quot;core&quot;))==True" />
+    <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) --opencover --save --outputDirectory __Instrumented --xmlReport $(CoverageOutput) --assemblyFilter &quot;@(CoverageAssemblyFilter)&quot; --typeFilter &quot;@(CoverageTypeFilter)&quot; --methodFilter &quot;@(CoverageMethodFilter)&quot; --attributeFilter &quot;@(CoverageAttributeFilter)&quot;" />
+    <Exec WorkingDirectory="$(OutDir)\__Instrumented" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx" />
+    <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) Runner --collect -r __Instrumented" />
     <RemoveDir Directories="$(OutDir)CoverageReport" />
-    <Exec Command="$(ReportGeneratorExe) -reports:$(OutDir)$(CoverageOutput) -targetdir:$(OutDir)CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
+    <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(ReportGenerator) -reports:$(CoverageOutput) -targetdir:CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
     <Exec Command="&quot;$(MSBuildThisFileDirectory)bin\Build.exe&quot; VerifyCoverage $(CoverageTarget) $(OutDir)CoverageReport/Summary.xml" />
     <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(TestStartTime)" AlwaysCreate="true" />
     <CallTarget Targets="OnTestSuccess" />
