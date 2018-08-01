@@ -5,6 +5,7 @@
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <CoverageTarget>70</CoverageTarget>
+    <DebugType>full</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,13 +22,5 @@
   <ItemGroup>
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
-
-  <Target Name="OnTestSuccess">
-    <PropertyGroup>
-      <NextTestTime>$([System.DateTime]::Now.AddMinutes(20).ToString(yyyy-MM-dd HH:mm:ss))</NextTestTime>
-    </PropertyGroup>
-    <Touch Files="..\Module\Project.zip" Time="$(NextTestTime)" />
-    <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(NextTestTime)" />
-  </Target>
 
 </Project>

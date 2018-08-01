@@ -19,6 +19,7 @@ namespace Lucid.ProjectCreation.Tests
             var rootPath = FindRootPath();
             var cmd = new GenerateProject { Name = "Lucid" };
             var bytes = cmd.Execute();
+            var zipCreated = File.GetLastWriteTimeUtc(Path.Combine(rootPath, "ProjectCreation/Module/Project.zip"));
 
             var zippedFiles = new List<string>();
 
@@ -32,6 +33,14 @@ namespace Lucid.ProjectCreation.Tests
                     if (Generate.ShouldProcessFile(name))
                     {
                         var originalFile = Path.Combine(rootPath, name);
+                        var originalLastWrite = File.GetLastWriteTimeUtc(originalFile);
+
+                        if (originalLastWrite > zipCreated)
+                        {
+                            TestContext.Progress.WriteLine($"Skip checks on file {originalFile} as it is more recent {originalLastWrite} than zip {zipCreated}.");
+                            continue;
+                        }
+
                         using (var stream = File.OpenRead(originalFile))
                         using (var copy = zipEntry.Open())
                         {

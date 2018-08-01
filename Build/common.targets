@@ -58,9 +58,6 @@
     <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(ReportGenerator) -reports:$(CoverageOutput) -targetdir:CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
     <Exec Command="&quot;$(MSBuildThisFileDirectory)bin\Build.exe&quot; VerifyCoverage $(CoverageTarget) $(OutDir)CoverageReport/Summary.xml" />
     <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(TestStartTime)" AlwaysCreate="true" />
-    <CallTarget Targets="OnTestSuccess" />
   </Target>
-
-  <Target Name="OnTestSuccess"></Target>
 
 </Project>

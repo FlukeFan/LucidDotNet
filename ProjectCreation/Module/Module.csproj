@@ -23,6 +23,7 @@
 
   <Target Name="CustomClean" BeforeTargets="Clean">
     <Delete Files="Project.zip" />
+    <Delete Files="Project.zip.nextUpdate" />
   </Target>
 
 </Project>

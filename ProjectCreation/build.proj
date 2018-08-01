@@ -15,8 +15,7 @@
     <!-- to save on build time, the Project.zip (and tests) are only updated every 20 mins -->
     <!-- this forces the run of the tests -->
     <Delete Files="Module\Project.zip" />
-    <MSBuild Projects="Module\Module.csproj" />
-    <Delete Files="Tests\bin\Debug\net461\Tests.success.flg" />
+    <Delete Files="Module\Project.zip.nextUpdate" />
     <MSBuild Projects="Tests\Tests.csproj" />
   </Target>
 
