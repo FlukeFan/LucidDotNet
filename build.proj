@@ -8,11 +8,11 @@
   </ItemGroup>
   
   <Target Name="BeforeBuild" BeforeTargets="Build">
-    <MSBuild Projects="Build\Build.csproj" Targets="Build" />
+    <MSBuild Projects="Build\Util\BuildUtil.csproj" Targets="Build" />
   </Target>
 
   <Target Name="BeforeRestore" BeforeTargets="Restore">
-    <MSBuild Projects="Build\Build.csproj" Targets="Restore" />
+    <MSBuild Projects="Build\Util\BuildUtil.csproj" Targets="Restore" />
   </Target>
 
 </Project>
