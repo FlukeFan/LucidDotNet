@@ -22,7 +22,7 @@
     <FilesToZip Remove="..\..\pre_core\**" />
   </ItemGroup>
 
-  <Target Name="Zip" Inputs="@(FilesToZip)" Outputs="Project.zip.nextUpdate">
+  <Target Name="Zip" Inputs="@(FilesToZip)" Outputs="Project.zip.nextUpdate" Condition="Exists('$(BuildUtil)')">
     <Exec Command="dotnet $(BuildUtil) Zip ..\.. Project.zip @(FilesToZip)" />
     <PropertyGroup>
       <NextUpdateTime>$([System.DateTime]::Now.AddMinutes(20).ToString(yyyy-MM-dd HH:mm:ss))</NextUpdateTime>
