@@ -9,7 +9,7 @@ An example application using ASP.Net Core.
 Building
 ========
 
-To build, open CommandPrompt.bat as administrator, and type 'b'.
+To build, open CommandPrompt.bat as administrator, and type 'br' (to restore) then 'b'.
 
 Build commands:
 
