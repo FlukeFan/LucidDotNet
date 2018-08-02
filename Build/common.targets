@@ -42,7 +42,7 @@
 
   <Target Name="RunTestsWithCoverage">
     <PropertyGroup>
-      <TestStartTime>$([System.DateTime]::Now.ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
+      <TestStartTime>$([System.DateTime]::Now.AddSeconds(1).ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
     </PropertyGroup>
     <Message Text="TestStartTime=$(TestStartTime)" />
     <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) --opencover --save --outputDirectory __Instrumented --xmlReport $(CoverageOutput) --assemblyFilter &quot;@(CoverageAssemblyFilter)&quot; --typeFilter &quot;@(CoverageTypeFilter)&quot; --methodFilter &quot;@(CoverageMethodFilter)&quot; --attributeFilter &quot;@(CoverageAttributeFilter)&quot;" />

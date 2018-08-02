@@ -14,4 +14,23 @@
       Lines="@(Watch -> '%(FullPath)')" />
   </Target>
 
-</Project>
+  <Target Name="Restore">
+    <MSBuild Projects="@(ProjectsToBuild)" Targets="Restore" BuildInParallel="false" />
+  </Target>
+
+  <Target Name="Build">
+    <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" BuildInParallel="true" />
+    <Message Text="Build Success - $(MSBuildProjectFullPath)" Importance="high" />
+  </Target>
+
+  <Target Name="Clean">
+    <MSBuild Projects="@(ProjectsToBuild->Reverse())" Targets="Clean" BuildInParallel="true" />
+    <ItemGroup>
+      <BinFolders Include="**\*.csproj" />
+      <BinFolders Remove="pre_core\**" />
+    </ItemGroup>
+    <RemoveDir Directories="@(BinFolders->'%(RelativeDir)bin')" />
+    <RemoveDir Directories="@(BinFolders->'%(RelativeDir)obj')" />
+  </Target>
+
+  </Project>

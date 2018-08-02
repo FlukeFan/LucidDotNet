@@ -3,31 +3,16 @@
   <Import Project="Build\common.build.proj" />
 
   <ItemGroup>
-    <ProjectsToBuild Include="Build\Build.csproj" />
-    <ProjectsToBuild Include="Infrastructure\Host\Mvc\Mvc.csproj" />
     <ProjectsToBuild Include="ProjectCreation\build.proj" />
+    <ProjectsToBuild Include="Infrastructure\build.proj" />
   </ItemGroup>
-
-  <Target Name="Restore">
-    <ItemGroup>
-      <AllProjects Include="**\*.csproj" Exclude="pre_core\**" />
-    </ItemGroup>
-    <MSBuild Projects="@(AllProjects)" Targets="Restore" BuildInParallel="true" />
+  
+  <Target Name="BeforeBuild" BeforeTargets="Build">
+    <MSBuild Projects="Build\Build.csproj" Targets="Build" />
   </Target>
 
-  <Target Name="Build">
-    <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" BuildInParallel="true" />
-    <Message Text="Build Success" Importance="high" />
-  </Target>
-
-  <Target Name="Clean">
-    <MSBuild Projects="@(ProjectsToBuild->Reverse())" Targets="Clean" BuildInParallel="true" />
-    <ItemGroup>
-      <BinFolders Include="**\*.csproj" />
-      <BinFolders Remove="pre_core\**" />
-    </ItemGroup>
-    <RemoveDir Directories="@(BinFolders->'%(RelativeDir)bin')" />
-    <RemoveDir Directories="@(BinFolders->'%(RelativeDir)obj')" />
+  <Target Name="BeforeRestore" BeforeTargets="Restore">
+    <MSBuild Projects="Build\Build.csproj" Targets="Restore" />
   </Target>
 
 </Project>
