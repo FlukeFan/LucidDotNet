@@ -19,8 +19,14 @@
   </Target>
 
   <Target Name="Build">
+    <PropertyGroup>
+      <BuildBeginTime>$([System.DateTime]::Now.ToString(yyyy-MM-dd HH:mm:ss))</BuildBeginTime>
+    </PropertyGroup>
     <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" BuildInParallel="true" />
-    <Message Text="Build Success - $(MSBuildProjectFullPath)" Importance="high" />
+    <PropertyGroup>
+      <BuildTime>Time:$([System.DateTime]::Now.Subtract($(BuildBeginTime)).TotalSeconds.ToString(0.00))s</BuildTime>
+    </PropertyGroup>
+    <Message Text="Build Success $(BuildTime) $(MSBuildProjectFullPath)" Importance="high" />
   </Target>
 
   <Target Name="Clean">
