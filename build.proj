@@ -26,15 +26,21 @@
     <AllFiles Remove="ProjectCreation/Module/Project.zip.nextUpdate" />
   </ItemGroup>
 
-  <Target Name="Package" Inputs="@(AllFiles)" Outputs="$(MvcBin)/Packaged.zip">
-    <RemoveDir Directories="$(MvcBin)/Packaged" />
-    <Delete Files="$(MvcBin)/Packaged.zip" />
-    <MSBuild Projects="Infrastructure/Host/Mvc/Mvc.csproj" Targets="Publish" Properties="Configuration=Release;PublishDir=bin/Packaged" />
+  <Target Name="Package" Inputs="@(AllFiles)" Outputs="$(MvcBin)/publish.zip">
+    <RemoveDir Directories="$(MvcBin)/publish" />
+    <Delete Files="$(MvcBin)/publish.zip" />
+    <MSBuild Projects="Infrastructure/Host/Mvc/Mvc.csproj" Targets="Publish" Properties="Configuration=Release;PublishDir=bin/publish;TrimUnusedDependencies=true" />
     <ItemGroup>
-      <FilesToZip Include="$(MvcBin)/Packaged/**" />
+      <FilesToZip Include="$(MvcBin)/publish/**" />
     </ItemGroup>
-    <Exec Command="dotnet $(BuildUtil) Zip $(MvcBin)/Packaged $(MvcBin)/Packaged.zip" />
-    <RemoveDir Directories="$(MvcBin)/Packaged" />
+    <Exec Command="dotnet $(BuildUtil) Zip $(MvcBin)/publish $(MvcBin)/publish.zip" />
+    <RemoveDir Directories="$(MvcBin)/publish" />
+  </Target>
+
+  <Target Name="Deploy" DependsOnTargets="Package">
+    <Error Text="Need to set LucidFtpHostFile variable" Condition="'$(LucidFtpHostFile)'==''" />
+    <Error Text="Need to set LucidFtpRemoteDir variable" Condition="'$(LucidFtpRemoteDir)'==''" />
+    <Exec Command="lib\ncftp\ncftpput.exe -f $(LucidFtpHostFile) -S .tmp $(LucidFtpRemoteDir) $(MvcBin)/publish.zip" />
   </Target>
 
 </Project>

@@ -13,7 +13,7 @@ namespace Lucid.ProjectCreation
         [HttpGet]
         public IActionResult Index()
         {
-            return Content("Hello from project creation");
+            return Content("Hello from deployed Lucid project creation");
         }
     }
 }
