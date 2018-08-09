@@ -174,7 +174,7 @@ namespace Lucid.ProjectCreation.Tests
                 {
                     var fileName = zipEntry.FullName;
 
-                    if (fileName.EndsWith("ProjectCreation\\Module\\Generate.cs"))
+                    if (fileName.EndsWith("ProjectCreation/Module/Generate.cs"))
                     {
                         ignoredGenerateCs = true;
                         continue;

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2" />
+    <PackageReference Include="ZipDeploy" Version="0.0.4" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,9 @@
 <Project>
 
+  <PropertyGroup>
+    <BuildUtil>$(MSBuildThisFileDirectory)\Util\bin\Debug\netcoreapp2.1\BuildUtil.dll</BuildUtil>
+  </PropertyGroup>
+
   <ItemGroup>
     <Watch Include="**\*.cs" />
     <Watch Include="**\*.csproj" />

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using ZipDeploy;
 
 namespace WebApp
 {
@@ -16,6 +17,8 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseZipDeploy(opt => opt.UseIisUrl("http://lucid.enodo.co.uk"));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

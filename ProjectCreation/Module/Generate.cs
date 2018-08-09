@@ -23,6 +23,7 @@ namespace Lucid.ProjectCreation
             ".bat",
             ".nunit",
             ".txt",
+            ".md",
             ".targets",
             ".json",
             ".config",
@@ -34,6 +35,7 @@ namespace Lucid.ProjectCreation
             ".scss",
             ".defaults",
             ".html",
+            ".htm",
         };
 
         private static readonly IList<String> UnprocessedExtensions = new List<string>

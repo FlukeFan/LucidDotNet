@@ -15,4 +15,26 @@
     <MSBuild Projects="Build\Util\BuildUtil.csproj" Targets="Restore" />
   </Target>
 
+  <PropertyGroup>
+    <MvcBin>Infrastructure/Host/Mvc/bin</MvcBin>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <AllFiles Include="**" />
+    <AllFiles Remove="**\bin\**" />
+    <AllFiles Remove="**\obj\**" />
+    <AllFiles Remove="ProjectCreation/Module/Project.zip.nextUpdate" />
+  </ItemGroup>
+
+  <Target Name="Package" Inputs="@(AllFiles)" Outputs="$(MvcBin)/Packaged.zip">
+    <RemoveDir Directories="$(MvcBin)/Packaged" />
+    <Delete Files="$(MvcBin)/Packaged.zip" />
+    <MSBuild Projects="Infrastructure/Host/Mvc/Mvc.csproj" Targets="Publish" Properties="Configuration=Release;PublishDir=bin/Packaged" />
+    <ItemGroup>
+      <FilesToZip Include="$(MvcBin)/Packaged/**" />
+    </ItemGroup>
+    <Exec Command="dotnet $(BuildUtil) Zip $(MvcBin)/Packaged $(MvcBin)/Packaged.zip" />
+    <RemoveDir Directories="$(MvcBin)/Packaged" />
+  </Target>
+
 </Project>
