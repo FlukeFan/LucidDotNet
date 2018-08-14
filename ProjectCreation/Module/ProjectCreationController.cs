@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.ProjectCreation
 {
@@ -13,7 +14,7 @@ namespace Lucid.ProjectCreation
         [HttpGet]
         public IActionResult Index()
         {
-            return Content("Hello from deployed Lucid project creation");
+            return Content($"Hello from deployed Lucid project creation - {DateTime.Now}");
         }
     }
 }
