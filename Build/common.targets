@@ -32,12 +32,22 @@
 
   <Target Name="RunTests" Condition="'$(RunTests)'=='true' or '$(FilterTestFqn)'!=''" Inputs="@(TestDependencies)" Outputs="$(OutDir)$(TestSuccessFlag)">
     <CallTarget Targets="RunTestsWithFilter" Condition="'$(FilterTestFqn)'!=''" />
-    <CallTarget Targets="RunTestsWithCoverage" Condition="'$(FilterTestFqn)'==''" />
+    <CallTarget Targets="RunTestsWithoutCoverage" Condition="'$(FilterTestFqn)'=='' And '$(NoCoverage)'=='true'" />
+    <CallTarget Targets="RunTestsWithCoverage" Condition="'$(FilterTestFqn)'=='' And '$(NoCoverage)'!='true'" />
   </Target>
 
   <Target Name="RunTestsWithFilter">
     <Message Importance="high" Text="Running VsTestConsole with --testcasefilter:FullyQualifiedName~$(FilterTestFqn)" />
     <Exec Command="dotnet &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx --testcasefilter:FullyQualifiedName~$(FilterTestFqn)" WorkingDirectory="$(OutDir)" />
+  </Target>
+
+  <Target Name="RunTestsWithoutCoverage">
+    <PropertyGroup>
+      <TestStartTime>$([System.DateTime]::Now.AddSeconds(1).ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
+    </PropertyGroup>
+    <Message Text="TestStartTime=$(TestStartTime)" />
+    <Exec WorkingDirectory="$(OutDir)" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx" />
+    <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(TestStartTime)" AlwaysCreate="true" />
   </Target>
 
   <Target Name="RunTestsWithCoverage">
