@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <BuildUtil>$(MSBuildThisFileDirectory)\Util\bin\Debug\netcoreapp2.1\BuildUtil.dll</BuildUtil>
+    <BuildUtil>$(MSBuildThisFileDirectory)\Util\bin\$(Configuration)\netcoreapp2.1\BuildUtil.dll</BuildUtil>
   </PropertyGroup>
 
   <ItemGroup>

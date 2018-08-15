@@ -37,10 +37,19 @@
     <RemoveDir Directories="$(MvcBin)/publish" />
   </Target>
 
+  <Target Name="CreateHostFile">
+    <ItemGroup>
+      <HostFileLines Include="host $(LucidFtpHost)" />
+      <HostFileLines Include="user $(LucidFtpUser)" />
+      <HostFileLines Include="pass $(LucidFtpPassword)" />
+    </ItemGroup>
+    <WriteLinesToFile File="LucidFtpHostFile.txt" Lines="@(HostFileLines)" Overwrite="true" />
+  </Target>
+
   <Target Name="Deploy" DependsOnTargets="Package">
     <Error Text="Need to set LucidFtpHostFile variable" Condition="'$(LucidFtpHostFile)'==''" />
     <Error Text="Need to set LucidFtpRemoteDir variable" Condition="'$(LucidFtpRemoteDir)'==''" />
-    <Exec Command="lib\ncftp\ncftpput.exe -f $(LucidFtpHostFile) -S .tmp $(LucidFtpRemoteDir) $(MvcBin)/publish.zip" />
+    <Exec Command="lib\ncftp\ncftpput.exe -S .tmp -f $(LucidFtpHostFile) $(LucidFtpRemoteDir) $(MvcBin)/publish.zip" />
   </Target>
 
 </Project>
