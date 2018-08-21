@@ -12,11 +12,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.6.0" />
     <PackageReference Include="ZipDeploy" Version="0.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\ProjectCreation\Module\Module.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <Target Name="DisableIisExpress" BeforeTargets="CoreCompile" Condition="$(BuildingInsideVisualStudio)!='true'">
