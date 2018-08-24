@@ -23,11 +23,12 @@ namespace WebApp
             }
             catch (Exception e)
             {
-                logger.Error(e, "caught error");
+                logger.Fatal(e, $"error from web host");
                 throw;
             }
             finally
             {
+                logger.Info($"Shutting down logging");
                 LogManager.Shutdown();
             }
         }

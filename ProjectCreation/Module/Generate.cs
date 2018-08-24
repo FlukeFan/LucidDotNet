@@ -85,7 +85,7 @@ namespace Lucid.ProjectCreation
                 return true;
 
             if (!UnprocessedExtensions.Contains(extension))
-                throw new Exception(string.Format("Extension {0} should be added to Generate.ProcessedExtensions or Generate.UnprocessedExtensions.", extension));
+                throw new Exception($"Extension '{extension}' should be added to Generate.ProcessedExtensions or Generate.UnprocessedExtensions for file '{fileName}'.");
 
             return false;
         }
