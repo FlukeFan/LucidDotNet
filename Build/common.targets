@@ -8,7 +8,7 @@
     <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
 
     <BuildUtil>$(MSBuildThisFileDirectory)\Util\bin\Debug\netcoreapp2.1\BuildUtil.dll</BuildUtil>
-    <AltCover>$(NuGetPackageRoot)altcover\4.0.603\tools\netcoreapp2.0\AltCover.dll</AltCover>
+    <AltCover>$(NuGetPackageRoot)altcover\4.0.618\tools\netcoreapp2.0\AltCover.dll</AltCover>
     <VsTestConsole>$(MSBuildExtensionsPath)vstest.console.dll</VsTestConsole>
     <ReportGenerator>$(NuGetPackageRoot)reportgenerator\4.0.0-rc2\tools\netcoreapp2.0\ReportGenerator.dll</ReportGenerator>
 
