@@ -1,16 +1,15 @@
 ﻿using System.IO;
-using NLog.Web;
 
 namespace Lucid.Infrastructure.Host.Mvc
 {
     public class Logging
     {
-        public static void Configure()
+        public static string PrepareConfigFile()
         {
             var sourceLogFile = Path.GetFullPath("nlog.config");
 
             if (!File.Exists(sourceLogFile))
-                return;
+                return null;
 
             var targetLogFile = Path.GetFullPath("../logs.config/nlog.mvc.config");
 
@@ -22,7 +21,22 @@ namespace Lucid.Infrastructure.Host.Mvc
             if (!File.Exists(targetLogFile))
                 File.Copy(sourceLogFile, targetLogFile);
 
-            NLogBuilder.ConfigureNLog(targetLogFile);
+            var sourceModified = File.GetLastWriteTimeUtc(sourceLogFile);
+            var targetModified = File.GetLastWriteTimeUtc(targetLogFile);
+
+            if (targetModified > sourceModified)
+                return targetLogFile;
+
+            var previous = $"{targetLogFile}.previous";
+
+            if (File.Exists(previous))
+                File.Delete(previous);
+
+            File.Move(targetLogFile, $"{targetLogFile}.previous");
+
+            File.Copy(sourceLogFile, targetLogFile);
+
+            return targetLogFile;
         }
     }
 }

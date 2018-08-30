@@ -10,7 +10,10 @@ namespace Lucid.Infrastructure.Host.Mvc
     {
         public static void Main(string[] args)
         {
-            Logging.Configure();
+            var logConfigFile = Logging.PrepareConfigFile();
+
+            if (logConfigFile != null)
+                NLogBuilder.ConfigureNLog(logConfigFile);
 
             var logger = LogManager.GetCurrentClassLogger();
             logger.Info($"Creating web host");

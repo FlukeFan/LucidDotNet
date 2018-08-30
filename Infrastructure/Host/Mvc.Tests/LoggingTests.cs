@@ -23,13 +23,54 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
         }
 
         [Test]
-        public void ConfigFileIsCreatedIfItDoesNotExist()
+        public void WhenConfigDoesNotExists_ConfigFileIsCreated()
         {
-            File.WriteAllText("nlog.config", "<xml/>");
+            File.WriteAllText("nlog.config", "<nlog/>");
 
-            Logging.Configure();
+            var file = Logging.PrepareConfigFile();
 
-            File.Exists("../logs.config/nlog.mvc.config").Should().BeTrue("config should be created (in parent of app folder) if it does not already exist");
+            Path.IsPathFullyQualified(file).Should().BeTrue($"{file} should be fully qualified");
+            File.Exists(file).Should().BeTrue("config should be created (in parent of app folder) if it does not already exist");
+        }
+
+        [Test]
+        public void WhenTargetConfigIsNewer_ItIsNotOverwritten()
+        {
+            Directory.CreateDirectory("../logs.config");
+            File.WriteAllText("../logs.config/nlog.mvc.config", "<nlog>newer</nlog>");
+            File.WriteAllText("nlog.config", "<nlog>older</nlog>");
+
+            var old = DateTime.UtcNow - TimeSpan.FromHours(3);
+            File.SetLastWriteTimeUtc("nlog.config", old);
+
+            var file = Logging.PrepareConfigFile();
+
+            File.ReadAllText(file).Should().Be("<nlog>newer</nlog>");
+        }
+
+        [Test]
+        public void WhenTargetConfigIsOlder_ItIsOverwritten()
+        {
+            Directory.CreateDirectory("../logs.config");
+            File.WriteAllText("../logs.config/nlog.mvc.config", "<nlog>older</nlog>");
+            File.WriteAllText("nlog.config", "<nlog>newer</nlog>");
+
+            var old = DateTime.UtcNow - TimeSpan.FromHours(3);
+            File.SetLastWriteTimeUtc("../logs.config/nlog.mvc.config", old);
+
+            var file = Logging.PrepareConfigFile();
+
+            File.ReadAllText(file).Should().Be("<nlog>newer</nlog>");
+        }
+
+        [Test]
+        public void MultipleChanges_AreHandled()
+        {
+            File.WriteAllText("nlog.config", "<nlog>newer</nlog>");
+            Logging.PrepareConfigFile();
+
+            File.WriteAllText("nlog.config", "<nlog>newer</nlog>");
+            Logging.PrepareConfigFile();
         }
     }
 }
