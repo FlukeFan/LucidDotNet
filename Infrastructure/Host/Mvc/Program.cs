@@ -1,18 +1,16 @@
 ﻿using System;
-using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using NLog;
 using NLog.Web;
 
-namespace WebApp
+namespace Lucid.Infrastructure.Host.Mvc
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            if (File.Exists("nlog.config"))
-                NLogBuilder.ConfigureNLog("nlog.config");
+            Logging.Configure();
 
             var logger = LogManager.GetCurrentClassLogger();
             logger.Info($"Creating web host");

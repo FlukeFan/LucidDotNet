@@ -31,6 +31,7 @@
       <BuildTime>Time:$([System.DateTime]::Now.Subtract($(BuildBeginTime)).TotalSeconds.ToString(0.00))s</BuildTime>
     </PropertyGroup>
     <Message Text="Build Success $(BuildTime) $(MSBuildProjectFullPath)" Importance="high" />
+    <OnError ExecuteTargets="BuildError" />
   </Target>
 
   <Target Name="Clean">
@@ -43,4 +44,8 @@
     <RemoveDir Directories="@(BinFolders->'%(RelativeDir)obj')" />
   </Target>
 
-  </Project>
+  <Target Name="BuildError">
+    <Message Text="Build Fail $(MSBuildProjectFullPath)" Importance="high" />
+  </Target>
+
+</Project>

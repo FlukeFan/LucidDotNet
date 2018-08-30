@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using ZipDeploy;
 
-namespace WebApp
+namespace Lucid.Infrastructure.Host.Mvc
 {
     public class Startup
     {

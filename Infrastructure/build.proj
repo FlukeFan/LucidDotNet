@@ -4,6 +4,7 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="Host\Mvc\Mvc.csproj" />
+    <ProjectsToBuild Include="Host\Mvc.Tests\Mvc.Tests.csproj" />
   </ItemGroup>
 
 </Project>
