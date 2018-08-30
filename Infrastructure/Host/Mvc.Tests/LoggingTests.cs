@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using FluentAssertions;
+using NLog.Web;
 using NUnit.Framework;
 
 namespace Lucid.Infrastructure.Host.Mvc.Tests
@@ -103,6 +104,18 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
                 { "name2", "server_secret" },
                 { "name3", "value3" },
             });
+        }
+
+        [Test]
+        public void RealLoggingFileIsValid()
+        {
+            var projPath = Path.GetFullPath(".");
+
+            while (!File.Exists(Path.Combine(projPath, "Mvc.Tests.csproj")))
+                projPath = Directory.GetParent(projPath).FullName;
+
+            var realConfig = Path.Combine(projPath, "../Mvc/nlog.config");
+            NLogBuilder.ConfigureNLog(realConfig);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Lucid.Infrastructure.Host.Mvc
                 NLogBuilder.ConfigureNLog(logConfigFile);
 
             var logger = LogManager.GetCurrentClassLogger();
-            logger.Info($"Creating web host");
+            logger.Info($"Logging configured using '{logConfigFile}'");
 
             try
             {

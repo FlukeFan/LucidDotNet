@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Mvc\Mvc.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <TestDependencies Include="../Mvc/nlog.config" />
+  </ItemGroup>
+
 </Project>
