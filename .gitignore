@@ -5,4 +5,4 @@ obj
 *.user
 /ProjectCreation/Module/Project.zip
 /ProjectCreation/Module/Project.zip.nextUpdate
-/Infrastructure/Host/nlog.mvc.config
+/Infrastructure/Host/logs.config

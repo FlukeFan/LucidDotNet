@@ -29,7 +29,7 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
 
             Logging.Configure();
 
-            File.Exists("../nlog.mvc.config").Should().BeTrue("config should be created (in parent of app folder) if it does not already exist");
+            File.Exists("../logs.config/nlog.mvc.config").Should().BeTrue("config should be created (in parent of app folder) if it does not already exist");
         }
     }
 }

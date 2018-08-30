@@ -12,7 +12,12 @@ namespace Lucid.Infrastructure.Host.Mvc
             if (!File.Exists(sourceLogFile))
                 return;
 
-            var targetLogFile = Path.GetFullPath("../nlog.mvc.config");
+            var targetLogFile = Path.GetFullPath("../logs.config/nlog.mvc.config");
+
+            var targetFolder = Path.GetDirectoryName(targetLogFile);
+
+            if (!Directory.Exists(targetFolder))
+                Directory.CreateDirectory(targetFolder);
 
             if (!File.Exists(targetLogFile))
                 File.Copy(sourceLogFile, targetLogFile);
