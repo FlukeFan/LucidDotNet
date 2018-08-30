@@ -45,7 +45,7 @@
   </Target>
 
   <Target Name="BuildError">
-    <Message Text="Build Fail $(MSBuildProjectFullPath)" Importance="high" />
+    <Error Text="Build Fail $(MSBuildProjectFullPath)" />
   </Target>
 
 </Project>

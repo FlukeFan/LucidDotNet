@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using FluentAssertions;
 using NUnit.Framework;
@@ -60,7 +61,7 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
 
             var file = Logging.PrepareConfigFile();
 
-            File.ReadAllText(file).Should().Be("<nlog>newer</nlog>");
+            File.ReadAllText(file).Should().EndWith("<nlog>newer</nlog>");
         }
 
         [Test]
@@ -71,6 +72,37 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
 
             File.WriteAllText("nlog.config", "<nlog>newer</nlog>");
             Logging.PrepareConfigFile();
+        }
+
+        [Test]
+        public void WhenConfigUpdated_VariablesAreRetained()
+        {
+            Directory.CreateDirectory("../logs.config");
+
+            File.WriteAllText("../logs.config/nlog.mvc.config", "<nlog xmlns=\"http://www.nlog-project.org/schemas/NLog.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + "<variable name=\"name2\" value=\"server_secret\" />"
+                + "</nlog>");
+
+            File.WriteAllText("nlog.config", "<nlog xmlns=\"http://www.nlog-project.org/schemas/NLog.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + "<variable name=\"name1\" value=\"value1\" />"
+                + "<variable name=\"name2\" value=\"value2\" />"
+                + "<variable name=\"name3\" value=\"value3\" />"
+                + "</nlog>");
+
+
+            var old = DateTime.UtcNow - TimeSpan.FromHours(3);
+            File.SetLastWriteTimeUtc("../logs.config/nlog.mvc.config", old);
+
+            var file = Logging.PrepareConfigFile();
+
+            var values = Logging.ReadVariables("../logs.config/nlog.mvc.config");
+
+            values.Should().BeEquivalentTo(new Dictionary<string, string>()
+            {
+                { "name1", "value1" },
+                { "name2", "server_secret" },
+                { "name3", "value3" },
+            });
         }
     }
 }

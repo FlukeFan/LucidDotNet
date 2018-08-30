@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Xml.Linq;
 
 namespace Lucid.Infrastructure.Host.Mvc
 {
@@ -27,6 +29,7 @@ namespace Lucid.Infrastructure.Host.Mvc
             if (targetModified > sourceModified)
                 return targetLogFile;
 
+            var existingVariables = ReadVariables(targetLogFile);
             var previous = $"{targetLogFile}.previous";
 
             if (File.Exists(previous))
@@ -34,9 +37,43 @@ namespace Lucid.Infrastructure.Host.Mvc
 
             File.Move(targetLogFile, $"{targetLogFile}.previous");
 
-            File.Copy(sourceLogFile, targetLogFile);
+            var doc = XDocument.Load(sourceLogFile, LoadOptions.PreserveWhitespace);
+
+            var variableElements = GetVariableElements(doc);
+
+            foreach (var variableElement in variableElements)
+            {
+                var name = variableElement.Attribute("name").Value;
+
+                if (!existingVariables.ContainsKey(name))
+                    continue;
+
+                variableElement.Attribute("value").Value = existingVariables[name];
+            }
+
+            doc.Save(targetLogFile);
 
             return targetLogFile;
+        }
+
+        public static IDictionary<string, string> ReadVariables(string xmlFile)
+        {
+            var variables = new Dictionary<string, string>();
+
+            var doc = XDocument.Load(xmlFile);
+            var variableElements = GetVariableElements(doc);
+
+            foreach (var variableElement in variableElements)
+                variables.Add(variableElement.Attribute("name").Value, variableElement.Attribute("value").Value);
+
+            return variables;
+        }
+
+        private static IEnumerable<XElement> GetVariableElements(XDocument doc)
+        {
+            var ns = doc.Root.GetDefaultNamespace();
+            var variableElements = doc.Descendants(ns + "variable");
+            return variableElements;
         }
     }
 }
