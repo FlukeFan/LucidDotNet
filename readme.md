@@ -4,7 +4,7 @@
 Lucid
 =====
 
-An example application using ASP.Net Core.
+An example application using ASP.Net Core.  https://lucid.rgbco.uk
 
 Building
 ========

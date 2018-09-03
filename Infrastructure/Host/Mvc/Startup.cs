@@ -18,7 +18,7 @@ namespace Lucid.Infrastructure.Host.Mvc
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseZipDeploy(opt => opt.UseIisUrl("http://lucid.enodo.co.uk"));
+            app.UseZipDeploy(opt => opt.UseIisUrl("http://lucid.rgbco.uk"));
 
             if (env.IsDevelopment())
             {
