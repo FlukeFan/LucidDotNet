@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using NLog;
@@ -10,12 +11,17 @@ namespace Lucid.Infrastructure.Host.Mvc
     {
         public static void Main(string[] args)
         {
-            var logConfigFile = Logging.PrepareConfigFile();
+            IList<string> logSetupMessages = new List<string>();
+            var logConfigFile = Logging.PrepareConfigFile(logSetupMessages);
 
             if (logConfigFile != null)
                 NLogBuilder.ConfigureNLog(logConfigFile);
 
             var logger = LogManager.GetCurrentClassLogger();
+
+            foreach (var logSetupMessage in logSetupMessages)
+                logger.Debug($"log setup: {logSetupMessage}");
+
             logger.Info($"Logging configured using '{logConfigFile}'");
 
             try

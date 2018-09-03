@@ -58,12 +58,17 @@ namespace Lucid.Infrastructure.Host.Mvc
             }
         }
 
-        public static string PrepareConfigFile()
+        public static string PrepareConfigFile(IList<string> logSetupMessages = null)
         {
+            logSetupMessages = logSetupMessages ?? new List<string>();
+
             var sourceLogFile = Path.GetFullPath("nlog.config");
 
             if (!File.Exists(sourceLogFile))
+            {
+                logSetupMessages.Add($"No file found at {sourceLogFile}");
                 return null;
+            }
 
             var targetLogFile = Path.GetFullPath("../logs.config/nlog.mvc.config");
 
@@ -78,15 +83,24 @@ namespace Lucid.Infrastructure.Host.Mvc
             var sourceModified = File.GetLastWriteTimeUtc(sourceLogFile);
             var targetModified = File.GetLastWriteTimeUtc(targetLogFile);
 
+            logSetupMessages.Add($"sourceLogFile={sourceLogFile} sourceModified={sourceModified} targetLogFile={targetLogFile} targetModified={targetModified}");
+
             if (targetModified > sourceModified)
+            {
+                logSetupMessages.Add($"target log file is newer than source log file - not overwriting");
                 return targetLogFile;
+            }
 
             var existingVariables = ReadVariables(targetLogFile);
             var previous = $"{targetLogFile}.previous";
 
             if (File.Exists(previous))
+            {
+                logSetupMessages.Add($"deleting {previous}");
                 File.Delete(previous);
+            }
 
+            logSetupMessages.Add($"moving {targetLogFile} to {previous}");
             File.Move(targetLogFile, $"{targetLogFile}.previous");
 
             var doc = XDocument.Load(sourceLogFile, LoadOptions.PreserveWhitespace);
@@ -100,9 +114,11 @@ namespace Lucid.Infrastructure.Host.Mvc
                 if (!existingVariables.ContainsKey(name))
                     continue;
 
+                logSetupMessages.Add($"retaining existing value for {name} in new log file");
                 variableElement.Attribute("value").Value = existingVariables[name];
             }
 
+            logSetupMessages.Add($"writing to {targetLogFile}");
             doc.Save(targetLogFile);
 
             return targetLogFile;
