@@ -5,10 +5,10 @@ using FluentAssertions;
 using NLog.Web;
 using NUnit.Framework;
 
-namespace Lucid.Infrastructure.Host.Mvc.Tests
+namespace Lucid.Infrastructure.Host.Mvc.Logging.Tests
 {
     [TestFixture]
-    public class GenerateTests
+    public class LogConfigTests
     {
         [SetUp]
         public void SetUp()
@@ -29,7 +29,7 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
         {
             File.WriteAllText("nlog.config", "<nlog/>");
 
-            var file = Logging.PrepareConfigFile();
+            var file = LogConfig.PrepareConfigFile();
 
             Path.IsPathFullyQualified(file).Should().BeTrue($"{file} should be fully qualified");
             File.Exists(file).Should().BeTrue("config should be created (in parent of app folder) if it does not already exist");
@@ -45,7 +45,7 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
             var old = DateTime.UtcNow - TimeSpan.FromHours(3);
             File.SetLastWriteTimeUtc("nlog.config", old);
 
-            var file = Logging.PrepareConfigFile();
+            var file = LogConfig.PrepareConfigFile();
 
             File.ReadAllText(file).Should().Be("<nlog>newer</nlog>");
         }
@@ -60,7 +60,7 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
             var old = DateTime.UtcNow - TimeSpan.FromHours(3);
             File.SetLastWriteTimeUtc("../logs.config/nlog.mvc.config", old);
 
-            var file = Logging.PrepareConfigFile();
+            var file = LogConfig.PrepareConfigFile();
 
             File.ReadAllText(file).Should().EndWith("<nlog>newer</nlog>");
         }
@@ -69,10 +69,10 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
         public void MultipleChanges_AreHandled()
         {
             File.WriteAllText("nlog.config", "<nlog>newer</nlog>");
-            Logging.PrepareConfigFile();
+            LogConfig.PrepareConfigFile();
 
             File.WriteAllText("nlog.config", "<nlog>newer</nlog>");
-            Logging.PrepareConfigFile();
+            LogConfig.PrepareConfigFile();
         }
 
         [Test]
@@ -94,9 +94,9 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
             var old = DateTime.UtcNow - TimeSpan.FromHours(3);
             File.SetLastWriteTimeUtc("../logs.config/nlog.mvc.config", old);
 
-            var file = Logging.PrepareConfigFile();
+            var file = LogConfig.PrepareConfigFile();
 
-            var values = Logging.ReadVariables("../logs.config/nlog.mvc.config");
+            var values = LogConfig.ReadVariables("../logs.config/nlog.mvc.config");
 
             values.Should().BeEquivalentTo(new Dictionary<string, string>()
             {

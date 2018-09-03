@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lucid.Infrastructure.Host.Mvc.Logging;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using NLog;
@@ -12,7 +13,7 @@ namespace Lucid.Infrastructure.Host.Mvc
         public static void Main(string[] args)
         {
             IList<string> logSetupMessages = new List<string>();
-            var logConfigFile = Logging.PrepareConfigFile(logSetupMessages);
+            var logConfigFile = LogConfig.PrepareConfigFile(logSetupMessages);
 
             if (logConfigFile != null)
                 NLogBuilder.ConfigureNLog(logConfigFile);
