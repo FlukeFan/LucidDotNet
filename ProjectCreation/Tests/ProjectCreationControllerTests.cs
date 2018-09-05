@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing;
@@ -8,7 +9,7 @@ namespace Lucid.ProjectCreation.Tests
 {
     public class ProjectCreationControllerTests : ModuleControllerTests<TestStartup>
     {
-        public ProjectCreationControllerTests() : base(@"..\..\..\..\Module") { }
+        public ProjectCreationControllerTests() : base(Path.Combine(ProjectPath(), "../Module")) { }
 
         [Test]
         public async Task Index_DisplaysForm()

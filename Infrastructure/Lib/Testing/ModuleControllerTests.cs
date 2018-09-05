@@ -11,6 +11,11 @@ namespace Lucid.Infrastructure.Lib.Testing
             TestRegistry.SetupTestServer<TStartup>(moduleRootPath);
         }
 
+        public static string ProjectPath()
+        {
+            return TestUtil.ProjectPath();
+        }
+
         public SimulatedHttpClient MvcTestingClient()
         {
             return TestRegistry.TestServer.MvcTestingClient();
