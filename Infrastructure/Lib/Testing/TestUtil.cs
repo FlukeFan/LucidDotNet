@@ -10,9 +10,9 @@ namespace Lucid.Infrastructure.Lib.Testing
 
             while (Directory.GetFiles(cd, "*.csproj").Length == 0)
             {
-                var parent = Directory.GetParent(cd).FullName;
+                var parent = Directory.GetParent(cd)?.FullName;
 
-                if (parent == cd)
+                if (parent == cd || parent == null)
                     throw new System.Exception($".csproj not found in parent of {Path.GetFullPath(".")}");
 
                 cd = parent;
