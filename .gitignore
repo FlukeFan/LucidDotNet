@@ -6,3 +6,4 @@ obj
 /ProjectCreation/Module/Project.zip
 /ProjectCreation/Module/Project.zip.nextUpdate
 /Infrastructure/Host/logs.config
+/Infrastructure/Host/logs/mvc.internal.log
