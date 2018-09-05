@@ -33,6 +33,13 @@ namespace Lucid.ProjectCreation.Tests
                     if (Generate.ShouldProcessFile(name))
                     {
                         var originalFile = Path.Combine(rootPath, name);
+
+                        if (!File.Exists(originalFile))
+                        {
+                            TestContext.Progress.WriteLine($"Skip checks on file not-found: {originalFile}");
+                            continue;
+                        }
+
                         var originalLastWrite = File.GetLastWriteTimeUtc(originalFile);
 
                         if (originalLastWrite > zipCreated)

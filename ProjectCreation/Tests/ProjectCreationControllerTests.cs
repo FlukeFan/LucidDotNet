@@ -1,51 +1,23 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection;
-using MvcTesting.AspNetCore;
+using Lucid.Infrastructure.Lib.Testing;
 using NUnit.Framework;
 
-namespace Tests
+namespace Lucid.ProjectCreation.Tests
 {
-    [TestFixture]
-    public class ProjectCreationControllerTests
+    public class ProjectCreationControllerTests : ModuleControllerTests<TestStartup>
     {
-        private TestServer _testServer;
-
-        [OneTimeSetUp]
-        public void SetUpFixture()
-        {
-            _testServer = new WebHostBuilder()
-                .UseEnvironment("Development")
-                .UseContentRoot(@"..\..\..\..\Module")
-                .UseStartup<TestStartup>()
-                .MvcTestingTestServer();
-        }
+        public ProjectCreationControllerTests() : base(@"..\..\..\..\Module") { }
 
         [Test]
         public async Task Index_DisplaysForm()
         {
-            var response = await _testServer.MvcTestingClient()
+            var response = await MvcTestingClient()
                 .GetAsync("/ProjectCreation");
 
+            response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
             response.Text.Should().StartWith("Hello from deployed");
-        }
-    }
-
-    public class TestStartup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseMvc(routes =>
-            {
-            });
         }
     }
 }
