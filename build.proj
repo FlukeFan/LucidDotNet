@@ -3,7 +3,7 @@
   <Import Project="Build\common.build.proj" />
 
   <ItemGroup>
-    <ProjectsToBuild Include="ProjectCreation\build.proj" />
+    <ProjectsToBuild Include="System\build.proj" />
     <ProjectsToBuild Include="Infrastructure\build.proj" />
   </ItemGroup>
   
@@ -23,7 +23,7 @@
     <AllFiles Include="**" />
     <AllFiles Remove="**\bin\**" />
     <AllFiles Remove="**\obj\**" />
-    <AllFiles Remove="ProjectCreation/Module/Project.zip.nextUpdate" />
+    <AllFiles Remove="System\ProjectCreation/Module/Project.zip.nextUpdate" />
   </ItemGroup>
 
   <Target Name="Package" Inputs="@(AllFiles)" Outputs="$(MvcBin)/publish.zip">
