@@ -1,27 +1,27 @@
 ﻿<Project DefaultTargets="Zip"  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <ItemGroup>
-    <FilesToZip Include="..\..\**\lib\**" />
-    <FilesToZip Include="..\..\**\.gitignore" />
-    <FilesToZip Include="..\..\**\*.bat" />
-    <FilesToZip Include="..\..\**\*.txt" />
-    <FilesToZip Include="..\..\**\*.md" />
-    <FilesToZip Include="..\..\**\*.htm" />
-    <FilesToZip Include="..\..\**\*.proj" />
-    <FilesToZip Include="..\..\**\*.targets" />
-    <FilesToZip Include="..\..\**\*.json" />
-    <FilesToZip Include="..\..\**\*.js" />
-    <FilesToZip Include="..\..\**\*.sln" />
-    <FilesToZip Include="..\..\**\*.csproj" />
-    <FilesToZip Include="..\..\**\*.cs" />
-    <FilesToZip Include="..\..\**\*.cshtml" />
-    <FilesToZip Include="..\..\**\*.asax" />
-    <FilesToZip Include="..\..\**\*.config" />
-    <FilesToZip Include="..\..\**\favicon.ico" />
-    <FilesToZip Remove="..\..\pre_core\**" />
-    <FilesToZip Remove="..\..\.*\**" />
-    <FilesToZip Remove="..\..\**\bin\**" />
-    <FilesToZip Remove="..\..\**\obj\**" />
+    <FilesToZip Include="..\..\..\**\lib\**" />
+    <FilesToZip Include="..\..\..\**\.gitignore" />
+    <FilesToZip Include="..\..\..\**\*.bat" />
+    <FilesToZip Include="..\..\..\**\*.txt" />
+    <FilesToZip Include="..\..\..\**\*.md" />
+    <FilesToZip Include="..\..\..\**\*.htm" />
+    <FilesToZip Include="..\..\..\**\*.proj" />
+    <FilesToZip Include="..\..\..\**\*.targets" />
+    <FilesToZip Include="..\..\..\**\*.json" />
+    <FilesToZip Include="..\..\..\**\*.js" />
+    <FilesToZip Include="..\..\..\**\*.sln" />
+    <FilesToZip Include="..\..\..\**\*.csproj" />
+    <FilesToZip Include="..\..\..\**\*.cs" />
+    <FilesToZip Include="..\..\..\**\*.cshtml" />
+    <FilesToZip Include="..\..\..\**\*.asax" />
+    <FilesToZip Include="..\..\..\**\*.config" />
+    <FilesToZip Include="..\..\..\**\favicon.ico" />
+    <FilesToZip Remove="..\..\..\pre_core\**" />
+    <FilesToZip Remove="..\..\..\.*\**" />
+    <FilesToZip Remove="..\..\..\**\bin\**" />
+    <FilesToZip Remove="..\..\..\**\obj\**" />
     <FilesToZip Remove="Project\**" />
   </ItemGroup>
 

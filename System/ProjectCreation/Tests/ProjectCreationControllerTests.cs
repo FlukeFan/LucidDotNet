@@ -5,7 +5,7 @@ using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing;
 using NUnit.Framework;
 
-namespace Lucid.ProjectCreation.Tests
+namespace Lucid.System.ProjectCreation.Tests
 {
     public class ProjectCreationControllerTests : ModuleControllerTests<TestStartup>
     {

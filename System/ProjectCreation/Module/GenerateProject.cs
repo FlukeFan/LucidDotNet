@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Lucid.ProjectCreation
+namespace Lucid.System.ProjectCreation
 {
     public class ExecutableValidator
     {

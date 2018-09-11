@@ -8,7 +8,7 @@ using System.Xml;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Lucid.ProjectCreation.Tests
+namespace Lucid.System.ProjectCreation.Tests
 {
     [TestFixture]
     public class GenerateTests

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +35,7 @@ namespace Lucid.Infrastructure.Host.Mvc
         [HttpGet]
         public IActionResult Index()
         {
-            throw new System.Exception("testing errors");
+            throw new Exception("testing errors");
         }
     }
 }

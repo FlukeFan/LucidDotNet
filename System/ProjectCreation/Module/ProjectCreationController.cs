@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lucid.ProjectCreation
+namespace Lucid.System.ProjectCreation
 {
     public abstract class LucidController : Microsoft.AspNetCore.Mvc.Controller
     {
