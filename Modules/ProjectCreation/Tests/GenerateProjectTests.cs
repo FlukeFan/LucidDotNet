@@ -4,7 +4,7 @@ using System.IO.Compression;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Lucid.System.ProjectCreation.Tests
+namespace Lucid.Modules.ProjectCreation.Tests
 {
     [TestFixture]
     public class GenerateProjectTests

@@ -1,4 +1,4 @@
-﻿namespace Lucid.Web.ProjectCreation
+﻿namespace Lucid.Modules.ProjectCreation
 {
     //public class GenerateProject : Command<byte[]>
     //{

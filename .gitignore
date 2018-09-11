@@ -3,7 +3,7 @@ obj
 .vs
 .vscode
 *.user
-/System/ProjectCreation/Module/Project.zip
-/System/ProjectCreation/Module/Project.zip.nextUpdate
+/Modules/ProjectCreation/Module/Project.zip
+/Modules/ProjectCreation/Module/Project.zip.nextUpdate
 /Infrastructure/Host/logs.config
 /Infrastructure/Host/logs/mvc.internal.log

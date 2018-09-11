@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lucid.System.ProjectCreation
+namespace Lucid.Modules.ProjectCreation
 {
     public static class Guids
     {

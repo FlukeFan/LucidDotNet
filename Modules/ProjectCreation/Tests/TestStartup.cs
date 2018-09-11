@@ -1,6 +1,6 @@
 ﻿using Lucid.Infrastructure.Lib.Testing;
 
-namespace Lucid.System.ProjectCreation.Tests
+namespace Lucid.Modules.ProjectCreation.Tests
 {
     public class TestStartup : AbstractTestStartup
     {

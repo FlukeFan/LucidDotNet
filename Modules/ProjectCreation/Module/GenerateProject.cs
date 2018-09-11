@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Lucid.System.ProjectCreation
+namespace Lucid.Modules.ProjectCreation
 {
     public class ExecutableValidator
     {
@@ -67,7 +67,7 @@ namespace Lucid.System.ProjectCreation
 
             var assembly = GetType().Assembly;
 
-            using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.ProjectCreation.Project.zip"))
+            using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.Modules.ProjectCreation.Project.zip"))
             using (var zipOutputStream = Generate.Project(zipInputStream, Name))
                 return StreamToBytes(zipOutputStream);
         }

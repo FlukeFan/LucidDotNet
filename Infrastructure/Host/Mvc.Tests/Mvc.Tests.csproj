@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <CoverageAssemblyFilter Include="Lucid.ProjectCreation" />
+    <CoverageAssemblyFilter Include="Lucid.Modules.ProjectCreation" />
     <CoverageTypeFilter Include="Lucid.Infrastructure.Host.Mvc.Program" />
     <CoverageTypeFilter Include="Lucid.Infrastructure.Host.Mvc.Startup" />
   </ItemGroup>

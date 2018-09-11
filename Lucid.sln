@@ -37,19 +37,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{C5979DA4-1E3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing", "Infrastructure\Lib\Testing\Testing.csproj", "{2759C3ED-4239-4E7B-B6FA-F04A1911CC1C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System", "System", "{43B44B4F-BCC4-412C-9664-C749BDC57565}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{43B44B4F-BCC4-412C-9664-C749BDC57565}"
 	ProjectSection(SolutionItems) = preProject
-		System\build.proj = System\build.proj
+		Modules\build.proj = Modules\build.proj
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectCreation", "ProjectCreation", "{A5DCD578-ECE9-4A21-85A9-93A1FA4542DF}"
 	ProjectSection(SolutionItems) = preProject
-		System\ProjectCreation\build.proj = System\ProjectCreation\build.proj
+		Modules\ProjectCreation\build.proj = Modules\ProjectCreation\build.proj
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module", "System\ProjectCreation\Module\Module.csproj", "{27B5CCEE-3384-4F80-A1C1-091DE02DC467}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module", "Modules\ProjectCreation\Module\Module.csproj", "{27B5CCEE-3384-4F80-A1C1-091DE02DC467}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "System\ProjectCreation\Tests\Tests.csproj", "{AB79A64B-C4DF-4239-A8E7-7E2A1117C760}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Modules\ProjectCreation\Tests\Tests.csproj", "{AB79A64B-C4DF-4239-A8E7-7E2A1117C760}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

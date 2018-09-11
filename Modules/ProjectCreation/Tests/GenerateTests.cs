@@ -8,7 +8,7 @@ using System.Xml;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Lucid.System.ProjectCreation.Tests
+namespace Lucid.Modules.ProjectCreation.Tests
 {
     [TestFixture]
     public class GenerateTests
@@ -19,7 +19,7 @@ namespace Lucid.System.ProjectCreation.Tests
             var rootPath = FindRootPath();
             var cmd = new GenerateProject { Name = "Lucid" };
             var bytes = cmd.Execute();
-            var zipCreated = File.GetLastWriteTimeUtc(Path.Combine(rootPath, "ProjectCreation/Module/Project.zip"));
+            var zipCreated = File.GetLastWriteTimeUtc(Path.Combine(rootPath, "Modules/ProjectCreation/Module/Project.zip"));
 
             var zippedFiles = new List<string>();
 
@@ -129,7 +129,7 @@ namespace Lucid.System.ProjectCreation.Tests
 
             var knownGeneratedFiles = new string[]
             {
-                "ProjectCreation\\Module\\Project.zip", // this is generated in the 'BeforeBuild'
+                "Modules\\ProjectCreation\\Module\\Project.zip", // this is generated in the 'BeforeBuild'
             };
 
             var fileElements = new string[]
@@ -175,7 +175,7 @@ namespace Lucid.System.ProjectCreation.Tests
             var allGuidsInZip = new List<string>();
             var ignoredGenerateCs = false;
 
-            using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.ProjectCreation.Project.zip"))
+            using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.Modules.ProjectCreation.Project.zip"))
             using (var zipFile = new ZipArchive(zipInputStream))
                 foreach (var zipEntry in zipFile.Entries)
                 {

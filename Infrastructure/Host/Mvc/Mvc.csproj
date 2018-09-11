@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\System\ProjectCreation\Module\Module.csproj" />
+    <ProjectReference Include="..\..\..\Modules\ProjectCreation\Module\Module.csproj" />
   </ItemGroup>
 
   <ItemGroup>
