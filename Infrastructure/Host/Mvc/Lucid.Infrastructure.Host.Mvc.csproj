@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Modules\ProjectCreation\Module\Module.csproj" />
+    <ProjectReference Include="..\..\..\Modules\ProjectCreation\Module\Lucid.Modules.ProjectCreation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

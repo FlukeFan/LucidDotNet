@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mvc\Mvc.csproj" />
+    <ProjectReference Include="..\Mvc\Lucid.Infrastructure.Host.Mvc.csproj" />
   </ItemGroup>
 
   <ItemGroup>

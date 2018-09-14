@@ -4,8 +4,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Lucid.Infrastructure.Lib.Testing</AssemblyName>
-    <RootNamespace>Lucid.Infrastructure.Lib.Testing</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

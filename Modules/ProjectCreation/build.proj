@@ -3,8 +3,8 @@
   <Import Project="..\..\Build\common.build.proj" />
 
   <ItemGroup>
-    <ProjectsToBuild Include="Module\Module.csproj" />
-    <ProjectsToBuild Include="Tests\Tests.csproj" />
+    <ProjectsToBuild Include="Module\Lucid.Modules.ProjectCreation.csproj" />
+    <ProjectsToBuild Include="Tests\Lucid.Modules.ProjectCreation.Tests.csproj" />
   </ItemGroup>
 
   <Target Name="ForceTests">
@@ -12,7 +12,7 @@
     <!-- this forces the run of the tests -->
     <Delete Files="Module\Project.zip" />
     <Delete Files="Module\Project.zip.nextUpdate" />
-    <MSBuild Projects="Tests\Tests.csproj" />
+    <MSBuild Projects="Tests\Lucid.Modules.ProjectCreation.Tests.csproj" />
   </Target>
 
 </Project>

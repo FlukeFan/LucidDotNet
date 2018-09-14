@@ -3,7 +3,7 @@ using NLog.Common;
 using NLog.Targets;
 using NLog.Targets.Wrappers;
 
-namespace Mvc.Logging
+namespace Lucid.Infrastructure.Host.Mvc.Logging
 {
     /// <summary> Custom NLog buffer to batch emails in increasing batch sizes </summary>
     [Target("VariableBuffer", IsWrapper = true)]

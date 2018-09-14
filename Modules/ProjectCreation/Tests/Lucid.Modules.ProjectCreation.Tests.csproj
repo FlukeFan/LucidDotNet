@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Infrastructure\Lib\Testing\Testing.csproj" />
-    <ProjectReference Include="..\Module\Module.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Lib\Testing\Lucid.Infrastructure.Lib.Testing.csproj" />
+    <ProjectReference Include="..\Module\Lucid.Modules.ProjectCreation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

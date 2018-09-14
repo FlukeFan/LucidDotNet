@@ -3,9 +3,9 @@
   <Import Project="..\Build\common.build.proj" />
 
   <ItemGroup>
-    <ProjectsToBuild Include="Lib\Testing\Testing.csproj" />
-    <ProjectsToBuild Include="Host\Mvc\Mvc.csproj" />
-    <ProjectsToBuild Include="Host\Mvc.Tests\Mvc.Tests.csproj" />
+    <ProjectsToBuild Include="Lib\Testing\Lucid.Infrastructure.Lib.Testing.csproj" />
+    <ProjectsToBuild Include="Host\Mvc\Lucid.Infrastructure.Host.Mvc.csproj" />
+    <ProjectsToBuild Include="Host\Mvc.Tests\Lucid.Infrastructure.Host.Mvc.Tests.csproj" />
   </ItemGroup>
 
 </Project>

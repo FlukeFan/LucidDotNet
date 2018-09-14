@@ -4,8 +4,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Lucid.Modules.ProjectCreation</AssemblyName>
-    <RootNamespace>Lucid.Modules.ProjectCreation</RootNamespace>
     <DebugType>full</DebugType>
   </PropertyGroup>
 
