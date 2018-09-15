@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,9 @@ namespace Lucid.Infrastructure.Host.Mvc
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseZipDeploy(opt => opt.UseIisUrl("http://lucid.rgbco.uk"));
+            app.UseZipDeploy(opt => opt
+                .UseIisUrl("http://lucid.rgbco.uk")
+                .UseIsBinary(f => ZipDeployOptions.DefaultIsBinary(f) || Path.GetFileName(f) == "nlog.config"));
 
             if (env.IsDevelopment())
             {
