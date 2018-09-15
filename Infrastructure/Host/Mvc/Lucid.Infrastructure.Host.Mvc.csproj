@@ -32,7 +32,7 @@
     <Copy SourceFiles="..\..\..\Build\App_Offline.htm" DestinationFolder="." />
   </Target>
 
-  <Target Name="ReenableIisExpress" AfterTargets="Build">
+  <Target Name="ReenableIisExpress" AfterTargets="Build" Condition="Exists('./App_Offline.htm')">
     <Message Importance="High" Text="Enable site (delete App_Offline.htm)" />
     <Delete Files=".\App_Offline.htm" />
   </Target>
