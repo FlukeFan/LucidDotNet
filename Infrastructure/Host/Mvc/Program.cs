@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Lucid.Infrastructure.Host.Mvc.Logging;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Web;
 
@@ -43,6 +44,7 @@ namespace Lucid.Infrastructure.Host.Mvc
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging(l => l.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace))
                 .UseNLog()
                 .UseStartup<Startup>();
     }
