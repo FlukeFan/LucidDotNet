@@ -7,9 +7,9 @@ using NUnit.Framework;
 
 namespace Lucid.Modules.ProjectCreation.Tests
 {
-    public class ProjectCreationControllerTests : ModuleControllerTests<TestStartup>
+    public class ControllerTests : ModuleControllerTests<TestStartup>
     {
-        public ProjectCreationControllerTests() : base(Path.Combine(ProjectPath(), "../Module")) { }
+        public ControllerTests() : base(Path.Combine(ProjectPath(), "../Module")) { }
 
         [Test]
         public async Task Index_DisplaysForm()
@@ -18,7 +18,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
                 .GetAsync("/ProjectCreation");
 
             response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            response.Text.Should().StartWith("Hello from deployed");
+            response.Text.Should().Contain("Hello from deployed");
         }
     }
 }

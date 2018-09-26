@@ -6,17 +6,17 @@ namespace Lucid.Infrastructure.Lib.Testing
 {
     public static class TestRegistry
     {
-        private static TestServer _testServer;
+        public static TestServer TestServer { get; private set; }
 
-        public static TestServer TestServer { get { return _testServer; } }
-
-        public static void SetupTestServer<TStartup>(string modulePath) where TStartup : class
+        public static TestServer SetupTestServer<TStartup>(string modulePath) where TStartup : class
         {
-            _testServer = new WebHostBuilder()
+            TestServer = new WebHostBuilder()
                 .UseEnvironment("Development")
                 .UseContentRoot(modulePath)
                 .UseStartup<TStartup>()
                 .MvcTestingTestServer();
+
+            return TestServer;
         }
     }
 }

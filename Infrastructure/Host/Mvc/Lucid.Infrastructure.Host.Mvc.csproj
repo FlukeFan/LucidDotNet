@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Modules\ProjectCreation\Module\Lucid.Modules.ProjectCreation.csproj" />
+    <ProjectReference Include="..\..\Lib\MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  <Target Name="CopyViews" BeforeTargets="Build">
+    <ItemGroup>
+      <ModuleViewfiles Include="..\..\..\Modules\**\*.cshtml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ModuleViewFiles)" DestinationFolder="ModuleViews\%(RecursiveDir)" />
+  </Target>
 
   <Target Name="DisableIisExpress" BeforeTargets="CoreCompile" Condition="$(BuildingInsideVisualStudio)!='true'">
     <Message Importance="High" Text="Disable site (copy App_Offline.htm)" />

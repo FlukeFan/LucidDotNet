@@ -8,13 +8,16 @@ namespace Lucid.Modules.ProjectCreation
     }
 
     [Route("/")]
-    [Route("/projectCreation")]
+    [Route(RouteUrl)]
     public class Controller : LucidController
     {
+        public const string RouteUrl = "projectCreation/";
+
         [HttpGet]
         public IActionResult Index()
         {
-            return Content($"Hello from deployed Lucid project creation - {DateTime.Now}");
+            var model = new IndexModel { Now = DateTime.Now };
+            return View(model);
         }
     }
 }

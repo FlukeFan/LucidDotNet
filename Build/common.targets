@@ -5,6 +5,7 @@
 
     <Version>0.0.1</Version>
 
+    <PreserveCompilationContext Condition="$(IsTestProject)=='true'">true</PreserveCompilationContext>
     <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
     <NoCoverage Condition="'$(NoCoverage)'==''">false</NoCoverage>
 

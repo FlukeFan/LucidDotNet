@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Lucid.Infrastructure.Lib.MvcApp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace Lucid.Infrastructure.Host.Mvc
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(o => o.Filters.Add(new FeatureFolderViewFilter("Lucid.Modules", "Module/", "/ModuleViews")));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
