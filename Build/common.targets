@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
+    <TestDependencies Include="../**/*.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

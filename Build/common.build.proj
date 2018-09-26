@@ -9,6 +9,7 @@
     <Watch Include="**\*.csproj" />
     <Watch Include="**\*.proj" />
     <Watch Include="**\*.targets" />
+    <Watch Include="**\*.cshtml" />
   </ItemGroup>
 
   <Target Name="GenerateWatchList">
