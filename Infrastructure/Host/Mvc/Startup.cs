@@ -13,7 +13,12 @@ namespace Lucid.Infrastructure.Host.Mvc
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(o => o.Filters.Add(new FeatureFolderViewFilter("Lucid.Modules", "Module/", "/ModuleViews")));
+            services.AddMvc(o => ConfigureMvcOptions(o));
+        }
+
+        protected virtual void ConfigureMvcOptions(MvcOptions mvcOptions)
+        {
+            mvcOptions.Filters.Add(new FeatureFolderViewFilter("Lucid.Modules", "Module/", "/ModuleViews"));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
