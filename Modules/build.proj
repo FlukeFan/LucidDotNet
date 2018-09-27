@@ -4,6 +4,7 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="ProjectCreation\build.proj" />
+    <ProjectsToBuild Include="Temp\build.proj" />
   </ItemGroup>
 
 </Project>

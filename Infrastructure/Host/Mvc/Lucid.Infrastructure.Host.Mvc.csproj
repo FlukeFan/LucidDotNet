@@ -18,8 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Modules\ProjectCreation\Module\Lucid.Modules.ProjectCreation.csproj" />
     <ProjectReference Include="..\..\Lib\MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj" />
+    <ProjectReference Include="..\..\..\Modules\ProjectCreation\Module\Lucid.Modules.ProjectCreation.csproj" />
+    <ProjectReference Include="..\..\..\Modules\Temp\Module\Lucid.Modules.Temp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
