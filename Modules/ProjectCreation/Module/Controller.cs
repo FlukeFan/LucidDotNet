@@ -17,7 +17,7 @@ namespace Lucid.Modules.ProjectCreation
         public IActionResult Index()
         {
             var model = new IndexModel { Now = DateTime.Now };
-            return View(model);
+            return View("/Index.cshtml", model);
         }
     }
 }

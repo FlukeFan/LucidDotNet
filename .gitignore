@@ -5,6 +5,5 @@ obj
 *.user
 /Modules/ProjectCreation/Module/Project.zip
 /Modules/ProjectCreation/Module/Project.zip.nextUpdate
-/Infrastructure/Host/Mvc/ModuleViews
 /Infrastructure/Host/logs.config
 /Infrastructure/Host/logs/mvc.internal.log

@@ -27,22 +27,8 @@ namespace Lucid.Infrastructure.Lib.MvcApp
             if (viewResult == null)
                 return;
 
-            var viewName = viewResult.ViewName;
-
-            if (viewResult.ViewName == null)
-            {
-                var action = context.RouteData.Values["action"];
-                viewName = $"{action}.cshtml";
-            }
-
-            var controllerPath = context.Controller.GetType().Namespace;
-
-            if (controllerPath.StartsWith(_namespacePrefix))
-                controllerPath = controllerPath.Substring(_namespacePrefix.Length);
-
-            controllerPath = controllerPath.Replace('.', '/');
-
-            viewResult.ViewName = $"{_viewPrefix}{controllerPath}/{_modulePrefix}{viewName}";
+            // need to decide if we're keeping this filter to handle
+            // multiple (precompiled) views of the same name in different assemblies
         }
     }
 }

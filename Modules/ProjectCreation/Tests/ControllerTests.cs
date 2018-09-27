@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing;
@@ -9,8 +8,6 @@ namespace Lucid.Modules.ProjectCreation.Tests
 {
     public class ControllerTests : ModuleControllerTests<TestStartup>
     {
-        public ControllerTests() : base(Path.Combine(ProjectPath(), "../Module")) { }
-
         [Test]
         public async Task Index_DisplaysForm()
         {
@@ -19,6 +16,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
 
             response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
             response.Text.Should().Contain("Hello from deployed");
+            response.Text.Should().Contain("precompiled");
         }
     }
 }

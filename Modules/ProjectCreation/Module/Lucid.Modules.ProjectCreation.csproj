@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="ZipProject">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor" InitialTargets="ZipProject">
 
   <Import Project="..\..\..\Build\common.targets" />
 

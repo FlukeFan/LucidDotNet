@@ -28,13 +28,6 @@
     </Content>
   </ItemGroup>
 
-  <Target Name="CopyViews" BeforeTargets="Build">
-    <ItemGroup>
-      <ModuleViewfiles Include="..\..\..\Modules\**\*.cshtml" />
-    </ItemGroup>
-    <Copy SourceFiles="@(ModuleViewFiles)" DestinationFolder="ModuleViews\%(RecursiveDir)" />
-  </Target>
-
   <Target Name="DisableIisExpress" BeforeTargets="CoreCompile" Condition="$(BuildingInsideVisualStudio)!='true'">
     <Message Importance="High" Text="Disable site (copy App_Offline.htm)" />
     <Copy SourceFiles="..\..\..\Build\App_Offline.htm" DestinationFolder="." />

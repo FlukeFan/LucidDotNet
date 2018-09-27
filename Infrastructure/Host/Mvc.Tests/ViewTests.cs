@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing;
@@ -16,7 +15,7 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
         public async Task CanSeeModuleViews()
         {
             var client = TestRegistry
-                .SetupTestServer<TestStartup>(Path.Combine(TestUtil.ProjectPath(), "../Mvc"))
+                .SetupTestServer<TestStartup>()
                 .MvcTestingClient();
 
             var response = await client.GetAsync("/");

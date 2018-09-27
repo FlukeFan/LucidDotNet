@@ -6,9 +6,9 @@ namespace Lucid.Infrastructure.Lib.Testing
     [TestFixture]
     public abstract class ModuleControllerTests<TStartup> where TStartup : class
     {
-        public ModuleControllerTests(string moduleRootPath)
+        public ModuleControllerTests()
         {
-            TestRegistry.SetupTestServer<TStartup>(moduleRootPath);
+            TestRegistry.SetupTestServer<TStartup>();
         }
 
         public static string ProjectPath()

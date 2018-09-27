@@ -8,11 +8,10 @@ namespace Lucid.Infrastructure.Lib.Testing
     {
         public static TestServer TestServer { get; private set; }
 
-        public static TestServer SetupTestServer<TStartup>(string modulePath) where TStartup : class
+        public static TestServer SetupTestServer<TStartup>() where TStartup : class
         {
             TestServer = new WebHostBuilder()
                 .UseEnvironment("Development")
-                .UseContentRoot(modulePath)
                 .UseStartup<TStartup>()
                 .MvcTestingTestServer();
 
