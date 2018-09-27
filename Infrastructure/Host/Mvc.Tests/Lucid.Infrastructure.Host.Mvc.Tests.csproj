@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.1.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="FluentAssertions" Version="5.4.2" />
@@ -24,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Modules\ProjectCreation\Module\Lucid.Modules.ProjectCreation.csproj" />
     <ProjectReference Include="..\..\Lib\Testing\Lucid.Infrastructure.Lib.Testing.csproj" />
     <ProjectReference Include="..\Mvc\Lucid.Infrastructure.Host.Mvc.csproj" />
   </ItemGroup>
