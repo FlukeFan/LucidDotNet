@@ -9,6 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{673964CD-F184-4238-9DCA-A6EA7C9E2C7F}"
+	ProjectSection(SolutionItems) = preProject
+		Infrastructure\Host\build.proj = Infrastructure\Host\build.proj
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root", "_root", "{2E1ACA93-B1FB-4E31-A73A-3428C1C74A9F}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,6 +31,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{9A8AE9CC
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{C5979DA4-1E3E-4344-9BB1-1F103A17C811}"
+	ProjectSection(SolutionItems) = preProject
+		Infrastructure\Lib\build.proj = Infrastructure\Lib\build.proj
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{43B44B4F-BCC4-412C-9664-C749BDC57565}"
 	ProjectSection(SolutionItems) = preProject
