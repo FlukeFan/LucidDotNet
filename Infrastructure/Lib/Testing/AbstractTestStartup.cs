@@ -6,16 +6,11 @@ namespace Lucid.Infrastructure.Lib.Testing
 {
     public abstract class AbstractTestStartup
     {
-        private string _namespacePrefix;
-
-        public AbstractTestStartup(string namespacePrefix)
-        {
-            _namespacePrefix = namespacePrefix;
-        }
-
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(o => o.Filters.Add(new FeatureFolderViewFilter(_namespacePrefix, "", "/")));
+            services
+                .AddMvc(o => o.Filters.Add(new FeatureFolderViewFilter()))
+                .ConfigureApplicationPartManager(apm => apm.AddModuleFeatureFolders());
         }
 
         public void Configure(IApplicationBuilder app)

@@ -3,12 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.Modules.Temp
 {
-    public abstract class LucidController : Microsoft.AspNetCore.Mvc.Controller
-    {
-    }
-
     [Route(RouteUrl)]
-    public class Controller : LucidController
+    public class Controller : Microsoft.AspNetCore.Mvc.Controller
     {
         public const string RouteUrl = "temp/";
 
@@ -16,7 +12,7 @@ namespace Lucid.Modules.Temp
         public IActionResult Index()
         {
             var model = new IndexModel { Now = DateTime.Now };
-            return View("/Index.cshtml", model);
+            return View(model);
         }
     }
 }

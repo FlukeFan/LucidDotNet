@@ -3,13 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.Modules.ProjectCreation
 {
-    public abstract class LucidController : Microsoft.AspNetCore.Mvc.Controller
-    {
-    }
-
     [Route("/")]
     [Route(RouteUrl)]
-    public class Controller : LucidController
+    public class Controller : Microsoft.AspNetCore.Mvc.Controller
     {
         public const string RouteUrl = "projectCreation/";
 
@@ -17,7 +13,7 @@ namespace Lucid.Modules.ProjectCreation
         public IActionResult Index()
         {
             var model = new IndexModel { Now = DateTime.Now };
-            return View("/Index.cshtml", model);
+            return View(model);
         }
     }
 }

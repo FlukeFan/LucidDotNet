@@ -24,6 +24,19 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests
             response.LastResult.Should().BeOfType<ViewResult>();
         }
 
+        [Test]
+        public async Task CanSeeModuleViewsWithSameViewName()
+        {
+            var client = TestRegistry
+                .SetupTestServer<TestStartup>()
+                .MvcTestingClient();
+
+            var response = await client.GetAsync("/temp");
+
+            response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
+            response.LastResult.Should().BeOfType<ViewResult>();
+        }
+
         public class TestStartup : Startup
         {
             protected override void ConfigureMvcOptions(MvcOptions mvcOptions)
