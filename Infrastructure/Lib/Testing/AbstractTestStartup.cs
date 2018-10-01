@@ -10,7 +10,7 @@ namespace Lucid.Infrastructure.Lib.Testing
         {
             services
                 .AddMvc(o => o.Filters.Add(new FeatureFolderViewFilter()))
-                .ConfigureApplicationPartManager(apm => apm.AddModuleFeatureFolders());
+                .ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
         }
 
         public void Configure(IApplicationBuilder app)

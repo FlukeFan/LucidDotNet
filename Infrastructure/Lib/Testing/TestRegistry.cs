@@ -11,7 +11,7 @@ namespace Lucid.Infrastructure.Lib.Testing
         public static TestServer SetupTestServer<TStartup>() where TStartup : class
         {
             TestServer = new WebHostBuilder()
-                .UseEnvironment("Development")
+                .UseEnvironment("Testing")
                 .UseStartup<TStartup>()
                 .MvcTestingTestServer();
 

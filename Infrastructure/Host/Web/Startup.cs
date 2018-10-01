@@ -20,9 +20,19 @@ namespace Lucid.Infrastructure.Host.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddMvc(o => ConfigureMvcOptions(o))
-                .ConfigureApplicationPartManager(apm => apm.AddModuleFeatureFolders());
+            var mvc = services.AddMvc(o => ConfigureMvcOptions(o));
+
+            if (_env.IsDevelopment())
+            {
+                // use the file-system razor views so that we get re-compilation when they change
+                var rootSourcePath = Path.GetFullPath(Path.Combine(_env.ContentRootPath, "../../.."));
+                services.UseFileSystemRazorViews(rootSourcePath);
+            }
+            else
+            {
+                // use the compiled razor views
+                mvc.ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
+            }
         }
 
         protected virtual void ConfigureMvcOptions(MvcOptions mvcOptions)
