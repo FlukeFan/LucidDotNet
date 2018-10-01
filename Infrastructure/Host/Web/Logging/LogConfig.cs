@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml.Linq;
 
-namespace Lucid.Infrastructure.Host.Mvc.Logging
+namespace Lucid.Infrastructure.Host.Web.Logging
 {
     public class LogConfig
     {

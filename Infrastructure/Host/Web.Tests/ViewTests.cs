@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MvcTesting.AspNetCore;
 using NUnit.Framework;
 
-namespace Lucid.Infrastructure.Host.Mvc.Tests
+namespace Lucid.Infrastructure.Host.Web.Tests
 {
     [TestFixture]
     public class ViewTests

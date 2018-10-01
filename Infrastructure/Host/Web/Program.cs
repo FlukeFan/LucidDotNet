@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lucid.Infrastructure.Host.Mvc.Logging;
+using Lucid.Infrastructure.Host.Web.Logging;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Web;
 
-namespace Lucid.Infrastructure.Host.Mvc
+namespace Lucid.Infrastructure.Host.Web
 {
     public class Program
     {

@@ -51,9 +51,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Build.BuildUtil", "Bu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Testing", "Infrastructure\Lib\Testing\Lucid.Infrastructure.Lib.Testing.csproj", "{7B10D47E-748C-4603-8188-8E57095001B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Host.Mvc", "Infrastructure\Host\Mvc\Lucid.Infrastructure.Host.Mvc.csproj", "{7705B555-3EE0-4B86-8BEF-ED1159C82F45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Host.Web", "Infrastructure\Host\Web\Lucid.Infrastructure.Host.Web.csproj", "{7705B555-3EE0-4B86-8BEF-ED1159C82F45}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Host.Mvc.Tests", "Infrastructure\Host\Mvc.Tests\Lucid.Infrastructure.Host.Mvc.Tests.csproj", "{5A957B8F-7DBF-4989-ACFA-6BD59C257009}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Host.Web.Tests", "Infrastructure\Host\Web.Tests\Lucid.Infrastructure.Host.Web.Tests.csproj", "{5A957B8F-7DBF-4989-ACFA-6BD59C257009}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.ProjectCreation.Tests", "Modules\ProjectCreation\Tests\Lucid.Modules.ProjectCreation.Tests.csproj", "{A5C22845-613B-457B-8F5B-5F4E8CC13FB5}"
 EndProject

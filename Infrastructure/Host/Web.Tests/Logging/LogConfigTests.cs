@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using FluentAssertions;
-using Lucid.Infrastructure.Host.Mvc.Logging;
+using Lucid.Infrastructure.Host.Web.Logging;
 using NLog.Web;
 using NUnit.Framework;
 
-namespace Lucid.Infrastructure.Host.Mvc.Tests.Logging
+namespace Lucid.Infrastructure.Host.Web.Tests.Logging
 {
     [TestFixture]
     public class LogConfigTests
@@ -112,10 +112,10 @@ namespace Lucid.Infrastructure.Host.Mvc.Tests.Logging
         {
             var projPath = Path.GetFullPath(".");
 
-            while (!File.Exists(Path.Combine(projPath, "Lucid.Infrastructure.Host.Mvc.Tests.csproj")))
+            while (!File.Exists(Path.Combine(projPath, "Lucid.Infrastructure.Host.Web.Tests.csproj")))
                 projPath = Directory.GetParent(projPath).FullName;
 
-            var realConfig = Path.Combine(projPath, "../Mvc/nlog.config");
+            var realConfig = Path.Combine(projPath, "../Web/nlog.config");
             NLogBuilder.ConfigureNLog(realConfig);
         }
     }

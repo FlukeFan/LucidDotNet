@@ -29,7 +29,7 @@
   <Target Name="Package" Inputs="@(AllFiles)" Outputs="$(MvcBin)/publish.zip">
     <RemoveDir Directories="$(MvcBin)/publish" />
     <Delete Files="$(MvcBin)/publish.zip" />
-    <MSBuild Projects="Infrastructure/Host/Mvc/Lucid.Infrastructure.Host.Mvc.csproj" Targets="Publish" Properties="Configuration=Release;PublishDir=bin/publish;TrimUnusedDependencies=true" />
+    <MSBuild Projects="Infrastructure/Host/Web/Lucid.Infrastructure.Host.Web.csproj" Targets="Publish" Properties="Configuration=Release;PublishDir=bin/publish;TrimUnusedDependencies=true" />
     <ItemGroup>
       <FilesToZip Include="$(MvcBin)/publish/**" />
     </ItemGroup>

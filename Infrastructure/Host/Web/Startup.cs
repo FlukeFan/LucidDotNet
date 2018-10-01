@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using ZipDeploy;
 
-namespace Lucid.Infrastructure.Host.Mvc
+namespace Lucid.Infrastructure.Host.Web
 {
     public class Startup
     {

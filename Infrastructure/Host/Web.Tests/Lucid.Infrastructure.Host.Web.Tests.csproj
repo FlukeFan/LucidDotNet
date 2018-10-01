@@ -24,11 +24,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Lib\Testing\Lucid.Infrastructure.Lib.Testing.csproj" />
-    <ProjectReference Include="..\Mvc\Lucid.Infrastructure.Host.Mvc.csproj" />
+    <ProjectReference Include="..\Web\Lucid.Infrastructure.Host.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <TestDependencies Include="../Mvc/nlog.config" />
+    <TestDependencies Include="../Web/nlog.config" />
   </ItemGroup>
 
 </Project>
