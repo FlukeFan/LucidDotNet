@@ -11,6 +11,13 @@ namespace Lucid.Infrastructure.Host.Web
 {
     public class Startup
     {
+        private IHostingEnvironment _env;
+
+        public Startup(IHostingEnvironment env)
+        {
+            _env = env;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services
@@ -23,20 +30,16 @@ namespace Lucid.Infrastructure.Host.Web
             mvcOptions.Filters.Add(new FeatureFolderViewFilter());
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseZipDeploy(opt => opt
                 .UseIisUrl("https://lucid.rgbco.uk")
                 .UseIsBinary(f => ZipDeployOptions.DefaultIsBinary(f) || Path.GetFileName(f) == "nlog.config"));
 
-            if (env.IsDevelopment())
-            {
+            if (_env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
-            }
 
-            app.UseMvc(routes =>
-            {
-            });
+            app.UseMvc();
         }
     }
 
