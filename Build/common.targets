@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <CoverageAssemblyFilter Include="NUnit3.TestAdapter" />
+    <CoverageAssemblyFilter Include="Lucid.Infrastructure.Lib" />
   </ItemGroup>
 
   <Target Name="BeforeBuildComplete" AfterTargets="AfterBuild">
