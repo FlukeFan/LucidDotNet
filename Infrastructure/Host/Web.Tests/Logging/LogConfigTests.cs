@@ -40,7 +40,7 @@ namespace Lucid.Infrastructure.Host.Web.Tests.Logging
         public void WhenTargetConfigIsNewer_ItIsNotOverwritten()
         {
             Directory.CreateDirectory("../logs.config");
-            File.WriteAllText("../logs.config/nlog.mvc.config", "<nlog>newer</nlog>");
+            File.WriteAllText("../logs.config/nlog.web.config", "<nlog>newer</nlog>");
             File.WriteAllText("nlog.config", "<nlog>older</nlog>");
 
             var old = DateTime.UtcNow - TimeSpan.FromHours(3);
@@ -55,11 +55,11 @@ namespace Lucid.Infrastructure.Host.Web.Tests.Logging
         public void WhenTargetConfigIsOlder_ItIsOverwritten()
         {
             Directory.CreateDirectory("../logs.config");
-            File.WriteAllText("../logs.config/nlog.mvc.config", "<nlog>older</nlog>");
+            File.WriteAllText("../logs.config/nlog.web.config", "<nlog>older</nlog>");
             File.WriteAllText("nlog.config", "<nlog>newer</nlog>");
 
             var old = DateTime.UtcNow - TimeSpan.FromHours(3);
-            File.SetLastWriteTimeUtc("../logs.config/nlog.mvc.config", old);
+            File.SetLastWriteTimeUtc("../logs.config/nlog.web.config", old);
 
             var file = LogConfig.PrepareConfigFile();
 
@@ -81,7 +81,7 @@ namespace Lucid.Infrastructure.Host.Web.Tests.Logging
         {
             Directory.CreateDirectory("../logs.config");
 
-            File.WriteAllText("../logs.config/nlog.mvc.config", "<nlog xmlns=\"http://www.nlog-project.org/schemas/NLog.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
+            File.WriteAllText("../logs.config/nlog.web.config", "<nlog xmlns=\"http://www.nlog-project.org/schemas/NLog.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
                 + "<variable name=\"name2\" value=\"server_secret\" />"
                 + "</nlog>");
 
@@ -93,11 +93,11 @@ namespace Lucid.Infrastructure.Host.Web.Tests.Logging
 
 
             var old = DateTime.UtcNow - TimeSpan.FromHours(3);
-            File.SetLastWriteTimeUtc("../logs.config/nlog.mvc.config", old);
+            File.SetLastWriteTimeUtc("../logs.config/nlog.web.config", old);
 
             var file = LogConfig.PrepareConfigFile();
 
-            var values = LogConfig.ReadVariables("../logs.config/nlog.mvc.config");
+            var values = LogConfig.ReadVariables("../logs.config/nlog.web.config");
 
             values.Should().BeEquivalentTo(new Dictionary<string, string>()
             {

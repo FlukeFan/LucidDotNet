@@ -21,5 +21,5 @@ bt [test]                               Run tests with filter Name~[test]
 btw [test]                              Watch run tests with filter Name~[test]
 bc                                      Clean the build outputs
 
-mvc                                     Run the MVC site
-mvcw                                    Watch run the MVC site
+web                                     Run the Web application
+webw                                    Watch run the Web application

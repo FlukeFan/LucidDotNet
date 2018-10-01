@@ -18,7 +18,7 @@ namespace Lucid.Infrastructure.Host.Web.Logging
                 return null;
             }
 
-            var targetLogFile = Path.GetFullPath("../logs.config/nlog.mvc.config");
+            var targetLogFile = Path.GetFullPath("../logs.config/nlog.web.config");
 
             var targetFolder = Path.GetDirectoryName(targetLogFile);
 
