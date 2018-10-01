@@ -48,7 +48,7 @@
     <PropertyGroup>
       <TestStartTime>$([System.DateTime]::Now.AddSeconds(1).ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
     </PropertyGroup>
-    <Message Text="TestStartTime=$(TestStartTime)" />
+    <Message Importance="high" Text="Running tests: $(TestAssembly)" />
     <Exec WorkingDirectory="$(OutDir)" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx" />
     <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(TestStartTime)" AlwaysCreate="true" />
   </Target>
@@ -57,7 +57,7 @@
     <PropertyGroup>
       <TestStartTime>$([System.DateTime]::Now.AddSeconds(1).ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
     </PropertyGroup>
-    <Message Text="TestStartTime=$(TestStartTime)" />
+    <Message Importance="high" Text="Running tests: $(TestAssembly)" />
     <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) --opencover --save --outputDirectory __Instrumented --xmlReport $(CoverageOutput) --assemblyFilter &quot;@(CoverageAssemblyFilter)&quot; --typeFilter &quot;@(CoverageTypeFilter)&quot; --methodFilter &quot;@(CoverageMethodFilter)&quot; --attributeFilter &quot;@(CoverageAttributeFilter)&quot;" />
     <Exec WorkingDirectory="$(OutDir)\__Instrumented" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx" />
     <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) Runner --collect -r __Instrumented" />

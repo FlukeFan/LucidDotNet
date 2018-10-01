@@ -47,7 +47,10 @@
   </Target>
 
   <Target Name="BuildError">
-    <Error Text="Build Fail $(MSBuildProjectFullPath)" />
+    <PropertyGroup>
+      <BuildTime>Time:$([System.DateTime]::Now.Subtract($(BuildBeginTime)).TotalSeconds.ToString(0.00))s</BuildTime>
+    </PropertyGroup>
+    <Error Text="Build Fail $(BuildTime) $(MSBuildProjectFullPath)" />
   </Target>
 
 </Project>
