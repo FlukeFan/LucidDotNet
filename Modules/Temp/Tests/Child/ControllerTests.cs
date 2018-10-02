@@ -4,18 +4,19 @@ using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing;
 using NUnit.Framework;
 
-namespace Lucid.Modules.Temp.Tests
+namespace Lucid.Modules.Temp.Tests.Child
 {
+    [TestFixture]
     public class ControllerTests : ModuleControllerTests<TestStartup>
     {
         [Test]
         public async Task Index()
         {
             var response = await MvcTestingClient()
-                .GetAsync("/temp");
+                .GetAsync("/temp/child");
 
             response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            response.Text.Should().Contain("precompiled");
+            response.Text.Should().Contain("precompiled child");
         }
     }
 }

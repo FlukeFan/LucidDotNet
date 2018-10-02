@@ -37,16 +37,16 @@ namespace Lucid.Infrastructure.Lib.MvcApp
             if (!potentialCompiledPath.StartsWith(compiledViewStart))
                 return potentialCompiledPath;
 
-            var namespacePath = potentialCompiledPath.Substring(compiledViewStart.Length);
-            var separator = namespacePath.IndexOf('/');
-            var viewPath = namespacePath.Substring(separator, namespacePath.Length - separator);
-            namespacePath = namespacePath.Substring(0, namespacePath.IndexOf('/'));
-            namespacePath = namespacePath.Replace('.', '/');
+            var assemblyPath = potentialCompiledPath.Substring(compiledViewStart.Length);
+            var separator = assemblyPath.IndexOf('/');
+            var viewPath = assemblyPath.Substring(separator, assemblyPath.Length - separator);
+            assemblyPath = assemblyPath.Substring(0, assemblyPath.IndexOf('/'));
+            assemblyPath = assemblyPath.Replace('.', '/');
 
-            if (namespacePath.StartsWith("Modules/"))
-                namespacePath = $"{namespacePath}/Module";
+            if (assemblyPath.StartsWith("Modules/"))
+                assemblyPath = $"{assemblyPath}/Module";
 
-            var fullViewPath = $"/{namespacePath}{viewPath}";
+            var fullViewPath = $"/{assemblyPath}{viewPath}";
 
             return fullViewPath;
         }

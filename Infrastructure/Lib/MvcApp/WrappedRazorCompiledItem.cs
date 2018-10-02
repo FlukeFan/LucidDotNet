@@ -13,7 +13,12 @@ namespace Lucid.Infrastructure.Lib.MvcApp
         public WrappedRazorCompiledItem(RazorCompiledItem item)
         {
             _item = item;
-            _identifier = $"/{_item.Type.Namespace}{_item.Identifier}";
+            var assembly = _item.Type.Assembly.GetName().Name;
+
+            if (assembly.EndsWith(".Views"))
+                assembly = assembly.Substring(0, assembly.Length - 6);
+
+            _identifier = $"/{assembly}{_item.Identifier}";
         }
 
         public override string Identifier => _identifier;

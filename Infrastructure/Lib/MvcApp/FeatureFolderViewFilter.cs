@@ -27,7 +27,11 @@ namespace Lucid.Infrastructure.Lib.MvcApp
                 viewName = $"/{action}.cshtml";
             }
 
-            viewName = $"/{context.Controller.GetType().Namespace}{viewName}";
+            var controllerType = context.Controller.GetType();
+            var assembly = controllerType.Assembly.GetName().Name;
+            var controllerPath = controllerType.Namespace.Substring(assembly.Length).Replace(".", "/");
+
+            viewName = $"/{assembly}{controllerPath}{viewName}";
             viewResult.ViewName = viewName;
         }
     }
