@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Lucid.Infrastructure.Lib.MvcApp;
+using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

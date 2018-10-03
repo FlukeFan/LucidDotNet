@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Lucid.Infrastructure.Lib.MvcApp
+namespace Lucid.Infrastructure.Lib.MvcApp.RazorFolders
 {
     public static class RazorFolderExtensions
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Hosting;
 
-namespace Lucid.Infrastructure.Lib.MvcApp
+namespace Lucid.Infrastructure.Lib.MvcApp.RazorFolders
 {
-    /// <summary> Wraps a RazorCompiledItem to prefix the identifier with the view's type's namespace </summary>
+    /// <summary> Wraps a RazorCompiledItem to prefix the identifier with the view's type's assembly </summary>
     public class WrappedRazorCompiledItem : RazorCompiledItem
     {
         private RazorCompiledItem   _item;

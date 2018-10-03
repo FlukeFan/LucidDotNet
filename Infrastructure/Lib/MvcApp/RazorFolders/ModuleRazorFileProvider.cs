@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
 
-namespace Lucid.Infrastructure.Lib.MvcApp
+namespace Lucid.Infrastructure.Lib.MvcApp.RazorFolders
 {
     public class ModuleRazorFileProvider : IFileProvider
     {

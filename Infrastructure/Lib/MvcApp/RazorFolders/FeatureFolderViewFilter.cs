@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Lucid.Infrastructure.Lib.MvcApp
+namespace Lucid.Infrastructure.Lib.MvcApp.RazorFolders
 {
     public class FeatureFolderViewFilter : IActionFilter
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Razor.Hosting;
 
-namespace Lucid.Infrastructure.Lib.MvcApp
+namespace Lucid.Infrastructure.Lib.MvcApp.RazorFolders
 {
     public class WrappedRazorCompiledItemProvider : ApplicationPart, IRazorCompiledItemProvider
     {

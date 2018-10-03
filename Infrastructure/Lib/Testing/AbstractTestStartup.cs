@@ -1,4 +1,4 @@
-﻿using Lucid.Infrastructure.Lib.MvcApp;
+﻿using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
