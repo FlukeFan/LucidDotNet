@@ -1,10 +1,11 @@
 ﻿using System;
+using Lucid.Infrastructure.Lib.MvcApp;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.Modules.Temp
 {
     [Route(RouteUrl)]
-    public class Controller : Microsoft.AspNetCore.Mvc.Controller
+    public class Controller : MvcAppController
     {
         public const string RouteUrl = "temp/";
 
