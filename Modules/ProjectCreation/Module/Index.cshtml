@@ -1,6 +1,6 @@
 ﻿@namespace Lucid.Modules.ProjectCreation
 @inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<IndexModel>
-@{
-    SetTitle("Generate Project");
-}
+@{Setup(pi => {
+        pi.Title = "Generate Project";
+    });}
 Hello from deployed Lucid project creation precompiled razor view - @Model.Now

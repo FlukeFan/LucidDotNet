@@ -1,3 +1,7 @@
 ﻿@namespace Lucid.Modules.Temp.Child
 @inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<dynamic>
+@{Setup(pi =>
+    {
+        pi.Title = "Temporary child test page";
+    });}
 Hello from Temp precompiled child view

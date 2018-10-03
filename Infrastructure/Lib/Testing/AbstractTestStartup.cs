@@ -1,5 +1,7 @@
-﻿using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
+﻿using Lucid.Infrastructure.Lib.MvcApp.Pages;
+using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lucid.Infrastructure.Lib.Testing
@@ -9,15 +11,18 @@ namespace Lucid.Infrastructure.Lib.Testing
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddMvc(o => o.Filters.Add(new FeatureFolderViewFilter()))
+                .AddSingleton<IRazorPageActivator, CustomRazorPageActivator>()
+                .AddMvc(o =>
+                {
+                    o.Filters.Add(new FeatureFolderViewFilter());
+                    o.Filters.Add(new MvcAppPageResultFilter(false));
+                })
                 .ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseMvc(routes =>
-            {
-            });
+            app.UseMvc();
         }
     }
 }

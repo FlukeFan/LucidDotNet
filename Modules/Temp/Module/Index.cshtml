@@ -1,5 +1,9 @@
 ﻿@namespace Lucid.Modules.Temp
 @inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<IndexModel>
+@{Setup(pi =>
+    {
+        pi.Title = "Temporary test page";
+    });}
 
 Hello from Temp precompiled view
 

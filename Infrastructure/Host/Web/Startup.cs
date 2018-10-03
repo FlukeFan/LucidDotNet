@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using ZipDeploy;
 
@@ -27,6 +29,7 @@ namespace Lucid.Infrastructure.Host.Web
                 // use the file-system razor views so that we get re-compilation when they change
                 var rootSourcePath = Path.GetFullPath(Path.Combine(_env.ContentRootPath, "../../.."));
                 services.UseFileSystemRazorViews(rootSourcePath);
+                services.AddSingleton<IRazorPageActivator, CustomRazorPageActivator>();
             }
             else
             {
@@ -38,6 +41,9 @@ namespace Lucid.Infrastructure.Host.Web
         protected virtual void ConfigureMvcOptions(MvcOptions mvcOptions)
         {
             mvcOptions.Filters.Add(new FeatureFolderViewFilter());
+
+            if (_env.IsDevelopment())
+                mvcOptions.Filters.Add(new MvcAppPageResultFilter(true));
         }
 
         public void Configure(IApplicationBuilder app)
