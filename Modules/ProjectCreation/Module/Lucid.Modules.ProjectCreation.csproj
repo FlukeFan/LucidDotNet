@@ -19,6 +19,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Lib\MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj" />
+  </ItemGroup>
+
   <Target Name="ZipProject" BeforeTargets="CoreCompile">
     <MSBuild Projects="Zip.proj" Properties="BuildUtil=$(BuildUtil)" />
   </Target>

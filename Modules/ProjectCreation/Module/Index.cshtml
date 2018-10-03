@@ -1,4 +1,6 @@
 ﻿@namespace Lucid.Modules.ProjectCreation
-@model IndexModel
-
+@inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<IndexModel>
+@{
+    SetTitle("Generate Project");
+}
 Hello from deployed Lucid project creation precompiled razor view - @Model.Now
