@@ -3,11 +3,17 @@
 @{
     PageInfo PageInfo = ViewBag.PageInfo;
 }
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Lucid - @PageInfo.Title</title>
-    </head>
-    <body>
-        @RenderBody()
-    </body>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="icon" href="favicon.ico">
+    <title>Lucid - @PageInfo.Title</title>
+</head>
+<body>
+    @RenderBody()
+</body>
 </html>

@@ -59,6 +59,7 @@ namespace Lucid.Infrastructure.Host.Web
             if (_env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
