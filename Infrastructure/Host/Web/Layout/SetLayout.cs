@@ -7,6 +7,7 @@ namespace Lucid.Infrastructure.Host.Web.Layout
     {
         void ISetLayout.Set(IMvcAppPage page, PageInfo pageInfo, ViewContext viewContext)
         {
+            viewContext.ViewBag.PageInfo = pageInfo;
             page.Layout = "/Lucid.Infrastructure.Host.Web/Layout/Master.cshtml";
         }
     }

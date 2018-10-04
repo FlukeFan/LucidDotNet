@@ -23,10 +23,9 @@ namespace Lucid.Infrastructure.Host.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddSingleton<ISetLayout, SetLayout>()
-                .AddMvc(o => ConfigureMvcOptions(o))
-                .ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
+            services.AddSingleton<ISetLayout, SetLayout>();
+
+            var mvc = services.AddMvc(o => ConfigureMvcOptions(o));
 
             if (_env.IsDevelopment())
             {
@@ -36,6 +35,10 @@ namespace Lucid.Infrastructure.Host.Web
 
                 // add adctivator so we can track views have been setup correctly during development
                 services.AddSingleton<IRazorPageActivator, CustomRazorPageActivator>();
+            }
+            else
+            {
+                mvc.ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
             }
         }
 
