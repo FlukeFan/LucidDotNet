@@ -23,7 +23,7 @@ namespace Lucid.Infrastructure.Lib.MvcApp.RazorFolders
             return apm;
         }
 
-        public static IServiceCollection UseFileSystemRazorViews(this IServiceCollection services, string rootSourcePath)
+        public static IServiceCollection UseCustomFileSystemRazorViews(this IServiceCollection services, string rootSourcePath)
         {
             services.Configure<RazorViewEngineOptions>(o => o.FileProviders.Add(new ModuleRazorFileProvider(rootSourcePath)));
             return services;

@@ -22,19 +22,18 @@ namespace Lucid.Infrastructure.Host.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var mvc = services.AddMvc(o => ConfigureMvcOptions(o));
+            services
+                .AddMvc(o => ConfigureMvcOptions(o))
+                .ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
 
             if (_env.IsDevelopment())
             {
                 // use the file-system razor views so that we get re-compilation when they change
                 var rootSourcePath = Path.GetFullPath(Path.Combine(_env.ContentRootPath, "../../.."));
-                services.UseFileSystemRazorViews(rootSourcePath);
+                services.UseCustomFileSystemRazorViews(rootSourcePath);
+
+                // add adctivator so we can track views have been setup correctly during development
                 services.AddSingleton<IRazorPageActivator, CustomRazorPageActivator>();
-            }
-            else
-            {
-                // use the compiled razor views
-                mvc.ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
             }
         }
 
