@@ -1,13 +1,10 @@
 ﻿using System;
 using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Razor.Internal;
 
 namespace Lucid.Infrastructure.Lib.MvcApp
 {
-    public interface IMvcAppPage
-    {
-    }
-
     public static class MvcAppPage
     {
         public const string SetupCalled = "SetupCalled";
@@ -15,13 +12,17 @@ namespace Lucid.Infrastructure.Lib.MvcApp
 
     public abstract class MvcAppPage<TModel> : RazorPage<TModel>, IMvcAppPage
     {
+        [RazorInject]
+        protected ISetLayout SetLayout { get; set; }
+
         private PageInfo _pageInfo;
 
         public void Setup(Action<PageInfo> action)
         {
+            Context.Items.Add(MvcAppPage.SetupCalled, true);
             _pageInfo = new PageInfo();
             action(_pageInfo);
-            Context.Items.Add(MvcAppPage.SetupCalled, true);
+            SetLayout.Set(this, _pageInfo, ViewContext);
         }
     }
 }

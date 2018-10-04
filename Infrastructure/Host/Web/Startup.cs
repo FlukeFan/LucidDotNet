@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Lucid.Infrastructure.Host.Web.Layout;
 using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
 using Microsoft.AspNetCore.Builder;
@@ -23,6 +24,7 @@ namespace Lucid.Infrastructure.Host.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddSingleton<ISetLayout, SetLayout>()
                 .AddMvc(o => ConfigureMvcOptions(o))
                 .ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
 

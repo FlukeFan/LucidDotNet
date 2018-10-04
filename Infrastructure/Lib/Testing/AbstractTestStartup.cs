@@ -12,6 +12,7 @@ namespace Lucid.Infrastructure.Lib.Testing
         {
             services
                 .AddSingleton<IRazorPageActivator, CustomRazorPageActivator>()
+                .AddSingleton<ISetLayout, EmptySetLayout>()
                 .AddMvc(o =>
                 {
                     o.Filters.Add(new FeatureFolderViewFilter());
