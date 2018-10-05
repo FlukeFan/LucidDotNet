@@ -28,10 +28,8 @@ namespace Lucid.Infrastructure.Lib.MvcApp.RazorFolders
             }
 
             var controllerType = context.Controller.GetType();
-            var assembly = controllerType.Assembly.GetName().Name;
-            var controllerPath = controllerType.Namespace.Substring(assembly.Length).Replace(".", "/");
+            viewName = controllerType.RelativeViewPath(viewName);
 
-            viewName = $"/{assembly}{controllerPath}{viewName}";
             viewResult.ViewName = viewName;
         }
     }

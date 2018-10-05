@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,29 @@ namespace Lucid.Infrastructure.Lib.MvcApp.RazorFolders
         {
             services.Configure<RazorViewEngineOptions>(o => o.FileProviders.Add(new ModuleRazorFileProvider(rootSourcePath)));
             return services;
+        }
+
+        public static string RelativeViewPath<T>(this T typeInNamespace, string viewName)
+        {
+            return typeof(T).RelativeViewPath(viewName);
+        }
+
+        public static string AbsoluteViewPath<T>(this T typeFromAssembly, string viewPath)
+        {
+            return typeof(T).AbsoluteViewPath(viewPath);
+        }
+
+        public static string RelativeViewPath(this Type typeInNamespace, string viewName)
+        {
+            var assembly = typeInNamespace.Assembly.GetName().Name;
+            var controllerPath = typeInNamespace.Namespace.Substring(assembly.Length).Replace(".", "/");
+            return $"/{assembly}{controllerPath}/{viewName.TrimStart('/')}";
+        }
+
+        public static string AbsoluteViewPath(this Type typeFromAssembly, string viewPath)
+        {
+            var assembly = typeFromAssembly.Assembly.GetName().Name;
+            return $"/{assembly}/{viewPath.TrimStart('/')}";
         }
     }
 }

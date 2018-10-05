@@ -4,6 +4,7 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj" />
+    <ProjectsToBuild Include="MvcApp.Tests\Lucid.Infrastructure.Lib.MvcApp.Tests.csproj" />
     <ProjectsToBuild Include="Testing\Lucid.Infrastructure.Lib.Testing.csproj" />
   </ItemGroup>
 
