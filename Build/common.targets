@@ -68,4 +68,8 @@
     <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(TestStartTime)" AlwaysCreate="true" />
   </Target>
 
+  <Target Name="CopyPackageContents" Condition="'$(CopyPackageContent)' == 'true'" BeforeTargets="Compile">
+    <Exec Command="dotnet &quot;$(BuildUtil)&quot; CopyPackageContents &quot;$(MSBuildProjectFullPath)&quot; $(NuGetPackageRoot)" />
+  </Target>
+
 </Project>
