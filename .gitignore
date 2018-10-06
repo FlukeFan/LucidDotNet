@@ -7,3 +7,4 @@ obj
 /Modules/ProjectCreation/Module/Project.zip.nextUpdate
 /Infrastructure/Host/logs.config
 /Infrastructure/Host/logs/web.internal.log
+/Infrastructure/Host/Web/wwwroot/css/site.min.css
