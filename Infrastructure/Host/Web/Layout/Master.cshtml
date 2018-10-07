@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="@Context.AddFileVersionToPath("/css/site.min.css")" />
 
 </head>
-<body>
-    @RenderBody()
+<body class="lucid">
+    <div data-pjax="true">
+        @RenderBody()
+    </div>
 </body>
 </html>

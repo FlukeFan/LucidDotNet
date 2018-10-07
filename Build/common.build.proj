@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Watch Include="**\*.cs" />
+    <Watch Include="**\*.scss" />
     <Watch Include="**\*.csproj" />
     <Watch Include="**\*.proj" />
     <Watch Include="**\*.targets" />
