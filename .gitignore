@@ -9,4 +9,3 @@ obj
 /Infrastructure/Host/logs/web.internal.log
 /Infrastructure/Host/Web/wwwroot/css/site.min.css
 /Infrastructure/Host/Web/Content/web.css
-/Infrastructure/Host/Web/Content/web.min.css
