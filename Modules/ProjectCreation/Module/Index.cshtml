@@ -1,5 +1,6 @@
 ﻿@namespace Lucid.Modules.ProjectCreation
 @inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<IndexModel>
+@model IndexModel
 @{Setup(pi =>
     {
         pi.Title = "Generate Project";
@@ -9,5 +10,7 @@ Generate Project form - @Model.Now
 
 @using (Html.BeginRouteForm("GenerateProject"))
 {
-    @Html.Partial("/Lucid.Modules.ProjectCreation/GenerateProjectForm.cshtml", Model.Cmd)
+    @Html.TextBoxFor(m => m.Cmd.Name)
+
+    <button>Submit</button>
 }

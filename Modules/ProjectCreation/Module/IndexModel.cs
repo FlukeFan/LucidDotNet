@@ -7,6 +7,6 @@ namespace Lucid.Modules.ProjectCreation
         public DateTime Now;
 
         // POST
-        public GenerateProject Cmd;
+        public GenerateProject Cmd { get; set; }
     }
 }

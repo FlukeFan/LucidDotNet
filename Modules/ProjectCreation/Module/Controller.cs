@@ -21,5 +21,11 @@ namespace Lucid.Modules.ProjectCreation
 
             return View(model);
         }
+
+        [HttpPost]
+        public IActionResult Index(IndexModel post)
+        {
+            return View(post);
+        }
     }
 }

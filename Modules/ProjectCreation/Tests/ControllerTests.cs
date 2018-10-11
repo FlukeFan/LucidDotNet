@@ -13,12 +13,12 @@ namespace Lucid.Modules.ProjectCreation.Tests
         {
             var form = await MvcTestingClient()
                 .GetAsync("/ProjectCreation")
-                .Form<GenerateProject>();
+                .Form<IndexModel>();
 
             form.Method.Should().Be("post");
             form.Action.Should().Be("/projectCreation");
 
-            form.GetText(m => m.Name).Should().Be("Demo", "default project generation name should be 'Demo'");
+            form.GetText(m => m.Cmd.Name).Should().Be("Demo", "default project generation name should be 'Demo'");
         }
     }
 }
