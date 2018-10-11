@@ -1,6 +1,13 @@
 ﻿@namespace Lucid.Modules.ProjectCreation
 @inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<IndexModel>
-@{Setup(pi => {
+@{Setup(pi =>
+    {
         pi.Title = "Generate Project";
     });}
-Hello from deployed Lucid project creation precompiled razor view - @Model.Now
+
+Generate Project form - @Model.Now
+
+@using (Html.BeginRouteForm("GenerateProject"))
+{
+    @Html.Partial("/Lucid.Modules.ProjectCreation/GenerateProjectForm.cshtml", Model.Cmd)
+}

@@ -59,7 +59,7 @@ namespace Lucid.Modules.ProjectCreation
 
     public class GenerateProject
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = "Demo";
 
         public byte[] Execute()
         {

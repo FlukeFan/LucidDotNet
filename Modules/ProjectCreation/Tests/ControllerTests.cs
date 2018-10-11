@@ -1,7 +1,7 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing;
+using MvcTesting.Html;
 using NUnit.Framework;
 
 namespace Lucid.Modules.ProjectCreation.Tests
@@ -11,12 +11,14 @@ namespace Lucid.Modules.ProjectCreation.Tests
         [Test]
         public async Task Index_DisplaysForm()
         {
-            var response = await MvcTestingClient()
-                .GetAsync("/ProjectCreation");
+            var form = await MvcTestingClient()
+                .GetAsync("/ProjectCreation")
+                .Form<GenerateProject>();
 
-            response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            response.Text.Should().Contain("Hello from deployed");
-            response.Text.Should().Contain("precompiled");
+            form.Method.Should().Be("post");
+            form.Action.Should().Be("/projectCreation");
+
+            form.GetText(m => m.Name).Should().Be("Demo", "default project generation name should be 'Demo'");
         }
     }
 }
