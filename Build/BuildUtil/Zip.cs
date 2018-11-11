@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 
-namespace Lucid.Build.BuildUtil
+namespace Build.BuildUtil
 {
     public class Zip : Command
     {

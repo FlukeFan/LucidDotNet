@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 
-namespace Lucid.Build.BuildUtil
+namespace Build.BuildUtil
 {
     public class VerifyCoverage : Command
     {

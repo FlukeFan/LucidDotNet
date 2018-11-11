@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lucid.Build.BuildUtil
+namespace Build.BuildUtil
 {
     public abstract class Command
     {

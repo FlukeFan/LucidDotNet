@@ -1,4 +1,4 @@
-﻿namespace Lucid.Build.BuildUtil
+﻿namespace Build.BuildUtil
 {
     class Program
     {

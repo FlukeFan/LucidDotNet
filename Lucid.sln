@@ -47,7 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectCreation", "ProjectC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.ProjectCreation", "Modules\ProjectCreation\Module\Lucid.Modules.ProjectCreation.csproj", "{82B9322E-7FC1-41CA-B444-759E274E13F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Build.BuildUtil", "Build\BuildUtil\Lucid.Build.BuildUtil.csproj", "{A4FEBFF7-A823-480A-B926-A17548BC4410}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build.BuildUtil", "Build\BuildUtil\Build.BuildUtil.csproj", "{A4FEBFF7-A823-480A-B926-A17548BC4410}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Testing", "Infrastructure\Lib\Testing\Lucid.Infrastructure.Lib.Testing.csproj", "{7B10D47E-748C-4603-8188-8E57095001B7}"
 EndProject

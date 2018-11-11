@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
-namespace Lucid.Build.BuildUtil
+namespace Build.BuildUtil
 {
     public class CopyPackageContents : Command
     {
