@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Lucid.Infrastructure.Host.Web.Layout;
 using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
@@ -61,6 +62,9 @@ namespace Lucid.Infrastructure.Host.Web
 
             app.UseStaticFiles();
             app.UseMvc();
+
+            Task.WaitAll(
+                Modules.ProjectCreation.Registry.StartupAsync());
         }
     }
 

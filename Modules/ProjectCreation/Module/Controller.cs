@@ -28,6 +28,7 @@ namespace Lucid.Modules.ProjectCreation
         [HttpPost("projectCreation")]
         public IActionResult Index(IndexModel post)
         {
+            Registry.Executor.Execute(post.Cmd);
             return View(post);
         }
     }

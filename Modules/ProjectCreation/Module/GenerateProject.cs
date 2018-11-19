@@ -57,11 +57,11 @@ namespace Lucid.Modules.ProjectCreation
         }
     }
 
-    public class GenerateProject
+    public class GenerateProject : Command<byte[]>
     {
         public string Name { get; set; } = "Demo";
 
-        public byte[] Execute()
+        public override byte[] Execute()
         {
             ValidateName();
 
