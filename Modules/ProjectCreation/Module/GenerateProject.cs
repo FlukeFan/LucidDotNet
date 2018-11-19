@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using Lucid.Infrastructure.Lib.Facade;
 
 namespace Lucid.Modules.ProjectCreation
 {

@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Lucid.Infrastructure.Lib.Facade;
 using Lucid.Infrastructure.Lib.Testing;
 using Microsoft.AspNetCore.Mvc;
 using MvcTesting.Html;
