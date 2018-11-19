@@ -3,6 +3,7 @@ using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
+using MvcTesting.AspNetCore;
 
 namespace Lucid.Infrastructure.Lib.Testing
 {
@@ -17,6 +18,7 @@ namespace Lucid.Infrastructure.Lib.Testing
                 {
                     o.Filters.Add(new FeatureFolderViewFilter());
                     o.Filters.Add(new MvcAppPageResultFilter(false));
+                    o.Filters.Add(new CaptureResultFilter());
                 })
                 .ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
         }

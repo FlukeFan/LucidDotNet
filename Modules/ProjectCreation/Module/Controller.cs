@@ -5,12 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace Lucid.Modules.ProjectCreation
 {
     [Route("/")]
-    [Route(RouteUrl, Name = "GenerateProject")]
     public class Controller : MvcAppController
     {
-        public const string RouteUrl = "projectCreation/";
+        [HttpGet("/")]
+        public IActionResult Root()
+        {
+            return Redirect("projectCreation");
+        }
 
-        [HttpGet]
+        [HttpGet("projectCreation", Name = "GenerateProject")]
         public IActionResult Index()
         {
             var model = new IndexModel
@@ -22,7 +25,7 @@ namespace Lucid.Modules.ProjectCreation
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("projectCreation")]
         public IActionResult Index(IndexModel post)
         {
             return View(post);
