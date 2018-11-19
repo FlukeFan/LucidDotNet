@@ -1,7 +1,9 @@
-﻿namespace Lucid.Infrastructure.Lib.Facade
+﻿using System.Threading.Tasks;
+
+namespace Lucid.Infrastructure.Lib.Facade
 {
     public interface IExecutable
     {
-        object Execute();
+        Task<object> Execute();
     }
 }

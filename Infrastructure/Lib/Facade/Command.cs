@@ -1,12 +1,14 @@
-﻿namespace Lucid.Infrastructure.Lib.Facade
+﻿using System.Threading.Tasks;
+
+namespace Lucid.Infrastructure.Lib.Facade
 {
     public abstract class Command<T> : ICommand<T>, IExecutable
     {
-        public abstract T Execute();
+        public abstract Task<T> Execute();
 
-        object IExecutable.Execute()
+        async Task<object> IExecutable.Execute()
         {
-            return Execute();
+            return await Execute();
         }
     }
 }

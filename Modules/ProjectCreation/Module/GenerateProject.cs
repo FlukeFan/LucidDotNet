@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade;
 
 namespace Lucid.Modules.ProjectCreation
@@ -62,7 +63,7 @@ namespace Lucid.Modules.ProjectCreation
     {
         public string Name { get; set; } = "Demo";
 
-        public override byte[] Execute()
+        public override Task<byte[]> Execute()
         {
             ValidateName();
 
@@ -70,7 +71,7 @@ namespace Lucid.Modules.ProjectCreation
 
             using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.Modules.ProjectCreation.Project.zip"))
             using (var zipOutputStream = Generate.Project(zipInputStream, Name))
-                return StreamToBytes(zipOutputStream);
+                return Task.FromResult(StreamToBytes(zipOutputStream));
         }
 
         private static byte[] StreamToBytes(Stream stream)

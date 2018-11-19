@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Xml;
 using FluentAssertions;
 using NUnit.Framework;
@@ -14,11 +15,11 @@ namespace Lucid.Modules.ProjectCreation.Tests
     public class GenerateTests
     {
         [Test]
-        public void FormatIsMaintained()
+        public async Task FormatIsMaintained()
         {
             var rootPath = FindRootPath();
             var cmd = new GenerateProject { Name = "Lucid" };
-            var bytes = cmd.Execute();
+            var bytes = await cmd.Execute();
             var zipCreated = File.GetLastWriteTimeUtc(Path.Combine(rootPath, "Modules/ProjectCreation/Module/Project.zip"));
 
             var zippedFiles = new List<string>();
@@ -96,10 +97,10 @@ namespace Lucid.Modules.ProjectCreation.Tests
         }
 
         [Test]
-        public void GeneratedProjectContainsFilesReferencedByEachCsproj()
+        public async Task GeneratedProjectContainsFilesReferencedByEachCsproj()
         {
             var cmd = new GenerateProject { Name = "DemoProj" };
-            var bytes = cmd.Execute();
+            var bytes = await cmd.Execute();
 
             var zippedFiles = new List<string>();
             var csProjEntries = new List<CsprojEntry>();

@@ -1,8 +1,10 @@
-﻿namespace Lucid.Infrastructure.Lib.Facade
+﻿using System.Threading.Tasks;
+
+namespace Lucid.Infrastructure.Lib.Facade
 {
     public class Executor : IExecutor
     {
-        object IExecutor.Execute(IExecutable executable)
+        Task<object> IExecutor.Execute(IExecutable executable)
         {
             return executable.Execute();
         }

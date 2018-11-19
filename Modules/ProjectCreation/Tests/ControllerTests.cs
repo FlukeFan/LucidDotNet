@@ -18,13 +18,13 @@ namespace Lucid.Modules.ProjectCreation.Tests
 
         public IList<object> Executed = new List<object>();
 
-        object IExecutor.Execute(IExecutable executable)
+        Task<object> IExecutor.Execute(IExecutable executable)
         {
             Executed.Add(executable);
 
-            return _stubResults.ContainsKey(executable.GetType())
+            return Task.FromResult(_stubResults.ContainsKey(executable.GetType())
                 ? _stubResults[executable.GetType()]
-                : null;
+                : null);
         }
 
         public void StubResult<T>(object result)

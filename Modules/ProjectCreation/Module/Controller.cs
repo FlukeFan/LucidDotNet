@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.MvcApp;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,9 +27,9 @@ namespace Lucid.Modules.ProjectCreation
         }
 
         [HttpPost("projectCreation")]
-        public IActionResult Index(IndexModel post)
+        public async Task<IActionResult> Index(IndexModel post)
         {
-            var bytes = (byte[])Registry.Executor.Execute(post.Cmd);
+            var bytes = (byte[])await Registry.Executor.Execute(post.Cmd);
             return File(bytes, "application/zip", $"{post.Cmd.Name}.zip");
         }
     }

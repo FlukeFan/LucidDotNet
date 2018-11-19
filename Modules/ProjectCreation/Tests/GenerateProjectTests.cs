@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -12,11 +13,11 @@ namespace Lucid.Modules.ProjectCreation.Tests
         private static readonly Func<GenerateProject> _validCommand = () => new GenerateProject { Name = "NewProj_1" };
 
         [Test]
-        public void Execute()
+        public async Task Execute()
         {
             var cmd = _validCommand();
 
-            var bytes = cmd.Execute();
+            var bytes = await cmd.Execute();
 
             var fileCount = 0;
 
