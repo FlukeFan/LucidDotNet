@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing;
@@ -11,12 +13,22 @@ namespace Lucid.Modules.ProjectCreation.Tests
 {
     public class ExecutorStub : IExecutor
     {
+        private IDictionary<Type, object> _stubResults = new Dictionary<Type, object>();
+
         public IList<object> Executed = new List<object>();
 
         object IExecutor.Execute(IExecutable executable)
         {
             Executed.Add(executable);
-            return null;
+
+            return _stubResults.ContainsKey(executable.GetType())
+                ? _stubResults[executable.GetType()]
+                : null;
+        }
+
+        public void StubResult<T>(object result)
+        {
+            _stubResults[typeof(T)] = result;
         }
     }
 
@@ -56,6 +68,9 @@ namespace Lucid.Modules.ProjectCreation.Tests
         [Test]
         public async Task Index_Post_GeneratesProject()
         {
+            var expectedBytes = Encoding.ASCII.GetBytes("stub bytes");
+            _stubExecutor.StubResult<GenerateProject>(expectedBytes);
+
             var form = await MvcTestingClient()
                 .GetAsync("/ProjectCreation")
                 .Form<IndexModel>();
@@ -66,6 +81,10 @@ namespace Lucid.Modules.ProjectCreation.Tests
 
             _stubExecutor.Executed.Count.Should().BeGreaterThan(0);
             _stubExecutor.Executed[0].Should().BeEquivalentTo(new GenerateProject { Name = "PostTest" });
+
+            var fileResult = response.ActionResultOf<FileResult>();
+            fileResult.ContentType.Should().Be("application/zip");
+            fileResult.FileDownloadName.Should().Be("PostTest.zip");
         }
     }
 }

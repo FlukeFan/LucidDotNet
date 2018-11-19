@@ -28,8 +28,8 @@ namespace Lucid.Modules.ProjectCreation
         [HttpPost("projectCreation")]
         public IActionResult Index(IndexModel post)
         {
-            Registry.Executor.Execute(post.Cmd);
-            return View(post);
+            var bytes = (byte[])Registry.Executor.Execute(post.Cmd);
+            return File(bytes, "application/zip", $"{post.Cmd.Name}.zip");
         }
     }
 }
