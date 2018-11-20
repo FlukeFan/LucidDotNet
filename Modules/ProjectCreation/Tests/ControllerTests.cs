@@ -1,38 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Facade;
 using Lucid.Infrastructure.Lib.Testing;
+using Lucid.Infrastructure.Lib.Testing.Execution;
 using Microsoft.AspNetCore.Mvc;
 using MvcTesting.Html;
 using NUnit.Framework;
 
 namespace Lucid.Modules.ProjectCreation.Tests
 {
-    public class ExecutorStub : IExecutor
-    {
-        private IDictionary<Type, object> _stubResults = new Dictionary<Type, object>();
-
-        public IList<object> Executed = new List<object>();
-
-        Task<object> IExecutor.Execute(IExecutable executable)
-        {
-            Executed.Add(executable);
-
-            return Task.FromResult(_stubResults.ContainsKey(executable.GetType())
-                ? _stubResults[executable.GetType()]
-                : null);
-        }
-
-        public void StubResult<T>(object result)
-        {
-            _stubResults[typeof(T)] = result;
-        }
-    }
-
     public class ControllerTests : ModuleControllerTests<TestStartup>
     {
         private ExecutorStub _stubExecutor;
@@ -40,8 +17,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         [SetUp]
         public void SetUp()
         {
-            _stubExecutor = new ExecutorStub();
-            Registry.Executor = _stubExecutor;
+            Registry.Executor = _stubExecutor = new ExecutorStub();
         }
 
         [Test]
