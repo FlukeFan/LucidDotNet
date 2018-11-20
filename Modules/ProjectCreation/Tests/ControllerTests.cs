@@ -45,8 +45,8 @@ namespace Lucid.Modules.ProjectCreation.Tests
         [Test]
         public async Task Index_Post_GeneratesProject()
         {
-            var expectedBytes = Encoding.ASCII.GetBytes("stub bytes");
-            _stubExecutor.StubResult<GenerateProject>(expectedBytes);
+            var expectedByteString = "stub bytes";
+            _stubExecutor.StubResult<GenerateProject>(Encoding.ASCII.GetBytes(expectedByteString));
 
             var form = await MvcTestingClient()
                 .GetAsync("/ProjectCreation")
@@ -61,6 +61,8 @@ namespace Lucid.Modules.ProjectCreation.Tests
             var fileResult = response.ActionResultOf<FileResult>();
             fileResult.ContentType.Should().Be("application/zip");
             fileResult.FileDownloadName.Should().Be("PostTest.zip");
+
+            response.Text.Should().Be(expectedByteString);
         }
     }
 }
