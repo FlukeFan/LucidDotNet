@@ -20,7 +20,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         }
 
         [Test]
-        public async Task Index_DisplaysForm()
+        public async Task Can_SeeProjectCreationForm()
         {
             var form = await MvcTestingClient()
                 .GetAsync("/ProjectCreation")
@@ -33,7 +33,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         }
 
         [Test]
-        public async Task Index_Post_GeneratesProject()
+        public async Task Can_DownloadProjectZipFile()
         {
             var expectedByteString = "stub bytes";
             ExecutorStub.StubResult<GenerateProject>(Encoding.ASCII.GetBytes(expectedByteString));
