@@ -56,8 +56,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
                 .SetText(m => m.Cmd.Name, "PostTest")
                 .Submit();
 
-            _stubExecutor.Executed.Count.Should().BeGreaterThan(0);
-            _stubExecutor.Executed[0].Should().BeEquivalentTo(new GenerateProject { Name = "PostTest" });
+            _stubExecutor.SingleExecuted<GenerateProject>().Should().BeEquivalentTo(new GenerateProject { Name = "PostTest" });
 
             var fileResult = response.ActionResultOf<FileResult>();
             fileResult.ContentType.Should().Be("application/zip");

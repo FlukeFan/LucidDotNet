@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade;
 
@@ -9,20 +10,38 @@ namespace Lucid.Infrastructure.Lib.Testing.Execution
     {
         private IDictionary<Type, object> _stubResults = new Dictionary<Type, object>();
 
-        public IList<object> Executed = new List<object>();
+        public IList<object> AllExecuted = new List<object>();
 
-        Task<object> IExecutor.Execute(IExecutable executable)
+        public IList<T> Executed<T>()
         {
-            Executed.Add(executable);
+            return AllExecuted
+                .Where(e => typeof(T).IsAssignableFrom(e.GetType()))
+                .Cast<T>()
+                .ToList();
+        }
 
-            return Task.FromResult(_stubResults.ContainsKey(executable.GetType())
-                ? _stubResults[executable.GetType()]
-                : null);
+        public T SingleExecuted<T>()
+        {
+            var executed = Executed<T>();
+
+            if (executed.Count != 1)
+                throw new Exception($"Expected 1 execution of {typeof(T)} but got {executed.Count}");
+
+            return executed[0];
         }
 
         public void StubResult<T>(object result)
         {
             _stubResults[typeof(T)] = result;
+        }
+
+        Task<object> IExecutor.Execute(IExecutable executable)
+        {
+            AllExecuted.Add(executable);
+
+            return Task.FromResult(_stubResults.ContainsKey(executable.GetType())
+                ? _stubResults[executable.GetType()]
+                : null);
         }
     }
 }
