@@ -2,24 +2,14 @@
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Testing;
-using Lucid.Infrastructure.Lib.Testing.Execution;
 using Microsoft.AspNetCore.Mvc;
 using MvcTesting.Html;
 using NUnit.Framework;
 
 namespace Lucid.Modules.ProjectCreation.Tests
 {
-    public class ControllerTests : ModuleControllerTests<TestStartup>
+    public class ControllerTests : ModuleTest.Controller
     {
-        private ExecutorStub _stubExecutor;
-
-        [SetUp]
-        public void SetUp()
-        {
-            Registry.Executor = _stubExecutor = new ExecutorStub();
-        }
-
         [Test]
         public async Task Root_RedirectsToProjectCreation()
         {
@@ -46,7 +36,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         public async Task Index_Post_GeneratesProject()
         {
             var expectedByteString = "stub bytes";
-            _stubExecutor.StubResult<GenerateProject>(Encoding.ASCII.GetBytes(expectedByteString));
+            ExecutorStub.StubResult<GenerateProject>(Encoding.ASCII.GetBytes(expectedByteString));
 
             var form = await MvcTestingClient()
                 .GetAsync("/ProjectCreation")
@@ -56,7 +46,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
                 .SetText(m => m.Cmd.Name, "PostTest")
                 .Submit();
 
-            _stubExecutor.SingleExecuted<GenerateProject>().Should().BeEquivalentTo(new GenerateProject { Name = "PostTest" });
+            ExecutorStub.SingleExecuted<GenerateProject>().Should().BeEquivalentTo(new GenerateProject { Name = "PostTest" });
 
             var fileResult = response.ActionResultOf<FileResult>();
             fileResult.ContentType.Should().Be("application/zip");
