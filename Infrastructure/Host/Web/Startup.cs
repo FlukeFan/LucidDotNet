@@ -58,7 +58,10 @@ namespace Lucid.Infrastructure.Host.Web
                 .UseIsBinary(f => ZipDeployOptions.DefaultIsBinary(f) || Path.GetFileName(f) == "nlog.config"));
 
             if (_env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+            }
 
             app.UseStaticFiles();
             app.UseMvc();
