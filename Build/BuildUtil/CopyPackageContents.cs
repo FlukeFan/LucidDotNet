@@ -28,15 +28,15 @@ namespace Build.BuildUtil
                 return;
             }
 
-            var packageFolders = new List<string>();
-            CollectPackages(csproj, packageFolders);
+            var packages = new List<Package>();
+            CollectPackages(csproj, packages);
 
             if (Directory.Exists(targetRoot))
                 Directory.Delete(targetRoot, true);
 
             Directory.CreateDirectory(targetRoot);
 
-            CopyPackages(nugetRoot, packageFolders, targetRoot);
+            CopyPackages(nugetRoot, packages, targetRoot);
 
             File.WriteAllText(targetFlagFile, "");
         }
@@ -53,7 +53,7 @@ namespace Build.BuildUtil
                 : DateTime.MinValue;
         }
 
-        private void CollectPackages(string csproj, IList<string> packageFolders)
+        private void CollectPackages(string csproj, IList<Package> packages)
         {
             var projXml = new XmlDocument();
             projXml.Load(csproj);
@@ -64,17 +64,17 @@ namespace Build.BuildUtil
             {
                 var packageName = packageReference.Attributes["Include"].Value;
                 var version = packageReference.Attributes["Version"].Value;
-                var folder = Path.Combine(packageName, version);
-                packageFolders.Add(folder);
+                var package = new Package { Name = packageName, Version = version };
+                packages.Add(package);
             }
         }
 
-        private void CopyPackages(string nugetRoot, IList<string> packageFolders, string targetRoot)
+        private void CopyPackages(string nugetRoot, IList<Package> packages, string targetRoot)
         {
-            foreach (var packageFolder in packageFolders)
+            foreach (var package in packages)
             {
-                var nugetPackage = Path.Combine(nugetRoot, packageFolder);
-                var targetFolder = Path.Combine(targetRoot, packageFolder);
+                var nugetPackage = Path.Combine(nugetRoot, package.Name, package.Version);
+                var targetFolder = Path.Combine(targetRoot, package.Name);
                 CopyContent(nugetPackage, "content", targetFolder);
                 CopyContent(nugetPackage, "contentFiles", targetFolder);
             }
@@ -101,6 +101,12 @@ namespace Build.BuildUtil
 
             foreach (string fileName in Directory.GetFiles(source, "*", SearchOption.AllDirectories))
                 File.Copy(fileName, Path.Combine(target, fileName.Substring(source.Length + 1)));
+        }
+
+        private class Package
+        {
+            public string Name;
+            public string Version;
         }
     }
 }
