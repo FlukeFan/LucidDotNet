@@ -75,23 +75,23 @@ namespace Build.BuildUtil
             {
                 var nugetPackage = Path.Combine(nugetRoot, package.Name, package.Version);
                 var targetFolder = Path.Combine(targetRoot, package.Name);
-                CopyContent(nugetPackage, "content", targetFolder);
-                CopyContent(nugetPackage, "contentFiles", targetFolder);
+                CopyContent(nugetPackage, "content", targetFolder, package.Version);
+                CopyContent(nugetPackage, "contentFiles", targetFolder, package.Version);
             }
         }
 
-        private void CopyContent(string packageFolder, string contentName, string targetFolder)
+        private void CopyContent(string packageFolder, string contentName, string targetFolder, string version)
         {
             var source = Path.Combine(packageFolder, contentName);
 
             if (Directory.Exists(source))
             {
-                CopyFolder(source, Path.Combine(targetFolder, contentName));
+                CopyFolder(source, Path.Combine(targetFolder, contentName), version);
                 UsingConsoleColor(ConsoleColor.Cyan, () => Console.WriteLine($"Copied NuGet package content {source}"));
             }
         }
 
-        private void CopyFolder(string source, string target)
+        private void CopyFolder(string source, string target, string version)
         {
             // https://stackoverflow.com/a/8022011/357728
             // cos it's 2018, and we still have to write code to copy a directory *sigh*
@@ -100,7 +100,7 @@ namespace Build.BuildUtil
                 Directory.CreateDirectory(Path.Combine(target, dir.Substring(source.Length + 1)));
 
             foreach (string fileName in Directory.GetFiles(source, "*", SearchOption.AllDirectories))
-                File.Copy(fileName, Path.Combine(target, fileName.Substring(source.Length + 1)));
+                File.Copy(fileName, Path.Combine(target, fileName.Substring(source.Length + 1).Replace(version, "version")));
         }
 
         private class Package
