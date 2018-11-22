@@ -6,11 +6,20 @@
         pi.Title = "Generate Project";
     });}
 
-Generate Project form - @Model.Now
+<div class="base-form">
+    @using (Html.BeginRouteForm("GenerateProject"))
+    {
+        <div class="form-group row">
+            <label for="Cmd_Name" class="col-sm-4 col-form-label">Project Name</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Cmd.Name, "", new { @class = "form-control" })
+            </div>
+        </div>
 
-@using (Html.BeginRouteForm("GenerateProject"))
-{
-    @Html.TextBoxFor(m => m.Cmd.Name)
-
-    <button>Download .zip</button>
-}
+        <div class="row">
+            <div class="col-sm-8 offset-sm-4">
+                <button type="submit" data-nopjax="true" class="btn btn-primary">Download .zip</button>
+            </div>
+        </div>
+    }
+</div>
