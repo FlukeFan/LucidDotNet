@@ -13,6 +13,11 @@
     margin-bottom: 6px;
 }
 
+// https://github.com/twbs/bootstrap/issues/12030
+.navbar-toggler:focus {
+    outline: none;
+}
+
 body {
     width: 100%;
     height: 100%;
