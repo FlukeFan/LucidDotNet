@@ -19,7 +19,7 @@ namespace Lucid.Infrastructure.Host.Web.Tests
                 .SetupTestServer<TestStartup>()
                 .MvcTestingClient();
 
-            var response = await client.GetAsync("/projectCreation");
+            var response = await client.GetAsync(Modules.ProjectCreation.Actions.Index());
 
             response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
             response.LastResult.Should().BeOfType<ViewResult>();

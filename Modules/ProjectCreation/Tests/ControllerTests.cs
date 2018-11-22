@@ -16,18 +16,18 @@ namespace Lucid.Modules.ProjectCreation.Tests
             var response = await MvcTestingClient().GetAsync("/");
 
             response.StatusCode.Should().Be(HttpStatusCode.Redirect);
-            response.ActionResultOf<RedirectResult>().Url.Should().Be("projectCreation");
+            response.ActionResultOf<RedirectResult>().Url.Should().Be(Actions.Index());
         }
 
         [Test]
         public async Task Can_SeeProjectCreationForm()
         {
             var form = await MvcTestingClient()
-                .GetAsync("/ProjectCreation")
+                .GetAsync(Actions.Index())
                 .Form<IndexModel>();
 
             form.Method.Should().Be("post");
-            form.Action.Should().Be("/projectCreation");
+            form.Action.Should().Be(Actions.Index());
 
             form.GetText(m => m.Cmd.Name).Should().Be("Demo", "default project generation name should be 'Demo'");
         }
@@ -39,7 +39,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
             ExecutorStub.StubResult<GenerateProject>(Encoding.ASCII.GetBytes(expectedByteString));
 
             var form = await MvcTestingClient()
-                .GetAsync("/ProjectCreation")
+                .GetAsync(Actions.Index())
                 .Form<IndexModel>();
 
             var response = await form
