@@ -8,6 +8,7 @@
     <Watch Include="**\*.cs" />
     <Watch Include="**\*.scss" />
     <Watch Include="**\*.js" />
+    <Watch Remove="**\wwwroot\js\*.*" />
     <Watch Include="**\*.json" />
     <Watch Include="**\*.csproj" />
     <Watch Include="**\*.proj" />

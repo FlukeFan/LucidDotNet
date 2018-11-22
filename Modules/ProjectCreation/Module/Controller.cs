@@ -12,16 +12,6 @@ namespace Lucid.Modules.ProjectCreation
         public static string Index() { return $"/{RoutePrefix}"; }
     }
 
-    [Route("/")]
-    public class RootController : MvcAppController
-    {
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return Redirect(Actions.Index());
-        }
-    }
-
     [Route(Actions.RoutePrefix)]
     public class Controller : MvcAppController
     {

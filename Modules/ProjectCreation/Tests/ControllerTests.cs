@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
@@ -10,15 +9,6 @@ namespace Lucid.Modules.ProjectCreation.Tests
 {
     public class ControllerTests : ModuleTest.Controller
     {
-        [Test]
-        public async Task Root_RedirectsToProjectCreation()
-        {
-            var response = await MvcTestingClient().GetAsync("/");
-
-            response.StatusCode.Should().Be(HttpStatusCode.Redirect);
-            response.ActionResultOf<RedirectResult>().Url.Should().Be(Actions.Index());
-        }
-
         [Test]
         public async Task Can_SeeProjectCreationForm()
         {
