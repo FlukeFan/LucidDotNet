@@ -16,20 +16,10 @@ namespace Build.BuildUtil
             var nugetRoot = args.Pop();
             UsingConsoleColor(ConsoleColor.White, () => Console.WriteLine($"Unzipping package contents csproj='{csproj}' nuget-root='{nugetRoot}'"));
 
-            var targetRoot = Path.Combine(Path.GetDirectoryName(csproj), "bin/content");
-            var targetFlagFile = Path.Combine(targetRoot, "lastUpdated.flg");
-
-            var sourceDate = ProjectLastUpdatedUtc(csproj);
-            var targetDate = TargetLastUpdatedUtc(targetFlagFile);
-
-            if (targetDate >= sourceDate)
-            {
-                UsingConsoleColor(ConsoleColor.Gray, () => Console.WriteLine($"Package contents in {targetRoot} are up to date."));
-                return;
-            }
-
             var packages = new List<Package>();
             CollectPackages(csproj, packages);
+
+            var targetRoot = Path.Combine(Path.GetDirectoryName(csproj), "bin/content");
 
             if (Directory.Exists(targetRoot))
                 Directory.Delete(targetRoot, true);
@@ -37,8 +27,6 @@ namespace Build.BuildUtil
             Directory.CreateDirectory(targetRoot);
 
             CopyPackages(nugetRoot, packages, targetRoot);
-
-            File.WriteAllText(targetFlagFile, "");
         }
 
         private DateTime ProjectLastUpdatedUtc(string csproj)
