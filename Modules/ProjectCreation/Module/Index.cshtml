@@ -9,10 +9,13 @@
 <div class="base-form">
     @using (Html.BeginRouteForm("GenerateProject"))
     {
-        <div class="form-group row">
+        <div class="form-group form-row">
             <label for="Cmd_Name" class="col-sm-4 col-form-label">Project Name</label>
             <div class="col-sm-8">
                 @Html.TextBoxFor(m => m.Cmd.Name, "", new { @class = "form-control" })
+                <div class="invalid-feedback d-block">
+                    @Html.ValidationMessageFor(m => m.Cmd.Name)
+                </div>
             </div>
         </div>
 
