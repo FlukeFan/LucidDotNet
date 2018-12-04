@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Lucid.Infrastructure.Lib.Facade;
 using NUnit.Framework;
 
 namespace Lucid.Modules.ProjectCreation.Tests
@@ -41,7 +42,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
             _validCommand().ShouldBeInvalid(c => c.Name = " a ", "Name cannot contain spaces");
 
             foreach (var invalidChar in "!\"£$%^&*()+=-][}{#';/.,~@:?><|\\")
-                _validCommand().ShouldBeInvalid(c => c.Name = c.Name.Replace('_', invalidChar), "Name cannot special character: " + invalidChar);
+                _validCommand().ShouldBeInvalid(c => c.Name = c.Name.Replace('_', invalidChar), "Name cannot contain special character: " + invalidChar);
         }
     }
 
