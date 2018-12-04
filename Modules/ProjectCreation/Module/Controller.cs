@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucid.Infrastructure.Lib.MvcApp;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.Modules.ProjectCreation
@@ -13,26 +12,32 @@ namespace Lucid.Modules.ProjectCreation
     }
 
     [Route(Actions.RoutePrefix)]
-    public class Controller : MvcAppController
+    public class Controller : Registry.ProjectCreationController
     {
 
         [HttpGet(Name = "GenerateProject")]
         public IActionResult Index()
         {
-            var model = new IndexModel
-            {
-                Now = DateTime.Now,
-                Cmd = new GenerateProject(),
-            };
-
-            return View(model);
+            return Render(new GenerateProject());
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(IndexModel post)
         {
-            var bytes = (byte[])await Registry.Executor.Execute(post.Cmd);
-            return File(bytes, "application/zip", $"{post.Cmd.Name}.zip");
+            return await Exec(post.Cmd,
+                success: bytes => File(bytes, "application/zip", $"{post.Cmd.Name}.zip"),
+                failure: () => Render(post.Cmd));
+        }
+
+        private IActionResult Render(GenerateProject cmd)
+        {
+            var model = new IndexModel
+            {
+                Now = DateTime.Now,
+                Cmd = cmd,
+            };
+
+            return View(model);
         }
     }
 }

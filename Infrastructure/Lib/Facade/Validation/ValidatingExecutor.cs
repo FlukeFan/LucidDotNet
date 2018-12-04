@@ -11,7 +11,7 @@ namespace Lucid.Infrastructure.Lib.Facade.Validation
             _inner = inner;
         }
 
-        Task<object> IExecutor.Execute(IExecutable executable)
+        Task<object> IExecutor.Execute(object executable)
         {
             ExecutableValidator.Validate(executable);
             return _inner.Execute(executable);

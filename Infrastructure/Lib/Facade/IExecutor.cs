@@ -4,6 +4,6 @@ namespace Lucid.Infrastructure.Lib.Facade
 {
     public interface IExecutor
     {
-        Task<object> Execute(IExecutable executable);
+        Task<object> Execute(object executable);
     }
 }

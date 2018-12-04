@@ -21,6 +21,14 @@ namespace Lucid.Infrastructure.Lib.Facade.Exceptions
             : this(new List<string>(), ConvertResults(validationResults))
         { }
 
+        public FacadeException(IEnumerable<string> messages)
+            : this(messages, new Dictionary<string, IList<string>>())
+        { }
+
+        public FacadeException(string message)
+            : this(new List<string> { message })
+        { }
+
         public static string FormatMessage(IEnumerable<string> messages, IDictionary<string, IList<string>> propertyMessages)
         {
             var lines = new List<string>(messages);

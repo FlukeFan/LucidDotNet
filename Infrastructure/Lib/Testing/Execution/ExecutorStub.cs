@@ -35,7 +35,7 @@ namespace Lucid.Infrastructure.Lib.Testing.Execution
             _stubResults[typeof(T)] = result;
         }
 
-        Task<object> IExecutor.Execute(IExecutable executable)
+        Task<object> IExecutor.Execute(object executable)
         {
             AllExecuted.Add(executable);
 
