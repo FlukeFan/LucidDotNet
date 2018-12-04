@@ -1,19 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq.Expressions;
+﻿using System.IO;
 using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade;
+using Lucid.Infrastructure.Lib.Facade.Exceptions;
 
 namespace Lucid.Modules.ProjectCreation
 {
-    public class ExecutableValidator
-    {
-        public static void Validate(object command)
-        {
-        }
-    }
-
     public class GenerateProject : Command<byte[]>
     {
         public string Name { get; set; } = "Demo";
@@ -48,30 +39,20 @@ namespace Lucid.Modules.ProjectCreation
         private void ValidateStartsWithAlpha()
         {
             if (!char.IsLetter(Name[0]))
-                throw this.PropertyError(gp => gp.Name, p => "Please supply a Name that starts with a letter");
+                throw this.PropertyException(gp => gp.Name, p => "Please supply a Name that starts with a letter");
         }
 
         private void ValidateNoSpaces()
         {
             if (Name.Contains(" ") == true)
-                throw this.PropertyError(gp => gp.Name, p => "Please supply a Name that does not contains spaces");
+                throw this.PropertyException(gp => gp.Name, p => "Please supply a Name that does not contains spaces");
         }
 
         private void ValidateNoSpecialCharacters()
         {
             foreach (var chr in Name)
                 if (!char.IsLetterOrDigit(chr) && chr != '_')
-                    throw this.PropertyError(gp => gp.Name, p => "Please supply a Name that does not contains special characters");
-        }
-    }
-
-    public static class FacadeExceptionExtensions
-    {
-        public static FacadeException PropertyError<T>(this T source, Expression<Func<T, object>> property, Func<string, string> message)
-        {
-            var propertyName = ((MemberExpression)property.Body).Member.Name;
-            var validationResult = new ValidationResult(message(propertyName), new string[] { propertyName });
-            return new FacadeException(new ValidationResult[] { validationResult });
+                    throw this.PropertyException(gp => gp.Name, p => "Please supply a Name that does not contains special characters");
         }
     }
 }

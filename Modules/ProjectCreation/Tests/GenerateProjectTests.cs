@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Facade;
+using Lucid.Infrastructure.Lib.Testing.Validation;
 using NUnit.Framework;
 
 namespace Lucid.Modules.ProjectCreation.Tests
@@ -43,15 +43,6 @@ namespace Lucid.Modules.ProjectCreation.Tests
 
             foreach (var invalidChar in "!\"£$%^&*()+=-][}{#';/.,~@:?><|\\")
                 _validCommand().ShouldBeInvalid(c => c.Name = c.Name.Replace('_', invalidChar), "Name cannot contain special character: " + invalidChar);
-        }
-    }
-
-    public static class ValidationExtensions
-    {
-        public static void ShouldBeInvalid(this GenerateProject command, Action<GenerateProject> invalidate, string reason)
-        {
-            invalidate(command);
-            Assert.Throws<FacadeException>(() => { ExecutableValidator.Validate(command); command.Execute(); }, reason);
         }
     }
 }
