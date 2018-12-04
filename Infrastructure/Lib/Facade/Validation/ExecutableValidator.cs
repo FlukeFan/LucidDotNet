@@ -12,10 +12,13 @@ namespace Lucid.Infrastructure.Lib.Facade.Validation
             var results = new List<ValidationResult>();
             var valid = Validator.TryValidateObject(dto, context, results, true);
 
-            if (valid)
-                return;
+            if (!valid)
+                throw new FacadeException(results);
 
-            throw new FacadeException(results);
+            var customValidation = dto as ICustomValidation;
+
+            if (customValidation != null)
+                customValidation.Validate();
         }
     }
 }

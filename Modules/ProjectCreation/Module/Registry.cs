@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade;
+using Lucid.Infrastructure.Lib.Facade.Validation;
 
 namespace Lucid.Modules.ProjectCreation
 {
@@ -11,7 +12,9 @@ namespace Lucid.Modules.ProjectCreation
         {
             await Task.Run(() =>
             {
-                Executor = new Executor();
+                Executor =
+                    new ValidatingExecutor(
+                        new Executor());
             });
         }
     }

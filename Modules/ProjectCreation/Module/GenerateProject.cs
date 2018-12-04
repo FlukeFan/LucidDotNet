@@ -1,18 +1,19 @@
-﻿using System.IO;
+﻿using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
+using Lucid.Infrastructure.Lib.Facade.Validation;
 
 namespace Lucid.Modules.ProjectCreation
 {
-    public class GenerateProject : Command<byte[]>
+    public class GenerateProject : Command<byte[]>, ICustomValidation
     {
+        [Required(ErrorMessage = "Please supply a Name")]
         public string Name { get; set; } = "Demo";
 
         public override Task<byte[]> Execute()
         {
-            ValidateName();
-
             var assembly = GetType().Assembly;
 
             using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.Modules.ProjectCreation.Project.zip"))
@@ -27,6 +28,11 @@ namespace Lucid.Modules.ProjectCreation
                 stream.CopyTo(memory);
                 return memory.ToArray();
             }
+        }
+
+        void ICustomValidation.Validate()
+        {
+            ValidateName();
         }
 
         private void ValidateName()

@@ -31,7 +31,6 @@ namespace Lucid.Modules.ProjectCreation.Tests
         }
 
         [Test]
-        [Ignore("Until validation is in place, this is ignored")]
         public void Validation()
         {
             _validCommand().ShouldBeInvalid(c => c.Name = null, "Name cannot be null");
