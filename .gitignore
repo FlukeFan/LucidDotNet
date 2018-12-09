@@ -11,3 +11,4 @@ obj
 /Infrastructure/Host/Web/wwwroot/js/site.min.js
 /Infrastructure/Host/Web/wwwroot/js/site.min.js.map
 /Infrastructure/Host/Web/Content/web.css
+/Infrastructure/Lib/MvcApp/wwwroot/lib/mvcForms

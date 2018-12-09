@@ -22,6 +22,7 @@
     <FilesToZip Remove="..\..\..\.*\**" />
     <FilesToZip Remove="..\..\..\**\bin\**" />
     <FilesToZip Remove="..\..\..\**\obj\**" />
+    <FilesToZip Remove="..\..\..\**\*.uptodate" />
     <FilesToZip Remove="Project\**" />
   </ItemGroup>
 
