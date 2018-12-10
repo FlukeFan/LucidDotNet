@@ -20,5 +20,10 @@ namespace Lucid.Infrastructure.Lib.Testing
         {
             return TestRegistry.TestServer.MvcTestingClient();
         }
+
+        protected string AddHost(string action)
+        {
+            return $"http://localhost{action}";
+        }
     }
 }

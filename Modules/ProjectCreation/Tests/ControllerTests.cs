@@ -14,12 +14,12 @@ namespace Lucid.Modules.ProjectCreation.Tests
         {
             var form = await MvcTestingClient()
                 .GetAsync(Actions.Index())
-                .Form<IndexModel>();
+                .Form<GenerateProject>();
 
             form.Method.Should().Be("post");
-            form.Action.Should().Be(Actions.Index());
+            form.Action.Should().Be(AddHost(Actions.Index()));
 
-            form.GetText(m => m.Cmd.Name).Should().Be("Demo", "default project generation name should be 'Demo'");
+            form.GetText(m => m.Name).Should().Be("Demo", "default project generation name should be 'Demo'");
         }
 
         [Test]
@@ -30,10 +30,10 @@ namespace Lucid.Modules.ProjectCreation.Tests
 
             var form = await MvcTestingClient()
                 .GetAsync(Actions.Index())
-                .Form<IndexModel>();
+                .Form<GenerateProject>();
 
             var response = await form
-                .SetText(m => m.Cmd.Name, "PostTest")
+                .SetText(m => m.Name, "PostTest")
                 .Submit();
 
             ExecutorStub.SingleExecuted<GenerateProject>().Should().BeEquivalentTo(new GenerateProject { Name = "PostTest" });

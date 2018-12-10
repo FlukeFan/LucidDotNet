@@ -37,6 +37,9 @@ namespace Lucid.Infrastructure.Lib.Testing.Execution
 
         Task<object> IExecutor.Execute(object executable)
         {
+            if (executable == null)
+                throw new Exception("Null executable passed to IExecutor.Execute");
+
             AllExecuted.Add(executable);
 
             return Task.FromResult(_stubResults.ContainsKey(executable.GetType())

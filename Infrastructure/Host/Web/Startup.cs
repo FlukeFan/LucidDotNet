@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
+using MvcForms;
+using MvcForms.Styles.Bootstrap;
 using ZipDeploy;
 
 namespace Lucid.Infrastructure.Host.Web
@@ -65,6 +67,7 @@ namespace Lucid.Infrastructure.Host.Web
 
             app.UseStaticFiles();
             app.UseMvc();
+            Styler.Set(new Bootstrap4Style());
 
             Task.WaitAll(
                 Modules.ProjectCreation.Registry.StartupAsync());

@@ -1,4 +1,5 @@
-﻿@namespace Lucid.Modules.ProjectCreation
+﻿@using MvcForms.Forms
+@namespace Lucid.Modules.ProjectCreation
 @inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<IndexModel>
 @model IndexModel
 @{Setup(pi =>
@@ -7,22 +8,15 @@
     });}
 
 <div class="base-form">
-    @using (Html.BeginRouteForm("GenerateProject"))
-    {
-        <div class="form-group form-row">
-            <label for="Cmd_Name" class="col-sm-4 col-form-label">Project Name</label>
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Cmd.Name, "", new { @class = "form-control" })
-                <div class="invalid-feedback d-block">
-                    @Html.ValidationMessageFor(m => m.Cmd.Name)
-                </div>
-            </div>
-        </div>
 
-        <div class="form-row">
-            <div class="col-sm-8 offset-sm-4">
-                <button type="submit" data-nopjax="true" class="btn btn-primary">Download .zip</button>
-            </div>
-        </div>
+    @using (var form = Html.FormFor(Model.Cmd).Begin())
+    {
+        @form.Html.LabelledInputText("Project Name", m => m.Name)
+
+        using (form.Html.FormButtons())
+        {
+            @form.Html.ButtonSubmit("Download .zip").NoPjax()
+        }
     }
+
 </div>

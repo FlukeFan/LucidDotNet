@@ -22,13 +22,11 @@ namespace Lucid.Modules.ProjectCreation
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(IndexModel post)
+        public async Task<IActionResult> Index(GenerateProject cmd)
         {
-            SetFacadePropertyPrefix("Cmd.");
-
-            return await Exec(post.Cmd,
-                success: bytes => File(bytes, "application/zip", $"{post.Cmd.Name}.zip"),
-                failure: () => Render(post.Cmd));
+            return await Exec(cmd,
+                success: bytes => File(bytes, "application/zip", $"{cmd.Name}.zip"),
+                failure: () => Render(cmd));
         }
 
         private IActionResult Render(GenerateProject cmd)
