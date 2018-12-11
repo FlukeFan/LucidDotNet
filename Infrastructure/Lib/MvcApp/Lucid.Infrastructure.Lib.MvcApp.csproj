@@ -15,7 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.1.3" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.1.1" />
-    <PackageReference Include="MvcForms" Version="0.0.5" />
+    <PackageReference Include="MvcForms" Version="0.0.6" />
   </ItemGroup>
 
   <ItemGroup>

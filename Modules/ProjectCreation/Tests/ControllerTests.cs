@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
 
             var response = await form
                 .SetText(m => m.Name, "PostTest")
-                .Submit();
+                .Submit(r => r.SetExpectedResponse(HttpStatusCode.OK));
 
             ExecutorStub.SingleExecuted<GenerateProject>().Should().BeEquivalentTo(new GenerateProject { Name = "PostTest" });
 
