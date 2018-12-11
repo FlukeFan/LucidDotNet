@@ -13,6 +13,11 @@
     margin-bottom: 6px;
 }
 
+.is-invalid label {
+    // boostrap doesn't make label red in invalid controls
+    color: #dc3545;
+}
+
 // https://github.com/twbs/bootstrap/issues/12030
 .navbar-toggler:focus {
     outline: none;
