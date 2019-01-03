@@ -15,14 +15,12 @@ namespace Lucid.Infrastructure.Lib.MvcApp
         [RazorInject]
         protected ISetLayout SetLayout { get; set; }
 
-        private PageInfo _pageInfo;
-
         public void Setup(Action<PageInfo> action)
         {
             Context.Items.Add(MvcAppPage.SetupCalled, true);
-            _pageInfo = new PageInfo();
-            action(_pageInfo);
-            SetLayout.Set(this, _pageInfo, ViewContext);
+            var pageInfo = new PageInfo();
+            action(pageInfo);
+            SetLayout.Set(this, pageInfo, ViewContext);
         }
     }
 }

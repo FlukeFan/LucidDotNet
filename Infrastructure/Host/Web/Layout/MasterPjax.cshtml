@@ -1,0 +1,8 @@
+﻿@namespace Lucid.Infrastructure.Host.Web.Layout
+@using Lucid.Infrastructure.Lib.MvcApp.Pages
+@{
+    PageInfo PageInfo = ViewBag.PageInfo;
+}
+<span data-title="Lucid - @PageInfo.Title">
+    @RenderBody()
+</span>

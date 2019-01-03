@@ -1,6 +1,8 @@
-﻿using Lucid.Infrastructure.Lib.MvcApp.Pages;
+﻿using System;
+using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MvcForms;
 
 namespace Lucid.Infrastructure.Host.Web.Layout
 {
@@ -9,7 +11,22 @@ namespace Lucid.Infrastructure.Host.Web.Layout
         void ISetLayout.Set(IMvcAppPage page, PageInfo pageInfo, ViewContext viewContext)
         {
             viewContext.ViewBag.PageInfo = pageInfo;
-            page.Layout = this.RelativeViewPath("Master.cshtml");
+
+            var request = viewContext.HttpContext.Request;
+            var isPjaxModal = request.IsPjaxModal();
+
+            if (isPjaxModal)
+                throw new Exception("TODO: add handling for pjax modal");
+
+            var isPjax = request.IsPjax();
+            var menuModel = new MenuModel();
+
+            menuModel.Layout = isPjax
+                ? this.RelativeViewPath("MasterPjax.cshtml")
+                : this.RelativeViewPath("Master.cshtml");
+
+            viewContext.ViewBag.MenuModel = menuModel;
+            page.Layout = this.RelativeViewPath("Menu.cshtml");
         }
     }
 }
