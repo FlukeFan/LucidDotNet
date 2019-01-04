@@ -6,11 +6,11 @@ type readme.md
 @doskey webw=dotnet watch run -p Infrastructure\Host\Web\Lucid.Infrastructure.Host.Web.csproj $*
 @doskey web=dotnet run -p Infrastructure\Host\Web\Lucid.Infrastructure.Host.Web.csproj $*
 @doskey bc=dotnet clean build.proj $*
-@doskey btw=dotnet watch msbuild build.proj /p:RunTests=true /m:16 /p:FilterTest=FullyQualifiedName~$1 $2 $3 $4 $5 $6 $7 $8 $9
-@doskey bt=dotnet msbuild build.proj /p:RunTests=true /m:16 /p:FilterTest=FullyQualifiedName~$1 $2 $3 $4 $5 $6 $7 $8 $9
-@doskey bw=dotnet watch msbuild build.proj /p:RunTests=true /p:NoCoverage=true /m:16 $*
-@doskey ba=dotnet msbuild build.proj /p:RunTests=true /m:16 $*
-@doskey b=dotnet msbuild build.proj /p:RunTests=true /p:FilterTest=TestCategory!=Slow /m:16 $*
+@doskey btw=dotnet watch msbuild build.proj /p:RunTests=true /m:999 /p:FilterTest=FullyQualifiedName~$1 $2 $3 $4 $5 $6 $7 $8 $9
+@doskey bt=dotnet msbuild build.proj /p:RunTests=true /m:999 /p:FilterTest=FullyQualifiedName~$1 $2 $3 $4 $5 $6 $7 $8 $9
+@doskey bw=dotnet watch msbuild build.proj /p:RunTests=true /p:NoCoverage=true /m:999 $*
+@doskey ba=dotnet msbuild build.proj /p:RunTests=true /m:999 $*
+@doskey b=dotnet msbuild build.proj /p:RunTests=true /p:FilterTest=TestCategory!=Slow /m:999 $*
 @doskey br=dotnet restore build.proj $*
 @echo.
 @echo Aliases:
