@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace Build.BuildUtil
@@ -18,7 +19,9 @@ namespace Build.BuildUtil
             doc.Load(coverageFile);
 
             var lineCoverageNode = doc.SelectSingleNode("/CoverageReport/Summary/Linecoverage");
-            var actualLineCoverage = double.Parse(lineCoverageNode.InnerText.Replace("%", ""));
+            var numerals = "0123456789";
+            var lineCoverageText = string.Concat(lineCoverageNode.InnerText.TakeWhile(c => numerals.Contains(c)));
+            var actualLineCoverage = double.Parse(lineCoverageText);
 
             if (actualLineCoverage < targetPercentage)
                 throw new Exception($"Expected at least {targetPercentage}% coverage, only got {actualLineCoverage}% coverage");
