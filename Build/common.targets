@@ -15,7 +15,9 @@
     <ReportGenerator>$(NuGetPackageRoot)reportgenerator\4.0.5\tools\netcoreapp2.0\ReportGenerator.dll</ReportGenerator>
 
     <TestAssembly>$(AssemblyName).dll</TestAssembly>
-    <TestSuccessFlag>$(AssemblyName).noCoverage$(NoCoverage).success.flg</TestSuccessFlag>
+    <Quot>"</Quot>
+    <SafeFilterTest>$([System.String]::Copy($(FilterTest)).Replace("/", "_fs_").Replace("\", "_bs_").Replace(":", "_col_").Replace("*", "_ast_").Replace("?", "_q_").Replace($(Quot), "_quot_").Replace("&gt;", "_gt_").Replace("&lt;", "_lt_").Replace("|", "_pipe_").Replace(" ", "__"))</SafeFilterTest>
+    <TestSuccessFlag>$(AssemblyName).noCoverage$(NoCoverage)_$(SafeFilterTest).success.flg</TestSuccessFlag>
     <CoverageOutput>$(AssemblyName).coverage.xml</CoverageOutput>
 
   </PropertyGroup>
@@ -34,23 +36,18 @@
     <CallTarget Targets="RunTests" Condition="$(IsTestProject)=='true'" />
   </Target>
 
-  <Target Name="RunTests" Condition="'$(RunTests)'=='true' or '$(FilterTestFqn)'!=''" Inputs="@(TestDependencies)" Outputs="$(OutDir)$(TestSuccessFlag)">
-    <CallTarget Targets="RunTestsWithFilter" Condition="'$(FilterTestFqn)'!=''" />
-    <CallTarget Targets="RunTestsWithoutCoverage" Condition="'$(FilterTestFqn)'=='' And '$(NoCoverage)'=='true'" />
-    <CallTarget Targets="RunTestsWithCoverage" Condition="'$(FilterTestFqn)'=='' And '$(NoCoverage)'!='true'" />
-  </Target>
-
-  <Target Name="RunTestsWithFilter">
-    <Message Importance="high" Text="Running VsTestConsole with --testcasefilter:FullyQualifiedName~$(FilterTestFqn)" />
-    <Exec Command="dotnet &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx --testcasefilter:FullyQualifiedName~$(FilterTestFqn)" WorkingDirectory="$(OutDir)" />
+  <Target Name="RunTests" Condition="'$(RunTests)'=='true' or '$(FilterTest)'!=''" Inputs="@(TestDependencies)" Outputs="$(OutDir)$(TestSuccessFlag)">
+    <CallTarget Targets="RunTestsWithoutCoverage" Condition="'$(FilterTest)'!='' Or '$(NoCoverage)'=='true'" />
+    <CallTarget Targets="RunTestsWithCoverage" Condition="'$(FilterTest)'=='' And '$(NoCoverage)'!='true'" />
   </Target>
 
   <Target Name="RunTestsWithoutCoverage">
     <PropertyGroup>
       <TestStartTime>$([System.DateTime]::Now.AddSeconds(1).ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
+      <TestCaseFilterOption Condition="'$(FilterTest)'!=''">--testcasefilter:$(FilterTest)</TestCaseFilterOption>
     </PropertyGroup>
-    <Message Importance="high" Text="Running tests: $(TestAssembly)" />
-    <Exec WorkingDirectory="$(OutDir)" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx" />
+    <Message Importance="high" Text="Running tests: $(TestAssembly) without coverage $(TestCaseFilterOption)" />
+    <Exec WorkingDirectory="$(OutDir)" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx $(TestCaseFilterOption)" />
     <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(TestStartTime)" AlwaysCreate="true" />
   </Target>
 
@@ -58,7 +55,7 @@
     <PropertyGroup>
       <TestStartTime>$([System.DateTime]::Now.AddSeconds(1).ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
     </PropertyGroup>
-    <Message Importance="high" Text="Running tests: $(TestAssembly)" />
+    <Message Importance="high" Text="Running tests with coverage: $(TestAssembly)" />
     <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) --opencover --save --outputDirectory __Instrumented --xmlReport $(CoverageOutput) --assemblyFilter &quot;@(CoverageAssemblyFilter)&quot; --typeFilter &quot;@(CoverageTypeFilter)&quot; --methodFilter &quot;@(CoverageMethodFilter)&quot; --attributeFilter &quot;@(CoverageAttributeFilter)&quot;" />
     <Exec WorkingDirectory="$(OutDir)\__Instrumented" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx" />
     <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) Runner --collect -r __Instrumented" />
