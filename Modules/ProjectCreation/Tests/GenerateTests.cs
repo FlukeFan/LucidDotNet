@@ -5,7 +5,6 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Xml;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -97,13 +96,12 @@ namespace Lucid.Modules.ProjectCreation.Tests
         }
 
         [Test]
-        public async Task GeneratedProjectContainsFilesReferencedByEachCsproj()
+        public async Task GeneratedProjectContainsExpectedFiles()
         {
             var cmd = new GenerateProject { Name = "DemoProj" };
             var bytes = await cmd.Execute();
 
             var zippedFiles = new List<string>();
-            var csProjEntries = new List<CsprojEntry>();
 
             using (var ms = new MemoryStream(bytes))
             using (var zipFile = new ZipArchive(ms))
@@ -116,57 +114,48 @@ namespace Lucid.Modules.ProjectCreation.Tests
 
                     var zippedFileName = name.Replace("/", "\\");
                     zippedFiles.Add(zippedFileName);
-
-                    if (name.ToLower().EndsWith(".csproj"))
-                        using (var sr = new StreamReader(zipEntry.Open()))
-                            csProjEntries.Add(new CsprojEntry
-                            {
-                                Name = Path.GetFileName(name),
-                                Folder = Path.GetDirectoryName(name),
-                                Content = sr.ReadToEnd(),
-                            });
                 }
             }
 
-            var knownGeneratedFiles = new string[]
-            {
-                "Modules\\ProjectCreation\\Module\\Project.zip", // this is generated in the 'BeforeBuild'
-            };
+            // verify a selection of files
 
-            var fileElements = new string[]
-            {
-                "Compile",
-                "None",
-                "Content",
-                "EmbeddedResource",
-            };
+            // root files
+            zippedFiles.Should().Contain(".gitignore");
+            zippedFiles.Should().Contain("build.proj");
+            zippedFiles.Should().Contain("CommandPrompt.bat");
+            zippedFiles.Should().Contain("global.json");
+            zippedFiles.Should().Contain("DemoProj.sln");
+            zippedFiles.Should().Contain("readme.md");
 
-            foreach (var csproj in csProjEntries)
-            {
-                var proj = new XmlDocument();
-                proj.LoadXml(csproj.Content);
+            // build files
+            zippedFiles.Should().Contain("Build\\App_Offline.htm");
+            zippedFiles.Should().Contain("Build\\common.build.proj");
+            zippedFiles.Should().Contain("Build\\common.targets");
+            zippedFiles.Should().Contain("Build\\BuildUtil\\Build.BuildUtil.csproj");
+            zippedFiles.Should().Contain("Build\\BuildUtil\\Program.cs");
 
-                foreach (XmlElement el in proj.SelectNodes("//*"))
-                {
-                    if (fileElements.Contains(el.Name) && el.HasAttribute("Include"))
-                    {
-                        var file = el.Attributes["Include"].Value;
+            // Host files
+            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\bundleconfig.json");
+            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\compilerconfig.json.defaults");
+            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\nlog.config");
+            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\Content\\demoProj.js");
+            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\Content\\web.scss");
+            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\Home\\Index.cshtml");
+            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\wwwroot\\favicon.ico");
+            zippedFiles.Should().NotContain("Infrastructure\\Host\\Web\\wwwroot\\css\\site.min.css");
+            zippedFiles.Should().NotContain("Infrastructure\\Host\\Web\\wwwroot\\js\\site.min.js");
+            zippedFiles.Should().NotContain("Infrastructure\\Host\\Web.Tests\\wwwroot\\DemoProj.Infrastructure.Host.Web.Tests.csproj.user");
 
-                        if (file.Contains(".."))
-                            continue; // ignore relative files
+            // lib files
+            zippedFiles.Should().NotContain("Infrastructure\\Lib\\MvcApp\\wwwroot\\lib\\mvcForms\\css\\mvcForms.css");
 
-                        var expectedFile = Path.Combine(csproj.Folder, file);
-
-                        if (knownGeneratedFiles.Contains(expectedFile))
-                            continue;
-
-                        expectedFile.ToLower().Should().NotEndWith("\\lucid.js", "file should have been renamed");
-
-                        zippedFiles.Should().Contain(expectedFile,
-                            "file {0} was referenced by project {1}", file, csproj.Name);
-                    }
-                }
-            }
+            // ProjectCreation module
+            zippedFiles.Should().Contain("Modules\\ProjectCreation\\Module\\DemoProj.Modules.ProjectCreation.csproj");
+            zippedFiles.Should().Contain("Modules\\ProjectCreation\\Module\\Zip.proj");
+            zippedFiles.Should().NotContain("Modules\\ProjectCreation\\Module\\Project.zip");
+            zippedFiles.Should().NotContain("Modules\\ProjectCreation\\Module\\Project.zip.nextUpdate");
+            zippedFiles.Should().NotContain("Modules\\ProjectCreation\\Module\\bin\\Debug\\netstandard2.0\\DemoProj.Modules.ProjectCreation.dll");
+            zippedFiles.Should().NotContain("Modules\\ProjectCreation\\Module\\obj\\project.assets.json");
         }
 
         [Test]
@@ -225,13 +214,6 @@ namespace Lucid.Modules.ProjectCreation.Tests
             var outputLine = Generate.ProcessLine(inputLine, "NewProj1");
 
             outputLine.Should().Be("    <compilation debug=\"true\" targetFramework=\"4.5\" optimizeCompilations=\"true\"  />");
-        }
-
-        public class CsprojEntry
-        {
-            public string Name;
-            public string Folder;
-            public string Content;
         }
     }
 }

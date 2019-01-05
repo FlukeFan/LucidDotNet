@@ -10,7 +10,9 @@
     <FilesToZip Include="..\..\..\**\*.proj" />
     <FilesToZip Include="..\..\..\**\*.targets" />
     <FilesToZip Include="..\..\..\**\*.json" />
+    <FilesToZip Include="..\..\..\**\*.json.defaults" />
     <FilesToZip Include="..\..\..\**\*.js" />
+    <FilesToZip Include="..\..\..\**\*.scss" />
     <FilesToZip Include="..\..\..\**\*.sln" />
     <FilesToZip Include="..\..\..\**\*.csproj" />
     <FilesToZip Include="..\..\..\**\*.cs" />
@@ -23,6 +25,10 @@
     <FilesToZip Remove="..\..\..\**\bin\**" />
     <FilesToZip Remove="..\..\..\**\obj\**" />
     <FilesToZip Remove="..\..\..\**\*.uptodate" />
+    <FilesToZip Remove="..\..\..\Infrastructure\Host\logs.config\**" />
+    <FilesToZip Remove="..\..\..\Infrastructure\Host\Web\wwwroot\js\**" />
+    <FilesToZip Remove="..\..\..\Infrastructure\Host\Web\wwwroot\css\**" />
+    <FilesToZip Remove="..\..\..\Infrastructure\Lib\MvcApp\wwwroot\**" />
     <FilesToZip Remove="Project\**" />
   </ItemGroup>
 

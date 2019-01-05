@@ -8,7 +8,7 @@ type readme.md
 @doskey bc=dotnet clean build.proj $*
 @doskey btw=dotnet watch msbuild build.proj /p:RunTests=true /m:999 /p:FilterTest=FullyQualifiedName~$1 $2 $3 $4 $5 $6 $7 $8 $9
 @doskey bt=dotnet msbuild build.proj /p:RunTests=true /m:999 /p:FilterTest=FullyQualifiedName~$1 $2 $3 $4 $5 $6 $7 $8 $9
-@doskey bw=dotnet watch msbuild build.proj /p:RunTests=true /p:NoCoverage=true /m:999 $*
+@doskey bw=dotnet watch msbuild build.proj /p:RunTests=true /p:FilterTest=TestCategory!=Slow /m:999 $*
 @doskey ba=dotnet msbuild build.proj /p:RunTests=true /m:999 $*
 @doskey b=dotnet msbuild build.proj /p:RunTests=true /p:FilterTest=TestCategory!=Slow /m:999 $*
 @doskey br=dotnet restore build.proj $*
