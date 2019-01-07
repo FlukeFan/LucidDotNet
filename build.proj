@@ -49,7 +49,7 @@
   <Target Name="Deploy" DependsOnTargets="Package">
     <Error Text="Need to set LucidFtpHostFile variable" Condition="'$(LucidFtpHostFile)'==''" />
     <Error Text="Need to set LucidFtpRemoteDir variable" Condition="'$(LucidFtpRemoteDir)'==''" />
-    <Exec Command="lib\ncftp\ncftpput.exe -S .tmp -f $(LucidFtpHostFile) $(LucidFtpRemoteDir) $(WebBin)/publish.zip" />
+    <Exec Command="Tools\ncftp\ncftpput.exe -S .tmp -f $(LucidFtpHostFile) $(LucidFtpRemoteDir) $(WebBin)/publish.zip" />
     <Message Text="Completed FTP of publish.zip" Importance="high" />
   </Target>
 
