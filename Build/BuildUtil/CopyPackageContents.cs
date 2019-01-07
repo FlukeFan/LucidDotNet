@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Build.BuildUtil
 {
@@ -14,10 +16,14 @@ namespace Build.BuildUtil
 
             var csproj = args.Pop();
             var nugetRoot = args.Pop();
+
             UsingConsoleColor(ConsoleColor.White, () => Console.WriteLine($"Unzipping package contents csproj='{csproj}' nuget-root='{nugetRoot}'"));
 
-            var packages = new List<Package>();
-            CollectPackages(csproj, packages);
+            var assetsFile = Path.Combine(Path.GetDirectoryName(csproj), "obj/project.assets.json");
+
+            UsingConsoleColor(ConsoleColor.White, () => Console.WriteLine($"Using assets file '{assetsFile}'"));
+
+            var packages = CollectPackages(assetsFile);
 
             var targetRoot = Path.Combine(Path.GetDirectoryName(csproj), "bin/content");
 
@@ -29,39 +35,43 @@ namespace Build.BuildUtil
             CopyPackages(nugetRoot, packages, targetRoot);
         }
 
-        private DateTime ProjectLastUpdatedUtc(string csproj)
+        private IList<Package> CollectPackages(string assetsFile)
         {
-            return File.GetLastWriteTimeUtc(csproj);
-        }
+            var packages = new List<Package>();
+            var json = File.ReadAllText(assetsFile);
+            var assets = (JObject)JsonConvert.DeserializeObject(json);
 
-        private DateTime TargetLastUpdatedUtc(string targetFlagFile)
-        {
-            return (File.Exists(targetFlagFile))
-                ? File.GetLastWriteTimeUtc(targetFlagFile)
-                : DateTime.MinValue;
-        }
+            var libraries = assets["libraries"];
 
-        private void CollectPackages(string csproj, IList<Package> packages)
-        {
-            var projXml = new XmlDocument();
-            projXml.Load(csproj);
-
-            var packageReferences = projXml.SelectNodes("//*[local-name()='PackageReference']");
-
-            foreach (XmlElement packageReference in packageReferences)
+            foreach (var library in libraries)
             {
-                var packageName = packageReference.Attributes["Include"].Value;
-                var version = packageReference.Attributes["Version"].Value;
-                var package = new Package { Name = packageName, Version = version };
-                packages.Add(package);
+                var libProps = library.Children();
+                var type = libProps["type"].First().Value<string>();
+
+                if (type != "package")
+                    continue;
+
+                var nameParts = library.Value<JProperty>().Name.Split('/');
+                var name = nameParts[0];
+                var version = nameParts[1];
+                var path = libProps["path"].First().Value<string>();
+
+                packages.Add(new Package
+                {
+                    Name = name,
+                    Version = version,
+                    Path = path,
+                });
             }
+
+            return packages;
         }
 
         private void CopyPackages(string nugetRoot, IList<Package> packages, string targetRoot)
         {
             foreach (var package in packages)
             {
-                var nugetPackage = Path.Combine(nugetRoot, package.Name, package.Version);
+                var nugetPackage = Path.Combine(nugetRoot, package.Path);
                 var targetFolder = Path.Combine(targetRoot, package.Name);
                 CopyContent(nugetPackage, "content", targetFolder, package.Version);
                 CopyContent(nugetPackage, "contentFiles", targetFolder, package.Version);
@@ -95,6 +105,7 @@ namespace Build.BuildUtil
         {
             public string Name;
             public string Version;
+            public string Path;
         }
     }
 }

@@ -66,7 +66,7 @@
   </Target>
 
   <Target Name="CopyPackageContents" Condition="'$(CopyPackageContent)' == 'true'" BeforeTargets="Compile" Inputs="$(MSBuildProjectFile)" Outputs="bin/content/lastUpdated.flg">
-    <Exec Command="dotnet &quot;$(BuildUtil)&quot; CopyPackageContents &quot;$(MSBuildProjectFullPath)&quot; $(NuGetPackageRoot)" />
+    <Exec Command="dotnet &quot;$(BuildUtil)&quot; CopyPackageContents &quot;$(MSBuildProjectFullPath)&quot; &quot;$([System.String]::Copy($(NuGetPackageRoot)).TrimEnd('\'))&quot;" />
     <Touch Files="bin/content/lastUpdated.flg" AlwaysCreate="true" />
   </Target>
 
