@@ -1,1 +1,0 @@
--[Lucid.Database]Lucid.Database.Migrations.LucidMigration

@@ -1,8 +1,0 @@
--[App_*]*
--[Lucid.Database]*
--[Lucid.Domain.Contract]*
--[Lucid.Domain]*
--[Lucid.Infrastructure]*
--[Lucid.Web]Lucid.Web.LucidApplication
--[Lucid.Web]Lucid.Web.App.Shared.*
--[Lucid.Web]Lucid.Web.Utility.*
