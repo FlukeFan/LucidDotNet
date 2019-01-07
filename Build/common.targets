@@ -65,8 +65,8 @@
     <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(TestStartTime)" AlwaysCreate="true" />
   </Target>
 
-  <Target Name="CopyPackageContents" Condition="'$(CopyPackageContent)' == 'true'" BeforeTargets="Compile" Inputs="$(MSBuildProjectFile)" Outputs="bin/content/lastUpdated.flg">
-    <Exec Command="dotnet &quot;$(BuildUtil)&quot; CopyPackageContents &quot;$(MSBuildProjectFullPath)&quot; &quot;$([System.String]::Copy($(NuGetPackageRoot)).TrimEnd('\'))&quot;" />
+  <Target Name="CopyPackageContents" Condition="'$(CopyPackageContent)' == 'true'" BeforeTargets="Compile" Inputs="$(MSBuildProjectDirectory)/obj/project.assets.json" Outputs="bin/content/lastUpdated.flg">
+    <Exec Command="dotnet &quot;$(BuildUtil)&quot; CopyPackageContents &quot;$(MSBuildProjectDirectory)/obj/project.assets.json&quot; &quot;$([System.String]::Copy($(NuGetPackageRoot)).TrimEnd('\'))&quot;" />
     <Touch Files="bin/content/lastUpdated.flg" AlwaysCreate="true" />
   </Target>
 

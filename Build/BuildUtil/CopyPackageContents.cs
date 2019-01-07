@@ -12,20 +12,16 @@ namespace Build.BuildUtil
         public override void Execute(Stack<string> args)
         {
             if (args.Count != 2)
-                throw new Exception($"usage: dotnet Build.dll CopyPackageContents <csproj_file> <nuget_root>");
+                throw new Exception($"usage: dotnet Build.dll CopyPackageContents <assets_file> <nuget_root>");
 
-            var csproj = args.Pop();
+            var assetsFile = args.Pop();
             var nugetRoot = args.Pop();
 
-            UsingConsoleColor(ConsoleColor.White, () => Console.WriteLine($"Unzipping package contents csproj='{csproj}' nuget-root='{nugetRoot}'"));
-
-            var assetsFile = Path.Combine(Path.GetDirectoryName(csproj), "obj/project.assets.json");
-
-            UsingConsoleColor(ConsoleColor.White, () => Console.WriteLine($"Using assets file '{assetsFile}'"));
+            UsingConsoleColor(ConsoleColor.White, () => Console.WriteLine($"Unzipping package contents assetsFile='{assetsFile}' nuget-root='{nugetRoot}'"));
 
             var packages = CollectPackages(assetsFile);
 
-            var targetRoot = Path.Combine(Path.GetDirectoryName(csproj), "bin/content");
+            var targetRoot = Path.Combine(Path.GetDirectoryName(assetsFile), "../bin/content");
 
             if (Directory.Exists(targetRoot))
                 Directory.Delete(targetRoot, true);
