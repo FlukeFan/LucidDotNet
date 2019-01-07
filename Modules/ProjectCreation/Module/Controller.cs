@@ -6,7 +6,7 @@ namespace Lucid.Modules.ProjectCreation
 {
     public static class Actions
     {
-        public const string RoutePrefix = "projectCreation";
+        internal const string RoutePrefix = "projectCreation";
 
         public static string Index() { return $"/{RoutePrefix}"; }
     }

@@ -13,7 +13,7 @@ namespace Lucid.Modules.Temp.Tests.Child
         public async Task Index()
         {
             var response = await MvcTestingClient()
-                .GetAsync("/temp/child");
+                .GetAsync(Temp.Child.Actions.Index());
 
             response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
             response.Text.Should().Contain("precompiled child");

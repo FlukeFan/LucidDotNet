@@ -32,7 +32,7 @@ namespace Lucid.Infrastructure.Host.Web.Tests
                 .SetupTestServer<TestStartup>()
                 .MvcTestingClient();
 
-            var response = await client.GetAsync("/temp");
+            var response = await client.GetAsync(Modules.Temp.Actions.Index());
 
             response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
             response.LastResult.Should().BeOfType<ViewResult>();
