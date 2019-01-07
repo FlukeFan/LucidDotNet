@@ -20,7 +20,6 @@
     <FilesToZip Include="..\..\..\**\*.asax" />
     <FilesToZip Include="..\..\..\**\*.config" />
     <FilesToZip Include="..\..\..\**\favicon.ico" />
-    <FilesToZip Remove="..\..\..\pre_core\**" />
     <FilesToZip Remove="..\..\..\.*\**" />
     <FilesToZip Remove="..\..\..\**\bin\**" />
     <FilesToZip Remove="..\..\..\**\obj\**" />
