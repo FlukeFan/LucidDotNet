@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing;
@@ -16,6 +17,17 @@ namespace Lucid.Modules.Temp.Tests
 
             response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
             response.Text.Should().Contain("precompiled");
+        }
+
+        [Test]
+        public async Task Login()
+        {
+            var client = MvcTestingClient();
+
+            var response = await client
+                .GetAsync(Actions.Login());
+
+            client.Cookies.Select(c => c.Name).Should().Contain(TestStartup.AuthCookieName);
         }
     }
 }

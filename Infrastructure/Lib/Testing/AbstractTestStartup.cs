@@ -9,7 +9,7 @@ namespace Lucid.Infrastructure.Lib.Testing
 {
     public abstract class AbstractTestStartup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public virtual void ConfigureServices(IServiceCollection services)
         {
             services
                 .AddSingleton<IRazorPageActivator, CustomRazorPageActivator>()
@@ -23,7 +23,7 @@ namespace Lucid.Infrastructure.Lib.Testing
                 .ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
         }
 
-        public void Configure(IApplicationBuilder app)
+        public virtual void Configure(IApplicationBuilder app)
         {
             app.UseMvc();
         }

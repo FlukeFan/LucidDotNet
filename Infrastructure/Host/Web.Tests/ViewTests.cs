@@ -1,9 +1,11 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using MvcTesting.AspNetCore;
 using NUnit.Framework;
 
@@ -46,6 +48,9 @@ namespace Lucid.Infrastructure.Host.Web.Tests
             {
                 base.ConfigureMvcOptions(mvcOptions);
                 mvcOptions.Filters.Add<CaptureResultFilter>();
+
+                // remove authorization filter for testing
+                mvcOptions.Filters.Remove(mvcOptions.Filters.Where(f => typeof(AuthorizeFilter).IsAssignableFrom(f.GetType())).Single());
             }
         }
     }

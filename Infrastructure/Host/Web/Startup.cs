@@ -4,9 +4,11 @@ using System.Threading.Tasks;
 using Lucid.Infrastructure.Host.Web.Layout;
 using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using MvcForms;
@@ -43,11 +45,19 @@ namespace Lucid.Infrastructure.Host.Web
             {
                 mvc.ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
             }
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(o =>
+                {
+                    o.Cookie.Name = "AuthCookie";
+                    o.LoginPath = Modules.Temp.Actions.Login();
+                });
         }
 
         protected virtual void ConfigureMvcOptions(MvcOptions mvcOptions)
         {
             mvcOptions.Filters.Add(new FeatureFolderViewFilter());
+            mvcOptions.Filters.Add(new AuthorizeFilter());
 
             if (_env.IsDevelopment())
                 mvcOptions.Filters.Add(new MvcAppPageResultFilter(true));
@@ -58,6 +68,8 @@ namespace Lucid.Infrastructure.Host.Web
             app.UseZipDeploy(opt => opt
                 .UseIisUrl("https://lucid.rgbco.uk")
                 .UseIsBinary(f => ZipDeployOptions.DefaultIsBinary(f) || Path.GetFileName(f) == "nlog.config"));
+
+            app.UseAuthentication();
 
             if (_env.IsDevelopment())
             {
