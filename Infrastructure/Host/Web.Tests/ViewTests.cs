@@ -18,6 +18,8 @@ namespace Lucid.Infrastructure.Host.Web.Tests
         [Test]
         public async Task CanSeeModuleViews()
         {
+            TestContext.Progress.WriteLine($"*** IsRunningInAppVeyor={System.Environment.GetEnvironmentVariable("IsRunningInAppVeyor")} ***");
+
             var client = TestRegistry
                 .SetupTestServer<TestStartup>()
                 .MvcTestingClient();
