@@ -10,8 +10,8 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
         {
             var isRunningInAppVeyor = config.GetSection("IsRunningInAppVeyor").Value != null;
             var sqlServerSettings = config.GetSection("SqlServer");
-            _dbConfig = GetConfig(isDevelopment, isRunningInAppVeyor);
 
+            _dbConfig = GetConfig(isDevelopment, isRunningInAppVeyor);
             _dbConfig.CreateDb();
         }
 
