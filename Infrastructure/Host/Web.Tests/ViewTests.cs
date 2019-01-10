@@ -52,6 +52,8 @@ namespace Lucid.Infrastructure.Host.Web.Tests
 
                 // remove authorization filter for testing
                 mvcOptions.Filters.Remove(mvcOptions.Filters.Where(f => typeof(AuthorizeFilter).IsAssignableFrom(f.GetType())).Single());
+
+                TestContext.Progress.WriteLine($"IsRunningInAppVeyor={System.Environment.GetEnvironmentVariable("IsRunningInAppVeyor")}");
             }
         }
     }
