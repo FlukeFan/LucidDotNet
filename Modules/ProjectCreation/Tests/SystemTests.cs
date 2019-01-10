@@ -90,10 +90,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
                     // ensure any environment variables are copied to sub-process (e.g., AppVeyor specific variables)
                     var envVars = Environment.GetEnvironmentVariables();
                     foreach (DictionaryEntry envVar in envVars)
-                    {
-                        process.StartInfo.Environment[(string)envVar.Key] = (string)envVar.Value;
-                        TestContext.Progress.WriteLine($"Copying environment variable: {envVar.Key}={envVar.Value}");
-                    }
+                        process.StartInfo.EnvironmentVariables.Add((string)envVar.Key, (string)envVar.Value);
 
                     TestContext.Progress.WriteLine($"Running {process.StartInfo.FileName} {process.StartInfo.Arguments} (in {process.StartInfo.WorkingDirectory})");
 
