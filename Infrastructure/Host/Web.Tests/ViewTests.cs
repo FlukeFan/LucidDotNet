@@ -6,6 +6,7 @@ using Lucid.Infrastructure.Lib.Testing;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Logging;
 using MvcTesting.AspNetCore;
 using NUnit.Framework;
 
@@ -42,7 +43,7 @@ namespace Lucid.Infrastructure.Host.Web.Tests
 
         public class TestStartup : Startup
         {
-            public TestStartup(IHostingEnvironment env) : base(env) { }
+            public TestStartup(IHostingEnvironment env, ILogger<Startup> log) : base(env, log) { }
 
             protected override void ConfigureMvcOptions(MvcOptions mvcOptions)
             {
