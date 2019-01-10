@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Lucid.Infrastructure.Host.Web.Layout;
+using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvcForms;
@@ -68,11 +70,13 @@ namespace Lucid.Infrastructure.Host.Web
                 mvcOptions.Filters.Add(new MvcAppPageResultFilter(true));
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IConfiguration config)
         {
             app.UseZipDeploy(opt => opt
                 .UseIisUrl("https://lucid.rgbco.uk")
                 .UseIsBinary(f => ZipDeployOptions.DefaultIsBinary(f) || Path.GetFileName(f) == "nlog.config"));
+
+            SqlServer.Startup(_env.IsDevelopment(), config);
 
             app.UseAuthentication();
 
