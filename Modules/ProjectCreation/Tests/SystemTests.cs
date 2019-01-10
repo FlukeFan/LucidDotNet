@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -88,8 +89,8 @@ namespace Lucid.Modules.ProjectCreation.Tests
 
                     // ensure any environment variables are copied to sub-process (e.g., AppVeyor specific variables)
                     var envVars = Environment.GetEnvironmentVariables();
-                    foreach (string envVar in envVars)
-                        process.StartInfo.Environment[envVar] = (string)envVars[envVar];
+                    foreach (DictionaryEntry envVar in envVars)
+                        process.StartInfo.Environment[(string)envVar.Key] = (string)envVar.Value;
 
                     TestContext.Progress.WriteLine($"Running {process.StartInfo.FileName} {process.StartInfo.Arguments} (in {process.StartInfo.WorkingDirectory})");
 
