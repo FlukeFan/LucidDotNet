@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MvcForms;
 using MvcForms.Styles.Bootstrap;
 using ZipDeploy;
@@ -20,10 +21,14 @@ namespace Lucid.Infrastructure.Host.Web
     public class Startup
     {
         private IHostingEnvironment _env;
+        private ILogger             _log;
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, ILogger<Startup> log)
         {
             _env = env;
+            _log = log;
+
+            _log.LogInformation($"Startup environment: {_env.EnvironmentName}");
         }
 
         public void ConfigureServices(IServiceCollection services)
