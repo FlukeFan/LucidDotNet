@@ -65,7 +65,7 @@
 
   <ItemGroup>
     <BundleMinifyInputs Include="../../Lib/MvcApp/bin/content/**/*.css" />
-    <BundleMinifyInputs Include="../../Lib/MvcApp/bin/content/**/*.css" />
+    <BundleMinifyInputs Include="../../Lib/MvcApp/wwwroot/**/*.css" />
     <BundleMinifyInputs Include="Content/web.css" />
   </ItemGroup>
 

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Watch Include="**\*.cs" />
+    <Watch Include="**\*.css" />
     <Watch Include="**\*.scss" />
     <Watch Include="**\*.js" />
     <Watch Remove="**\wwwroot\js\*.*" />
