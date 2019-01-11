@@ -4,6 +4,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RunBundleMinify>False</RunBundleMinify>
+    <RunWebCompiler>False</RunWebCompiler>
   </PropertyGroup>
 
   <ItemGroup>
@@ -45,6 +47,36 @@
   <Target Name="ReenableIisExpress" AfterTargets="Build" Condition="Exists('./App_Offline.htm')">
     <Message Importance="High" Text="Enable site (delete App_Offline.htm)" />
     <Delete Files=".\App_Offline.htm" />
+  </Target>
+
+  <ItemGroup>
+    <WebCompileInputs Include="Content/web.scss" />
+  </ItemGroup>
+
+  <Target Name="WebCompileCustom" BeforeTargets="BundleMinify;BeforeCompile" Inputs="@(WebCompileInputs)" Outputs="bin/webCompile.flg">
+    <WebCompiler.CompilerBuildTask FileName="$(MSBuildProjectDirectory)\compilerconfig.json" />
+    <Touch Files="bin/webCompile.flg" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="WebCompileCleanCustom" AfterTargets="CoreClean">
+    <WebCompiler.CompilerCleanTask FileName="$(MSBuildProjectDirectory)\compilerconfig.json" />
+    <Delete Files="bin/webCompile.flg" />
+  </Target>
+
+  <ItemGroup>
+    <BundleMinifyInputs Include="../../Lib/MvcApp/bin/content/**/*.css" />
+    <BundleMinifyInputs Include="../../Lib/MvcApp/bin/content/**/*.css" />
+    <BundleMinifyInputs Include="Content/web.css" />
+  </ItemGroup>
+
+  <Target Name="BundleMinifyCustom" AfterTargets="CompileTypeScriptWithTSConfig" BeforeTargets="BeforeCompile" Inputs="@(BundleMinifyInputs)" Outputs="bin/bundleMinify.flg">
+    <BundlerMinifier.BundlerBuildTask FileName="$(MSBuildProjectDirectory)\bundleconfig.json" />
+    <Touch Files="bin/bundleMinify.flg" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="BundleMinifyCleanCustom" AfterTargets="CoreClean">
+    <BundlerMinifier.BundlerCleanTask FileName="$(MSBuildProjectDirectory)\bundleconfig.json" />
+    <Delete Files="bin/bundleMinify.flg" />
   </Target>
 
 </Project>
