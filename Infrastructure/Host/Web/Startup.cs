@@ -76,7 +76,7 @@ namespace Lucid.Infrastructure.Host.Web
                 .UseIisUrl("https://lucid.rgbco.uk")
                 .UseIsBinary(f => ZipDeployOptions.DefaultIsBinary(f) || Path.GetFileName(f) == "nlog.config"));
 
-            SqlServer.Startup(_env.IsDevelopment(), config);
+            SqlServer.Startup(_env, config);
 
             app.UseAuthentication();
 

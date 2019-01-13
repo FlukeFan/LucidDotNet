@@ -2,9 +2,10 @@
 {
     public class DbConfigProduction : DbConfig
     {
-        public override void CreateDb()
+        protected override bool CanCreateDb()
         {
-            // do nothing - production DB will already exist
+            // production DB will always already exist
+            return false;
         }
     }
 }

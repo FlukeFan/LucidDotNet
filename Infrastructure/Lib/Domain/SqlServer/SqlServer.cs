@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace Lucid.Infrastructure.Lib.Domain.SqlServer
 {
@@ -6,21 +7,22 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
     {
         private static DbConfig _dbConfig;
 
-        public static void Startup(bool isDevelopment, IConfiguration config)
+        public static void Startup(IHostingEnvironment env, IConfiguration config, params Schema[] schemas)
         {
             var isRunningInAppVeyor = config.GetSection("IsRunningInAppVeyor").Value != null;
+            var isDevelopmentMachine = !isRunningInAppVeyor && (env.IsDevelopment() || env.IsEnvironment("Testing"));
             var sqlServerSettings = config.GetSection("SqlServer");
 
-            _dbConfig = GetConfig(isDevelopment, isRunningInAppVeyor);
-            _dbConfig.CreateDb();
+            _dbConfig = GetConfig(isDevelopmentMachine, isRunningInAppVeyor);
+            _dbConfig.CreateDb(schemas);
         }
 
-        private static DbConfig GetConfig(bool isDevelopment, bool isAppVeyor)
+        public static DbConfig GetConfig(bool isDevelopmentMachine, bool isAppVeyor)
         {
             if (isAppVeyor)
                 return new DbConfigAppVeyor();
 
-            if (isDevelopment)
+            if (isDevelopmentMachine)
                 return new DbConfigDocker();
 
             return new DbConfigProduction();
