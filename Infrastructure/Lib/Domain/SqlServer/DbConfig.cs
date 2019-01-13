@@ -11,17 +11,18 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
 
         public virtual void CreateDb(params Schema[] schemas)
         {
-            var connectionString = MasterConnectionString();
-
-            using (var cn = new SqlConnection(connectionString))
+            if (CanCreateDb())
             {
-                cn.Open();
+                var connectionString = MasterConnectionString();
 
-                if (CanCreateDb())
+                using (var cn = new SqlConnection(connectionString))
+                {
+                    cn.Open();
                     CreateDb(cn);
 
-                foreach (var schema in schemas)
-                    CreateSchema(cn, schema);
+                    foreach (var schema in schemas)
+                        CreateSchema(cn, schema);
+                }
             }
         }
 
