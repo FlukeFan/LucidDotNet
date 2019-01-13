@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <Import Project="..\..\..\Build\common.targets" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Lib\Domain\Lucid.Infrastructure.Lib.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Lib\MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj" />
+  </ItemGroup>
+
+</Project>

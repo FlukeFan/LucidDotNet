@@ -3,6 +3,7 @@
   <Import Project="..\Build\common.build.proj" />
 
   <ItemGroup>
+    <ProjectsToBuild Include="Account\build.proj" />
     <ProjectsToBuild Include="ProjectCreation\build.proj" />
     <ProjectsToBuild Include="Temp\build.proj" />
   </ItemGroup>

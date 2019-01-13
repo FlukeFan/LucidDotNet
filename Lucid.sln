@@ -68,11 +68,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.Temp", "Modul
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.Temp.Tests", "Modules\Temp\Tests\Lucid.Modules.Temp.Tests.csproj", "{107E1C49-2D88-44EC-9057-42AC34D08E16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Infrastructure.Lib.MvcApp.Tests", "Infrastructure\Lib\MvcApp.Tests\Lucid.Infrastructure.Lib.MvcApp.Tests.csproj", "{44B2CB31-3F0C-4108-8E5B-58D85E677C02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.MvcApp.Tests", "Infrastructure\Lib\MvcApp.Tests\Lucid.Infrastructure.Lib.MvcApp.Tests.csproj", "{44B2CB31-3F0C-4108-8E5B-58D85E677C02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Infrastructure.Lib.Facade", "Infrastructure\Lib\Facade\Lucid.Infrastructure.Lib.Facade.csproj", "{B8A7348D-B678-489B-847D-D4226D44B66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Facade", "Infrastructure\Lib\Facade\Lucid.Infrastructure.Lib.Facade.csproj", "{B8A7348D-B678-489B-847D-D4226D44B66A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Infrastructure.Lib.Domain", "Infrastructure\Lib\Domain\Lucid.Infrastructure.Lib.Domain.csproj", "{278D3B89-7D55-4FAE-A3F4-ABEE17257308}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Domain", "Infrastructure\Lib\Domain\Lucid.Infrastructure.Lib.Domain.csproj", "{278D3B89-7D55-4FAE-A3F4-ABEE17257308}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Account", "Account", "{278F2112-9252-4D71-BD27-A0DAF59D4C2C}"
+	ProjectSection(SolutionItems) = preProject
+		Modules\Account\build.proj = Modules\Account\build.proj
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.Account", "Modules\Account\Module\Lucid.Modules.Account.csproj", "{D21B6119-CC47-4199-96B3-DF084470B2F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.Account.Tests", "Modules\Account\Tests\Lucid.Modules.Account.Tests.csproj", "{43622633-2FB7-4DC4-9A23-0312BBC8B84B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -228,6 +237,30 @@ Global
 		{278D3B89-7D55-4FAE-A3F4-ABEE17257308}.Release|x64.Build.0 = Release|Any CPU
 		{278D3B89-7D55-4FAE-A3F4-ABEE17257308}.Release|x86.ActiveCfg = Release|Any CPU
 		{278D3B89-7D55-4FAE-A3F4-ABEE17257308}.Release|x86.Build.0 = Release|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Debug|x64.Build.0 = Debug|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Debug|x86.Build.0 = Debug|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Release|x64.ActiveCfg = Release|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Release|x64.Build.0 = Release|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Release|x86.ActiveCfg = Release|Any CPU
+		{D21B6119-CC47-4199-96B3-DF084470B2F8}.Release|x86.Build.0 = Release|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Debug|x64.Build.0 = Debug|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Debug|x86.Build.0 = Debug|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Release|x64.ActiveCfg = Release|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Release|x64.Build.0 = Release|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Release|x86.ActiveCfg = Release|Any CPU
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -249,6 +282,9 @@ Global
 		{44B2CB31-3F0C-4108-8E5B-58D85E677C02} = {C5979DA4-1E3E-4344-9BB1-1F103A17C811}
 		{B8A7348D-B678-489B-847D-D4226D44B66A} = {C5979DA4-1E3E-4344-9BB1-1F103A17C811}
 		{278D3B89-7D55-4FAE-A3F4-ABEE17257308} = {C5979DA4-1E3E-4344-9BB1-1F103A17C811}
+		{278F2112-9252-4D71-BD27-A0DAF59D4C2C} = {43B44B4F-BCC4-412C-9664-C749BDC57565}
+		{D21B6119-CC47-4199-96B3-DF084470B2F8} = {278F2112-9252-4D71-BD27-A0DAF59D4C2C}
+		{43622633-2FB7-4DC4-9A23-0312BBC8B84B} = {278F2112-9252-4D71-BD27-A0DAF59D4C2C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27488AA5-5058-4F4D-A53B-1E0907BD5009}
