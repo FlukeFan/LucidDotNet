@@ -70,7 +70,7 @@ namespace Lucid.Infrastructure.Host.Web
                 mvcOptions.Filters.Add(new MvcAppPageResultFilter(true));
         }
 
-        public void Configure(IApplicationBuilder app, IConfiguration config)
+        public void Configure(IApplicationBuilder app, IConfiguration config, ILoggerFactory loggerFactory)
         {
             app.UseZipDeploy(opt => opt
                 .UseIisUrl("https://lucid.rgbco.uk")
@@ -92,6 +92,8 @@ namespace Lucid.Infrastructure.Host.Web
 
             Task.WaitAll(
                 Modules.ProjectCreation.Registry.StartupAsync());
+
+            loggerFactory.CreateLogger("SystemAlert").LogInformation("Startup complete");
         }
     }
 
