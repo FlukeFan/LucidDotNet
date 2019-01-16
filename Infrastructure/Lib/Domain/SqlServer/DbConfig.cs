@@ -51,33 +51,49 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
         {
             using (var cmd = cn.CreateCommand())
             {
-                cmd.CommandText = $"SELECT name FROM sys.schemas";
-                var existingSchemas = new List<string>();
-
-                using (var reader = cmd.ExecuteReader())
-                    while (reader.Read())
-                        existingSchemas.Add(((string)reader[0]).ToLower());
+                var existingSchemas = SelectString(cmd, $"SELECT name FROM sys.schemas");
+                var existingLogins = SelectString(cmd, $"SELECT name FROM sys.sql_logins");
 
                 foreach (var schema in schemas)
-                    CreateSchema(cmd, existingSchemas, schema);
+                    CreateSchema(cmd, existingSchemas, existingLogins, schema);
             }
         }
 
-        private void CreateSchema(SqlCommand cmd, IList<string> existingSchemas, Schema schema)
+        private void CreateSchema(SqlCommand cmd, IList<string> existingSchemas, IList<string> existingLogins, Schema schema)
         {
             if (!existingSchemas.Contains(schema.Name.ToLower()))
             {
-                cmd.CommandText = $"CREATE LOGIN[{DbName()}_{schema.Name}] WITH PASSWORD = N'Password12!', DEFAULT_DATABASE =[{DbName()}]";
+                var login = $"{DbName()}_{schema.Name}";
+
+                if (existingLogins.Contains(login.ToLower()))
+                {
+                    cmd.CommandText = $"DROP LOGIN [{login}]";
+                    cmd.ExecuteNonQuery();
+                }
+
+                cmd.CommandText = $"CREATE LOGIN[{login}] WITH PASSWORD = N'Password12!', DEFAULT_DATABASE =[{DbName()}]";
                 cmd.ExecuteNonQuery();
 
-                cmd.CommandText = $"CREATE USER[{DbName()}_{schema.Name}] FOR LOGIN[{DbName()}_{schema.Name}] WITH DEFAULT_SCHEMA =[{schema.Name}]";
+                cmd.CommandText = $"CREATE USER[{login}] FOR LOGIN[{login}] WITH DEFAULT_SCHEMA =[{schema.Name}]";
                 cmd.ExecuteNonQuery();
 
-                cmd.CommandText = $"CREATE SCHEMA[{schema.Name}] AUTHORIZATION[{DbName()}_{schema.Name}]";
+                cmd.CommandText = $"CREATE SCHEMA[{schema.Name}] AUTHORIZATION[{login}]";
                 cmd.ExecuteNonQuery();
             }
 
             schema.ConnectionString = SchemaConnectionString(schema.Name);
+        }
+
+        private IList<string> SelectString(SqlCommand cmd, string sql)
+        {
+            var items = new List<string>();
+            cmd.CommandText = sql;
+
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    items.Add(((string)reader[0]).ToLower());
+
+            return items;
         }
     }
 }
