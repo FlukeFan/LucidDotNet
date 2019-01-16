@@ -11,7 +11,7 @@ namespace Lucid.Modules.Account.Tests
         {
             // need to figure out if anything has changed, and if it hasn't, skip remainder of the DB setup
 
-            SqlTestUtil.DropAll();
+            SqlTestUtil.DropAll("Account");
         }
     }
 }
