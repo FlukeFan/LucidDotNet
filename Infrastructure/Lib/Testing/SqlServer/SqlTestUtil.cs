@@ -1,12 +1,38 @@
 ﻿using System;
 using System.Data.SqlClient;
+using FluentMigrator.Runner;
+using FluentMigrator.Runner.Initialization;
+using FluentMigrator.Runner.Processors;
 using Lucid.Infrastructure.Lib.Domain.SqlServer;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 
 namespace Lucid.Infrastructure.Lib.Testing.SqlServer
 {
     public class SqlTestUtil
     {
+        public static void UpdateMigrations<TFromMigrationAssembly>()
+        {
+            var runnerOptions = new RunnerOptions();
+            var processorOptions = new ProcessorOptions();
+
+            var runner = new MigrationRunner(
+                Options.Create(runnerOptions),
+                MigrationUtil.OptionsSnapshot.Create(processorOptions),
+                null,
+                MigrationUtil.ProcessorAccessor.Create(null),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+            runner.MigrateUp();
+        }
+
         public static void DropAll(string schemaName)
         {
             var dbConfig = Domain.SqlServer.SqlServer.GetConfig(true, Environment.GetEnvironmentVariable("IsRunningInAppVeyor") != null);
