@@ -31,7 +31,6 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
                 var sql = @"
                     declare @n char(1)
                     set @n = char(10)
-
                     declare @stmt nvarchar(max)
 
                     -- procedures
@@ -39,10 +38,9 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
                         'drop procedure [' + schema_name(schema_id) + '].[' + name + ']'
                     from sys.procedures
 
-
                     -- check constraints
                     select @stmt = isnull( @stmt + @n, '' ) +
-                    'alter table [' + schema_name(schema_id) + '].[' + object_name( parent_object_id ) + ']    drop constraint [' + name + ']'
+                        'alter table [' + schema_name(schema_id) + '].[' + object_name( parent_object_id ) + ']    drop constraint [' + name + ']'
                     from sys.check_constraints
 
                     -- functions
@@ -71,7 +69,6 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
                         'drop type [' + schema_name(schema_id) + '].[' + name + ']'
                     from sys.types
                     where is_user_defined = 1
-
 
                     exec sp_executesql @stmt";
 
