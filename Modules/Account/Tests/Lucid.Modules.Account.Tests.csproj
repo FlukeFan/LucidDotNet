@@ -5,7 +5,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <DebugType>full</DebugType>
-    <CoverageTarget>30</CoverageTarget><!-- until we get migration test passing -->
   </PropertyGroup>
 
   <ItemGroup>

@@ -79,6 +79,9 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
 
                 cmd.CommandText = $"CREATE SCHEMA[{schema.Name}] AUTHORIZATION[{login}]";
                 cmd.ExecuteNonQuery();
+
+                cmd.CommandText = $"GRANT CREATE TABLE TO [{login}]";
+                cmd.ExecuteNonQuery();
             }
 
             schema.ConnectionString = SchemaConnectionString(schema.Name);

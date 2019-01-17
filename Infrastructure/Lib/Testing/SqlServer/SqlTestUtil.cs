@@ -1,39 +1,40 @@
 ﻿using System;
 using System.Data.SqlClient;
 using FluentMigrator.Runner;
-using FluentMigrator.Runner.Initialization;
-using FluentMigrator.Runner.Processors;
+using FluentMigrator.Runner.Conventions;
 using Lucid.Infrastructure.Lib.Domain.SqlServer;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 
 namespace Lucid.Infrastructure.Lib.Testing.SqlServer
 {
     public class SqlTestUtil
     {
-        public static void UpdateMigrations<TFromMigrationAssembly>()
+        public static void UpdateMigrations<TFromMigrationAssembly>(Schema schema)
         {
-            var runnerOptions = new RunnerOptions();
-            var processorOptions = new ProcessorOptions();
+            var serviceCollection = new ServiceCollection();
+            var serviceProvider = serviceCollection
+                .AddFluentMigratorCore()
+                .ConfigureRunner(mrb =>
+                {
+                    mrb.AddSqlServer2016();
+                    mrb.ScanIn(typeof(TFromMigrationAssembly).Assembly).For.Migrations();
+                    mrb.WithGlobalConnectionString(schema.ConnectionString);
+                    mrb.WithVersionTable(new MigrationUtil.SchemaVersionTable(schema.Name));
+                })
+                .AddScoped<IConventionSet>(sp => new DefaultConventionSet(schema.Name, null))
+                .AddLogging(lb => lb.Services.AddSingleton<ILoggerProvider, MigrationUtil.NUnitLoggerProvider>())
+                .BuildServiceProvider(false);
 
-            var runner = new MigrationRunner(
-                Options.Create(runnerOptions),
-                MigrationUtil.OptionsSnapshot.Create(processorOptions),
-                null,
-                MigrationUtil.ProcessorAccessor.Create(null),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-
-            runner.MigrateUp();
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+                runner.MigrateUp();
+            }
         }
 
-        public static void DropAll(string schemaName)
+        public static Schema DropAll(string schemaName)
         {
             var dbConfig = Domain.SqlServer.SqlServer.GetConfig(true, Environment.GetEnvironmentVariable("IsRunningInAppVeyor") != null);
             var schema = new Schema { Name = schemaName };
@@ -46,6 +47,8 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
                 cn.Open();
                 DropAllItems(cn);
             }
+
+            return schema;
         }
 
         private static void DropAllItems(SqlConnection cn)

@@ -1,31 +1,61 @@
-﻿using FluentMigrator;
-using FluentMigrator.Runner.Processors;
-using Microsoft.Extensions.Options;
+﻿using System;
+using FluentMigrator.Runner;
+using FluentMigrator.Runner.Logging;
+using FluentMigrator.Runner.VersionTableInfo;
+using Microsoft.Extensions.Logging;
+using NUnit.Framework;
 
 namespace Lucid.Infrastructure.Lib.Testing.SqlServer
 {
     public class MigrationUtil
     {
-        public class OptionsSnapshot
+        public class SchemaVersionTable : IVersionTableMetaData
         {
-            public static IOptionsSnapshot<T> Create<T>(T options) where T : class, new()
+            private string _schemaName;
+
+            public SchemaVersionTable(string schemaName)
             {
-                return new OptionsSnapshot<T>(options);
+                _schemaName = schemaName;
+            }
+
+            public bool OwnsSchema => true;
+            public string ColumnName => "Version";
+            public string SchemaName => _schemaName;
+            public string TableName => "VersionInfo";
+            public string UniqueIndexName => "UC_Version";
+            public string AppliedOnColumnName => "AppliedOn";
+            public string DescriptionColumnName => "Description";
+            public object ApplicationContext { get; set; }
+        }
+
+        public class NUnitLoggerProvider : ILoggerProvider
+        {
+            public ILogger CreateLogger(string categoryName)
+            {
+                return new NUnitLogger();
+            }
+
+            public void Dispose()
+            {
             }
         }
 
-        public class OptionsSnapshot<T> : OptionsWrapper<T>, IOptionsSnapshot<T> where T : class, new()
+        public class NUnitLogger : FluentMigratorRunnerLogger
         {
-            public OptionsSnapshot(T options) : base(options) { }
-        }
+            protected override void WriteHeading(string message) { WriteLine($"Heading: {message}"); }
+            protected override void WriteElapsedTime(TimeSpan timeSpan) { WriteLine($"Elapsed Time: {timeSpan}"); }
+            protected override void WriteEmphasize(string message) { WriteLine($"Emphasize: {message}"); }
+            protected override void WriteEmptySql() { WriteLine($"Empty SQL"); }
+            protected override void WriteError(Exception exception) { WriteLine($"Error: {exception}"); }
+            protected override void WriteError(string message) { WriteLine($"Error: {message}"); }
+            protected override void WriteSay(string message) { WriteLine($"Say: {message}"); }
+            protected override void WriteSql(string sql) { WriteLine($"SQL: {sql}"); }
 
-        public class ProcessorAccessor : IProcessorAccessor
-        {
-            public IMigrationProcessor Processor { get; set; }
+            public NUnitLogger() : base(Console.Out, Console.Error, new FluentMigratorLoggerOptions()) { }
 
-            public static ProcessorAccessor Create(IMigrationProcessor processor)
+            private void WriteLine(string line)
             {
-                return new ProcessorAccessor { Processor = processor };
+                TestContext.Progress.WriteLine(line);
             }
         }
     }
