@@ -12,7 +12,7 @@ namespace Lucid.Modules.Account.Tests
             // need to figure out if anything has changed, and if it hasn't, skip remainder of the DB setup
 
             var schema = SqlTestUtil.DropAll("Account");
-            SqlTestUtil.UpdateMigrations<DbMigrations.V001.Build000>(schema);
+            SqlTestUtil.UpdateMigrations<DbMigrations.V001.V000.Script000>(schema);
         }
     }
 }

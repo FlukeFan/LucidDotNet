@@ -19,6 +19,7 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
                 .ConfigureRunner(mrb =>
                 {
                     mrb.AddSqlServer2016();
+                    mrb.ScanIn(typeof(BeforeAll).Assembly).For.Migrations();
                     mrb.ScanIn(typeof(TFromMigrationAssembly).Assembly).For.Migrations();
                     mrb.WithGlobalConnectionString(schema.ConnectionString);
                     mrb.WithVersionTable(new MigrationUtil.SchemaVersionTable(schema.Name));
@@ -30,6 +31,7 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
             using (var scope = serviceProvider.CreateScope())
             {
                 var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+                runner.MigrateUp();
                 runner.MigrateUp();
             }
         }
