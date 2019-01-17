@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 
@@ -24,7 +25,7 @@ namespace Build.BuildUtil
             var actualLineCoverage = double.Parse(lineCoverageText);
 
             if (actualLineCoverage < targetPercentage)
-                throw new Exception($"Expected at least {targetPercentage}% coverage, only got {actualLineCoverage}% coverage");
+                throw new Exception($"Expected at least {targetPercentage}% coverage, only got {actualLineCoverage}% coverage in {Path.GetFullPath(coverageFile)}");
 
             UsingConsoleColor(ConsoleColor.Green, () => Console.WriteLine($"Coverage of {actualLineCoverage}% is greater than target of {targetPercentage}% "));
         }

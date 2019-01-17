@@ -14,7 +14,7 @@ namespace Build.BuildUtil
             }
             catch (Exception e)
             {
-                UsingConsoleColor(ConsoleColor.Red, () => Console.Error.WriteLine(e.Message));
+                UsingConsoleColor(ConsoleColor.Red, () => Console.Error.WriteLine($"***** {e.Message} ***** ({Environment.CurrentDirectory})"));
                 Console.Error.WriteLine(e);
                 Environment.Exit(1);
             }
