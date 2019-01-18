@@ -1,7 +1,6 @@
 ﻿using System;
 using FluentMigrator.Runner;
 using FluentMigrator.Runner.Logging;
-using FluentMigrator.Runner.VersionTableInfo;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 
@@ -9,23 +8,6 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
 {
     public class MigrationUtil
     {
-        public class SchemaVersionTable : IVersionTableMetaData
-        {
-            public SchemaVersionTable(string schemaName)
-            {
-                SchemaName = schemaName;
-            }
-
-            public bool     OwnsSchema              => true;
-            public string   ColumnName              => "Version";
-            public string   SchemaName              { get; }
-            public string   TableName               => "VersionInfo";
-            public string   UniqueIndexName         => "UC_Version";
-            public string   AppliedOnColumnName     => "AppliedOn";
-            public string   DescriptionColumnName   => "Description";
-            public object   ApplicationContext      { get; set; }
-        }
-
         public class NUnitLoggerProvider : ILoggerProvider
         {
             public ILogger CreateLogger(string categoryName) { return new NUnitLogger(); }

@@ -19,10 +19,9 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
                 .ConfigureRunner(mrb =>
                 {
                     mrb.AddSqlServer2016();
-                    mrb.ScanIn(typeof(BeforeAll).Assembly).For.Migrations();
-                    mrb.ScanIn(typeof(TFromMigrationAssembly).Assembly).For.Migrations();
+                    mrb.ScanIn(typeof(TFromMigrationAssembly).Assembly).For.All();
                     mrb.WithGlobalConnectionString(schema.ConnectionString);
-                    mrb.WithVersionTable(new MigrationUtil.SchemaVersionTable(schema.Name));
+                    mrb.WithVersionTable(new SchemaVersionMetadata(schema.Name));
                 })
                 .AddScoped<IConventionSet>(sp => new DefaultConventionSet(schema.Name, null))
                 .AddLogging(lb => lb.Services.AddSingleton<ILoggerProvider, MigrationUtil.NUnitLoggerProvider>())

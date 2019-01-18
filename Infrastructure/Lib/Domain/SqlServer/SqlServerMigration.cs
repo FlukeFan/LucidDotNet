@@ -23,18 +23,4 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
             return builder.WithColumn(columnName).AsInt32().PrimaryKey("PK_" + tableName + "_" + columnName).Identity();
         }
     }
-
-    [Maintenance(MigrationStage.BeforeAll)]
-    [Migration(0)]
-    public class BeforeAll : Migration
-    {
-        public override void Up()
-        {
-            // remove from version table any migrations that are WIP
-        }
-
-        public override void Down()
-        {
-        }
-    }
 }
