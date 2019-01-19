@@ -19,13 +19,13 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
             protected override void WriteHeading(string message)        { WriteLine($"\nFM: {message}\nFM: {new string('-', message.Length)}"); }
             protected override void WriteElapsedTime(TimeSpan timeSpan) { WriteLine($"FM: Elapsed Time = {timeSpan}"); }
             protected override void WriteEmphasize(string message)      { WriteLine($"FM: *** {message} ***"); }
-            protected override void WriteEmptySql()                     { WriteLine($"FM: "); }
+            protected override void WriteEmptySql()                     { WriteLine($"FM: -- no sql --"); }
             protected override void WriteError(Exception exception)     { WriteLine($"FM: Error - {exception}"); }
             protected override void WriteError(string message)          { WriteLine($"FM: Error - {message}"); }
             protected override void WriteSay(string message)            { WriteLine($"FM: {message}"); }
             protected override void WriteSql(string sql)                { WriteLine($"FM: SQL ({sql})"); }
 
-            public NUnitLogger() : base(Console.Out, Console.Error, new FluentMigratorLoggerOptions()) { }
+            public NUnitLogger() : base(Console.Out, Console.Error, new FluentMigratorLoggerOptions { ShowSql = true }) { }
 
             private void WriteLine(string line)
             {

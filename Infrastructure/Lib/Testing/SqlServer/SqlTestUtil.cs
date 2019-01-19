@@ -24,13 +24,22 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
                     mrb.WithVersionTable(new SchemaVersionMetadata(schema.Name));
                 })
                 .AddScoped<IConventionSet>(sp => new DefaultConventionSet(schema.Name, null))
-                .AddLogging(lb => lb.Services.AddSingleton<ILoggerProvider, MigrationUtil.NUnitLoggerProvider>())
+                .AddLogging(lb =>
+                {
+                    lb.SetMinimumLevel(LogLevel.Trace);
+                    lb.Services.AddSingleton<ILoggerProvider, MigrationUtil.NUnitLoggerProvider>();
+                })
                 .BuildServiceProvider(false);
 
+            RunMigrations(serviceProvider);
+            RunMigrations(serviceProvider);
+        }
+
+        private static void RunMigrations(ServiceProvider serviceProvider)
+        {
             using (var scope = serviceProvider.CreateScope())
             {
                 var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
-                runner.MigrateUp();
                 runner.MigrateUp();
             }
         }
