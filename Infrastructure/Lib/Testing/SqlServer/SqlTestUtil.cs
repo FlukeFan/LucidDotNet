@@ -24,6 +24,7 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
                     mrb.WithVersionTable(new SchemaVersionMetadata(schema.Name));
                 })
                 .AddScoped<IConventionSet>(sp => new DefaultConventionSet(schema.Name, null))
+                .AddScoped<DbQuery>(sp => new DbQuery(schema.ConnectionString, schema.Name))
                 .AddLogging(lb =>
                 {
                     lb.SetMinimumLevel(LogLevel.Trace);
