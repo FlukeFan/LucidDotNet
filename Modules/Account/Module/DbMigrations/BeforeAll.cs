@@ -21,10 +21,10 @@ namespace Lucid.Modules.Account.DbMigrations
         public override void Up()
         {
             var versionsInfo = GetVersionsInfo();
-            RerunWorkInProgressMigration<V001.V000.Script000>(versionsInfo);
+            RemoveFromVersions<V001.V000.Script000>(versionsInfo);
         }
 
-        protected void RerunWorkInProgressMigration<T>(ExistingVersionsInfo versionsInfo)
+        protected void RemoveFromVersions<T>(ExistingVersionsInfo versionsInfo)
         {
             var migrationAttribute = (MigrationAttribute)typeof(T).GetCustomAttributes(true).SingleOrDefault(a => typeof(MigrationAttribute).IsAssignableFrom(a.GetType()));
             var version = migrationAttribute.Version;
@@ -40,6 +40,7 @@ namespace Lucid.Modules.Account.DbMigrations
             var versionsInfo = new ExistingVersionsInfo();
 
             if (Schema.Schema("Account").Table("VersionInfo").Exists())
+            {
                 Execute.WithConnection((cn, tx) =>
                 {
                     _logger.LogInformation($"Found versions table");
@@ -51,6 +52,7 @@ namespace Lucid.Modules.Account.DbMigrations
                         while (reader.Read())
                             versionsInfo.Versions.Add(reader.GetInt64(0));
                 });
+            }
 
             versionsInfo.RerunIndex = versionsInfo.Versions.Count > 0
                 ? Math.Min(versionsInfo.Versions.Min(), -1)
