@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  mvw.sql:
+  sql:
     image: mcr.microsoft.com/mssql/server:2017-latest
     environment:
       - ACCEPT_EULA=Y
