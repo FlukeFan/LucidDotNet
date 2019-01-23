@@ -111,6 +111,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
                     var name = zipEntry.FullName;
 
                     name.ToLower().Should().NotBe("license.txt", "LICENSE.txt should not be included in output (should be part of skipped files)");
+                    name.ToLower().Should().NotContain("ftphost", $"Host information should not be included (file {name} was zipped into output)");
 
                     var zippedFileName = name.Replace("/", "\\");
                     zippedFiles.Add(zippedFileName);
