@@ -36,6 +36,7 @@ namespace Lucid.Modules.ProjectCreation
             ".defaults",
             ".html",
             ".htm",
+            ".yml",
         };
 
         private static readonly IList<String> UnprocessedExtensions = new List<string>

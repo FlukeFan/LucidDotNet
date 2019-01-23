@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root", "_root", "{2E1ACA93
 		.gitignore = .gitignore
 		build.proj = build.proj
 		CommandPrompt.bat = CommandPrompt.bat
+		docker-compose.yml = docker-compose.yml
 		global.json = global.json
 		LICENSE.txt = LICENSE.txt
 		readme.md = readme.md

@@ -127,6 +127,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
             zippedFiles.Should().Contain("global.json");
             zippedFiles.Should().Contain("DemoProj.sln");
             zippedFiles.Should().Contain("readme.md");
+            zippedFiles.Should().Contain("docker-compose.yml");
 
             // build files
             zippedFiles.Should().Contain("Build\\App_Offline.htm");
