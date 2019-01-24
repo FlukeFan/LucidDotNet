@@ -37,19 +37,18 @@
     <RemoveDir Directories="$(WebBin)/publish" />
   </Target>
 
-  <Target Name="CreateHostFile">
+  <Target Name="Deploy" DependsOnTargets="Package">
+    <Error Text="Need to set LucidFtpHost variable" Condition="'$(LucidFtpHost)'==''" />
+    <Error Text="Need to set LucidFtpUser variable" Condition="'$(LucidFtpUser)'==''" />
+    <Error Text="Need to set LucidFtpPassword variable" Condition="'$(LucidFtpPassword)'==''" />
+    <Error Text="Need to set LucidFtpRemoteDir variable" Condition="'$(LucidFtpRemoteDir)'==''" />
     <ItemGroup>
       <HostFileLines Include="host $(LucidFtpHost)" />
       <HostFileLines Include="user $(LucidFtpUser)" />
       <HostFileLines Include="pass $(LucidFtpPassword)" />
     </ItemGroup>
-    <WriteLinesToFile File="LucidFtpHostFile.txt" Lines="@(HostFileLines)" Overwrite="true" />
-  </Target>
-
-  <Target Name="Deploy" DependsOnTargets="Package">
-    <Error Text="Need to set LucidFtpHostFile variable" Condition="'$(LucidFtpHostFile)'==''" />
-    <Error Text="Need to set LucidFtpRemoteDir variable" Condition="'$(LucidFtpRemoteDir)'==''" />
-    <Exec Command="Tools\ncftp\ncftpput.exe -S .tmp -f $(LucidFtpHostFile) $(LucidFtpRemoteDir) $(WebBin)/publish.zip" />
+    <WriteLinesToFile File="$(TEMP)/LucidFtpHostFile.txt" Lines="@(HostFileLines)" Overwrite="true" />
+    <Exec Command="Tools\ncftp\ncftpput.exe -S .tmp -f $(TEMP)/LucidFtpHostFile.txt $(LucidFtpRemoteDir) $(WebBin)/publish.zip" />
     <Message Text="Completed FTP of publish.zip" Importance="high" />
   </Target>
 
