@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace Lucid.Modules.ProjectCreation.Tests
 {
     [TestFixture]
-    public class GenerateTests
+    public class ZipGeneratorTests
     {
         [Test]
         public async Task FormatIsMaintained()
@@ -30,7 +30,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
                 {
                     var name = zipEntry.FullName;
 
-                    if (Generate.ShouldProcessFile(name))
+                    if (ZipGenerator.ShouldProcessFile(name))
                     {
                         var originalFile = Path.Combine(rootPath, name);
 
@@ -51,8 +51,8 @@ namespace Lucid.Modules.ProjectCreation.Tests
                         using (var stream = File.OpenRead(originalFile))
                         using (var copy = zipEntry.Open())
                         {
-                            var originalBom = Generate.ReadBomEncoding(stream);
-                            var copiedBom = Generate.ReadBomEncoding(copy);
+                            var originalBom = ZipGenerator.ReadBomEncoding(stream);
+                            var copiedBom = ZipGenerator.ReadBomEncoding(copy);
 
                             copiedBom.Should().Be(originalBom, $"BOM of file {name} is not the same in the generated project");
                         }
@@ -163,7 +163,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         [Test]
         public void GuidsUsedInProjectAreKnown()
         {
-            var assembly = typeof(Generate).Assembly;
+            var assembly = typeof(ZipGenerator).Assembly;
             var allGuidsInZip = new List<string>();
             var ignoredGenerateCs = false;
 
@@ -179,15 +179,15 @@ namespace Lucid.Modules.ProjectCreation.Tests
                         continue;
                     }
 
-                    if (!Generate.ShouldProcessFile(fileName))
+                    if (!ZipGenerator.ShouldProcessFile(fileName))
                         continue;
 
                     using (var stream = zipEntry.Open())
                     {
-                        var lines = Generate.ReadLines(stream);
+                        var lines = ZipGenerator.ReadLines(stream);
 
                         foreach (var line in lines)
-                            foreach (Match match in Generate.GuidSearch.Matches(line))
+                            foreach (Match match in ZipGenerator.GuidSearch.Matches(line))
                                 allGuidsInZip.Add(match.Value.ToUpper());
                     }
                 }
@@ -203,7 +203,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         {
             var inputLine = "DoesNotNeedChanging";
 
-            var outputLine = Generate.ProcessLine(inputLine, "NewProj1");
+            var outputLine = ZipGenerator.ProcessLine(inputLine, "NewProj1");
 
             outputLine.Should().Be("DoesNotNeedChanging");
         }
@@ -213,7 +213,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         {
             var inputLine = "    <compilation debug=\"true\" targetFramework=\"4.5\" optimizeCompilations=\"true\" tempDirectory=\"D:\\temp\\a4vy1sad.evu\\temp\\\" />";
 
-            var outputLine = Generate.ProcessLine(inputLine, "NewProj1");
+            var outputLine = ZipGenerator.ProcessLine(inputLine, "NewProj1");
 
             outputLine.Should().Be("    <compilation debug=\"true\" targetFramework=\"4.5\" optimizeCompilations=\"true\"  />");
         }

@@ -17,7 +17,7 @@ namespace Lucid.Modules.ProjectCreation
             var assembly = GetType().Assembly;
 
             using (var zipInputStream = assembly.GetManifestResourceStream("Lucid.Modules.ProjectCreation.Project.zip"))
-            using (var zipOutputStream = Generate.Project(zipInputStream, Name))
+            using (var zipOutputStream = ZipGenerator.Generate(zipInputStream, Name))
                 return Task.FromResult(StreamToBytes(zipOutputStream));
         }
 

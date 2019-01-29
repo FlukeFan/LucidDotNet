@@ -14,8 +14,7 @@ namespace Lucid.Modules.ProjectCreation
     [Route(Actions.RoutePrefix)]
     public class Controller : Registry.ProjectCreationController
     {
-
-        [HttpGet(Name = "GenerateProject")]
+        [HttpGet]
         public IActionResult Index()
         {
             return Render(new GenerateProject());

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Lucid.Modules.ProjectCreation
 {
-    public class Generate
+    public class ZipGenerator
     {
         private static readonly IList<string> SkippedFiles = new List<string>
         {
@@ -58,7 +58,7 @@ namespace Lucid.Modules.ProjectCreation
 
         private static IDictionary<string, string> _guidMap;
 
-        public static MemoryStream Project(Stream zipInputStream, string newName)
+        public static MemoryStream Generate(Stream zipInputStream, string newName)
         {
             _guidMap = new Dictionary<string, string>();
 
