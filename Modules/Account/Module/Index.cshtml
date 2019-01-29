@@ -1,0 +1,19 @@
+﻿@using MvcForms.Forms
+@namespace Lucid.Modules.Account
+@inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<IndexModel>
+@model IndexModel
+@{Setup(pi =>
+    {
+        pi.Title = "Login";
+    });}
+
+<div class="base-form">
+
+    <p>Please login.</p>
+
+    @using (var form = Html.FormFor(Model.Cmd).Begin())
+    {
+        @form.Html.LabelledInputText("User Name", m => m.UserName)
+    }
+
+</div>
