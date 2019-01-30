@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.IO;
 using FluentMigrator.Runner;
 using FluentMigrator.Runner.Conventions;
 using Lucid.Infrastructure.Lib.Domain.SqlServer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
@@ -11,8 +13,12 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
 {
     public class SqlTestUtil
     {
-        public static void UpdateMigrations<TFromMigrationAssembly>(Schema schema)
+        public static void UpdateMigrations<TFromMigrationAssembly>(string schemaName)
         {
+            // need to figure out if anything has changed, and if it hasn't, skip remainder of the DB setup
+            var schema = GetSchema(schemaName);
+            DropAll(schema);
+
             var serviceCollection = new ServiceCollection();
             var serviceProvider = serviceCollection
                 .AddFluentMigratorCore()
@@ -36,6 +42,42 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
             RunMigrations(serviceProvider);
         }
 
+        private static Schema GetSchema(string schemaName)
+        {
+            var searchFile = "Infrastructure/Host/web.config.xml";
+            var cd = Directory.GetCurrentDirectory();
+            var configFile = Path.Combine(cd, searchFile);
+
+            while (!File.Exists(configFile))
+            {
+                var parent = Directory.GetParent(cd)?.FullName;
+
+                if (parent == cd || parent == null)
+                    throw new Exception($"{searchFile} not found in parent of {Directory.GetCurrentDirectory()}");
+
+                cd = parent;
+                configFile = Path.Combine(cd, searchFile);
+            }
+
+            var config = new ConfigurationBuilder()
+                .AddXmlFile(configFile)
+                .AddEnvironmentVariables()
+                .Build();
+
+            var sqlServerConfig = config.GetSection("Host").GetSection("SqlServer");
+
+            var sqlServer = new Domain.SqlServer.SqlServer(
+                server: sqlServerConfig.GetValue<string>("Server"),
+                dbName: sqlServerConfig.GetValue<string>("DbName"),
+                userId: sqlServerConfig.GetValue<string>("userId"),
+                password: sqlServerConfig.GetValue<string>("password"));
+
+            var schema = new Schema { Name = schemaName };
+            sqlServer.Init(true, schema);
+
+            return schema;
+        }
+
         private static void RunMigrations(ServiceProvider serviceProvider)
         {
             using (var scope = serviceProvider.CreateScope())
@@ -45,13 +87,9 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
             }
         }
 
-        public static Schema DropAll(string schemaName)
+        private static Schema DropAll(Schema schema)
         {
-            var dbConfig = Domain.SqlServer.SqlServer.GetConfig(true, Environment.GetEnvironmentVariable("IsRunningInAppVeyor") != null);
-            var schema = new Schema { Name = schemaName };
-            dbConfig.CreateDb(schema);
-
-            TestContext.Progress.WriteLine($"Dropping all items for schema {schemaName}");
+            TestContext.Progress.WriteLine($"Dropping all items for schema {schema.Name}");
 
             using (var cn = new SqlConnection(schema.ConnectionString))
             {

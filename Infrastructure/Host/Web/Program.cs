@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Lucid.Infrastructure.Host.Web.Logging;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Web;
@@ -44,8 +46,30 @@ namespace Lucid.Infrastructure.Host.Web
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseSetting(WebHostDefaults.CaptureStartupErrorsKey, "false")
+                .ConfigureAppConfiguration(AddConfig)
                 .ConfigureLogging(l => l.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace))
                 .UseNLog()
                 .UseStartup<Startup>();
+
+        private static void AddConfig(IConfigurationBuilder config)
+        {
+            var cd = Directory.GetCurrentDirectory();
+            var configFile = Path.Combine(cd, "web.config.xml");
+
+            while (!File.Exists(configFile))
+            {
+                var parent = Directory.GetParent(cd)?.FullName;
+
+                if (parent == cd || parent == null)
+                    throw new Exception($"web.config.xml not found in parent of {Directory.GetCurrentDirectory()}");
+
+                cd = parent;
+                configFile = Path.Combine(cd, "web.config.xml");
+            }
+
+            config.AddXmlFile(configFile);
+            config.AddEnvironmentVariables();
+        }
     }
 }

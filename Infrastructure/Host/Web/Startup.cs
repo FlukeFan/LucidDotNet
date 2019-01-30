@@ -76,7 +76,8 @@ namespace Lucid.Infrastructure.Host.Web
                 .UseIisUrl("https://lucid.rgbco.uk")
                 .UseIsBinary(f => ZipDeployOptions.DefaultIsBinary(f) || Path.GetFileName(f) == "nlog.config"));
 
-            SqlServer.Startup(_env, config);
+            var hostConfig = config.GetSection("Host");
+            InitSqlServer(hostConfig.GetSection("SqlServer"));
 
             app.UseAuthentication();
 
@@ -94,6 +95,19 @@ namespace Lucid.Infrastructure.Host.Web
                 Modules.ProjectCreation.Registry.StartupAsync());
 
             loggerFactory.CreateLogger("SystemAlert").LogInformation("Startup complete");
+        }
+
+        protected virtual void InitSqlServer(IConfigurationSection config)
+        {
+            var server = config.GetValue<string>("Server");
+            var dbName = config.GetValue<string>("DbName");
+            var userId = config.GetValue<string>("UserId");
+            var password = config.GetValue<string>("Password");
+
+            var startup = new SqlServer(server, dbName, userId, password);
+
+            var createDb = config.GetValue<bool>("CreateDb");
+            startup.Init(createDb);
         }
     }
 

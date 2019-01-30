@@ -11,6 +11,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{673964CD-F184-4238-9DCA-A6EA7C9E2C7F}"
 	ProjectSection(SolutionItems) = preProject
 		Infrastructure\Host\build.proj = Infrastructure\Host\build.proj
+		Infrastructure\Host\web.config.xml = Infrastructure\Host\web.config.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root", "_root", "{2E1ACA93-B1FB-4E31-A73A-3428C1C74A9F}"

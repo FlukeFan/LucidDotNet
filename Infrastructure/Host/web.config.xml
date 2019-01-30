@@ -1,0 +1,11 @@
+<configuration>
+  <Host>
+    <SqlServer>
+      <Server>localhost,51433</Server>
+      <DbName>Lucid</DbName>
+      <UserId>sa</UserId>
+      <Password>Password12!</Password>
+      <CreateDb>True</CreateDb>
+    </SqlServer>
+  </Host>
+</configuration>

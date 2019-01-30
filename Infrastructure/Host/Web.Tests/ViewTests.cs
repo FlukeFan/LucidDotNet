@@ -7,6 +7,7 @@ using Lucid.Infrastructure.Lib.Testing;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MvcTesting.AspNetCore;
 using NUnit.Framework;
@@ -53,6 +54,11 @@ namespace Lucid.Infrastructure.Host.Web.Tests
 
                 // remove authorization filter for testing
                 mvcOptions.Filters.Remove(mvcOptions.Filters.Where(f => typeof(AuthorizeFilter).IsAssignableFrom(f.GetType())).Single());
+            }
+
+            protected override void InitSqlServer(IConfigurationSection config)
+            {
+                // no SQL init
             }
         }
     }
