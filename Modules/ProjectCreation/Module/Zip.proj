@@ -5,6 +5,7 @@
     <FilesToZip Include="..\..\..\**\.gitignore" />
     <FilesToZip Include="..\..\..\**\*.bat" />
     <FilesToZip Include="..\..\..\**\*.yml" />
+    <FilesToZip Include="..\..\..\**\*.xml" />
     <FilesToZip Include="..\..\..\**\*.txt" />
     <FilesToZip Include="..\..\..\**\*.md" />
     <FilesToZip Include="..\..\..\**\*.htm" />

@@ -137,6 +137,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
             zippedFiles.Should().Contain("Build\\BuildUtil\\Program.cs");
 
             // Host files
+            zippedFiles.Should().Contain("Infrastructure\\Host\\web.config.xml");
             zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\bundleconfig.json");
             zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\compilerconfig.json.defaults");
             zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\nlog.config");
