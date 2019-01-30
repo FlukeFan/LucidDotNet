@@ -7,6 +7,11 @@ namespace Lucid.Infrastructure.Lib.Testing.Validation
 {
     public static class ValidationExtensions
     {
+        public static void ShouldBeValid<T>(this T command)
+        {
+            ExecutableValidator.Validate(command);
+        }
+
         public static void ShouldBeInvalid<T>(this T command, Action<T> invalidate, string reason)
         {
             invalidate(command);

@@ -3,13 +3,18 @@
 @inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<IndexModel>
 @model IndexModel
 @{Setup(pi =>
-    {
-        pi.Title = "Login";
-    });}
+      {
+          pi.Title = "Login";
+      });}
 
 <div class="base-form">
 
-    <p>Please login.</p>
+    <h5>Log in anonymously</h5>
+    <ul>
+        <li>You can use any user name you like;</li>
+        <li>Anybody can log in using (or re-using) any user name;</li>
+        <li>You are consenting to a cookie being used to identify the user name used.</li>
+    </ul>
 
     @using (var form = Html.FormFor(Model.Cmd).Begin())
     {
