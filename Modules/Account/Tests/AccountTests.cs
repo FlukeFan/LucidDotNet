@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.Testing;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Infrastructure.Lib.Testing.SqlServer;
@@ -9,12 +10,15 @@ namespace Lucid.Modules.Account.Tests
     [SetUpFixture]
     public class AccountTests
     {
+        public static Schema Schema;
+
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            SqlTestUtil.UpdateMigrations<DbMigrations.V001.V000.Rev0_CreateUserTable>(
-                schemaName:             "Account",
-                migrationsSourceFolder: Path.Combine(TestUtil.ProjectPath(), "../Module/DbMigrations"));
+            Schema =
+                SqlTestUtil.UpdateMigrations<DbMigrations.V001.V000.Rev0_CreateUserTable>(
+                    schemaName:             "Account",
+                    migrationsSourceFolder: Path.Combine(TestUtil.ProjectPath(), "../Module/DbMigrations"));
         }
 
         public abstract class Controller : ModuleControllerTests<TestStartup>

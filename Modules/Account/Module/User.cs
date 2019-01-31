@@ -6,7 +6,7 @@ namespace Lucid.Modules.Account
     {
         protected User() { }
 
-        public string   Name            { get; protected set; }
-        public DateTime LastLoggedOut   { get; protected set; } // deliberate wrong name until we verify persistence fails
+        public virtual string   Name            { get; protected set; }
+        public virtual DateTime LastLoggedIn    { get; protected set; }
     }
 }

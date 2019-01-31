@@ -22,8 +22,7 @@ namespace Lucid.Modules.Account
         public abstract class Entity : IEntity
         {
             object IEntity.Id => Id;
-
-            public int Id { get; protected set; }
+            public virtual int Id { get; protected set; }
         }
 
         public abstract class Controller : MvcAppController
