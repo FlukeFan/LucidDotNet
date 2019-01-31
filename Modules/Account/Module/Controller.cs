@@ -10,7 +10,7 @@ namespace Lucid.Modules.Account
     }
 
     [Route(Actions.RoutePrefix)]
-    public class Controller : Registry.AccountController
+    public class Controller : Registry.Controller
     {
         [HttpGet]
         public IActionResult Index()

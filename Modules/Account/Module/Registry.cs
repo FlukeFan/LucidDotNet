@@ -2,6 +2,7 @@
 using Lucid.Infrastructure.Lib.Facade;
 using Lucid.Infrastructure.Lib.Facade.Validation;
 using Lucid.Infrastructure.Lib.MvcApp;
+using Reposify;
 
 namespace Lucid.Modules.Account
 {
@@ -9,17 +10,23 @@ namespace Lucid.Modules.Account
     {
         public static IExecutor Executor { get; set; }
 
-        public static async Task StartupAsync()
+        public static Task StartupAsync()
         {
-            await Task.Run(() =>
-            {
-                Executor =
-                    new ValidatingExecutor(
-                        new Executor());
-            });
+            Executor =
+                new ValidatingExecutor(
+                    new Executor());
+
+            return Task.CompletedTask;
         }
 
-        public class AccountController : MvcAppController
+        public abstract class Entity : IEntity
+        {
+            object IEntity.Id => Id;
+
+            public int Id { get; protected set; }
+        }
+
+        public abstract class Controller : MvcAppController
         {
             protected override IExecutor Executor() { return Registry.Executor; }
         }

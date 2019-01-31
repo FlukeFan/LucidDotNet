@@ -91,8 +91,12 @@ namespace Lucid.Infrastructure.Host.Web
             app.UseMvc();
             Styler.Set(new Bootstrap4Style());
 
-            Task.WaitAll(
-                Modules.ProjectCreation.Registry.StartupAsync());
+            var startupTasks = new[]
+            {
+                Task.Run(() => Modules.ProjectCreation.Registry.StartupAsync()),
+            };
+
+            Task.WaitAll(startupTasks);
 
             loggerFactory.CreateLogger("SystemAlert").LogInformation("Startup complete");
         }
