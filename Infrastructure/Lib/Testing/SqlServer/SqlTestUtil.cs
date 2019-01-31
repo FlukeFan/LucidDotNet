@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
 using FluentMigrator.Runner;
 using FluentMigrator.Runner.Conventions;
 using Lucid.Infrastructure.Lib.Domain.SqlServer;
@@ -13,10 +14,31 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
 {
     public class SqlTestUtil
     {
-        public static void UpdateMigrations<TFromMigrationAssembly>(string schemaName)
+        public static Schema UpdateMigrations<TFromMigrationAssembly>(string schemaName, string migrationsSourceFolder)
         {
-            // need to figure out if anything has changed, and if it hasn't, skip remainder of the DB setup
-            var schema = GetSchema(schemaName);
+            // if everything is up to date, we should get the schema without touching the DB
+            var serverConfig = GetServerConfig();
+            var schema = GetSchema(serverConfig, schemaName);
+
+            var testStartTime = DateTime.UtcNow;
+            var flagFile = Path.Combine(TestUtil.ProjectPath(), "bin/dbMigrated.flg");
+
+            var skipDbMigration = !Directory.GetCurrentDirectory().Contains("__Instrumented")
+                && File.Exists(flagFile)
+                && File.GetLastWriteTimeUtc(flagFile) > LastFileUpdateUtc(migrationsSourceFolder);
+
+            if (!skipDbMigration)
+                UpdateMigrations<TFromMigrationAssembly>(serverConfig, schema);
+
+            File.WriteAllText(flagFile, "");
+            File.SetLastWriteTimeUtc(flagFile, testStartTime);
+
+            return schema;
+        }
+
+        private static void UpdateMigrations<TFromMigrationAssembly>(Domain.SqlServer.SqlServer serverConfig, Schema schema)
+        {
+            serverConfig.CreateSchemas(true, schema);
             DropAll(schema);
 
             var serviceCollection = new ServiceCollection();
@@ -42,27 +64,19 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
             RunMigrations(serviceProvider);
         }
 
-        private static Schema GetSchema(string schemaName)
+        private static DateTime LastFileUpdateUtc(string folder)
         {
-            var searchFile = "Infrastructure/Host/web.config.xml";
-            var cd = Directory.GetCurrentDirectory();
-            var configFile = Path.Combine(cd, searchFile);
+            var allFiles = Directory.GetFiles(folder, "*.*", SearchOption.AllDirectories);
 
-            while (!File.Exists(configFile))
-            {
-                var parent = Directory.GetParent(cd)?.FullName;
+            if (allFiles.Length == 0)
+                return DateTime.MinValue;
 
-                if (parent == cd || parent == null)
-                    throw new Exception($"{searchFile} not found in parent of {Directory.GetCurrentDirectory()}");
+            return allFiles.Select(f => File.GetLastWriteTimeUtc(f)).Max();
+        }
 
-                cd = parent;
-                configFile = Path.Combine(cd, searchFile);
-            }
-
-            var config = new ConfigurationBuilder()
-                .AddXmlFile(configFile)
-                .AddEnvironmentVariables()
-                .Build();
+        private static Domain.SqlServer.SqlServer GetServerConfig()
+        {
+            var config = TestUtil.GetConfig();
 
             var sqlServerConfig = config.GetSection("Host").GetSection("SqlServer");
 
@@ -72,8 +86,13 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
                 userId: sqlServerConfig.GetValue<string>("userId"),
                 password: sqlServerConfig.GetValue<string>("password"));
 
+            return sqlServer;
+        }
+
+        private static Schema GetSchema(Domain.SqlServer.SqlServer serverConfig, string schemaName)
+        {
             var schema = new Schema { Name = schemaName };
-            sqlServer.Init(true, schema);
+            serverConfig.SetSchemaConnections(schema);
 
             return schema;
         }

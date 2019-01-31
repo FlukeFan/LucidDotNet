@@ -111,7 +111,7 @@ namespace Lucid.Infrastructure.Host.Web
             var startup = new SqlServer(server, dbName, userId, password);
 
             var createDb = config.GetValue<bool>("CreateDb");
-            startup.Init(createDb);
+            startup.CreateSchemas(createDb);
         }
     }
 

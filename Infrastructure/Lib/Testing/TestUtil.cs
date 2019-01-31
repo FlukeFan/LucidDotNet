@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace Lucid.Infrastructure.Lib.Testing
 {
@@ -19,6 +21,31 @@ namespace Lucid.Infrastructure.Lib.Testing
             }
 
             return cd;
+        }
+
+        public static IConfigurationRoot GetConfig()
+        {
+            var searchFile = "Infrastructure/Host/web.config.xml";
+            var cd = Directory.GetCurrentDirectory();
+            var configFile = Path.Combine(cd, searchFile);
+
+            while (!File.Exists(configFile))
+            {
+                var parent = Directory.GetParent(cd)?.FullName;
+
+                if (parent == cd || parent == null)
+                    throw new Exception($"{searchFile} not found in parent of {Directory.GetCurrentDirectory()}");
+
+                cd = parent;
+                configFile = Path.Combine(cd, searchFile);
+            }
+
+            var config = new ConfigurationBuilder()
+                .AddXmlFile(configFile)
+                .AddEnvironmentVariables()
+                .Build();
+
+            return config;
         }
     }
 }

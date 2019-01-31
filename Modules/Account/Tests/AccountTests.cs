@@ -1,4 +1,5 @@
-﻿using Lucid.Infrastructure.Lib.Testing;
+﻿using System.IO;
+using Lucid.Infrastructure.Lib.Testing;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Infrastructure.Lib.Testing.SqlServer;
 using NUnit.Framework;
@@ -11,7 +12,9 @@ namespace Lucid.Modules.Account.Tests
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            SqlTestUtil.UpdateMigrations<DbMigrations.V001.V000.Rev0_CreateUserTable>("Account");
+            SqlTestUtil.UpdateMigrations<DbMigrations.V001.V000.Rev0_CreateUserTable>(
+                schemaName:             "Account",
+                migrationsSourceFolder: Path.Combine(TestUtil.ProjectPath(), "../Module/DbMigrations"));
         }
 
         public abstract class Controller : ModuleControllerTests<TestStartup>

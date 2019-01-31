@@ -18,7 +18,13 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
             _password = password;
         }
 
-        public void Init(bool createDb, params Schema[] schemas)
+        public void SetSchemaConnections(params Schema[] schemas)
+        {
+            foreach (var schema in schemas)
+                schema.ConnectionString = $"Server={_server};Database={_dbName};User ID={_dbName}_{schema.Name};Password={_password}";
+        }
+
+        public void CreateSchemas(bool createDb, params Schema[] schemas)
         {
             var connectionString = createDb
                 ? $"Server={_server};Database=master;User ID={_userId};Password={_password}"
@@ -91,8 +97,6 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
                 cmd.CommandText = $"GRANT CREATE TABLE TO [{login}]";
                 cmd.ExecuteNonQuery();
             }
-
-            schema.ConnectionString = $"Server={_server};Database={_dbName};User ID={_dbName}_{schema.Name};Password=Password12!";
         }
 
         private static IList<string> SelectString(SqlCommand cmd, string sql)
