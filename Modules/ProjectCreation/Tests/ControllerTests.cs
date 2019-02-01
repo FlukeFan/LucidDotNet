@@ -2,13 +2,14 @@
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Lucid.Infrastructure.Lib.Testing.Controller;
 using Microsoft.AspNetCore.Mvc;
 using MvcTesting.Html;
 using NUnit.Framework;
 
 namespace Lucid.Modules.ProjectCreation.Tests
 {
-    public class ControllerTests : ModuleTest.Controller
+    public class ControllerTests : ModuleTestSetup.ControllerTest
     {
         [Test]
         public async Task Can_SeeProjectCreationForm()
@@ -18,7 +19,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
                 .Form<GenerateProject>();
 
             form.Method.Should().Be("post");
-            form.Action.Should().Be(AddHost(Actions.Index()));
+            form.Action.Should().Be(Actions.Index().PrefixLocalhost());
 
             form.GetText(m => m.Name).Should().Be("Demo", "default project generation name should be 'Demo'");
         }

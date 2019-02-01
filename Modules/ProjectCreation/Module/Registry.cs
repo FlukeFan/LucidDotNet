@@ -7,7 +7,7 @@ namespace Lucid.Modules.ProjectCreation
 {
     public static class Registry
     {
-        public static IExecutor Executor { get; set; }
+        public static IExecutor Executor;
 
         public static Task StartupAsync()
         {

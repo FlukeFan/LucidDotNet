@@ -8,7 +8,7 @@ namespace Lucid.Modules.Account
 {
     public static class Registry
     {
-        public static IExecutor Executor { get; set; }
+        public static IExecutor Executor;
 
         public static Task StartupAsync()
         {

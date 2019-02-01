@@ -1,13 +1,12 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Testing;
 using NUnit.Framework;
 
 namespace Lucid.Modules.Temp.Tests.Child
 {
     [TestFixture]
-    public class ControllerTests : ModuleControllerTests<TestStartup>
+    public class ControllerTests : ModuleTestSetup.ControllerTest
     {
         [Test]
         public async Task Index()

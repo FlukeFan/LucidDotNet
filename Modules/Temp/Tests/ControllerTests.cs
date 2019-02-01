@@ -2,12 +2,11 @@
 using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Testing;
 using NUnit.Framework;
 
 namespace Lucid.Modules.Temp.Tests
 {
-    public class ControllerTests : ModuleControllerTests<TestStartup>
+    public class ControllerTests : ModuleTestSetup.ControllerTest
     {
         [Test]
         public async Task Index()
@@ -27,7 +26,7 @@ namespace Lucid.Modules.Temp.Tests
             var response = await client
                 .GetAsync(Actions.Login());
 
-            client.Cookies.Select(c => c.Name).Should().Contain(TestStartup.AuthCookieName);
+            client.Cookies.Select(c => c.Name).Should().Contain(ModuleTestSetup.TestStartup.AuthCookieName);
         }
     }
 }

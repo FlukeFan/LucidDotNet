@@ -30,7 +30,7 @@ namespace Lucid.Modules.Account.Tests
             {
                 cfg.DataBaseIntegration(db =>
                 {
-                    db.ConnectionString = AccountTests.Schema.ConnectionString;
+                    db.ConnectionString = ModuleTestSetup.Schema.ConnectionString;
                     db.ConnectionProvider<DriverConnectionProvider>();
                     db.Driver<SqlClientDriver>();
                     db.Dialect<MsSql2012Dialect>();
