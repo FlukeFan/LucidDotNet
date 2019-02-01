@@ -4,7 +4,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <CoverageTarget>70</CoverageTarget>
     <DebugType>full</DebugType>
   </PropertyGroup>
 

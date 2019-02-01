@@ -6,7 +6,7 @@
     <Version>0.0.1</Version>
 
     <PreserveCompilationContext Condition="$(IsTestProject)=='true'">true</PreserveCompilationContext>
-    <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
+    <CoverageTarget Condition="'$(CoverageTarget)'==''">70</CoverageTarget>
     <NoCoverage Condition="'$(NoCoverage)'==''">false</NoCoverage>
 
     <BuildUtil>$(MSBuildThisFileDirectory)\BuildUtil\bin\Debug\netcoreapp2.1\Build.BuildUtil.dll</BuildUtil>

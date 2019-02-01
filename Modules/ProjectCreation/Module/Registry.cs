@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Lucid.Infrastructure.Lib.Facade;
+﻿using Lucid.Infrastructure.Lib.Facade;
 using Lucid.Infrastructure.Lib.Facade.Validation;
 using Lucid.Infrastructure.Lib.MvcApp;
 
@@ -9,13 +8,11 @@ namespace Lucid.Modules.ProjectCreation
     {
         public static IExecutor Executor;
 
-        public static Task StartupAsync()
+        public static void Startup()
         {
             Executor =
                 new ValidatingExecutor(
                     new Executor());
-
-            return Task.CompletedTask;
         }
 
         public class ProjectCreationController : MvcAppController

@@ -4,6 +4,7 @@ using NHibernate.Connection;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Mapping.ByCode;
+using NHibernate.Tool.hbm2ddl;
 using Reposify.NHibernate;
 
 namespace Lucid.Infrastructure.Lib.Domain.SqlServer
@@ -22,9 +23,11 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
                     db.ConnectionProvider<DriverConnectionProvider>();
                     db.Driver<SqlClientDriver>();
                     db.Dialect<MsSql2012Dialect>();
-                    db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
+                    db.KeywordsAutoImport = Hbm2DDLKeyWords.None;
                 });
             });
+
+            SchemaMetadataUpdater.QuoteTableAndColumns(config, new MsSql2012Dialect());
 
             var sessionFactory = config.BuildSessionFactory();
             return sessionFactory;

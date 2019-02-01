@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.Testing.Controller;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -45,9 +46,11 @@ namespace Lucid.Infrastructure.Host.Web.Tests
                 mvcOptions.Filters.Remove(mvcOptions.Filters.Where(f => typeof(AuthorizeFilter).IsAssignableFrom(f.GetType())).Single());
             }
 
-            protected override void InitSqlServer(IConfigurationSection config)
+            protected override void InitSqlServer(IConfigurationSection config, params Schema[] schemas)
             {
                 // no SQL init
+                foreach (var schema in schemas)
+                    schema.ConnectionString = "Server=not_used;User ID=not_used;Password=not_used";
             }
         }
     }

@@ -77,7 +77,8 @@ namespace Lucid.Infrastructure.Host.Web
                 .UseIsBinary(f => ZipDeployOptions.DefaultIsBinary(f) || Path.GetFileName(f) == "nlog.config"));
 
             var hostConfig = config.GetSection("Host");
-            InitSqlServer(hostConfig.GetSection("SqlServer"));
+            var accountSchema = new Schema { Name = "Account" };
+            InitSqlServer(hostConfig.GetSection("SqlServer"), accountSchema);
 
             app.UseAuthentication();
 
@@ -93,7 +94,8 @@ namespace Lucid.Infrastructure.Host.Web
 
             var startupTasks = new[]
             {
-                Task.Run(() => Modules.ProjectCreation.Registry.StartupAsync()),
+                Task.Run(() => Modules.ProjectCreation.Registry.Startup()),
+                Task.Run(() => Modules.Account.Registry.Startup(accountSchema.ConnectionString)),
             };
 
             Task.WaitAll(startupTasks);
@@ -102,7 +104,7 @@ namespace Lucid.Infrastructure.Host.Web
             loggerFactory.CreateLogger("SystemAlert").LogInformation($"Startup complete: {startupTime}");
         }
 
-        protected virtual void InitSqlServer(IConfigurationSection config)
+        protected virtual void InitSqlServer(IConfigurationSection config, params Schema[] schemas)
         {
             var server = config.GetValue<string>("Server");
             var dbName = config.GetValue<string>("DbName");
@@ -112,7 +114,8 @@ namespace Lucid.Infrastructure.Host.Web
             var startup = new SqlServer(server, dbName, userId, password);
 
             var createDb = config.GetValue<bool>("CreateDb");
-            startup.CreateSchemas(createDb);
+            startup.SetSchemaConnections(schemas);
+            startup.CreateSchemas(createDb, schemas);
         }
     }
 
