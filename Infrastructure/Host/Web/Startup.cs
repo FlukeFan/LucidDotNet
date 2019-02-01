@@ -98,7 +98,8 @@ namespace Lucid.Infrastructure.Host.Web
 
             Task.WaitAll(startupTasks);
 
-            loggerFactory.CreateLogger("SystemAlert").LogInformation("Startup complete");
+            var startupTime = Program.StartupCompleted();
+            loggerFactory.CreateLogger("SystemAlert").LogInformation($"Startup complete: {startupTime}");
         }
 
         protected virtual void InitSqlServer(IConfigurationSection config)

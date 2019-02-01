@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Lucid.Infrastructure.Host.Web.Logging;
 using Microsoft.AspNetCore;
@@ -13,8 +14,19 @@ namespace Lucid.Infrastructure.Host.Web
 {
     public class Program
     {
+        private static Stopwatch _startupTimer;
+
+        public static TimeSpan? StartupCompleted()
+        {
+            _startupTimer?.Stop();
+            return _startupTimer?.Elapsed;
+        }
+
         public static void Main(string[] args)
         {
+            _startupTimer = new Stopwatch();
+            _startupTimer.Start();
+
             IList<string> logSetupMessages = new List<string>();
             var logConfigFile = LogConfig.PrepareConfigFile(logSetupMessages);
 
