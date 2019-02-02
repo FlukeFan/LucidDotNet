@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using Reposify.NHibernate;
 using Reposify.Testing;
 
 namespace Lucid.Modules.Account.Tests
@@ -10,14 +9,12 @@ namespace Lucid.Modules.Account.Tests
         [Test]
         public void CheckSaveLoad()
         {
-            using (var session = ModuleTestSetup.SessionFactory.Value.OpenSession())
-            using (var repository = new NhRepository(session))
-            using (var tx = repository.BeginTransaction())
+            using (var db = new ModuleTestSetup.DbTxTest())
             {
                 var user = new UserBuilder()
                     .Value();
 
-                new CheckSaveLoad<User>(user, repository).Check();
+                new CheckSaveLoad<User>(user, db.NhRepository).Check();
             }
         }
     }

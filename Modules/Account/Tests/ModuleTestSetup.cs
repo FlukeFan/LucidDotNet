@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.Testing;
 using Lucid.Infrastructure.Lib.Testing.Controller;
 using Lucid.Infrastructure.Lib.Testing.Execution;
@@ -8,36 +7,36 @@ using Lucid.Infrastructure.Lib.Testing.SqlServer;
 using MvcTesting.AspNetCore;
 using NHibernate;
 using NUnit.Framework;
+using Reposify.NHibernate;
 
 namespace Lucid.Modules.Account.Tests
 {
     [SetUpFixture]
     public class ModuleTestSetup
     {
-        public static Schema                        Schema;
-        public static Lazy<ISessionFactory>         SessionFactory;
-        public static SetupTestServer<TestStartup>  TestServerSetup;
+        private static Lazy<ISessionFactory>            _sessionFactory;
+        private static SetupTestServer<TestStartup>     _testServerSetup;
 
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            Schema =
+            var schema =
                 SqlTestUtil.UpdateMigrations<DbMigrations.V001.V000.Rev0_CreateUserTable>(
                     schemaName:             "Account",
                     migrationsSourceFolder: Path.Combine(TestUtil.ProjectPath(), "../Module/DbMigrations"));
 
-            TestServerSetup = new SetupTestServer<TestStartup>();
+            _testServerSetup = new SetupTestServer<TestStartup>();
 
-            SessionFactory = new Lazy<ISessionFactory>(() => Registry.BuildSessionFactory(Schema.ConnectionString));
+            _sessionFactory = new Lazy<ISessionFactory>(() => Registry.BuildSessionFactory(schema.ConnectionString));
         }
 
         [OneTimeTearDown]
         public void OnTimeTearDown()
         {
-            using (TestServerSetup) { }
+            using (_testServerSetup) { }
 
-            if (SessionFactory.IsValueCreated)
-                using (SessionFactory.Value) { }
+            if (_sessionFactory.IsValueCreated)
+                using (_sessionFactory.Value) { }
         }
 
         [TestFixture]
@@ -45,7 +44,7 @@ namespace Lucid.Modules.Account.Tests
         {
             private SetupExecutorStub _excecutorStub;
 
-            protected SimulatedHttpClient   MvcTestingClient()  { return TestServerSetup.TestServer.MvcTestingClient(); }
+            protected SimulatedHttpClient   MvcTestingClient()  { return _testServerSetup.TestServer.MvcTestingClient(); }
             protected ExecutorStub          ExecutorStub        => _excecutorStub.Stub;
 
             [SetUp]
@@ -58,6 +57,26 @@ namespace Lucid.Modules.Account.Tests
             public void TearDown()
             {
                 using (_excecutorStub) { }
+            }
+        }
+
+        public class DbTxTest : IDisposable
+        {
+            public DbTxTest()
+            {
+                Session = _sessionFactory.Value.OpenSession();
+                NhRepository = new NhRepository(Session);
+                NhRepository.BeginTransaction();
+            }
+
+            public ISession     Session         { get; private set; }
+            public NhRepository NhRepository    { get; private set; }
+
+            public void Dispose()
+            {
+                using (NhRepository)
+                using (Session)
+                { }
             }
         }
 
