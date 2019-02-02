@@ -1,10 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.Testing;
 using Lucid.Infrastructure.Lib.Testing.Controller;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Infrastructure.Lib.Testing.SqlServer;
 using MvcTesting.AspNetCore;
+using NHibernate;
 using NUnit.Framework;
 
 namespace Lucid.Modules.Account.Tests
@@ -13,6 +15,7 @@ namespace Lucid.Modules.Account.Tests
     public class ModuleTestSetup
     {
         public static Schema                        Schema;
+        public static Lazy<ISessionFactory>         SessionFactory;
         public static SetupTestServer<TestStartup>  TestServerSetup;
 
         [OneTimeSetUp]
@@ -24,12 +27,17 @@ namespace Lucid.Modules.Account.Tests
                     migrationsSourceFolder: Path.Combine(TestUtil.ProjectPath(), "../Module/DbMigrations"));
 
             TestServerSetup = new SetupTestServer<TestStartup>();
+
+            SessionFactory = new Lazy<ISessionFactory>(() => Registry.BuildSessionFactory(Schema.ConnectionString));
         }
 
         [OneTimeTearDown]
         public void OnTimeTearDown()
         {
             using (TestServerSetup) { }
+
+            if (SessionFactory.IsValueCreated)
+                using (SessionFactory.Value) { }
         }
 
         [TestFixture]

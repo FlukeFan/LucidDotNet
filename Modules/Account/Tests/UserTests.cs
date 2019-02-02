@@ -10,9 +10,7 @@ namespace Lucid.Modules.Account.Tests
         [Test]
         public void CheckSaveLoad()
         {
-            var sessionFactory = Registry.BuildSessionFactory(ModuleTestSetup.Schema.ConnectionString);
-
-            using (var session = sessionFactory.OpenSession())
+            using (var session = ModuleTestSetup.SessionFactory.Value.OpenSession())
             using (var repository = new NhRepository(session))
             using (var tx = repository.BeginTransaction())
             {
