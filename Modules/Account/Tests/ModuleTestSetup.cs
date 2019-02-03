@@ -7,7 +7,6 @@ using Lucid.Infrastructure.Lib.Testing.SqlServer;
 using MvcTesting.AspNetCore;
 using NHibernate;
 using NUnit.Framework;
-using Reposify.NHibernate;
 
 namespace Lucid.Modules.Account.Tests
 {
@@ -60,24 +59,9 @@ namespace Lucid.Modules.Account.Tests
             }
         }
 
-        public class DbTxTest : IDisposable
+        public class DbTxTest : NhSqlTxTest
         {
-            public DbTxTest()
-            {
-                Session = _sessionFactory.Value.OpenSession();
-                NhRepository = new NhRepository(Session);
-                NhRepository.BeginTransaction();
-            }
-
-            public ISession     Session         { get; private set; }
-            public NhRepository NhRepository    { get; private set; }
-
-            public void Dispose()
-            {
-                using (NhRepository)
-                using (Session)
-                { }
-            }
+            public DbTxTest() : base(_sessionFactory.Value) { }
         }
 
         public class TestStartup : AbstractTestStartup
