@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Reposify.Testing;
 
 namespace Lucid.Modules.Account.Tests
@@ -16,6 +17,26 @@ namespace Lucid.Modules.Account.Tests
 
                 new CheckSaveLoad<User>(user, db.NhRepository).Check();
             }
+        }
+
+        [Test]
+        public void DbConstraints()
+        {
+            VerifyConstraints(e =>
+            {
+                using (var db = new ModuleTestSetup.DbTxTest())
+                    e.Save(db.NhRepository);
+            });
+        }
+
+        private void VerifyConstraints(Action<Builder<User>> verifySave)
+        {
+            Func<Builder<User>> validUserBuilder = () => new UserBuilder();
+
+            Assert.That(() => verifySave(validUserBuilder()), Throws.Nothing);
+
+            Assert.That(() => verifySave(validUserBuilder().With(u => u.Name, null)), Throws.Exception, $"should not allow null Name");
+            Assert.That(() => verifySave(validUserBuilder().With(u => u.LastLoggedIn, DateTime.MinValue)), Throws.Exception, $"should not allow date-value of {DateTime.MinValue}");
         }
     }
 }

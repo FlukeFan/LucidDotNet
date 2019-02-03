@@ -1,6 +1,6 @@
 ﻿using System;
+using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using NHibernate;
-using Reposify.NHibernate;
 
 namespace Lucid.Infrastructure.Lib.Testing.SqlServer
 {
@@ -9,12 +9,12 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
         public NhSqlTxTest(ISessionFactory sessionFactory)
         {
             Session = sessionFactory.OpenSession();
-            NhRepository = new NhRepository(Session);
+            NhRepository = new NhSqlRepository(Session);
             NhRepository.BeginTransaction();
         }
 
-        public ISession     Session         { get; private set; }
-        public NhRepository NhRepository    { get; private set; }
+        public ISession         Session         { get; private set; }
+        public NhSqlRepository  NhRepository    { get; private set; }
 
         public void Dispose()
         {
