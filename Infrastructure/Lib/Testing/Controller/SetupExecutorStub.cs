@@ -9,11 +9,12 @@ namespace Lucid.Infrastructure.Lib.Testing.Controller
         private IExecutor           _previous;
         private Action<IExecutor>   _onDispose;
 
-        public SetupExecutorStub(ref IExecutor executor, Action<IExecutor> onDispose)
+        public SetupExecutorStub(IExecutor current, Action<IExecutor> setup)
         {
-            _previous = executor;
-            _onDispose = onDispose;
-            executor = Stub = new ExecutorStub();
+            _previous = current;
+            _onDispose = setup;
+            Stub = new ExecutorStub();
+            setup(Stub);
         }
 
         public ExecutorStub Stub { get; private set; }

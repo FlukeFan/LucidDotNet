@@ -49,7 +49,7 @@ namespace Lucid.Modules.Account.Tests
             [SetUp]
             public void SetUp()
             {
-                _excecutorStub = new SetupExecutorStub(ref Registry.Executor, prev => Registry.Executor = prev);
+                _excecutorStub = new SetupExecutorStub(Registry.Executor, e => Registry.Executor = e);
             }
 
             [TearDown]
