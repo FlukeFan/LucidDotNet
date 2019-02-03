@@ -29,6 +29,16 @@ namespace Lucid.Modules.Account.Tests
             });
         }
 
+        [Test]
+        public void MemoryConstraints()
+        {
+            VerifyConstraints(e =>
+            {
+                using (var mem = new ModuleTestSetup.MemoryRepo())
+                    e.Save(mem.MemoryRepository);
+            });
+        }
+
         private void VerifyConstraints(Action<Builder<User>> verifySave)
         {
             Func<Builder<User>> validUserBuilder = () => new UserBuilder();

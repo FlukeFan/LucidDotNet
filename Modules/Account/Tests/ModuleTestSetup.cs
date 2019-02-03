@@ -7,12 +7,15 @@ using Lucid.Infrastructure.Lib.Testing.SqlServer;
 using MvcTesting.AspNetCore;
 using NHibernate;
 using NUnit.Framework;
+using Reposify.Testing;
 
 namespace Lucid.Modules.Account.Tests
 {
     [SetUpFixture]
     public class ModuleTestSetup
     {
+        public static ConstraintChecker MemoryConstraints = new ConstraintChecker();
+
         private static Lazy<ISessionFactory>            _sessionFactory;
         private static SetupTestServer<TestStartup>     _testServerSetup;
 
@@ -57,6 +60,18 @@ namespace Lucid.Modules.Account.Tests
             {
                 using (_excecutorStub) { }
             }
+        }
+
+        public class MemoryRepo : IDisposable
+        {
+            public MemoryRepo()
+            {
+                MemoryRepository = new MemoryRepository(MemoryConstraints);
+            }
+
+            public MemoryRepository MemoryRepository { get; private set; }
+
+            public void Dispose() { }
         }
 
         public class DbTxTest : NhSqlTxTest
