@@ -47,12 +47,12 @@ namespace Lucid.Modules.Account.Tests
             private SetupExecutorStub _excecutorStub;
 
             protected SimulatedHttpClient   MvcTestingClient()  { return _testServerSetup.TestServer.MvcTestingClient(); }
-            protected ExecutorStub          ExecutorStub        => _excecutorStub.Stub;
+            protected ExecutorStubAsync     ExecutorStub        => _excecutorStub.Stub;
 
             [SetUp]
             public void SetUp()
             {
-                _excecutorStub = new SetupExecutorStub(Registry.Executor, e => Registry.Executor = e);
+                _excecutorStub = new SetupExecutorStub(Registry.ExecutorAsync, e => Registry.ExecutorAsync = e);
             }
 
             [TearDown]

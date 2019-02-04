@@ -6,18 +6,18 @@ namespace Lucid.Infrastructure.Lib.Testing.Controller
 {
     public class SetupExecutorStub : IDisposable
     {
-        private IExecutor           _previous;
-        private Action<IExecutor>   _onDispose;
+        private IExecutorAsync          _previous;
+        private Action<IExecutorAsync>  _onDispose;
 
-        public SetupExecutorStub(IExecutor current, Action<IExecutor> setup)
+        public SetupExecutorStub(IExecutorAsync current, Action<IExecutorAsync> setup)
         {
             _previous = current;
             _onDispose = setup;
-            Stub = new ExecutorStub();
+            Stub = new ExecutorStubAsync();
             setup(Stub);
         }
 
-        public ExecutorStub Stub { get; private set; }
+        public ExecutorStubAsync Stub { get; private set; }
 
         public void Dispose()
         {

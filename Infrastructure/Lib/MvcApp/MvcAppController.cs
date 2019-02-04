@@ -11,14 +11,15 @@ namespace Lucid.Infrastructure.Lib.MvcApp
     {
         private string _facadePropertyPrefix;
 
-        protected virtual IExecutor Executor()
+        protected virtual IExecutorAsync ExecutorAsync()
         {
-            throw new NotImplementedException("Need to override Executor()");
+            throw new NotImplementedException("Need to override ExecutorAsync()");
         }
 
-        protected async Task<IActionResult> Exec<TResult>(ICommand<TResult> cmd, Func<TResult, IActionResult> success, Func<IActionResult> failure)
+        protected async Task<IActionResult> ExecAsync<TResult>(ICommand<TResult> cmd, Func<TResult, IActionResult> success, Func<IActionResult> failure)
         {
-            return await Exec<TResult>(ModelState, () => Executor().Execute(cmd), success, failure);
+            var context = new ExecutionContext { Executable = cmd };
+            return await Exec<TResult>(ModelState, () => ExecutorAsync().ExecuteAsync(context), success, failure);
         }
 
         protected void SetFacadePropertyPrefix(string prefix)

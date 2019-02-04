@@ -6,7 +6,7 @@ using Lucid.Infrastructure.Lib.Facade;
 
 namespace Lucid.Infrastructure.Lib.Testing.Execution
 {
-    public class ExecutorStub : IExecutor
+    public class ExecutorStubAsync : IExecutorAsync
     {
         private IDictionary<Type, object> _stubResults = new Dictionary<Type, object>();
 
@@ -35,11 +35,15 @@ namespace Lucid.Infrastructure.Lib.Testing.Execution
             _stubResults[typeof(T)] = result;
         }
 
-        Task<object> IExecutor.Execute(object executable)
+        Task<object> IExecutorAsync.ExecuteAsync(IExecutionContext context)
         {
-            if (executable == null)
-                throw new Exception("Null executable passed to IExecutor.Execute");
+            if (context == null)
+                throw new Exception("Null context passed to IExecutorAsync.ExecuteAsync");
 
+            if (context.Executable == null)
+                throw new Exception("Null executable passed to IExecutorAsync.ExecuteAsync");
+
+            var executable = context.Executable;
             AllExecuted.Add(executable);
 
             return Task.FromResult(_stubResults.ContainsKey(executable.GetType())

@@ -18,7 +18,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         {
             var cmd = _validCommand();
 
-            var bytes = await cmd.Execute();
+            var bytes = await cmd.ExecuteAsync();
 
             var fileCount = 0;
 

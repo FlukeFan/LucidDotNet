@@ -2,8 +2,8 @@
 
 namespace Lucid.Infrastructure.Lib.Facade
 {
-    public interface IExecutable
+    public interface IExecutableAsync
     {
-        Task<object> Execute();
+        Task<object> ExecuteAsync();
     }
 }

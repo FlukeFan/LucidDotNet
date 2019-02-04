@@ -23,7 +23,7 @@ namespace Lucid.Modules.ProjectCreation
         [HttpPost]
         public async Task<IActionResult> Index(GenerateProject cmd)
         {
-            return await Exec(cmd,
+            return await ExecAsync(cmd,
                 success: bytes => File(bytes, "application/zip", $"{cmd.Name}.zip"),
                 failure: () => Render(cmd));
         }

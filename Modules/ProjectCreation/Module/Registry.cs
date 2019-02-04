@@ -6,18 +6,18 @@ namespace Lucid.Modules.ProjectCreation
 {
     public static class Registry
     {
-        public static IExecutor Executor;
+        public static IExecutorAsync ExecutorAsync;
 
         public static void Startup()
         {
-            Executor =
-                new ValidatingExecutor(
-                    new Executor());
+            ExecutorAsync =
+                new ValidatingExecutorAsync(
+                    new ExecutorAsync());
         }
 
         public class ProjectCreationController : MvcAppController
         {
-            protected override IExecutor Executor() { return Registry.Executor; }
+            protected override IExecutorAsync ExecutorAsync() { return Registry.ExecutorAsync; }
         }
     }
 }

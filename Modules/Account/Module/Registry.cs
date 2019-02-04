@@ -11,15 +11,15 @@ namespace Lucid.Modules.Account
     {
         private static ISessionFactory _sessionFactory;
 
-        public static IExecutor Executor;
+        public static IExecutorAsync ExecutorAsync;
 
         public static void Startup(string connectionString)
         {
             _sessionFactory = NhUtil.CreateNhSessionFactory<Registry.Entity>(connectionString);
 
-            Executor =
-                new ValidatingExecutor(
-                    new Executor());
+            ExecutorAsync =
+                new ValidatingExecutorAsync(
+                    new ExecutorAsync());
         }
 
         public static ISessionFactory BuildSessionFactory(string connectionString)
@@ -35,7 +35,7 @@ namespace Lucid.Modules.Account
 
         public abstract class Controller : MvcAppController
         {
-            protected override IExecutor Executor() { return Registry.Executor; }
+            protected override IExecutorAsync ExecutorAsync() { return Registry.ExecutorAsync; }
         }
     }
 }
