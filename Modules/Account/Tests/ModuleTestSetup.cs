@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.Testing;
 using Lucid.Infrastructure.Lib.Testing.Controller;
 using Lucid.Infrastructure.Lib.Testing.Execution;
@@ -62,16 +63,23 @@ namespace Lucid.Modules.Account.Tests
             }
         }
 
-        public class MemoryRepo : IDisposable
+        public class SetupMemoryLogic : IDisposable
         {
-            public MemoryRepo()
+            private INhSqlRepository _previous;
+
+            public SetupMemoryLogic()
             {
-                MemoryRepository = new MemoryRepository(MemoryConstraints);
+                _previous = Registry.Repository.Value;
+                MemoryRepository = new NhSqlMemoryRepository(MemoryConstraints);
+                Registry.Repository.Value = MemoryRepository;
             }
 
-            public MemoryRepository MemoryRepository { get; private set; }
+            public NhSqlMemoryRepository MemoryRepository { get; private set; }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+                Registry.Repository.Value = _previous;
+            }
         }
 
         public class DbTxTest : NhSqlTxTest

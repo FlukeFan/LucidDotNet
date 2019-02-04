@@ -1,4 +1,5 @@
-﻿using Lucid.Infrastructure.Lib.Domain.SqlServer;
+﻿using System.Threading;
+using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.Facade;
 using Lucid.Infrastructure.Lib.Facade.Validation;
 using Lucid.Infrastructure.Lib.MvcApp;
@@ -11,7 +12,8 @@ namespace Lucid.Modules.Account
     {
         private static ISessionFactory _sessionFactory;
 
-        public static IExecutorAsync ExecutorAsync;
+        public static AsyncLocal<INhSqlRepository>  Repository      = new AsyncLocal<INhSqlRepository>();
+        public static IExecutorAsync                ExecutorAsync;
 
         public static void Startup(string connectionString)
         {
@@ -31,6 +33,8 @@ namespace Lucid.Modules.Account
         {
             object IEntity.Id => Id;
             public virtual int Id { get; protected set; }
+
+            protected static INhSqlRepository Repository => Registry.Repository.Value;
         }
 
         public abstract class Controller : MvcAppController

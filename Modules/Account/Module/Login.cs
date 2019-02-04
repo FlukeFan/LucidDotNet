@@ -4,14 +4,14 @@ using Lucid.Infrastructure.Lib.Facade;
 
 namespace Lucid.Modules.Account
 {
-    public class Login : CommandAsync<int>
+    public class Login : CommandAsync<User>
     {
         [Required(ErrorMessage = "Please supply a User Name")]
         public string UserName { get; set; }
 
-        public override Task<int> ExecuteAsync()
+        public override async Task<User> ExecuteAsync()
         {
-            throw new System.NotImplementedException();
+            return await User.Login(this);
         }
     }
 }

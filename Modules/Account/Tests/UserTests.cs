@@ -34,7 +34,7 @@ namespace Lucid.Modules.Account.Tests
         {
             VerifyConstraints(e =>
             {
-                using (var mem = new ModuleTestSetup.MemoryRepo())
+                using (var mem = new ModuleTestSetup.SetupMemoryLogic())
                     e.Save(mem.MemoryRepository);
             });
         }
