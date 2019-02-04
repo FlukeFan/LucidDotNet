@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using Lucid.Infrastructure.Lib.Domain;
 using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.Facade;
 using Lucid.Infrastructure.Lib.Facade.Validation;
@@ -8,7 +9,7 @@ using Reposify;
 
 namespace Lucid.Modules.Account
 {
-    public static class Registry
+    public class Registry : DomainRegistry
     {
         private static ISessionFactory _sessionFactory;
 

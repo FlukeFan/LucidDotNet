@@ -36,7 +36,7 @@ namespace Lucid.Modules.Account
 
         protected virtual void Login()
         {
-            LastLoggedIn = DateTime.UtcNow;
+            LastLoggedIn = Registry.UtcNow();
         }
     }
 }

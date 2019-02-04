@@ -83,11 +83,13 @@ namespace Lucid.Modules.Account.Tests
 
         public class SetupMemoryLogic : IDisposable
         {
-            private INhSqlRepository _previous;
+            private Func<DateTime>      _previousNow;
+            private INhSqlRepository    _previousRepository;
 
             public SetupMemoryLogic()
             {
-                _previous = Registry.Repository.Value;
+                _previousNow = Registry.UtcNow;
+                _previousRepository = Registry.Repository.Value;
                 MemoryRepository = new NhSqlMemoryRepository(MemoryConstraints);
                 Registry.Repository.Value = MemoryRepository;
             }
@@ -96,7 +98,8 @@ namespace Lucid.Modules.Account.Tests
 
             public void Dispose()
             {
-                Registry.Repository.Value = _previous;
+                Registry.Repository.Value = _previousRepository;
+                Registry.UtcNow = _previousNow;
             }
         }
 
