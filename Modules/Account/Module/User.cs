@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Lucid.Modules.Account
@@ -12,11 +13,30 @@ namespace Lucid.Modules.Account
 
         public async static Task<User> Login(Login cmd)
         {
-            return await Repository.SaveAsync(new User
+            var existingUser = Repository.Query<User>()
+                .Where(u => u.Name == cmd.UserName)
+                .SingleOrDefault();
+
+            if (existingUser == null)
             {
-                Name            = cmd.UserName,
-                LastLoggedIn    = DateTime.UtcNow,
-            });
+                var user = new User
+                {
+                    Name = cmd.UserName,
+                };
+                
+                user.Login();
+                return await Repository.SaveAsync(user);
+            }
+            else
+            {
+                existingUser.Login();
+                return existingUser;
+            }
+        }
+
+        protected virtual void Login()
+        {
+            LastLoggedIn = DateTime.UtcNow;
         }
     }
 }

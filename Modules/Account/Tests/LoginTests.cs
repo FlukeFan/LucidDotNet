@@ -39,5 +39,18 @@ namespace Lucid.Modules.Account.Tests
                 user1.Id.Should().NotBe(user2.Id);
             }
         }
+
+        [Test]
+        public async Task Login_ReturnsExistingUser()
+        {
+            using (new ModuleTestSetup.SetupMemoryLogic())
+            {
+                var user1 = await new Login { UserName = "Test1" }.ExecuteAsync();
+                var user2 = await new Login { UserName = "Test1" }.ExecuteAsync();
+
+                user1.Id.Should().NotBe(0);
+                user2.Id.Should().Be(user1.Id, "should return existing user");
+            }
+        }
     }
 }
