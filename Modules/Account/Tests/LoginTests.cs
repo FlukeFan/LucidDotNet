@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Lucid.Modules.Account.Tests
 {
     [TestFixture]
-    public class LoginTests
+    public class LoginTests : ModuleTestSetup.LogicTest
     {
         private static readonly Func<Login> _validCommand = () => new Login { UserName = "TestUser1" };
 
@@ -29,28 +29,22 @@ namespace Lucid.Modules.Account.Tests
         [Test]
         public async Task Login_ReturnsNewUser()
         {
-            using (new ModuleTestSetup.SetupMemoryLogic())
-            {
-                var user1 = await new Login { UserName = "Test1" }.ExecuteAsync();
-                var user2 = await new Login { UserName = "Test2" }.ExecuteAsync();
+            var user1 = await new Login { UserName = "Test1" }.ExecuteAsync();
+            var user2 = await new Login { UserName = "Test2" }.ExecuteAsync();
 
-                user1.Id.Should().NotBe(0);
-                user2.Id.Should().NotBe(0);
-                user1.Id.Should().NotBe(user2.Id);
-            }
+            user1.Id.Should().NotBe(0);
+            user2.Id.Should().NotBe(0);
+            user1.Id.Should().NotBe(user2.Id);
         }
 
         [Test]
         public async Task Login_ReturnsExistingUser()
         {
-            using (new ModuleTestSetup.SetupMemoryLogic())
-            {
-                var user1 = await new Login { UserName = "Test1" }.ExecuteAsync();
-                var user2 = await new Login { UserName = "Test1" }.ExecuteAsync();
+            var user1 = await new Login { UserName = "Test1" }.ExecuteAsync();
+            var user2 = await new Login { UserName = "Test1" }.ExecuteAsync();
 
-                user1.Id.Should().NotBe(0);
-                user2.Id.Should().Be(user1.Id, "should return existing user");
-            }
+            user1.Id.Should().NotBe(0);
+            user2.Id.Should().Be(user1.Id, "should return existing user");
         }
     }
 }
