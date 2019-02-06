@@ -55,12 +55,7 @@ namespace Lucid.Modules.Account.Tests
         {
             ExecutorStub.StubResult<Login>(l => throw new FacadeException("simulated error"));
 
-            var client = MvcTestingClient();
-
-            var form = await client
-                .GetAsync(Actions.Index())
-                .Form<Login>();
-
+            var form = await MvcTestingClient().GetAsync(Actions.Index()).Form<Login>();
             await form.Submit(r => r.SetExpectedResponse(HttpStatusCode.OK));
         }
     }

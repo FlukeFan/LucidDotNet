@@ -22,6 +22,18 @@ namespace Lucid.Infrastructure.Lib.MvcApp
             return await Exec<TResult>(ModelState, () => ExecutorAsync().ExecuteAsync(context), success, failure);
         }
 
+        protected async Task<IActionResult> ExecAsync<TResult>(ICommand<TResult> cmd, Func<TResult, Task<IActionResult>> success, Func<IActionResult> failure)
+        {
+            var context = new ExecutionContext { Executable = cmd };
+            return await Exec<TResult>(ModelState, () => ExecutorAsync().ExecuteAsync(context), success, () => Task.FromResult(failure()));
+        }
+
+        protected async Task<IActionResult> ExecAsync<TResult>(ICommand<TResult> cmd, Func<TResult, IActionResult> success, Func<Task<IActionResult>> failure)
+        {
+            var context = new ExecutionContext { Executable = cmd };
+            return await Exec<TResult>(ModelState, () => ExecutorAsync().ExecuteAsync(context), r => Task.FromResult(success(r)), failure);
+        }
+
         protected async Task<IActionResult> ExecAsync<TResult>(ICommand<TResult> cmd, Func<TResult, IActionResult> success, Func<IActionResult> failure)
         {
             var context = new ExecutionContext { Executable = cmd };

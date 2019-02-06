@@ -18,7 +18,7 @@ namespace Lucid.Modules.Account
     public class Controller : Registry.Controller
     {
         [HttpGet]
-        public Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return RenderIndex(new Login());
         }
@@ -31,10 +31,10 @@ namespace Lucid.Modules.Account
                 failure: () => RenderIndex(cmd));
         }
 
-        private Task<IActionResult> RenderIndex(Login cmd)
+        private IActionResult RenderIndex(Login cmd)
         {
             var model = new IndexModel { Cmd = cmd };
-            return Task.FromResult<IActionResult>(View(model));
+            return View(model);
         }
 
         private async Task<IActionResult> Login(User user)
