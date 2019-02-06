@@ -15,4 +15,8 @@
     <PackageReference Include="Reposify.NHibernate" Version="0.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Facade\Lucid.Infrastructure.Lib.Facade.csproj" />
+  </ItemGroup>
+
 </Project>

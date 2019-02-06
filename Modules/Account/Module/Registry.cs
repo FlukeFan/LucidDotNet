@@ -18,11 +18,12 @@ namespace Lucid.Modules.Account
 
         public static void Startup(string connectionString)
         {
-            _sessionFactory = NhUtil.CreateNhSessionFactory<Registry.Entity>(connectionString);
+            _sessionFactory = BuildSessionFactory(connectionString);
 
             ExecutorAsync =
                 new ValidatingExecutorAsync(
-                    new ExecutorAsync());
+                    new RepositoryExecutorAsync(_sessionFactory, () => Repository.Value, r => Repository.Value = r,
+                        new ExecutorAsync()));
         }
 
         public static ISessionFactory BuildSessionFactory(string connectionString)
