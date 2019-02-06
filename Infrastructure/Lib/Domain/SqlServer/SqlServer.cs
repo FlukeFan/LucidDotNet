@@ -85,7 +85,7 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
                     cmd.ExecuteNonQuery();
                 }
 
-                cmd.CommandText = $"CREATE LOGIN[{login}] WITH PASSWORD = N'Password12!', DEFAULT_DATABASE =[{_dbName}]";
+                cmd.CommandText = $"CREATE LOGIN[{login}] WITH PASSWORD = N'{_password}', DEFAULT_DATABASE =[{_dbName}]";
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = $"CREATE USER[{login}] FOR LOGIN[{login}] WITH DEFAULT_SCHEMA =[{schema.Name}]";
