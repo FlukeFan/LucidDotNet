@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
 using Lucid.Infrastructure.Lib.Testing.Controller;
@@ -44,10 +45,28 @@ namespace Lucid.Modules.Account.Tests
 
             client.Cookies.Select(c => c.Name).Should().Contain(ModuleTestSetup.TestStartup.AuthCookieName);
 
-            var redirectUrl = response.LastResult.As<RedirectResult>().Url;
+            var redirectUrl = response.ActionResultOf<RedirectResult>().Url;
             redirectUrl.Should().Be(Actions.LoginSuccess());
 
             await client.GetAsync(redirectUrl);
+        }
+
+        [Test]
+        public async Task Login_RedirectsToOriginalPage()
+        {
+            ExecutorStub.StubResult<Login>(new UserBuilder().Value());
+
+            var action = Actions.Index() + $"/?returnUrl={HttpUtility.UrlEncode("http://someUrl")}";
+
+            var form = await MvcTestingClient()
+                .GetAsync(action)
+                .Form<Login>();
+
+            var response = await form
+                .SetText(m => m.UserName, "User1")
+                .Submit();
+
+            response.ActionResultOf<RedirectResult>().Url.Should().Be("http://someUrl");
         }
 
         [Test]

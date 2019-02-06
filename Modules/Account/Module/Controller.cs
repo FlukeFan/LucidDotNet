@@ -50,7 +50,8 @@ namespace Lucid.Modules.Account
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-            return Redirect(Actions.LoginSuccess());
+            var returnUrl = Request.Query["returnUrl"];
+            return Redirect(returnUrl.Count > 0 ? returnUrl[0] : Actions.LoginSuccess());
         }
 
         [HttpGet("loginSuccess")]
