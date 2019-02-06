@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.Modules.Account
@@ -34,8 +37,19 @@ namespace Lucid.Modules.Account
             return View(model);
         }
 
-        private IActionResult Login(User user)
+        private async Task<IActionResult> Login(User user)
         {
+            var claims = new[]
+            {
+                new Claim("Id", user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Name),
+            };
+
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
             return Redirect(Actions.LoginSuccess());
         }
 

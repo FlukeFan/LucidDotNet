@@ -16,10 +16,16 @@ namespace Lucid.Infrastructure.Lib.MvcApp
             throw new NotImplementedException("Need to override ExecutorAsync()");
         }
 
-        protected async Task<IActionResult> ExecAsync<TResult>(ICommand<TResult> cmd, Func<TResult, IActionResult> success, Func<IActionResult> failure)
+        protected async Task<IActionResult> ExecAsync<TResult>(ICommand<TResult> cmd, Func<TResult, Task<IActionResult>> success, Func<Task<IActionResult>> failure)
         {
             var context = new ExecutionContext { Executable = cmd };
             return await Exec<TResult>(ModelState, () => ExecutorAsync().ExecuteAsync(context), success, failure);
+        }
+
+        protected async Task<IActionResult> ExecAsync<TResult>(ICommand<TResult> cmd, Func<TResult, IActionResult> success, Func<IActionResult> failure)
+        {
+            var context = new ExecutionContext { Executable = cmd };
+            return await Exec<TResult>(ModelState, () => ExecutorAsync().ExecuteAsync(context), r => Task.FromResult(success(r)), () => Task.FromResult(failure()));
         }
 
         protected void SetFacadePropertyPrefix(string prefix)
@@ -27,7 +33,7 @@ namespace Lucid.Infrastructure.Lib.MvcApp
             _facadePropertyPrefix = prefix;
         }
 
-        private async Task<IActionResult> Exec<TResult>(ModelStateDictionary modelState, Func<Task<object>> run, Func<TResult, IActionResult> success, Func<IActionResult> failure)
+        private async Task<IActionResult> Exec<TResult>(ModelStateDictionary modelState, Func<Task<object>> run, Func<TResult, Task<IActionResult>> success, Func<Task<IActionResult>> failure)
         {
             TResult response = default(TResult);
 
@@ -45,8 +51,8 @@ namespace Lucid.Infrastructure.Lib.MvcApp
             }
 
             return modelState.IsValid
-                ? success(response)
-                : failure();
+                ? await success(response)
+                : await failure();
         }
 
         private void AddErrors(ModelStateDictionary modelState, FacadeException exception)

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing.Controller;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,8 @@ namespace Lucid.Modules.Account.Tests
         [Test]
         public async Task Can_Login()
         {
+            ExecutorStub.StubResult<Login>(new UserBuilder().Value()); // TODO: remove need for this - create return object by default in stub
+
             var client = MvcTestingClient();
 
             var form = await client
@@ -37,7 +40,7 @@ namespace Lucid.Modules.Account.Tests
 
             ExecutorStub.SingleExecuted<Login>().Should().BeEquivalentTo(new Login { UserName = "User1" });
 
-            // TODO: assert that login cookie is set
+            client.Cookies.Select(c => c.Name).Should().Contain(ModuleTestSetup.TestStartup.AuthCookieName);
 
             var redirectUrl = response.LastResult.As<RedirectResult>().Url;
             redirectUrl.Should().Be(Actions.LoginSuccess());
