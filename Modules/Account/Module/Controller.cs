@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.Modules.Account
 {
@@ -6,7 +7,8 @@ namespace Lucid.Modules.Account
     {
         internal const string RoutePrefix = "account";
 
-        public static string Index() { return $"/{RoutePrefix}"; }
+        public static string Index()        { return $"/{RoutePrefix}"; }
+        public static string LoginSuccess() { return $"/{RoutePrefix}/loginSuccess"; }
     }
 
     [Route(Actions.RoutePrefix)]
@@ -15,17 +17,32 @@ namespace Lucid.Modules.Account
         [HttpGet]
         public IActionResult Index()
         {
-            return Render(new Login());
+            return RenderIndex(new Login());
         }
 
-        private IActionResult Render(Login cmd)
+        [HttpPost]
+        public async Task<IActionResult> Index(Login cmd)
         {
-            var model = new IndexModel
-            {
-                Cmd = cmd,
-            };
+            return await ExecAsync(cmd,
+                success: user => Login(user),
+                failure: () => null);
+        }
 
+        private IActionResult RenderIndex(Login cmd)
+        {
+            var model = new IndexModel { Cmd = cmd };
             return View(model);
+        }
+
+        private IActionResult Login(User user)
+        {
+            return Redirect(Actions.LoginSuccess());
+        }
+
+        [HttpGet("loginSuccess")]
+        public IActionResult LoginSuccess()
+        {
+            return View();
         }
     }
 }

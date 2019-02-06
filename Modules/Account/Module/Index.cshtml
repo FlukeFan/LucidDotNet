@@ -19,6 +19,11 @@
     @using (var form = Html.FormFor(Model.Cmd).Begin())
     {
         @form.Html.LabelledInputText("User Name", m => m.UserName)
+
+        using (form.Html.FormButtons())
+        {
+            @form.Html.ButtonSubmit("Login").NoPjax()
+        }
     }
 
 </div>
