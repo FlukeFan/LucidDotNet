@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.Modules.ProjectCreation
@@ -12,6 +13,7 @@ namespace Lucid.Modules.ProjectCreation
     }
 
     [Route(Actions.RoutePrefix)]
+    [AllowAnonymous]
     public class Controller : Registry.ProjectCreationController
     {
         [HttpGet]

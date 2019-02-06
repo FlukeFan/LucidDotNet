@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.Modules.Account
@@ -18,12 +19,14 @@ namespace Lucid.Modules.Account
     public class Controller : Registry.Controller
     {
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return RenderIndex(new Login());
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Index(Login cmd)
         {
             return await ExecAsync(cmd,
