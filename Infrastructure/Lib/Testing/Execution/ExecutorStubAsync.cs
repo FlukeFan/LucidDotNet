@@ -8,7 +8,7 @@ namespace Lucid.Infrastructure.Lib.Testing.Execution
 {
     public class ExecutorStubAsync : IExecutorAsync
     {
-        private IDictionary<Type, object> _stubResults = new Dictionary<Type, object>();
+        private IDictionary<Type, Func<object, object>> _stubResults = new Dictionary<Type, Func<object, object>>();
 
         public IList<object> AllExecuted = new List<object>();
 
@@ -32,7 +32,12 @@ namespace Lucid.Infrastructure.Lib.Testing.Execution
 
         public void StubResult<T>(object result)
         {
-            _stubResults[typeof(T)] = result;
+            _stubResults[typeof(T)] = o => result;
+        }
+
+        public void StubResult<T>(Func<T, object> result)
+        {
+            _stubResults[typeof(T)] = o => result((T)o);
         }
 
         Task<object> IExecutorAsync.ExecuteAsync(IExecutionContext context)
@@ -47,7 +52,7 @@ namespace Lucid.Infrastructure.Lib.Testing.Execution
             AllExecuted.Add(executable);
 
             return Task.FromResult(_stubResults.ContainsKey(executable.GetType())
-                ? _stubResults[executable.GetType()]
+                ? _stubResults[executable.GetType()](executable)
                 : null);
         }
     }

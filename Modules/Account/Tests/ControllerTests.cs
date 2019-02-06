@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Lucid.Infrastructure.Lib.Facade.Exceptions;
 using Lucid.Infrastructure.Lib.Testing.Controller;
 using Microsoft.AspNetCore.Mvc;
 using MvcTesting.Html;
@@ -46,6 +48,20 @@ namespace Lucid.Modules.Account.Tests
             redirectUrl.Should().Be(Actions.LoginSuccess());
 
             await client.GetAsync(redirectUrl);
+        }
+
+        [Test]
+        public async Task WhenError_RedisplaysPage()
+        {
+            ExecutorStub.StubResult<Login>(l => throw new FacadeException("simulated error"));
+
+            var client = MvcTestingClient();
+
+            var form = await client
+                .GetAsync(Actions.Index())
+                .Form<Login>();
+
+            await form.Submit(r => r.SetExpectedResponse(HttpStatusCode.OK));
         }
     }
 }
