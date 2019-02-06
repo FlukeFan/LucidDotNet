@@ -28,7 +28,7 @@ namespace Lucid.Modules.Account.Tests
         [Test]
         public async Task Can_Login()
         {
-            ExecutorStub.StubResult<Login>(new UserBuilder().Value()); // TODO: remove need for this - create return object by default in stub
+            ExecutorStub.StubResult<Login>(new UserBuilder().Value());
 
             var client = MvcTestingClient();
 
