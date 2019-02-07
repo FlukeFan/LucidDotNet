@@ -9,8 +9,9 @@
 
   <ItemGroup>
     <CoverageAssemblyFilter Include="Lucid.Modules" />
-    <CoverageTypeFilter Include="Lucid.Infrastructure.Host.Mvc.Program" />
-    <CoverageTypeFilter Include="Lucid.Infrastructure.Host.Mvc.Startup" />
+    <CoverageTypeFilter Include="Lucid.Infrastructure.Host.Web.Program" />
+    <CoverageTypeFilter Include="Lucid.Infrastructure.Host.Web.Startup" />
+    <CoverageTypeFilter Include="Lucid.Infrastructure.Host.Web.Logging.VariableBuffer" />
   </ItemGroup>
 
   <ItemGroup>

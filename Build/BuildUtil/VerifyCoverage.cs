@@ -27,7 +27,7 @@ namespace Build.BuildUtil
             if (actualLineCoverage < targetPercentage)
                 throw new Exception($"Expected at least {targetPercentage}% coverage, only got {actualLineCoverage}% coverage in {Path.GetFullPath(coverageFile)}");
 
-            UsingConsoleColor(ConsoleColor.Green, () => Console.WriteLine($"Coverage of {actualLineCoverage}% is greater than target of {targetPercentage}% "));
+            UsingConsoleColor(ConsoleColor.Green, () => Console.WriteLine($"Coverage of {actualLineCoverage}% is greater than target of {targetPercentage}% in {Path.GetFullPath(coverageFile)}"));
         }
     }
 }
