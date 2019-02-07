@@ -1,9 +1,11 @@
 ﻿using System.Threading;
+using FluentMigrator.Runner;
 using Lucid.Infrastructure.Lib.Domain;
 using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.Facade;
 using Lucid.Infrastructure.Lib.Facade.Validation;
 using Lucid.Infrastructure.Lib.MvcApp;
+using Microsoft.Extensions.Logging;
 using NHibernate;
 using Reposify;
 
@@ -16,9 +18,11 @@ namespace Lucid.Modules.Account
         public static AsyncLocal<INhSqlRepository>  Repository      = new AsyncLocal<INhSqlRepository>();
         public static IExecutorAsync                ExecutorAsync;
 
-        public static void Startup(string connectionString)
+        public static void Startup(Schema schema, ILogger<MigrationRunner> migrationLogger)
         {
-            _sessionFactory = BuildSessionFactory(connectionString);
+            DbMigration.Migrate<DbMigrations.V001.V000.Rev0_CreateUserTable>(schema, migrationLogger);
+
+            _sessionFactory = BuildSessionFactory(schema.ConnectionString);
 
             ExecutorAsync =
                 new ValidatingExecutorAsync(

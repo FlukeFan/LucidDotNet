@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using FluentMigrator.Runner;
 using Lucid.Infrastructure.Host.Web.Layout;
 using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.MvcApp.Pages;
@@ -95,7 +96,7 @@ namespace Lucid.Infrastructure.Host.Web
             var startupTasks = new[]
             {
                 Task.Run(() => Modules.ProjectCreation.Registry.Startup()),
-                Task.Run(() => Modules.Account.Registry.Startup(accountSchema.ConnectionString)),
+                Task.Run(() => Modules.Account.Registry.Startup(accountSchema, loggerFactory.CreateLogger<MigrationRunner>())),
             };
 
             Task.WaitAll(startupTasks);

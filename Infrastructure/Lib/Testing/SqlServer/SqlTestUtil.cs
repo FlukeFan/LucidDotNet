@@ -3,7 +3,6 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using FluentMigrator.Runner;
-using FluentMigrator.Runner.Conventions;
 using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,16 +42,7 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
 
             var serviceCollection = new ServiceCollection();
             var serviceProvider = serviceCollection
-                .AddFluentMigratorCore()
-                .ConfigureRunner(mrb =>
-                {
-                    mrb.AddSqlServer2016();
-                    mrb.ScanIn(typeof(TFromMigrationAssembly).Assembly).For.All();
-                    mrb.WithGlobalConnectionString(schema.ConnectionString);
-                    mrb.WithVersionTable(new SchemaVersionMetadata(schema.Name));
-                })
-                .AddScoped<IConventionSet>(sp => new DefaultConventionSet(schema.Name, null))
-                .AddScoped<DbQuery>(sp => new DbQuery(schema.ConnectionString, schema.Name))
+                .AddMigration(schema, typeof(TFromMigrationAssembly).Assembly)
                 .AddLogging(lb =>
                 {
                     lb.SetMinimumLevel(LogLevel.Trace);
