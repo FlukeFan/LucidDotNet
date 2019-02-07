@@ -66,6 +66,7 @@ namespace Lucid.Infrastructure.Host.Web
         {
             mvcOptions.Filters.Add(new FeatureFolderViewFilter());
             mvcOptions.Filters.Add(new AuthorizeFilter());
+            mvcOptions.Filters.Add(new PjaxFilter());
 
             if (_env.IsDevelopment())
                 mvcOptions.Filters.Add(new MvcAppPageResultFilter(true));
