@@ -46,7 +46,7 @@
     <Copy SourceFiles="..\..\..\Build\App_Offline.htm" DestinationFolder="." />
   </Target>
 
-  <Target Name="ReenableIisExpress" AfterTargets="Build" Condition="Exists('./App_Offline.htm')">
+  <Target Name="ReenableIisExpress" BeforeTargets="AfterBuild" Condition="Exists('./App_Offline.htm')">
     <Message Importance="High" Text="Enable site (delete App_Offline.htm)" />
     <Delete Files=".\App_Offline.htm" />
   </Target>
@@ -60,7 +60,7 @@
     <Touch Files="bin/webCompile.flg" AlwaysCreate="true" />
   </Target>
 
-  <Target Name="WebCompileCleanCustom" AfterTargets="CoreClean" Condition="Exists('obj/project.assets.json')">
+  <Target Name="WebCompileCleanCustom" BeforeTargets="AfterClean" Condition="Exists('obj/project.assets.json')">
     <WebCompiler.CompilerCleanTask FileName="$(MSBuildProjectDirectory)\compilerconfig.json" />
     <Delete Files="bin/webCompile.flg" />
   </Target>
@@ -76,7 +76,7 @@
     <Touch Files="bin/bundleMinify.flg" AlwaysCreate="true" />
   </Target>
 
-  <Target Name="BundleMinifyCleanCustom" AfterTargets="CoreClean" Condition="Exists('obj/project.assets.json')">
+  <Target Name="BundleMinifyCleanCustom" BeforeTargets="AfterClean" Condition="Exists('obj/project.assets.json')">
     <BundlerMinifier.BundlerCleanTask FileName="$(MSBuildProjectDirectory)\bundleconfig.json" />
     <Delete Files="bin/bundleMinify.flg" />
   </Target>
