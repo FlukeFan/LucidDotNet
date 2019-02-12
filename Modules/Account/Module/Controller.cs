@@ -13,6 +13,7 @@ namespace Lucid.Modules.Account
 
         public static string Index()        { return $"/{RoutePrefix}"; }
         public static string LoginSuccess() { return $"/{RoutePrefix}/loginSuccess"; }
+        public static string LogOut()       { return $"/{RoutePrefix}/logOut"; }
     }
 
     [Route(Actions.RoutePrefix)]
@@ -61,6 +62,13 @@ namespace Lucid.Modules.Account
         public IActionResult LoginSuccess()
         {
             return View();
+        }
+
+        [HttpGet("logOut")]
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect("/");
         }
     }
 }

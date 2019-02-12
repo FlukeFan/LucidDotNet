@@ -41,7 +41,7 @@
     </Content>
   </ItemGroup>
 
-  <Target Name="DisableIisExpress" BeforeTargets="CoreCompile" Condition="$(BuildingInsideVisualStudio)!='true'">
+  <Target Name="DisableIisExpress" BeforeTargets="CoreCompile" Condition="'$(BuildingInsideVisualStudio)'!='true'">
     <Message Importance="High" Text="Disable site (copy App_Offline.htm)" />
     <Copy SourceFiles="..\..\..\Build\App_Offline.htm" DestinationFolder="." />
   </Target>

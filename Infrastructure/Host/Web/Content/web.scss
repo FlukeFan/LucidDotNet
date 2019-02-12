@@ -34,7 +34,7 @@ body {
         max-width: 800px;
     }
 
-    .header {
+    header {
         position: absolute;
         overflow: visible;
         top: 0px;
@@ -48,7 +48,7 @@ body {
 
         #logInOut {
             position: absolute;
-            top: 8px;
+            top: 0px;
             left: 90px;
 
             @media (min-width: 768px) {

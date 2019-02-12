@@ -1,5 +1,6 @@
 ﻿using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
+using Lucid.Infrastructure.Lib.Testing.Controller;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,9 +14,10 @@ namespace Lucid.Infrastructure.Lib.Testing
         {
             services
                 .AddSingleton<IRazorPageActivator, CustomRazorPageActivator>()
-                .AddSingleton<ISetLayout, EmptySetLayout>()
+                .AddSingleton<ISetLayout>(NewSetLayout())
                 .AddMvc(o =>
                 {
+                    o.Filters.Add(new StubUserFilter());
                     o.Filters.Add(new FeatureFolderViewFilter());
                     o.Filters.Add(new MvcAppPageResultFilter(false));
                     o.Filters.Add(new CaptureResultFilter());
@@ -27,5 +29,7 @@ namespace Lucid.Infrastructure.Lib.Testing
         {
             app.UseMvc();
         }
+
+        protected virtual ISetLayout NewSetLayout() { return new EmptySetLayout(); }
     }
 }

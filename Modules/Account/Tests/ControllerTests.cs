@@ -77,5 +77,19 @@ namespace Lucid.Modules.Account.Tests
             var form = await MvcTestingClient().GetAsync(Actions.Index()).Form<Login>();
             await form.Submit(r => r.SetExpectedResponse(HttpStatusCode.OK));
         }
+
+        [Test]
+        public async Task CanLogOut()
+        {
+            var client = MvcTestingClient();
+
+            var response = await client
+                .GetAsync(Actions.LogOut(), r => r.SetExpectedResponse(HttpStatusCode.Redirect));
+
+            client.Cookies.Select(c => c.Name).Should().Contain(ModuleTestSetup.TestStartup.AuthCookieName);
+
+            var redirectUrl = response.ActionResultOf<RedirectResult>().Url;
+            redirectUrl.Should().Be("/");
+        }
     }
 }

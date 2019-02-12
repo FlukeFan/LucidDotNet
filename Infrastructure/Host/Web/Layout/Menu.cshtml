@@ -1,5 +1,7 @@
 ﻿@namespace Lucid.Infrastructure.Host.Web.Layout
+@using Lucid.Infrastructure.Lib.MvcApp
 @using Lucid.Infrastructure.Lib.MvcApp.Pages
+@using MvcForms.Navigation
 @{
     MenuModel MenuModel = ViewBag.MenuModel;
     PageInfo PageInfo = ViewBag.PageInfo;
@@ -22,6 +24,14 @@
                     </li>
                 </ul>
             </div>
+            @if (Context.LoggedInUser() == null)
+            {
+                @Html.LinkButton("Log In", Modules.Account.Actions.Index()).Tag(t => t.Id("logInOut"))
+            }
+            else
+            {
+                @Html.LinkButton($"Log Out {Context.LoggedInUser().Name}", Modules.Account.Actions.LogOut()).Tag(t => t.Id("logInOut"))
+            }
         </div>
     </nav>
 </header>
