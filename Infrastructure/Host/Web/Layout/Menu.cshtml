@@ -2,6 +2,8 @@
 @using Lucid.Infrastructure.Lib.MvcApp
 @using Lucid.Infrastructure.Lib.MvcApp.Pages
 @using MvcForms.Navigation
+@using MvcForms.Styles
+@using MvcForms.Styles.Bootstrap
 @{
     MenuModel MenuModel = ViewBag.MenuModel;
     PageInfo PageInfo = ViewBag.PageInfo;
@@ -26,11 +28,11 @@
             </div>
             @if (Context.LoggedInUser() == null)
             {
-                @Html.LinkButton("Log In", Modules.Account.Actions.Index()).Tag(t => t.Id("logInOut"))
+                @Html.LinkButton("Log In", Modules.Account.Actions.Index()).Style(BootstrapButton.Success).Tag(t => t.Id("logInOut"))
             }
             else
             {
-                @Html.LinkButton($"Log Out {Context.LoggedInUser().Name}", Modules.Account.Actions.LogOut()).Tag(t => t.Id("logInOut"))
+                @Html.LinkButton($"Log Out {Context.LoggedInUser().Name}", Modules.Account.Actions.LogOut()).Style(BootstrapButton.Primary).Tag(t => t.Id("logInOut"))
             }
         </div>
     </nav>
