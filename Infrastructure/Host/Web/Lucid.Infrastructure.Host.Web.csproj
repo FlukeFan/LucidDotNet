@@ -52,7 +52,8 @@
   </Target>
 
   <ItemGroup>
-    <WebCompileInputs Include="Content/web.scss" />
+    <WebCompileInputs Include="../../Lib/MvcApp/bin/content/**/*.css" />
+    <WebCompileInputs Include="Content/*.scss" />
   </ItemGroup>
 
   <Target Name="WebCompileCustom" BeforeTargets="BundleMinify;BeforeCompile" Inputs="@(WebCompileInputs)" Outputs="bin/webCompile.flg">
@@ -66,9 +67,8 @@
   </Target>
 
   <ItemGroup>
-    <BundleMinifyInputs Include="../../Lib/MvcApp/bin/content/**/*.css" />
-    <BundleMinifyInputs Include="../../Lib/MvcApp/wwwroot/**/*.css" />
-    <BundleMinifyInputs Include="Content/web.css" />
+    <BundleMinifyInputs Include="../../Lib/MvcApp/bin/content/**/*.js" />
+    <BundleMinifyInputs Include="Content/*.js" />
   </ItemGroup>
 
   <Target Name="BundleMinifyCustom" AfterTargets="CompileTypeScriptWithTSConfig" BeforeTargets="BeforeCompile" Inputs="@(BundleMinifyInputs)" Outputs="bin/bundleMinify.flg">
