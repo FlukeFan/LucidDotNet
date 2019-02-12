@@ -46,9 +46,7 @@ namespace Lucid.Modules.Account.Tests
             client.Cookies.Select(c => c.Name).Should().Contain(ModuleTestSetup.TestStartup.AuthCookieName);
 
             var redirectUrl = response.ActionResultOf<RedirectResult>().Url;
-            redirectUrl.Should().Be(Actions.LoginSuccess());
-
-            await client.GetAsync(redirectUrl);
+            redirectUrl.Should().Be("/");
         }
 
         [Test]

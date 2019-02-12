@@ -12,7 +12,6 @@ namespace Lucid.Modules.Account
         internal const string RoutePrefix = "account";
 
         public static string Index()        { return $"/{RoutePrefix}"; }
-        public static string LoginSuccess() { return $"/{RoutePrefix}/loginSuccess"; }
         public static string LogOut()       { return $"/{RoutePrefix}/logOut"; }
     }
 
@@ -55,13 +54,7 @@ namespace Lucid.Modules.Account
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
             var returnUrl = Request.Query["returnUrl"];
-            return Redirect(returnUrl.Count > 0 ? returnUrl[0] : Actions.LoginSuccess());
-        }
-
-        [HttpGet("loginSuccess")]
-        public IActionResult LoginSuccess()
-        {
-            return View();
+            return Redirect(returnUrl.Count > 0 ? returnUrl[0] : "/");
         }
 
         [HttpGet("logOut")]
