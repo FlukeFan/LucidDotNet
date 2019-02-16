@@ -103,6 +103,17 @@ body {
         }
     }
 
+    @media (max-height: 250px) {
+        // on tiny screens, prevent the fixed-header
+        .navbar {
+            position: relative;
+        }
+
+        .main {
+            position: relative;
+        }
+    }
+
     .mfo-dialog {
         background: #eee;
     }
