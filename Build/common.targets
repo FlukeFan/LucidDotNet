@@ -48,7 +48,7 @@
       <TestCaseFilterOption Condition="'$(FilterTest)'!=''">--testcasefilter:$(FilterTest)</TestCaseFilterOption>
     </PropertyGroup>
     <Message Importance="high" Text="Running tests: $(TestAssembly) without coverage $(TestCaseFilterOption)" />
-    <Exec WorkingDirectory="$(OutDir)" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx $(TestCaseFilterOption)" />
+    <ColorExec WorkingDirectory="$(OutDir)" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx $(TestCaseFilterOption)" />
     <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(TestStartTime)" AlwaysCreate="true" />
   </Target>
 
@@ -57,18 +57,94 @@
       <TestStartTime>$([System.DateTime]::Now.AddSeconds(1).ToString(yyyy-MM-dd HH:mm:ss))</TestStartTime>
     </PropertyGroup>
     <Message Importance="high" Text="Running tests with coverage: $(TestAssembly)" />
-    <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) --opencover --save --outputDirectory __Instrumented --xmlReport $(CoverageOutput) --assemblyFilter &quot;@(CoverageAssemblyFilter)&quot; --typeFilter &quot;@(CoverageTypeFilter)&quot; --methodFilter &quot;@(CoverageMethodFilter)&quot; --attributeFilter &quot;@(CoverageAttributeFilter)&quot;" />
-    <Exec WorkingDirectory="$(OutDir)\__Instrumented" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx" />
-    <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) Runner --collect -r __Instrumented" />
+    <ColorExec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) --opencover --save --outputDirectory __Instrumented --xmlReport $(CoverageOutput) --assemblyFilter &quot;@(CoverageAssemblyFilter)&quot; --typeFilter &quot;@(CoverageTypeFilter)&quot; --methodFilter &quot;@(CoverageMethodFilter)&quot; --attributeFilter &quot;@(CoverageAttributeFilter)&quot;" />
+    <ColorExec WorkingDirectory="$(OutDir)\__Instrumented" Command="dotnet.exe &quot;$(VsTestConsole)&quot; $(TestAssembly) --logger:trx" />
+    <ColorExec WorkingDirectory="$(OutDir)" Command="dotnet $(AltCover) Runner --collect -r __Instrumented" />
     <RemoveDir Directories="$(OutDir)CoverageReport" />
-    <Exec WorkingDirectory="$(OutDir)" Command="dotnet $(ReportGenerator) -reports:$(CoverageOutput) -targetdir:CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
-    <Exec Command="dotnet &quot;$(BuildUtil)&quot; VerifyCoverage $(CoverageTarget) $(OutDir)CoverageReport/Summary.xml" />
+    <ColorExec WorkingDirectory="$(OutDir)" Command="dotnet $(ReportGenerator) -reports:$(CoverageOutput) -targetdir:CoverageReport -verbosity:Error -ReportTypes:Html;XmlSummary" />
+    <ColorExec Command="dotnet &quot;$(BuildUtil)&quot; VerifyCoverage $(CoverageTarget) $(OutDir)CoverageReport/Summary.xml" />
     <Touch Files="$(OutDir)$(TestSuccessFlag)" Time="$(TestStartTime)" AlwaysCreate="true" />
   </Target>
 
   <Target Name="CopyPackageContents" Condition="'$(CopyPackageContent)' == 'true'" BeforeTargets="Compile" Inputs="$(MSBuildProjectDirectory)/obj/project.assets.json" Outputs="bin/content/lastUpdated.flg">
-    <Exec Command="dotnet &quot;$(BuildUtil)&quot; CopyPackageContents &quot;$(MSBuildProjectDirectory)/obj/project.assets.json&quot; &quot;$([System.String]::Copy($(NuGetPackageRoot)).TrimEnd('\'))&quot;" />
+    <ColorExec Command="dotnet &quot;$(BuildUtil)&quot; CopyPackageContents &quot;$(MSBuildProjectDirectory)/obj/project.assets.json&quot; &quot;$([System.String]::Copy($(NuGetPackageRoot)).TrimEnd('\'))&quot;" />
     <Touch Files="bin/content/lastUpdated.flg" AlwaysCreate="true" />
   </Target>
+
+  <UsingTask
+    TaskName="ColorExec"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="$(NuGetPackageRoot)roslyncodetaskfactory\2.0.7\build\netstandard2.0\RoslynCodeTaskFactory.dll" >
+    <ParameterGroup>
+      <WorkingDirectory ParameterType="System.String" />
+      <Command ParameterType="System.String" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.Diagnostics"/>
+      <Using Namespace="System.Threading"/>
+      <Code Type="Fragment" Language="cs">
+<![CDATA[
+  using (var process = new Process())
+  {
+      var firstSpace = Command.IndexOf(' ');
+
+      if (firstSpace > 0)
+      {
+        process.StartInfo.FileName = Command.Substring(0, firstSpace);
+        process.StartInfo.Arguments = Command.Substring(firstSpace + 1, Command.Length - firstSpace - 1);
+      }
+      else
+      {
+        process.StartInfo.FileName = Command;
+      }
+
+      if (!System.String.IsNullOrWhiteSpace(WorkingDirectory))
+        process.StartInfo.WorkingDirectory = WorkingDirectory;
+
+      using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
+      using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
+      {
+        var redirectOutput = BuildEngine2.IsRunningMultipleNodes;
+
+        if (redirectOutput)
+        {
+          process.StartInfo.RedirectStandardOutput = true;
+          process.StartInfo.RedirectStandardError = true;
+
+          process.OutputDataReceived += (sender, eventArgs) =>
+          {
+            if (eventArgs.Data == null)
+              outputWaitHandle.Set();
+            else
+              Log.LogMessage(MessageImportance.High, eventArgs.Data);
+          };
+
+          process.ErrorDataReceived += (sender, eventArgs) =>
+          {
+            if (eventArgs.Data == null)
+              outputWaitHandle.Set();
+            else
+              Log.LogError(eventArgs.Data);
+          };
+        }
+
+        process.StartInfo.UseShellExecute = false;
+
+        Log.LogMessage(MessageImportance.High, $"Starting {process.StartInfo.FileName} {process.StartInfo.Arguments} (in {process.StartInfo.WorkingDirectory}) redirectOutput={redirectOutput}");
+
+        process.Start();
+
+        if (redirectOutput)
+        {
+          process.BeginOutputReadLine();
+          process.BeginErrorReadLine();
+        }
+
+        process.WaitForExit();
+      }
+  }]]>
+      </Code>
+    </Task>
+  </UsingTask>
 
 </Project>
