@@ -33,7 +33,6 @@ namespace Lucid.Modules.ProjectCreation.Tests
             //// Assert DB?  NUnit logs?
 
             Exec.Cmd("dotnet", "clean build.proj", buildFolder);
-            Exec.Cmd("dotnet", "build-server shutdown", buildFolder);
             DeleteFolder(buildFolder, 5);
         }
 
