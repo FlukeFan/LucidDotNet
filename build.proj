@@ -6,14 +6,6 @@
     <ProjectsToBuild Include="Modules\build.proj" />
     <ProjectsToBuild Include="Infrastructure\build.proj" />
   </ItemGroup>
-  
-  <Target Name="BeforeBuild" BeforeTargets="Build">
-    <MSBuild Projects="Build\BuildUtil\Build.BuildUtil.csproj" Targets="Build" Properties="Configuration=Debug" />
-  </Target>
-
-  <Target Name="BeforeRestore" BeforeTargets="Restore">
-    <MSBuild Projects="Build\BuildUtil\Build.BuildUtil.csproj" Targets="Restore" />
-  </Target>
 
   <PropertyGroup>
     <WebBin>Infrastructure/Host/Web/bin</WebBin>

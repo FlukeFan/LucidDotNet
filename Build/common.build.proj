@@ -1,8 +1,20 @@
 <Project>
 
   <PropertyGroup>
-    <BuildUtil>$(MSBuildThisFileDirectory)\BuildUtil\bin\Debug\netcoreapp2.1\Build.BuildUtil.dll</BuildUtil>
+    <BuildUtil>$(MSBuildThisFileDirectory)BuildUtil/bin/Debug/netcoreapp2.1/Build.BuildUtil.dll</BuildUtil>
   </PropertyGroup>
+
+  <ItemGroup>
+    <BuildUtilSources Include="$(MSBuildThisFileDirectory)**/*.cs" />
+  </ItemGroup>
+
+  <Target Name="BeforeBuild" BeforeTargets="Build" Inputs="@(BuildUtilSources)" Outputs="$(BuildUtil)">
+    <MSBuild Projects="$(MSBuildThisFileDirectory)BuildUtil\Build.BuildUtil.csproj" Targets="Build" Properties="Configuration=Debug" />
+  </Target>
+
+  <Target Name="BeforeRestore" BeforeTargets="Restore" Inputs="@(BuildUtilSources)" Outputs="$(BuildUtil)">
+    <MSBuild Projects="$(MSBuildThisFileDirectory)BuildUtil\Build.BuildUtil.csproj" Targets="Restore" />
+  </Target>
 
   <ItemGroup>
     <Watch Include="**\*.cs" />
@@ -60,7 +72,7 @@
 
   <Target Name="BuildError">
     <PropertyGroup>
-      <BuildTime>Time:$([System.DateTime]::Now.Subtract($(BuildBeginTime)).TotalSeconds.ToString(0.00))s</BuildTime>
+      <BuildTime Condition="'$(BuildBeginTime)'!=''">Time:$([System.DateTime]::Now.Subtract($(BuildBeginTime)).TotalSeconds.ToString(0.00))s</BuildTime>
     </PropertyGroup>
     <Error Text="***** Build Fail $(BuildTime) $(MSBuildProjectFullPath) *****" />
   </Target>
