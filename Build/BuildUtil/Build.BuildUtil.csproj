@@ -4,12 +4,16 @@
     <OutputType>Exe</OutputType>
     <DebugType>full</DebugType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
-  <Target Name="ShutdownDotnetServer" BeforeTargets="BeforeBuild">
+  <Target Name="ExportFiles" AfterTargets="Publish">
     <Message Importance="High" Text="Shutting down dotnet.exe build-server so Build.BuildUtil.dll is not in use" />
     <Exec Command="dotnet build-server shutdown" />
+    <RemoveDir Directories="../.build" />
+    <ItemGroup>
+      <BuildUtilBinaries Include="bin/Debug/netcoreapp2.1/publish/**/*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(BuildUtilBinaries)" DestinationFolder="../.build/%(RecursiveDir)" />
   </Target>
 
   <ItemGroup>

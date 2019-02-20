@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <BuildUtil>$(MSBuildThisFileDirectory)BuildUtil/bin/Debug/netcoreapp2.1/Build.BuildUtil.dll</BuildUtil>
+    <BuildUtil>$(MSBuildThisFileDirectory).build/Build.BuildUtil.dll</BuildUtil>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <Target Name="BeforeBuild" BeforeTargets="Build" Inputs="@(BuildUtilSources)" Outputs="$(BuildUtil)">
-    <MSBuild Projects="$(MSBuildThisFileDirectory)BuildUtil\Build.BuildUtil.csproj" Targets="Build" Properties="Configuration=Debug" />
+    <MSBuild Projects="$(MSBuildThisFileDirectory)BuildUtil\Build.BuildUtil.csproj" Targets="Publish" Properties="Configuration=Debug" />
   </Target>
 
   <Target Name="BeforeRestore" BeforeTargets="Restore" Inputs="@(BuildUtilSources)" Outputs="$(BuildUtil)">

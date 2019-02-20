@@ -32,8 +32,8 @@ namespace Lucid.Modules.ProjectCreation.Tests
 
             //// Assert DB?  NUnit logs?
 
-            //Exec.Cmd("dotnet", "clean build.proj", buildFolder);
-            //DeleteFolder(buildFolder, 5);
+            Exec.Cmd("dotnet", "clean build.proj", buildFolder);
+            DeleteFolder(buildFolder, 5);
         }
 
         private void Unzip(byte[] zipBytes, string folder)

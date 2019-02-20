@@ -2,6 +2,7 @@ bin
 obj
 .vs
 .vscode
+.build
 *.user
 /Modules/ProjectCreation/Module/Project.zip
 /Modules/ProjectCreation/Module/Project.zip.nextUpdate
