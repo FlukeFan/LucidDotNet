@@ -9,7 +9,7 @@
     <CoverageTarget Condition="'$(CoverageTarget)'==''">70</CoverageTarget>
     <NoCoverage Condition="'$(NoCoverage)'==''">false</NoCoverage>
 
-    <BuildUtil>$(MSBuildThisFileDirectory)\BuildUtil\bin\Debug\netcoreapp2.1\Build.BuildUtil.dll</BuildUtil>
+    <BuildUtil>$(MSBuildThisFileDirectory)BuildUtil\bin\Debug\netcoreapp2.1\Build.BuildUtil.dll</BuildUtil>
     <AltCover>$(NuGetPackageRoot)altcover\5.0.665\tools\netcoreapp2.0\AltCover.dll</AltCover>
     <VsTestConsole>$(MSBuildExtensionsPath)vstest.console.dll</VsTestConsole>
     <ReportGenerator>$(NuGetPackageRoot)reportgenerator\4.0.11\tools\netcoreapp2.0\ReportGenerator.dll</ReportGenerator>
@@ -21,6 +21,8 @@
     <CoverageOutput>$(AssemblyName).coverage.xml</CoverageOutput>
 
   </PropertyGroup>
+
+  <UsingTask AssemblyFile="$(BuildUtil)" TaskName="Build.BuildUtil.ColorExec" />
 
   <ItemGroup>
     <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
@@ -70,81 +72,5 @@
     <ColorExec Command="dotnet &quot;$(BuildUtil)&quot; CopyPackageContents &quot;$(MSBuildProjectDirectory)/obj/project.assets.json&quot; &quot;$([System.String]::Copy($(NuGetPackageRoot)).TrimEnd('\'))&quot;" />
     <Touch Files="bin/content/lastUpdated.flg" AlwaysCreate="true" />
   </Target>
-
-  <UsingTask
-    TaskName="ColorExec"
-    TaskFactory="CodeTaskFactory"
-    AssemblyFile="$(NuGetPackageRoot)roslyncodetaskfactory\2.0.7\build\netstandard2.0\RoslynCodeTaskFactory.dll" >
-    <ParameterGroup>
-      <WorkingDirectory ParameterType="System.String" />
-      <Command ParameterType="System.String" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System.Diagnostics"/>
-      <Using Namespace="System.Threading"/>
-      <Code Type="Fragment" Language="cs">
-<![CDATA[
-  using (var process = new Process())
-  {
-      var firstSpace = Command.IndexOf(' ');
-
-      if (firstSpace > 0)
-      {
-        process.StartInfo.FileName = Command.Substring(0, firstSpace);
-        process.StartInfo.Arguments = Command.Substring(firstSpace + 1, Command.Length - firstSpace - 1);
-      }
-      else
-      {
-        process.StartInfo.FileName = Command;
-      }
-
-      if (!System.String.IsNullOrWhiteSpace(WorkingDirectory))
-        process.StartInfo.WorkingDirectory = WorkingDirectory;
-
-      using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
-      using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
-      {
-        var redirectOutput = BuildEngine2.IsRunningMultipleNodes;
-
-        if (redirectOutput)
-        {
-          process.StartInfo.RedirectStandardOutput = true;
-          process.StartInfo.RedirectStandardError = true;
-
-          process.OutputDataReceived += (sender, eventArgs) =>
-          {
-            if (eventArgs.Data == null)
-              outputWaitHandle.Set();
-            else
-              Log.LogMessage(MessageImportance.High, eventArgs.Data);
-          };
-
-          process.ErrorDataReceived += (sender, eventArgs) =>
-          {
-            if (eventArgs.Data == null)
-              outputWaitHandle.Set();
-            else
-              Log.LogError(eventArgs.Data);
-          };
-        }
-
-        process.StartInfo.UseShellExecute = false;
-
-        Log.LogMessage(MessageImportance.High, $"Starting {process.StartInfo.FileName} {process.StartInfo.Arguments} (in {process.StartInfo.WorkingDirectory}) redirectOutput={redirectOutput}");
-
-        process.Start();
-
-        if (redirectOutput)
-        {
-          process.BeginOutputReadLine();
-          process.BeginErrorReadLine();
-        }
-
-        process.WaitForExit();
-      }
-  }]]>
-      </Code>
-    </Task>
-  </UsingTask>
 
 </Project>
