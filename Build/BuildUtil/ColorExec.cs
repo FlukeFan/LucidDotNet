@@ -36,8 +36,8 @@ namespace Build.BuildUtil
                 {
                     process.StartInfo.RedirectStandardOutput = true;
                     process.StartInfo.RedirectStandardError = true;
-                    process.OutputDataReceived += (sender, eventArgs) => Log.LogMessage(MessageImportance.High, eventArgs.Data);
-                    process.ErrorDataReceived += (sender, eventArgs) => Log.LogError(eventArgs.Data);
+                    process.OutputDataReceived += (sender, eventArgs) => { if (eventArgs.Data != null) Log.LogMessage(MessageImportance.High, eventArgs.Data); };
+                    process.ErrorDataReceived += (sender, eventArgs) => { if (eventArgs.Data != null) Log.LogError(eventArgs.Data); };
                 }
 
                 process.StartInfo.UseShellExecute = false;
