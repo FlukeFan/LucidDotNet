@@ -74,7 +74,7 @@
   <Target Name="CleanBuildUtil" AfterTargets="Clean" Condition="Exists('$(MSBuildThisFileDirectory).build')">
     <Message Importance="High" Text="Shutting down dotnet.exe build-server so Build.BuildUtil.dll is not in use" />
     <Exec Command="dotnet build-server shutdown" />
-    <RemoveDir Directories="$(MSBuildThisFileDirectory).build" />
+    <RemoveDir Directories="$(MSBuildThisFileDirectory).build" ContinueOnError="true" />
   </Target>
 
   <Target Name="BuildError">
