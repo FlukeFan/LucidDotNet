@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <Target Name="ShutdownDotnetServer" BeforeTargets="BeforeBuild">
+    <Message Importance="High" Text="Shutting down dotnet.exe build-server so Build.BuildUtil.dll is not in use" />
     <Exec Command="dotnet build-server shutdown" />
   </Target>
 
