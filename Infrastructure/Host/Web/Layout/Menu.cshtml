@@ -21,8 +21,17 @@
                     <li class="nav-item">
                         <a href="@Modules.ProjectCreation.Actions.Index()" class="nav-link">Generate Project</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="@Modules.Temp.Child.Actions.Index()" class="nav-link">Temp page</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ToDoApp Factory
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item disabled" href="#">Design</a>
+                            <a class="dropdown-item disabled" href="#">Manufacturing</a>
+                            <a class="dropdown-item disabled" href="#">Sales</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Modules.Temp.Child.Actions.Index()">Temp page</a>
+                        </div>
                     </li>
                 </ul>
             </div>

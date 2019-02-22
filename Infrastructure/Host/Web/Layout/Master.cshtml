@@ -4,7 +4,7 @@
     PageInfo PageInfo = ViewBag.PageInfo;
 }
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta charset="utf-8" />
@@ -12,6 +12,10 @@
 
     <link rel="icon" href="~/favicon.ico">
     <title>Lucid - @PageInfo.Title</title>
+
+    <script>
+        document.documentElement.className = document.documentElement.className.replace("no-js", "js");
+    </script>
 
     <link rel="stylesheet" href="@Context.AddFileVersionToPath("/css/site.min.css")" />
 

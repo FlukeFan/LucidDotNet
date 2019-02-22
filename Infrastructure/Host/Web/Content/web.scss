@@ -118,3 +118,10 @@ body {
         background: #eee;
     }
 }
+
+html.no-js {
+    .dropdown-menu {
+        display: block;
+        position: initial !important;
+    }
+}
