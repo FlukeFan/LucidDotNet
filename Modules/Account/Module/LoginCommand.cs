@@ -4,7 +4,7 @@ using Lucid.Infrastructure.Lib.Facade;
 
 namespace Lucid.Modules.Account
 {
-    public class Login : CommandAsync<User>
+    public class LoginCommand : CommandAsync<User>
     {
         [Required(ErrorMessage = "Please supply a User Name")]
         public string UserName { get; set; }

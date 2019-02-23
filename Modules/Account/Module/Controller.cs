@@ -22,19 +22,19 @@ namespace Lucid.Modules.Account
         [AllowAnonymous]
         public IActionResult Index()
         {
-            return RenderIndex(new Login());
+            return RenderIndex(new LoginCommand());
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Index(Login cmd)
+        public async Task<IActionResult> Index(LoginCommand cmd)
         {
             return await ExecAsync(cmd,
                 success: user => Login(user),
                 failure: () => RenderIndex(cmd));
         }
 
-        private IActionResult RenderIndex(Login cmd)
+        private IActionResult RenderIndex(LoginCommand cmd)
         {
             var model = new IndexModel { Cmd = cmd };
             return View(model);

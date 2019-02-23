@@ -18,7 +18,7 @@ namespace Lucid.Modules.Account.Tests
         {
             var form = await MvcTestingClient()
                 .GetAsync(Actions.Index())
-                .Form<Login>();
+                .Form<LoginCommand>();
 
             form.Method.Should().Be("post");
             form.Action.Should().Be(Actions.Index().PrefixLocalhost());
@@ -29,19 +29,19 @@ namespace Lucid.Modules.Account.Tests
         [Test]
         public async Task Can_Login()
         {
-            ExecutorStub.StubResult<Login>(new UserBuilder().Value());
+            ExecutorStub.StubResult<LoginCommand>(new UserBuilder().Value());
 
             var client = MvcTestingClient();
 
             var form = await client
                 .GetAsync(Actions.Index())
-                .Form<Login>();
+                .Form<LoginCommand>();
 
             var response = await form
                 .SetText(m => m.UserName, "User1")
                 .Submit();
 
-            ExecutorStub.SingleExecuted<Login>().Should().BeEquivalentTo(new Login { UserName = "User1" });
+            ExecutorStub.SingleExecuted<LoginCommand>().Should().BeEquivalentTo(new LoginCommand { UserName = "User1" });
 
             client.Cookies.Select(c => c.Name).Should().Contain(ModuleTestSetup.TestStartup.AuthCookieName);
 
@@ -52,13 +52,13 @@ namespace Lucid.Modules.Account.Tests
         [Test]
         public async Task Login_RedirectsToOriginalPage()
         {
-            ExecutorStub.StubResult<Login>(new UserBuilder().Value());
+            ExecutorStub.StubResult<LoginCommand>(new UserBuilder().Value());
 
             var action = Actions.Index() + $"/?returnUrl={HttpUtility.UrlEncode("http://someUrl")}";
 
             var form = await MvcTestingClient()
                 .GetAsync(action)
-                .Form<Login>();
+                .Form<LoginCommand>();
 
             var response = await form
                 .SetText(m => m.UserName, "User1")
@@ -70,9 +70,9 @@ namespace Lucid.Modules.Account.Tests
         [Test]
         public async Task WhenError_RedisplaysPage()
         {
-            ExecutorStub.StubResult<Login>(l => throw new FacadeException("simulated error"));
+            ExecutorStub.StubResult<LoginCommand>(l => throw new FacadeException("simulated error"));
 
-            var form = await MvcTestingClient().GetAsync(Actions.Index()).Form<Login>();
+            var form = await MvcTestingClient().GetAsync(Actions.Index()).Form<LoginCommand>();
             await form.Submit(r => r.SetExpectedResponse(HttpStatusCode.OK));
         }
 

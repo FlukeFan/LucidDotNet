@@ -7,9 +7,9 @@ using NUnit.Framework;
 namespace Lucid.Modules.Account.Tests
 {
     [TestFixture]
-    public class LoginTests : ModuleTestSetup.LogicTest
+    public class LoginCommandTests : ModuleTestSetup.LogicTest
     {
-        private static readonly Func<Login> _validCommand = () => new Login { UserName = "TestUser1" };
+        private static readonly Func<LoginCommand> _validCommand = () => new LoginCommand { UserName = "TestUser1" };
 
         [Test]
         public void Execute()
@@ -29,8 +29,8 @@ namespace Lucid.Modules.Account.Tests
         [Test]
         public async Task Login_ReturnsNewUser()
         {
-            var user1 = await new Login { UserName = "Test1" }.ExecuteAsync();
-            var user2 = await new Login { UserName = "Test2" }.ExecuteAsync();
+            var user1 = await new LoginCommand { UserName = "Test1" }.ExecuteAsync();
+            var user2 = await new LoginCommand { UserName = "Test2" }.ExecuteAsync();
 
             user1.Id.Should().NotBe(0);
             user2.Id.Should().NotBe(0);
@@ -40,8 +40,8 @@ namespace Lucid.Modules.Account.Tests
         [Test]
         public async Task Login_ReturnsExistingUser()
         {
-            var user1 = await new Login { UserName = "Test1" }.ExecuteAsync();
-            var user2 = await new Login { UserName = "Test1" }.ExecuteAsync();
+            var user1 = await new LoginCommand { UserName = "Test1" }.ExecuteAsync();
+            var user2 = await new LoginCommand { UserName = "Test1" }.ExecuteAsync();
 
             user1.Id.Should().NotBe(0);
             user2.Id.Should().Be(user1.Id, "should return existing user");
@@ -52,13 +52,13 @@ namespace Lucid.Modules.Account.Tests
         {
             var earlier = Registry.UtcNow = () => new DateTime(2008, 07, 06);
 
-            var user = await new Login { UserName = "Test1" }.ExecuteAsync();
+            var user = await new LoginCommand { UserName = "Test1" }.ExecuteAsync();
 
             user.LastLoggedIn.Should().Be(earlier());
 
             var later = Registry.UtcNow = () => new DateTime(2009, 08, 07);
 
-            user = await new Login { UserName = user.Name }.ExecuteAsync();
+            user = await new LoginCommand { UserName = user.Name }.ExecuteAsync();
 
             user.LastLoggedIn.Should().Be(later());
         }

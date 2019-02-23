@@ -3,6 +3,6 @@
     public class IndexModel
     {
         // POST
-        public Login Cmd { get; set; }
+        public LoginCommand Cmd { get; set; }
     }
 }
