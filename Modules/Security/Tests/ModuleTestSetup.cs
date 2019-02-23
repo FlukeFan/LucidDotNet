@@ -12,7 +12,7 @@ using NHibernate;
 using NUnit.Framework;
 using Reposify.Testing;
 
-namespace Lucid.Modules.Account.Tests
+namespace Lucid.Modules.Security.Tests
 {
     [SetUpFixture]
     public class ModuleTestSetup
@@ -27,7 +27,7 @@ namespace Lucid.Modules.Account.Tests
         {
             var schema =
                 SqlTestUtil.UpdateMigrations<DbMigrations.V001.V000.Rev0_CreateUserTable>(
-                    schemaName:             "Account",
+                    schemaName:             "Security",
                     migrationsSourceFolder: Path.Combine(TestUtil.ProjectPath(), "../Module/DbMigrations"));
 
             _testServerSetup = new SetupTestServer<TestStartup>();

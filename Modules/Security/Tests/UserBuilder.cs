@@ -1,6 +1,6 @@
 ﻿using Reposify.Testing;
 
-namespace Lucid.Modules.Account.Tests
+namespace Lucid.Modules.Security.Tests
 {
     public class UserBuilder : Builder<User>
     {

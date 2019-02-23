@@ -1,4 +1,4 @@
-﻿namespace Lucid.Modules.Account
+﻿namespace Lucid.Modules.Security
 {
     public class IndexModel
     {

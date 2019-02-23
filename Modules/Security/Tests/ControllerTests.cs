@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using MvcTesting.Html;
 using NUnit.Framework;
 
-namespace Lucid.Modules.Account.Tests
+namespace Lucid.Modules.Security.Tests
 {
     public class ControllerTests : ModuleTestSetup.ControllerTest
     {

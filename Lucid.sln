@@ -76,14 +76,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Fa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Domain", "Infrastructure\Lib\Domain\Lucid.Infrastructure.Lib.Domain.csproj", "{278D3B89-7D55-4FAE-A3F4-ABEE17257308}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Account", "Account", "{278F2112-9252-4D71-BD27-A0DAF59D4C2C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{278F2112-9252-4D71-BD27-A0DAF59D4C2C}"
 	ProjectSection(SolutionItems) = preProject
-		Modules\Account\build.proj = Modules\Account\build.proj
+		Modules\Security\build.proj = Modules\Security\build.proj
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.Account", "Modules\Account\Module\Lucid.Modules.Account.csproj", "{D21B6119-CC47-4199-96B3-DF084470B2F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.Security", "Modules\Security\Module\Lucid.Modules.Security.csproj", "{D21B6119-CC47-4199-96B3-DF084470B2F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.Account.Tests", "Modules\Account\Tests\Lucid.Modules.Account.Tests.csproj", "{43622633-2FB7-4DC4-9A23-0312BBC8B84B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.Security.Tests", "Modules\Security\Tests\Lucid.Modules.Security.Tests.csproj", "{43622633-2FB7-4DC4-9A23-0312BBC8B84B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Reposify.Testing;
 
-namespace Lucid.Modules.Account.Tests
+namespace Lucid.Modules.Security.Tests
 {
     [TestFixture]
     public class UserTests

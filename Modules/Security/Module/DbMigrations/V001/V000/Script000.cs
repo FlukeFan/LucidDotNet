@@ -1,6 +1,6 @@
 ﻿using Lucid.Infrastructure.Lib.Domain.SqlServer;
 
-namespace Lucid.Modules.Account.DbMigrations.V001.V000
+namespace Lucid.Modules.Security.DbMigrations.V001.V000
 {
     [MigrationOrder(major: 1, minor: 0, script: 0)]
     public class Rev0_CreateUserTable : SqlServerMigration

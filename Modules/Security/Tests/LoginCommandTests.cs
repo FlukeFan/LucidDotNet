@@ -4,7 +4,7 @@ using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing.Validation;
 using NUnit.Framework;
 
-namespace Lucid.Modules.Account.Tests
+namespace Lucid.Modules.Security.Tests
 {
     [TestFixture]
     public class LoginCommandTests : ModuleTestSetup.LogicTest

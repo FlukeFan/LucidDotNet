@@ -3,8 +3,8 @@
   <Import Project="..\..\Build\common.build.proj" />
 
   <ItemGroup>
-    <ProjectsToBuild Include="Module\Lucid.Modules.Account.csproj" />
-    <ProjectsToBuild Include="Tests\Lucid.Modules.Account.Tests.csproj" />
+    <ProjectsToBuild Include="Module\Lucid.Modules.Security.csproj" />
+    <ProjectsToBuild Include="Tests\Lucid.Modules.Security.Tests.csproj" />
   </ItemGroup>
 
 </Project>

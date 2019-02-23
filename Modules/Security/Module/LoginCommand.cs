@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade;
 
-namespace Lucid.Modules.Account
+namespace Lucid.Modules.Security
 {
     public class LoginCommand : CommandAsync<User>
     {

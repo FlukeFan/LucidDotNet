@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using NHibernate;
 using Reposify;
 
-namespace Lucid.Modules.Account
+namespace Lucid.Modules.Security
 {
     public class Registry : DomainRegistry
     {

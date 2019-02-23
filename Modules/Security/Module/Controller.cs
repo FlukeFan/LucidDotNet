@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lucid.Modules.Account
+namespace Lucid.Modules.Security
 {
     public static class Actions
     {
-        internal const string RoutePrefix = "account";
+        internal const string RoutePrefix = "security";
 
         public static string Index()        { return $"/{RoutePrefix}"; }
         public static string LogOut()       { return $"/{RoutePrefix}/logOut"; }

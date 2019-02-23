@@ -58,7 +58,7 @@ namespace Lucid.Infrastructure.Host.Web
                 .AddCookie(o =>
                 {
                     o.Cookie.Name = "AuthCookie";
-                    o.LoginPath = Modules.Account.Actions.Index();
+                    o.LoginPath = Modules.Security.Actions.Index();
                 });
         }
 
@@ -79,8 +79,8 @@ namespace Lucid.Infrastructure.Host.Web
                 .UseIsBinary(f => ZipDeployOptions.DefaultIsBinary(f) || Path.GetFileName(f) == "nlog.config"));
 
             var hostConfig = config.GetSection("Host");
-            var accountSchema = new Schema { Name = "Account" };
-            InitSqlServer(hostConfig.GetSection("SqlServer"), accountSchema);
+            var securitySchema = new Schema { Name = "Security" };
+            InitSqlServer(hostConfig.GetSection("SqlServer"), securitySchema);
 
             app.UseAuthentication();
 
@@ -97,7 +97,7 @@ namespace Lucid.Infrastructure.Host.Web
             var startupTasks = new[]
             {
                 Task.Run(() => Modules.ProjectCreation.Registry.Startup()),
-                Task.Run(() => Modules.Account.Registry.Startup(accountSchema, loggerFactory.CreateLogger<MigrationRunner>())),
+                Task.Run(() => Modules.Security.Registry.Startup(securitySchema, loggerFactory.CreateLogger<MigrationRunner>())),
             };
 
             Task.WaitAll(startupTasks);

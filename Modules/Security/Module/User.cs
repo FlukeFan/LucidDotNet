@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lucid.Modules.Account
+namespace Lucid.Modules.Security
 {
     public class User : Registry.Entity
     {
