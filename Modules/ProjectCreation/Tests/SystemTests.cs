@@ -18,7 +18,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         [Test]
         public async Task Execute()
         {
-            var cmd = new GenerateProject { Name = "ShinyNewProject1" };
+            var cmd = new GenerateProjectCommand { Name = "ShinyNewProject1" };
 
             var zipBytes = await cmd.ExecuteAsync();
 

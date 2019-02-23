@@ -16,7 +16,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         {
             var form = await MvcTestingClient()
                 .GetAsync(Actions.Index())
-                .Form<GenerateProject>();
+                .Form<GenerateProjectCommand>();
 
             form.Method.Should().Be("post");
             form.Action.Should().Be(Actions.Index().PrefixLocalhost());
@@ -28,17 +28,17 @@ namespace Lucid.Modules.ProjectCreation.Tests
         public async Task Can_DownloadProjectZipFile()
         {
             var expectedByteString = "stub bytes";
-            ExecutorStub.StubResult<GenerateProject>(Encoding.ASCII.GetBytes(expectedByteString));
+            ExecutorStub.StubResult<GenerateProjectCommand>(Encoding.ASCII.GetBytes(expectedByteString));
 
             var form = await MvcTestingClient()
                 .GetAsync(Actions.Index())
-                .Form<GenerateProject>();
+                .Form<GenerateProjectCommand>();
 
             var response = await form
                 .SetText(m => m.Name, "PostTest")
                 .Submit(r => r.SetExpectedResponse(HttpStatusCode.OK));
 
-            ExecutorStub.SingleExecuted<GenerateProject>().Should().BeEquivalentTo(new GenerateProject { Name = "PostTest" });
+            ExecutorStub.SingleExecuted<GenerateProjectCommand>().Should().BeEquivalentTo(new GenerateProjectCommand { Name = "PostTest" });
 
             var fileResult = response.ActionResultOf<FileResult>();
             fileResult.ContentType.Should().Be("application/zip");

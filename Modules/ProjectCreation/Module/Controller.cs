@@ -19,18 +19,18 @@ namespace Lucid.Modules.ProjectCreation
         [HttpGet]
         public IActionResult Index()
         {
-            return Render(new GenerateProject());
+            return Render(new GenerateProjectCommand());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(GenerateProject cmd)
+        public async Task<IActionResult> Index(GenerateProjectCommand cmd)
         {
             return await ExecAsync(cmd,
                 success: bytes => File(bytes, "application/zip", $"{cmd.Name}.zip"),
                 failure: () => Render(cmd));
         }
 
-        private IActionResult Render(GenerateProject cmd)
+        private IActionResult Render(GenerateProjectCommand cmd)
         {
             var model = new IndexModel
             {

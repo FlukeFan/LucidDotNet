@@ -17,7 +17,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         public async Task FormatIsMaintained()
         {
             var rootPath = FindRootPath();
-            var cmd = new GenerateProject { Name = "Lucid" };
+            var cmd = new GenerateProjectCommand { Name = "Lucid" };
             var bytes = await cmd.ExecuteAsync();
             var zipCreated = File.GetLastWriteTimeUtc(Path.Combine(rootPath, "Modules/ProjectCreation/Module/Project.zip"));
 
@@ -98,7 +98,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
         [Test]
         public async Task GeneratedProjectContainsExpectedFiles()
         {
-            var cmd = new GenerateProject { Name = "DemoProj" };
+            var cmd = new GenerateProjectCommand { Name = "DemoProj" };
             var bytes = await cmd.ExecuteAsync();
 
             var zippedFiles = new List<string>();

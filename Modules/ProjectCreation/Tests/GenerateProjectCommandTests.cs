@@ -9,9 +9,9 @@ using NUnit.Framework;
 namespace Lucid.Modules.ProjectCreation.Tests
 {
     [TestFixture]
-    public class GenerateProjectTests
+    public class GenerateProjectCommandTests
     {
-        private static readonly Func<GenerateProject> _validCommand = () => new GenerateProject { Name = "NewProj_1" };
+        private static readonly Func<GenerateProjectCommand> _validCommand = () => new GenerateProjectCommand { Name = "NewProj_1" };
 
         [Test]
         public async Task Execute()

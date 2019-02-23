@@ -7,7 +7,7 @@ using Lucid.Infrastructure.Lib.Facade.Validation;
 
 namespace Lucid.Modules.ProjectCreation
 {
-    public class GenerateProject : CommandAsync<byte[]>, ICustomValidation
+    public class GenerateProjectCommand : CommandAsync<byte[]>, ICustomValidation
     {
         [Required(ErrorMessage = "Please supply a Name")]
         public string Name { get; set; } = "Demo";
