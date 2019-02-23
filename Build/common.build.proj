@@ -7,6 +7,7 @@
   <ItemGroup>
     <BuildUtilSources Include="$(MSBuildThisFileDirectory)**/*.cs" />
     <BuildUtilSources Include="$(MSBuildThisFileDirectory)**/*.csproj" />
+    <BuildUtilSources Remove="$(MSBuildThisFileDirectory)**/obj/**/*.*" />
   </ItemGroup>
 
   <Target Name="BeforeBuild" BeforeTargets="Build" Inputs="@(BuildUtilSources)" Outputs="$(BuildUtil)">
