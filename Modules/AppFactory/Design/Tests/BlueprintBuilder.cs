@@ -1,4 +1,5 @@
-﻿using Reposify.Testing;
+﻿using FluentAssertions;
+using Reposify.Testing;
 
 namespace Lucid.Modules.AppFactory.Design.Tests
 {
@@ -6,11 +7,11 @@ namespace Lucid.Modules.AppFactory.Design.Tests
     {
         static BlueprintBuilder()
         {
-            //CustomChecks.Add<Blueprint>((cc, bp) =>
-            //{
-            //    cc.Check(() => bp.OwnedByUserId, uid => uid.Should().NotBe(0));
-            //    cc.CheckNotNull(() => bp.Name);
-            //});
+            CustomChecks.Add<Blueprint>((cc, bp) =>
+            {
+                cc.Check(() => bp.OwnedByUserId, uid => uid.Should().NotBe(0));
+                cc.CheckNotNull(() => bp.Name);
+            });
         }
 
         public BlueprintBuilder()

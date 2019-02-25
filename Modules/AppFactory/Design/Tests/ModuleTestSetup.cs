@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Lucid.Infrastructure.Lib.Domain.SqlServer;
 using Lucid.Infrastructure.Lib.Testing;
 using Lucid.Infrastructure.Lib.Testing.SqlServer;
 using NHibernate;
@@ -77,27 +78,27 @@ namespace Lucid.Modules.AppFactory.Design.Tests
         //    }
         //}
 
-        //public class SetupMemoryLogic : IDisposable
-        //{
-        //    private Func<DateTime>      _previousNow;
-        //    private INhSqlRepository    _previousRepository;
+        public class SetupMemoryLogic : IDisposable
+        {
+            private Func<DateTime>      _previousNow;
+            private INhSqlRepository    _previousRepository;
 
-        //    public SetupMemoryLogic()
-        //    {
-        //        _previousNow = Registry.UtcNow;
-        //        _previousRepository = Registry.Repository.Value;
-        //        MemoryRepository = new NhSqlMemoryRepository(MemoryConstraints);
-        //        Registry.Repository.Value = MemoryRepository;
-        //    }
+            public SetupMemoryLogic()
+            {
+                _previousNow = Registry.UtcNow;
+                _previousRepository = Registry.Repository.Value;
+                MemoryRepository = new NhSqlMemoryRepository(MemoryConstraints);
+                Registry.Repository.Value = MemoryRepository;
+            }
 
-        //    public NhSqlMemoryRepository MemoryRepository { get; private set; }
+            public NhSqlMemoryRepository MemoryRepository { get; private set; }
 
-        //    public void Dispose()
-        //    {
-        //        Registry.Repository.Value = _previousRepository;
-        //        Registry.UtcNow = _previousNow;
-        //    }
-        //}
+            public void Dispose()
+            {
+                Registry.Repository.Value = _previousRepository;
+                Registry.UtcNow = _previousNow;
+            }
+        }
 
         public class DbTxTest : NhSqlTxTest
         {
