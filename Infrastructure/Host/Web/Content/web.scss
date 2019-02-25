@@ -120,8 +120,21 @@ body {
 }
 
 html.no-js {
-    .dropdown-menu {
-        display: block;
-        position: initial !important;
+    header {
+        position: relative;
+        height: auto;
+        nav {
+            position: relative;
+            .dropdown-menu {
+                display: block;
+                position: initial !important;
+            }
+        }
+    }
+    .main-title {
+        position: inherit;
+    }
+    .main {
+        position: inherit;
     }
 }
