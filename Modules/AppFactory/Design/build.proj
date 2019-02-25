@@ -3,6 +3,7 @@
   <Import Project="..\..\..\Build\common.build.proj" />
 
   <ItemGroup>
+    <ProjectsToBuild Include="Contract\Lucid.Modules.AppFactory.Design.Contract.csproj" />
     <ProjectsToBuild Include="Module\Lucid.Modules.AppFactory.Design.csproj" />
     <ProjectsToBuild Include="Tests\Lucid.Modules.AppFactory.Design.Tests.csproj" />
   </ItemGroup>
