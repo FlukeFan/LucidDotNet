@@ -58,7 +58,7 @@ namespace Lucid.Infrastructure.Host.Web
                 .AddCookie(o =>
                 {
                     o.Cookie.Name = "AuthCookie";
-                    o.LoginPath = Modules.Security.Actions.Index();
+                    o.LoginPath = Modules.Security.Actions.Login();
                 });
         }
 

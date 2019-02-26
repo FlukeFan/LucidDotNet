@@ -11,21 +11,21 @@ namespace Lucid.Modules.Security
     {
         internal const string RoutePrefix = "security";
 
-        public static string Index()        { return $"/{RoutePrefix}"; }
+        public static string Login()        { return $"/{RoutePrefix}/login"; }
         public static string LogOut()       { return $"/{RoutePrefix}/logOut"; }
     }
 
     [Route(Actions.RoutePrefix)]
     public class Controller : Registry.Controller
     {
-        [HttpGet]
+        [HttpGet("login")]
         [AllowAnonymous]
         public IActionResult Index()
         {
             return RenderIndex(new LoginCommand());
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Index(LoginCommand cmd)
         {

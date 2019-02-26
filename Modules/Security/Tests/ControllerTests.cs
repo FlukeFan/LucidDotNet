@@ -17,11 +17,11 @@ namespace Lucid.Modules.Security.Tests
         public async Task Can_SeeLoginForm()
         {
             var form = await MvcTestingClient()
-                .GetAsync(Actions.Index())
+                .GetAsync(Actions.Login())
                 .Form<LoginCommand>();
 
             form.Method.Should().Be("post");
-            form.Action.Should().Be(Actions.Index().PrefixLocalhost());
+            form.Action.Should().Be(Actions.Login().PrefixLocalhost());
 
             form.GetText(m => m.UserName).Should().Be("");
         }
@@ -34,7 +34,7 @@ namespace Lucid.Modules.Security.Tests
             var client = MvcTestingClient();
 
             var form = await client
-                .GetAsync(Actions.Index())
+                .GetAsync(Actions.Login())
                 .Form<LoginCommand>();
 
             var response = await form
@@ -54,7 +54,7 @@ namespace Lucid.Modules.Security.Tests
         {
             ExecutorStub.StubResult<LoginCommand>(new UserBuilder().Value());
 
-            var action = Actions.Index() + $"/?returnUrl={HttpUtility.UrlEncode("http://someUrl")}";
+            var action = Actions.Login() + $"/?returnUrl={HttpUtility.UrlEncode("http://someUrl")}";
 
             var form = await MvcTestingClient()
                 .GetAsync(action)
@@ -72,7 +72,7 @@ namespace Lucid.Modules.Security.Tests
         {
             ExecutorStub.StubResult<LoginCommand>(l => throw new FacadeException("simulated error"));
 
-            var form = await MvcTestingClient().GetAsync(Actions.Index()).Form<LoginCommand>();
+            var form = await MvcTestingClient().GetAsync(Actions.Login()).Form<LoginCommand>();
             await form.Submit(r => r.SetExpectedResponse(HttpStatusCode.OK));
         }
 

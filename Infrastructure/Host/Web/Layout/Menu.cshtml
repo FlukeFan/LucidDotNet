@@ -37,7 +37,7 @@
             </div>
             @if (Context.LoggedInUser() == null)
             {
-                @Html.LinkButton("Log In", Modules.Security.Actions.Index()).Style(BootstrapButton.Success).Tag(t => t.Id("logInOut"))
+                @Html.LinkButton("Log In", Modules.Security.Actions.Login()).Style(BootstrapButton.Success).Tag(t => t.Id("logInOut"))
             }
             else
             {
