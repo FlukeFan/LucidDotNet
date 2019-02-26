@@ -102,7 +102,19 @@ namespace Lucid.Modules.AppFactory.Design.Tests
 
         public class SetupDbTx : SetupNhSqlTx
         {
-            public SetupDbTx() : base(_sessionFactory.Value) { }
+            private INhSqlRepository _previousRepository;
+
+            public SetupDbTx() : base(_sessionFactory.Value)
+            {
+                _previousRepository = Registry.Repository.Value;
+                Registry.Repository.Value = NhRepository;
+            }
+
+            public override void Dispose()
+            {
+                Registry.Repository.Value = _previousRepository;
+                base.Dispose();
+            }
         }
 
         public class TestStartup : AbstractTestStartup { }

@@ -7,18 +7,21 @@ using Reposify.Testing;
 namespace Lucid.Modules.AppFactory.Design.Tests
 {
     [TestFixture]
-    public class FindBlueprintsQueryTests : ModuleTestSetup.LogicTest
+    public class FindBlueprintsQueryTests
     {
         [Test]
         public async Task OrdersByName()
         {
-            await new BlueprintBuilder().With(bp => bp.Name, "Bp3").SaveAsync(Registry.Repository.Value);
-            await new BlueprintBuilder().With(bp => bp.Name, "Bp1").SaveAsync(Registry.Repository.Value);
-            await new BlueprintBuilder().With(bp => bp.Name, "Bp2").SaveAsync(Registry.Repository.Value);
+            using (var db = new ModuleTestSetup.SetupDbTx())
+            {
+                await new BlueprintBuilder().With(bp => bp.Name, "Bp3").SaveAsync(db.NhRepository);
+                await new BlueprintBuilder().With(bp => bp.Name, "Bp1").SaveAsync(db.NhRepository);
+                await new BlueprintBuilder().With(bp => bp.Name, "Bp2").SaveAsync(db.NhRepository);
 
-            var blueprints = await new FindBlueprintsQuery().ExecuteAsync();
+                var blueprints = await new FindBlueprintsQuery().ExecuteAsync();
 
-            blueprints.Select(bp => bp.Name).Should().Equal("Bp1", "Bp2", "Bp3");
+                blueprints.Select(bp => bp.Name).Should().Equal("Bp1", "Bp2", "Bp3");
+            }
         }
     }
 }

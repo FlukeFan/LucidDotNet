@@ -16,7 +16,7 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
         public ISession         Session         { get; private set; }
         public NhSqlRepository  NhRepository    { get; private set; }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             using (NhRepository)
             using (Session)
