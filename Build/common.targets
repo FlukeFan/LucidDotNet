@@ -24,7 +24,7 @@
 
   <UsingTask AssemblyFile="$(BuildUtil)" TaskName="Build.BuildUtil.ColorExec" />
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(BuildingInsideVisualStudio)'!='true'">
     <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
     <TestDependencies Include="../**/*.cshtml" />
   </ItemGroup>
