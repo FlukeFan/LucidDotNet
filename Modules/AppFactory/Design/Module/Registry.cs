@@ -20,6 +20,8 @@ namespace Lucid.Modules.AppFactory.Design
 
         public static void Startup(Schema schema, ILogger<MigrationRunner> migrationLogger)
         {
+            DbMigration.Migrate<DbMigrations.V001.V000.Rev0_CreateBlueprintTable>(schema, migrationLogger);
+
             _sessionFactory = BuildSessionFactory(schema.ConnectionString);
 
             ExecutorAsync =
