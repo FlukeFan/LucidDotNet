@@ -35,7 +35,7 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
             return schema;
         }
 
-        private static void UpdateMigrations<TFromMigrationAssembly>(Domain.SqlServer.SqlServer serverConfig, Schema schema)
+        private static void UpdateMigrations<TFromMigrationAssembly>(Lib.Domain.SqlServer.SqlServer serverConfig, Schema schema)
         {
             serverConfig.CreateSchemas(true, schema);
             DropAll(schema);
@@ -64,13 +64,13 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
             return allFiles.Select(f => File.GetLastWriteTimeUtc(f)).Max();
         }
 
-        private static Domain.SqlServer.SqlServer GetServerConfig()
+        private static Lib.Domain.SqlServer.SqlServer GetServerConfig()
         {
             var config = TestUtil.GetConfig();
 
             var sqlServerConfig = config.GetSection("Host").GetSection("SqlServer");
 
-            var sqlServer = new Domain.SqlServer.SqlServer(
+            var sqlServer = new Lib.Domain.SqlServer.SqlServer(
                 server: sqlServerConfig.GetValue<string>("Server"),
                 dbName: sqlServerConfig.GetValue<string>("DbName"),
                 userId: sqlServerConfig.GetValue<string>("userId"),
@@ -79,7 +79,7 @@ namespace Lucid.Infrastructure.Lib.Testing.SqlServer
             return sqlServer;
         }
 
-        private static Schema GetSchema(Domain.SqlServer.SqlServer serverConfig, string schemaName)
+        private static Schema GetSchema(Lib.Domain.SqlServer.SqlServer serverConfig, string schemaName)
         {
             var schema = new Schema { Name = schemaName };
             serverConfig.SetSchemaConnections(schema);

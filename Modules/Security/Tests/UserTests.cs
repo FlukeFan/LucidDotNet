@@ -10,7 +10,7 @@ namespace Lucid.Modules.Security.Tests
         [Test]
         public void CheckSaveLoad()
         {
-            using (var db = new ModuleTestSetup.DbTxTest())
+            using (var db = new ModuleTestSetup.SetupDbTx())
             {
                 var user = new UserBuilder()
                     .Value();
@@ -24,7 +24,7 @@ namespace Lucid.Modules.Security.Tests
         {
             VerifyConstraints(e =>
             {
-                using (var db = new ModuleTestSetup.DbTxTest())
+                using (var db = new ModuleTestSetup.SetupDbTx())
                     e.Save(db.NhRepository);
             });
         }

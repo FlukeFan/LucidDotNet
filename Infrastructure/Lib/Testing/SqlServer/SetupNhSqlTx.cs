@@ -4,9 +4,9 @@ using NHibernate;
 
 namespace Lucid.Infrastructure.Lib.Testing.SqlServer
 {
-    public class NhSqlTxTest : IDisposable
+    public class SetupNhSqlTx : IDisposable
     {
-        public NhSqlTxTest(ISessionFactory sessionFactory)
+        public SetupNhSqlTx(ISessionFactory sessionFactory)
         {
             Session = sessionFactory.OpenSession();
             NhRepository = new NhSqlRepository(Session);
