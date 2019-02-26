@@ -4,7 +4,7 @@
     {
     }
 
-    public interface ICommand<T>
+    public interface ICommand<TReturn>
     {
     }
 }

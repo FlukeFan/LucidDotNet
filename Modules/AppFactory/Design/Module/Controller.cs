@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.Modules.AppFactory.Design
 {
@@ -13,9 +14,16 @@ namespace Lucid.Modules.AppFactory.Design
     public class Controller : Registry.Controller
     {
         [HttpGet("list")]
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            return View();
+            var blueprints = ExecAsync(new FindBlueprintsQuery());
+
+            var model = new ListModel
+            {
+                Blueprints = await blueprints,
+            };
+
+            return View(model);
         }
     }
 }

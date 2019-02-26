@@ -1,12 +1,19 @@
 ﻿@using MvcForms.Forms
 @namespace Lucid.Modules.AppFactory.Design
-@inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<object>
-@model object
+@inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<ListModel>
+@model ListModel
 @{Setup(pi =>
       {
           pi.Title = "Blueprints";
       });}
 
-<table id="blueprintList">
-
+<table class="blueprintList">
+    <tbody>
+        @foreach (var blueprint in Model.Blueprints)
+        {
+            <tr class="blueprintItem">
+                <td>@blueprint.Name</td>
+            </tr>
+        }
+    </tbody>
 </table>

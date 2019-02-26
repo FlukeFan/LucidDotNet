@@ -16,6 +16,12 @@ namespace Lucid.Infrastructure.Lib.MvcApp
             throw new NotImplementedException("Need to override ExecutorAsync()");
         }
 
+        protected async Task<TReturn> ExecAsync<TReturn>(IQuery<TReturn> query)
+        {
+            var context = new ExecutionContext { Executable = query };
+            return (TReturn) await ExecutorAsync().ExecuteAsync(context);
+        }
+
         protected async Task<IActionResult> ExecAsync<TResult>(ICommand<TResult> cmd, Func<TResult, Task<IActionResult>> success, Func<Task<IActionResult>> failure)
         {
             var context = new ExecutionContext { Executable = cmd };
