@@ -60,6 +60,24 @@ namespace Lucid.Modules.AppFactory.Design.Tests
             }
         }
 
+        [TestFixture]
+        public abstract class LogicTest
+        {
+            private SetupMemoryLogic _memoryLogic;
+
+            [SetUp]
+            public void SetUp()
+            {
+                _memoryLogic = new SetupMemoryLogic();
+            }
+
+            [TearDown]
+            public void TearDown()
+            {
+                using (_memoryLogic) { }
+            }
+        }
+
         public class SetupMemoryLogic : IDisposable
         {
             private Func<DateTime>      _previousNow;
