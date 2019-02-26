@@ -46,7 +46,7 @@ namespace Lucid.Infrastructure.Host.Web
                 var rootSourcePath = Path.GetFullPath(Path.Combine(_env.ContentRootPath, "../../.."));
                 services.UseCustomFileSystemRazorViews(rootSourcePath);
 
-                // add adctivator so we can track views have been setup correctly during development
+                // add activator so we can track views have been setup correctly during development
                 services.AddSingleton<IRazorPageActivator, CustomRazorPageActivator>();
             }
             else
