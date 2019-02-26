@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lucid.Modules.AppFactory.Design
+namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
     public static class Actions
     {

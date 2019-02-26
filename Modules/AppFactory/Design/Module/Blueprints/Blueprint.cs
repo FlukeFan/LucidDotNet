@@ -1,4 +1,4 @@
-﻿namespace Lucid.Modules.AppFactory.Design
+﻿namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
     public class Blueprint : Registry.Entity
     {

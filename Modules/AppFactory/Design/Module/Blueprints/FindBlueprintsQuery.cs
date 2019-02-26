@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade;
 using NHibernate.Linq;
 
-namespace Lucid.Modules.AppFactory.Design
+namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
     public class FindBlueprintsQuery : QueryAsync<List<Blueprint>>
     {

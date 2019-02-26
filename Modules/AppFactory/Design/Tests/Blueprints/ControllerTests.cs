@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Lucid.Modules.AppFactory.Design.Blueprints;
 using NUnit.Framework;
 
-namespace Lucid.Modules.AppFactory.Design.Tests
+namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 {
     public class ControllerTests : ModuleTestSetup.ControllerTest
     {

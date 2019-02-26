@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
+using Lucid.Modules.AppFactory.Design.Blueprints;
 using Reposify.Testing;
 
-namespace Lucid.Modules.AppFactory.Design.Tests
+namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 {
     public class BlueprintBuilder : Builder<Blueprint>
     {

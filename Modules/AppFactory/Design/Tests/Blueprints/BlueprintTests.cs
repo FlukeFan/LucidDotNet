@@ -1,8 +1,9 @@
 ﻿using System;
+using Lucid.Modules.AppFactory.Design.Blueprints;
 using NUnit.Framework;
 using Reposify.Testing;
 
-namespace Lucid.Modules.AppFactory.Design.Tests
+namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 {
     [TestFixture]
     public class BlueprintTests

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lucid.Modules.AppFactory.Design
+namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
     public class ListModel
     {
