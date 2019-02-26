@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Modules\AppFactory\Design\Module\Lucid.Modules.AppFactory.Design.csproj" />
     <ProjectReference Include="..\..\Lib\Domain\Lucid.Infrastructure.Lib.Domain.csproj" />
     <ProjectReference Include="..\..\Lib\MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj" />
     <ProjectReference Include="..\..\..\Modules\ProjectCreation\Module\Lucid.Modules.ProjectCreation.csproj" />

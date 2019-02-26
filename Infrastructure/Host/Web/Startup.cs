@@ -80,7 +80,11 @@ namespace Lucid.Infrastructure.Host.Web
 
             var hostConfig = config.GetSection("Host");
             var securitySchema = new Schema { Name = "Security" };
-            InitSqlServer(hostConfig.GetSection("SqlServer"), securitySchema);
+            var designSchema = new Schema { Name = "Design" };
+
+            InitSqlServer(hostConfig.GetSection("SqlServer"),
+                securitySchema,
+                designSchema);
 
             app.UseAuthentication();
 
@@ -98,6 +102,7 @@ namespace Lucid.Infrastructure.Host.Web
             {
                 Task.Run(() => Modules.ProjectCreation.Registry.Startup()),
                 Task.Run(() => Modules.Security.Registry.Startup(securitySchema, loggerFactory.CreateLogger<MigrationRunner>())),
+                Task.Run(() => Modules.AppFactory.Design.Registry.Startup(designSchema, loggerFactory.CreateLogger<MigrationRunner>())),
             };
 
             Task.WaitAll(startupTasks);
