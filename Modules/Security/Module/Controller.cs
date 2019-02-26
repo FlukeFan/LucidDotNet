@@ -20,14 +20,14 @@ namespace Lucid.Modules.Security
     {
         [HttpGet("login")]
         [AllowAnonymous]
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return RenderIndex(new LoginCommand());
         }
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Index(LoginCommand cmd)
+        public async Task<IActionResult> Login(LoginCommand cmd)
         {
             return await ExecAsync(cmd,
                 success: user => Login(user),
@@ -36,7 +36,7 @@ namespace Lucid.Modules.Security
 
         private IActionResult RenderIndex(LoginCommand cmd)
         {
-            var model = new IndexModel { Cmd = cmd };
+            var model = new LoginModel { Cmd = cmd };
             return View(model);
         }
 

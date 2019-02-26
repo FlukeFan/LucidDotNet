@@ -1,6 +1,6 @@
 ﻿namespace Lucid.Modules.Security
 {
-    public class IndexModel
+    public class LoginModel
     {
         // POST
         public LoginCommand Cmd { get; set; }
