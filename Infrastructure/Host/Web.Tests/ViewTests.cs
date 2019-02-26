@@ -17,15 +17,5 @@ namespace Lucid.Infrastructure.Host.Web.Tests
             response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
             response.LastResult.Should().BeOfType<ViewResult>();
         }
-
-        [Test]
-        public async Task CanSeeModuleViewsWithSameViewName()
-        {
-            var response = await MvcTestingClient().GetAsync(Modules.Temp.Actions.Index());
-
-            response.HttpStatusCode.Should().Be(HttpStatusCode.OK);
-            response.LastResult.Should().BeOfType<ViewResult>();
-        }
-
     }
 }

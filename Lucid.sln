@@ -61,15 +61,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.ProjectCreati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.MvcApp", "Infrastructure\Lib\MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj", "{623F8080-8896-4836-B8C5-3B3B11448E62}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Temp", "Temp", "{1BA02468-5BD7-4BBC-858F-89C29FF68597}"
-	ProjectSection(SolutionItems) = preProject
-		Modules\Temp\build.proj = Modules\Temp\build.proj
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.Temp", "Modules\Temp\Module\Lucid.Modules.Temp.csproj", "{E310B956-4F2D-4186-9A86-1B6CCBDD629E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.Temp.Tests", "Modules\Temp\Tests\Lucid.Modules.Temp.Tests.csproj", "{107E1C49-2D88-44EC-9057-42AC34D08E16}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.MvcApp.Tests", "Infrastructure\Lib\MvcApp.Tests\Lucid.Infrastructure.Lib.MvcApp.Tests.csproj", "{44B2CB31-3F0C-4108-8E5B-58D85E677C02}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Facade", "Infrastructure\Lib\Facade\Lucid.Infrastructure.Lib.Facade.csproj", "{B8A7348D-B678-489B-847D-D4226D44B66A}"
@@ -99,7 +90,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.AppFactory.De
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.AppFactory.Design.Tests", "Modules\AppFactory\Design\Tests\Lucid.Modules.AppFactory.Design.Tests.csproj", "{BFA189F7-1772-4E70-924B-6396B27F5080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucid.Modules.AppFactory.Design.Contract", "Modules\AppFactory\Design\Contract\Lucid.Modules.AppFactory.Design.Contract.csproj", "{FB0BC786-9A16-41C8-AED1-ED6C18F01807}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.AppFactory.Design.Contract", "Modules\AppFactory\Design\Contract\Lucid.Modules.AppFactory.Design.Contract.csproj", "{FB0BC786-9A16-41C8-AED1-ED6C18F01807}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -195,30 +186,6 @@ Global
 		{623F8080-8896-4836-B8C5-3B3B11448E62}.Release|x64.Build.0 = Release|Any CPU
 		{623F8080-8896-4836-B8C5-3B3B11448E62}.Release|x86.ActiveCfg = Release|Any CPU
 		{623F8080-8896-4836-B8C5-3B3B11448E62}.Release|x86.Build.0 = Release|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Debug|x64.Build.0 = Debug|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Debug|x86.Build.0 = Debug|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Release|x64.ActiveCfg = Release|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Release|x64.Build.0 = Release|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Release|x86.ActiveCfg = Release|Any CPU
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E}.Release|x86.Build.0 = Release|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Debug|x64.Build.0 = Debug|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Debug|x86.Build.0 = Debug|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Release|x64.ActiveCfg = Release|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Release|x64.Build.0 = Release|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Release|x86.ActiveCfg = Release|Any CPU
-		{107E1C49-2D88-44EC-9057-42AC34D08E16}.Release|x86.Build.0 = Release|Any CPU
 		{44B2CB31-3F0C-4108-8E5B-58D85E677C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{44B2CB31-3F0C-4108-8E5B-58D85E677C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44B2CB31-3F0C-4108-8E5B-58D85E677C02}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -330,9 +297,6 @@ Global
 		{5A957B8F-7DBF-4989-ACFA-6BD59C257009} = {673964CD-F184-4238-9DCA-A6EA7C9E2C7F}
 		{A5C22845-613B-457B-8F5B-5F4E8CC13FB5} = {A5DCD578-ECE9-4A21-85A9-93A1FA4542DF}
 		{623F8080-8896-4836-B8C5-3B3B11448E62} = {C5979DA4-1E3E-4344-9BB1-1F103A17C811}
-		{1BA02468-5BD7-4BBC-858F-89C29FF68597} = {43B44B4F-BCC4-412C-9664-C749BDC57565}
-		{E310B956-4F2D-4186-9A86-1B6CCBDD629E} = {1BA02468-5BD7-4BBC-858F-89C29FF68597}
-		{107E1C49-2D88-44EC-9057-42AC34D08E16} = {1BA02468-5BD7-4BBC-858F-89C29FF68597}
 		{44B2CB31-3F0C-4108-8E5B-58D85E677C02} = {C5979DA4-1E3E-4344-9BB1-1F103A17C811}
 		{B8A7348D-B678-489B-847D-D4226D44B66A} = {C5979DA4-1E3E-4344-9BB1-1F103A17C811}
 		{278D3B89-7D55-4FAE-A3F4-ABEE17257308} = {C5979DA4-1E3E-4344-9BB1-1F103A17C811}

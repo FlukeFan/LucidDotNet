@@ -6,7 +6,6 @@
     <ProjectsToBuild Include="Security\build.proj" />
     <ProjectsToBuild Include="ProjectCreation\build.proj" />
     <ProjectsToBuild Include="AppFactory\build.proj" />
-    <ProjectsToBuild Include="Temp\build.proj" />
   </ItemGroup>
 
 </Project>
