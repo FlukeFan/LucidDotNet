@@ -6,16 +6,16 @@ namespace Lucid.Modules.Security.Tests
     {
         static UserBuilder()
         {
-            CustomChecks.Add<User>((cc, u) =>
+            CustomChecks.Add<User>((cc, e) =>
             {
-                cc.CheckNotNull(() => u.Name);
+                cc.CheckNotNull(() => e.Name);
             });
         }
 
         public UserBuilder()
         {
-            With(u => u.Name, "TestUser");
-            With(u => u.LastLoggedIn, new System.DateTime(2008, 07, 06));
+            With(e => e.Name, "TestUser");
+            With(e => e.LastLoggedIn, new System.DateTime(2008, 07, 06));
         }
     }
 }

@@ -7,17 +7,17 @@ namespace Lucid.Modules.AppFactory.Design.Tests
     {
         static BlueprintBuilder()
         {
-            CustomChecks.Add<Blueprint>((cc, bp) =>
+            CustomChecks.Add<Blueprint>((cc, e) =>
             {
-                cc.Check(() => bp.OwnedByUserId, uid => uid.Should().NotBe(0));
-                cc.CheckNotNull(() => bp.Name);
+                cc.Check(() => e.OwnedByUserId, uid => uid.Should().NotBe(0));
+                cc.CheckNotNull(() => e.Name);
             });
         }
 
         public BlueprintBuilder()
         {
-            With(u => u.OwnedByUserId, 123);
-            With(u => u.Name, "TestBlueprint");
+            With(e => e.OwnedByUserId, 123);
+            With(e => e.Name, "TestBlueprint");
         }
     }
 }

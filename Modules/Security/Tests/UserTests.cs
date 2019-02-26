@@ -12,10 +12,10 @@ namespace Lucid.Modules.Security.Tests
         {
             using (var db = new ModuleTestSetup.SetupDbTx())
             {
-                var user = new UserBuilder()
+                var entity = new UserBuilder()
                     .Value();
 
-                new CheckSaveLoad<User>(user, db.NhRepository).Check();
+                new CheckSaveLoad<User>(entity, db.NhRepository).Check();
             }
         }
 
