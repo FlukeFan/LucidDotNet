@@ -51,6 +51,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests
             [SetUp]
             public void SetUp()
             {
+                StubUserFilter.SetupDefault();
                 _excecutorStub = new SetupExecutorStub(Registry.ExecutorAsync, e => Registry.ExecutorAsync = e);
             }
 

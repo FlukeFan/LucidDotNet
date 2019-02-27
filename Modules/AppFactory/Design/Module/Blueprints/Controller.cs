@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Lucid.Infrastructure.Lib.MvcApp;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lucid.Modules.AppFactory.Design.Blueprints
@@ -16,7 +17,11 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         [HttpGet("list")]
         public async Task<IActionResult> List()
         {
-            var blueprints = ExecAsync(new FindBlueprintsQuery());
+            var blueprints = ExecAsync(
+                new FindBlueprintsQuery
+                {
+                    UserId = HttpContext.LoggedInUser().Id
+                });
 
             var model = new ListModel
             {

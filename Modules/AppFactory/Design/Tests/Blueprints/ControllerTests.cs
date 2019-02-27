@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Lucid.Infrastructure.Lib.Testing.Controller;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using NUnit.Framework;
 
@@ -19,6 +20,12 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 
             var response = await MvcTestingClient()
                 .GetAsync(Actions.List());
+
+            ExecutorStub.Executed<FindBlueprintsQuery>()[0].Should().BeEquivalentTo(
+                new FindBlueprintsQuery
+                {
+                    UserId = StubUserFilter.StubUser.Id,
+                });
 
             response.Doc.Find(".blueprintList").Should().NotBeNull();
             response.Doc.FindAll(".blueprintItem").Count.Should().Be(2);

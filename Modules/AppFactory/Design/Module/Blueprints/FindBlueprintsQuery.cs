@@ -8,6 +8,8 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
     public class FindBlueprintsQuery : QueryAsync<List<Blueprint>>
     {
+        public int UserId;
+
         public override async Task<List<Blueprint>> ExecuteAsync()
         {
             return await Registry.Repository.Value.Query<Blueprint>()
