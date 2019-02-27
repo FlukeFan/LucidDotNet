@@ -13,6 +13,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         public override async Task<List<Blueprint>> ExecuteAsync()
         {
             return await Registry.Repository.Value.Query<Blueprint>()
+                .Where(bp => bp.OwnedByUserId == UserId)
                 .OrderBy(bp => bp.Name)
                 .ToListAsync();
         }

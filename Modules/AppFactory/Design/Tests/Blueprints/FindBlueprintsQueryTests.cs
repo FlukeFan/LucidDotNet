@@ -10,19 +10,44 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
     [TestFixture]
     public class FindBlueprintsQueryTests
     {
+        private ModuleTestSetup.SetupDbTx _db;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _db = new ModuleTestSetup.SetupDbTx();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            using (_db)
+            { }
+        }
+
         [Test]
         public async Task OrdersByName()
         {
-            using (var db = new ModuleTestSetup.SetupDbTx())
-            {
-                await new BlueprintBuilder().With(bp => bp.Name, "Bp3").SaveAsync(db.NhRepository);
-                await new BlueprintBuilder().With(bp => bp.Name, "Bp1").SaveAsync(db.NhRepository);
-                await new BlueprintBuilder().With(bp => bp.Name, "Bp2").SaveAsync(db.NhRepository);
+            await new BlueprintBuilder().With(bp => bp.Name, "Bp3").SaveAsync(_db.NhRepository);
+            await new BlueprintBuilder().With(bp => bp.Name, "Bp1").SaveAsync(_db.NhRepository);
+            await new BlueprintBuilder().With(bp => bp.Name, "Bp2").SaveAsync(_db.NhRepository);
 
-                var blueprints = await new FindBlueprintsQuery().ExecuteAsync();
+            var defaultUserId = new BlueprintBuilder().Value().OwnedByUserId;
 
-                blueprints.Select(bp => bp.Name).Should().Equal("Bp1", "Bp2", "Bp3");
-            }
+            var blueprints = await new FindBlueprintsQuery { UserId = defaultUserId }.ExecuteAsync();
+
+            blueprints.Select(bp => bp.Name).Should().Equal("Bp1", "Bp2", "Bp3");
+        }
+
+        [Test]
+        public async Task FiltersUserId()
+        {
+            var bp1 = await new BlueprintBuilder().With(bp => bp.OwnedByUserId, 123).SaveAsync(_db.NhRepository);
+            var bp2 = await new BlueprintBuilder().With(bp => bp.OwnedByUserId, 234).SaveAsync(_db.NhRepository);
+
+            var blueprints = await new FindBlueprintsQuery { UserId = 234 }.ExecuteAsync();
+
+            blueprints.Select(bp => bp.Id).Should().Equal(bp2.Id);
         }
     }
 }
