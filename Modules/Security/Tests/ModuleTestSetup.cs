@@ -20,6 +20,7 @@ namespace Lucid.Modules.Security.Tests
     {
         public static ConstraintChecker MemoryConstraints = new ConstraintChecker();
 
+        private static DbState                          _dbState             = new DbState();
         private static Lazy<ISessionFactory>            _sessionFactory;
         private static SetupTestServer<TestStartup>     _testServerSetup;
 
@@ -106,7 +107,7 @@ namespace Lucid.Modules.Security.Tests
 
         public class SetupDbTx : SetupNhSqlTx
         {
-            public SetupDbTx() : base(_sessionFactory.Value) { }
+            public SetupDbTx() : base(_sessionFactory.Value, _dbState) { }
         }
 
         public class TestStartup : AbstractTestStartup

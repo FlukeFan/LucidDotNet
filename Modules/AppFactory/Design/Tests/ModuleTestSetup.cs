@@ -17,6 +17,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests
     {
         public static ConstraintChecker MemoryConstraints = new ConstraintChecker();
 
+        private static DbState                          _dbState            = new DbState();
         private static SetupTestServer<TestStartup>     _testServerSetup;
         private static Lazy<ISessionFactory>            _sessionFactory;
 
@@ -104,10 +105,15 @@ namespace Lucid.Modules.AppFactory.Design.Tests
         {
             private INhSqlRepository _previousRepository;
 
-            public SetupDbTx() : base(_sessionFactory.Value)
+            public SetupDbTx() : base(_sessionFactory.Value, _dbState)
             {
                 _previousRepository = Registry.Repository.Value;
                 Registry.Repository.Value = NhRepository;
+            }
+
+            public override void Clean(NhSqlRepository repository)
+            {
+                repository.Session.Delete($"from {nameof(Design.Blueprints.Blueprint)}");
             }
 
             public override void Dispose()
