@@ -3,6 +3,6 @@
     public class StartModel
     {
         // POST
-        public StartBlueprintCommand Cmd;
+        public StartCommand Cmd;
     }
 }

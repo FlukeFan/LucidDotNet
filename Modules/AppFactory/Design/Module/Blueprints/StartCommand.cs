@@ -5,7 +5,7 @@ using Lucid.Infrastructure.Lib.Facade;
 
 namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
-    public class StartBlueprintCommand : CommandAsync<Blueprint>
+    public class StartCommand : CommandAsync<Blueprint>
     {
         [Required(ErrorMessage = "Please supply a Name")]
         public string Name { get; set; }

@@ -6,7 +6,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
     public static class Actions
     {
-        internal const string RoutePrefix = "appFactory/design";
+        internal const string RoutePrefix = "appFactory/design/blueprints";
 
         public static string List()     { return $"/{RoutePrefix}/list"; }
         public static string Start()    { return $"/{RoutePrefix}/start"; }
@@ -35,7 +35,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         [HttpGet("start")]
         public IActionResult Start()
         {
-            var model = new StartModel { Cmd = new StartBlueprintCommand() };
+            var model = new StartModel { Cmd = new StartCommand() };
             return View(model);
         }
     }
