@@ -16,7 +16,7 @@ namespace Lucid.Infrastructure.Host.Web.Layout
 
             if (isPjaxModal)
             {
-                page.Layout = this.RelativeViewPath("ModalDialog.cshtml");
+                page.Layout = this.RelativeViewPath("Modal.cshtml");
                 return;
             }
 
