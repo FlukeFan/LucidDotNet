@@ -3,7 +3,16 @@
 @{
     PageInfo PageInfo = ViewBag.PageInfo;
 }
-<div data-title="@PageInfo.Title" class="container-fluid">
-    <h4>@PageInfo.Title</h4>
-    @RenderBody()
+<div data-title="@PageInfo.Title">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">@PageInfo.Title</h5>
+            <button type="button" class="close" data-close-dialog="false" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            @RenderBody()
+        </div>
+    </div>
 </div>

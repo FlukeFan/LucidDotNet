@@ -18,6 +18,10 @@
     color: #dc3545;
 }
 
+.modal-content {
+    border: 0;
+}
+
 // https://github.com/twbs/bootstrap/issues/12030
 .navbar-toggler:focus {
     outline: none;
