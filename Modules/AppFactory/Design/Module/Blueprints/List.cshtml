@@ -1,4 +1,4 @@
-﻿@using MvcForms.Forms
+﻿@using MvcForms.Navigation
 @namespace Lucid.Modules.AppFactory.Design.Blueprints
 @inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<ListModel>
 @model ListModel
@@ -7,7 +7,12 @@
           pi.Title = "Blueprints";
       });}
 
-<table class="blueprintList">
+<table class="blueprintList table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+    </thead>
     <tbody>
         @foreach (var blueprint in Model.Blueprints)
         {
@@ -17,3 +22,7 @@
         }
     </tbody>
 </table>
+
+<br/>
+
+@Html.LinkButtonModal("Start Blueprint", Actions.Start())

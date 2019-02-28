@@ -9,6 +9,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         internal const string RoutePrefix = "appFactory/design";
 
         public static string List()     { return $"/{RoutePrefix}/list"; }
+        public static string Start()    { return $"/{RoutePrefix}/start"; }
     }
 
     [Route(Actions.RoutePrefix)]
@@ -29,6 +30,12 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
             };
 
             return View(model);
+        }
+
+        [HttpGet("start")]
+        public IActionResult Start()
+        {
+            return View();
         }
     }
 }

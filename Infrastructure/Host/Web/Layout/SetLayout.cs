@@ -1,5 +1,4 @@
-﻿using System;
-using Lucid.Infrastructure.Lib.MvcApp.Pages;
+﻿using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MvcForms;
@@ -16,7 +15,10 @@ namespace Lucid.Infrastructure.Host.Web.Layout
             var isPjaxModal = request.IsPjaxModal();
 
             if (isPjaxModal)
-                throw new Exception("TODO: add handling for pjax modal");
+            {
+                page.Layout = this.RelativeViewPath("ModalDialog.cshtml");
+                return;
+            }
 
             var isPjax = request.IsPjax();
             var menuModel = new MenuModel();
