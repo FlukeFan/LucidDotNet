@@ -1,16 +1,24 @@
-﻿@using MvcForms.Navigation
+﻿@using MvcForms.Forms
+@using MvcForms.Navigation
+@using MvcForms.Styles
+@using MvcForms.Styles.Bootstrap
 @namespace Lucid.Modules.AppFactory.Design.Blueprints
-@inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<object>
-@model object
+@inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppPage<StartModel>
+@model StartModel
 @{Setup(pi =>
       {
           pi.Title = "Start Blueprint";
       });}
 
-<p>
-    Define a name to start a Blueprint.
-</p>
+@using (var form = Html.FormFor(Model.Cmd).Begin())
+{
+    @form.Html.ErrorSummary()
 
-<div class="modal-footer">
-    @Html.LinkButtonCancelModal()
-</div>
+    @form.Html.LabelledInputText("Name", m => m.Name)
+
+    @using (form.Html.FormButtons())
+    {
+        @form.Html.ButtonSubmit("Start Blueprint").Style(BootstrapButton.Success).Tag(t => t.Attr("disabled", "disabled"))
+        @form.Html.LinkButtonCancelModal()
+    }
+}

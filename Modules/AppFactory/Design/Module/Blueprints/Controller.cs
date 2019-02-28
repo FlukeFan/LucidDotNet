@@ -35,7 +35,8 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         [HttpGet("start")]
         public IActionResult Start()
         {
-            return View();
+            var model = new StartModel { Cmd = new StartBlueprintCommand() };
+            return View(model);
         }
     }
 }
