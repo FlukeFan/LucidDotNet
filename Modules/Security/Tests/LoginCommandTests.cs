@@ -12,16 +12,9 @@ namespace Lucid.Modules.Security.Tests
         private static readonly Func<LoginCommand> _validCommand = () => new LoginCommand { UserName = "TestUser1" };
 
         [Test]
-        public void Execute()
-        {
-            var cmd = _validCommand();
-
-            cmd.ShouldBeValid();
-        }
-
-        [Test]
         public void Validation()
         {
+            _validCommand().ShouldBeValid();
             _validCommand().ShouldBeInvalid(c => c.UserName = null, "Name cannot be null");
             _validCommand().ShouldBeInvalid(c => c.UserName = "", "Name cannot be empty");
         }

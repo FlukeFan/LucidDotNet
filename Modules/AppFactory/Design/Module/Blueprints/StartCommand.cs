@@ -7,11 +7,16 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
     public class StartCommand : CommandAsync<Blueprint>
     {
+        public int OwnedByUserId { get; set; }
+
         [Required(ErrorMessage = "Please supply a Name")]
         public string Name { get; set; }
 
         public override Task<Blueprint> ExecuteAsync()
         {
+            if (OwnedByUserId == 0)
+                throw new FacadeException("User id not specified");
+
             throw new FacadeException("Not implemented yet ...");
         }
     }

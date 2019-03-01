@@ -42,6 +42,8 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         [HttpPost("start")]
         public async Task<IActionResult> Start(StartCommand cmd)
         {
+            cmd.OwnedByUserId = HttpContext.LoggedInUser().Id;
+
             return await ExecAsync(cmd,
                 success: blueprint => this.ReturnModal(),
                 failure: () => RenderStart(cmd));

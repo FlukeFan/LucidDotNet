@@ -49,7 +49,11 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
                 .SetText(m => m.Name, "Blueprint1")
                 .Submit();
 
-            ExecutorStub.SingleExecuted<StartCommand>().Should().BeEquivalentTo(new StartCommand { Name = "Blueprint1" });
+            ExecutorStub.SingleExecuted<StartCommand>().Should().BeEquivalentTo(new StartCommand
+            {
+                OwnedByUserId = StubUserFilter.StubUser.Id,
+                Name = "Blueprint1",
+            });
         }
 
         [Test]
