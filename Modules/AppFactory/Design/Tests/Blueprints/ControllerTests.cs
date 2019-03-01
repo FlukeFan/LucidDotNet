@@ -35,7 +35,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
                 .Form<StartCommand>();
 
             var response = await form
-                .SetText(m => m.Name, "Blueprint1")
+                .SetText(m => m.Name, "TestBlueprint")
                 .Submit();
 
             ExecutorStub.VerifySingleExecuted(Agreements.Start);

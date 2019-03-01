@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using FluentAssertions;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
 using Lucid.Infrastructure.Lib.Testing.Validation;
 using Lucid.Modules.AppFactory.Design.Blueprints;
@@ -29,6 +31,17 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
             {
                 await cmd.ExecuteAsync();
             });
+        }
+
+        [Test]
+        [Ignore("WIP")]
+        public async Task Agreement()
+        {
+            var agreement = Agreements.Start;
+
+            var blueprint = await agreement.Executable().ExecuteAsync();
+
+            blueprint.Should().BeEquivalentTo(agreement.Result());
         }
     }
 }

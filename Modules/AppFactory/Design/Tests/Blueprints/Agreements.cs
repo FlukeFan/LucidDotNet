@@ -19,13 +19,15 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
                     new BlueprintBuilder().Value(),
                 });
 
-        public static Agreement<StartCommand> Start =
+        public static Agreement<StartCommand, Blueprint> Start =
             AgreementBuilder.For(() =>
                 new StartCommand
                 {
                     OwnedByUserId = Defaults.UserId,
-                    Name = "Blueprint1",
+                    Name = "TestBlueprint",
                 })
-            .NoResultDefined();
+            .Result(() =>
+                new BlueprintBuilder()
+                    .Value());
     }
 }
