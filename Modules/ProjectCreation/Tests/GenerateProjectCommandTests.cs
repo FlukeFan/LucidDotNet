@@ -11,7 +11,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
     [TestFixture]
     public class GenerateProjectCommandTests
     {
-        private static readonly Func<GenerateProjectCommand> _validCommand = () => new GenerateProjectCommand { Name = "NewProj_1" };
+        private static readonly Func<GenerateProjectCommand> _validCommand = Agreements.GenerateProject.Executable;
 
         [Test]
         public async Task Execute()

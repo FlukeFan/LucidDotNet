@@ -21,11 +21,11 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 
         public static Agreement<StartCommand> Start =
             AgreementBuilder.For(() =>
-            new StartCommand
-            {
-                OwnedByUserId = Defaults.UserId,
-                Name = "Blueprint1",
-            })
+                new StartCommand
+                {
+                    OwnedByUserId = Defaults.UserId,
+                    Name = "Blueprint1",
+                })
             .NoResultDefined();
     }
 }

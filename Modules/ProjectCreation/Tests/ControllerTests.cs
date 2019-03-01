@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing.Controller;
+using Lucid.Infrastructure.Lib.Testing.Execution;
 using Microsoft.AspNetCore.Mvc;
 using MvcTesting.Html;
 using NUnit.Framework;
@@ -35,14 +36,14 @@ namespace Lucid.Modules.ProjectCreation.Tests
                 .Form<GenerateProjectCommand>();
 
             var response = await form
-                .SetText(m => m.Name, "PostTest")
+                .SetText(m => m.Name, "NewProj_1")
                 .Submit(r => r.SetExpectedResponse(HttpStatusCode.OK));
 
-            ExecutorStub.SingleExecuted<GenerateProjectCommand>().Should().BeEquivalentTo(new GenerateProjectCommand { Name = "PostTest" });
+            ExecutorStub.VerifySingleExecuted(Agreements.GenerateProject);
 
             var fileResult = response.ActionResultOf<FileResult>();
             fileResult.ContentType.Should().Be("application/zip");
-            fileResult.FileDownloadName.Should().Be("PostTest.zip");
+            fileResult.FileDownloadName.Should().Be("NewProj_1.zip");
 
             response.Text.Should().Be(expectedByteString);
         }
