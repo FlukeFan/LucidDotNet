@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using Reposify.Testing;
 
@@ -17,7 +18,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 
         public BlueprintBuilder()
         {
-            With(e => e.OwnedByUserId, 123);
+            With(e => e.OwnedByUserId, Defaults.UserId);
             With(e => e.Name, "TestBlueprint");
         }
     }

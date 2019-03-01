@@ -26,6 +26,19 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         }
 
         [Test]
+        public async Task VerifyAgreement()
+        {
+            var agreement = Agreements.FindBlueprints;
+
+            await new BlueprintBuilder().SaveAsync(_db.NhRepository);
+            await new BlueprintBuilder().SaveAsync(_db.NhRepository);
+
+            var blueprints = await agreement.Executable.ExecuteAsync();
+
+            blueprints.Should().BeEquivalentTo(agreement.Result, opt => opt.Excluding(o => o.Id));
+        }
+
+        [Test]
         public async Task OrdersByName()
         {
             await new BlueprintBuilder().With(bp => bp.Name, "Bp3").SaveAsync(_db.NhRepository);
