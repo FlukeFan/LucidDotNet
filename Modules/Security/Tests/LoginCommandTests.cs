@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Infrastructure.Lib.Testing.Validation;
 using NUnit.Framework;
 
@@ -9,7 +10,7 @@ namespace Lucid.Modules.Security.Tests
     [TestFixture]
     public class LoginCommandTests : ModuleTestSetup.LogicTest
     {
-        private static readonly Func<LoginCommand> _validCommand = () => new LoginCommand { UserName = "TestUser1" };
+        private static readonly Func<LoginCommand> _validCommand = Agreements.Login.Executable;
 
         [Test]
         public void Validation()
@@ -17,6 +18,16 @@ namespace Lucid.Modules.Security.Tests
             _validCommand().ShouldBeValid();
             _validCommand().ShouldBeInvalid(c => c.UserName = null, "Name cannot be null");
             _validCommand().ShouldBeInvalid(c => c.UserName = "", "Name cannot be empty");
+        }
+
+        [Test]
+        public async Task Agreement()
+        {
+            var earlier = Registry.UtcNow = () => Defaults.SummerNow;
+
+            var user = await Agreements.Login.Executable().ExecuteAsync();
+
+            user.Should().BeEquivalentTo(Agreements.Login.Result(), opt => opt.Excluding(o => o.Id));
         }
 
         [Test]

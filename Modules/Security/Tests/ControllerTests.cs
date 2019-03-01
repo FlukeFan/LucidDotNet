@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Web;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
-using Lucid.Infrastructure.Lib.Testing.Controller;
+using Lucid.Infrastructure.Lib.Testing.Execution;
 using Microsoft.AspNetCore.Mvc;
 using MvcTesting.Html;
 using NUnit.Framework;
@@ -14,22 +14,9 @@ namespace Lucid.Modules.Security.Tests
     public class ControllerTests : ModuleTestSetup.ControllerTest
     {
         [Test]
-        public async Task Can_SeeLoginForm()
-        {
-            var form = await MvcTestingClient()
-                .GetAsync(Actions.Login())
-                .Form<LoginCommand>();
-
-            form.Method.Should().Be("post");
-            form.Action.Should().Be(Actions.Login().PrefixLocalhost());
-
-            form.GetText(m => m.UserName).Should().Be("");
-        }
-
-        [Test]
         public async Task Can_Login()
         {
-            ExecutorStub.StubResult<LoginCommand>(new UserBuilder().Value());
+            ExecutorStub.StubResult(Agreements.Login);
 
             var client = MvcTestingClient();
 
@@ -38,10 +25,10 @@ namespace Lucid.Modules.Security.Tests
                 .Form<LoginCommand>();
 
             var response = await form
-                .SetText(m => m.UserName, "User1")
+                .SetText(m => m.UserName, "TestUser")
                 .Submit();
 
-            ExecutorStub.SingleExecuted<LoginCommand>().Should().BeEquivalentTo(new LoginCommand { UserName = "User1" });
+            ExecutorStub.VerifySingleExecuted(Agreements.Login);
 
             client.Cookies.Select(c => c.Name).Should().Contain(ModuleTestSetup.TestStartup.AuthCookieName);
 
@@ -52,7 +39,7 @@ namespace Lucid.Modules.Security.Tests
         [Test]
         public async Task Login_RedirectsToOriginalPage()
         {
-            ExecutorStub.StubResult<LoginCommand>(new UserBuilder().Value());
+            ExecutorStub.StubResult(Agreements.Login);
 
             var action = Actions.Login() + $"/?returnUrl={HttpUtility.UrlEncode("http://someUrl")}";
 

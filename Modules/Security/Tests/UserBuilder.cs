@@ -1,4 +1,5 @@
-﻿using Reposify.Testing;
+﻿using Lucid.Infrastructure.Lib.Testing.Execution;
+using Reposify.Testing;
 
 namespace Lucid.Modules.Security.Tests
 {
@@ -15,7 +16,7 @@ namespace Lucid.Modules.Security.Tests
         public UserBuilder()
         {
             With(e => e.Name, "TestUser");
-            With(e => e.LastLoggedIn, new System.DateTime(2008, 07, 06));
+            With(e => e.LastLoggedIn, Defaults.SummerNow);
         }
     }
 }
