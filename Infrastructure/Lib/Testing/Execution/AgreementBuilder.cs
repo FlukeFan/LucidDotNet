@@ -1,8 +1,10 @@
-﻿namespace Lucid.Infrastructure.Lib.Testing.Execution
+﻿using System;
+
+namespace Lucid.Infrastructure.Lib.Testing.Execution
 {
     public class AgreementBuilder
     {
-        public static AgreementBuilder<TExecutable> For<TExecutable>(TExecutable executable)
+        public static AgreementBuilder<TExecutable> For<TExecutable>(Func<TExecutable> executable)
         {
             return new AgreementBuilder<TExecutable> { Executable = executable };
         }
@@ -10,9 +12,9 @@
 
     public class AgreementBuilder<TExecutable>
     {
-        public TExecutable Executable;
+        public Func<TExecutable> Executable;
 
-        public Agreement<TExecutable, TResult> Result<TResult>(TResult result)
+        public Agreement<TExecutable, TResult> Result<TResult>(Func<TResult> result)
         {
             return new Agreement<TExecutable, TResult>
             {

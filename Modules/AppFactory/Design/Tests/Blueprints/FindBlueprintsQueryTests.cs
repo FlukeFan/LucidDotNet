@@ -33,9 +33,9 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
             await new BlueprintBuilder().SaveAsync(_db.NhRepository);
             await new BlueprintBuilder().SaveAsync(_db.NhRepository);
 
-            var blueprints = await agreement.Executable.ExecuteAsync();
+            var blueprints = await agreement.Executable().ExecuteAsync();
 
-            blueprints.Should().BeEquivalentTo(agreement.Result, opt => opt.Excluding(o => o.Id));
+            blueprints.Should().BeEquivalentTo(agreement.Result(), opt => opt.Excluding(o => o.Id));
         }
 
         [Test]

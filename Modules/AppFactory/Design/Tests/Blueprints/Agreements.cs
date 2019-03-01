@@ -7,12 +7,12 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
     public class Agreements
     {
         public static Agreement<FindBlueprintsQuery, List<Blueprint>> FindBlueprints =
-            AgreementBuilder.For(
+            AgreementBuilder.For(() =>
                 new FindBlueprintsQuery
                 {
                     UserId = Defaults.UserId,
                 })
-            .Result(
+            .Result(() =>
                 new List<Blueprint>
                 {
                     new BlueprintBuilder().Value(),
