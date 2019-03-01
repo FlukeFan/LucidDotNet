@@ -9,7 +9,7 @@ namespace Lucid.Infrastructure.Lib.Testing.Execution
             executorStub.StubResult<TExecutable>(agreement.Result());
         }
 
-        public static void VerifySingleExecuted<TExecutable, TResult>(this ExecutorStubAsync executorStub, Agreement<TExecutable, TResult> agreement)
+        public static void VerifySingleExecuted<TExecutable>(this ExecutorStubAsync executorStub, Agreement<TExecutable> agreement)
         {
             executorStub.SingleExecuted<TExecutable>().Should().BeEquivalentTo(agreement.Executable());
         }

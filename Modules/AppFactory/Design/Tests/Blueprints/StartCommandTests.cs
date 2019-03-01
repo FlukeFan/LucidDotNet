@@ -1,19 +1,15 @@
 ﻿using System;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
 using Lucid.Infrastructure.Lib.Testing.Validation;
-using Lucid.Modules.AppFactory.Design.Tests;
+using Lucid.Modules.AppFactory.Design.Blueprints;
 using NUnit.Framework;
 
-namespace Lucid.Modules.AppFactory.Design.Blueprints.Tests
+namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 {
     [TestFixture]
     public class StartCommandTests : ModuleTestSetup.LogicTest
     {
-        private static readonly Func<StartCommand> _validCommand = () => new StartCommand
-        {
-            OwnedByUserId = 123,
-            Name = "TestBlueprint1",
-        };
+        private static readonly Func<StartCommand> _validCommand = Agreements.Start.Executable;
 
         [Test]
         public void Validation()

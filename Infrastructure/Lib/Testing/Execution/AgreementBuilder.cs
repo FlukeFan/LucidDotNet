@@ -22,5 +22,13 @@ namespace Lucid.Infrastructure.Lib.Testing.Execution
                 Result = result,
             };
         }
+
+        public Agreement<TExecutable> NoResultDefined()
+        {
+            return new Agreement<TExecutable>
+            {
+                Executable = Executable,
+            };
+        }
     }
 }

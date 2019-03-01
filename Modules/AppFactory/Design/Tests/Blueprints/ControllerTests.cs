@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
-using Lucid.Infrastructure.Lib.Testing.Controller;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using MvcTesting.Html;
@@ -29,8 +28,6 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         [Test]
         public async Task Can_StartBlueprint()
         {
-            ExecutorStub.StubResult<StartCommand>(new BlueprintBuilder().Value());
-
             var client = MvcTestingClient();
 
             var form = await client
@@ -41,11 +38,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
                 .SetText(m => m.Name, "Blueprint1")
                 .Submit();
 
-            ExecutorStub.SingleExecuted<StartCommand>().Should().BeEquivalentTo(new StartCommand
-            {
-                OwnedByUserId = StubUserFilter.StubUser.Id,
-                Name = "Blueprint1",
-            });
+            ExecutorStub.VerifySingleExecuted(Agreements.Start);
         }
 
         [Test]
