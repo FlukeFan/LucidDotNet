@@ -18,7 +18,7 @@
 
     @using (form.Html.FormButtons())
     {
-        @form.Html.ButtonSubmit("Start Blueprint").Style(BootstrapButton.Success).Tag(t => t.Attr("disabled", "disabled"))
+        @form.Html.ButtonSubmit("Start Blueprint").Style(BootstrapButton.Success)
         @form.Html.LinkButtonCancelModal()
     }
 }

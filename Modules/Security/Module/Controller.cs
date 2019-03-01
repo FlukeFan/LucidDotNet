@@ -22,7 +22,7 @@ namespace Lucid.Modules.Security
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return RenderIndex(new LoginCommand());
+            return RenderLogin(new LoginCommand());
         }
 
         [HttpPost("login")]
@@ -31,10 +31,10 @@ namespace Lucid.Modules.Security
         {
             return await ExecAsync(cmd,
                 success: user => Login(user),
-                failure: () => RenderIndex(cmd));
+                failure: () => RenderLogin(cmd));
         }
 
-        private IActionResult RenderIndex(LoginCommand cmd)
+        private IActionResult RenderLogin(LoginCommand cmd)
         {
             var model = new LoginModel { Cmd = cmd };
             return View(model);
