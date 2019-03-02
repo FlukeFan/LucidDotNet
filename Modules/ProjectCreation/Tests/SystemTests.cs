@@ -28,7 +28,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
             Unzip(zipBytes, buildFolder);
 
             Exec.Cmd("dotnet", "restore build.proj", buildFolder);
-            Exec.Cmd("dotnet", "msbuild build.proj /m:1 /p:FilterTest=TestCategory!=Slow", buildFolder);
+            Exec.Cmd("dotnet", "msbuild build.proj /m:999 /p:FilterTest=TestCategory!=Slow", buildFolder);
 
             //// Assert DB?  NUnit logs?
 
