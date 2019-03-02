@@ -8,6 +8,7 @@
     <ProjectsToBuild Include="Domain\Lucid.Infrastructure.Lib.Domain.csproj" />
     <ProjectsToBuild Include="Facade\Lucid.Infrastructure.Lib.Facade.csproj" />
     <ProjectsToBuild Include="Testing\Lucid.Infrastructure.Lib.Testing.csproj" />
+    <ProjectsToBuild Include="Util\Lucid.Infrastructure.Lib.Util.csproj" />
   </ItemGroup>
 
 </Project>

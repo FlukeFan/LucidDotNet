@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Facade\Lucid.Infrastructure.Lib.Facade.csproj" />
+    <ProjectReference Include="..\Util\Lucid.Infrastructure.Lib.Util.csproj" />
   </ItemGroup>
 
 </Project>

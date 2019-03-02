@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
+using Lucid.Infrastructure.Lib.Util;
 
 namespace Lucid.Infrastructure.Lib.Domain.SqlServer
 {
@@ -26,18 +27,21 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
 
         public void CreateSchemas(bool createDb, params Schema[] schemas)
         {
-            var connectionString = createDb
-                ? $"Server={_server};Database=master;User ID={_userId};Password={_password}"
-                : $"Server={_server};Database={_dbName};User ID={_userId};Password={_password}";
-
-            using (var cn = new SqlConnection(connectionString))
+            using (new GlobalLock($"SetupSchemas_{_dbName}"))
             {
-                cn.Open();
+                var connectionString = createDb
+                    ? $"Server={_server};Database=master;User ID={_userId};Password={_password}"
+                    : $"Server={_server};Database={_dbName};User ID={_userId};Password={_password}";
 
-                if (createDb)
-                    CreateDb(cn);
+                using (var cn = new SqlConnection(connectionString))
+                {
+                    cn.Open();
 
-                CreateSchemas(cn, schemas);
+                    if (createDb)
+                        CreateDb(cn);
+
+                    CreateSchemas(cn, schemas);
+                }
             }
         }
 
