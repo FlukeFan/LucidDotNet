@@ -31,7 +31,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
                 .SingleOrDefault();
 
             if (existingBlueprint != null)
-                throw new FacadeException($"There is already a Blueprint with the name '{name}'");
+                throw new FacadeException($"There is already a Blueprint with the name '{existingBlueprint.Name}'");
         }
     }
 }
