@@ -6,6 +6,7 @@ using Lucid.Infrastructure.Lib.Testing.Controller;
 using Lucid.Infrastructure.Lib.Testing.Domain;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Infrastructure.Lib.Testing.SqlServer;
+using Lucid.Infrastructure.Lib.Util;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using MvcTesting.AspNetCore;
@@ -27,6 +28,8 @@ namespace Lucid.Modules.Security.Tests
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
+            ProcessLocks.AddDb("Seecurity");
+
             var schema =
                 SqlTestUtil.UpdateMigrations<DbMigrations.V001.V000.Rev0_CreateUserTable>(
                     schemaName:             "Security",

@@ -5,6 +5,7 @@ using Lucid.Infrastructure.Lib.Testing;
 using Lucid.Infrastructure.Lib.Testing.Controller;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Infrastructure.Lib.Testing.SqlServer;
+using Lucid.Infrastructure.Lib.Util;
 using MvcTesting.AspNetCore;
 using NHibernate;
 using NUnit.Framework;
@@ -24,6 +25,8 @@ namespace Lucid.Modules.AppFactory.Design.Tests
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
+            ProcessLocks.AddDb("Design");
+
             var schema =
                 SqlTestUtil.UpdateMigrations<DbMigrations.V001.V000.Rev0_CreateBlueprintTable>(
                     schemaName:             "Design",
