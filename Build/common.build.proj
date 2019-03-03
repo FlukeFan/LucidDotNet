@@ -64,7 +64,7 @@
   </Target>
 
   <Target Name="Clean">
-    <MSBuild Projects="@(ProjectsToBuild->Reverse())" Targets="Clean" BuildInParallel="false" />
+    <MSBuild Projects="@(ProjectsToBuild->Reverse())" Targets="Clean" BuildInParallel="false" Properties="Cleaning=true" />
     <ItemGroup>
       <BinFolders Include="**\*.csproj" />
     </ItemGroup>
