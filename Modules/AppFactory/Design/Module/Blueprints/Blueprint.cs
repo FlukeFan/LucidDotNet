@@ -13,13 +13,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
 
         public static async Task<Blueprint> Start(StartCommand cmd)
         {
-            var existingBlueprint = Repository.Query<Blueprint>()
-                .Where(bp => bp.OwnedByUserId == cmd.OwnedByUserId)
-                .Where(bp => bp.Name == cmd.Name)
-                .SingleOrDefault();
-
-            if (existingBlueprint != null)
-                throw new FacadeException($"There is already a Blueprint with the name '{cmd.Name}'");
+            VerifyNameIsUnique(cmd.OwnedByUserId, cmd.Name);
 
             return await Repository.SaveAsync(
                 new Blueprint
@@ -27,6 +21,17 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
                     OwnedByUserId = cmd.OwnedByUserId,
                     Name = cmd.Name,
                 });
+        }
+
+        private static void VerifyNameIsUnique(int ownedByUserId, string name)
+        {
+            var existingBlueprint = Repository.Query<Blueprint>()
+                .Where(bp => bp.OwnedByUserId == ownedByUserId)
+                .Where(bp => bp.Name == name)
+                .SingleOrDefault();
+
+            if (existingBlueprint != null)
+                throw new FacadeException($"There is already a Blueprint with the name '{name}'");
         }
     }
 }
