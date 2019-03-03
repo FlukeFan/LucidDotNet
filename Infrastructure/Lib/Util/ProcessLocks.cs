@@ -20,7 +20,7 @@ namespace Lucid.Infrastructure.Lib.Util
 
         public static void AddDb(string dbName)
         {
-            Add($"Db{dbName}");
+            Add($"LucidDb{dbName}");
         }
 
         public static void ReleaseAll()
