@@ -12,12 +12,12 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         [Required(ErrorMessage = "Please supply a Name")]
         public string Name { get; set; }
 
-        public override Task<Blueprint> ExecuteAsync()
+        public override async Task<Blueprint> ExecuteAsync()
         {
             if (OwnedByUserId == 0)
                 throw new FacadeException("User id not specified");
 
-            throw new FacadeException("Not implemented yet ...");
+            return await Blueprint.Start(this);
         }
     }
 }

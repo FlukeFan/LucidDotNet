@@ -27,21 +27,37 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
             var cmd = _validCommand();
             cmd.OwnedByUserId = 0;
 
-            Assert.ThrowsAsync<FacadeException>(async () =>
-            {
-                await cmd.ExecuteAsync();
-            });
+            Assert.That(() =>
+                cmd.ExecuteAsync(),
+                Throws.InstanceOf<FacadeException>());
         }
 
         [Test]
-        [Ignore("WIP")]
         public async Task Agreement()
         {
             var agreement = Agreements.Start;
 
             var blueprint = await agreement.Executable().ExecuteAsync();
 
-            blueprint.Should().BeEquivalentTo(agreement.Result());
+            blueprint.Should().BeEquivalentTo(agreement.Result(), opt => opt.Excluding(o => o.Id));
+        }
+
+        [Test]
+        public async Task Start_DuplicateName_Throws()
+        {
+            await new StartCommand { OwnedByUserId = 123, Name = "Blueprint_duplicate" }.ExecuteAsync();
+
+            Assert.That(() =>
+                new StartCommand { OwnedByUserId = 123, Name = "Blueprint_duplicate" }.ExecuteAsync(),
+                Throws.InstanceOf<FacadeException>());
+        }
+
+        [Test]
+        public async Task Start_DuplicateNameWithDifferentUser_StartsBlueprint()
+        {
+            await new StartCommand { OwnedByUserId = 123, Name = "Blueprint_unique" }.ExecuteAsync();
+            await new StartCommand { OwnedByUserId = 123, Name = "Blueprint_duplicate" }.ExecuteAsync();
+            await new StartCommand { OwnedByUserId = 234, Name = "Blueprint_duplicate" }.ExecuteAsync();
         }
     }
 }
