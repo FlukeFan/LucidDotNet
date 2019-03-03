@@ -24,7 +24,7 @@
     <ProjectReference Include="..\..\..\Infrastructure\Lib\MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj" />
   </ItemGroup>
 
-  <Target Name="ZipProject" BeforeTargets="CoreCompile" Condition="'$(Cleaning)'!='true'">
+  <Target Name="ZipProject" BeforeTargets="CoreCompile" Condition="'$(Cleaning)'!='true' And '$(Restoring)'!='true'">
     <MSBuild Projects="Zip.proj" Properties="BuildUtil=$(BuildUtil)" />
   </Target>
 

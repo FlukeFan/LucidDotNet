@@ -10,11 +10,12 @@
     <BuildUtilSources Remove="$(MSBuildThisFileDirectory)**/obj/**/*.*" />
   </ItemGroup>
 
-  <Target Name="BeforeBuild" BeforeTargets="Build" Inputs="@(BuildUtilSources)" Outputs="$(BuildUtil)">
+  <Target Name="BeforeBuild" BeforeTargets="Build" Inputs="@(BuildUtilSources)" Outputs="$(BuildUtil).flg">
     <MSBuild Projects="$(MSBuildThisFileDirectory)BuildUtil\Build.BuildUtil.csproj" Targets="Publish" Properties="Configuration=Debug" />
+    <Touch Files="$(BuildUtil).flg" AlwaysCreate="true" />
   </Target>
 
-  <Target Name="BeforeRestore" BeforeTargets="Restore" Inputs="@(BuildUtilSources)" Outputs="$(BuildUtil)">
+  <Target Name="BeforeRestore" BeforeTargets="Restore">
     <MSBuild Projects="$(MSBuildThisFileDirectory)BuildUtil\Build.BuildUtil.csproj" Targets="Restore" />
   </Target>
 
@@ -44,7 +45,7 @@
     <PropertyGroup>
       <BuildBeginTime>$([System.DateTime]::Now.ToString(yyyy-MM-dd HH:mm:ss))</BuildBeginTime>
     </PropertyGroup>
-    <MSBuild Projects="@(ProjectsToBuild)" Targets="Restore" BuildInParallel="false" />
+    <MSBuild Projects="@(ProjectsToBuild)" Targets="Restore" BuildInParallel="false" Properties="Restoring=true" />
     <PropertyGroup>
       <BuildTime>Time:$([System.DateTime]::Now.Subtract($(BuildBeginTime)).TotalSeconds.ToString(0.00))s</BuildTime>
     </PropertyGroup>
@@ -72,7 +73,7 @@
     <RemoveDir Directories="@(BinFolders->'%(RelativeDir)obj')" />
   </Target>
 
-  <Target Name="CleanBuildUtil" AfterTargets="Clean" Condition="Exists('$(MSBuildThisFileDirectory).build')">
+  <Target Name="CleanBuildUtil" AfterTargets="Clean" Condition="Exists('$(MSBuildThisFileDirectory).build') And '$(Cleaning)'!='true'">
     <Message Importance="High" Text="Shutting down dotnet.exe build-server so Build.BuildUtil.dll is not in use" />
     <Exec Command="dotnet build-server shutdown" />
     <RemoveDir Directories="$(MSBuildThisFileDirectory).build" ContinueOnError="true" />
