@@ -17,7 +17,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
             if (OwnedByUserId == 0)
                 throw new FacadeException("User id not specified");
 
-            return await Blueprint.Start(this);
+            return await Blueprint.StartAsync(this);
         }
     }
 }

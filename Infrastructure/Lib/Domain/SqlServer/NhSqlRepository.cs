@@ -8,7 +8,7 @@ namespace Lucid.Infrastructure.Lib.Domain.SqlServer
         IRepositoryAsync,
         IDbExecutorAsync,
         ILinqQueryable,
-        IDbLinqExecutor
+        IDbLinqExecutorAsync
     { }
 
     public class NhSqlRepository : NhRepository, INhSqlRepository

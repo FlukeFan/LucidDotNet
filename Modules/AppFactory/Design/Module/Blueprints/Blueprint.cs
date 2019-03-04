@@ -11,7 +11,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         public virtual int      OwnedByUserId   { get; protected set; }
         public virtual string   Name            { get; protected set; }
 
-        public static async Task<Blueprint> Start(StartCommand cmd)
+        public static async Task<Blueprint> StartAsync(StartCommand cmd)
         {
             VerifyNameIsUnique(cmd.OwnedByUserId, cmd.Name);
 
