@@ -3,6 +3,6 @@
     public class StartModel
     {
         // POST
-        public StartCommand Cmd;
+        public StartEditCommand Cmd;
     }
 }

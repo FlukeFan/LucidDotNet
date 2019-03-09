@@ -5,7 +5,7 @@ using Lucid.Infrastructure.Lib.Facade.Exceptions;
 
 namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
-    public class StartCommand : CommandAsync<Blueprint>
+    public class StartEditCommand : CommandAsync<Blueprint>
     {
         public int OwnedByUserId { get; set; }
 

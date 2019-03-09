@@ -36,11 +36,11 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         [HttpGet("start")]
         public IActionResult Start()
         {
-            return RenderStart(new StartCommand());
+            return RenderStart(new StartEditCommand());
         }
 
         [HttpPost("start")]
-        public async Task<IActionResult> Start(StartCommand cmd)
+        public async Task<IActionResult> Start(StartEditCommand cmd)
         {
             cmd.OwnedByUserId = HttpContext.LoggedInUser().Id;
 
@@ -49,7 +49,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
                 failure: () => RenderStart(cmd));
         }
 
-        private IActionResult RenderStart(StartCommand cmd)
+        private IActionResult RenderStart(StartEditCommand cmd)
         {
             var model = new StartModel { Cmd = cmd };
             return View(model);

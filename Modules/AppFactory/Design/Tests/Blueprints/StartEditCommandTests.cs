@@ -9,9 +9,9 @@ using NUnit.Framework;
 namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 {
     [TestFixture]
-    public class StartCommandTests : ModuleTestSetup.LogicTest
+    public class StartEditCommandTests : ModuleTestSetup.LogicTest
     {
-        private static readonly Func<StartCommand> _validCommand = Agreements.Start.Executable;
+        private static readonly Func<StartEditCommand> _validCommand = Agreements.Start.Executable;
 
         [Test]
         public void Validation()
@@ -45,19 +45,19 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         [Test]
         public async Task Start_DuplicateName_Throws()
         {
-            await new StartCommand { OwnedByUserId = 123, Name = "Blueprint_duplicate" }.ExecuteAsync();
+            await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_duplicate" }.ExecuteAsync();
 
             Assert.That(() =>
-                new StartCommand { OwnedByUserId = 123, Name = "Blueprint_duplicate" }.ExecuteAsync(),
+                new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_duplicate" }.ExecuteAsync(),
                 Throws.InstanceOf<FacadeException>());
         }
 
         [Test]
         public async Task Start_DuplicateNameWithDifferentUser_StartsBlueprint()
         {
-            await new StartCommand { OwnedByUserId = 123, Name = "Blueprint_unique" }.ExecuteAsync();
-            await new StartCommand { OwnedByUserId = 123, Name = "Blueprint_duplicate" }.ExecuteAsync();
-            await new StartCommand { OwnedByUserId = 234, Name = "Blueprint_duplicate" }.ExecuteAsync();
+            await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_unique" }.ExecuteAsync();
+            await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_duplicate" }.ExecuteAsync();
+            await new StartEditCommand { OwnedByUserId = 234, Name = "Blueprint_duplicate" }.ExecuteAsync();
         }
     }
 }

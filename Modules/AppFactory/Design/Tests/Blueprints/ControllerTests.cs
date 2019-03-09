@@ -32,7 +32,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 
             var form = await client
                 .GetAsync(Actions.Start())
-                .Form<StartCommand>();
+                .Form<StartEditCommand>();
 
             var response = await form
                 .SetText(m => m.Name, "TestBlueprint")
@@ -44,9 +44,9 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         [Test]
         public async Task WhenError_RedisplaysPage()
         {
-            ExecutorStub.StubResult<StartCommand>(l => throw new FacadeException("simulated error"));
+            ExecutorStub.StubResult<StartEditCommand>(l => throw new FacadeException("simulated error"));
 
-            var form = await MvcTestingClient().GetAsync(Actions.Start()).Form<StartCommand>();
+            var form = await MvcTestingClient().GetAsync(Actions.Start()).Form<StartEditCommand>();
             await form.Submit(r => r.SetExpectedResponse(HttpStatusCode.OK));
         }
     }
