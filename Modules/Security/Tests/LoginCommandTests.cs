@@ -4,7 +4,6 @@ using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Infrastructure.Lib.Testing.Validation;
 using NUnit.Framework;
-using Reposify.Testing;
 
 namespace Lucid.Modules.Security.Tests
 {
@@ -30,7 +29,7 @@ namespace Lucid.Modules.Security.Tests
 
             user.Should().BeEquivalentTo(Agreements.Login.Result().Mutate(r =>
             {
-                Builder.Modify(r).With(bp => bp.Id, user.Id);
+                r.With(bp => bp.Id, user.Id);
             }));
         }
 

@@ -6,7 +6,6 @@ using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Infrastructure.Lib.Testing.Validation;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using NUnit.Framework;
-using Reposify.Testing;
 
 namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 {
@@ -43,7 +42,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 
             blueprint.Should().BeEquivalentTo(agreement.Result().Mutate(r =>
             {
-                Builder.Modify(r).With(bp => bp.Id, blueprint.Id);
+                r.With(bp => bp.Id, blueprint.Id);
             }));
         }
 
@@ -77,7 +76,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
             updatedBlueprint.Id.Should().Be(existingBlueprint.Id);
             updatedBlueprint.Should().BeEquivalentTo(agreement.Result().Mutate(r =>
             {
-                Builder.Modify(r).With(bp => bp.Id, existingBlueprint.Id);
+                r.With(bp => bp.Id, existingBlueprint.Id);
             }));
         }
     }

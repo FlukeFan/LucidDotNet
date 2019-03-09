@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq.Expressions;
+using Reposify.Testing;
 
 namespace Lucid.Infrastructure.Lib.Testing.Execution
 {
@@ -10,6 +10,12 @@ namespace Lucid.Infrastructure.Lib.Testing.Execution
         {
             mutator(target);
             return target;
+        }
+
+        public static Builder<T> With<T, U>(this T target, Expression<Func<T, U>> propertyFunction, U value)
+        {
+            var builder = Builder.Modify(target);
+            return builder.With(propertyFunction, value);
         }
     }
 }

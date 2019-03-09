@@ -38,8 +38,8 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 
             blueprints.Should().BeEquivalentTo(agreement.Result().Mutate(r =>
             {
-                Builder.Modify(r[0]).With(bp => bp.Id, bp1.Id);
-                Builder.Modify(r[1]).With(bp => bp.Id, bp2.Id);
+                r[0].With(bp => bp.Id, bp1.Id);
+                r[1].With(bp => bp.Id, bp2.Id);
             }));
         }
 
