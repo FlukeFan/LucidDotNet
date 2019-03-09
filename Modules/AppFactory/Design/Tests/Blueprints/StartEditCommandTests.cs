@@ -79,5 +79,29 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
                 r.With(bp => bp.Id, existingBlueprint.Id);
             }));
         }
+
+        [Test]
+        public async Task Edit_NoChanges()
+        {
+            var bp = await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_1" }.ExecuteAsync();
+
+            await new StartEditCommand
+            {
+                BlueprintId = bp.Id,
+                OwnedByUserId = bp.OwnedByUserId,
+                Name = bp.Name,
+            }.ExecuteAsync();
+        }
+
+        [Test]
+        public async Task Edit_DuplicateName_Throws()
+        {
+            await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_1" }.ExecuteAsync();
+            var bp2 = await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_2" }.ExecuteAsync();
+
+            Assert.That(() =>
+                new StartEditCommand { BlueprintId = bp2.Id, OwnedByUserId = 123, Name = "Blueprint_1" }.ExecuteAsync(),
+                Throws.InstanceOf<FacadeException>());
+        }
     }
 }

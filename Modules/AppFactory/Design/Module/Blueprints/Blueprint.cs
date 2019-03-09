@@ -18,7 +18,6 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
                 OwnedByUserId = cmd.OwnedByUserId,
             };
 
-            VerifyNameIsUnique(cmd.OwnedByUserId, cmd.Name);
             blueprint.Update(cmd);
             return await Repository.SaveAsync(blueprint);
         }
@@ -32,12 +31,14 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
 
         protected virtual void Update(StartEditCommand cmd)
         {
+            VerifyNameIsUnique(Id, OwnedByUserId, cmd.Name);
             Name = cmd.Name;
         }
 
-        private static void VerifyNameIsUnique(int ownedByUserId, string name)
+        private static void VerifyNameIsUnique(int blueprintId, int ownedByUserId, string name)
         {
             var existingBlueprint = Repository.Query<Blueprint>()
+                .Where(bp => bp.Id != blueprintId)
                 .Where(bp => bp.OwnedByUserId == ownedByUserId)
                 .Where(bp => bp.Name == name)
                 .SingleOrDefault();
