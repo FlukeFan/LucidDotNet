@@ -13,14 +13,26 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
 
         public static async Task<Blueprint> StartAsync(StartEditCommand cmd)
         {
-            VerifyNameIsUnique(cmd.OwnedByUserId, cmd.Name);
+            var blueprint = new Blueprint
+            {
+                OwnedByUserId = cmd.OwnedByUserId,
+            };
 
-            return await Repository.SaveAsync(
-                new Blueprint
-                {
-                    OwnedByUserId = cmd.OwnedByUserId,
-                    Name = cmd.Name,
-                });
+            VerifyNameIsUnique(cmd.OwnedByUserId, cmd.Name);
+            blueprint.Update(cmd);
+            return await Repository.SaveAsync(blueprint);
+        }
+
+        public static async Task<Blueprint> EditAsync(StartEditCommand cmd)
+        {
+            var blueprint = await Repository.LoadAsync<Blueprint>(cmd.BlueprintId);
+            blueprint.Update(cmd);
+            return blueprint;
+        }
+
+        protected virtual void Update(StartEditCommand cmd)
+        {
+            Name = cmd.Name;
         }
 
         private static void VerifyNameIsUnique(int ownedByUserId, string name)

@@ -2,9 +2,11 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
+using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Infrastructure.Lib.Testing.Validation;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using NUnit.Framework;
+using Reposify.Testing;
 
 namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 {
@@ -33,13 +35,16 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         }
 
         [Test]
-        public async Task Agreement()
+        public async Task Start_Agreement()
         {
             var agreement = Agreements.Start;
 
             var blueprint = await agreement.Executable().ExecuteAsync();
 
-            blueprint.Should().BeEquivalentTo(agreement.Result(), opt => opt.Excluding(o => o.Id));
+            blueprint.Should().BeEquivalentTo(agreement.Result().Mutate(r =>
+            {
+                Builder.Modify(r).With(bp => bp.Id, blueprint.Id);
+            }));
         }
 
         [Test]
@@ -58,6 +63,22 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
             await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_unique" }.ExecuteAsync();
             await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_duplicate" }.ExecuteAsync();
             await new StartEditCommand { OwnedByUserId = 234, Name = "Blueprint_duplicate" }.ExecuteAsync();
+        }
+
+        [Test]
+        public async Task Edit_Agreement()
+        {
+            var agreement = Agreements.Edit;
+
+            var existingBlueprint = await Agreements.Start.Executable().ExecuteAsync();
+
+            var updatedBlueprint = await agreement.Executable().Mutate(c => c.BlueprintId = existingBlueprint.Id).ExecuteAsync();
+
+            updatedBlueprint.Id.Should().Be(existingBlueprint.Id);
+            updatedBlueprint.Should().BeEquivalentTo(agreement.Result().Mutate(r =>
+            {
+                Builder.Modify(r).With(bp => bp.Id, existingBlueprint.Id);
+            }));
         }
     }
 }

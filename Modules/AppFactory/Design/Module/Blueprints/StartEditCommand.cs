@@ -7,7 +7,8 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
     public class StartEditCommand : CommandAsync<Blueprint>
     {
-        public int OwnedByUserId { get; set; }
+        public int BlueprintId      { get; set; }
+        public int OwnedByUserId    { get; set; }
 
         [Required(ErrorMessage = "Please supply a Name")]
         public string Name { get; set; }
@@ -17,7 +18,9 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
             if (OwnedByUserId == 0)
                 throw new FacadeException("User id not specified");
 
-            return await Blueprint.StartAsync(this);
+            return (BlueprintId == 0)
+                ? await Blueprint.StartAsync(this)
+                : await Blueprint.EditAsync(this);
         }
     }
 }
