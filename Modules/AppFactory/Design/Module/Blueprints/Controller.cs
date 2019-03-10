@@ -35,9 +35,17 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         }
 
         [HttpGet("startEdit/{blueprintId?}")]
-        public IActionResult StartEdit(int blueprintId)
+        public async Task<IActionResult> StartEdit(int blueprintId)
         {
-            return RenderStartEdit(new StartEditCommand { BlueprintId = blueprintId });
+            var cmd = new StartEditCommand { BlueprintId = blueprintId };
+
+            if (blueprintId != 0)
+            {
+                var blueprint = await ExecAsync(new FindBlueprintQuery { BlueprintId = blueprintId });
+                cmd.Name = blueprint.Name;
+            }
+
+            return RenderStartEdit(cmd);
         }
 
         [HttpPost("startEdit/{blueprintId?}")]

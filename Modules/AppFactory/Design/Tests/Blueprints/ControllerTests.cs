@@ -49,6 +49,8 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         [Test]
         public async Task Can_EditBlueprint()
         {
+            ExecutorStub.StubResult(Agreements.FindBlueprint);
+
             var client = MvcTestingClient();
 
             var getResponse = await client
@@ -58,7 +60,10 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
             model.Title.Should().Be("Edit Blueprint");
             model.ButtonText.Should().Be("Update");
 
-            var response = await getResponse.Form<StartEditCommand>()
+            var form = getResponse.Form<StartEditCommand>();
+            form.GetText(m => m.Name).Should().Be("TestBlueprint");
+
+            var response = await form
                 .SetText(m => m.Name, "UpdatedBlueprint")
                 .Submit();
 
