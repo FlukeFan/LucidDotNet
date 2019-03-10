@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
+using Lucid.Infrastructure.Lib.Testing.Controller;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using MvcTesting.Html;
@@ -30,11 +31,14 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         {
             var client = MvcTestingClient();
 
-            var form = await client
-                .GetAsync(Actions.Start())
-                .Form<StartEditCommand>();
+            var getResponse = await client
+                .GetAsync(Actions.Start());
 
-            var response = await form
+            var model = getResponse.ViewResultModel<StartEditModel>();
+            model.Title.Should().Be("Start Blueprint");
+            model.ButtonText.Should().Be("Start Blueprint");
+
+            var response = await getResponse.Form<StartEditCommand>()
                 .SetText(m => m.Name, "TestBlueprint")
                 .Submit();
 

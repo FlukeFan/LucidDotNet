@@ -10,7 +10,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         internal const string RoutePrefix = "appFactory/design/blueprints";
 
         public static string List()     { return $"/{RoutePrefix}/list"; }
-        public static string Start()    { return $"/{RoutePrefix}/start"; }
+        public static string Start()    { return $"/{RoutePrefix}/startEdit"; }
     }
 
     [Route(Actions.RoutePrefix)]
@@ -33,25 +33,40 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
             return View(model);
         }
 
-        [HttpGet("start")]
-        public IActionResult Start()
+        [HttpGet("startEdit")]
+        public IActionResult StartEdit()
         {
-            return RenderStart(new StartEditCommand());
+            return RenderStartEdit(new StartEditCommand());
         }
 
-        [HttpPost("start")]
-        public async Task<IActionResult> Start(StartEditCommand cmd)
+        [HttpPost("startEdit")]
+        public async Task<IActionResult> StartEdit(StartEditCommand cmd)
         {
             cmd.OwnedByUserId = HttpContext.LoggedInUser().Id;
 
             return await ExecAsync(cmd,
                 success: blueprint => this.ReturnModal(),
-                failure: () => RenderStart(cmd));
+                failure: () => RenderStartEdit(cmd));
         }
 
-        private IActionResult RenderStart(StartEditCommand cmd)
+        private IActionResult RenderStartEdit(StartEditCommand cmd)
         {
-            var model = new StartModel { Cmd = cmd };
+            var model = new StartEditModel
+            {
+                Cmd = cmd,
+            };
+
+            if (cmd.BlueprintId == 0)
+            {
+                model.Title = "Start Blueprint";
+                model.ButtonText = "Start Blueprint";
+            }
+            else
+            {
+                model.Title = "Edit Blueprint";
+                model.ButtonText = "Update";
+            }
+
             return View(model);
         }
     }
