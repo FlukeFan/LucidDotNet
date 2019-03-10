@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
 
@@ -31,6 +32,9 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
 
         protected virtual void Update(StartEditCommand cmd)
         {
+            if (OwnedByUserId != cmd.OwnedByUserId)
+                throw new Exception("Invalid attempt to change the owner of a Blueprint");
+
             VerifyNameIsUnique(Id, OwnedByUserId, cmd.Name);
             Name = cmd.Name;
         }

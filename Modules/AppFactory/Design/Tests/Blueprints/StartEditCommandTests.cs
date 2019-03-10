@@ -103,5 +103,15 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
                 new StartEditCommand { BlueprintId = bp2.Id, OwnedByUserId = 123, Name = "Blueprint_1" }.ExecuteAsync(),
                 Throws.InstanceOf<FacadeException>());
         }
+
+        [Test]
+        public async Task Edit_NotOwner_Throws()
+        {
+            var bp = await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint" }.ExecuteAsync();
+
+            Assert.That(() =>
+                new StartEditCommand { BlueprintId = bp.Id, OwnedByUserId = 234, Name = "Blueprint" }.ExecuteAsync(),
+                Throws.InstanceOf<Exception>());
+        }
     }
 }
