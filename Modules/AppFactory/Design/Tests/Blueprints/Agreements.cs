@@ -15,8 +15,8 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
             .Result(() =>
                 new List<Blueprint>
                 {
-                    new BlueprintBuilder().Value(),
-                    new BlueprintBuilder().Value(),
+                    new BlueprintBuilder().With(bp => bp.Id, 101).Value(),
+                    new BlueprintBuilder().With(bp => bp.Id, 102).Value(),
                 });
 
         public static Agreement<StartEditCommand, Blueprint> Start =

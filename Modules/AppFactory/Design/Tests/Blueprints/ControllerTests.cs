@@ -24,6 +24,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 
             response.Doc.Find(".blueprintList").Should().NotBeNull();
             response.Doc.FindAll(".blueprintItem").Count.Should().Be(2);
+            response.Doc.Find(".blueprintItem:nth-child(1) a").Attribute("href").Should().StartWith(Actions.Edit(101));
         }
 
         [Test]
