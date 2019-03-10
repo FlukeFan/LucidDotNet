@@ -46,6 +46,25 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         }
 
         [Test]
+        public async Task Can_EditBlueprint()
+        {
+            var client = MvcTestingClient();
+
+            var getResponse = await client
+                .GetAsync(Actions.Edit(123));
+
+            var model = getResponse.ViewResultModel<StartEditModel>();
+            model.Title.Should().Be("Edit Blueprint");
+            model.ButtonText.Should().Be("Update");
+
+            var response = await getResponse.Form<StartEditCommand>()
+                .SetText(m => m.Name, "UpdatedBlueprint")
+                .Submit();
+
+            ExecutorStub.VerifySingleExecuted(Agreements.Edit);
+        }
+
+        [Test]
         public async Task WhenError_RedisplaysPage()
         {
             ExecutorStub.StubResult<StartEditCommand>(l => throw new FacadeException("simulated error"));

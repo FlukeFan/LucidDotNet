@@ -9,8 +9,9 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
     {
         internal const string RoutePrefix = "appFactory/design/blueprints";
 
-        public static string List()     { return $"/{RoutePrefix}/list"; }
-        public static string Start()    { return $"/{RoutePrefix}/startEdit"; }
+        public static string List()                 { return $"/{RoutePrefix}/list"; }
+        public static string Start()                { return $"/{RoutePrefix}/startEdit"; }
+        public static string Edit(int blueprintId)  { return $"/{RoutePrefix}/startEdit/{blueprintId}"; }
     }
 
     [Route(Actions.RoutePrefix)]
@@ -33,13 +34,13 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
             return View(model);
         }
 
-        [HttpGet("startEdit")]
-        public IActionResult StartEdit()
+        [HttpGet("startEdit/{blueprintId?}")]
+        public IActionResult StartEdit(int blueprintId)
         {
-            return RenderStartEdit(new StartEditCommand());
+            return RenderStartEdit(new StartEditCommand { BlueprintId = blueprintId });
         }
 
-        [HttpPost("startEdit")]
+        [HttpPost("startEdit/{blueprintId?}")]
         public async Task<IActionResult> StartEdit(StartEditCommand cmd)
         {
             cmd.OwnedByUserId = HttpContext.LoggedInUser().Id;
