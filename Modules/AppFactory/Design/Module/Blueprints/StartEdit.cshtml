@@ -14,6 +14,7 @@
 {
     @form.Html.ErrorSummary()
 
+    @form.Html.HiddenFor(m => m.BlueprintId)
     @form.Html.LabelledInputText("Name", m => m.Name)
 
     @using (form.Html.FormButtons())
