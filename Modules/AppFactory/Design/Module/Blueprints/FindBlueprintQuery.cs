@@ -9,7 +9,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
 
         public override async Task<Blueprint> ExecuteAsync()
         {
-            return await Registry.Repository.Value.LoadAsync<Blueprint>(0); // broken until we add test
+            return await Registry.Repository.Value.LoadAsync<Blueprint>(BlueprintId);
         }
     }
 }

@@ -1,0 +1,23 @@
+﻿using System.Threading.Tasks;
+using FluentAssertions;
+using Lucid.Infrastructure.Lib.Testing.Execution;
+using NUnit.Framework;
+
+namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
+{
+    [TestFixture]
+    public class FindBlueprintQueryTests : ModuleTestSetup.LogicTest
+    {
+        [Test]
+        public async Task Agreement()
+        {
+            var agreement = Agreements.FindBlueprint;
+
+            var bp = await Agreements.Start.Executable().ExecuteAsync();
+
+            var result = await agreement.Executable().Mutate(c => c.BlueprintId = bp.Id).ExecuteAsync();
+
+            result.Should().BeEquivalentTo(agreement.Result().Mutate(r => r.With(e => e.Id, bp.Id)));
+        }
+    }
+}
