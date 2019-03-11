@@ -1,10 +1,19 @@
 ﻿using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Modules.AppFactory.Design.Blueprints;
+using Lucid.Modules.AppFactory.Design.Contract;
 using Reposify.Testing;
 
 namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 {
+    public class BlueprintDtoDefault : BlueprintDto
+    {
+        public BlueprintDtoDefault()
+        {
+            Name = "TestBlueprint";
+        }
+    }
+
     public class BlueprintBuilder : Builder<Blueprint>
     {
         static BlueprintBuilder()

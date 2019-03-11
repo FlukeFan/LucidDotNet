@@ -1,18 +1,17 @@
 ﻿using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade;
-using NHibernate;
+using Lucid.Modules.AppFactory.Design.Contract;
 
 namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
-    public class FindBlueprintQuery : QueryAsync<Blueprint>
+    public class FindBlueprintQuery : QueryAsync<BlueprintDto>
     {
         public int BlueprintId;
 
-        public override async Task<Blueprint> ExecuteAsync()
+        public override async Task<BlueprintDto> ExecuteAsync()
         {
             var blueprint = await Registry.Repository.Value.LoadAsync<Blueprint>(BlueprintId);
-            NHibernateUtil.Initialize(blueprint);
-            return blueprint;
+            return blueprint.ToDto();
         }
     }
 }

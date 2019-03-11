@@ -2,13 +2,23 @@
 
 namespace Lucid.Infrastructure.Lib.Testing.Execution
 {
-    public class Agreement<TExecutable>
+    public interface IAgreement<TExecutable>
     {
-        public Func<TExecutable> Executable;
+        Func<TExecutable> Executable { get; }
     }
 
-    public class Agreement<TExecutable, TResult> : Agreement<TExecutable>
+    public interface IAgreement<TExecutable, out TResult> : IAgreement<TExecutable>
     {
-        public Func<TResult> Result;
+        Func<TResult> Result { get; }
+    }
+
+    public class Agreement<TExecutable> : IAgreement<TExecutable>
+    {
+        public Func<TExecutable> Executable { get; set; }
+    }
+
+    public class Agreement<TExecutable, TResult> : Agreement<TExecutable>, IAgreement<TExecutable, TResult>
+    {
+        public Func<TResult> Result { get; set; }
     }
 }

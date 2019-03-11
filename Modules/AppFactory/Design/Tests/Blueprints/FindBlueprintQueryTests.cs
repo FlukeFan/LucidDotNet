@@ -22,7 +22,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
                 var result = await agreement.Executable().Mutate(c => c.BlueprintId = bp.Id).ExecuteAsync();
 
                 NHibernateUtil.IsInitialized(result).Should().BeTrue();
-                result.Should().BeEquivalentTo(agreement.Result().Mutate(r => r.With(e => e.Id, result.Id)));
+                result.Should().BeEquivalentTo(agreement.Result().Mutate(r => r.Id = result.Id));
             }
         }
     }

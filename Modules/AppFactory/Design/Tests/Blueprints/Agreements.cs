@@ -1,33 +1,34 @@
 ﻿using System.Collections.Generic;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Modules.AppFactory.Design.Blueprints;
+using Lucid.Modules.AppFactory.Design.Contract;
 
 namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
 {
     public class Agreements
     {
-        public static Agreement<FindBlueprintsQuery, List<Blueprint>> FindBlueprints =
+        public static IAgreement<FindBlueprintsQuery, List<BlueprintDto>> FindBlueprints =
             AgreementBuilder.For(() =>
                 new FindBlueprintsQuery
                 {
                     UserId = Defaults.UserId,
                 })
             .Result(() =>
-                new List<Blueprint>
+                new List<BlueprintDto>
                 {
-                    new BlueprintBuilder().With(bp => bp.Id, 101).Value(),
-                    new BlueprintBuilder().With(bp => bp.Id, 102).Value(),
+                    new BlueprintDtoDefault { Id = 101 },
+                    new BlueprintDtoDefault { Id = 102 },
                 });
 
-        public static Agreement<FindBlueprintQuery, Blueprint> FindBlueprint =
+        public static IAgreement<FindBlueprintQuery, BlueprintDto> FindBlueprint =
             AgreementBuilder.For(() =>
                 new FindBlueprintQuery
                 {
                     BlueprintId = 123,
                 })
-            .Result(() => new BlueprintBuilder().With(bp => bp.Id, 123).Value());
+            .Result(() => new BlueprintDtoDefault { Id = 123 });
 
-        public static Agreement<StartEditCommand, Blueprint> Start =
+        public static IAgreement<StartEditCommand, Blueprint> Start =
             AgreementBuilder.For(() =>
                 new StartEditCommand
                 {
@@ -38,7 +39,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
                 new BlueprintBuilder()
                     .Value());
 
-        public static Agreement<StartEditCommand, Blueprint> Edit =
+        public static IAgreement<StartEditCommand, Blueprint> Edit =
             AgreementBuilder.For(() =>
                 new StartEditCommand
                 {

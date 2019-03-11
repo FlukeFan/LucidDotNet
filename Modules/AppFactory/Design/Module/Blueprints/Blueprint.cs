@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
+using Lucid.Modules.AppFactory.Design.Contract;
 
 namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
@@ -28,6 +29,15 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
             var blueprint = await Repository.LoadAsync<Blueprint>(cmd.BlueprintId);
             blueprint.Update(cmd);
             return blueprint;
+        }
+
+        public virtual BlueprintDto ToDto()
+        {
+            return new BlueprintDto
+            {
+                Id = Id,
+                Name = Name,
+            };
         }
 
         protected virtual void Update(StartEditCommand cmd)
