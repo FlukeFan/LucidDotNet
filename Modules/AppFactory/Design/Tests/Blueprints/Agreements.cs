@@ -28,18 +28,16 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
                 })
             .Result(() => new BlueprintDtoDefault { Id = 123 });
 
-        public static IAgreement<StartEditCommand, Blueprint> Start =
+        public static IAgreement<StartEditCommand, int> Start =
             AgreementBuilder.For(() =>
                 new StartEditCommand
                 {
                     OwnedByUserId = Defaults.UserId,
                     Name = "TestBlueprint",
                 })
-            .Result(() =>
-                new BlueprintBuilder()
-                    .Value());
+            .Result(() => 101);
 
-        public static IAgreement<StartEditCommand, Blueprint> Edit =
+        public static IAgreement<StartEditCommand, int> Edit =
             AgreementBuilder.For(() =>
                 new StartEditCommand
                 {
@@ -47,9 +45,6 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
                     OwnedByUserId = Defaults.UserId,
                     Name = "UpdatedBlueprint",
                 })
-            .Result(() =>
-                new BlueprintBuilder()
-                    .With(bp => bp.Name, "UpdatedBlueprint")
-                    .Value());
+            .Result(() => 101);
     }
 }

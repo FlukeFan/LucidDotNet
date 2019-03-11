@@ -4,6 +4,7 @@ using FluentAssertions;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
 using Lucid.Infrastructure.Lib.Testing.Execution;
 using Lucid.Infrastructure.Lib.Testing.Validation;
+using Lucid.Infrastructure.Lib.Util;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using NUnit.Framework;
 
@@ -38,12 +39,12 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         {
             var agreement = Agreements.Start;
 
-            var blueprint = await agreement.Executable().ExecuteAsync();
+            var blueprintId = await agreement.Executable().ExecuteAsync();
 
-            blueprint.Should().BeEquivalentTo(agreement.Result().Mutate(r =>
-            {
-                r.With(bp => bp.Id, blueprint.Id);
-            }));
+            blueprintId.Should().NotBe(0);
+
+            await new FindBlueprintQuery { BlueprintId = blueprintId }.ExecuteAsync()
+                .Then(dto => dto.Should().BeEquivalentTo(new BlueprintDtoDefault { Id = blueprintId }));
         }
 
         [Test]
@@ -69,27 +70,30 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         {
             var agreement = Agreements.Edit;
 
-            var existingBlueprint = await Agreements.Start.Executable().ExecuteAsync();
+            var existingBlueprintId = await Agreements.Start.Executable().ExecuteAsync();
 
-            var updatedBlueprint = await agreement.Executable().Mutate(c => c.BlueprintId = existingBlueprint.Id).ExecuteAsync();
+            var updatedBlueprintId = await agreement.Executable().Mutate(c => c.BlueprintId = existingBlueprintId).ExecuteAsync();
 
-            updatedBlueprint.Id.Should().Be(existingBlueprint.Id);
-            updatedBlueprint.Should().BeEquivalentTo(agreement.Result().Mutate(r =>
-            {
-                r.With(bp => bp.Id, existingBlueprint.Id);
-            }));
+            updatedBlueprintId.Should().Be(existingBlueprintId);
+
+            await new FindBlueprintQuery { BlueprintId = updatedBlueprintId }.ExecuteAsync()
+                .Then(dto => dto.Should().BeEquivalentTo(new BlueprintDtoDefault
+                {
+                    Id = updatedBlueprintId,
+                    Name = "UpdatedBlueprint",
+                }));
         }
 
         [Test]
         public async Task Edit_NoChanges()
         {
-            var bp = await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_1" }.ExecuteAsync();
+            var bpId = await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_1" }.ExecuteAsync();
 
             await new StartEditCommand
             {
-                BlueprintId = bp.Id,
-                OwnedByUserId = bp.OwnedByUserId,
-                Name = bp.Name,
+                BlueprintId = bpId,
+                OwnedByUserId = 123,
+                Name = "Blueprint_1",
             }.ExecuteAsync();
         }
 
@@ -97,20 +101,20 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         public async Task Edit_DuplicateName_Throws()
         {
             await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_1" }.ExecuteAsync();
-            var bp2 = await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_2" }.ExecuteAsync();
+            var bp2Id = await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint_2" }.ExecuteAsync();
 
             Assert.That(() =>
-                new StartEditCommand { BlueprintId = bp2.Id, OwnedByUserId = 123, Name = "Blueprint_1" }.ExecuteAsync(),
+                new StartEditCommand { BlueprintId = bp2Id, OwnedByUserId = 123, Name = "Blueprint_1" }.ExecuteAsync(),
                 Throws.InstanceOf<FacadeException>());
         }
 
         [Test]
         public async Task Edit_NotOwner_Throws()
         {
-            var bp = await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint" }.ExecuteAsync();
+            var bpId = await new StartEditCommand { OwnedByUserId = 123, Name = "Blueprint" }.ExecuteAsync();
 
             Assert.That(() =>
-                new StartEditCommand { BlueprintId = bp.Id, OwnedByUserId = 234, Name = "Blueprint" }.ExecuteAsync(),
+                new StartEditCommand { BlueprintId = bpId, OwnedByUserId = 234, Name = "Blueprint" }.ExecuteAsync(),
                 Throws.InstanceOf<Exception>());
         }
     }

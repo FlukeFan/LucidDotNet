@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Testing.Execution;
-using NHibernate;
 using NUnit.Framework;
 
 namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
@@ -12,16 +11,14 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         [Test]
         public async Task Agreement()
         {
+            var agreement = Agreements.FindBlueprint;
+
             using (var db = new ModuleTestSetup.SetupDbTx())
             {
-                var agreement = Agreements.FindBlueprint;
-                var bp = await Agreements.Start.Executable().ExecuteAsync();
+                var bpId = await Agreements.Start.Executable().ExecuteAsync();
 
-                db.Session.Clear();
+                var result = await agreement.Executable().Mutate(c => c.BlueprintId = bpId).ExecuteAsync();
 
-                var result = await agreement.Executable().Mutate(c => c.BlueprintId = bp.Id).ExecuteAsync();
-
-                NHibernateUtil.IsInitialized(result).Should().BeTrue();
                 result.Should().BeEquivalentTo(agreement.Result().Mutate(r => r.Id = result.Id));
             }
         }

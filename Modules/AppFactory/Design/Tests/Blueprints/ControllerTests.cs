@@ -30,6 +30,8 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         [Test]
         public async Task Can_StartBlueprint()
         {
+            ExecutorStub.StubResult(Agreements.Start);
+
             var client = MvcTestingClient();
 
             var getResponse = await client
@@ -50,6 +52,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
         public async Task Can_EditBlueprint()
         {
             ExecutorStub.StubResult(Agreements.FindBlueprint);
+            ExecutorStub.StubResult(Agreements.Edit);
 
             var client = MvcTestingClient();
 
