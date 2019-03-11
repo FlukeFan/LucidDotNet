@@ -9,8 +9,12 @@
 .btn {
     // Add margin to Bootstrap buttons, as Razor will render them
     // right next to each other with no white-space
-    margin-right: 6px;
-    margin-bottom: 6px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+td a.btn {
+    margin-top: 4px;
 }
 
 .is-invalid label {
@@ -105,8 +109,6 @@ body {
             margin-left: auto;
             padding: 15px;
         }
-
-        td a.btn { margin-top: 4px; }
     }
 
     @media (max-height: 250px) {
