@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\Build\common.targets" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Infrastructure\Lib\Testing\Lucid.Infrastructure.Lib.Testing.csproj" />
+    <ProjectReference Include="..\Contract\Lucid.Modules.AppFactory.Design.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

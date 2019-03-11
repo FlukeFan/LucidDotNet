@@ -5,6 +5,7 @@
   <ItemGroup>
     <ProjectsToBuild Include="Contract\Lucid.Modules.AppFactory.Design.Contract.csproj" />
     <ProjectsToBuild Include="Module\Lucid.Modules.AppFactory.Design.csproj" />
+    <ProjectsToBuild Include="Tests.Contract\Lucid.Modules.AppFactory.Design.Tests.Contract.csproj" />
     <ProjectsToBuild Include="Tests\Lucid.Modules.AppFactory.Design.Tests.csproj" />
   </ItemGroup>
 
