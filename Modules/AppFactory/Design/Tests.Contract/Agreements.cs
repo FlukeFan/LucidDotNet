@@ -4,7 +4,7 @@ using Lucid.Modules.AppFactory.Design.Contract;
 
 namespace Lucid.Modules.AppFactory.Design.Tests.Contract
 {
-    public class ContractAgreements
+    public class Agreements
     {
         public static IAgreement<FindAvailableBlueprints, List<BlueprintDto>> FindAvailableBlueprints =
             AgreementBuilder.For(() =>

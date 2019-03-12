@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Lucid.Infrastructure.Lib.Domain.SqlServer;
+using Lucid.Infrastructure.Lib.Facade;
 using Lucid.Infrastructure.Lib.Testing;
 using Lucid.Infrastructure.Lib.Testing.Controller;
 using Lucid.Infrastructure.Lib.Testing.Execution;
@@ -87,19 +88,20 @@ namespace Lucid.Modules.AppFactory.Design.Tests
         {
             private Func<DateTime>      _previousNow;
             private INhSqlRepository    _previousRepository;
+            private IExecutorAsync      _previousExecutorAsync;
 
             public SetupMemoryLogic()
             {
                 _previousNow = Registry.UtcNow;
-                _previousRepository = Registry.Repository.Value;
-                MemoryRepository = new NhSqlMemoryRepository(MemoryConstraints);
-                Registry.Repository.Value = MemoryRepository;
+                _previousRepository = Registry.Repository.Value = MemoryRepository = new NhSqlMemoryRepository(MemoryConstraints);
+                _previousExecutorAsync = Registry.ExecutorAsync = new ExecutorAsync().UsingHandlersFromAssemblyWithType<Registry>();
             }
 
             public NhSqlMemoryRepository MemoryRepository { get; private set; }
 
             public void Dispose()
             {
+                Registry.ExecutorAsync = _previousExecutorAsync;
                 Registry.Repository.Value = _previousRepository;
                 Registry.UtcNow = _previousNow;
             }

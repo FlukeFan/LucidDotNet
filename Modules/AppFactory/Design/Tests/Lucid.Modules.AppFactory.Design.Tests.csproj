@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Infrastructure\Lib\Testing\Lucid.Infrastructure.Lib.Testing.csproj" />
     <ProjectReference Include="..\Module\Lucid.Modules.AppFactory.Design.csproj" />
+    <ProjectReference Include="..\Tests.Contract\Lucid.Modules.AppFactory.Design.Tests.Contract.csproj" />
   </ItemGroup>
 
   <ItemGroup>
