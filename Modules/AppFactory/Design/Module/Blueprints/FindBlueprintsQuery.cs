@@ -3,21 +3,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lucid.Infrastructure.Lib.Facade;
 using Lucid.Modules.AppFactory.Design.Contract;
-using NHibernate.Linq;
+using Reposify;
 
 namespace Lucid.Modules.AppFactory.Design.Blueprints
 {
-    public class FindBlueprintsQuery : QueryAsync<List<BlueprintDto>>
+    public class FindBlueprintsQuery : QueryAsync<List<BlueprintDto>>, IDbLinq<Blueprint>
     {
         public int UserId;
 
         public override async Task<List<BlueprintDto>> ExecuteAsync()
         {
-            return await Registry.Repository.Value.Query<Blueprint>()
-                .Where(bp => bp.OwnedByUserId == UserId)
-                .OrderBy(bp => bp.Name)
+            var blueprints = await Registry.Repository.Value.ListAsync(this);
+
+            return blueprints
                 .Select(bp => bp.ToDto())
-                .ToListAsync();
+                .ToList();
+        }
+
+        public IQueryable<Blueprint> Prepare(IQueryable<Blueprint> queryable)
+        {
+            return queryable
+                .Where(bp => bp.OwnedByUserId == UserId)
+                .OrderBy(bp => bp.Name);
         }
     }
 }
