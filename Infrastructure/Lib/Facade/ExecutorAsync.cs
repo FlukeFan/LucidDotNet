@@ -57,7 +57,7 @@ namespace Lucid.Infrastructure.Lib.Facade
             var iExecutable = (context.Executable as IExecutableAsync);
 
             if (iExecutable != null)
-                return iExecutable.ExecuteAsync();
+                return await iExecutable.ExecuteAsync();
 
             var executable = context.Executable;
             var executableType = executable.GetType();

@@ -11,7 +11,7 @@ namespace Lucid.Modules.Security
         public virtual string   Name            { get; protected set; }
         public virtual DateTime LastLoggedIn    { get; protected set; }
 
-        public async static Task<User> Login(LoginCommand cmd)
+        public static async Task<User> Login(LoginCommand cmd)
         {
             var existingUser = Repository.Query<User>()
                 .Where(u => u.Name == cmd.UserName)
