@@ -4,6 +4,7 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="Design\build.proj" />
+    <ProjectsToBuild Include="Manufacturing\build.proj" />
   </ItemGroup>
 
 </Project>
