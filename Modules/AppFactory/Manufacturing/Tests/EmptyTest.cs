@@ -7,7 +7,10 @@ namespace Lucid.Modules.AppFactory.Manufacturing.Tests
         [Test]
         public void InitialEmptyTest()
         {
-            Assert.Pass("Added empty module");
+            using (new ModuleTestSetup.SetupDbTx())
+            {
+                Assert.Pass("Added empty module");
+            }
         }
     }
 }
