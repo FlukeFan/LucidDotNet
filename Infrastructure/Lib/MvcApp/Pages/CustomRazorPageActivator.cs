@@ -20,8 +20,8 @@ namespace Lucid.Infrastructure.Lib.MvcApp.Pages
         {
             Activate(page, context);
 
-            if (page is IMvcAppPage)
-                context.HttpContext.Items.Add(IsMvcAppPage, true);
+            //if (page is IMvcAppPage)
+            //    context.HttpContext.Items.Add(IsMvcAppPage, true);
         }
     }
 }

@@ -3,6 +3,7 @@ using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
 using Lucid.Infrastructure.Lib.Testing;
 using Lucid.Infrastructure.Lib.Testing.Controller;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MvcTesting.AspNetCore;
 using NUnit.Framework;
@@ -43,7 +44,7 @@ namespace Lucid.Infrastructure.Host.Web.Tests
 
             public class MenuSetLayout : ISetLayout
             {
-                void ISetLayout.Set(IMvcAppPage page, PageInfo pageInfo, ViewContext viewContext)
+                void ISetLayout.Set(IRazorPage page, PageInfo pageInfo, ViewContext viewContext)
                 {
                     page.Layout = typeof(MenuModel).RelativeViewPath("Menu.cshtml");
                     viewContext.ViewBag.MenuModel = new MenuModel();

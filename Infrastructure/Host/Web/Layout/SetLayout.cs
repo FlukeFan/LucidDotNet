@@ -1,5 +1,6 @@
 ﻿using Lucid.Infrastructure.Lib.MvcApp.Pages;
 using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MvcForms;
 
@@ -7,7 +8,7 @@ namespace Lucid.Infrastructure.Host.Web.Layout
 {
     public class SetLayout : ISetLayout
     {
-        void ISetLayout.Set(IMvcAppPage page, PageInfo pageInfo, ViewContext viewContext)
+        void ISetLayout.Set(IRazorPage page, PageInfo pageInfo, ViewContext viewContext)
         {
             viewContext.ViewBag.PageInfo = pageInfo;
 

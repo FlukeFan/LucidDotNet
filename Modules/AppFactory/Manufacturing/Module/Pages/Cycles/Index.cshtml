@@ -1,3 +1,9 @@
 ﻿@page "/appFactory/manufacturing/cycles"
-
+@inherits Lucid.Infrastructure.Lib.MvcApp.MvcAppRazorPage
+@{
+    Setup(pi =>
+    {
+        pi.Title = "Cycles";
+    });
+}
 Hello from Cycles page
