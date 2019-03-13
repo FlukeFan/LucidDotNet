@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -45,9 +44,6 @@ namespace Lucid.Infrastructure.Host.Web
                 // use the file-system razor views so that we get re-compilation when they change
                 var rootSourcePath = Path.GetFullPath(Path.Combine(_env.ContentRootPath, "../../.."));
                 services.UseCustomFileSystemRazorViews(rootSourcePath);
-
-                // add activator so we can track views have been setup correctly during development
-                services.AddSingleton<IRazorPageActivator, CustomRazorPageActivator>();
             }
             else
             {
@@ -67,9 +63,6 @@ namespace Lucid.Infrastructure.Host.Web
             mvcOptions.Filters.Add(new FeatureFolderViewFilter());
             mvcOptions.Filters.Add(new AuthorizeFilter());
             mvcOptions.Filters.Add(new PjaxFilter());
-
-            if (_env.IsDevelopment())
-                mvcOptions.Filters.Add(new MvcAppPageResultFilter(true));
         }
 
         public void Configure(IApplicationBuilder app, IConfiguration config, ILoggerFactory loggerFactory)
