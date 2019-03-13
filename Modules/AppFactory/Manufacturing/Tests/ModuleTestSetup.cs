@@ -45,12 +45,12 @@ namespace Lucid.Modules.AppFactory.Manufacturing.Tests
         }
 
         [TestFixture]
-        public abstract class ControllerTest
+        public abstract class PagesTest
         {
             private SetupExecutorStub _excecutorStub;
 
-            protected SimulatedHttpClient   MvcTestingClient()  { return _testServerSetup.TestServer.MvcTestingClient(); }
-            protected ExecutorStubAsync     ExecutorStub        => _excecutorStub.Stub;
+            protected SimulatedHttpClient   Client()        { return _testServerSetup.TestServer.MvcTestingClient(); }
+            protected ExecutorStubAsync     ExecutorStub    => _excecutorStub.Stub;
 
             [SetUp]
             public void SetUp()

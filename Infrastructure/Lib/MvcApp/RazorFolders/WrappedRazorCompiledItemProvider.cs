@@ -23,7 +23,7 @@ namespace Lucid.Infrastructure.Lib.MvcApp.RazorFolders
         private IList<RazorCompiledItem> Wrap(IEnumerable<RazorCompiledItem> originalItems)
         {
             return originalItems
-                .Select(i => new WrappedRazorCompiledItem(i))
+                .Select(i => i.Kind.Contains("razor-page") ? i : new WrappedRazorCompiledItem(i))
                 .Cast<RazorCompiledItem>()
                 .ToList();
         }
