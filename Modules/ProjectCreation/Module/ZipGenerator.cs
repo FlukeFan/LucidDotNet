@@ -17,6 +17,7 @@ namespace Lucid.Modules.ProjectCreation
         private static readonly IList<string> ProcessedExtensions = new List<string>
         {
             ".gitignore",
+            ".editorconfig",
             ".sln",
             ".csproj",
             ".proj",
@@ -87,7 +88,7 @@ namespace Lucid.Modules.ProjectCreation
                 return true;
 
             if (!UnprocessedExtensions.Contains(extension))
-                throw new Exception($"Extension '{extension}' should be added to Generate.ProcessedExtensions or Generate.UnprocessedExtensions for file '{fileName}'.");
+                throw new Exception($"Extension '{extension}' should be added to ZipGenerator.ProcessedExtensions or ZipGenerator.UnprocessedExtensions for file '{fileName}'.");
 
             return false;
         }

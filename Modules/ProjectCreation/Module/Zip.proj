@@ -3,6 +3,7 @@
   <ItemGroup>
     <FilesToZip Include="..\..\..\**\lib\**" />
     <FilesToZip Include="..\..\..\**\.gitignore" />
+    <FilesToZip Include="..\..\..\**\.editorconfig" />
     <FilesToZip Include="..\..\..\**\*.bat" />
     <FilesToZip Include="..\..\..\**\*.yml" />
     <FilesToZip Include="..\..\..\**\*.xml" />
