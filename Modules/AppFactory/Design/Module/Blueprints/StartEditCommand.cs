@@ -11,6 +11,7 @@ namespace Lucid.Modules.AppFactory.Design.Blueprints
         public int OwnedByUserId    { get; set; }
 
         [Required(ErrorMessage = "Please supply a Name")]
+        [MaxLength(255, ErrorMessage = "Please supply a Name less than 255 characters")]
         public string Name { get; set; }
 
         public override async Task<int> ExecuteAsync()

@@ -18,6 +18,7 @@ namespace Lucid.Modules.Security.Tests
             _validCommand().ShouldBeValid();
             _validCommand().ShouldBeInvalid(c => c.UserName = null, "Name cannot be null");
             _validCommand().ShouldBeInvalid(c => c.UserName = "", "Name cannot be empty");
+            _validCommand().ShouldBeInvalid(c => c.UserName = Defaults.LongString, "Name cannot be too long");
         }
 
         [Test]

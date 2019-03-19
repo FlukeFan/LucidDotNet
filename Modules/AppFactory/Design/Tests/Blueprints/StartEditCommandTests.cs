@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Infrastructure.Lib.Facade.Exceptions;
@@ -21,6 +22,7 @@ namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints
             _validCommand().ShouldBeValid();
             _validCommand().ShouldBeInvalid(c => c.Name = null, "Name cannot be null");
             _validCommand().ShouldBeInvalid(c => c.Name = "", "Name cannot be empty");
+            _validCommand().ShouldBeInvalid(c => c.Name = Defaults.LongString, "Name cannot be too long");
         }
 
         [Test]
