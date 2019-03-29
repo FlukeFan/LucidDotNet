@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Lucid.Infrastructure.Lib.Facade.Pledge;
-using Lucid.Modules.AppFactory.Design.Contract;
 
-namespace Lucid.Modules.AppFactory.Design.Tests.Contract
+namespace Lucid.Modules.AppFactory.Design.Contract
 {
     public class Agreements
     {
