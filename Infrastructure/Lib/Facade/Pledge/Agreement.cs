@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucid.Infrastructure.Lib.Testing.Execution
+namespace Lucid.Infrastructure.Lib.Facade.Pledge
 {
     public interface IAgreement<TExecutable>
     {

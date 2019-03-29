@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Lucid.Infrastructure.Lib.Facade.Pledge;
 
 namespace Lucid.Infrastructure.Lib.Testing.Execution
 {
