@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Lucid.Infrastructure.Host.Web.Layout
+namespace Lucid.Host.Web.Layout
 {
     public static class RazorExtensions
     {

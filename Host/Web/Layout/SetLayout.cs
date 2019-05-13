@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MvcForms;
 
-namespace Lucid.Infrastructure.Host.Web.Layout
+namespace Lucid.Host.Web.Layout
 {
     public class SetLayout : ISetLayout
     {

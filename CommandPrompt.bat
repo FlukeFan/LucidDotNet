@@ -5,8 +5,8 @@
 type readme.md
 @doskey dcu=docker-compose up
 @doskey dcud=docker-compose up -d
-@doskey webw=dotnet watch run -p Infrastructure\Host\Web\Lucid.Infrastructure.Host.Web.csproj $*
-@doskey web=dotnet run -p Infrastructure\Host\Web\Lucid.Infrastructure.Host.Web.csproj $*
+@doskey webw=dotnet watch run -p Host\Web\Lucid.Host.Web.csproj $*
+@doskey web=dotnet run -p Host\Web\Lucid.Host.Web.csproj $*
 @doskey bc=dotnet clean build.proj $*
 @doskey btw=dotnet watch msbuild build.proj /p:RunTests=true /m:1 /p:FilterTest=FullyQualifiedName~$1 $2 $3 $4 $5 $6 $7 $8 $9
 @doskey bt=dotnet msbuild build.proj /p:RunTests=true /m:1 /p:FilterTest=FullyQualifiedName~$1 $2 $3 $4 $5 $6 $7 $8 $9

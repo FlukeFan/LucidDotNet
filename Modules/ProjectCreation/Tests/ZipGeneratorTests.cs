@@ -137,17 +137,17 @@ namespace Lucid.Modules.ProjectCreation.Tests
             zippedFiles.Should().Contain("Build\\BuildUtil\\Program.cs");
 
             // Host files
-            zippedFiles.Should().Contain("Infrastructure\\Host\\web.config.xml");
-            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\bundleconfig.json");
-            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\compilerconfig.json.defaults");
-            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\nlog.config");
-            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\Content\\demoProj.js");
-            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\Content\\web.scss");
-            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\Home\\Index.cshtml");
-            zippedFiles.Should().Contain("Infrastructure\\Host\\Web\\wwwroot\\favicon.ico");
-            zippedFiles.Should().NotContain("Infrastructure\\Host\\Web\\wwwroot\\css\\site.min.css");
-            zippedFiles.Should().NotContain("Infrastructure\\Host\\Web\\wwwroot\\js\\site.min.js");
-            zippedFiles.Should().NotContain("Infrastructure\\Host\\Web.Tests\\wwwroot\\DemoProj.Infrastructure.Host.Web.Tests.csproj.user");
+            zippedFiles.Should().Contain("Host\\web.config.xml");
+            zippedFiles.Should().Contain("Host\\Web\\bundleconfig.json");
+            zippedFiles.Should().Contain("Host\\Web\\compilerconfig.json.defaults");
+            zippedFiles.Should().Contain("Host\\Web\\nlog.config");
+            zippedFiles.Should().Contain("Host\\Web\\Content\\demoProj.js");
+            zippedFiles.Should().Contain("Host\\Web\\Content\\web.scss");
+            zippedFiles.Should().Contain("Host\\Web\\Home\\Index.cshtml");
+            zippedFiles.Should().Contain("Host\\Web\\wwwroot\\favicon.ico");
+            zippedFiles.Should().NotContain("Host\\Web\\wwwroot\\css\\site.min.css");
+            zippedFiles.Should().NotContain("Host\\Web\\wwwroot\\js\\site.min.js");
+            zippedFiles.Should().NotContain("Host\\Web.Tests\\wwwroot\\DemoProj.Host.Web.Tests.csproj.user");
 
             // lib files
             zippedFiles.Should().Contain("Lib\\MvcApp\\DemoProj.Lib.MvcApp.csproj");

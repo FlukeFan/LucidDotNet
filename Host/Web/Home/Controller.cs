@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lucid.Infrastructure.Host.Web.Home
+namespace Lucid.Host.Web.Home
 {
     [Route("/")]
     [AllowAnonymous]

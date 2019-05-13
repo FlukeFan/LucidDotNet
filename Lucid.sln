@@ -3,15 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{7157C75A-FD10-460B-B747-46EA2AC93CA3}"
-	ProjectSection(SolutionItems) = preProject
-		Infrastructure\build.proj = Infrastructure\build.proj
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{673964CD-F184-4238-9DCA-A6EA7C9E2C7F}"
 	ProjectSection(SolutionItems) = preProject
-		Infrastructure\Host\build.proj = Infrastructure\Host\build.proj
-		Infrastructure\Host\web.config.xml = Infrastructure\Host\web.config.xml
+		Host\build.proj = Host\build.proj
+		Host\web.config.xml = Host\web.config.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root", "_root", "{2E1ACA93-B1FB-4E31-A73A-3428C1C74A9F}"
@@ -54,9 +49,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build.BuildUtil", "Build\Bu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Lib.Testing", "Lib\Testing\Lucid.Lib.Testing.csproj", "{7B10D47E-748C-4603-8188-8E57095001B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Host.Web", "Infrastructure\Host\Web\Lucid.Infrastructure.Host.Web.csproj", "{7705B555-3EE0-4B86-8BEF-ED1159C82F45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Host.Web", "Host\Web\Lucid.Host.Web.csproj", "{7705B555-3EE0-4B86-8BEF-ED1159C82F45}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Host.Web.Tests", "Infrastructure\Host\Web.Tests\Lucid.Infrastructure.Host.Web.Tests.csproj", "{5A957B8F-7DBF-4989-ACFA-6BD59C257009}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Host.Web.Tests", "Host\Web.Tests\Lucid.Host.Web.Tests.csproj", "{5A957B8F-7DBF-4989-ACFA-6BD59C257009}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.ProjectCreation.Tests", "Modules\ProjectCreation\Tests\Lucid.Modules.ProjectCreation.Tests.csproj", "{A5C22845-613B-457B-8F5B-5F4E8CC13FB5}"
 EndProject
@@ -335,7 +330,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{673964CD-F184-4238-9DCA-A6EA7C9E2C7F} = {7157C75A-FD10-460B-B747-46EA2AC93CA3}
 		{A5DCD578-ECE9-4A21-85A9-93A1FA4542DF} = {43B44B4F-BCC4-412C-9664-C749BDC57565}
 		{82B9322E-7FC1-41CA-B444-759E274E13F5} = {A5DCD578-ECE9-4A21-85A9-93A1FA4542DF}
 		{A4FEBFF7-A823-480A-B926-A17548BC4410} = {9A8AE9CC-024C-4616-8B8B-E0A3B813BB82}

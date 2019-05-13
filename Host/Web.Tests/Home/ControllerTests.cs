@@ -4,7 +4,7 @@ using FluentAssertions;
 using Lucid.Lib.Testing.Controller;
 using NUnit.Framework;
 
-namespace Lucid.Infrastructure.Host.Web.Tests.Home
+namespace Lucid.Host.Web.Tests.Home
 {
     [TestFixture]
     public class ControllerTests : WebTests.Controller

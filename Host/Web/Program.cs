@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using Lucid.Infrastructure.Host.Web.Logging;
+using Lucid.Host.Web.Logging;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Web;
 
-namespace Lucid.Infrastructure.Host.Web
+namespace Lucid.Host.Web
 {
     public class Program
     {

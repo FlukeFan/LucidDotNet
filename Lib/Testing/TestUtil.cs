@@ -25,7 +25,7 @@ namespace Lucid.Lib.Testing
 
         public static IConfigurationRoot GetConfig()
         {
-            var searchFile = "Infrastructure/Host/web.config.xml";
+            var searchFile = "Host/web.config.xml";
             var cd = Directory.GetCurrentDirectory();
             var configFile = Path.Combine(cd, searchFile);
 

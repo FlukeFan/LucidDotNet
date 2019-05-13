@@ -22,7 +22,6 @@ namespace Lucid.Modules.ProjectCreation.Tests
 
             var zipBytes = await cmd.ExecuteAsync();
 
-            //var originalFolder = @"..\..\..";
             var buildFolder = Path.Combine(Path.GetTempPath(), "GpTmp");
             TestContext.Progress.WriteLine($"Building project {cmd.Name} in {buildFolder}");
             Unzip(zipBytes, buildFolder);

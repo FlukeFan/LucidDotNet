@@ -1,4 +1,4 @@
-﻿using Lucid.Infrastructure.Host.Web.Layout;
+﻿using Lucid.Host.Web.Layout;
 using Lucid.Lib.MvcApp.Pages;
 using Lucid.Lib.MvcApp.RazorFolders;
 using Lucid.Lib.Testing;
@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MvcTesting.AspNetCore;
 using NUnit.Framework;
 
-namespace Lucid.Infrastructure.Host.Web.Tests
+namespace Lucid.Host.Web.Tests
 {
     [SetUpFixture]
     public class WebTests

@@ -4,7 +4,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 
-namespace Lucid.Infrastructure.Host.Web.Tests
+namespace Lucid.Host.Web.Tests
 {
     [TestFixture]
     public class ViewTests : WebTests.Controller

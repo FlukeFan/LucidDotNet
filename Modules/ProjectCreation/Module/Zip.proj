@@ -28,9 +28,9 @@
     <FilesToZip Remove="..\..\..\**\obj\**" />
     <FilesToZip Remove="..\..\..\**\*.uptodate" />
     <FilesToZip Remove="..\..\..\*Host*" />
-    <FilesToZip Remove="..\..\..\Infrastructure\Host\logs.config\**" />
-    <FilesToZip Remove="..\..\..\Infrastructure\Host\Web\wwwroot\js\**" />
-    <FilesToZip Remove="..\..\..\Infrastructure\Host\Web\wwwroot\css\**" />
+    <FilesToZip Remove="..\..\..\Host\logs.config\**" />
+    <FilesToZip Remove="..\..\..\Host\Web\wwwroot\js\**" />
+    <FilesToZip Remove="..\..\..\Host\Web\wwwroot\css\**" />
     <FilesToZip Remove="..\..\..\Lib\MvcApp\wwwroot\**" />
     <FilesToZip Remove="Project\**" />
   </ItemGroup>

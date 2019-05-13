@@ -1,4 +1,4 @@
-﻿namespace Lucid.Infrastructure.Host.Web.Layout
+﻿namespace Lucid.Host.Web.Layout
 {
     public class MenuModel
     {

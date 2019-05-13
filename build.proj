@@ -4,12 +4,12 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="Lib\build.proj" />
-    <ProjectsToBuild Include="Infrastructure\build.proj" />
     <ProjectsToBuild Include="Modules\build.proj" />
+    <ProjectsToBuild Include="Host\build.proj" />
   </ItemGroup>
 
   <PropertyGroup>
-    <WebBin>Infrastructure/Host/Web/bin</WebBin>
+    <WebBin>Host/Web/bin</WebBin>
   </PropertyGroup>
   
   <ItemGroup>
@@ -22,7 +22,7 @@
   <Target Name="Package" Inputs="@(AllFiles)" Outputs="$(WebBin)/publish.zip">
     <RemoveDir Directories="$(WebBin)/publish" />
     <Delete Files="$(WebBin)/publish.zip" />
-    <MSBuild Projects="Infrastructure/Host/Web/Lucid.Infrastructure.Host.Web.csproj" Targets="Publish" Properties="Configuration=Release;PublishDir=bin/publish;TrimUnusedDependencies=true" />
+    <MSBuild Projects="Host/Web/Lucid.Host.Web.csproj" Targets="Publish" Properties="Configuration=Release;PublishDir=bin/publish;TrimUnusedDependencies=true" />
     <ItemGroup>
       <FilesToZip Include="$(WebBin)/publish/**" />
     </ItemGroup>

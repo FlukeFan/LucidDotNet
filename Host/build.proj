@@ -3,7 +3,8 @@
   <Import Project="..\Build\common.build.proj" />
 
   <ItemGroup>
-    <ProjectsToBuild Include="Host\build.proj" />
+    <ProjectsToBuild Include="Web\Lucid.Host.Web.csproj" />
+    <ProjectsToBuild Include="Web.Tests\Lucid.Host.Web.Tests.csproj" />
   </ItemGroup>
 
 </Project>

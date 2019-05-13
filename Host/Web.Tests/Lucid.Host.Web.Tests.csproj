@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\..\Build\common.targets" />
+  <Import Project="..\..\Build\common.targets" />
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -9,9 +9,9 @@
 
   <ItemGroup>
     <CoverageAssemblyFilter Include="Lucid.Modules" />
-    <CoverageTypeFilter Include="Lucid.Infrastructure.Host.Web.Program" />
-    <CoverageTypeFilter Include="Lucid.Infrastructure.Host.Web.Startup" />
-    <CoverageTypeFilter Include="Lucid.Infrastructure.Host.Web.Logging.VariableBuffer" />
+    <CoverageTypeFilter Include="Lucid.Host.Web.Program" />
+    <CoverageTypeFilter Include="Lucid.Host.Web.Startup" />
+    <CoverageTypeFilter Include="Lucid.Host.Web.Logging.VariableBuffer" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Lib\Testing\Lucid.Lib.Testing.csproj" />
-    <ProjectReference Include="..\Web\Lucid.Infrastructure.Host.Web.csproj" />
+    <ProjectReference Include="..\..\Lib\Testing\Lucid.Lib.Testing.csproj" />
+    <ProjectReference Include="..\Web\Lucid.Host.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>

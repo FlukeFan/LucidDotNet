@@ -7,9 +7,9 @@ obj
 /Lib/MvcApp/wwwroot/lib/mvcForms
 /Modules/ProjectCreation/Module/Project.zip
 /Modules/ProjectCreation/Module/Project.zip.nextUpdate
-/Infrastructure/Host/logs.config
-/Infrastructure/Host/logs/web.internal.log
-/Infrastructure/Host/Web/wwwroot/css/site.min.css
-/Infrastructure/Host/Web/wwwroot/js/site.min.js
-/Infrastructure/Host/Web/wwwroot/js/site.min.js.map
-/Infrastructure/Host/Web/Content/web.css
+/Host/logs.config
+/Host/logs/web.internal.log
+/Host/Web/wwwroot/css/site.min.css
+/Host/Web/wwwroot/js/site.min.js
+/Host/Web/wwwroot/js/site.min.js.map
+/Host/Web/Content/web.css

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using FluentMigrator.Runner;
-using Lucid.Infrastructure.Host.Web.Layout;
+using Lucid.Host.Web.Layout;
 using Lucid.Lib.Domain.SqlServer;
 using Lucid.Lib.MvcApp.Pages;
 using Lucid.Lib.MvcApp.RazorFolders;
@@ -18,7 +18,7 @@ using MvcForms;
 using MvcForms.Styles.Bootstrap;
 using ZipDeploy;
 
-namespace Lucid.Infrastructure.Host.Web
+namespace Lucid.Host.Web
 {
     public class Startup
     {
@@ -42,7 +42,7 @@ namespace Lucid.Infrastructure.Host.Web
             if (_env.IsDevelopment())
             {
                 // use the file-system razor views so that we get re-compilation when they change
-                var rootSourcePath = Path.GetFullPath(Path.Combine(_env.ContentRootPath, "../../.."));
+                var rootSourcePath = Path.GetFullPath(Path.Combine(_env.ContentRootPath, "../.."));
                 services.UseCustomFileSystemRazorViews(rootSourcePath);
             }
             else
