@@ -1,4 +1,4 @@
-﻿using Lucid.Infrastructure.Lib.Facade.Pledge;
+﻿using Lucid.Lib.Facade.Pledge;
 using Reposify.Testing;
 
 namespace Lucid.Modules.Security.Tests

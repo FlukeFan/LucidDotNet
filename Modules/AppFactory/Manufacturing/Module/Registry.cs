@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using FluentMigrator.Runner;
-using Lucid.Infrastructure.Lib.Domain;
-using Lucid.Infrastructure.Lib.Domain.SqlServer;
-using Lucid.Infrastructure.Lib.Facade;
-using Lucid.Infrastructure.Lib.Facade.Validation;
-using Lucid.Infrastructure.Lib.MvcApp;
+using Lucid.Lib.Domain;
+using Lucid.Lib.Domain.SqlServer;
+using Lucid.Lib.Facade;
+using Lucid.Lib.Facade.Validation;
+using Lucid.Lib.MvcApp;
 using Microsoft.Extensions.Logging;
 using NHibernate;
 using Reposify;

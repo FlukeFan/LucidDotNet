@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Testing.Controller;
+using Lucid.Lib.Testing.Controller;
 using NUnit.Framework;
 
 namespace Lucid.Infrastructure.Host.Web.Tests.Home

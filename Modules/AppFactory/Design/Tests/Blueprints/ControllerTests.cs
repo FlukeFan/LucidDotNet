@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Facade.Exceptions;
-using Lucid.Infrastructure.Lib.Testing.Controller;
-using Lucid.Infrastructure.Lib.Testing.Execution;
+using Lucid.Lib.Facade.Exceptions;
+using Lucid.Lib.Testing.Controller;
+using Lucid.Lib.Testing.Execution;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using MvcTesting.Html;
 using NUnit.Framework;

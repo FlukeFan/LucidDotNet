@@ -31,7 +31,7 @@
     <FilesToZip Remove="..\..\..\Infrastructure\Host\logs.config\**" />
     <FilesToZip Remove="..\..\..\Infrastructure\Host\Web\wwwroot\js\**" />
     <FilesToZip Remove="..\..\..\Infrastructure\Host\Web\wwwroot\css\**" />
-    <FilesToZip Remove="..\..\..\Infrastructure\Lib\MvcApp\wwwroot\**" />
+    <FilesToZip Remove="..\..\..\Lib\MvcApp\wwwroot\**" />
     <FilesToZip Remove="Project\**" />
   </ItemGroup>
 

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Facade.Pledge;
-using Lucid.Infrastructure.Lib.Testing.Execution;
+using Lucid.Lib.Facade.Pledge;
+using Lucid.Lib.Testing.Execution;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using Lucid.Modules.AppFactory.Design.Contract;
 using NUnit.Framework;

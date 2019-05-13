@@ -1,6 +1,6 @@
-﻿using Lucid.Infrastructure.Lib.Testing;
-using Lucid.Infrastructure.Lib.Testing.Controller;
-using Lucid.Infrastructure.Lib.Testing.Execution;
+﻿using Lucid.Lib.Testing;
+using Lucid.Lib.Testing.Controller;
+using Lucid.Lib.Testing.Execution;
 using MvcTesting.AspNetCore;
 using NUnit.Framework;
 

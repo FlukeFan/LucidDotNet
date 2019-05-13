@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Threading.Tasks;
-using Lucid.Infrastructure.Lib.Facade;
-using Lucid.Infrastructure.Lib.Facade.Exceptions;
-using Lucid.Infrastructure.Lib.Facade.Validation;
+using Lucid.Lib.Facade;
+using Lucid.Lib.Facade.Exceptions;
+using Lucid.Lib.Facade.Validation;
 
 namespace Lucid.Modules.ProjectCreation
 {

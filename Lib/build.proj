@@ -1,0 +1,14 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="..\Build\common.build.proj" />
+
+  <ItemGroup>
+    <ProjectsToBuild Include="MvcApp\Lucid.Lib.MvcApp.csproj" />
+    <ProjectsToBuild Include="MvcApp.Tests\Lucid.Lib.MvcApp.Tests.csproj" />
+    <ProjectsToBuild Include="Domain\Lucid.Lib.Domain.csproj" />
+    <ProjectsToBuild Include="Facade\Lucid.Lib.Facade.csproj" />
+    <ProjectsToBuild Include="Testing\Lucid.Lib.Testing.csproj" />
+    <ProjectsToBuild Include="Util\Lucid.Lib.Util.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Lucid.Infrastructure.Lib.Facade.Pledge;
+using Lucid.Lib.Facade.Pledge;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using Lucid.Modules.AppFactory.Design.Contract;
 using Reposify.Testing;

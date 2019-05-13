@@ -3,8 +3,9 @@
   <Import Project="Build\common.build.proj" />
 
   <ItemGroup>
-    <ProjectsToBuild Include="Modules\build.proj" />
+    <ProjectsToBuild Include="Lib\build.proj" />
     <ProjectsToBuild Include="Infrastructure\build.proj" />
+    <ProjectsToBuild Include="Modules\build.proj" />
   </ItemGroup>
 
   <PropertyGroup>

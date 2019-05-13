@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Lucid.Infrastructure.Lib.Facade;
-using Lucid.Infrastructure.Lib.Facade.Exceptions;
+using Lucid.Lib.Facade;
+using Lucid.Lib.Facade.Exceptions;
 
 namespace Lucid.Modules.AppFactory.Design.Blueprints
 {

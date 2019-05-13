@@ -30,8 +30,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Modules\AppFactory\Design\Module\Lucid.Modules.AppFactory.Design.csproj" />
     <ProjectReference Include="..\..\..\Modules\AppFactory\Manufacturing\Module\Lucid.Modules.AppFactory.Manufacturing.csproj" />
-    <ProjectReference Include="..\..\Lib\Domain\Lucid.Infrastructure.Lib.Domain.csproj" />
-    <ProjectReference Include="..\..\Lib\MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj" />
+    <ProjectReference Include="..\..\..\Lib\Domain\Lucid.Lib.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Lib\MvcApp\Lucid.Lib.MvcApp.csproj" />
     <ProjectReference Include="..\..\..\Modules\ProjectCreation\Module\Lucid.Modules.ProjectCreation.csproj" />
     <ProjectReference Include="..\..\..\Modules\Security\Module\Lucid.Modules.Security.csproj" />
   </ItemGroup>

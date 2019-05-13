@@ -150,7 +150,8 @@ namespace Lucid.Modules.ProjectCreation.Tests
             zippedFiles.Should().NotContain("Infrastructure\\Host\\Web.Tests\\wwwroot\\DemoProj.Infrastructure.Host.Web.Tests.csproj.user");
 
             // lib files
-            zippedFiles.Should().NotContain("Infrastructure\\Lib\\MvcApp\\wwwroot\\lib\\mvcForms\\css\\mvcForms.css");
+            zippedFiles.Should().Contain("Lib\\MvcApp\\DemoProj.Lib.MvcApp.csproj");
+            zippedFiles.Should().NotContain("Lib\\MvcApp\\wwwroot\\lib\\mvcForms\\css\\mvcForms.css");
 
             // ProjectCreation module
             zippedFiles.Should().Contain("Modules\\ProjectCreation\\Module\\DemoProj.Modules.ProjectCreation.csproj");

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Testing.Execution;
+using Lucid.Lib.Testing.Execution;
 using Lucid.Modules.AppFactory.Design.Blueprints;
 using NUnit.Framework;
 using Reposify.Testing;

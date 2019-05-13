@@ -2,8 +2,8 @@
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Testing.Controller;
-using Lucid.Infrastructure.Lib.Testing.Execution;
+using Lucid.Lib.Testing.Controller;
+using Lucid.Lib.Testing.Execution;
 using Microsoft.AspNetCore.Mvc;
 using MvcTesting.Html;
 using NUnit.Framework;

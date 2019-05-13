@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lucid.Infrastructure.Lib.Facade;
+using Lucid.Lib.Facade;
 
 namespace Lucid.Modules.AppFactory.Design.Contract
 {

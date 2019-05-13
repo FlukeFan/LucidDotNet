@@ -4,17 +4,17 @@
   {
     "outputFileName": "wwwroot/css/site.min.css",
     "inputFiles": [
-      "../../Lib/MvcApp/bin/content/bootstrap/content/Content/bootstrap.css",
-      "../../Lib/MvcApp/bin/content/MvcForms/content/css/mvcForms.css",
+      "../../../Lib/MvcApp/bin/content/bootstrap/content/Content/bootstrap.css",
+      "../../../Lib/MvcApp/bin/content/MvcForms/content/css/mvcForms.css",
       "Content/web.css"
     ]
   },
   {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
-      "../../Lib/MvcApp/bin/content/jquery/content/Scripts/jquery-version.js",
-      "../../Lib/MvcApp/bin/content/bootstrap/content/Scripts/bootstrap.js",
-      "../../Lib/MvcApp/bin/content/MvcForms/content/js/mvcForms.js",
+      "../../../Lib/MvcApp/bin/content/jquery/content/Scripts/jquery-version.js",
+      "../../../Lib/MvcApp/bin/content/bootstrap/content/Scripts/bootstrap.js",
+      "../../../Lib/MvcApp/bin/content/MvcForms/content/js/mvcForms.js",
       "Content/lucid.js"
     ],
     "minify": {

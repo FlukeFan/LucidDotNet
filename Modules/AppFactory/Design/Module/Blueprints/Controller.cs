@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Lucid.Infrastructure.Lib.MvcApp;
+using Lucid.Lib.MvcApp;
 using Microsoft.AspNetCore.Mvc;
 using MvcForms;
 

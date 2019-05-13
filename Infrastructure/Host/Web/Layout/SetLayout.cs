@@ -1,5 +1,5 @@
-﻿using Lucid.Infrastructure.Lib.MvcApp.Pages;
-using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
+﻿using Lucid.Lib.MvcApp.Pages;
+using Lucid.Lib.MvcApp.RazorFolders;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MvcForms;

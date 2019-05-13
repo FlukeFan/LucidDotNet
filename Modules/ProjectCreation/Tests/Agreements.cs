@@ -1,4 +1,4 @@
-﻿using Lucid.Infrastructure.Lib.Facade.Pledge;
+﻿using Lucid.Lib.Facade.Pledge;
 
 namespace Lucid.Modules.ProjectCreation.Tests
 {

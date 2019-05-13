@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Testing.Execution;
+using Lucid.Lib.Testing.Execution;
 using NUnit.Framework;
 
 namespace Lucid.Modules.AppFactory.Design.Tests.Blueprints

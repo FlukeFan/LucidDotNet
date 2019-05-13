@@ -1,4 +1,4 @@
-﻿using Lucid.Infrastructure.Lib.MvcApp;
+﻿using Lucid.Lib.MvcApp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

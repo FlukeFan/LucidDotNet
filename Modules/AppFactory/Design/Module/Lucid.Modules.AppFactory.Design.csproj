@@ -14,8 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contract\Lucid.Modules.AppFactory.Design.Contract.csproj" />
-    <ProjectReference Include="..\..\..\..\Infrastructure\Lib\Domain\Lucid.Infrastructure.Lib.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\Infrastructure\Lib\MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj" />
+    <ProjectReference Include="..\..\..\..\Lib\Domain\Lucid.Lib.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\Lib\MvcApp\Lucid.Lib.MvcApp.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Lucid.Infrastructure.Lib.Facade;
+using Lucid.Lib.Facade;
 using Lucid.Modules.AppFactory.Design.Contract;
 using Reposify;
 

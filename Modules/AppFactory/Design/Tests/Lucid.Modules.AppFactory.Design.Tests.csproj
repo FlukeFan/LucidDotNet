@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Infrastructure\Lib\Testing\Lucid.Infrastructure.Lib.Testing.csproj" />
+    <ProjectReference Include="..\..\..\..\Lib\Testing\Lucid.Lib.Testing.csproj" />
     <ProjectReference Include="..\Module\Lucid.Modules.AppFactory.Design.csproj" />
   </ItemGroup>
 

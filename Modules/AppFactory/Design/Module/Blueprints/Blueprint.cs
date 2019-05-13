@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Lucid.Infrastructure.Lib.Facade.Exceptions;
+using Lucid.Lib.Facade.Exceptions;
 using Lucid.Modules.AppFactory.Design.Contract;
 
 namespace Lucid.Modules.AppFactory.Design.Blueprints

@@ -1,4 +1,4 @@
-﻿using Lucid.Infrastructure.Lib.Domain.SqlServer;
+﻿using Lucid.Lib.Domain.SqlServer;
 
 namespace Lucid.Modules.AppFactory.Design.DbMigrations.V001.V000
 {

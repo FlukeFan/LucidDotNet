@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Lucid.Infrastructure.Lib.Facade;
+using Lucid.Lib.Facade;
 
 namespace Lucid.Modules.Security
 {

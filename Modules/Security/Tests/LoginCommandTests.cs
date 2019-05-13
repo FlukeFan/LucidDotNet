@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Facade.Pledge;
-using Lucid.Infrastructure.Lib.Testing.Execution;
-using Lucid.Infrastructure.Lib.Testing.Validation;
+using Lucid.Lib.Facade.Pledge;
+using Lucid.Lib.Testing.Execution;
+using Lucid.Lib.Testing.Validation;
 using NUnit.Framework;
 
 namespace Lucid.Modules.Security.Tests

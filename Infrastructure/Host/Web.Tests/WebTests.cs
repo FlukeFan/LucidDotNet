@@ -1,8 +1,8 @@
 ﻿using Lucid.Infrastructure.Host.Web.Layout;
-using Lucid.Infrastructure.Lib.MvcApp.Pages;
-using Lucid.Infrastructure.Lib.MvcApp.RazorFolders;
-using Lucid.Infrastructure.Lib.Testing;
-using Lucid.Infrastructure.Lib.Testing.Controller;
+using Lucid.Lib.MvcApp.Pages;
+using Lucid.Lib.MvcApp.RazorFolders;
+using Lucid.Lib.Testing;
+using Lucid.Lib.Testing.Controller;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MvcTesting.AspNetCore;

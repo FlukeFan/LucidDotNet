@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lucid.Infrastructure.Lib.Testing.Validation;
+using Lucid.Lib.Testing.Validation;
 using NUnit.Framework;
 
 namespace Lucid.Modules.ProjectCreation.Tests

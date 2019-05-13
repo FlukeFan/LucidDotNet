@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{9A8AE9CC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{C5979DA4-1E3E-4344-9BB1-1F103A17C811}"
 	ProjectSection(SolutionItems) = preProject
-		Infrastructure\Lib\build.proj = Infrastructure\Lib\build.proj
+		Lib\build.proj = Lib\build.proj
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{43B44B4F-BCC4-412C-9664-C749BDC57565}"
@@ -52,7 +52,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.ProjectCreati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build.BuildUtil", "Build\BuildUtil\Build.BuildUtil.csproj", "{A4FEBFF7-A823-480A-B926-A17548BC4410}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Testing", "Infrastructure\Lib\Testing\Lucid.Infrastructure.Lib.Testing.csproj", "{7B10D47E-748C-4603-8188-8E57095001B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Lib.Testing", "Lib\Testing\Lucid.Lib.Testing.csproj", "{7B10D47E-748C-4603-8188-8E57095001B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Host.Web", "Infrastructure\Host\Web\Lucid.Infrastructure.Host.Web.csproj", "{7705B555-3EE0-4B86-8BEF-ED1159C82F45}"
 EndProject
@@ -60,13 +60,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Host.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.ProjectCreation.Tests", "Modules\ProjectCreation\Tests\Lucid.Modules.ProjectCreation.Tests.csproj", "{A5C22845-613B-457B-8F5B-5F4E8CC13FB5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.MvcApp", "Infrastructure\Lib\MvcApp\Lucid.Infrastructure.Lib.MvcApp.csproj", "{623F8080-8896-4836-B8C5-3B3B11448E62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Lib.MvcApp", "Lib\MvcApp\Lucid.Lib.MvcApp.csproj", "{623F8080-8896-4836-B8C5-3B3B11448E62}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.MvcApp.Tests", "Infrastructure\Lib\MvcApp.Tests\Lucid.Infrastructure.Lib.MvcApp.Tests.csproj", "{44B2CB31-3F0C-4108-8E5B-58D85E677C02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Lib.MvcApp.Tests", "Lib\MvcApp.Tests\Lucid.Lib.MvcApp.Tests.csproj", "{44B2CB31-3F0C-4108-8E5B-58D85E677C02}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Facade", "Infrastructure\Lib\Facade\Lucid.Infrastructure.Lib.Facade.csproj", "{B8A7348D-B678-489B-847D-D4226D44B66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Lib.Facade", "Lib\Facade\Lucid.Lib.Facade.csproj", "{B8A7348D-B678-489B-847D-D4226D44B66A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Domain", "Infrastructure\Lib\Domain\Lucid.Infrastructure.Lib.Domain.csproj", "{278D3B89-7D55-4FAE-A3F4-ABEE17257308}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Lib.Domain", "Lib\Domain\Lucid.Lib.Domain.csproj", "{278D3B89-7D55-4FAE-A3F4-ABEE17257308}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{278F2112-9252-4D71-BD27-A0DAF59D4C2C}"
 	ProjectSection(SolutionItems) = preProject
@@ -93,7 +93,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.AppFactory.De
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Modules.AppFactory.Design.Contract", "Modules\AppFactory\Design\Contract\Lucid.Modules.AppFactory.Design.Contract.csproj", "{FB0BC786-9A16-41C8-AED1-ED6C18F01807}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Infrastructure.Lib.Util", "Infrastructure\Lib\Util\Lucid.Infrastructure.Lib.Util.csproj", "{2783F6B9-D2E8-4C2C-B258-FB90CA3A2BD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucid.Lib.Util", "Lib\Util\Lucid.Lib.Util.csproj", "{2783F6B9-D2E8-4C2C-B258-FB90CA3A2BD4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manufacturing", "Manufacturing", "{B87699A2-2A1B-49A7-BF2A-1C26EAD80797}"
 	ProjectSection(SolutionItems) = preProject
@@ -336,7 +336,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{673964CD-F184-4238-9DCA-A6EA7C9E2C7F} = {7157C75A-FD10-460B-B747-46EA2AC93CA3}
-		{C5979DA4-1E3E-4344-9BB1-1F103A17C811} = {7157C75A-FD10-460B-B747-46EA2AC93CA3}
 		{A5DCD578-ECE9-4A21-85A9-93A1FA4542DF} = {43B44B4F-BCC4-412C-9664-C749BDC57565}
 		{82B9322E-7FC1-41CA-B444-759E274E13F5} = {A5DCD578-ECE9-4A21-85A9-93A1FA4542DF}
 		{A4FEBFF7-A823-480A-B926-A17548BC4410} = {9A8AE9CC-024C-4616-8B8B-E0A3B813BB82}

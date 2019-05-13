@@ -1,6 +1,6 @@
-﻿using Lucid.Infrastructure.Lib.Facade;
-using Lucid.Infrastructure.Lib.Facade.Validation;
-using Lucid.Infrastructure.Lib.MvcApp;
+﻿using Lucid.Lib.Facade;
+using Lucid.Lib.Facade.Validation;
+using Lucid.Lib.MvcApp;
 
 namespace Lucid.Modules.ProjectCreation
 {

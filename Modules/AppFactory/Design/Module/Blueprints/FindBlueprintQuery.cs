@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Lucid.Infrastructure.Lib.Facade;
+using Lucid.Lib.Facade;
 using Lucid.Modules.AppFactory.Design.Contract;
 
 namespace Lucid.Modules.AppFactory.Design.Blueprints
