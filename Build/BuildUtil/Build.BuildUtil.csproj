@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <DebugType>full</DebugType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <Target Name="ExportFiles" AfterTargets="Publish">
@@ -11,7 +11,7 @@
     <Exec Command="dotnet build-server shutdown" />
     <RemoveDir Directories="../.build" />
     <ItemGroup>
-      <BuildUtilBinaries Include="bin/Debug/netcoreapp2.1/publish/**/*.*" />
+      <BuildUtilBinaries Include="bin/Debug/netcoreapp2.2/publish/**/*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(BuildUtilBinaries)" DestinationFolder="../.build/%(RecursiveDir)" />
   </Target>

@@ -3,7 +3,8 @@
   <Import Project="..\..\Build\common.targets" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <RunBundleMinify>False</RunBundleMinify>
     <RunWebCompiler>False</RunWebCompiler>
   </PropertyGroup>

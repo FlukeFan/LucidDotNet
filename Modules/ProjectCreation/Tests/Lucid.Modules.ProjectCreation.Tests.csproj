@@ -3,7 +3,7 @@
   <Import Project="..\..\..\Build\common.targets" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <DebugType>full</DebugType>
   </PropertyGroup>
 
