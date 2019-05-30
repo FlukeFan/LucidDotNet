@@ -15,9 +15,9 @@
     @form.Html.ErrorSummary()
 
     @form.Html.HiddenFor(m => m.BlueprintId)
-    @form.Html.LabelledInputText("Name", m => m.Name)
+    @form.Html.FormGroup("Name", fg => fg.InputText(m => m.Name))
 
-    @using (form.Html.FormButtons())
+    @using (form.Html.FormGroupLayout())
     {
         @form.Html.ButtonSubmit(Model.ButtonText).Style(BootstrapButton.Success)
         @form.Html.LinkButtonCancelModal()

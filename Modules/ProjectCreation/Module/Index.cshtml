@@ -11,9 +11,9 @@
 
     @using (var form = Html.FormFor(Model.Cmd).Begin())
     {
-        @form.Html.LabelledInputText("Project Name", m => m.Name)
+        @form.Html.FormGroup("Project Name", fg => fg.InputText(m => m.Name))
 
-        using (form.Html.FormButtons())
+        using (form.Html.FormGroupLayout())
         {
             @form.Html.ButtonSubmit("Download .zip").NoPjax()
         }

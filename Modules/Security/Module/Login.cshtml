@@ -18,9 +18,9 @@
 
     @using (var form = Html.FormFor(Model.Cmd).Begin())
     {
-        @form.Html.LabelledInputText("User Name", m => m.UserName)
+        @form.Html.FormGroup("User Name", fg => fg.InputText(m => m.UserName))
 
-        using (form.Html.FormButtons())
+        using (form.Html.FormGroupLayout())
         {
             @form.Html.ButtonSubmit("Login")
         }
