@@ -1,9 +1,11 @@
 ﻿@page "/appFactory/manufacturing/cycles"
 @inherits Lucid.Lib.MvcApp.MvcAppRazorPage
+@using MvcForms.Navigation
 @{
     Setup(pi =>
     {
         pi.Title = "Cycles";
     });
 }
-Hello from Cycles page
+
+@Html.LinkButtonModal("Start Cycle", "/appFactory/manufacturing/cycles/start")
