@@ -86,10 +86,6 @@ namespace Lucid.Host.Web
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
-            else
-            {
-                app.UseHttpsRedirection();
-            }
 
             app.UseStaticFiles();
             app.UseMvc();
