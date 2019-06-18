@@ -88,7 +88,7 @@ namespace Lucid.Modules.ProjectCreation
                 return true;
 
             if (!UnprocessedExtensions.Contains(extension))
-                throw new Exception($"Extension '{extension}' should be added to ZipGenerator.ProcessedExtensions or ZipGenerator.UnprocessedExtensions for file '{fileName}'.");
+                throw new Exception($"Extension '{extension}' should be added to ZipGenerator.ProcessedExtensions or ZipGenerator.UnprocessedExtensions for file '{fileName} (or file removed from zip)'.");
 
             return false;
         }

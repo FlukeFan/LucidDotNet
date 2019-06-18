@@ -32,6 +32,7 @@
     <FilesToZip Remove="..\..\..\Host\Web\wwwroot\js\**" />
     <FilesToZip Remove="..\..\..\Host\Web\wwwroot\css\**" />
     <FilesToZip Remove="..\..\..\Lib\MvcApp\wwwroot\**" />
+    <FilesToZip Remove="..\..\..\**\*.csproj.user" />
     <FilesToZip Remove="Project\**" />
   </ItemGroup>
 
