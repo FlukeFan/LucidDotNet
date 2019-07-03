@@ -15,6 +15,16 @@ Pre-requisites
 * Docker;
 * .NET SDK specified in global.json.
 
+
+Additional recommendations for Visual Studio
+--------------------------------------------
+
+* Visual Studio 2017/2019 (community is fine)
+* Bundler & Minifier
+* Web Compiler
+* Browser Reload on Save
+
+
 To build:
 
 1. Open CommandPrompt.bat as administrator;

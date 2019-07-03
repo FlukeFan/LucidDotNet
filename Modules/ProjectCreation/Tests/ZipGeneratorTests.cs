@@ -160,6 +160,11 @@ namespace Lucid.Modules.ProjectCreation.Tests
             zippedFiles.Should().NotContain("Modules\\ProjectCreation\\Module\\Project.zip.nextUpdate");
             zippedFiles.Should().NotContain("Modules\\ProjectCreation\\Module\\bin\\Debug\\netstandard2.0\\DemoProj.Modules.ProjectCreation.dll");
             zippedFiles.Should().NotContain("Modules\\ProjectCreation\\Module\\obj\\project.assets.json");
+
+            // Tool binaries
+            zippedFiles.Should().Contain("Tools\\ncftp\\ncftp.exe");
+            zippedFiles.Should().Contain("Tools\\ncftp\\doc\\readme_windows.rtf");
+            zippedFiles.Should().Contain("Tools\\ncftp\\doc\\html\\ncftp.html");
         }
 
         [Test]

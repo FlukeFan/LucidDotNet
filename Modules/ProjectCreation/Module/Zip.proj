@@ -34,11 +34,13 @@
     <FilesToZip Remove="..\..\..\Lib\MvcApp\wwwroot\**" />
     <FilesToZip Remove="..\..\..\**\*.csproj.user" />
     <FilesToZip Remove="Project\**" />
+    <ToolsFiles Include="..\..\..\Tools\**" />
   </ItemGroup>
 
-  <Target Name="Zip" Inputs="@(FilesToZip)" Outputs="Project.zip.nextUpdate" Condition="Exists('$(BuildUtil)')">
+  <Target Name="Zip" Inputs="@(FilesToZip);@(ToolsFiles)" Outputs="Project.zip.nextUpdate" Condition="Exists('$(BuildUtil)')">
     <RemoveDir Directories="bin/Project" />
     <Copy DestinationFolder="bin/Project/%(RecursiveDir)" SourceFiles="@(FilesToZip)" />
+    <Copy DestinationFolder="bin/Project/Tools/%(RecursiveDir)" SourceFiles="@(ToolsFiles)" />
     <Exec Command="dotnet $(BuildUtil) Zip bin/Project Project.zip" />
     <RemoveDir Directories="bin/Project" />
 
