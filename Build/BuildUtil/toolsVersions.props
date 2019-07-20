@@ -2,6 +2,6 @@
 <Project>
   <PropertyGroup>
     <AltCoverVersion>5.3.675</AltCoverVersion>
-    <ReportGeneratorVersion>4.1.9</ReportGeneratorVersion>
+    <ReportGeneratorVersion>4.2.10</ReportGeneratorVersion>
   </PropertyGroup>
 </Project>
