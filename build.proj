@@ -36,13 +36,13 @@
     <Error Text="Need to set LucidFtpPassword variable" Condition="'$(LucidFtpPassword)'==''" />
     <Error Text="Need to set LucidFtpRemoteDir variable" Condition="'$(LucidFtpRemoteDir)'==''" />
     <ItemGroup>
-      <HostFileLines Include="host $(LucidFtpHost)" />
-      <HostFileLines Include="user $(LucidFtpUser)" />
-      <HostFileLines Include="pass $(LucidFtpPassword)" />
+      <FtpFileLines Include="cd $(LucidFtpRemoteDir)" />
+      <FtpFileLines Include="put $(WebBin)/publish.zip publish.zip.tmp" />
+      <FtpFileLines Include="ren publish.zip.tmp publish.zip" />
     </ItemGroup>
-    <WriteLinesToFile File="$(TEMP)/LucidFtpHostFile.txt" Lines="@(HostFileLines)" Overwrite="true" />
-    <Exec Command="Tools\ncftp\ncftpput.exe -S .tmp -f $(TEMP)/LucidFtpHostFile.txt $(LucidFtpRemoteDir) $(WebBin)/publish.zip" />
-    <Message Text="Completed FTP of publish.zip" Importance="high" />
+    <WriteLinesToFile File="$(TEMP)/LucidFtpBatch.txt" Lines="@(FtpFileLines)" Overwrite="true" />
+    <Exec Command="Tools\PuTTY\psftp.exe -pw $(LucidFtpPassword) -b $(TEMP)/LucidFtpBatch.txt $(LucidFtpUser)@$(LucidFtpHost)" />
+    <Message Text="Completed SFTP of publish.zip" Importance="high" />
   </Target>
 
 </Project>
