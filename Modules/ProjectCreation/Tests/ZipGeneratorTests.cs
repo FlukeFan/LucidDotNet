@@ -162,9 +162,7 @@ namespace Lucid.Modules.ProjectCreation.Tests
             zippedFiles.Should().NotContain("Modules\\ProjectCreation\\Module\\obj\\project.assets.json");
 
             // Tool binaries
-            zippedFiles.Should().Contain("Tools\\ncftp\\ncftp.exe");
-            zippedFiles.Should().Contain("Tools\\ncftp\\doc\\readme_windows.rtf");
-            zippedFiles.Should().Contain("Tools\\ncftp\\doc\\html\\ncftp.html");
+            zippedFiles.Should().Contain("Tools\\PuTTY\\psftp.exe");
         }
 
         [Test]
