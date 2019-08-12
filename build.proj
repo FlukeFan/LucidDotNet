@@ -41,7 +41,7 @@
       <FtpFileLines Include="ren publish.zip.tmp publish.zip" />
     </ItemGroup>
     <WriteLinesToFile File="$(TEMP)/LucidFtpBatch.txt" Lines="@(FtpFileLines)" Overwrite="true" />
-    <Exec Command="Tools\PuTTY\psftp.exe -pw $(LucidFtpPassword) -b $(TEMP)/LucidFtpBatch.txt $(LucidFtpUser)@$(LucidFtpHost) &lt;Tools\PuTTY\input.txt &gt; NUL" />
+    <Exec Command="Tools\PuTTY\psftp.exe -pw $(LucidFtpPassword) -b $(TEMP)/LucidFtpBatch.txt $(LucidFtpUser)@$(LucidFtpHost) &lt;Tools\PuTTY\input.txt &gt; NUL 2&gt;&amp;1" />
     <Message Text="Completed SFTP of publish.zip" Importance="high" />
   </Target>
 
