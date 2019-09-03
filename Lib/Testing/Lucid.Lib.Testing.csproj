@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="FluentAssertions" Version="5.8.0" />
+    <PackageReference Include="FluentAssertions" Version="5.9.0" />
     <PackageReference Include="MvcTesting" Version="0.0.4" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="2.2.0" />
