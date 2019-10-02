@@ -10,6 +10,7 @@
     <Message Importance="High" Text="Shutting down dotnet.exe build-server so Build.BuildUtil.dll is not in use" />
     <Exec Command="dotnet build-server shutdown" />
     <RemoveDir Directories="../.build" />
+    <RemoveDir Directories="../.build.forDelete" />
     <ItemGroup>
       <BuildUtilBinaries Include="bin/Debug/netcoreapp3.0/publish/**/*.*" />
     </ItemGroup>

@@ -3,6 +3,7 @@ obj
 .vs
 .vscode
 .build
+.build.forDelete
 *.user
 /**/Tests/Properties/launchSettings.json
 /Host/Web.Tests/Properties/launchSettings.json
