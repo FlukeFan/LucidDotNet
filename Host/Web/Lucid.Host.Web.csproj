@@ -3,7 +3,7 @@
   <Import Project="..\..\Build\common.targets" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <RunBundleMinify>False</RunBundleMinify>
     <RunWebCompiler>False</RunWebCompiler>
@@ -17,14 +17,10 @@
   <ItemGroup>
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="NLog.MailKit" Version="3.1.0" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.5" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.6" />
     <PackageReference Include="ZipDeploy" Version="0.5.0" />
   </ItemGroup>
 

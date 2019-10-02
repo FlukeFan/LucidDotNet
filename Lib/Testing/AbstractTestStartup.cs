@@ -11,20 +11,25 @@ namespace Lucid.Lib.Testing
     {
         public virtual void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddSingleton<ISetLayout>(NewSetLayout())
-                .AddMvc(o =>
-                {
-                    o.Filters.Add(new StubUserFilter());
-                    o.Filters.Add(new FeatureFolderViewFilter());
-                    o.Filters.Add(new CaptureResultFilter());
-                })
+            services.AddSingleton<ISetLayout>(NewSetLayout());
+            services.AddRazorPages();
+            services.AddControllersWithViews(o =>
+            {
+                o.Filters.Add(new StubUserFilter());
+                o.Filters.Add(new FeatureFolderViewFilter());
+                o.Filters.Add(new CaptureResultFilter());
+            })
                 .ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
         }
 
         public virtual void Configure(IApplicationBuilder app)
         {
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(cfg =>
+            {
+                cfg.MapControllers();
+                cfg.MapRazorPages();
+            });
         }
 
         protected virtual ISetLayout NewSetLayout() { return new EmptySetLayout(); }

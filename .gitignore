@@ -4,6 +4,8 @@ obj
 .vscode
 .build
 *.user
+/**/Tests/Properties/launchSettings.json
+/Host/Web.Tests/Properties/launchSettings.json
 /Lib/MvcApp/wwwroot/lib/mvcForms
 /Modules/ProjectCreation/Module/Project.zip
 /Modules/ProjectCreation/Module/Project.zip.nextUpdate

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MvcForms;
 using MvcForms.Styles.Bootstrap;
@@ -22,10 +23,10 @@ namespace Lucid.Host.Web
 {
     public class Startup
     {
-        private IHostingEnvironment _env;
+        private IHostEnvironment _env;
         private ILogger             _log;
 
-        public Startup(IHostingEnvironment env, ILogger<Startup> log)
+        public Startup(IHostEnvironment env, ILogger<Startup> log)
         {
             _env = env;
             _log = log;
@@ -37,18 +38,9 @@ namespace Lucid.Host.Web
         {
             services.AddSingleton<ISetLayout, SetLayout>();
 
+            services.AddRazorPages();
             var mvc = services.AddMvc(o => ConfigureMvcOptions(o));
-
-            if (_env.IsDevelopment())
-            {
-                // use the file-system razor views so that we get re-compilation when they change
-                var rootSourcePath = Path.GetFullPath(Path.Combine(_env.ContentRootPath, "../.."));
-                services.UseCustomFileSystemRazorViews(rootSourcePath);
-            }
-            else
-            {
-                mvc.ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
-            }
+            mvc.ConfigureApplicationPartManager(apm => apm.UseCompiledRazorViews());
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(o =>
@@ -88,7 +80,13 @@ namespace Lucid.Host.Web
             }
 
             app.UseStaticFiles();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(e =>
+            {
+                e.MapControllers();
+                e.MapRazorPages();
+            });
+
             Styler.Set(new Bootstrap4Style());
 
             var startupTasks = new[]

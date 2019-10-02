@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Lucid.Lib.MvcApp.RazorFolders
 {
@@ -22,12 +20,6 @@ namespace Lucid.Lib.MvcApp.RazorFolders
             }
 
             return apm;
-        }
-
-        public static IServiceCollection UseCustomFileSystemRazorViews(this IServiceCollection services, string rootSourcePath)
-        {
-            services.Configure<RazorViewEngineOptions>(o => o.FileProviders.Add(new ModuleRazorFileProvider(rootSourcePath)));
-            return services;
         }
 
         public static string RelativeViewPath<T>(this T typeInNamespace, string viewName)
