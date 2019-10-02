@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <CoverageAssemblyFilter Include="BouncyCastle.Crypto" />
     <CoverageAssemblyFilter Include="Lucid.Modules" />
     <CoverageTypeFilter Include="Lucid.Host.Web.Program" />
     <CoverageTypeFilter Include="Lucid.Host.Web.Startup" />
