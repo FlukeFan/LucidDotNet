@@ -1,5 +1,7 @@
 ﻿@page "/appFactory/manufacturing/cycles/start"
 @inherits Lucid.Lib.MvcApp.MvcAppRazorPage
+@model StartCycleModel
+@using Lucid.Modules.AppFactory.Manufacturing.Pages.Cycles
 @using MvcForms.Forms
 @using MvcForms.Navigation
 @using MvcForms.Styles
@@ -10,13 +12,16 @@
         pi.Title = "Start Cycle";
     });
 }
-@using (var form = Html.FormFor(Model).Begin())
+@using (var form = Html.FormFor(Model.Cmd).Begin())
 {
     @form.Html.ErrorSummary()
 
     @using (form.Html.FormGroupLayout())
     {
-        @form.Html.ButtonSubmit("Start Cycle").Style(BootstrapButton.Success).Tag(t => t.Attr("disabled", "disabled"))
+        @form.Html.AntiForgeryToken();
+        @form.Html.HiddenFor(m => m.BlueprintId)
+        @form.Html.FormGroup("Quantity", fg => fg.InputNumber(m => m.Quantity))
+        @form.Html.ButtonSubmit("Start Cycle").Style(BootstrapButton.Success)
         @form.Html.LinkButtonCancelModal()
     }
 }

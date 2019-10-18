@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using Lucid.Modules.AppFactory.Manufacturing.Domain.Cycles;
+using MvcTesting.Html;
 using NUnit.Framework;
 
 namespace Lucid.Modules.AppFactory.Manufacturing.Tests.Pages
@@ -27,12 +28,17 @@ namespace Lucid.Modules.AppFactory.Manufacturing.Tests.Pages
             var getResponse = await client
                 .GetAsync("/appFactory/manufacturing/cycles/start");
 
-            //var response = await getResponse.Form<StartCycleCommand>()
-            //    .Submit();
+            var response = await getResponse.Form<StartCycleCommand>()
+                .SetText("Quantity", "123")
+                .Submit();
 
-            getResponse.Should().NotBeNull();
+            response.Should().NotBeNull();
 
-            //ExecutorStub.VerifySingleExecuted(Agreements.Start);
+            ExecutorStub.SingleExecuted<StartCycleCommand>().Should().BeEquivalentTo(new StartCycleCommand
+            {
+                BlueprintId = -1,
+                Quantity = 123,
+            });
         }
     }
 }
