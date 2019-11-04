@@ -27,8 +27,6 @@ namespace Lucid.Host.Web
             _startupTimer = new Stopwatch();
             _startupTimer.Start();
 
-            Directory.SetCurrentDirectory(AppContext.BaseDirectory);
-
             IList<string> logSetupMessages = new List<string>();
             var logConfigFile = LogConfig.PrepareConfigFile(logSetupMessages);
 

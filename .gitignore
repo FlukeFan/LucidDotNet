@@ -10,8 +10,8 @@ obj
 /Lib/MvcApp/wwwroot/lib/mvcForms
 /Modules/ProjectCreation/Module/Project.zip
 /Modules/ProjectCreation/Module/Project.zip.nextUpdate
+/Host/logs
 /Host/logs.config
-/Host/logs/web.internal.log
 /Host/Web/wwwroot/css/site.min.css
 /Host/Web/wwwroot/js/site.min.js
 /Host/Web/wwwroot/js/site.min.js.map
