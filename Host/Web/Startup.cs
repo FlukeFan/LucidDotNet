@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using FluentMigrator.Runner;
 using Lucid.Host.Web.Layout;
@@ -36,6 +35,7 @@ namespace Lucid.Host.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddZipDeploy();
             services.AddSingleton<ISetLayout, SetLayout>();
 
             services.AddRazorPages();
@@ -59,10 +59,6 @@ namespace Lucid.Host.Web
 
         public void Configure(IApplicationBuilder app, IConfiguration config, ILoggerFactory loggerFactory)
         {
-            app.UseZipDeploy(opt => opt
-                .UseIisUrl("https://lucid.rgbco.uk")
-                .UseIsBinary(f => ZipDeployOptions.DefaultIsBinary(f) || Path.GetFileName(f) == "nlog.config"));
-
             var hostConfig = config.GetSection("Host");
             var securitySchema = new Schema { Name = "Security" };
             var designSchema = new Schema { Name = "Design" };
