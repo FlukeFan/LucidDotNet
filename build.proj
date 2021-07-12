@@ -2,6 +2,10 @@
 
   <Import Project="Build\common.build.proj" />
 
+  <Target Name="BeforeAll" BeforeTargets="BeforeBuild">
+    <Message Text="Target Build MSBuildNodeCount=$(MSBuildNodeCount)" Importance="high" />
+  </Target>
+
   <ItemGroup>
     <ProjectsToBuild Include="Lib\build.proj" />
     <ProjectsToBuild Include="Modules\build.proj" />

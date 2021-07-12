@@ -53,7 +53,6 @@
   </Target>
 
   <Target Name="Build">
-    <Message Text="Target Build MSBuildNodeCount=$(MSBuildNodeCount)" Importance="high" />
     <PropertyGroup>
       <BuildBeginTime>$([System.DateTime]::Now.ToString(yyyy-MM-dd HH:mm:ss))</BuildBeginTime>
     </PropertyGroup>
